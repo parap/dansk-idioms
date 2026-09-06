@@ -190,6 +190,32 @@ final class ImportPipelineTest extends TestCase
         self::assertFalse($literal[0]['quiz_usable']);
     }
 
+    // ---- classification ----------------------------------------------------
+
+    /** @dataProvider verbPhrases */
+    public function testFiniteAndPastVerbFormsAreRecognised(string $text, bool $expected): void
+    {
+        // Reported from a real round: "договорились" was classed as a noun phrase
+        // because only infinitive endings were checked, so the picker offered
+        // "сочная красотка" and "затею" alongside it.
+        self::assertSame($expected, (new \Dansk\Import\Classifier())->hasVerb($text));
+    }
+
+    public static function verbPhrases(): array
+    {
+        return [
+            'reflexive past'   => ['договорились', true],
+            'past plural'      => ['на том и порешили', true],
+            'future 1pl'       => ['так и сделаем', true],
+            'infinitive'       => ['не упустить шанс', true],
+            'reflexive inf'    => ['юркнуть назад', true],
+            'noun phrase'      => ['сочная красотка', false],
+            'bare noun'        => ['затею', false],
+            'prepositional'    => ['по рукам', false],
+            'noun enumeration' => ['гравий, щебень, труха', false],
+        ];
+    }
+
     // ---- normalization -----------------------------------------------------
 
     public function testDanishLettersAreNeverAsciiFolded(): void

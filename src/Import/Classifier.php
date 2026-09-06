@@ -50,13 +50,48 @@ final class Classifier
         };
     }
 
+    /**
+     * Does any token in the phrase inflect like a Russian verb?
+     *
+     * Checking only the first token for an infinitive ending missed every finite
+     * and past form: "договорились", "на том и порешили" and "так и сделаем" were
+     * all classed as noun phrases, and the distractor picker then matched them with
+     * genuinely verbless options. Endings here are chosen for precision over recall
+     * -- a missed verb costs a slightly weaker question, a false positive puts a
+     * noun among verbs, which is the tell we are trying to remove.
+     */
+    public function hasVerb(string $text): bool
+    {
+        foreach (preg_split('/\s+/u', mb_strtolower(trim($text), 'UTF-8')) ?: [] as $token) {
+            $token = trim($token, ".,;:!?()«»\"'");
+            if (mb_strlen($token, 'UTF-8') < 4) {
+                continue;
+            }
+            $isVerb = preg_match(
+                '/('
+                . 'ться|тись|чься|ть|ти|чь'                       // infinitive
+                . '|лся|лась|лось|лись'                            // reflexive past
+                . '|[аяеиыуо]л|[аяеиыуо]ла|[аяеиыуо]ло|[аяеиыуо]ли'  // past
+                . '|[аяеу]ет|[аяеу]ем|[аяеу]ешь|[аяеу]ете'         // present/future, 1st conj
+                . '|[иеая]т|ит|ишь|им|ите'                          // present, 2nd conj
+                . '|айте|ейте|ите'                                  // imperative
+                . ')$/u',
+                $token
+            );
+            if ($isVerb) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /** Grammatical shape of a Russian translation -- used to match distractors. */
     public function translationShape(string $text): string
     {
         $first = mb_strtolower(preg_split('/\s+/u', trim($text))[0] ?? '', 'UTF-8');
         return match (true) {
-            (bool) preg_match('/(ть|ться|ти|чь)$/u', $first)             => 'verbal',
             (bool) preg_match('/^(чёрт|черт|блин|ну|вот|ой|да|нет)$/u', $first) => 'interjection',
+            $this->hasVerb($text)                                        => 'verbal',
             (bool) preg_match('/(о|е)$/u', $first) && mb_strlen($first) > 4 => 'adverbial',
             default                                                      => 'nominal',
         };
