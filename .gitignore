@@ -1,0 +1,9 @@
+/vendor/
+/config/local.php
+/storage/exports/*
+/storage/logs/*
+!/storage/exports/.gitkeep
+!/storage/logs/.gitkeep
+.env
+.idea/
+/.phpunit.cache/
