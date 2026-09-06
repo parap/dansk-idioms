@@ -1,178 +1,267 @@
-# dansk.div — Danish idiom trainer
+# Dansk idiomer
 
-Quiz app for Danish idioms with Russian explanations, sourced from a Telegram export.
-Plain PHP 8.3 + PDO, no framework, dockerized. Full plan:
-`~/.claude/plans/ok-i-have-a-elegant-stearns.md`
+A trainer for Danish idioms with Russian explanations, built from a Telegram group
+export. Ten idioms per round, four candidate translations each; pick one, read the
+explanation, get a score.
 
-## Running it
+Plain PHP 8.3 + MySQL 8, no framework, no JavaScript build step, all in Docker.
+
+---
+
+## Quick start
 
 ```bash
 docker-compose up -d --build
 docker-compose exec app composer install
 docker-compose exec app php bin/migrate.php
+bin/load-export.sh                 # import your Telegram export
 ```
 
 | URL | What |
 |---|---|
-| http://localhost:8080 | app shell |
-| http://localhost:8080/api/v1/health | health + DB check |
-| http://localhost:8080/api/v1/stats | corpus counters |
-| http://localhost:8081 | Adminer (server `db`, user `dansk`, pass `dansk`) |
+| http://localhost:8080 | the site |
+| http://localhost:8080/admin | review queue |
+| http://localhost:8081 | Adminer (server `db`, user `dansk`, password `dansk`) |
+| http://localhost:8080/api/v1/health | health + database check |
 
-Ports: the container publishes **8080** because host Apache owns :80, and the DB
-publishes **nothing** because host MySQL owns 127.0.0.1:3306.
+The container publishes **8080** because host Apache owns :80, and the database
+publishes nothing because host MySQL owns 127.0.0.1:3306.
 
-## Gotchas learned the hard way
+---
 
-**Always pass `--default-character-set=utf8mb4` to the `mysql` CLI.** The client in the
-`mysql:8.0` image negotiates **latin1** by default. Danish characters then round-trip
-*visually* correctly (mangled on insert, un-mangled on select) while being stored wrong,
-which silently invalidates any manual test of Danish text.
+## Using the site
 
-```bash
-docker-compose exec db mysql --default-character-set=utf8mb4 -uroot -proot dansk
-```
+**Playing.** Press *Начать раунд*. Each question shows a Danish idiom and four Russian
+translations. Answer with the mouse or with <kbd>A</kbd>–<kbd>D</kbd> / <kbd>1</kbd>–<kbd>4</kbd>;
+<kbd>Enter</kbd> moves on. The full explanation appears after every answer, right or wrong.
 
-PHP is unaffected: the PDO DSN pins `charset=utf8mb4`.
+**Accounts** are optional. Without one your progress lives in a browser cookie and you
+still get history and best score. With one you get spaced repetition: each idiom you
+answer is scheduled by SM-2, and later rounds put what is due first. Rounds you played
+before registering are adopted into the new account.
 
-**Accent-insensitive collation is a real hazard, verified here.** Under MySQL 8's default
-`utf8mb4_0900_ai_ci`, `'har' = 'hår'`, `'o' = 'ø'` and `'ae' = 'æ'` all evaluate true, so a
-UNIQUE index rejects `hår` once `har` exists. Every normalized/unique column is therefore
-declared `COLLATE utf8mb4_0900_as_cs`; case is folded in PHP before insert.
+**Interface language** switches in the header (RU/EN) and is remembered per browser.
+This is the *interface* only — the answers themselves are Russian until English
+translations exist.
 
-**`idiom_translations.is_primary` is `1` or `NULL`, never `0`.** The single-primary-per-
-(idiom, lang) rule is enforced by `UNIQUE (idiom_id, lang_code, is_primary)` relying on
-MySQL ignoring NULLs. Writing `0` would collapse every non-primary row into one.
-(A STORED generated column was the first attempt; MySQL refuses `ON DELETE CASCADE` on a
-foreign key over a column a stored generated column reads.)
+**"Мой ответ тоже верный"** appears under a wrong answer. Use it: two independent
+reports on the same pairing automatically block that distractor from appearing against
+that answer again. It is the only feedback loop the quiz has.
 
-**Migrations do not run in a transaction.** MySQL implicitly commits on every DDL
-statement, so a wrapping transaction cannot roll a failed migration back and only makes
-`commit()` throw afterwards, masking the real error. A failed migration is repaired by hand.
+**Installing to a phone.** The site is a PWA — "Add to home screen" gives it an icon
+and a standalone window. Offline it will show the shell but cannot serve a scored
+round, by design: caching questions would mean shipping the answers to the browser.
 
-**`docker-compose`, not `docker compose`** — this box has the standalone v2.5.1 binary.
-
-## Layout
-
-```
-public/     document root — front controller, assets, PWA shell
-src/        Http/ Support/ Import/ Domain/ Controller/
-bin/        migrate.php, later import.php / reparse.php
-db/         numbered .sql migrations
-tests/      parser fixtures (the regression contract for the importer)
-```
-
-`index.html` in the project root is the old placeholder served by *host* Apache at
-`http://dansk.div`; it is outside the container docroot and unused by the app.
-
-## Importer notes
-
-`php bin/import.php --file=storage/exports/messages.html [--dry-run]`
-
-Re-running is safe: messages, raw entries and translations all upsert, and a `raw_entries`
-row whose `status` is `fixed` (human-edited) is never overwritten by a re-parse.
-
-**Never use `trim($s, "…«»")` on UTF-8.** `trim()` with a character list is byte-based, and
-`…` (E2 80 A6) contributes `0x80` — the trailing byte of many Cyrillic letters. It cut `р`
-(D1 80) in half and MySQL rejected the row with *Incorrect string value*. Use
-`Text::trimPunctuation()`, which is `preg_replace` with `/u`.
-
-Parser strategies, in confidence order: `bold` (Telegram `<strong>` headword) → `script`
-(separator confined to the pre-Cyrillic prefix) → `newline` (headword alone on its own line)
-→ `separator` → `fallback`. Run `vendor/bin/phpunit` after touching any of them; the fixtures
-encode every failure mode observed in the real export.
-
-## Review queue
-
-`http://localhost:8080/admin` — the password comes from `ADMIN_PASSWORD` in the
-environment, or `admin.password` in the gitignored `config/local.php`. **There is no
-default**: with nothing configured, admin login refuses every attempt with 503. This
-is deliberate — a committed default is a published credential the moment the
-repository is public. Interim gate until real accounts arrive in Phase 2.
-
-Keyboard-driven: <kbd>Enter</kbd> accept, <kbd>N</kbd> skip, <kbd>R</kbd> reject.
-Extracted candidates appear as clickable chips; literal glosses are struck through
-because they are retained as distractors but must never be the answer.
-
-**Accepting writes `raw_entries.status = 'fixed'`, which a re-import must never
-overwrite.** That protection covers not just the status but the corrected term and —
-most importantly — `idiom_id`. An earlier version protected only the status, so
-re-importing silently set `idiom_id` back to NULL, orphaning the reviewed idiom from
-its source message and undercounting `seen_count`. Verified by importing twice and
-asserting the link survives.
-
-## Quiz (Phase 2)
-
-`http://localhost:8080` — ten idioms per round, four options, explanation after each answer.
-Keyboard: <kbd>A</kbd>–<kbd>D</kbd> or <kbd>1</kbd>–<kbd>4</kbd> to answer, <kbd>Enter</kbd> to continue.
-
-**Anti-cheat.** Questions are generated and stored server-side before being served, and
-`correct_index` is never present in a question payload. Grading reads the stored row, never
-the request body. `response_ms` is client-supplied and clamped to 0–300000.
-
-**Distractors** are not random — that would let anyone find the answer by length, register or
-shape without knowing Danish. Candidates are filtered (word count ±3, no declared synonym, no
-reported block, never another idiom from the same round), then near-duplicates are rejected
-(token Jaccard ≥ 0.34, substring containment), then scored on length, shape, register and kind.
-About 40% of questions reserve a slot for another idiom's *literal* gloss — register-matched,
-vivid and guaranteed wrong.
-
-**Offline** is shell-only by design: `/api/*` is never cached, because caching a scored quiz
-would ship the correct answers to the client.
-
-Two MySQL gotchas encoded in the code:
-- `LIMIT ?` cannot be a bound parameter with `ATTR_EMULATE_PREPARES = false` — PDO sends it as
-  a string and MySQL rejects `LIMIT '10'`. Validated integers are interpolated instead.
-- `word_count` is `TINYINT UNSIGNED`, so `word_count - 5` wraps around rather than going
-  negative (error 1690). Casts to `SIGNED` before arithmetic.
-
-## Interface language
-
-UI strings live in a single `STRINGS` object at the top of `public/app.html`, keyed by
-language code (`ru` is the default, `en` supplied). Nothing else in the page hard-codes
-user-facing text — everything goes through `t('key')`, which falls back to Russian for any
-key a translation has not filled in yet. Adding a language means adding one block.
-
-The choice is remembered in `localStorage` under `ui_lang` and switched from the header.
-Note this is *interface* language only; it is independent of `idiom_translations.lang_code`,
-which is the language of the answers themselves.
-
-To check a translation is complete, compare the keys used in code against each block —
-all must be present and none unused.
-
-### Plurals
-
-A string in `STRINGS` may be a plain string or a map of CLDR plural categories:
-
-```js
-statRounds: { one: 'раунд', few: 'раунда', many: 'раундов', other: 'раундов' },
-```
-
-`t('statRounds', n)` then selects via `Intl.PluralRules`, so Russian gets its three
-forms (1 раунд / 2 раунда / 5 раундов) and English its two, with no counting logic in
-the page. This needs no `ext-intl` — the rules live in the browser.
+---
 
 ## Adding new idioms
 
-Post as usual in the Telegram group, then:
+Post in the Telegram group as usual, then export and load. **Re-export the whole
+history every time** — there is no need to narrow the date range.
 
-1. Telegram Desktop → **⋮ → Export chat history** → format **HTML** (no media needed).
-2. `bin/load-export.sh` — with no argument it picks the newest `ChatExport_*` in
-   `~/Downloads/Telegram Desktop`, or pass an export folder as an argument.
+### 1. Export
 
-Re-export the **whole** history each time; there is no need to narrow the date range.
-The import is idempotent:
+Telegram Desktop → **⋮ → Export chat history** → format **HTML**, media not needed.
 
-- Messages key on `(source, tg_message_id)` and entries on `(message, entry_index)`,
-  so re-importing updates in place instead of duplicating.
-- Idioms dedupe on `term_norm` — an idiom already present is recognised, not re-added.
-- Entries you corrected in the review queue carry `status = 'fixed'` and are never
-  overwritten by a re-parse: the decision, the corrected term and the link to the
-  idiom all survive.
+> HTML rather than JSON on purpose. The HTML export carries the message ids *and*
+> timestamps with a UTC offset (`29.08.2026 21:01:39 UTC+01:00`), where the JSON
+> export gives naive local time that cannot be corrected afterwards.
 
-Running it against an unchanged export reports `idioms created 0`, which is the check
+### 2. Load
+
+```bash
+bin/load-export.sh                       # newest ChatExport_* in ~/Downloads
+bin/load-export.sh /path/to/ChatExport_… # or name the folder
+```
+
+Multi-part exports (`messages2.html`, …) are handled automatically.
+
+### 3. Review what it was unsure about
+
+Open http://localhost:8080/admin. Entries the parser could not confidently split wait
+there, lowest confidence first. <kbd>Enter</kbd> accepts, <kbd>N</kbd> skips,
+<kbd>R</kbd> rejects a chunk that is not an idiom at all. Extracted candidates appear
+as clickable chips, so you are usually picking rather than typing.
+
+### Re-importing is safe
+
+Everything upserts:
+
+- messages key on `(source, tg_message_id)`, entries on `(message, entry_index)`
+- idioms dedupe on a normalised term, so an idiom already present is recognised
+- **entries you corrected are never overwritten.** A reviewed entry is marked `fixed`,
+  and the decision, the corrected term and the link to the idiom all survive a re-parse
+
+Running it against an unchanged export reports `idioms created 0`. That is the check
 that idempotency still holds.
 
-Two figures in the output are worth watching: **PUBLISHED BUT UNANSWERABLE** must stay
-0, and **orphaned** counts idioms whose term a later parser change rewrote, leaving the
-old row behind with nothing pointing at it.
+### What to watch in the output
+
+```
+  messages read            199
+  entries parsed           358
+    auto-accepted          328     ← went straight in
+    needs review            26     ← waiting for you at /admin
+    rejected                 4     ← not idiom entries
+  idioms created             0     ← 0 on an unchanged re-import
+  entries with no answer    27
+  orphaned                   1
+  PUBLISHED BUT UNANSWERABLE 0     ← must always be 0
+```
+
+**`PUBLISHED BUT UNANSWERABLE`** must stay 0; anything else means idioms have silently
+disappeared from the quiz. **`orphaned`** counts idioms whose term a later parser
+change rewrote, leaving the old row behind with nothing pointing at it.
+
+### Writing posts the importer handles well
+
+It reads what you already write, so none of this is required — but these are the shapes
+it reads most reliably.
+
+**Separate each entry with a zero-width space**, as you do now. It is what tells the
+importer where one idiom ends and the next begins. A line starting in Latin is a new
+entry; a line starting in Cyrillic continues the one above.
+
+**Bold the Danish headword.** It is the highest-confidence signal there is, and the
+only thing that rescues a post opening in Russian prose
+(`Глагольная конструкция **at mærke efter** — …`).
+
+**Put the short translation on the head line**, then elaborate:
+
+```
+​at slå pjalterne sammen — объединиться, съехаться
+​Значение: Разговорный фразеологизм о совместной жизни или деле.
+​Объяснение: Буквально «сложить лохмотья вместе».
+```
+
+`Значение:`, `Объяснение:`, `Перевод:`, `Дословно:` and `Этимология:` are recognised as
+structured fields.
+
+**A few things to avoid**, each of which caused a wrong answer at some point:
+
+- **Two forms in one headword** — `Rodekasser / at være ekspert i rodekasser`. Only one
+  becomes the term (the `at …` form); the other is kept as a note. Better to pick one.
+- **Glossing a component word with `«…»`** — in `Слово grus означает «гравий, щебень,
+  труха»`, that quote defines *grus*, not the idiom. It is now detected and excluded,
+  but the pattern is fragile.
+- **Respelling Danish in Cyrillic** as the meaning — «экспертом в родекассерах» is not
+  a translation.
+- **Meta-description as the meaning** — `Значение: Яркое метафорическое выражение` says
+  what kind of thing it is, not what it means.
+- Keep the primary meaning **under about six words**; longer readings are kept but
+  cannot be used as quiz options.
+
+---
+
+## Administration
+
+The review queue is behind a password. **There is no default** — with none configured,
+admin login refuses every attempt with 503. Set it in the gitignored `config/local.php`:
+
+```php
+<?php return ['admin' => ['password' => 'a-long-random-string']];
+```
+
+or via `ADMIN_PASSWORD` in the environment. (A committed default is a published
+credential the moment the repository is public.)
+
+### Exposing the site publicly
+
+The machine is behind NAT, so a tunnel is needed. A quick Cloudflare tunnel needs no
+account and opens no inbound port:
+
+```bash
+docker run -d --name dansk_tunnel --network danskdiv_default --restart unless-stopped \
+  cloudflare/cloudflared:latest tunnel --no-autoupdate --url http://app:80
+docker logs dansk_tunnel | grep -o 'https://.*trycloudflare.com'
+```
+
+The URL changes on every restart, and Cloudflare terminates the TLS, so your traffic is
+readable at their edge. `docker rm -f dansk_tunnel` stops it instantly.
+
+---
+
+## Commands
+
+| Command | Purpose |
+|---|---|
+| `bin/load-export.sh [dir]` | import the newest (or named) Telegram export |
+| `php bin/import.php --file=… [--dry-run]` | import one file; `--dry-run` writes nothing |
+| `php bin/migrate.php [--status]` | apply pending migrations |
+| `php bin/reclassify.php [--dry-run]` | recompute derived shape after changing heuristics |
+| `vendor/bin/phpunit` | the parser regression suite |
+
+Prefix with `docker-compose exec app` for the PHP ones.
+
+---
+
+## How the importer reads a post
+
+Entries are split on U+200B, then continuation lines are merged back: a chunk opening in
+Latin is a new entry, one opening in Cyrillic continues the previous. Measured over the
+real export that rule is exact on 618 of 619 chunks.
+
+Each entry is then split into term and explanation by a cascade, most confident first:
+
+| Strategy | How |
+|---|---|
+| `bold` | a Latin-only `<strong>` span is the headword |
+| `script` | the separator must lie before the first Cyrillic character, which makes interior colons and dashes unreachable |
+| `newline` | the headword alone on its own line under Russian prose |
+| `separator` | no Cyrillic at all in the entry |
+| `fallback` | split at the first Cyrillic character; always sent to review |
+
+Each parse is scored, and anything below the threshold goes to the review queue instead
+of being published. Translations are then pulled from the head line, the labelled
+fields, and `«…»` quotes — with quotes that gloss *another* word excluded.
+
+---
+
+## Development
+
+```
+public/     document root — front controller, PWA shell, assets
+src/        Http/ Support/ Import/ Domain/ Controller/
+bin/        migrate, import, reclassify, load-export
+db/         numbered .sql migrations
+tests/      parser fixtures — the regression contract
+```
+
+Interface strings live in one `STRINGS` object at the top of `public/app.html`, keyed by
+language. Everything user-facing goes through `t('key')`, which falls back to Russian.
+A value may be a map of CLDR plural categories, selected by `Intl.PluralRules`, so
+Russian gets its three forms (1 раунд / 2 раунда / 5 раундов).
+
+### Gotchas worth knowing
+
+**`utf8mb4_0900_ai_ci` is accent-insensitive.** `'har' = 'hår'`, `'o' = 'ø'` and
+`'ae' = 'æ'` all evaluate true, so a UNIQUE index under it rejects `hår` once `har`
+exists. Every normalised column is `utf8mb4_0900_as_cs`; case is folded in PHP. The same
+insensitivity makes `LIKE '%\x02%'` match any string containing *any* ignorable
+character — use `INSTR(BINARY col, …)` to hunt for control characters.
+
+**Always pass `--default-character-set=utf8mb4` to the `mysql` CLI.** The client in the
+`mysql:8.0` image negotiates latin1, and Danish text then round-trips *visually*
+correctly while being stored wrong.
+
+**`trim($s, "…«»")` is byte-based.** `…` contributes `0x80`, the trailing byte of many
+Cyrillic letters, so trimming cuts `р` in half. Use `Text::trimPunctuation()`.
+
+**`LIMIT ?` cannot be a bound parameter** with `ATTR_EMULATE_PREPARES = false` — MySQL
+rejects `LIMIT '10'`. Validated integers are interpolated.
+
+**`word_count` is `TINYINT UNSIGNED`**, so `word_count - 5` wraps instead of going
+negative (error 1690). Cast to `SIGNED` first.
+
+**`idiom_translations.is_primary` is `1` or `NULL`, never `0`.** One primary per
+(idiom, language) is enforced by `UNIQUE (idiom_id, lang_code, is_primary)` relying on
+MySQL ignoring NULLs.
+
+**Migrations do not run in a transaction.** MySQL commits implicitly on DDL, so a
+wrapper cannot roll one back and only makes `commit()` throw, masking the real error.
+
+**The service worker is network-first for HTML.** It was cache-first once, which served
+every visitor a permanently stale page. `sw.js` itself is sent `no-cache` so a bad
+caching strategy can never become unfixable.
+
+**`docker-compose`, not `docker compose`** — this box has the standalone v2.5.1 binary.
