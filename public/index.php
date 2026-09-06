@@ -45,7 +45,12 @@ $route  = $dispatcher->dispatch($method, $uri);
 
 if ($route[0] === Dispatcher::NOT_FOUND) {
     if (!str_starts_with($uri, '/api/')) {
-        readfile(__DIR__ . ($uri === '/admin' || str_starts_with($uri, '/admin') ? '/admin.html' : '/app.html'));
+        // The document must always be revalidated. Serving a stale shell means an
+        // interface change never reaches an existing visitor -- which is exactly
+        // what a cache-first service worker did before.
+        header('Content-Type: text/html; charset=utf-8');
+        header('Cache-Control: no-cache, must-revalidate');
+        readfile(__DIR__ . (str_starts_with($uri, '/admin') ? '/admin.html' : '/app.html'));
         return;
     }
     Response::error('not_found', 'No such endpoint.', 404);
