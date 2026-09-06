@@ -30,8 +30,30 @@ final class EntryParser
 
         [$head, $labels, $trailing] = $this->splitLabels($entryText);
         $entry->labels = $labels;
+        $entry->trailingLines = array_values(array_filter(
+            array_map(
+                static fn(string $l): string => Text::clean($l),
+                preg_split('/\R/u', $trailing) ?: []
+            ),
+            static fn(string $l): bool => $l !== ''
+        ));
 
         $this->extractTerm($entry, $head);
+
+        // The head can span several lines when the entry carries no labels. Only its
+        // first line is the head remainder; the rest are continuation lines, which
+        // often hold the meaning as a bare list.
+        if ($entry->explanation !== null && str_contains($entry->explanation, "\n")) {
+            $lines = array_values(array_filter(
+                array_map(
+                    static fn(string $l): string => Text::clean($l),
+                    preg_split('/\R/u', $entry->explanation) ?: []
+                ),
+                static fn(string $l): bool => $l !== ''
+            ));
+            $entry->explanation  = array_shift($lines) ?? '';
+            $entry->trailingLines = array_merge($lines, $entry->trailingLines);
+        }
 
         $entry->headRemainder = $entry->explanation === null ? null : Text::clean($entry->explanation);
 
@@ -40,7 +62,10 @@ final class EntryParser
         // the labelled versions on top, printing every explanation twice.
         $parts = array_filter([
             $entry->headRemainder,
-            $trailing !== '' ? $trailing : null,
+            // trailingLines, not the raw $trailing: continuation lines lifted out of a
+            // multi-line head live only there, and quoted spans inside them must stay
+            // visible to the extractor.
+            $entry->trailingLines !== [] ? implode("\n", $entry->trailingLines) : null,
             ...array_map(
                 static fn(string $k, string $v): string => "{$k}: {$v}",
                 array_keys($labels),

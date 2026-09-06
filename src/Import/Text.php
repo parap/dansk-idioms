@@ -86,8 +86,8 @@ final class Text
     public static function trimPunctuation(string $s, bool $withDashes = true): string
     {
         $class = $withDashes
-            ? '[\s.,;:!?…"«»„“”\-–—*\x{00A0}]'
-            : '[\s.,;:!?…"«»„“”\x{00A0}]';
+            ? '[\s.,;:!?…"«»„“”()\[\]\-–—*\x{00A0}]'
+            : '[\s.,;:!?…"«»„“”()\[\]\x{00A0}]';
         return preg_replace('/^' . $class . '+|' . $class . '+$/u', '', $s) ?? $s;
     }
 

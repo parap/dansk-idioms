@@ -13,6 +13,8 @@ final class ParsedEntry
         public ?string $explanation = null,
         /** Text after the separator on the head line -- often the short translation. */
         public ?string $headRemainder = null,
+        /** Continuation lines carrying no explicit label. @var list<string> */
+        public array $trailingLines = [],
         public array   $labels = [],
         public ?string $strategy = null,
         public ?string $separatorKind = null,

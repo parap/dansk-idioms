@@ -263,6 +263,80 @@ final class ImportPipelineTest extends TestCase
         self::assertSame('находить ценное среди хлама', $primary[0]['text']);
     }
 
+    public function testLiterallyTranslatesAsIsNotTheMeaning(): void
+    {
+        // "Буквально переводится как «быть в своем тузе»" ends in an idiomatic cue
+        // but is a literal gloss. It was outranking the real meaning in Значение.
+        $entry = $this->parse(
+            "At være i sit es\n"
+            . "Значение: Быть в своей стихии, чувствовать себя как рыба в воде, быть на высоте.\n"
+            . "Объяснение: Слово es означает «туз». Буквально переводится как «быть в своем тузе»."
+        );
+        $byText = [];
+        foreach ((new TranslationExtractor())->extract($entry) as $t) {
+            $byText[$t['text']] = $t;
+        }
+
+        self::assertSame('literal', $byText['быть в своем тузе']['sense_type']);
+        self::assertFalse($byText['быть в своем тузе']['quiz_usable']);
+        self::assertSame('gloss', $byText['туз']['sense_type']);
+
+        $primary = array_values(array_filter($byText, fn($t) => $t['is_primary']));
+        self::assertNotEmpty($primary, 'the meaning from Значение must win the primary slot');
+        self::assertStringContainsString('стихии', $primary[0]['text']);
+    }
+
+    public function testSlashSeparatedVerbsSharingAnObjectAreNotSplit(): void
+    {
+        // "Дать / подать / опубликовать объявление в прессе" is three verbs sharing
+        // one object. Splitting it produced the answer "Дать", which translates nothing.
+        $entry = $this->parse("At indrykke en annonce\nЗначение: Дать / подать / опубликовать объявление в прессе.");
+        foreach ((new TranslationExtractor())->extract($entry) as $t) {
+            self::assertNotSame('Дать', $t['text'], 'a bare verb without its object is not a translation');
+        }
+    }
+
+    public function testMeaningInAnUnlabelledContinuationLineIsFound(): void
+    {
+        // "Буквально оно означает «...», а по смыслу:" then the meaning as a bare
+        // list. The literal was being served as the answer: the compound cue needs
+        // to tolerate a word between "буквально" and "означает", and the meaning
+        // lives in a continuation line that was not being read at all.
+        $entry = $this->parse(
+            self::B0 . 'at mærke efter' . self::B1 . " — это важное выражение.\n"
+            . "Буквально оно означает «ощупывать вслед за ощущением», а по смыслу:\n"
+            . "прислушиваться к своим чувствам и потребностям;"
+        );
+        $translations = (new TranslationExtractor())->extract($entry);
+
+        $byText = [];
+        foreach ($translations as $t) {
+            $byText[$t['text']] = $t;
+        }
+        self::assertSame('literal', $byText['ощупывать вслед за ощущением']['sense_type']);
+        self::assertFalse($byText['ощупывать вслед за ощущением']['quiz_usable']);
+
+        $primary = array_values(array_filter($translations, fn($t) => $t['is_primary']));
+        self::assertSame('прислушиваться к своим чувствам и потребностям', $primary[0]['text']);
+    }
+
+    public function testHeadLineAnswerSurvivesAParentheticalContainingQuotes(): void
+    {
+        // "стокроновая купюра (… слово lap означает «лоскут», «заплатка»)" — the head
+        // was skipped wholesale for containing «, and a fallback regex then emitted
+        // the unbalanced fragment 'лоскут», «заплатка»)' as the answer.
+        $entry = $this->parse(
+            'en hundredelap — стокроновая купюра (наименование банкноты; '
+            . 'слово lap буквально означает «лоскут», «заплатка»).'
+        );
+        $primary = array_values(array_filter(
+            (new TranslationExtractor())->extract($entry),
+            fn($t) => $t['is_primary']
+        ));
+
+        self::assertSame('стокроновая купюра', $primary[0]['text']);
+    }
+
     // ---- classification ----------------------------------------------------
 
     /** @dataProvider verbPhrases */

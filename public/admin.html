@@ -52,6 +52,9 @@
   kbd{font:600 11px ui-monospace,monospace;background:var(--chip);border:1px solid var(--line);
       border-bottom-width:2px;border-radius:4px;padding:.1em .4em;margin-left:.4em;color:var(--muted)}
   .hint{color:var(--muted);font-size:.83rem;margin-top:1rem}
+  .counter{float:right;font-weight:400;text-transform:none;letter-spacing:0}
+  .counter.over{color:var(--bad);font-weight:700}
+  input.over{outline:2px solid var(--bad);outline-offset:-1px}
   .done{text-align:center;padding:3rem 1rem}
   .done h2{color:var(--ok)}
   .msg{margin-top:.8rem;font-size:.88rem}
@@ -139,7 +142,7 @@ function draw() {
       <input id="term" type="text" value="${esc(it.term_guess ?? '')}">
     </div>
     <div class="field">
-      <label for="tr">Russian translation (the quiz answer)</label>
+      <label for="tr">Russian translation (the quiz answer) <span id="count" class="counter"></span></label>
       <input id="tr" type="text" value="${esc(suggested)}">
       ${it.candidates.length ? `<div class="chips">${it.candidates.map(c =>
         `<button type="button" class="chip ${c.usable ? '' : 'gloss'}" data-t="${esc(c.text)}">
@@ -151,14 +154,31 @@ function draw() {
       <button class="danger" id="rej">Not an idiom<kbd>R</kbd></button>
     </div>
     <p class="hint">Click a suggestion to fill the answer. Literal glosses are struck
-       through — they are kept as distractors but never used as the answer.</p>`;
+       through — kept as distractors, never used as the answer. Keep the answer short:
+       it has to sit alongside three distractors of similar length, or the right one is
+       obvious. The full explanation is stored separately.</p>`;
 
   $('#counts').textContent = `${idx+1} of ${items.length} · ${counts.auto_accepted} auto-accepted · ${counts.fixed} fixed`;
   $('#bar').style.width = ((idx / Math.max(1, total)) * 100) + '%';
 
+  // The answer has to fit alongside three distractors of comparable length, so the
+  // limits the importer enforces are shown live rather than discovered on submit.
+  const MAX_WORDS = 6, MAX_CHARS = 60;
+  const gauge = () => {
+    const v = $('#tr').value.trim();
+    const w = (v.match(/[\p{L}\p{N}'’-]+/gu) || []).length;
+    const over = w > MAX_WORDS || v.length > MAX_CHARS;
+    $('#count').textContent = `${w}/${MAX_WORDS} words · ${v.length}/${MAX_CHARS} chars`;
+    $('#count').classList.toggle('over', over);
+    $('#tr').classList.toggle('over', over);
+    $('#acc').disabled = over;
+  };
+  $('#tr').addEventListener('input', gauge);
+
   $('#card').querySelectorAll('.chip').forEach(b =>
-    b.onclick = () => { $('#tr').value = b.dataset.t; $('#tr').focus(); });
+    b.onclick = () => { $('#tr').value = b.dataset.t; $('#tr').focus(); gauge(); });
   $('#acc').onclick = accept;
+  gauge();
   $('#skip').onclick = () => { idx++; draw(); };
   $('#rej').onclick = reject;
   $('#term').focus();

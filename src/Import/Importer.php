@@ -74,12 +74,20 @@ final class Importer
                 }
 
                 $idiomId = null;
-                if ($status === 'auto_accepted') {
+                if ($status !== 'rejected' && ($entry->term ?? '') !== '') {
+                    // Entries awaiting review still get their idiom, unpublished. It
+                    // keeps raw_entries.idiom_id populated, so the entry stays linked
+                    // to its idiom instead of the idiom looking orphaned the moment a
+                    // stricter rule demotes the entry -- which is how a prune once
+                    // deleted 18 perfectly good idioms.
                     [$idiomId, $created] = $this->upsertIdiom($entry, $messageId);
                     $stats[$created ? 'idioms_created' : 'idioms_updated']++;
                     $stats['translations'] += $this->writeTranslations($idiomId, $lang, $translations);
                     $this->writeExplanation($idiomId, $lang, $entry);
-                    $this->publishIfAnswerable($idiomId, $lang);
+
+                    if ($status === 'auto_accepted') {
+                        $this->publishIfAnswerable($idiomId, $lang);
+                    }
                 }
 
                 $this->upsertRawEntry($messageId, $index, $entry, $status, $idiomId, $parserVersion);
@@ -87,6 +95,8 @@ final class Importer
         }
 
         if (!$dryRun) {
+            $this->ensurePrimaries($lang);
+            $this->syncPublication($lang);
             $this->recomputeSeenCounts();
             // A published idiom with no primary translation is unanswerable and would
             // silently vanish from the quiz. Surfaced as a stat so a run that breaks
@@ -106,6 +116,34 @@ final class Importer
         }
 
         return $stats;
+    }
+
+    /**
+     * Promotes a primary for any published idiom that has usable translations but no
+     * primary among them -- otherwise the idiom is published yet unanswerable and
+     * silently disappears from the quiz. Shortest usable reading wins, since a quiz
+     * option has to sit beside three others of similar length.
+     */
+    private function ensurePrimaries(string $lang): void
+    {
+        $orphaned = Db::fetchAll(
+            'SELECT i.id FROM idioms i
+             WHERE i.is_published = 1
+               AND NOT EXISTS (SELECT 1 FROM idiom_translations t
+                               WHERE t.idiom_id = i.id AND t.lang_code = ? AND t.is_primary = 1)
+               AND EXISTS     (SELECT 1 FROM idiom_translations t
+                               WHERE t.idiom_id = i.id AND t.lang_code = ? AND t.quiz_usable = 1)',
+            [$lang, $lang]
+        );
+
+        foreach ($orphaned as $row) {
+            Db::execute(
+                'UPDATE idiom_translations SET is_primary = 1
+                 WHERE idiom_id = ? AND lang_code = ? AND quiz_usable = 1
+                 ORDER BY word_count ASC, char_count ASC, confidence DESC LIMIT 1',
+                [(int) $row['id'], $lang]
+            );
+        }
     }
 
     /** Derived, so repeated imports of the same export do not inflate it. */
@@ -289,17 +327,35 @@ final class Importer
         );
     }
 
-    /** Publishable only once something answerable exists. */
+    /**
+     * Publication tracks answerability in BOTH directions. Publishing used to be
+     * one-way, so an idiom whose answer later failed a stricter rule stayed published
+     * with nothing to ask -- present in the corpus count, absent from every quiz.
+     */
     private function publishIfAnswerable(int $idiomId, string $lang): void
     {
         Db::execute(
-            'UPDATE idioms i SET i.is_published = 1
-             WHERE i.id = ? AND EXISTS (
+            'UPDATE idioms i SET i.is_published = IF(EXISTS (
                  SELECT 1 FROM idiom_translations t
                  WHERE t.idiom_id = i.id AND t.lang_code = ?
                    AND t.quiz_usable = 1 AND t.is_primary = 1
-             )',
-            [$idiomId, $lang]
+             ), 1, 0)
+             WHERE i.id = ?',
+            [$lang, $idiomId]
+        );
+    }
+
+    /** Sweeps the same invariant across the corpus at the end of a run. */
+    private function syncPublication(string $lang): void
+    {
+        Db::execute(
+            "UPDATE idioms i SET i.is_published = 0
+             WHERE i.is_published = 1 AND NOT EXISTS (
+                 SELECT 1 FROM idiom_translations t
+                 WHERE t.idiom_id = i.id AND t.lang_code = ?
+                   AND t.quiz_usable = 1 AND t.is_primary = 1
+             )",
+            [$lang]
         );
     }
 

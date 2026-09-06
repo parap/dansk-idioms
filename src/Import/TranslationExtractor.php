@@ -17,6 +17,14 @@ final class TranslationExtractor
     private const MAX_QUIZ_WORDS = 6;
     private const MAX_QUIZ_CHARS = 60;
 
+    /**
+     * "Буквально переводится как «быть в своем тузе»" is a literal gloss even though
+     * it ends in an idiomatic cue. The compound form has to be tested first, or the
+     * literal reading wins the primary slot over the real meaning.
+     */
+    private const LITERAL_COMPOUND_CUE =
+        '/(дословно|буквально|букв\.)\s+(\p{Cyrillic}{1,6}\s+)?(переводится|перевод|значит|означа\w*)\b/ui';
+
     private const LITERAL_CUE   = '/(дословно|буквально|букв\.|дословный перевод)\s*[:\-–—]?\s*$/ui';
     /**
      * Introduces a gloss of some OTHER word -- a component of the idiom, or its
@@ -49,6 +57,14 @@ final class TranslationExtractor
         //    the translation is here and Значение is merely explanation, so this
         //    outranks the labels. Quoted spans inside it are handled in step 3.
         $head = $entry->headRemainder;
+        if ($head !== null && $head !== '') {
+            // Strip parenthetical asides before judging the head. Previously any head
+            // containing « was skipped wholesale, which discarded correct answers whose
+            // aside merely quoted a component word:
+            //   "стокроновая купюра (… слово lap означает «лоскут», «заплатка»)"
+            $head = trim(preg_replace('/\([^()]*\)|\[[^\[\]]*\]/u', '', $head) ?? $head);
+            $head = Text::trimPunctuation(Text::collapseWhitespace($head));
+        }
         if ($head !== null && $head !== '' && !str_contains($head, '«')) {
             $clause = $this->firstClause($head);
             if (mb_strlen($clause, 'UTF-8') <= 90) {
@@ -57,6 +73,19 @@ final class TranslationExtractor
                     // own translation of THIS idiom, while a «...» further down may be
                     // glossing something else entirely.
                     $candidates[] = $this->make($v, 'idiomatic', 0.97);
+                }
+            }
+        }
+
+        // 1b. Unlabelled continuation lines. Some entries give the meaning as a bare
+        //     list rather than under a label:
+        //       "Буквально оно означает «...», а по смыслу:"
+        //       "прислушиваться к своим чувствам и потребностям;"
+        //     Ranked below the head line but above bare quotes.
+        foreach ($entry->trailingLines as $line) {
+            foreach ($this->clauses($line) as $i => $clause) {
+                foreach ($this->splitVariants($clause) as $v) {
+                    $candidates[] = $this->make($v, 'idiomatic', max(0.5, 0.90 - 0.03 * $i));
                 }
             }
         }
@@ -99,7 +128,12 @@ final class TranslationExtractor
                 '/(?:переводится как|означает|значит)\s*[:\-–—]?\s*([^.;]{2,60})/ui',
                 $explanation, $m
             )) {
-                $candidates[] = $this->make(trim($m[1]), 'idiomatic', 0.6);
+                $capture = Text::trimPunctuation(trim($m[1]), false);
+                // A fragment with unbalanced quotes or brackets was cut mid-structure
+                // and is not a phrase: "лоскут», «заплатка»)".
+                if ($this->isBalanced($capture)) {
+                    $candidates[] = $this->make($capture, 'idiomatic', 0.6);
+                }
             }
         }
 
@@ -186,11 +220,12 @@ final class TranslationExtractor
             $insideParens = mb_substr($masked, $charPos, 1, 'UTF-8') === "\x01";
 
             [$sense, $conf] = match (true) {
-                $insideParens                              => ['gloss', 0.5],
-                (bool) preg_match(self::GLOSS_CUE, $before)     => ['gloss', 0.5],
-                (bool) preg_match(self::LITERAL_CUE, $before)   => ['literal', 0.85],
-                (bool) preg_match(self::IDIOMATIC_CUE, $before) => ['idiomatic', 0.95],
-                default                                    => ['idiomatic', 0.7],
+                $insideParens                                          => ['gloss', 0.5],
+                (bool) preg_match(self::GLOSS_CUE, $before)            => ['gloss', 0.5],
+                (bool) preg_match(self::LITERAL_COMPOUND_CUE, $before) => ['literal', 0.9],
+                (bool) preg_match(self::LITERAL_CUE, $before)          => ['literal', 0.85],
+                (bool) preg_match(self::IDIOMATIC_CUE, $before)        => ['idiomatic', 0.95],
+                default                                                => ['idiomatic', 0.7],
             };
 
             $out[] = [$value, $sense, $conf];
@@ -199,10 +234,38 @@ final class TranslationExtractor
         return $out;
     }
 
-    /** Enumerations: «стереть ухмылку», «сбить спесь / заехать по физиономии» -> separate rows. */
+    /**
+     * Enumerations: «сбить спесь / заехать по физиономии» -> separate rows.
+     *
+     * But " / " also separates verbs that share one object:
+     * "Дать / подать / опубликовать объявление в прессе". Splitting that yields
+     * "Дать", which loses the object and is not a translation of anything. The parts
+     * are only treated as independent when they are comparable in length; a short
+     * part beside a much longer one means the longer one carries a shared tail.
+     */
     private function splitVariants(string $s): array
     {
         $parts = preg_split('~\s+/\s+~u', $s) ?: [$s];
+
+        if (count($parts) > 1) {
+            $counts = array_map(static fn(string $p): int => Text::wordCount($p), $parts);
+            // A bare one-word part next to a substantially longer one is a verb whose
+            // object lives in the long part: "Дать / подать / опубликовать объявление
+            // в прессе". Drop the bare verbs and keep the complete phrase. When every
+            // part is short they are genuine alternatives and all are kept.
+            if (max($counts) >= 3) {
+                $kept = [];
+                foreach ($parts as $i => $part) {
+                    if ($counts[$i] > 1) {
+                        $kept[] = $part;
+                    }
+                }
+                if ($kept !== []) {
+                    $parts = $kept;
+                }
+            }
+        }
+
         $out = [];
         foreach ($parts as $part) {
             $part = Text::trimPunctuation($part, false);
@@ -277,6 +340,8 @@ final class TranslationExtractor
         // ("ударить себя вместе") is retained because it is an excellent distractor,
         // but offering it as the answer would teach the wrong meaning outright.
         $usable = $sense === 'idiomatic'
+            // Text cut mid-quote or mid-bracket is a fragment, not a phrase.
+            && $this->isBalanced($text)
             && !preg_match(self::META_DESCRIPTION, $text)
             && !$this->isLexicographicPhrase($text, $words)
             && $words > 0 && $words <= self::MAX_QUIZ_WORDS
@@ -309,6 +374,18 @@ final class TranslationExtractor
             . '|поговорк\w*|пословиц\w*|описани\w*|обозначени\w*)/ui',
             $text
         );
+    }
+
+    /** Rejects text cut mid-quote or mid-bracket. */
+    private function isBalanced(string $s): bool
+    {
+        $pairs = [['«', '»'], ['(', ')'], ['[', ']'], ['„', '“']];
+        foreach ($pairs as [$open, $close]) {
+            if (mb_substr_count($s, $open) !== mb_substr_count($s, $close)) {
+                return false;
+            }
+        }
+        return mb_substr_count($s, '"') % 2 === 0;
     }
 
     private function countUsable(array $c): int

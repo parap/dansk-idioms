@@ -3,6 +3,7 @@
 namespace Dansk\Domain;
 
 use Dansk\Import\{Classifier, EntryParser, Normalizer, Text, TranslationExtractor};
+
 use Dansk\Support\Db;
 use PDO;
 
@@ -15,6 +16,9 @@ use PDO;
  */
 final class ReviewRepository
 {
+    public const MAX_ANSWER_WORDS = 6;
+    public const MAX_ANSWER_CHARS = 60;
+
     public function __construct(
         private EntryParser $parser = new EntryParser(),
         private TranslationExtractor $extractor = new TranslationExtractor(),
@@ -78,6 +82,20 @@ final class ReviewRepository
         $primary = Text::collapseWhitespace($primary);
         if ($term === '' || $primary === '') {
             throw new \InvalidArgumentException('Both a term and a translation are required.');
+        }
+
+        // The same limits the importer applies. Without this the review screen was the
+        // one way a 22-word explanation could become a quiz option, which then had no
+        // distractors of comparable length and made the question answerable on sight.
+        $words = Text::wordCount($primary);
+        $chars = mb_strlen($primary, 'UTF-8');
+        if ($words > self::MAX_ANSWER_WORDS || $chars > self::MAX_ANSWER_CHARS) {
+            throw new \InvalidArgumentException(sprintf(
+                'The translation is too long to be a quiz option (%d words, %d characters; '
+                . 'the limit is %d words and %d characters). Shorten it to the core meaning — '
+                . 'the full explanation is kept separately.',
+                $words, $chars, self::MAX_ANSWER_WORDS, self::MAX_ANSWER_CHARS
+            ));
         }
 
         $parsed  = $this->parser->parse($entry['raw_text']);
