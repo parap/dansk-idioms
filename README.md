@@ -261,6 +261,11 @@ human correction severed by a re-parse, 18 idioms deleted by a wrong definition 
 - distractors never repeat, never come from the same idiom, and always match the answer
   on verb parity
 
+The integration suite takes ~9 seconds, nearly all of it re-importing the fixture in
+each test's `setUp`. Cleanup between tests uses `DELETE`, not `TRUNCATE`: TRUNCATE is
+DDL and InnoDB recreates the tablespace, which at 20 tables per test was over half the
+suite's runtime (23s down to 9s from that one change).
+
 The scratch schema needs a grant, applied automatically on a fresh volume by
 `docker/mysql/01-test-database.sql`. On an existing volume, run it once by hand:
 

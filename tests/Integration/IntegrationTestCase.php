@@ -50,16 +50,28 @@ abstract class IntegrationTestCase extends TestCase
     {
         Db::serverPdo()->exec('DROP DATABASE IF EXISTS ' . self::TEST_DB);
         Db::reset();
+        self::$tables = null;
     }
+
+    /** @var list<string>|null */
+    private static ?array $tables = null;
 
     protected function setUp(): void
     {
         $pdo = Db::pdo();
+
+        // DELETE, not TRUNCATE. TRUNCATE is DDL: InnoDB drops and recreates the
+        // tablespace, which cost ~0.5s across these tables and, at 20 tables per test,
+        // was over half the suite's total runtime. DELETE on an already-empty table is
+        // effectively free. Nothing here asserts on specific auto-increment values.
+        self::$tables ??= array_values(array_diff(
+            $pdo->query('SHOW TABLES')->fetchAll(PDO::FETCH_COLUMN),
+            ['languages', 'schema_migrations']
+        ));
+
         $pdo->exec('SET FOREIGN_KEY_CHECKS = 0');
-        foreach ($pdo->query('SHOW TABLES')->fetchAll(PDO::FETCH_COLUMN) as $table) {
-            if ($table !== 'languages' && $table !== 'schema_migrations') {
-                $pdo->exec("TRUNCATE TABLE `{$table}`");
-            }
+        foreach (self::$tables as $table) {
+            $pdo->exec("DELETE FROM `{$table}`");
         }
         $pdo->exec('SET FOREIGN_KEY_CHECKS = 1');
     }
