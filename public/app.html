@@ -111,7 +111,10 @@ const STRINGS = {
     intro: 'Идиомы, собранные из живых датских текстов, с объяснениями на русском. ' +
            'В каждом раунде десять идиом и четыре варианта перевода — выберите верный, ' +
            'прочитайте объяснение и узнайте результат.',
-    statIdioms: 'идиом', statAnswers: 'переводов', statLearned: 'выучено', statDue: 'к повторению',
+    statIdioms: { one: 'идиома', few: 'идиомы', many: 'идиом', other: 'идиом' },
+    statSeen: 'вы видели',
+    statRounds: { one: 'раунд', few: 'раунда', many: 'раундов', other: 'раундов' },
+    statBest: 'лучший счёт', statLearned: 'выучено', statDue: 'к повторению',
     start: 'Начать раунд', startAgain: 'Ещё раунд',
     createAccount: 'Создать аккаунт, чтобы сохранять прогресс',
     signIn: 'войти', signOut: 'выйти',
@@ -128,7 +131,10 @@ const STRINGS = {
     intro: 'Idioms collected from real Danish texts, explained in Russian. ' +
            'Each round gives you ten idioms and four candidate translations — pick the ' +
            'right one, read the explanation, and see how you did.',
-    statIdioms: 'idioms', statAnswers: 'answers', statLearned: 'learned', statDue: 'due',
+    statIdioms: { one: 'idiom', other: 'idioms' },
+    statSeen: 'you have seen',
+    statRounds: { one: 'round', other: 'rounds' },
+    statBest: 'best score', statLearned: 'learned', statDue: 'due',
     start: 'Start a round', startAgain: 'Another round',
     createAccount: 'Create an account to track progress',
     signIn: 'sign in', signOut: 'log out',
@@ -144,7 +150,14 @@ const STRINGS = {
 
 let lang = localStorage.getItem('ui_lang') || 'ru';
 if (!STRINGS[lang]) lang = 'ru';
-const t = key => STRINGS[lang][key] ?? STRINGS.ru[key] ?? key;
+const t = (key, count) => {
+  const value = STRINGS[lang][key] ?? STRINGS.ru[key] ?? key;
+  if (typeof value === 'string') return value;
+  // Russian needs three forms (1 раунд / 2 раунда / 5 раундов); English needs two.
+  // Intl.PluralRules knows the rules for every locale, so no counting logic here.
+  const form = new Intl.PluralRules(lang).select(count ?? 0);
+  return value[form] ?? value.other ?? Object.values(value)[0];
+};
 const setLang = code => {
   lang = STRINGS[code] ? code : 'ru';
   try { localStorage.setItem('ui_lang', lang); } catch {}
@@ -183,6 +196,33 @@ async function refreshMe() {
   if (si) si.onclick = () => auth();
 }
 
+/**
+ * Progress tiles. A raw count of translation rows told a visitor nothing they could
+ * act on, so the remaining tiles show their own progress instead: coverage of the
+ * corpus and best score for anyone who has played, plus spaced-repetition figures
+ * once there is an account behind them. A first-time visitor sees just the corpus
+ * size rather than a row of zeroes.
+ */
+function tiles(s) {
+  const you = s.you ?? {};
+  const out = [];
+  const tile = (value, key, count) =>
+    `<div class="stat"><b>${value}</b><span>${esc(t(key, count))}</span></div>`;
+
+  if (you.seen > 0) {
+    out.push(tile(`${you.seen}<small style="font-size:.55em;color:var(--muted)">/${s.idioms_published}</small>`, 'statSeen'));
+  }
+  if (you.rounds > 0) {
+    out.push(tile(you.rounds, 'statRounds', you.rounds));
+    if (you.best !== null && you.best !== undefined) out.push(tile(you.best + '%', 'statBest'));
+  }
+  if (me) {
+    out.push(tile(me.learned, 'statLearned'));
+    if (me.due > 0) out.push(tile(me.due, 'statDue'));
+  }
+  return out.join('');
+}
+
 // ---------- home ----------
 async function home() {
   const s = await api('/stats').catch(() => ({}));
@@ -192,10 +232,8 @@ async function home() {
       <p class="tagline">${esc(t('tagline'))}</p>
       <p class="lede">${esc(t('intro'))}</p>
       <div class="stats">
-        <div class="stat"><b>${s.idioms_published ?? '—'}</b><span>${esc(t('statIdioms'))}</span></div>
-        <div class="stat"><b>${s.quiz_usable ?? '—'}</b><span>${esc(t('statAnswers'))}</span></div>
-        ${me ? `<div class="stat"><b>${me.learned}</b><span>${esc(t('statLearned'))}</span></div>
-                <div class="stat"><b>${me.due}</b><span>${esc(t('statDue'))}</span></div>` : ''}
+        <div class="stat"><b>${s.idioms_published ?? '—'}</b><span>${esc(t('statIdioms', s.idioms_published))}</span></div>
+        ${tiles(s)}
       </div>
       <button class="primary" id="go">${esc(t('start'))}</button>
       ${me ? '' : `<button class="link" id="reg" style="width:100%">${esc(t('createAccount'))}</button>`}

@@ -137,3 +137,15 @@ which is the language of the answers themselves.
 
 To check a translation is complete, compare the keys used in code against each block —
 all must be present and none unused.
+
+### Plurals
+
+A string in `STRINGS` may be a plain string or a map of CLDR plural categories:
+
+```js
+statRounds: { one: 'раунд', few: 'раунда', many: 'раундов', other: 'раундов' },
+```
+
+`t('statRounds', n)` then selects via `Intl.PluralRules`, so Russian gets its three
+forms (1 раунд / 2 раунда / 5 раундов) and English its two, with no counting logic in
+the page. This needs no `ext-intl` — the rules live in the browser.

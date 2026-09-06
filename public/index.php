@@ -93,14 +93,36 @@ try {
             ], $ok ? 200 : 503);
         })(),
 
-        'stats' => Response::json([
-            'idioms_published' => (int) Db::fetchValue('SELECT COUNT(*) FROM idioms WHERE is_published = 1'),
-            'idioms_total'     => (int) Db::fetchValue('SELECT COUNT(*) FROM idioms'),
-            'translations'     => (int) Db::fetchValue('SELECT COUNT(*) FROM idiom_translations'),
-            'quiz_usable'      => (int) Db::fetchValue('SELECT COUNT(*) FROM idiom_translations WHERE quiz_usable = 1'),
-            'examples'         => (int) Db::fetchValue('SELECT COUNT(*) FROM examples WHERE is_reviewed = 1'),
-            'needs_review'     => (int) Db::fetchValue("SELECT COUNT(*) FROM raw_entries WHERE status = 'needs_review'"),
-        ]),
+        'stats' => (function (): void {
+            // Corpus-wide figures, plus this visitor's own progress. Guests are
+            // identified by anon_key so a returning visitor sees their history
+            // without an account.
+            $userId  = \Dansk\Support\Auth::userId();
+            $anonKey = \Dansk\Support\Auth::anonKey();
+            $scope   = $userId !== null ? 'user_id = ?' : 'anon_key = ?';
+            $bind    = $userId !== null ? $userId : $anonKey;
+
+            $rounds = (int) Db::fetchValue(
+                "SELECT COUNT(*) FROM quiz_sessions WHERE {$scope} AND status = 'finished'", [$bind]
+            );
+            $best = Db::fetchValue(
+                "SELECT MAX(ROUND(100 * correct_count / NULLIF(question_count,0)))
+                 FROM quiz_sessions WHERE {$scope} AND status = 'finished'", [$bind]
+            );
+            $seen = (int) Db::fetchValue(
+                "SELECT COUNT(DISTINCT q.idiom_id) FROM quiz_questions q
+                 JOIN quiz_sessions s ON s.id = q.session_id
+                 WHERE s.{$scope} AND q.answered_at IS NOT NULL", [$bind]
+            );
+
+            Response::json([
+                'idioms_published' => (int) Db::fetchValue('SELECT COUNT(*) FROM idioms WHERE is_published = 1'),
+                'quiz_usable'      => (int) Db::fetchValue('SELECT COUNT(*) FROM idiom_translations WHERE quiz_usable = 1'),
+                'examples'         => (int) Db::fetchValue('SELECT COUNT(*) FROM examples WHERE is_reviewed = 1'),
+                'needs_review'     => (int) Db::fetchValue("SELECT COUNT(*) FROM raw_entries WHERE status = 'needs_review'"),
+                'you' => ['rounds' => $rounds, 'best' => $best === null ? null : (int) $best, 'seen' => $seen],
+            ]);
+        })(),
 
         'auth.register' => $auth->register($body),
         'auth.login'    => $auth->login($body),
