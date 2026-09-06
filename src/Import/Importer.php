@@ -88,6 +88,14 @@ final class Importer
 
         if (!$dryRun) {
             $this->recomputeSeenCounts();
+            // A published idiom with no primary translation is unanswerable and would
+            // silently vanish from the quiz. Surfaced as a stat so a run that breaks
+            // it cannot pass unnoticed.
+            $stats['published_without_answer'] = (int) Db::fetchValue(
+                'SELECT COUNT(*) FROM idioms i WHERE i.is_published = 1 AND NOT EXISTS (
+                     SELECT 1 FROM idiom_translations t
+                     WHERE t.idiom_id = i.id AND t.is_primary = 1 AND t.quiz_usable = 1)'
+            );
             $this->finishRun($runId, $stats);
         }
 
@@ -215,6 +223,16 @@ final class Importer
     private function writeTranslations(int $idiomId, string $lang, array $translations): int
     {
         $written = 0;
+
+        // uq_primary allows only one primary per (idiom, lang), so a re-parse that
+        // moves the primary would collide with the previous one. Clear it first --
+        // but never touch a row a human set, which is marked source='manual'.
+        Db::execute(
+            "UPDATE idiom_translations SET is_primary = NULL
+             WHERE idiom_id = ? AND lang_code = ? AND is_primary = 1 AND source <> 'manual'",
+            [$idiomId, $lang]
+        );
+
         foreach ($translations as $t) {
             $norm = Normalizer::translation($t['text']);
             if ($norm === '') {
@@ -226,8 +244,13 @@ final class Importer
                      quiz_usable, shape, word_count, char_count, source, confidence)
                  VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
                  ON DUPLICATE KEY UPDATE
-                    sense_type = VALUES(sense_type), quiz_usable = VALUES(quiz_usable),
-                    confidence = GREATEST(confidence, VALUES(confidence))',
+                    sense_type  = VALUES(sense_type),
+                    quiz_usable = VALUES(quiz_usable),
+                    -- is_primary MUST be updated here. The statement above clears the
+                    -- previous primary, so omitting it leaves the idiom with no answer
+                    -- at all whenever the winning row already existed.
+                    is_primary  = VALUES(is_primary),
+                    confidence  = GREATEST(confidence, VALUES(confidence))',
                 [
                     $idiomId, $lang, $t['text'], $norm, $t['sense_type'],
                     // 1 or NULL, never 0: uq_primary relies on NULLs being ignored.

@@ -127,6 +127,43 @@ final class ImportPipelineTest extends TestCase
         self::assertTrue($byText['чёрт возьми']['is_primary']);
     }
 
+    public function testGlossOfAComponentWordIsNotTheAnswer(): void
+    {
+        // Reported from a real round: "Слово grus означает «гравий, щебень, труха»"
+        // defines a component of the idiom, not the idiom. It was being served as
+        // the correct answer, outranking the author's own translation on the head line.
+        $entry = $this->parse(
+            "at få verden til at styrte i grus — заставить мир рухнуть в прах / разрушить чей-то мир до основания.\n"
+            . "Значение: Яркое метафорическое выражение. Слово grus означает «гравий, щебень, труха», "
+            . "а весь оборот описывает эмоциональный крах."
+        );
+        $translations = (new TranslationExtractor())->extract($entry);
+
+        $byText = [];
+        foreach ($translations as $t) {
+            $byText[$t['text']] = $t;
+        }
+
+        self::assertSame('gloss', $byText['гравий, щебень, труха']['sense_type']);
+        self::assertFalse($byText['гравий, щебень, труха']['quiz_usable']);
+
+        $primary = array_values(array_filter($translations, fn($t) => $t['is_primary']));
+        self::assertSame('заставить мир рухнуть в прах', $primary[0]['text'],
+            'the head-line translation must outrank a quoted gloss buried in the explanation');
+    }
+
+    public function testMetaDescriptionIsRejectedEvenWhenItLeadsWithAdjectives(): void
+    {
+        $entry = $this->parse("at prøve — Яркое метафорическое выражение, описывающее нечто.");
+        foreach ((new TranslationExtractor())->extract($entry) as $t) {
+            if (str_contains($t['text'], 'метафорическое')) {
+                self::assertFalse($t['quiz_usable']);
+                return;
+            }
+        }
+        self::fail('expected the adjective-led meta-description to be present but rejected');
+    }
+
     public function testLexicographicMetaDescriptionIsNotAnAnswer(): void
     {
         $entry = $this->parse(

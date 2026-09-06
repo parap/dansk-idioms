@@ -18,7 +18,17 @@ final class TranslationExtractor
     private const MAX_QUIZ_CHARS = 60;
 
     private const LITERAL_CUE   = '/(дословно|буквально|букв\.|дословный перевод)\s*[:\-–—]?\s*$/ui';
-    private const GLOSS_CUE     = '/(происходит от|заимствован\w*|этимолог\w*|от\s+\p{Latin}+\s*)$/ui';
+    /**
+     * Introduces a gloss of some OTHER word -- a component of the idiom, or its
+     * etymological source -- never of the headword itself. "Слово grus означает
+     * «гравий, щебень, труха»" defines grus, not "at få verden til at styrte i grus".
+     * These cues must be tested before the idiomatic ones, since they also contain
+     * "означает".
+     */
+    private const GLOSS_CUE = '/(происходит от|заимствован\w*|этимолог\w*'
+        . '|слов[оаеу]\s+\S+\s+(означа\w*|значит|переводится|это)\s*'
+        . '|\p{Latin}+\s+(означа\w*|значит|переводится)\s*'
+        . '|от\s+\p{Latin}+\s*)$/ui';
     /**
      * Lexicographic meta-description, not a translation. These open most Значение
      * values ("Устойчивое идиоматическое выражение, описывающее ...") and would
@@ -43,7 +53,10 @@ final class TranslationExtractor
             $clause = $this->firstClause($head);
             if (mb_strlen($clause, 'UTF-8') <= 90) {
                 foreach ($this->splitVariants($clause) as $v) {
-                    $candidates[] = $this->make($v, 'idiomatic', 0.94);
+                    // Above every quoted-span confidence: the head line is the author's
+                    // own translation of THIS idiom, while a «...» further down may be
+                    // glossing something else entirely.
+                    $candidates[] = $this->make($v, 'idiomatic', 0.97);
                 }
             }
         }
@@ -184,6 +197,7 @@ final class TranslationExtractor
         // but offering it as the answer would teach the wrong meaning outright.
         $usable = $sense === 'idiomatic'
             && !preg_match(self::META_DESCRIPTION, $text)
+            && !$this->isLexicographicPhrase($text, $words)
             && $words > 0 && $words <= self::MAX_QUIZ_WORDS
             && $chars <= self::MAX_QUIZ_CHARS
             && !str_contains($text, '…')
@@ -197,6 +211,23 @@ final class TranslationExtractor
             'is_primary'  => false,
             'confidence'  => $confidence,
         ];
+    }
+
+    /**
+     * Catches meta-description that does not start with the giveaway noun:
+     * "Яркое метафорическое выражение" leads with adjectives, so an anchored
+     * pattern misses it. Any short phrase whose head noun is grammatical
+     * terminology is describing the idiom, not translating it.
+     */
+    private function isLexicographicPhrase(string $text, int $words): bool
+    {
+        return $words <= 6 && (bool) preg_match(
+            '/(выражени\w*|оборот\w*|словосочетани\w*|фразеологизм\w*|конструкци\w*'
+            . '|идиом\w*|глагол\w*|существительн\w*|прилагательн\w*|наречи\w*'
+            . '|частиц\w*|союз\w*|предлог\w*|междомети\w*|термин\w*'
+            . '|поговорк\w*|пословиц\w*|описани\w*|обозначени\w*)/ui',
+            $text
+        );
     }
 
     private function countUsable(array $c): int

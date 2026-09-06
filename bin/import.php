@@ -38,8 +38,13 @@ $labels = [
     'idioms_updated'  => 'idioms seen again',
     'translations'    => 'translations written',
     'no_primary'      => 'entries with no answer',
+    'published_without_answer' => 'PUBLISHED BUT UNANSWERABLE',
 ];
 foreach ($labels as $key => $label) {
     printf("  %-24s %d\n", $label, $stats[$key] ?? 0);
+}
+if (($stats['published_without_answer'] ?? 0) > 0) {
+    fwrite(STDERR, "\nWARNING: published idioms without a usable answer would be invisible"
+        . " in the quiz. Investigate before relying on this corpus.\n");
 }
 printf("\nDone in %.1fs\n", microtime(true) - $started);

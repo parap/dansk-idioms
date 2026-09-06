@@ -156,11 +156,13 @@ final class DistractorService
         $lengthSim = 1.0 - min(1.0, abs((int) $c['word_count'] - (int) $correct['word_count']) / 5);
         $charSim   = 1.0 - min(1.0, abs((int) $c['char_count'] - (int) $correct['char_count']) / 40);
 
-        return 0.30 * (($lengthSim + $charSim) / 2)
-             + 0.25 * ($c['shape']    === $correct['shape']    ? 1 : 0)
+        // Shape carries the most weight: offering noun phrases against a verbal
+        // idiom lets the user pick the odd one out without knowing any Danish.
+        return 0.35 * ($c['shape']    === $correct['shape']    ? 1 : 0)
+             + 0.25 * (($lengthSim + $charSim) / 2)
              + 0.20 * ($c['register'] === $correct['register'] ? 1 : 0)
-             + 0.15 * ($c['kind']     === $correct['kind']     ? 1 : 0)
-             + 0.10 * (mt_rand() / mt_getrandmax());
+             + 0.12 * ($c['kind']     === $correct['kind']     ? 1 : 0)
+             + 0.08 * (mt_rand() / mt_getrandmax());
     }
 
     /** @return array<string,true> */
