@@ -151,3 +151,28 @@ statRounds: { one: 'раунд', few: 'раунда', many: 'раундов', ot
 `t('statRounds', n)` then selects via `Intl.PluralRules`, so Russian gets its three
 forms (1 раунд / 2 раунда / 5 раундов) and English its two, with no counting logic in
 the page. This needs no `ext-intl` — the rules live in the browser.
+
+## Adding new idioms
+
+Post as usual in the Telegram group, then:
+
+1. Telegram Desktop → **⋮ → Export chat history** → format **HTML** (no media needed).
+2. `bin/load-export.sh` — with no argument it picks the newest `ChatExport_*` in
+   `~/Downloads/Telegram Desktop`, or pass an export folder as an argument.
+
+Re-export the **whole** history each time; there is no need to narrow the date range.
+The import is idempotent:
+
+- Messages key on `(source, tg_message_id)` and entries on `(message, entry_index)`,
+  so re-importing updates in place instead of duplicating.
+- Idioms dedupe on `term_norm` — an idiom already present is recognised, not re-added.
+- Entries you corrected in the review queue carry `status = 'fixed'` and are never
+  overwritten by a re-parse: the decision, the corrected term and the link to the
+  idiom all survive.
+
+Running it against an unchanged export reports `idioms created 0`, which is the check
+that idempotency still holds.
+
+Two figures in the output are worth watching: **PUBLISHED BUT UNANSWERABLE** must stay
+0, and **orphaned** counts idioms whose term a later parser change rewrote, leaving the
+old row behind with nothing pointing at it.
