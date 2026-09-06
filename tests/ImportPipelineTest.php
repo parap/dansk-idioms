@@ -190,6 +190,36 @@ final class ImportPipelineTest extends TestCase
         self::assertFalse($literal[0]['quiz_usable']);
     }
 
+    public function testInternalMarkersNeverReachStoredText(): void
+    {
+        // \x02/\x03 carry <strong> through parsing and U+200B drives segmentation.
+        // Both were reaching the database and rendering as stray glyphs on screen.
+        $entry = $this->parse(
+            "at prøve" . self::B1 . " — попытка\n"
+            . self::ZW . "Значение: Разговорный оборот" . self::B0 . " со смыслом."
+        );
+
+        foreach ([$entry->explanation, $entry->label('Значение'), $entry->headRemainder] as $text) {
+            if ($text === null || $text === '') {
+                continue;
+            }
+            self::assertSame($text, Text::clean($text), 'markers survived: ' . bin2hex($text));
+            self::assertDoesNotMatchRegularExpression('/[\x00-\x08\x0B\x0C\x0E-\x1F\x{200B}]/u', $text);
+        }
+    }
+
+    public function testExplanationIsNotDuplicated(): void
+    {
+        $entry = $this->parse("at prøve — попытка\nЗначение: Смысл выражения.");
+
+        self::assertSame(
+            1,
+            substr_count((string) $entry->explanation, 'Смысл выражения.'),
+            'the label value must appear once, not both bare and label-qualified'
+        );
+        self::assertStringContainsString('Значение: Смысл выражения.', (string) $entry->explanation);
+    }
+
     // ---- classification ----------------------------------------------------
 
     /** @dataProvider verbPhrases */

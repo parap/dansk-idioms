@@ -33,12 +33,19 @@ final class EntryParser
 
         $this->extractTerm($entry, $head);
 
-        $entry->headRemainder = $entry->explanation;
+        $entry->headRemainder = $entry->explanation === null ? null : Text::clean($entry->explanation);
 
+        // Display-ready and label-qualified, so the explanation is stored exactly
+        // once. It previously held the bare label VALUES and the importer appended
+        // the labelled versions on top, printing every explanation twice.
         $parts = array_filter([
-            $entry->explanation,
+            $entry->headRemainder,
             $trailing !== '' ? $trailing : null,
-            ...array_values($labels),
+            ...array_map(
+                static fn(string $k, string $v): string => "{$k}: {$v}",
+                array_keys($labels),
+                array_values($labels)
+            ),
         ]);
         $entry->explanation = $parts === [] ? null : implode("\n", $parts);
 
@@ -76,19 +83,19 @@ final class EntryParser
             }
             if (preg_match($pattern, $line, $m)) {
                 $currentLabel = $m[1];
-                $labels[$currentLabel] = trim($m[2]);
+                $labels[$currentLabel] = Text::clean($m[2]);
                 continue;
             }
             if ($currentLabel !== null) {
-                $labels[$currentLabel] = trim($labels[$currentLabel] . ' ' . $line);
+                $labels[$currentLabel] = Text::clean($labels[$currentLabel] . ' ' . $line);
             } else {
-                $trail[] = $line;
+                $trail[] = Text::clean($line);
             }
         }
 
         // A label can also appear inline on the head line.
         if (preg_match($pattern, $head, $m)) {
-            $labels[$m[1]] = trim($m[2] . ' ' . ($labels[$m[1]] ?? ''));
+            $labels[$m[1]] = Text::clean($m[2] . ' ' . ($labels[$m[1]] ?? ''));
             $head = '';
         }
 

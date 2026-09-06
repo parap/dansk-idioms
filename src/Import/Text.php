@@ -60,6 +60,21 @@ final class Text
     }
 
     /**
+     * Removes everything that must never reach stored text or a user's screen:
+     * the internal bold sentinels, the zero-width separators the segmenter runs on,
+     * and any other C0 control character. These are working markers, not content --
+     * \x02 was reaching the database and rendering as a stray glyph in explanations.
+     */
+    public static function clean(string $s): string
+    {
+        $s = self::stripBoldMarkers($s);
+        $s = preg_replace('/[\x{200B}\x{FEFF}\x{00AD}]/u', '', $s) ?? $s;
+        $s = preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F]/u', '', $s) ?? $s;
+        $s = str_replace("\u{00A0}", ' ', $s);
+        return trim(preg_replace('/[ \t]+/u', ' ', $s) ?? $s);
+    }
+
+    /**
      * UTF-8-safe punctuation trim.
      *
      * trim($s, "…«»") is BYTE-based: PHP strips the individual bytes of those

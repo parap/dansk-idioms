@@ -252,7 +252,7 @@ final class Importer
                     is_primary  = VALUES(is_primary),
                     confidence  = GREATEST(confidence, VALUES(confidence))',
                 [
-                    $idiomId, $lang, $t['text'], $norm, $t['sense_type'],
+                    $idiomId, $lang, Text::clean($t['text']), $norm, $t['sense_type'],
                     // 1 or NULL, never 0: uq_primary relies on NULLs being ignored.
                     $t['is_primary'] ? 1 : null,
                     $t['quiz_usable'] ? 1 : 0,
@@ -269,11 +269,9 @@ final class Importer
 
     private function writeExplanation(int $idiomId, string $lang, ParsedEntry $entry): void
     {
-        $body = trim(($entry->explanation ?? '') . "\n" . implode("\n", array_map(
-            static fn(string $k, string $v): string => "$k: $v",
-            array_keys($entry->labels),
-            array_values($entry->labels)
-        )));
+        // ParsedEntry::$explanation is already label-qualified; appending the labels
+        // again is what duplicated every explanation on screen.
+        $body = trim((string) $entry->explanation);
         if ($body === '') {
             return;
         }
