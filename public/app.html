@@ -326,8 +326,6 @@ document.addEventListener('keydown', e => {
   else if (e.key === 'Enter' && $('#next')) $('#next').click();
 });
 
-$('#brand').onclick = e => { e.preventDefault(); home(); };
-
 document.documentElement.lang = lang;
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
 await refreshMe();
