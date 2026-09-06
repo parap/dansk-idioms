@@ -81,3 +81,20 @@ Parser strategies, in confidence order: `bold` (Telegram `<strong>` headword) �
 (separator confined to the pre-Cyrillic prefix) → `newline` (headword alone on its own line)
 → `separator` → `fallback`. Run `vendor/bin/phpunit` after touching any of them; the fixtures
 encode every failure mode observed in the real export.
+
+## Review queue
+
+`http://localhost:8080/admin` — password from `admin.password` in config
+(default `dansk-admin`; override in the gitignored `config/local.php`). This is an
+interim gate until real accounts arrive in Phase 2.
+
+Keyboard-driven: <kbd>Enter</kbd> accept, <kbd>N</kbd> skip, <kbd>R</kbd> reject.
+Extracted candidates appear as clickable chips; literal glosses are struck through
+because they are retained as distractors but must never be the answer.
+
+**Accepting writes `raw_entries.status = 'fixed'`, which a re-import must never
+overwrite.** That protection covers not just the status but the corrected term and —
+most importantly — `idiom_id`. An earlier version protected only the status, so
+re-importing silently set `idiom_id` back to NULL, orphaning the reviewed idiom from
+its source message and undercounting `seen_count`. Verified by importing twice and
+asserting the link survives.

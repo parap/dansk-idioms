@@ -87,10 +87,22 @@ final class Importer
         }
 
         if (!$dryRun) {
+            $this->recomputeSeenCounts();
             $this->finishRun($runId, $stats);
         }
 
         return $stats;
+    }
+
+    /** Derived, so repeated imports of the same export do not inflate it. */
+    private function recomputeSeenCounts(): void
+    {
+        Db::execute(
+            "UPDATE idioms i SET i.seen_count = GREATEST(1, (
+                 SELECT COUNT(*) FROM raw_entries r
+                 WHERE r.idiom_id = i.id AND r.status IN ('auto_accepted','fixed')
+             ))"
+        );
     }
 
     // ------------------------------------------------------------------ writes
@@ -166,7 +178,8 @@ final class Importer
             [$norm]
         );
         if ($existing !== false && $existing !== null) {
-            Db::execute('UPDATE idioms SET seen_count = seen_count + 1 WHERE id = ?', [(int) $existing]);
+            // seen_count is recomputed from raw_entries at the end of the run rather
+            // than incremented here, so re-importing the same export is idempotent.
             return [(int) $existing, false];
         }
 
@@ -274,15 +287,23 @@ final class Importer
                  idiom_id, parser_version, signals, content_hash)
              VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)
              ON DUPLICATE KEY UPDATE
-                raw_text = VALUES(raw_text), term_guess = VALUES(term_guess),
-                term_note_guess = VALUES(term_note_guess),
-                explanation_guess = VALUES(explanation_guess),
-                separator_kind = VALUES(separator_kind), strategy = VALUES(strategy),
-                confidence = VALUES(confidence), idiom_id = VALUES(idiom_id),
-                parser_version = VALUES(parser_version), signals = VALUES(signals),
-                content_hash = VALUES(content_hash),
-                -- a human edit outranks any re-parse
-                status = IF(raw_entries.status = \'fixed\', \'fixed\', VALUES(status))',
+                -- A human edit outranks any re-parse. Everything the reviewer owns --
+                -- the decision, the corrected term, and above all the link to the idiom
+                -- they created -- is preserved; only parser bookkeeping is
+                -- refreshed. Losing idiom_id here would orphan the idiom from its source
+                -- and silently undercount seen_count.
+                raw_text          = VALUES(raw_text),
+                content_hash      = VALUES(content_hash),
+                parser_version    = VALUES(parser_version),
+                signals           = VALUES(signals),
+                separator_kind    = IF(raw_entries.status = \'fixed\', raw_entries.separator_kind, VALUES(separator_kind)),
+                strategy          = IF(raw_entries.status = \'fixed\', raw_entries.strategy, VALUES(strategy)),
+                confidence        = IF(raw_entries.status = \'fixed\', raw_entries.confidence, VALUES(confidence)),
+                term_guess        = IF(raw_entries.status = \'fixed\', raw_entries.term_guess, VALUES(term_guess)),
+                term_note_guess   = IF(raw_entries.status = \'fixed\', raw_entries.term_note_guess, VALUES(term_note_guess)),
+                explanation_guess = IF(raw_entries.status = \'fixed\', raw_entries.explanation_guess, VALUES(explanation_guess)),
+                idiom_id          = IF(raw_entries.status = \'fixed\', raw_entries.idiom_id, VALUES(idiom_id)),
+                status            = IF(raw_entries.status = \'fixed\', \'fixed\', VALUES(status))',
             [
                 $messageId, $index, $entry->rawText, $entry->term, $entry->termNote,
                 $entry->explanation, $entry->separatorKind, $entry->strategy,

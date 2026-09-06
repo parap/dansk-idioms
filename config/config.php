@@ -17,6 +17,12 @@ $config = [
         'charset' => 'utf8mb4',
     ],
 
+    'admin' => [
+        // Interim gate for the review tool until real accounts land in Phase 2.
+        // Override in config/local.php (gitignored); never ship this default.
+        'password' => getenv('ADMIN_PASSWORD') ?: 'dansk-admin',
+    ],
+
     'quiz' => [
         'questions_per_round' => 10,
         'options_per_question' => 4,

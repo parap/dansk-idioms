@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Review queue — dansk idioms</title>
+<style>
+  :root{
+    --bg:#f4f5f7; --card:#fff; --ink:#15181d; --muted:#697080; --line:#dfe3e9;
+    --accent:#2f6fed; --ok:#1a7f4b; --bad:#b3261e; --warn:#8a6d00; --chip:#eef1f6;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#14161a;--card:#1c1f25;--ink:#e9ecf1;--muted:#98a0ae;--line:#2c313a;
+          --accent:#6f9dff;--ok:#4cc38a;--bad:#ff6b61;--warn:#e0b341;--chip:#252a32;}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  .wrap{max-width:56rem;margin:0 auto;padding:1.5rem 1rem 5rem}
+  header{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:1.25rem}
+  h1{font-size:1.15rem;margin:0;letter-spacing:-.01em}
+  .counts{color:var(--muted);font-size:.85rem}
+  .bar{height:4px;background:var(--line);border-radius:99px;overflow:hidden;margin:.5rem 0 1.25rem}
+  .bar>i{display:block;height:100%;background:var(--accent);transition:width .2s}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.25rem}
+  .meta{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-bottom:.9rem}
+  .tag{font:600 11px/1 ui-monospace,monospace;text-transform:uppercase;letter-spacing:.04em;
+       padding:.32em .6em;border-radius:5px;background:var(--chip);color:var(--muted)}
+  .tag.lo{background:#fdecea;color:var(--bad)} .tag.mid{background:#fdf4d9;color:var(--warn)}
+  @media (prefers-color-scheme:dark){.tag.lo{background:#3a1e1c}.tag.mid{background:#332b12}}
+  .raw{background:var(--chip);border-radius:8px;padding:.8rem .9rem;margin-bottom:1.1rem;
+       white-space:pre-wrap;word-break:break-word;font-size:.92rem}
+  .raw b{color:var(--accent)}
+  .raw .zw{opacity:.45;font-size:.8em}
+  label{display:block;font:600 .78rem/1 inherit;text-transform:uppercase;letter-spacing:.05em;
+        color:var(--muted);margin:0 0 .35rem}
+  input[type=text]{width:100%;padding:.6rem .7rem;font:inherit;color:var(--ink);
+       background:var(--bg);border:1px solid var(--line);border-radius:8px}
+  input:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:transparent}
+  .field{margin-bottom:1rem}
+  .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.45rem}
+  .chip{font-size:.85rem;padding:.3em .65em;border-radius:99px;border:1px solid var(--line);
+        background:var(--chip);color:var(--ink);cursor:pointer}
+  .chip:hover{border-color:var(--accent)}
+  .chip.gloss{opacity:.6;text-decoration:line-through}
+  .chip small{color:var(--muted);margin-left:.35em}
+  .actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.2rem}
+  button{font:600 inherit;padding:.6rem 1.1rem;border-radius:8px;border:1px solid var(--line);
+         background:var(--card);color:var(--ink);cursor:pointer}
+  button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  button.danger{color:var(--bad)}
+  kbd{font:600 11px ui-monospace,monospace;background:var(--chip);border:1px solid var(--line);
+      border-bottom-width:2px;border-radius:4px;padding:.1em .4em;margin-left:.4em;color:var(--muted)}
+  .hint{color:var(--muted);font-size:.83rem;margin-top:1rem}
+  .done{text-align:center;padding:3rem 1rem}
+  .done h2{color:var(--ok)}
+  .msg{margin-top:.8rem;font-size:.88rem}
+  .msg.err{color:var(--bad)} .msg.ok{color:var(--ok)}
+  .login{max-width:22rem;margin:5rem auto}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div id="login" class="login card" hidden>
+    <h1>Review queue</h1>
+    <p class="counts">Sign in to continue.</p>
+    <div class="field" style="margin-top:1rem">
+      <label for="pw">Admin password</label>
+      <input id="pw" type="password" autocomplete="current-password">
+    </div>
+    <button class="primary" id="loginBtn">Sign in</button>
+    <div id="loginMsg" class="msg err"></div>
+  </div>
+
+  <div id="app" hidden>
+    <header>
+      <h1>Review queue</h1>
+      <span class="counts" id="counts"></span>
+    </header>
+    <div class="bar"><i id="bar" style="width:0"></i></div>
+
+    <div id="card" class="card"></div>
+    <div id="msg" class="msg"></div>
+  </div>
+
+  <div id="done" class="done" hidden>
+    <h2>Queue empty</h2>
+    <p class="counts">Every flagged entry has been dealt with.</p>
+    <p><a href="/api/v1/stats">View corpus stats</a></p>
+  </div>
+
+</div>
+<script type="module">
+const $ = s => document.querySelector(s);
+const api = async (path, opts={}) => {
+  const r = await fetch('/api/v1' + path, {
+    headers: {'Content-Type':'application/json'}, ...opts,
+    body: opts.body ? JSON.stringify(opts.body) : undefined,
+  });
+  if (r.status === 401) { show('login'); throw new Error('unauthorized'); }
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j?.error?.message || 'Request failed');
+  return j;
+};
+const show = which => {
+  for (const id of ['login','app','done']) $('#'+id).hidden = (id !== which);
+};
+
+let items = [], idx = 0, counts = {}, total = 0;
+
+// Bold survives the import as \x02..\x03 sentinels; render them and make the
+// zero-width separators visible, since they are what drives segmentation.
+const renderRaw = t => t
+  .replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))
+  .replace(/\x02/g, '<b>').replace(/\x03/g, '</b>')
+  .replace(/​/g, '<span class="zw">·</span>');
+
+function draw() {
+  const it = items[idx];
+  if (!it) return show('done');
+  show('app');
+
+  const band = it.confidence < 0.5 ? 'lo' : it.confidence < 0.85 ? 'mid' : '';
+  const suggested = it.candidates.find(c => c.usable)?.text
+                 ?? it.candidates[0]?.text ?? '';
+
+  $('#card').innerHTML = `
+    <div class="meta">
+      <span class="tag ${band}">conf ${it.confidence.toFixed(2)}</span>
+      <span class="tag">${it.strategy ?? '—'}</span>
+      ${it.inflected ? `<span class="tag">in text: ${esc(it.inflected)}</span>` : ''}
+      <span class="counts">msg ${it.tg_message_id}</span>
+    </div>
+    <div class="raw">${renderRaw(it.raw_text)}</div>
+    <div class="field">
+      <label for="term">Danish term</label>
+      <input id="term" type="text" value="${esc(it.term_guess ?? '')}">
+    </div>
+    <div class="field">
+      <label for="tr">Russian translation (the quiz answer)</label>
+      <input id="tr" type="text" value="${esc(suggested)}">
+      ${it.candidates.length ? `<div class="chips">${it.candidates.map(c =>
+        `<button type="button" class="chip ${c.usable ? '' : 'gloss'}" data-t="${esc(c.text)}">
+           ${esc(c.text)}<small>${c.sense}</small></button>`).join('')}</div>` : ''}
+    </div>
+    <div class="actions">
+      <button class="primary" id="acc">Accept<kbd>↵</kbd></button>
+      <button id="skip">Skip<kbd>N</kbd></button>
+      <button class="danger" id="rej">Not an idiom<kbd>R</kbd></button>
+    </div>
+    <p class="hint">Click a suggestion to fill the answer. Literal glosses are struck
+       through — they are kept as distractors but never used as the answer.</p>`;
+
+  $('#counts').textContent = `${idx+1} of ${items.length} · ${counts.auto_accepted} auto-accepted · ${counts.fixed} fixed`;
+  $('#bar').style.width = ((idx / Math.max(1, total)) * 100) + '%';
+
+  $('#card').querySelectorAll('.chip').forEach(b =>
+    b.onclick = () => { $('#tr').value = b.dataset.t; $('#tr').focus(); });
+  $('#acc').onclick = accept;
+  $('#skip').onclick = () => { idx++; draw(); };
+  $('#rej').onclick = reject;
+  $('#term').focus();
+}
+
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const say = (t, cls='') => { $('#msg').className = 'msg ' + cls; $('#msg').textContent = t; };
+
+async function accept() {
+  const it = items[idx];
+  const term = $('#term').value.trim(), translation = $('#tr').value.trim();
+  if (!term || !translation) return say('Both fields are required.', 'err');
+  try {
+    await api(`/admin/entries/${it.id}/accept`, {method:'POST', body:{term, translation}});
+    counts.fixed++; say(`Saved “${term}”.`, 'ok');
+    idx++; draw();
+  } catch (e) { say(e.message, 'err'); }
+}
+
+async function reject() {
+  const it = items[idx];
+  try {
+    await api(`/admin/entries/${it.id}/reject`, {method:'POST'});
+    say('Rejected.', 'ok'); idx++; draw();
+  } catch (e) { say(e.message, 'err'); }
+}
+
+document.addEventListener('keydown', e => {
+  if ($('#app').hidden) return;
+  const typing = /^(INPUT|TEXTAREA)$/.test(e.target.tagName);
+  if (e.key === 'Enter') { e.preventDefault(); accept(); }
+  else if (!typing && (e.key === 'n' || e.key === 'N')) { idx++; draw(); }
+  else if (!typing && (e.key === 'r' || e.key === 'R')) reject();
+});
+
+$('#loginBtn').onclick = async () => {
+  try {
+    await api('/admin/login', {method:'POST', body:{password: $('#pw').value}});
+    $('#loginMsg').textContent = ''; await load();
+  } catch (e) { $('#loginMsg').textContent = 'Wrong password.'; }
+};
+$('#pw').addEventListener('keydown', e => { if (e.key === 'Enter') $('#loginBtn').click(); });
+
+async function load() {
+  const data = await api('/admin/review');
+  items = data.items; counts = data.counts; total = items.length; idx = 0;
+  draw();
+}
+load().catch(() => show('login'));
+</script>
+</body>
+</html>

@@ -145,6 +145,18 @@ final class TranslationExtractor
     private function firstClause(string $s): string
     {
         $s = trim($s);
+
+        // A head remainder often continues onto further lines with commentary
+        // ("прогноз погоды\nЭто сложное слово..."). Only the first line is the meaning.
+        $s = trim(preg_split('/\R/u', $s)[0] ?? $s);
+
+        // Some entries give the meaning wholly inside parentheses, sometimes with the
+        // author's letter-count hint appended: "(поздравления / пожелания — 13 букв)".
+        if (preg_match('/^\((.+)\)$/su', $s, $m)) {
+            $s = trim($m[1]);
+        }
+        $s = trim(preg_replace('/\s*[—–-]\s*\d+\s*букв\w*\s*$/u', '', $s) ?? $s);
+
         if (mb_strlen($s, 'UTF-8') <= self::MAX_QUIZ_CHARS) {
             return $s;
         }
