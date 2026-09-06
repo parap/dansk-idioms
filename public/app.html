@@ -24,8 +24,17 @@
     -webkit-tap-highlight-color:transparent}
   .wrap{max-width:38rem;margin:0 auto;padding:1.25rem 1rem calc(2rem + env(safe-area-inset-bottom))}
   header{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.5rem}
-  .brand{font-weight:700;letter-spacing:-.02em;font-size:1.05rem}
+  .brand{font-weight:700;letter-spacing:-.02em;font-size:1.05rem;color:inherit;
+    text-decoration:none;cursor:pointer}
+  .brand:hover span{text-decoration:underline}
   .brand span{color:var(--accent)}
+  .who{display:flex;align-items:center;gap:.6rem}
+  .lang{background:none;border:none;color:var(--muted);font:inherit;font-size:.85rem;
+    padding:.2rem .35rem;cursor:pointer;border-radius:5px}
+  .lang[aria-pressed=true]{color:var(--ink);font-weight:600;background:var(--chip)}
+  .hero h1{margin-bottom:.15rem}
+  .hero .tagline{margin:0 0 1rem;font-size:1.02rem;font-weight:500;color:var(--ink)}
+  .hero .lede{margin-bottom:1.5rem;color:var(--muted)}
   .who{font-size:.85rem;color:var(--muted)}
   .who a{color:inherit;text-decoration:underline;cursor:pointer}
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
@@ -84,13 +93,65 @@
 <body>
 <div class="wrap">
   <header>
-    <div class="brand">Dansk <span>idiomer</span></div>
+    <a class="brand" id="brand" href="/">Dansk <span>idiomer</span></a>
     <div class="who" id="who"></div>
   </header>
   <main id="view"></main>
 </div>
 
 <script type="module">
+// ---------------------------------------------------------------------------
+// Interface strings. Adding a language means adding one key here; nothing else
+// in the page hard-codes user-facing text. Falls back to Russian for any key a
+// translation has not filled in yet.
+// ---------------------------------------------------------------------------
+const STRINGS = {
+  ru: {
+    tagline: 'Тренажёр датских идиом',
+    intro: 'Идиомы, собранные из живых датских текстов, с объяснениями на русском. ' +
+           'В каждом раунде десять идиом и четыре варианта перевода — выберите верный, ' +
+           'прочитайте объяснение и узнайте результат.',
+    statIdioms: 'идиом', statAnswers: 'переводов', statLearned: 'выучено', statDue: 'к повторению',
+    start: 'Начать раунд', startAgain: 'Ещё раунд',
+    createAccount: 'Создать аккаунт, чтобы сохранять прогресс',
+    signIn: 'войти', signOut: 'выйти',
+    correct: 'Верно', wrong: 'Не совсем —',
+    next: 'Дальше', seeResults: 'Результат',
+    alsoRight: 'Мой ответ тоже верный', flagged: 'Спасибо — отправлено на проверку',
+    great: 'Отличный раунд.', ok: 'Уже неплохо.', poor: 'Стоит повторить.',
+    cannotStart: 'Не удалось начать', email: 'Эл. почта', password: 'Пароль',
+    login: 'Вход', register: 'Регистрация', createBtn: 'Создать аккаунт',
+    skip: 'Продолжить без аккаунта',
+  },
+  en: {
+    tagline: 'Danish idiom trainer',
+    intro: 'Idioms collected from real Danish texts, explained in Russian. ' +
+           'Each round gives you ten idioms and four candidate translations — pick the ' +
+           'right one, read the explanation, and see how you did.',
+    statIdioms: 'idioms', statAnswers: 'answers', statLearned: 'learned', statDue: 'due',
+    start: 'Start a round', startAgain: 'Another round',
+    createAccount: 'Create an account to track progress',
+    signIn: 'sign in', signOut: 'log out',
+    correct: 'Correct', wrong: 'Not quite —',
+    next: 'Next', seeResults: 'See results',
+    alsoRight: 'My answer was also right', flagged: 'Thanks — flagged for review',
+    great: 'Strong round.', ok: 'Getting there.', poor: 'Worth another pass.',
+    cannotStart: 'Cannot start', email: 'Email', password: 'Password',
+    login: 'Sign in', register: 'Register', createBtn: 'Create account',
+    skip: 'Continue without an account',
+  },
+};
+
+let lang = localStorage.getItem('ui_lang') || 'ru';
+if (!STRINGS[lang]) lang = 'ru';
+const t = key => STRINGS[lang][key] ?? STRINGS.ru[key] ?? key;
+const setLang = code => {
+  lang = STRINGS[code] ? code : 'ru';
+  try { localStorage.setItem('ui_lang', lang); } catch {}
+  document.documentElement.lang = lang;
+  refreshMe().then(home);
+};
+
 const $ = s => document.querySelector(s);
 const view = $('#view');
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -109,9 +170,14 @@ let me = null, sid = null, total = 0, asked = 0, shownAt = 0;
 
 async function refreshMe() {
   try { me = (await api('/me')).user; } catch { me = null; }
-  $('#who').innerHTML = me
-    ? `${esc(me.display_name || me.email)} · <a id="out">log out</a>`
-    : `<a id="signin">sign in</a>`;
+  const langs = Object.keys(STRINGS).map(code =>
+    `<button class="lang" data-lang="${code}" aria-pressed="${code === lang}">${code.toUpperCase()}</button>`
+  ).join('');
+  $('#who').innerHTML = (me
+    ? `<span>${esc(me.display_name || me.email)}</span> · <a id="out">${t('signOut')}</a>`
+    : `<a id="signin">${t('signIn')}</a>`) + langs;
+  $('#who').querySelectorAll('.lang').forEach(b =>
+    b.onclick = () => setLang(b.dataset.lang));
   const out = $('#out'), si = $('#signin');
   if (out) out.onclick = async () => { await api('/auth/logout', {method:'POST'}); await refreshMe(); home(); };
   if (si) si.onclick = () => auth();
@@ -121,17 +187,18 @@ async function refreshMe() {
 async function home() {
   const s = await api('/stats').catch(() => ({}));
   view.innerHTML = `
-    <div class="card">
-      <h1>Train Danish idioms</h1>
-      <p class="lede">Ten idioms, four translations each. Pick the right one.</p>
+    <div class="card hero">
+      <h1>Dansk <span style="color:var(--accent)">idiomer</span></h1>
+      <p class="tagline">${esc(t('tagline'))}</p>
+      <p class="lede">${esc(t('intro'))}</p>
       <div class="stats">
-        <div class="stat"><b>${s.idioms_published ?? '—'}</b><span>idioms</span></div>
-        <div class="stat"><b>${s.quiz_usable ?? '—'}</b><span>answers</span></div>
-        ${me ? `<div class="stat"><b>${me.learned}</b><span>learned</span></div>
-                <div class="stat"><b>${me.due}</b><span>due</span></div>` : ''}
+        <div class="stat"><b>${s.idioms_published ?? '—'}</b><span>${esc(t('statIdioms'))}</span></div>
+        <div class="stat"><b>${s.quiz_usable ?? '—'}</b><span>${esc(t('statAnswers'))}</span></div>
+        ${me ? `<div class="stat"><b>${me.learned}</b><span>${esc(t('statLearned'))}</span></div>
+                <div class="stat"><b>${me.due}</b><span>${esc(t('statDue'))}</span></div>` : ''}
       </div>
-      <button class="primary" id="go">Start a round</button>
-      ${me ? '' : `<button class="link" id="reg" style="width:100%">Create an account to track progress</button>`}
+      <button class="primary" id="go">${esc(t('start'))}</button>
+      ${me ? '' : `<button class="link" id="reg" style="width:100%">${esc(t('createAccount'))}</button>`}
     </div>`;
   $('#go').onclick = start;
   if ($('#reg')) $('#reg').onclick = () => auth();
@@ -145,7 +212,7 @@ async function start() {
     sid = r.session_id; total = r.question.total; asked = 0;
     render(r.question);
   } catch (e) {
-    view.innerHTML = `<div class="card"><h1>Cannot start</h1><p class="lede">${esc(e.message)}</p></div>`;
+    view.innerHTML = `<div class="card"><h1>${esc(t('cannotStart'))}</h1><p class="lede">${esc(e.message)}</p></div>`;
   }
 }
 
@@ -185,12 +252,12 @@ async function answer(q, chosen) {
   $('#fb').innerHTML = `
     <div class="feedback">
       <div class="verdict ${res.is_correct ? 'y' : 'n'}">
-        ${res.is_correct ? 'Correct' : 'Not quite — ' + esc(res.correct_text)}
+        ${res.is_correct ? esc(t('correct')) : esc(t('wrong')) + ' ' + esc(res.correct_text)}
       </div>
       ${res.explanation ? `<div class="expl">${esc(res.explanation)}</div>` : ''}
       <div class="row">
-        <button class="primary" id="next">${res.next_position ? 'Next' : 'See results'}</button>
-        ${res.is_correct ? '' : `<button class="link" id="rep">My answer was also right</button>`}
+        <button class="primary" id="next">${res.next_position ? esc(t('next')) : esc(t('seeResults'))}</button>
+        ${res.is_correct ? '' : `<button class="link" id="rep">${esc(t('alsoRight'))}</button>`}
       </div>
     </div>`;
 
@@ -202,7 +269,7 @@ async function answer(q, chosen) {
   if ($('#rep')) $('#rep').onclick = async (e) => {
     await api(`/quiz/sessions/${sid}/questions/${q.position}/report`, {
       method:'POST', body:{reason:'also_correct'}});
-    e.target.textContent = 'Thanks — flagged for review'; e.target.disabled = true;
+    e.target.textContent = t('flagged'); e.target.disabled = true;
   };
 }
 
@@ -213,8 +280,8 @@ async function results() {
   view.innerHTML = `
     <div class="card">
       <div class="score">${r.correct}<small> / ${r.total}</small></div>
-      <p class="lede">${pct >= 80 ? 'Strong round.' : pct >= 50 ? 'Getting there.' : 'Worth another pass.'}</p>
-      <button class="primary" id="again">Another round</button>
+      <p class="lede">${esc(pct >= 80 ? t('great') : pct >= 50 ? t('ok') : t('poor'))}</p>
+      <button class="primary" id="again">${esc(t('startAgain'))}</button>
       <ul class="recap">${r.questions.map(q => `
         <li><span class="mark ${q.is_correct ? 'y' : 'n'}">${q.is_correct ? '✓' : '✗'}</span>
             <b>${esc(q.term)}</b><span>${esc(q.correct_text)}</span></li>`).join('')}</ul>
@@ -227,17 +294,17 @@ function auth(mode = 'login') {
   view.innerHTML = `
     <div class="card">
       <div class="tabs">
-        <button id="tl" aria-selected="${mode==='login'}">Sign in</button>
-        <button id="tr" aria-selected="${mode==='register'}">Register</button>
+        <button id="tl" aria-selected="${mode==='login'}">${esc(t('login'))}</button>
+        <button id="tr" aria-selected="${mode==='register'}">${esc(t('register'))}</button>
       </div>
       <form id="f">
-        <label for="em">Email</label><input id="em" type="email" autocomplete="email" required>
-        <label for="pw">Password</label>
+        <label for="em">${esc(t('email'))}</label><input id="em" type="email" autocomplete="email" required>
+        <label for="pw">${esc(t('password'))}</label>
         <input id="pw" type="password" autocomplete="${mode==='login'?'current-password':'new-password'}" required>
-        <button class="primary" type="submit">${mode==='login'?'Sign in':'Create account'}</button>
+        <button class="primary" type="submit">${esc(mode==='login'?t('login'):t('createBtn'))}</button>
         <div class="err" id="er"></div>
       </form>
-      <button class="link" id="skip" style="width:100%">Continue without an account</button>
+      <button class="link" id="skip" style="width:100%">${esc(t('skip'))}</button>
     </div>`;
   $('#tl').onclick = () => auth('login');
   $('#tr').onclick = () => auth('register');
@@ -259,6 +326,9 @@ document.addEventListener('keydown', e => {
   else if (e.key === 'Enter' && $('#next')) $('#next').click();
 });
 
+$('#brand').onclick = e => { e.preventDefault(); home(); };
+
+document.documentElement.lang = lang;
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
 await refreshMe();
 home();

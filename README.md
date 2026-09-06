@@ -123,3 +123,17 @@ Two MySQL gotchas encoded in the code:
   a string and MySQL rejects `LIMIT '10'`. Validated integers are interpolated instead.
 - `word_count` is `TINYINT UNSIGNED`, so `word_count - 5` wraps around rather than going
   negative (error 1690). Casts to `SIGNED` before arithmetic.
+
+## Interface language
+
+UI strings live in a single `STRINGS` object at the top of `public/app.html`, keyed by
+language code (`ru` is the default, `en` supplied). Nothing else in the page hard-codes
+user-facing text — everything goes through `t('key')`, which falls back to Russian for any
+key a translation has not filled in yet. Adding a language means adding one block.
+
+The choice is remembered in `localStorage` under `ui_lang` and switched from the header.
+Note this is *interface* language only; it is independent of `idiom_translations.lang_code`,
+which is the language of the answers themselves.
+
+To check a translation is complete, compare the keys used in code against each block —
+all must be present and none unused.
