@@ -1,6 +1,8 @@
 <?php declare(strict_types=1);
 
 use Dansk\Controller\AdminController;
+use Dansk\Controller\AuthController;
+use Dansk\Controller\QuizController;
 use Dansk\Http\Response;
 use Dansk\Support\Config;
 use Dansk\Support\Db;
@@ -18,6 +20,17 @@ require_once $autoload;
 $dispatcher = FastRoute\simpleDispatcher(static function (RouteCollector $r): void {
     $r->addRoute('GET',  '/api/v1/health', 'health');
     $r->addRoute('GET',  '/api/v1/stats',  'stats');
+
+    $r->addRoute('POST', '/api/v1/auth/register', 'auth.register');
+    $r->addRoute('POST', '/api/v1/auth/login',    'auth.login');
+    $r->addRoute('POST', '/api/v1/auth/logout',   'auth.logout');
+    $r->addRoute('GET',  '/api/v1/me',            'auth.me');
+
+    $r->addRoute('POST', '/api/v1/quiz/sessions', 'quiz.start');
+    $r->addRoute('GET',  '/api/v1/quiz/sessions/{sid:[0-9A-Z]{26}}/questions/{pos:\d+}', 'quiz.question');
+    $r->addRoute('POST', '/api/v1/quiz/sessions/{sid:[0-9A-Z]{26}}/answers', 'quiz.answer');
+    $r->addRoute('GET',  '/api/v1/quiz/sessions/{sid:[0-9A-Z]{26}}/result',  'quiz.result');
+    $r->addRoute('POST', '/api/v1/quiz/sessions/{sid:[0-9A-Z]{26}}/questions/{pos:\d+}/report', 'quiz.report');
 
     $r->addRoute('POST', '/api/v1/admin/login',  'admin.login');
     $r->addRoute('POST', '/api/v1/admin/logout', 'admin.logout');
@@ -60,6 +73,8 @@ if (str_starts_with($handler, 'admin.') && $handler !== 'admin.login'
 
 try {
     $admin = new AdminController();
+    $quiz  = new QuizController();
+    $auth  = new AuthController();
 
     match ($handler) {
         'health' => (function (): void {
@@ -81,6 +96,17 @@ try {
             'examples'         => (int) Db::fetchValue('SELECT COUNT(*) FROM examples WHERE is_reviewed = 1'),
             'needs_review'     => (int) Db::fetchValue("SELECT COUNT(*) FROM raw_entries WHERE status = 'needs_review'"),
         ]),
+
+        'auth.register' => $auth->register($body),
+        'auth.login'    => $auth->login($body),
+        'auth.logout'   => $auth->logout(),
+        'auth.me'       => $auth->me(),
+
+        'quiz.start'    => $quiz->start($body),
+        'quiz.question' => $quiz->question($vars['sid'], (int) $vars['pos']),
+        'quiz.answer'   => $quiz->answer($vars['sid'], $body),
+        'quiz.result'   => $quiz->result($vars['sid']),
+        'quiz.report'   => $quiz->report($vars['sid'], (int) $vars['pos'], $body),
 
         'admin.login'  => $admin->login($body),
         'admin.logout' => $admin->logout(),

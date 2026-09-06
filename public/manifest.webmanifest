@@ -1,0 +1,13 @@
+{
+  "name": "Dansk idiomer",
+  "short_name": "Idiomer",
+  "description": "Train Danish idioms with ten-question rounds.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f5f6f8",
+  "theme_color": "#c8102e",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

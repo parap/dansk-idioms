@@ -173,7 +173,9 @@ final class TranslationExtractor
 
     private function make(string $text, string $sense, float $confidence): array
     {
-        $text  = Text::collapseWhitespace($text);
+        // Final guard: guillemets can survive when a variant was not split, and they
+        // would otherwise be shown to the user as part of the answer.
+        $text  = Text::collapseWhitespace(Text::trimPunctuation($text, false));
         $words = Text::wordCount($text);
         $chars = mb_strlen($text, 'UTF-8');
 

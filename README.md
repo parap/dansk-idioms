@@ -98,3 +98,28 @@ most importantly — `idiom_id`. An earlier version protected only the status, s
 re-importing silently set `idiom_id` back to NULL, orphaning the reviewed idiom from
 its source message and undercounting `seen_count`. Verified by importing twice and
 asserting the link survives.
+
+## Quiz (Phase 2)
+
+`http://localhost:8080` — ten idioms per round, four options, explanation after each answer.
+Keyboard: <kbd>A</kbd>–<kbd>D</kbd> or <kbd>1</kbd>–<kbd>4</kbd> to answer, <kbd>Enter</kbd> to continue.
+
+**Anti-cheat.** Questions are generated and stored server-side before being served, and
+`correct_index` is never present in a question payload. Grading reads the stored row, never
+the request body. `response_ms` is client-supplied and clamped to 0–300000.
+
+**Distractors** are not random — that would let anyone find the answer by length, register or
+shape without knowing Danish. Candidates are filtered (word count ±3, no declared synonym, no
+reported block, never another idiom from the same round), then near-duplicates are rejected
+(token Jaccard ≥ 0.34, substring containment), then scored on length, shape, register and kind.
+About 40% of questions reserve a slot for another idiom's *literal* gloss — register-matched,
+vivid and guaranteed wrong.
+
+**Offline** is shell-only by design: `/api/*` is never cached, because caching a scored quiz
+would ship the correct answers to the client.
+
+Two MySQL gotchas encoded in the code:
+- `LIMIT ?` cannot be a bound parameter with `ATTR_EMULATE_PREPARES = false` — PDO sends it as
+  a string and MySQL rejects `LIMIT '10'`. Validated integers are interpolated instead.
+- `word_count` is `TINYINT UNSIGNED`, so `word_count - 5` wraps around rather than going
+  negative (error 1690). Casts to `SIGNED` before arithmetic.

@@ -2,17 +2,266 @@
 <html lang="da">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#c8102e">
 <title>Dansk idiomer</title>
+<link rel="manifest" href="/manifest.webmanifest">
 <style>
-  body { font: 16px/1.6 system-ui, sans-serif; max-width: 40rem; margin: 4rem auto; padding: 0 1rem; }
-  code { background: #f0f0f3; padding: .15em .4em; border-radius: 4px; }
+  :root{
+    --bg:#f5f6f8; --card:#fff; --ink:#14171c; --muted:#6b7280; --line:#e0e4ea;
+    --accent:#c8102e; --accent-ink:#fff; --ok:#127a4a; --okbg:#e7f6ee;
+    --bad:#b3261e; --badbg:#fdecea; --chip:#eef1f5; --shadow:0 1px 2px rgba(20,23,28,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#121419;--card:#1b1e24;--ink:#e8ebf0;--muted:#98a1b0;--line:#2b3039;
+      --accent:#ff5a6e;--accent-ink:#1b1e24;--ok:#4cc38a;--okbg:#14301f;
+      --bad:#ff6b61;--badbg:#331b19;--chip:#232830;--shadow:none;}
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    -webkit-tap-highlight-color:transparent}
+  .wrap{max-width:38rem;margin:0 auto;padding:1.25rem 1rem calc(2rem + env(safe-area-inset-bottom))}
+  header{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.5rem}
+  .brand{font-weight:700;letter-spacing:-.02em;font-size:1.05rem}
+  .brand span{color:var(--accent)}
+  .who{font-size:.85rem;color:var(--muted)}
+  .who a{color:inherit;text-decoration:underline;cursor:pointer}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:1.4rem;box-shadow:var(--shadow)}
+  h1{font-size:1.5rem;margin:0 0 .4rem;letter-spacing:-.02em}
+  p.lede{color:var(--muted);margin:0 0 1.4rem}
+  .stats{display:flex;gap:1.4rem;margin:0 0 1.5rem;flex-wrap:wrap}
+  .stat b{display:block;font-size:1.5rem;line-height:1.1}
+  .stat span{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  button{font:600 1rem/1 inherit;padding:.85rem 1.3rem;border-radius:10px;border:1px solid var(--line);
+    background:var(--card);color:var(--ink);cursor:pointer;transition:border-color .12s,background .12s}
+  button:hover:not(:disabled){border-color:var(--accent)}
+  button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);width:100%}
+  button:disabled{opacity:.55;cursor:default}
+  .progress{display:flex;align-items:center;gap:.75rem;margin-bottom:1.1rem;font-size:.85rem;color:var(--muted)}
+  .track{flex:1;height:5px;background:var(--line);border-radius:99px;overflow:hidden}
+  .track>i{display:block;height:100%;background:var(--accent);transition:width .3s}
+  .term{font-size:1.6rem;font-weight:650;letter-spacing:-.02em;margin:.2rem 0 .3rem;line-height:1.25}
+  .note{color:var(--muted);font-size:.9rem;margin-bottom:1.3rem}
+  .opts{display:grid;gap:.6rem}
+  .opt{text-align:left;width:100%;padding:.85rem 1rem;font-weight:500;line-height:1.4;
+    border-radius:10px;display:flex;gap:.7rem;align-items:flex-start}
+  .opt i{flex:none;width:1.5rem;height:1.5rem;border-radius:6px;background:var(--chip);
+    display:grid;place-items:center;font:600 .8rem/1 ui-monospace,monospace;font-style:normal;color:var(--muted)}
+  .opt.correct{background:var(--okbg);border-color:var(--ok)}
+  .opt.correct i{background:var(--ok);color:#fff}
+  .opt.wrong{background:var(--badbg);border-color:var(--bad)}
+  .opt.wrong i{background:var(--bad);color:#fff}
+  .feedback{margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid var(--line)}
+  .verdict{font-weight:700;margin-bottom:.5rem}
+  .verdict.y{color:var(--ok)} .verdict.n{color:var(--bad)}
+  .expl{font-size:.93rem;color:var(--muted);white-space:pre-wrap;max-height:11rem;overflow:auto}
+  .row{display:flex;gap:.6rem;margin-top:1.1rem;align-items:center}
+  .row .primary{flex:1}
+  .link{background:none;border:none;color:var(--muted);text-decoration:underline;
+    font-weight:400;font-size:.85rem;padding:.5rem;cursor:pointer}
+  .score{font-size:3rem;font-weight:700;letter-spacing:-.03em;line-height:1}
+  .score small{font-size:1.1rem;color:var(--muted);font-weight:500}
+  ul.recap{list-style:none;padding:0;margin:1.3rem 0 0;font-size:.9rem}
+  ul.recap li{display:flex;gap:.6rem;padding:.5rem 0;border-top:1px solid var(--line)}
+  ul.recap b{font-weight:600} ul.recap span{color:var(--muted);margin-left:auto;text-align:right}
+  .mark{flex:none;width:1.2rem}
+  .mark.y{color:var(--ok)} .mark.n{color:var(--bad)}
+  form label{display:block;font-size:.8rem;font-weight:600;text-transform:uppercase;
+    letter-spacing:.05em;color:var(--muted);margin:0 0 .3rem}
+  form input{width:100%;padding:.7rem .8rem;font:inherit;color:var(--ink);background:var(--bg);
+    border:1px solid var(--line);border-radius:9px;margin-bottom:.9rem}
+  form input:focus{outline:2px solid var(--accent);outline-offset:-1px}
+  .err{color:var(--bad);font-size:.88rem;margin-top:.5rem}
+  .tabs{display:flex;gap:.4rem;margin-bottom:1.1rem}
+  .tabs button{flex:1;padding:.55rem;font-size:.9rem}
+  .tabs button[aria-selected=true]{background:var(--chip);border-color:var(--accent)}
+  [hidden]{display:none!important}
 </style>
 </head>
 <body>
-  <h1>Dansk idiomer</h1>
-  <p>Phase 0 scaffolding is up. The quiz UI arrives in Phase 2.</p>
-  <p>Health check: <a href="/api/v1/health"><code>/api/v1/health</code></a></p>
-  <p>Corpus stats: <a href="/api/v1/stats"><code>/api/v1/stats</code></a></p>
+<div class="wrap">
+  <header>
+    <div class="brand">Dansk <span>idiomer</span></div>
+    <div class="who" id="who"></div>
+  </header>
+  <main id="view"></main>
+</div>
+
+<script type="module">
+const $ = s => document.querySelector(s);
+const view = $('#view');
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+const api = async (path, opts = {}) => {
+  const r = await fetch('/api/v1' + path, {
+    headers: {'Content-Type': 'application/json'}, ...opts,
+    body: opts.body ? JSON.stringify(opts.body) : undefined,
+  });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j?.error?.message ?? 'Something went wrong.');
+  return j;
+};
+
+let me = null, sid = null, total = 0, asked = 0, shownAt = 0;
+
+async function refreshMe() {
+  try { me = (await api('/me')).user; } catch { me = null; }
+  $('#who').innerHTML = me
+    ? `${esc(me.display_name || me.email)} · <a id="out">log out</a>`
+    : `<a id="signin">sign in</a>`;
+  const out = $('#out'), si = $('#signin');
+  if (out) out.onclick = async () => { await api('/auth/logout', {method:'POST'}); await refreshMe(); home(); };
+  if (si) si.onclick = () => auth();
+}
+
+// ---------- home ----------
+async function home() {
+  const s = await api('/stats').catch(() => ({}));
+  view.innerHTML = `
+    <div class="card">
+      <h1>Train Danish idioms</h1>
+      <p class="lede">Ten idioms, four translations each. Pick the right one.</p>
+      <div class="stats">
+        <div class="stat"><b>${s.idioms_published ?? '—'}</b><span>idioms</span></div>
+        <div class="stat"><b>${s.quiz_usable ?? '—'}</b><span>answers</span></div>
+        ${me ? `<div class="stat"><b>${me.learned}</b><span>learned</span></div>
+                <div class="stat"><b>${me.due}</b><span>due</span></div>` : ''}
+      </div>
+      <button class="primary" id="go">Start a round</button>
+      ${me ? '' : `<button class="link" id="reg" style="width:100%">Create an account to track progress</button>`}
+    </div>`;
+  $('#go').onclick = start;
+  if ($('#reg')) $('#reg').onclick = () => auth();
+}
+
+// ---------- quiz ----------
+async function start() {
+  $('#go').disabled = true;
+  try {
+    const r = await api('/quiz/sessions', {method:'POST', body:{length:10}});
+    sid = r.session_id; total = r.question.total; asked = 0;
+    render(r.question);
+  } catch (e) {
+    view.innerHTML = `<div class="card"><h1>Cannot start</h1><p class="lede">${esc(e.message)}</p></div>`;
+  }
+}
+
+function render(q) {
+  shownAt = performance.now();
+  const pct = ((q.position - 1) / total) * 100;
+  view.innerHTML = `
+    <div class="card">
+      <div class="progress">
+        <span>${q.position} / ${total}</span>
+        <span class="track"><i style="width:${pct}%"></i></span>
+        <span>${asked ? Math.round(100 * q.score.correct / asked) + '%' : ''}</span>
+      </div>
+      <div class="term">${esc(q.prompt.term)}</div>
+      <div class="note">${q.prompt.term_note ? esc(q.prompt.term_note) + ' · ' : ''}${esc(q.prompt.kind)}</div>
+      <div class="opts">${q.options.map(o =>
+        `<button class="opt" data-i="${o.index}"><i>${'ABCD'[o.index]}</i><span>${esc(o.text)}</span></button>`
+      ).join('')}</div>
+      <div id="fb"></div>
+    </div>`;
+  view.querySelectorAll('.opt').forEach(b => b.onclick = () => answer(q, +b.dataset.i));
+}
+
+async function answer(q, chosen) {
+  view.querySelectorAll('.opt').forEach(b => b.disabled = true);
+  const res = await api(`/quiz/sessions/${sid}/answers`, {method:'POST', body:{
+    position: q.position, chosen_index: chosen, response_ms: Math.round(performance.now() - shownAt),
+  }});
+  asked = q.position;
+
+  view.querySelectorAll('.opt').forEach(b => {
+    const i = +b.dataset.i;
+    if (i === res.correct_index) b.classList.add('correct');
+    else if (i === chosen) b.classList.add('wrong');
+  });
+
+  $('#fb').innerHTML = `
+    <div class="feedback">
+      <div class="verdict ${res.is_correct ? 'y' : 'n'}">
+        ${res.is_correct ? 'Correct' : 'Not quite — ' + esc(res.correct_text)}
+      </div>
+      ${res.explanation ? `<div class="expl">${esc(res.explanation)}</div>` : ''}
+      <div class="row">
+        <button class="primary" id="next">${res.next_position ? 'Next' : 'See results'}</button>
+        ${res.is_correct ? '' : `<button class="link" id="rep">My answer was also right</button>`}
+      </div>
+    </div>`;
+
+  const go = async () => res.next_position
+    ? render(await api(`/quiz/sessions/${sid}/questions/${res.next_position}`))
+    : results();
+  $('#next').onclick = go;
+  $('#next').focus();
+  if ($('#rep')) $('#rep').onclick = async (e) => {
+    await api(`/quiz/sessions/${sid}/questions/${q.position}/report`, {
+      method:'POST', body:{reason:'also_correct'}});
+    e.target.textContent = 'Thanks — flagged for review'; e.target.disabled = true;
+  };
+}
+
+async function results() {
+  const r = await api(`/quiz/sessions/${sid}/result`);
+  await refreshMe();
+  const pct = Math.round(100 * r.correct / r.total);
+  view.innerHTML = `
+    <div class="card">
+      <div class="score">${r.correct}<small> / ${r.total}</small></div>
+      <p class="lede">${pct >= 80 ? 'Strong round.' : pct >= 50 ? 'Getting there.' : 'Worth another pass.'}</p>
+      <button class="primary" id="again">Another round</button>
+      <ul class="recap">${r.questions.map(q => `
+        <li><span class="mark ${q.is_correct ? 'y' : 'n'}">${q.is_correct ? '✓' : '✗'}</span>
+            <b>${esc(q.term)}</b><span>${esc(q.correct_text)}</span></li>`).join('')}</ul>
+    </div>`;
+  $('#again').onclick = start;
+}
+
+// ---------- auth ----------
+function auth(mode = 'login') {
+  view.innerHTML = `
+    <div class="card">
+      <div class="tabs">
+        <button id="tl" aria-selected="${mode==='login'}">Sign in</button>
+        <button id="tr" aria-selected="${mode==='register'}">Register</button>
+      </div>
+      <form id="f">
+        <label for="em">Email</label><input id="em" type="email" autocomplete="email" required>
+        <label for="pw">Password</label>
+        <input id="pw" type="password" autocomplete="${mode==='login'?'current-password':'new-password'}" required>
+        <button class="primary" type="submit">${mode==='login'?'Sign in':'Create account'}</button>
+        <div class="err" id="er"></div>
+      </form>
+      <button class="link" id="skip" style="width:100%">Continue without an account</button>
+    </div>`;
+  $('#tl').onclick = () => auth('login');
+  $('#tr').onclick = () => auth('register');
+  $('#skip').onclick = home;
+  $('#f').onsubmit = async e => {
+    e.preventDefault();
+    try {
+      await api(mode === 'login' ? '/auth/login' : '/auth/register',
+        {method:'POST', body:{email:$('#em').value, password:$('#pw').value}});
+      await refreshMe(); home();
+    } catch (err) { $('#er').textContent = err.message; }
+  };
+}
+
+document.addEventListener('keydown', e => {
+  const opts = [...view.querySelectorAll('.opt:not(:disabled)')];
+  const i = 'abcd1234'.indexOf(e.key.toLowerCase());
+  if (opts.length && i >= 0) opts[i % 4]?.click();
+  else if (e.key === 'Enter' && $('#next')) $('#next').click();
+});
+
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
+await refreshMe();
+home();
+</script>
 </body>
 </html>
