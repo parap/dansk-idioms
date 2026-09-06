@@ -216,9 +216,37 @@ final class EntryParser
             $raw = preg_replace('/\([^()]*\)|\[[^\[\]]*\]/u', ' ', $raw) ?? $raw;
         }
 
-        $entry->term = Text::collapseWhitespace(
-            Text::trimPunctuation($raw)
-        );
+        $raw = Text::collapseWhitespace(Text::trimPunctuation($raw));
+
+        // The author sometimes gives two forms at once:
+        //   "Rodekasser / at være ekspert i rodekasser"
+        // Only one can be the headword. The infinitive is the idiom proper, so a
+        // part beginning with "at " wins; otherwise the first. The rest is kept as
+        // a note rather than discarded.
+        if (str_contains($raw, ' / ')) {
+            $parts = array_values(array_filter(array_map('trim', explode(' / ', $raw))));
+            if (count($parts) > 1) {
+                $chosen = null;
+                foreach ($parts as $part) {
+                    if (preg_match('/^at\s+/ui', $part)) {
+                        $chosen = $part;
+                        break;
+                    }
+                }
+                $chosen ??= $parts[0];
+                $others = array_values(array_filter(
+                    $parts,
+                    static fn(string $p): bool => mb_strtolower($p, 'UTF-8') !== mb_strtolower($chosen, 'UTF-8')
+                ));
+                if ($others !== []) {
+                    $note = implode('; ', $others);
+                    $entry->termNote = $entry->termNote === null ? $note : $entry->termNote . '; ' . $note;
+                }
+                $raw = $chosen;
+            }
+        }
+
+        $entry->term = $raw;
     }
 
     /**

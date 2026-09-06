@@ -65,9 +65,17 @@ final class TranslationExtractor
         //    translation, so it ranks below the head line but above bare quotes.
         foreach (['Перевод' => 0.95, 'Значение' => 0.88] as $label => $conf) {
             $value = $entry->label($label);
-            if ($value !== null && $value !== '') {
-                foreach ($this->splitVariants($this->firstClause($value)) as $v) {
-                    $candidates[] = $this->make($v, 'idiomatic', $conf);
+            if ($value === null || $value === '') {
+                continue;
+            }
+            // Every clause, not only the first. A meaning is often given as several
+            // ";"-separated readings and the usable one is not always leading:
+            // "Разбираться в коробках с хаотично сваленными вещами; находить ценное
+            // среди хлама" -- the first clause is too long to be an option, the
+            // second is exactly right. Later clauses rank slightly lower.
+            foreach ($this->clauses($value) as $i => $clause) {
+                foreach ($this->splitVariants($clause) as $v) {
+                    $candidates[] = $this->make($v, 'idiomatic', max(0.5, $conf - 0.03 * $i));
                 }
             }
         }
@@ -95,7 +103,58 @@ final class TranslationExtractor
             }
         }
 
+        $candidates = $this->rejectTransliterations($candidates, (string) ($entry->term ?? ''));
+
         return $this->dedupeAndRank($candidates);
+    }
+
+    /**
+     * An "answer" that merely respells the Danish word in Cyrillic is explaining the
+     * idiom, not translating it: "экспертом в родекассерах" for
+     * "at være ekspert i rodekasser". Such text stays as a candidate -- it is real
+     * content from the post -- but must never be offered as the correct answer.
+     */
+    private function rejectTransliterations(array $candidates, string $term): array
+    {
+        $stems = [];
+        foreach (preg_split('/\s+/u', $term) ?: [] as $word) {
+            $word = Text::trimPunctuation($word);
+            if (mb_strlen($word, 'UTF-8') < 5) {
+                continue;
+            }
+            $stem = $this->loosen(Text::translitToCyrillic($word));
+            if (mb_strlen($stem, 'UTF-8') >= 6) {
+                $stems[] = mb_substr($stem, 0, 6, 'UTF-8');
+            }
+        }
+        if ($stems === []) {
+            return $candidates;
+        }
+
+        foreach ($candidates as &$candidate) {
+            if (!$candidate['quiz_usable']) {
+                continue;
+            }
+            foreach (preg_split('/\s+/u', $candidate['text']) ?: [] as $token) {
+                $token = $this->loosen(Text::trimPunctuation($token));
+                foreach ($stems as $stem) {
+                    if (mb_strlen($token, 'UTF-8') >= 6 && str_starts_with($token, $stem)) {
+                        $candidate['quiz_usable'] = false;
+                        $candidate['is_primary']  = false;
+                        continue 3;
+                    }
+                }
+            }
+        }
+        unset($candidate);
+
+        return $candidates;
+    }
+
+    /** Folds Cyrillic letters that transliteration cannot reliably choose between. */
+    private function loosen(string $s): string
+    {
+        return strtr(mb_strtolower($s, 'UTF-8'), ['э'=>'е','ё'=>'е','й'=>'и','ъ'=>'','ь'=>'']);
     }
 
     /** @return list<array{0:string,1:string,2:float}> */
@@ -152,6 +211,28 @@ final class TranslationExtractor
             }
         }
         return $out === [] ? [] : $out;
+    }
+
+    /**
+     * Splits a label value into its clauses, most promising first: the leading one,
+     * then any others short enough to serve as an option.
+     *
+     * @return list<string>
+     */
+    private function clauses(string $value): array
+    {
+        $out = [$this->firstClause($value)];
+        foreach (preg_split('/[;.]\s+/u', trim($value)) ?: [] as $part) {
+            $part = Text::trimPunctuation(Text::collapseWhitespace($part), false);
+            if ($part === '' || in_array($part, $out, true)) {
+                continue;
+            }
+            if (Text::wordCount($part) <= self::MAX_QUIZ_WORDS
+                && mb_strlen($part, 'UTF-8') <= self::MAX_QUIZ_CHARS) {
+                $out[] = $part;
+            }
+        }
+        return array_slice($out, 0, 4);
     }
 
     /** First sentence/clause only -- explanations run long after the meaning is given. */

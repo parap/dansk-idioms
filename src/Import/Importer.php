@@ -91,6 +91,12 @@ final class Importer
             // A published idiom with no primary translation is unanswerable and would
             // silently vanish from the quiz. Surfaced as a stat so a run that breaks
             // it cannot pass unnoticed.
+            // An idiom whose term the parser has since changed keeps its old row
+            // under the old term_norm, with nothing pointing at it any more.
+            $stats['orphaned_idioms'] = (int) Db::fetchValue(
+                'SELECT COUNT(*) FROM idioms i WHERE NOT EXISTS
+                     (SELECT 1 FROM raw_entries r WHERE r.idiom_id = i.id)'
+            );
             $stats['published_without_answer'] = (int) Db::fetchValue(
                 'SELECT COUNT(*) FROM idioms i WHERE i.is_published = 1 AND NOT EXISTS (
                      SELECT 1 FROM idiom_translations t

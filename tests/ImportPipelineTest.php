@@ -220,6 +220,49 @@ final class ImportPipelineTest extends TestCase
         self::assertStringContainsString('Значение: Смысл выражения.', (string) $entry->explanation);
     }
 
+    public function testTermGivingTwoFormsPicksTheInfinitive(): void
+    {
+        // "Rodekasser / at være ekspert i rodekasser" is two forms of one entry.
+        // Only one can be the headword; the infinitive is the idiom proper.
+        $entry = $this->parse("Rodekasser / at være ekspert i rodekasser\nЗначение: Находить ценное среди хлама.");
+
+        self::assertSame('at være ekspert i rodekasser', $entry->term);
+        self::assertStringContainsString('Rodekasser', (string) $entry->termNote);
+    }
+
+    public function testTransliteratedDanishIsNeverTheAnswer(): void
+    {
+        // "экспертом в родекассерах" respells the Danish word in Cyrillic. It
+        // explains the idiom; it does not translate it.
+        $entry = $this->parse(
+            "at være ekspert i rodekasser\n"
+            . "Значение: Находить ценное среди хлама.\n"
+            . "Объяснение: Быть «экспертом в родекассерах» означает искать сокровища."
+        );
+        foreach ((new TranslationExtractor())->extract($entry) as $t) {
+            if (str_contains($t['text'], 'родекассер')) {
+                self::assertFalse($t['quiz_usable'], 'a respelt Danish word is not a translation');
+                return;
+            }
+        }
+        self::fail('expected the transliterated candidate to be present but rejected');
+    }
+
+    public function testAnswerIsFoundInALaterClauseWhenTheFirstIsTooLong(): void
+    {
+        $entry = $this->parse(
+            "at være ekspert i rodekasser\n"
+            . "Значение: Разбираться в коробках с хаотично сваленными вещами; находить ценное среди хлама."
+        );
+        $primary = array_values(array_filter(
+            (new TranslationExtractor())->extract($entry),
+            fn($t) => $t['is_primary']
+        ));
+
+        self::assertNotEmpty($primary);
+        self::assertSame('находить ценное среди хлама', $primary[0]['text']);
+    }
+
     // ---- classification ----------------------------------------------------
 
     /** @dataProvider verbPhrases */

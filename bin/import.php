@@ -38,6 +38,7 @@ $labels = [
     'idioms_updated'  => 'idioms seen again',
     'translations'    => 'translations written',
     'no_primary'      => 'entries with no answer',
+    'orphaned_idioms' => 'orphaned (term changed by a re-parse)',
     'published_without_answer' => 'PUBLISHED BUT UNANSWERABLE',
 ];
 foreach ($labels as $key => $label) {

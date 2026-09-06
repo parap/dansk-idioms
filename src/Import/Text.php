@@ -106,6 +106,22 @@ final class Text
         return (int) preg_match_all('/[\p{L}\p{N}\'’\-]+/u', $s);
     }
 
+    /**
+     * Rough Danish -> Cyrillic transliteration, used only to catch an "answer" that
+     * merely respells the Danish word: "экспертом в родекассерах" for
+     * "at være ekspert i rodekasser" explains the idiom, it does not translate it.
+     */
+    public static function translitToCyrillic(string $s): string
+    {
+        $map = [
+            'æ'=>'э','ø'=>'ё','å'=>'о','a'=>'а','b'=>'б','c'=>'к','d'=>'д','e'=>'е',
+            'f'=>'ф','g'=>'г','h'=>'х','i'=>'и','j'=>'й','k'=>'к','l'=>'л','m'=>'м',
+            'n'=>'н','o'=>'о','p'=>'п','q'=>'к','r'=>'р','s'=>'с','t'=>'т','u'=>'у',
+            'v'=>'в','w'=>'в','x'=>'кс','y'=>'ю','z'=>'з',
+        ];
+        return strtr(mb_strtolower($s, 'UTF-8'), $map);
+    }
+
     /** Share of cased letters that are Latin -- used to reject quoted Danish. */
     public static function latinRatio(string $s): float
     {
