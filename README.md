@@ -84,9 +84,11 @@ encode every failure mode observed in the real export.
 
 ## Review queue
 
-`http://localhost:8080/admin` — password from `admin.password` in config
-(default `dansk-admin`; override in the gitignored `config/local.php`). This is an
-interim gate until real accounts arrive in Phase 2.
+`http://localhost:8080/admin` — the password comes from `ADMIN_PASSWORD` in the
+environment, or `admin.password` in the gitignored `config/local.php`. **There is no
+default**: with nothing configured, admin login refuses every attempt with 503. This
+is deliberate — a committed default is a published credential the moment the
+repository is public. Interim gate until real accounts arrive in Phase 2.
 
 Keyboard-driven: <kbd>Enter</kbd> accept, <kbd>N</kbd> skip, <kbd>R</kbd> reject.
 Extracted candidates appear as clickable chips; literal glosses are struck through

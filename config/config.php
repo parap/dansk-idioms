@@ -18,9 +18,12 @@ $config = [
     ],
 
     'admin' => [
-        // Interim gate for the review tool until real accounts land in Phase 2.
-        // Override in config/local.php (gitignored); never ship this default.
-        'password' => getenv('ADMIN_PASSWORD') ?: 'dansk-admin',
+        // Deliberately null. A committed default is a working credential the moment
+        // the repository is public, and a comment telling the reader to change it
+        // protects nothing. With no password configured, admin login refuses every
+        // attempt -- set ADMIN_PASSWORD in the environment or admin.password in
+        // config/local.php (gitignored).
+        'password' => getenv('ADMIN_PASSWORD') ?: null,
     ],
 
     'quiz' => [

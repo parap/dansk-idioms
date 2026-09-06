@@ -27,8 +27,20 @@ final class AdminController
     public function login(array $body): void
     {
         self::startSession();
-        $expected = (string) Config::get('admin.password');
+        $expected = Config::get('admin.password');
         $given    = (string) ($body['password'] ?? '');
+
+        // No password configured means the admin area is closed, not open. Failing
+        // shut is the only safe behaviour: a default that happens to work is a
+        // published credential as soon as the repository is.
+        if (!is_string($expected) || $expected === '') {
+            Response::error(
+                'admin_disabled',
+                'No admin password is configured. Set ADMIN_PASSWORD or admin.password in config/local.php.',
+                503
+            );
+            return;
+        }
 
         // hash_equals: constant time, so the response cannot be timed for the secret.
         if ($given === '' || !hash_equals($expected, $given)) {
