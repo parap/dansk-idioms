@@ -30,6 +30,12 @@ final class Db
     }
 
     /** Connect without selecting a database -- used by the migration bootstrap. */
+    /** Drops the cached connection so a later call reconnects with current config. */
+    public static function reset(): void
+    {
+        self::$pdo = null;
+    }
+
     public static function serverPdo(): PDO
     {
         $c = Config::get('db');

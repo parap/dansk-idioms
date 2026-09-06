@@ -37,6 +37,8 @@ services:
       MYSQL_PASSWORD: dansk
     volumes:
       - dbdata:/var/lib/mysql
+      # Runs only on first initialisation of the volume; see README for an existing one.
+      - ./docker/mysql:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-proot"]
       interval: 5s

@@ -110,16 +110,16 @@ final class DistractorService
             // wraps around instead of going negative (MySQL error 1690).
             $sql .= ' AND ABS(CAST(t.word_count AS SIGNED) - ?) <= ' . self::WORD_TOLERANCE;
             $params[] = (int) $correct['word_count'];
-
-            // Verb parity is a HARD filter, not a score. Offering "сочная красотка"
-            // and "затею" against "договорились" lets anyone discard them on sight
-            // without knowing a word of Danish -- every option must at least be the
-            // same kind of thing. Dropped in the relaxed pass rather than serving a
-            // question with fewer than four options.
-            $sql .= ($correct['shape'] ?? '') === 'verbal'
-                ? " AND t.shape = 'verbal'"
-                : " AND t.shape <> 'verbal'";
         }
+
+        // Verb parity is a HARD filter and holds even in the relaxed pass. Offering
+        // noun phrases against a verbal answer lets anyone discard them on sight
+        // without knowing a word of Danish, so a question that cannot find matching
+        // options is better skipped than served -- QuizService drops that idiom and
+        // uses another. Only the length window is relaxed.
+        $sql .= ($correct['shape'] ?? '') === 'verbal'
+            ? " AND t.shape = 'verbal'"
+            : " AND t.shape <> 'verbal'";
 
         // Declared synonyms of the correct idiom would be genuinely correct.
         $sql .= ' AND t.idiom_id NOT IN (

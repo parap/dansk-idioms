@@ -189,7 +189,9 @@ readable at their edge. `docker rm -f dansk_tunnel` stops it instantly.
 | `php bin/import.php --file=… [--dry-run]` | import one file; `--dry-run` writes nothing |
 | `php bin/migrate.php [--status]` | apply pending migrations |
 | `php bin/reclassify.php [--dry-run]` | recompute derived shape after changing heuristics |
-| `vendor/bin/phpunit` | the parser regression suite |
+| `vendor/bin/phpunit` | the whole suite (65 tests) |
+| `vendor/bin/phpunit --testsuite unit` | parser and text logic only, no database |
+| `vendor/bin/phpunit --testsuite integration` | real SQL against a scratch schema |
 
 Prefix with `docker-compose exec app` for the PHP ones.
 
@@ -231,6 +233,41 @@ Interface strings live in one `STRINGS` object at the top of `public/app.html`, 
 language. Everything user-facing goes through `t('key')`, which falls back to Russian.
 A value may be a map of CLDR plural categories, selected by `Intl.PluralRules`, so
 Russian gets its three forms (1 раунд / 2 раунда / 5 раундов).
+
+### Tests
+
+Two suites, because the failures came from two different places.
+
+**`unit`** — 40 tests over parsing, extraction and normalisation. Every case is taken
+from the real export and encodes a failure that was actually observed: a gloss of a
+component word served as the answer, a literal reading outranking the meaning, a
+transliterated Danish word offered as Russian, `trim()` cutting a Cyrillic letter in
+half. These are fast and catch extraction regressions the moment a rule changes.
+
+**`integration`** — 25 tests against a scratch `dansk_test` schema, built from the real
+migrations and dropped afterwards. This suite exists because *every* expensive bug in
+this project lived in code that talks to the database and was unreachable from a unit
+test: a primary flag lost on upsert (which left 320 of 349 idioms unanswerable), a
+human correction severed by a re-parse, 18 idioms deleted by a wrong definition of
+"orphaned", publication that was one-way. The load-bearing assertions are:
+
+- importing an unchanged export twice changes **nothing** — the corpus snapshot must be
+  identical, which alone would have caught four of those
+- a reviewed entry keeps its status, its corrected term and its link to the idiom
+- every published idiom has exactly one usable primary translation
+- `is_primary` is never `0`, only `1` or `NULL`
+- the correct answer never appears in a question payload, and grading reads the stored
+  row rather than the request
+- distractors never repeat, never come from the same idiom, and always match the answer
+  on verb parity
+
+The scratch schema needs a grant, applied automatically on a fresh volume by
+`docker/mysql/01-test-database.sql`. On an existing volume, run it once by hand:
+
+```bash
+docker-compose exec db mysql -uroot -proot \
+  -e "GRANT ALL ON \`dansk_test\`.* TO 'dansk'@'%'; FLUSH PRIVILEGES;"
+```
 
 ### Gotchas worth knowing
 
