@@ -55,7 +55,14 @@ if ($route[0] === Dispatcher::NOT_FOUND) {
         // what a cache-first service worker did before.
         header('Content-Type: text/html; charset=utf-8');
         header('Cache-Control: no-cache, must-revalidate');
-        readfile(__DIR__ . (str_starts_with($uri, '/admin') ? '/admin.html' : '/app.html'));
+        // Prefix order decides which shell wins, so a longer path that shares a
+        // prefix with a shorter one has to be listed above it.
+        $shell = match (true) {
+            str_starts_with($uri, '/admin') => '/admin.html',
+            str_starts_with($uri, '/read')  => '/read.html',
+            default                         => '/app.html',
+        };
+        readfile(__DIR__ . $shell);
         return;
     }
     Response::error('not_found', 'No such endpoint.', 404);

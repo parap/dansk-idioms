@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#c8102e">
+<title>Læseforståelse</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#fff; --ink:#14171c; --muted:#6b7280; --line:#e0e4ea;
+    --accent:#c8102e; --accent-ink:#fff; --ok:#127a4a; --okbg:#e7f6ee;
+    --bad:#b3261e; --badbg:#fdecea; --chip:#eef1f5; --shadow:0 1px 2px rgba(20,23,28,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#121419;--card:#1b1e24;--ink:#e8ebf0;--muted:#98a1b0;--line:#2b3039;
+      --accent:#ff5a6e;--accent-ink:#1b1e24;--ok:#4cc38a;--okbg:#14301f;
+      --bad:#ff6b61;--badbg:#331b19;--chip:#232830;--shadow:none;}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  .wrap{max-width:1100px;margin:0 auto;padding:20px 16px 64px}
+  header{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+  header h1{font-size:1.3rem;margin:0}
+  header .spacer{flex:1}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:18px;box-shadow:var(--shadow);margin-bottom:16px}
+  .muted{color:var(--muted)}
+  .lede{color:var(--muted);margin:.4rem 0 0}
+  .grid{display:grid;gap:16px;grid-template-columns:1fr}
+  @media (min-width:900px){ .grid{grid-template-columns:1.05fr .95fr;align-items:start}
+    .grid .passage{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto} }
+  .passage h2{font-size:1.05rem;margin:0 0 .6rem}
+  .passage p{margin:0 0 .9rem;white-space:pre-wrap}
+  .gap{display:inline-block;min-width:3.2rem;padding:0 .4rem;margin:0 .1rem;
+    border:1px dashed var(--accent);border-radius:6px;background:var(--chip);
+    color:var(--ink);font:inherit;font-size:.95rem;cursor:pointer;vertical-align:baseline}
+  .gap.filled{border-style:solid;background:var(--card)}
+  .gap[aria-current=true]{outline:2px solid var(--accent);outline-offset:1px}
+  .item{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
+  .item:first-child{border-top:none;padding-top:0;margin-top:0}
+  .item h3{font-size:.9rem;margin:0 0 .5rem;color:var(--muted);font-weight:600}
+  .item .prompt{margin:0 0 .6rem}
+  .opts{display:grid;gap:8px}
+  .opt{display:block;width:100%;text-align:left;padding:10px 12px;border-radius:10px;
+    border:1px solid var(--line);background:var(--card);color:var(--ink);
+    font:inherit;cursor:pointer}
+  .opt:hover:not(:disabled){border-color:var(--accent)}
+  .opt:disabled{cursor:default}
+  .opt.right{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+  .opt.wrong{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+  .primary{background:var(--accent);color:var(--accent-ink);border:none;border-radius:10px;
+    padding:11px 18px;font:inherit;font-weight:600;cursor:pointer}
+  .link{background:none;border:none;color:var(--accent);font:inherit;cursor:pointer;padding:0}
+  .score{font-variant-numeric:tabular-nums;font-weight:600}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Læseforståelse</h1>
+    <span class="spacer"></span>
+    <span id="score" class="score muted"></span>
+    <a class="link" href="/">idiomer →</a>
+  </header>
+  <div id="view"></div>
+</div>
+
+<script type="module">
+import { $, esc, api, t, registerStrings } from '/shared.js';
+
+// Interface strings. Adding a language means adding one key here; nothing else in the
+// page hard-codes user-facing text.
+const STRINGS = {
+  ru: {
+    intro: 'Тренажёр по чтению для Prøve i Dansk 3. Прочитайте текст и ответьте на вопросы — ' +
+           'формат тот же, что на экзамене.',
+    start: 'Начать', startAgain: 'Ещё текст',
+    cannotStart: 'Не удалось начать',
+    questions: 'Вопросы', passage: 'Текст',
+    gapHint: 'Нажмите на пропуск в тексте, чтобы перейти к вопросу.',
+    right: 'Верно', wrong: 'Неверно',
+    points: { one: 'балл', few: 'балла', many: 'баллов', other: 'баллов' },
+    done: 'Раунд завершён.',
+  },
+  en: {
+    intro: 'Reading practice for Prøve i Dansk 3. Read the text and answer the questions — ' +
+           'the format matches the exam.',
+    start: 'Start', startAgain: 'Another text',
+    cannotStart: 'Cannot start',
+    questions: 'Questions', passage: 'Text',
+    gapHint: 'Click a gap in the text to jump to its question.',
+    right: 'Correct', wrong: 'Not right',
+    points: { one: 'point', other: 'points' },
+    done: 'Round complete.',
+  },
+  da: {
+    intro: 'Læsetræning til Prøve i Dansk 3. Læs teksten og svar på spørgsmålene — ' +
+           'formatet er det samme som til prøven.',
+    start: 'Start', startAgain: 'En tekst mere',
+    cannotStart: 'Kunne ikke starte',
+    questions: 'Spørgsmål', passage: 'Tekst',
+    gapHint: 'Klik på et hul i teksten for at hoppe til spørgsmålet.',
+    right: 'Rigtigt', wrong: 'Forkert',
+    points: { one: 'point', other: 'point' },
+    done: 'Runden er slut.',
+  },
+};
+registerStrings(STRINGS);
+
+const view = $('#view');
+let paper = null, scored = 0;
+
+function home() {
+  view.innerHTML = `
+    <div class="card">
+      <p class="lede">${esc(t('intro'))}</p>
+      <p class="row" style="margin-top:14px"><button class="primary" id="go">${esc(t('start'))}</button></p>
+    </div>`;
+  $('#go').onclick = start;
+}
+
+async function start() {
+  $('#go').disabled = true;
+  try {
+    paper = await api('/reading/sessions', {method: 'POST', body: {mode: 'drill'}});
+    scored = 0;
+    render();
+  } catch (e) {
+    view.innerHTML = `<div class="card"><p><strong>${esc(t('cannotStart'))}</strong></p>
+      <p class="muted">${esc(e.message)}</p></div>`;
+  }
+}
+
+/**
+ * The passage body is escaped BEFORE gap markers become buttons. Doing it the other way
+ * round lets a passage author put markup on the page.
+ */
+function passageHtml(body) {
+  return esc(body).replace(/\{\{(\d+)\}\}/g, (_, n) =>
+    `<button class="gap" data-gap="${esc(n)}" id="gap-${esc(n)}">${esc(n)}</button>`);
+}
+
+function render() {
+  const hasGaps = paper.passage.kind !== 'mc';
+  view.innerHTML = `
+    <div class="grid">
+      <section class="card passage">
+        <h2>${esc(paper.passage.title)}</h2>
+        <p>${passageHtml(paper.passage.body)}</p>
+        ${hasGaps ? `<p class="muted" style="font-size:.85rem">${esc(t('gapHint'))}</p>` : ''}
+      </section>
+      <section class="card">
+        <h2>${esc(t('questions'))}</h2>
+        <div id="items"></div>
+        <p class="row" style="margin-top:16px" id="foot" hidden>
+          <button class="primary" id="again">${esc(t('startAgain'))}</button>
+          <span class="muted">${esc(t('done'))}</span>
+        </p>
+      </section>
+    </div>`;
+
+  $('#items').innerHTML = paper.items.map(itemHtml).join('');
+  paper.items.forEach(wire);
+  view.querySelectorAll('.gap').forEach(g => {
+    g.onclick = () => {
+      const el = $(`#item-${g.dataset.gap}`);
+      el?.scrollIntoView({behavior: 'smooth', block: 'center'});
+      view.querySelectorAll('.gap').forEach(o => o.setAttribute('aria-current', o === g));
+    };
+  });
+  updateScore();
+}
+
+function itemHtml(item) {
+  const label = i => String.fromCharCode(65 + i);
+  return `
+    <div class="item" id="item-${item.position}">
+      <h3>${item.position}. ${item.points} ${esc(t('points', item.points))}</h3>
+      ${item.prompt ? `<p class="prompt">${esc(item.prompt)}</p>` : ''}
+      <div class="opts">
+        ${item.options.map(o => `
+          <button class="opt" data-pos="${item.position}" data-index="${o.index}">
+            <strong>${label(o.index)}.</strong> ${esc(o.text)}
+          </button>`).join('')}
+      </div>
+      <p class="muted" id="fb-${item.position}" hidden></p>
+    </div>`;
+}
+
+function wire(item) {
+  view.querySelectorAll(`.opt[data-pos="${item.position}"]`).forEach(b => {
+    b.onclick = () => answer(item, Number(b.dataset.index));
+  });
+}
+
+async function answer(item, chosen) {
+  const buttons = [...view.querySelectorAll(`.opt[data-pos="${item.position}"]`)];
+  buttons.forEach(b => b.disabled = true);
+
+  let res;
+  try {
+    res = await api(`/reading/sessions/${paper.session_id}/answers`,
+      {method: 'POST', body: {position: item.position, chosen_index: chosen, response_ms: 0}});
+  } catch (e) {
+    buttons.forEach(b => b.disabled = false);
+    return;
+  }
+
+  buttons[chosen]?.classList.add(res.is_correct ? 'right' : 'wrong');
+  if (!res.is_correct) buttons[res.correct_index]?.classList.add('right');
+
+  const fb = $(`#fb-${item.position}`);
+  fb.textContent = res.is_correct ? t('right') : t('wrong');
+  fb.hidden = false;
+
+  const gap = $(`#gap-${item.position}`);
+  if (gap) gap.classList.add('filled');
+
+  scored += res.points_scored;
+  updateScore();
+
+  if (view.querySelectorAll('.opt:not(:disabled)').length === 0) {
+    $('#foot').hidden = false;
+    $('#again').onclick = () => { home(); start(); };
+  }
+}
+
+function updateScore() {
+  $('#score').textContent = `${scored} / ${paper.points_max}`;
+}
+
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
+home();
+</script>
+</body>
+</html>

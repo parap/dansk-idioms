@@ -96,17 +96,19 @@
 
 </div>
 <script type="module">
-const $ = s => document.querySelector(s);
-const api = async (path, opts={}) => {
-  const r = await fetch('/api/v1' + path, {
-    headers: {'Content-Type':'application/json'}, ...opts,
-    body: opts.body ? JSON.stringify(opts.body) : undefined,
-  });
-  if (r.status === 401) { show('login'); throw new Error('unauthorized'); }
-  const j = await r.json().catch(() => ({}));
-  if (!r.ok) throw new Error(j?.error?.message || 'Request failed');
-  return j;
+import { esc, api as request } from '/shared.js';
+
+// An expired admin session must land the reviewer back on the login card rather than on
+// an error, because every screen behind this point is useless without it.
+const api = async (path, opts = {}) => {
+  try {
+    return await request(path, opts);
+  } catch (e) {
+    if (e.status === 401) { show('login'); throw new Error('unauthorized'); }
+    throw e;
+  }
 };
+const $ = s => document.querySelector(s);
 const show = which => {
   for (const id of ['login','app','done']) $('#'+id).hidden = (id !== which);
 };
@@ -184,7 +186,6 @@ function draw() {
   $('#term').focus();
 }
 
-const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const say = (t, cls='') => { $('#msg').className = 'msg ' + cls; $('#msg').textContent = t; };
 
 async function accept() {

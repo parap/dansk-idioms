@@ -1,5 +1,5 @@
 // Bump on any change to the caching strategy or the shell list.
-const CACHE = 'dansk-shell-v2';
+const CACHE = 'dansk-shell-v3';
 
 // Only genuinely immutable assets are precached. The HTML deliberately is not:
 // see the navigation branch below.
@@ -28,7 +28,13 @@ self.addEventListener('fetch', e => {
   const isDocument = e.request.mode === 'navigate'
     || (e.request.headers.get('accept') || '').includes('text/html');
 
-  if (isDocument) {
+  // Shared code is a static file that changes as often as the pages importing it.
+  // Cache-first would pin an old copy behind the cache name until someone remembered to
+  // bump it, and a forgotten bump ships a stale interface with nothing reporting it. It
+  // is revalidated for the same reason the HTML is.
+  const isCode = url.origin === self.location.origin && /\.(js|css)$/.test(url.pathname);
+
+  if (isDocument || isCode) {
     e.respondWith(
       fetch(e.request)
         .then(res => {

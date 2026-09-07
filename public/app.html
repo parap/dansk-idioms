@@ -105,6 +105,7 @@
 </div>
 
 <script type="module">
+import { $, esc, api, t, registerStrings, currentLang, setLang as applyLang } from '/shared.js';
 // ---------------------------------------------------------------------------
 // Interface strings. Adding a language means adding one key here; nothing else
 // in the page hard-codes user-facing text. Falls back to Russian for any key a
@@ -132,6 +133,7 @@ const STRINGS = {
     cannotStart: 'Не удалось начать', email: 'Эл. почта', password: 'Пароль',
     login: 'Вход', register: 'Регистрация', createBtn: 'Создать аккаунт',
     skip: 'Продолжить без аккаунта',
+    readingLink: 'Чтение: Prøve i Dansk 3',
   },
   en: {
     tagline: 'Danish idiom trainer',
@@ -154,38 +156,16 @@ const STRINGS = {
     cannotStart: 'Cannot start', email: 'Email', password: 'Password',
     login: 'Sign in', register: 'Register', createBtn: 'Create account',
     skip: 'Continue without an account',
+    readingLink: 'Reading: Prøve i Dansk 3',
   },
 };
 
-let lang = localStorage.getItem('ui_lang') || 'ru';
-if (!STRINGS[lang]) lang = 'ru';
-const t = (key, count) => {
-  const value = STRINGS[lang][key] ?? STRINGS.ru[key] ?? key;
-  if (typeof value === 'string') return value;
-  // Russian needs three forms (1 раунд / 2 раунда / 5 раундов); English needs two.
-  // Intl.PluralRules knows the rules for every locale, so no counting logic here.
-  const form = new Intl.PluralRules(lang).select(count ?? 0);
-  return value[form] ?? value.other ?? Object.values(value)[0];
-};
-const setLang = code => {
-  lang = STRINGS[code] ? code : 'ru';
-  try { localStorage.setItem('ui_lang', lang); } catch {}
-  document.documentElement.lang = lang;
-  refreshMe().then(home);
-};
-
-const $ = s => document.querySelector(s);
+registerStrings(STRINGS);
 const view = $('#view');
-const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-const api = async (path, opts = {}) => {
-  const r = await fetch('/api/v1' + path, {
-    headers: {'Content-Type': 'application/json'}, ...opts,
-    body: opts.body ? JSON.stringify(opts.body) : undefined,
-  });
-  const j = await r.json().catch(() => ({}));
-  if (!r.ok) throw new Error(j?.error?.message ?? 'Something went wrong.');
-  return j;
+const setLang = code => {
+  applyLang(code);
+  refreshMe().then(home);
 };
 
 let me = null, sid = null, total = 0, asked = 0, shownAt = 0;
@@ -197,7 +177,7 @@ let direction = localStorage.getItem('quiz_direction') === 'tr_to_da' ? 'tr_to_d
 async function refreshMe() {
   try { me = (await api('/me')).user; } catch { me = null; }
   const langs = Object.keys(STRINGS).map(code =>
-    `<button class="lang" data-lang="${code}" aria-pressed="${code === lang}">${code.toUpperCase()}</button>`
+    `<button class="lang" data-lang="${code}" aria-pressed="${code === currentLang()}">${code.toUpperCase()}</button>`
   ).join('');
   $('#who').innerHTML = (me
     ? `<span>${esc(me.display_name || me.email)}</span> · <a id="out">${t('signOut')}</a>`
@@ -244,6 +224,7 @@ async function home() {
       <h1>Dansk <span style="color:var(--accent)">idiomer</span></h1>
       <p class="tagline">${esc(t('tagline'))}</p>
       <p class="lede">${esc(t('intro'))}</p>
+      <p><a class="link" href="/read">${esc(t('readingLink'))} →</a></p>
       <div class="stats">
         <div class="stat"><b>${s.idioms_published ?? '—'}</b><span>${esc(t('statIdioms', s.idioms_published))}</span></div>
         ${tiles(s)}
@@ -387,7 +368,7 @@ document.addEventListener('keydown', e => {
   else if (e.key === 'Enter' && $('#next')) $('#next').click();
 });
 
-document.documentElement.lang = lang;
+document.documentElement.lang = currentLang();
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
 await refreshMe();
 home();
