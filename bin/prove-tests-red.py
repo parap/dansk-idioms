@@ -132,11 +132,29 @@ FAULTS = [
   "        if ($row['chosen_index'] !== null) {","        if (false) {","integration"),
  (42,"a signed-in learner is never scheduled","src/Domain/Reading/ReadingSessionService.php",
   "        if ($session['user_id'] !== null) {","        if (false) {","integration"),
+ (43,"passage markup escaped after substitution","public/read.html",
+  "  return esc(body).replace(/\\{\\{(\\d+)\\}\\}/g, (_, n) =>",
+  "  return body.replace(/\\{\\{(\\d+)\\}\\}/g, (_, n) =>","ui"),
+ (44,"a wrong answer hides the right one","public/read.html",
+  "  if (!res.is_correct) buttons[res.correct_index]?.classList.add('right');",
+  "  if (false) buttons[res.correct_index]?.classList.add('right');","ui"),
+ (45,"answered options stay clickable","public/read.html",
+  "  buttons.forEach(b => b.disabled = true);",
+  "  buttons.forEach(b => b.disabled = false);","ui"),
+ (46,"gap markers never become buttons","public/read.html",
+  "  return esc(body).replace(/\\{\\{(\\d+)\\}\\}/g, (_, n) =>",
+  "  return esc(body).replace(/\\{\\{(ZZNEVER)\\}\\}/g, (_, n) =>","ui"),
 ]
 
 def run(suite):
-    r = subprocess.run(["docker-compose","exec","-T","app","vendor/bin/phpunit","--testsuite",suite],
-                       cwd=ROOT, capture_output=True, text=True)
+    # The interface checks drive a real browser, so they answer to a different runner.
+    # Without them a rendering fault -- an escape that stopped escaping, a button that
+    # stopped disabling -- is invisible to every suite in the repo.
+    if suite == "ui":
+        cmd = [sys.executable, str(ROOT/"bin"/"ui-tests.py")]
+    else:
+        cmd = ["docker-compose","exec","-T","app","vendor/bin/phpunit","--testsuite",suite]
+    r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
     return r.returncode == 0
 
 ambiguous = []
