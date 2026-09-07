@@ -80,6 +80,19 @@ FAULTS = [
  (16,"drop answer-length check","src/Domain/ReviewRepository.php",
   "        if ($words > self::MAX_ANSWER_WORDS || $chars > self::MAX_ANSWER_CHARS) {",
   "        if (false) {","integration"),
+ (23,"SM-2 ease floor inverted","src/Domain/Sm2.php",
+  "'ease'          => max(self::MIN_EASE, $ease - 0.2),",
+  "'ease'          => min(self::MIN_EASE, $ease - 0.2),","unit"),
+ (24,"SM-2 second interval collapses","src/Domain/Sm2.php",
+  "            2       => 6,","            2       => 1,","unit"),
+ (25,"SM-2 interval uses the rewarded ease","src/Domain/Sm2.php",
+  "default => (int) round($intervalDays * $ease),",
+  "default => (int) round($intervalDays * min(self::MAX_EASE, $ease + 0.1)),","unit"),
+ (26,"ULID loses a timestamp character","src/Support/Ulid.php",
+  "    private const TIME_CHARS = 10;","    private const TIME_CHARS = 9;","unit"),
+ (27,"ULID alphabet admits I/L/O/U","src/Support/Ulid.php",
+  "    private const ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';",
+  "    private const ALPHABET = '0123456789ABCDEFGHIJKLMNOPQRSTUV';","unit"),
 ]
 
 def run(suite):

@@ -3,6 +3,7 @@
 namespace Dansk\Domain;
 
 use Dansk\Support\Db;
+use Dansk\Support\Ulid;
 
 /**
  * Round selection, question generation and grading.
@@ -34,7 +35,7 @@ final class QuizService
         // Whether each individual question can be built is decided per question by
         // the distractor pool; a short round is perfectly legitimate.
 
-        $publicId = $this->ulid();
+        $publicId = Ulid::generate();
         Db::execute(
             'INSERT INTO quiz_sessions (public_id, user_id, anon_key, lang_code, direction, question_count)
              VALUES (?,?,?,?,?,?)',
@@ -330,20 +331,13 @@ final class QuizService
             [$userId, $idiomId]
         );
 
-        $ease   = (float) ($p['ease'] ?? 2.50);
-        $reps   = (int) ($p['repetitions'] ?? 0);
-        $lapses = (int) ($p['lapses'] ?? 0);
-
-        if ($isCorrect) {
-            $reps++;
-            $interval = match ($reps) { 1 => 1, 2 => 6, default => (int) round(((int) ($p['interval_days'] ?? 1)) * $ease) };
-            $ease = min(3.0, $ease + 0.1);
-        } else {
-            $reps = 0;
-            $lapses++;
-            $interval = 1;
-            $ease = max(1.3, $ease - 0.2);
-        }
+        $next = Sm2::next(
+            (float) ($p['ease'] ?? Sm2::DEFAULT_EASE),
+            (int) ($p['interval_days'] ?? 1),
+            (int) ($p['repetitions'] ?? 0),
+            (int) ($p['lapses'] ?? 0),
+            $isCorrect,
+        );
 
         Db::execute(
             'INSERT INTO user_idiom_progress
@@ -354,23 +348,8 @@ final class QuizService
                 repetitions = VALUES(repetitions), lapses = VALUES(lapses),
                 due_at = VALUES(due_at), last_result = VALUES(last_result),
                 last_answered_at = VALUES(last_answered_at)',
-            [$userId, $idiomId, $ease, $interval, $reps, $lapses, $interval, $isCorrect ? 1 : 0]
+            [$userId, $idiomId, $next['ease'], $next['interval_days'], $next['repetitions'],
+             $next['lapses'], $next['interval_days'], $isCorrect ? 1 : 0]
         );
-    }
-
-    /** Crockford base32 ULID -- 26 chars, so bot callback_data stays inside 64 bytes. */
-    private function ulid(): string
-    {
-        $alphabet = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
-        $time     = (int) (microtime(true) * 1000);
-        $out      = '';
-        for ($i = 9; $i >= 0; $i--) {
-            $out = $alphabet[$time % 32] . $out;
-            $time = intdiv($time, 32);
-        }
-        for ($i = 0; $i < 16; $i++) {
-            $out .= $alphabet[random_int(0, 31)];
-        }
-        return $out;
     }
 }
