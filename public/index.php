@@ -3,6 +3,7 @@
 use Dansk\Controller\AdminController;
 use Dansk\Controller\AuthController;
 use Dansk\Controller\QuizController;
+use Dansk\Controller\ReadingController;
 use Dansk\Http\Response;
 use Dansk\Support\Config;
 use Dansk\Support\Db;
@@ -31,6 +32,10 @@ $dispatcher = FastRoute\simpleDispatcher(static function (RouteCollector $r): vo
     $r->addRoute('POST', '/api/v1/quiz/sessions/{sid:[0-9A-Z]{26}}/answers', 'quiz.answer');
     $r->addRoute('GET',  '/api/v1/quiz/sessions/{sid:[0-9A-Z]{26}}/result',  'quiz.result');
     $r->addRoute('POST', '/api/v1/quiz/sessions/{sid:[0-9A-Z]{26}}/questions/{pos:\d+}/report', 'quiz.report');
+
+    $r->addRoute('POST', '/api/v1/reading/sessions', 'reading.start');
+    $r->addRoute('GET',  '/api/v1/reading/sessions/{sid:[0-9A-Z]{26}}', 'reading.session');
+    $r->addRoute('POST', '/api/v1/reading/sessions/{sid:[0-9A-Z]{26}}/answers', 'reading.answer');
 
     $r->addRoute('POST', '/api/v1/admin/login',  'admin.login');
     $r->addRoute('POST', '/api/v1/admin/logout', 'admin.logout');
@@ -80,6 +85,7 @@ try {
     $admin = new AdminController();
     $quiz  = new QuizController();
     $auth  = new AuthController();
+    $reading = new ReadingController();
 
     match ($handler) {
         'health' => (function (): void {
@@ -134,6 +140,10 @@ try {
         'quiz.answer'   => $quiz->answer($vars['sid'], $body),
         'quiz.result'   => $quiz->result($vars['sid']),
         'quiz.report'   => $quiz->report($vars['sid'], (int) $vars['pos'], $body),
+
+        'reading.start'   => $reading->start($body),
+        'reading.session' => $reading->session($vars['sid']),
+        'reading.answer'  => $reading->answer($vars['sid'], $body),
 
         'admin.login'  => $admin->login($body),
         'admin.logout' => $admin->logout(),
