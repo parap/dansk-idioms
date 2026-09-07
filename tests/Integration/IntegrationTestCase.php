@@ -66,7 +66,10 @@ abstract class IntegrationTestCase extends TestCase
         // specific auto-increment values.
         self::$tables ??= array_values(array_diff(
             $pdo->query('SHOW TABLES')->fetchAll(PDO::FETCH_COLUMN),
-            ['languages', 'schema_migrations']
+            // Reference data shipped by a migration rather than written by a test.
+            // Deleting it would leave every reading test failing on a missing grade
+            // scale, which reads as a bug in the code under test.
+            ['languages', 'schema_migrations', 'reading_grade_scales', 'reading_grade_bands']
         ));
 
         $pdo->exec('SET FOREIGN_KEY_CHECKS = 0');

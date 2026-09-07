@@ -93,6 +93,12 @@ FAULTS = [
  (27,"ULID alphabet admits I/L/O/U","src/Support/Ulid.php",
   "    private const ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';",
   "    private const ALPHABET = '0123456789ABCDEFGHIJKLMNOPQRSTUV';","unit"),
+ (28,"reading slug loses accent sensitivity","db/migrations/0002_reading.sql",
+  "    slug         VARCHAR(96) COLLATE utf8mb4_0900_as_cs NOT NULL,",
+  "    slug         VARCHAR(96) NOT NULL,","integration"),
+ (29,"an option may answer two items","db/migrations/0002_reading.sql",
+  "    UNIQUE KEY uq_item_correct (correct_option_id),",
+  "    KEY uq_item_correct (correct_option_id),","integration"),
 ]
 
 def run(suite):
