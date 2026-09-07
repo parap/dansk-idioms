@@ -99,6 +99,18 @@ FAULTS = [
  (29,"an option may answer two items","db/migrations/0002_reading.sql",
   "    UNIQUE KEY uq_item_correct (correct_option_id),",
   "    KEY uq_item_correct (correct_option_id),","integration"),
+ (30,"marker/item agreement dropped","src/Domain/Reading/ReadingRepository.php",
+  "        if ($markers !== $positions) {","        if (false) {","integration"),
+ (31,"cloze scored at two points","src/Domain/Reading/ReadingRepository.php",
+  "    private const POINTS = ['mc' => 2, 'insert' => 2, 'cloze' => 1];",
+  "    private const POINTS = ['mc' => 2, 'insert' => 2, 'cloze' => 2];","integration"),
+ (32,"unpublished passages are served","src/Domain/Reading/ReadingRepository.php",
+  "             WHERE is_published = 1 AND kind = ? ORDER BY id',",
+  "             WHERE kind = ? ORDER BY id',","integration"),
+ (33,"an item may mark two options correct","src/Domain/Reading/ReadingRepository.php",
+  "            if (count($correct) !== 1) {","            if (false) {","integration"),
+ (34,"an insertion bank needs no decoys","src/Domain/Reading/ReadingRepository.php",
+  "        if (count($labels) <= count($doc['items'])) {","        if (false) {","integration"),
 ]
 
 def run(suite):
