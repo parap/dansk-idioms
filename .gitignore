@@ -8,3 +8,6 @@
 .idea/
 /.phpunit.cache/
 /.claude/history/
+
+# Python bytecode from bin/ scripts
+__pycache__/
