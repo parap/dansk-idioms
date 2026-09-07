@@ -18,7 +18,7 @@ that silently fails to apply leaves the suite running against unmodified code, a
 Restores every file it touches, including on failure.
 """
 
-import subprocess, sys, pathlib, shutil, filecmp, tempfile, os
+import subprocess, sys, pathlib, shutil, filecmp, tempfile, os, signal, atexit
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
@@ -30,15 +30,15 @@ FAULTS = [
  (3,"GLOSS_CUE drop word-gloss","src/Import/TranslationExtractor.php",
   "|слов[оаеу]\\s+\\S+\\s+(означа\\w*|значит|переводится|это)\\s*'","|ZZNEVERMATCHZZ'","unit"),
  (4,"LITERAL_COMPOUND_CUE never matches","src/Import/TranslationExtractor.php",
-  "'/(дословно|буквально|букв\\.)\\s+(\\p{Cyrillic}{1,6}\\s+)?(переводится|перевод|значит|означа\\w*)\\b/ui'",
-  "'/ZZNEVERMATCHZZ/ui'","unit"),
+  "'/(?<!\\p{L})(дословно|буквально|букв\\.)\\s+(\\p{Cyrillic}{1,6}\\s+)?'",
+  "'/ZZNEVERMATCHZZ'","unit"),
  (5,"drop lexicographic-phrase check","src/Import/TranslationExtractor.php",
   "            && !$this->isLexicographicPhrase($text, $words)","            && true","unit"),
  (6,"drop isBalanced check","src/Import/TranslationExtractor.php",
   "            && $this->isBalanced($text)","            && true","unit"),
  (7,"Normalizer ASCII-folds Danish","src/Import/Normalizer.php",
-  "        $s = mb_strtolower($s, 'UTF-8');",
-  "        $s = strtr(mb_strtolower($s, 'UTF-8'), ['æ'=>'ae','ø'=>'o','å'=>'a']);","unit"),
+  "        $s = mb_strtolower($s, 'UTF-8');\n        $s = Text::trimPunctuation($s);",
+  "        $s = strtr(mb_strtolower($s, 'UTF-8'), ['æ'=>'ae','ø'=>'o','å'=>'a']);\n        $s = Text::trimPunctuation($s);","unit"),
  (8,"trimPunctuation byte-based","src/Import/Text.php",
   "        return preg_replace('/^' . $class . '+|' . $class . '+$/u', '', $s) ?? $s;",
   "        return trim($s, \" \\t\\n\\r.,;:!?…\\\"«»„“”-–—*\");","unit"),
@@ -87,29 +87,77 @@ def run(suite):
                        cwd=ROOT, capture_output=True, text=True)
     return r.returncode == 0
 
+ambiguous = []
+for num, name, relpath, old, new, suite in FAULTS:
+    n = (ROOT/relpath).read_text(encoding='utf-8').count(old)
+    if n != 1:
+        ambiguous.append((num, name, relpath, n))
+if ambiguous:
+    print("  ANCHORS THAT DO NOT IDENTIFY EXACTLY ONE SITE:")
+    for num, name, relpath, n in ambiguous:
+        found = "not found" if n == 0 else f"{n} occurrences"
+        print(f"    {num}. {name} — {found} in {relpath}")
+    print("\n  Nothing was injected. Re-derive each anchor from the current source.")
+    sys.exit(1)
+
+# The working tree must never be left holding an injected fault. A signal arriving
+# mid-run would otherwise leave a deliberately broken line in a source file with nothing
+# to report it, and the next commit ships it.
+pending = None
+
+def restore_pending():
+    global pending
+    if pending is None:
+        return
+    path, backup = pending
+    pending = None
+    shutil.copy2(backup, path)
+    os.unlink(backup)
+
+def on_signal(signum, _frame):
+    restore_pending()
+    print(f"\n  interrupted by {signal.Signals(signum).name} — working tree restored")
+    sys.exit(130)
+
+signal.signal(signal.SIGINT, on_signal)
+signal.signal(signal.SIGTERM, on_signal)
+atexit.register(restore_pending)
+
 survived = []
+# A fault that never reached the file proves nothing, so a skip fails the run rather
+# than printing a note. An anchor string that drifts during a refactor would otherwise
+# drop its fault from the suite silently, and the run would still report success.
+skipped = []
 for num, name, relpath, old, new, suite in FAULTS:
     f = ROOT/relpath
     backup = tempfile.NamedTemporaryFile(delete=False).name
     shutil.copy2(f, backup)
-    text = f.read_text(encoding='utf-8')
-    if old not in text:
-        print(f"  {num:2d}. {name:34s} ANCHOR NOT FOUND — fault not applied")
-        os.unlink(backup); continue
-    f.write_text(text.replace(old, new, 1), encoding='utf-8')
-    if filecmp.cmp(backup, f, shallow=False):
-        print(f"  {num:2d}. {name:34s} THE EDIT DID NOT LAND")
-        shutil.copy2(backup, f); os.unlink(backup); continue
-    green = run(suite)
-    shutil.copy2(backup, f); os.unlink(backup)
-    verdict = "SURVIVED (green)" if green else "caught (red)"
-    if green: survived.append((num, name))
-    print(f"  {num:2d}. {name:34s} {verdict}")
+    pending = (f, backup)
+    try:
+        text = f.read_text(encoding='utf-8')
+        if old not in text:
+            print(f"  {num:2d}. {name:34s} ANCHOR NOT FOUND — fault not applied")
+            skipped.append((num, name, "anchor not found"))
+            continue
+        f.write_text(text.replace(old, new, 1), encoding='utf-8')
+        if filecmp.cmp(backup, f, shallow=False):
+            print(f"  {num:2d}. {name:34s} THE EDIT DID NOT LAND")
+            skipped.append((num, name, "the edit did not land"))
+            continue
+        green = run(suite)
+        verdict = "SURVIVED (green)" if green else "caught (red)"
+        if green: survived.append((num, name))
+        print(f"  {num:2d}. {name:34s} {verdict}")
+    finally:
+        restore_pending()
 
 print()
 if survived:
     print("  FAULTS THAT SURVIVED:")
     for n, s in survived: print(f"    {n}. {s}")
-else:
+if skipped:
+    print("  FAULTS THAT WERE NEVER APPLIED:")
+    for n, s, why in skipped: print(f"    {n}. {s} — {why}")
+if not survived and not skipped:
     print("  every injected fault was caught")
-sys.exit(1 if survived else 0)
+sys.exit(1 if survived or skipped else 0)
