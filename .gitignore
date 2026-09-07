@@ -7,3 +7,4 @@
 .env
 .idea/
 /.phpunit.cache/
+/.claude/history/
