@@ -24,8 +24,8 @@ final class ImportPipelineTest extends TestCase
 
     public function testZwspContinuationLinesDoNotBecomeSeparateEntries(): void
     {
-        // The bug this guards: U+200B prefixes continuation lines too, so a naive
-        // split produced 619 chunks where only 354 were entries.
+        // U+200B prefixes continuation lines as well as entry heads, so splitting on
+        // it alone yields 619 chunks where only 354 are entries.
         $msg = self::ZW . 'at smide benene op — забросить ноги.' . "\n"
              . self::ZW . 'Значение: Разговорное выражение, описывающее позу.' . "\n"
              . self::ZW . 'at slænge sig — развалиться, растянуться.' . "\n"
@@ -59,9 +59,16 @@ final class ImportPipelineTest extends TestCase
     // ---- term / separator --------------------------------------------------
 
     /** @dataProvider separatorCases */
-    public function testTermSplitting(string $entry, string $expectedTerm): void
+    public function testTermSplitting(string $entry, string $expectedTerm, string $expectedSeparator): void
     {
-        self::assertSame($expectedTerm, $this->parse($entry)->term);
+        $parsed = $this->parse($entry);
+
+        self::assertSame($expectedTerm, $parsed->term);
+        // The separator matters as well as the term: the fallback strategy reaches the
+        // same term on some inputs while scoring far lower, so asserting only the term
+        // lets a missing separator tier pass unnoticed.
+        self::assertSame($expectedSeparator, $parsed->separatorKind);
+        self::assertSame('script', $parsed->strategy);
     }
 
     public static function separatorCases(): array
@@ -69,19 +76,19 @@ final class ImportPipelineTest extends TestCase
         return [
             'interior colon after Cyrillic is not a separator' => [
                 'knyttede næve — устойчивое сочетание: «сжатый кулак».',
-                'knyttede næve',
+                'knyttede næve', 'em_dash',
             ],
             'em dash inside a parenthetical is not a separator' => [
                 'fandeme — бранное слово (происходит от Fanden — «дьявол, чёрт»). Переводится как «чёрт возьми».',
-                'fandeme',
+                'fandeme', 'em_dash',
             ],
             'colon separator' => [
                 'at slå sig sammen: Словосочетание означает «объединяться».',
-                'at slå sig sammen',
+                'at slå sig sammen', 'colon',
             ],
             'Cyrillic parenthetical inside the term does not defeat the split' => [
                 "Jeg ved sgu ikk' (сокращение от ikke) — разговорный оборот, означающий «да фиг знает».",
-                "Jeg ved sgu ikk'",
+                "Jeg ved sgu ikk'", 'em_dash',
             ],
         ];
     }
@@ -129,9 +136,8 @@ final class ImportPipelineTest extends TestCase
 
     public function testGlossOfAComponentWordIsNotTheAnswer(): void
     {
-        // Reported from a real round: "Слово grus означает «гравий, щебень, труха»"
-        // defines a component of the idiom, not the idiom. It was being served as
-        // the correct answer, outranking the author's own translation on the head line.
+        // "Слово grus означает «гравий, щебень, труха»" defines a component word,
+        // not the idiom. Such a quote must never outrank the head-line translation.
         $entry = $this->parse(
             "at få verden til at styrte i grus — заставить мир рухнуть в прах / разрушить чей-то мир до основания.\n"
             . "Значение: Яркое метафорическое выражение. Слово grus означает «гравий, щебень, труха», "
@@ -150,6 +156,23 @@ final class ImportPipelineTest extends TestCase
         $primary = array_values(array_filter($translations, fn($t) => $t['is_primary']));
         self::assertSame('заставить мир рухнуть в прах', $primary[0]['text'],
             'the head-line translation must outrank a quoted gloss buried in the explanation');
+    }
+
+    public function testAGlossedWordWrittenInCyrillicIsStillAGloss(): void
+    {
+        // The headword may be quoted in Cyrillic rather than left in Latin, so the cue
+        // has to key on "слово X означает" itself and not on the script of X.
+        $entry = $this->parse(
+            'at hygge sig — уютно проводить время. Слово «хюгге» означает «уют, тепло».'
+        );
+        foreach ((new TranslationExtractor())->extract($entry) as $t) {
+            if (str_contains($t['text'], 'уют, тепло')) {
+                self::assertSame('gloss', $t['sense_type']);
+                self::assertFalse($t['quiz_usable']);
+                return;
+            }
+        }
+        self::fail('expected the glossed word to be present but excluded');
     }
 
     public function testMetaDescriptionIsRejectedEvenWhenItLeadsWithAdjectives(): void
@@ -265,8 +288,8 @@ final class ImportPipelineTest extends TestCase
 
     public function testLiterallyTranslatesAsIsNotTheMeaning(): void
     {
-        // "Буквально переводится как «быть в своем тузе»" ends in an idiomatic cue
-        // but is a literal gloss. It was outranking the real meaning in Значение.
+        // "Буквально переводится как «...»" ends in an idiomatic cue yet introduces a
+        // literal gloss, so it must rank below the meaning given under Значение.
         $entry = $this->parse(
             "At være i sit es\n"
             . "Значение: Быть в своей стихии, чувствовать себя как рыба в воде, быть на высоте.\n"
@@ -298,10 +321,9 @@ final class ImportPipelineTest extends TestCase
 
     public function testMeaningInAnUnlabelledContinuationLineIsFound(): void
     {
-        // "Буквально оно означает «...», а по смыслу:" then the meaning as a bare
-        // list. The literal was being served as the answer: the compound cue needs
-        // to tolerate a word between "буквально" and "означает", and the meaning
-        // lives in a continuation line that was not being read at all.
+        // The compound literal cue tolerates a word between "буквально" and
+        // "означает", and the meaning that follows lives in an unlabelled continuation
+        // line. Miss either and the literal becomes the answer.
         $entry = $this->parse(
             self::B0 . 'at mærke efter' . self::B1 . " — это важное выражение.\n"
             . "Буквально оно означает «ощупывать вслед за ощущением», а по смыслу:\n"
@@ -337,14 +359,33 @@ final class ImportPipelineTest extends TestCase
         self::assertSame('стокроновая купюра', $primary[0]['text']);
     }
 
+    public function testTextCutMidQuoteIsNeverAnAnswer(): void
+    {
+        // Splitting a label value on ";" can cut a quoted span in half, leaving a
+        // fragment with an unmatched guillemet. Such text is not a phrase and reads as
+        // garbage among the options.
+        $entry = $this->parse("at prøve\nЗначение: нечто «важное; и совсем другое» дело.");
+
+        $seenUnbalanced = false;
+        foreach ((new TranslationExtractor())->extract($entry) as $t) {
+            if (mb_substr_count($t['text'], '«') === mb_substr_count($t['text'], '»')) {
+                continue;
+            }
+            $seenUnbalanced = true;
+            self::assertFalse($t['quiz_usable'], "unbalanced fragment offered: {$t['text']}");
+        }
+
+        self::assertTrue($seenUnbalanced, 'this input must produce an unbalanced fragment to reject');
+    }
+
     // ---- classification ----------------------------------------------------
 
     /** @dataProvider verbPhrases */
     public function testFiniteAndPastVerbFormsAreRecognised(string $text, bool $expected): void
     {
-        // Reported from a real round: "договорились" was classed as a noun phrase
-        // because only infinitive endings were checked, so the picker offered
-        // "сочная красотка" and "затею" alongside it.
+        // Checking only infinitive endings classes finite and past forms such as
+        // "договорились" as noun phrases, which lets the picker offer verbless options
+        // against a verbal answer.
         self::assertSame($expected, (new \Dansk\Import\Classifier())->hasVerb($text));
     }
 
@@ -382,8 +423,8 @@ final class ImportPipelineTest extends TestCase
     /** @dataProvider cyrillicEndings */
     public function testTrimmingNeverProducesInvalidUtf8(string $input): void
     {
-        // trim($s, "…«»") is byte-based and '…' contributes 0x80, the trailing byte of
-        // many Cyrillic letters -- it used to cut 'р' in half and MySQL rejected the row.
+        // trim($s, "…«»") is byte-based, and '…' contributes 0x80 — the trailing byte
+        // of many Cyrillic letters. It cuts 'р' in half and MySQL rejects the row.
         foreach ([Normalizer::translation($input), Normalizer::term($input),
                   Text::trimPunctuation($input)] as $out) {
             self::assertTrue(mb_check_encoding($out, 'UTF-8'), "mangled: " . bin2hex($out));
@@ -393,8 +434,10 @@ final class ImportPipelineTest extends TestCase
     public static function cyrillicEndings(): array
     {
         return [
-            'ends in р (D1 80)'   => ['«собрать»'],
+            'ends in р (D1 80)'   => ['«вечер»'],
+            'ends in р, dotted'   => ['…мир…'],
             'ends in с (D1 81)'   => ['…вопрос…'],
+            'ends in ь (D1 8C)'   => ['«собрать»'],
             'ends in ь (D1 8C)'   => ['«потерять уверенность»'],
             'quoted and dotted'   => ['„сдаться…“'],
             'guillemets both ends' => ['«чёрт возьми»'],

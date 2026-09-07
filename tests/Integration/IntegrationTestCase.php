@@ -10,10 +10,10 @@ use PHPUnit\Framework\TestCase;
 /**
  * Base for tests that exercise real SQL.
  *
- * Every expensive bug this project has had lived in code that talks to the database --
- * a primary flag lost on upsert, a human correction severed by a re-parse, idioms
- * deleted by a wrong definition of "orphaned". None of it was reachable from a pure
- * unit test, so these run against a scratch schema built from the real migrations.
+ * The costly defects live in code that talks to the database: a primary flag lost on
+ * upsert, a human correction severed by a re-parse, idioms deleted by a wrong
+ * definition of "orphaned". None of that is reachable from a pure unit test, so these
+ * run against a scratch schema built from the real migrations.
  */
 abstract class IntegrationTestCase extends TestCase
 {
@@ -61,9 +61,9 @@ abstract class IntegrationTestCase extends TestCase
         $pdo = Db::pdo();
 
         // DELETE, not TRUNCATE. TRUNCATE is DDL: InnoDB drops and recreates the
-        // tablespace, which cost ~0.5s across these tables and, at 20 tables per test,
-        // was over half the suite's total runtime. DELETE on an already-empty table is
-        // effectively free. Nothing here asserts on specific auto-increment values.
+        // tablespace, costing ~0.5s across these tables on every test. DELETE on an
+        // already-empty table is effectively free, and nothing here asserts on
+        // specific auto-increment values.
         self::$tables ??= array_values(array_diff(
             $pdo->query('SHOW TABLES')->fetchAll(PDO::FETCH_COLUMN),
             ['languages', 'schema_migrations']

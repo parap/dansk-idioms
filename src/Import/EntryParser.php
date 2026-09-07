@@ -57,9 +57,9 @@ final class EntryParser
 
         $entry->headRemainder = $entry->explanation === null ? null : Text::clean($entry->explanation);
 
-        // Display-ready and label-qualified, so the explanation is stored exactly
-        // once. It previously held the bare label VALUES and the importer appended
-        // the labelled versions on top, printing every explanation twice.
+        // Display-ready and label-qualified, so a consumer stores it verbatim.
+        // Anything that appends the labels a second time prints every explanation
+        // twice on screen.
         $parts = array_filter([
             $entry->headRemainder,
             // trailingLines, not the raw $trailing: continuation lines lifted out of a

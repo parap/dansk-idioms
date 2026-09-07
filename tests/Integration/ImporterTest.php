@@ -28,9 +28,9 @@ final class ImporterTest extends IntegrationTestCase
     }
 
     /**
-     * The single highest-value assertion here. Re-importing an unchanged export used
-     * to inflate seen_count, sever human corrections, and once left 320 of 349 idioms
-     * with no answer because is_primary was missing from the upsert.
+     * The single highest-value assertion here. An upsert that omits any column it
+     * should carry, or increments a derived counter, shows up as a corpus that differs
+     * from itself after a second import of the same file.
      */
     public function testReimportingAnUnchangedExportChangesNothing(): void
     {
@@ -105,6 +105,55 @@ final class ImporterTest extends IntegrationTestCase
                  WHERE NOT EXISTS (SELECT 1 FROM raw_entries r WHERE r.idiom_id = i.id)'
             )
         );
+    }
+
+    /**
+     * A published idiom holding usable translations but no primary is unanswerable: it
+     * counts towards the corpus and appears in no quiz. The import repairs that state
+     * by promoting the shortest usable reading.
+     *
+     * The idiom here has no raw entry of its own, so the import never rewrites its
+     * translations — which is what isolates the repair from the ordinary upsert path.
+     */
+    public function testAPublishedIdiomLeftWithoutAPrimaryIsRepaired(): void
+    {
+        $this->import();
+
+        Db::execute(
+            "INSERT INTO idioms (lang_code, term, term_norm, kind, is_published, rand_key)
+             VALUES ('da', 'at stå for skud', 'stå for skud', 'idiom', 1, RAND())"
+        );
+        $idiomId = (int) Db::pdo()->lastInsertId();
+        Db::execute(
+            "INSERT INTO idiom_translations
+                (idiom_id, lang_code, text, text_norm, sense_type, is_primary, quiz_usable,
+                 shape, word_count, char_count, source, confidence)
+             VALUES (?, 'ru', 'принимать удар на себя', 'принимать удар на себя',
+                     'idiomatic', NULL, 1, 'verbal', 4, 22, 'manual', 1.0)",
+            [$idiomId]
+        );
+
+        self::assertSame(
+            0,
+            (int) Db::fetchValue(
+                'SELECT COUNT(*) FROM idiom_translations WHERE idiom_id = ? AND is_primary = 1',
+                [$idiomId]
+            ),
+            'precondition: published, one usable translation, no primary'
+        );
+
+        $this->import();
+
+        self::assertSame(
+            1,
+            (int) Db::fetchValue(
+                'SELECT COUNT(*) FROM idiom_translations
+                 WHERE idiom_id = ? AND is_primary = 1 AND quiz_usable = 1',
+                [$idiomId]
+            ),
+            'the usable translation must be promoted to primary'
+        );
+        $this->assertCorpusInvariants();
     }
 
     public function testLiteralGlossesAreStoredButNeverTheAnswer(): void

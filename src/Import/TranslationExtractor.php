@@ -37,12 +37,6 @@ final class TranslationExtractor
         . '|слов[оаеу]\s+\S+\s+(означа\w*|значит|переводится|это)\s*'
         . '|\p{Latin}+\s+(означа\w*|значит|переводится)\s*'
         . '|от\s+\p{Latin}+\s*)$/ui';
-    /**
-     * Lexicographic meta-description, not a translation. These open most Значение
-     * values ("Устойчивое идиоматическое выражение, описывающее ...") and would
-     * otherwise be served as the correct answer.
-     */
-    private const META_DESCRIPTION = '/^\s*(устойчив\w*|разговорн\w*|идиоматическ\w*|идиом\w*|фразеологизм\w*|фразеологическ\w*|словосочетани\w*|выражени\w*|оборот\w*|конструкци\w*|глагольн\w*|глагол|существительн\w*|прилагательн\w*|наречи\w*|частиц\w*|союз\w*|предлог\w*|междомети\w*|описани\w*|обозначени\w*|термин\w*|сокращени\w*|заимствован\w*|возвратн\w*|собирательн\w*|формальн\w*|неформальн\w*|литературн\w*|поговорк\w*|пословиц\w*)\b/ui';
 
     private const IDIOMATIC_CUE = '/(переводится как|означает\w*|означающ\w+|значит|в значении|аналог\w*|смысл\w*)\s*[:\-–—]?\s*$/ui';
 
@@ -58,9 +52,9 @@ final class TranslationExtractor
         //    outranks the labels. Quoted spans inside it are handled in step 3.
         $head = $entry->headRemainder;
         if ($head !== null && $head !== '') {
-            // Strip parenthetical asides before judging the head. Previously any head
-            // containing « was skipped wholesale, which discarded correct answers whose
-            // aside merely quoted a component word:
+            // Parentheticals are stripped before the head is judged. An aside that
+            // merely quotes a component word must not disqualify the head-line
+            // translation:
             //   "стокроновая купюра (… слово lap означает «лоскут», «заплатка»)"
             $head = trim(preg_replace('/\([^()]*\)|\[[^\[\]]*\]/u', '', $head) ?? $head);
             $head = Text::trimPunctuation(Text::collapseWhitespace($head));
@@ -342,7 +336,6 @@ final class TranslationExtractor
         $usable = $sense === 'idiomatic'
             // Text cut mid-quote or mid-bracket is a fragment, not a phrase.
             && $this->isBalanced($text)
-            && !preg_match(self::META_DESCRIPTION, $text)
             && !$this->isLexicographicPhrase($text, $words)
             && $words > 0 && $words <= self::MAX_QUIZ_WORDS
             && $chars <= self::MAX_QUIZ_CHARS
@@ -360,10 +353,10 @@ final class TranslationExtractor
     }
 
     /**
-     * Catches meta-description that does not start with the giveaway noun:
-     * "Яркое метафорическое выражение" leads with adjectives, so an anchored
-     * pattern misses it. Any short phrase whose head noun is grammatical
-     * terminology is describing the idiom, not translating it.
+     * Rejects lexicographic meta-description — text that says what kind of thing the
+     * idiom is rather than what it means. Matches anywhere in the phrase, since
+     * "Яркое метафорическое выражение" leads with adjectives. Any short phrase whose
+     * head noun is grammatical terminology is describing the idiom, not translating it.
      */
     private function isLexicographicPhrase(string $text, int $words): bool
     {

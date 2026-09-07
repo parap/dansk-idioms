@@ -192,6 +192,7 @@ readable at their edge. `docker rm -f dansk_tunnel` stops it instantly.
 | `vendor/bin/phpunit` | the whole suite (65 tests) |
 | `vendor/bin/phpunit --testsuite unit` | parser and text logic only, no database |
 | `vendor/bin/phpunit --testsuite integration` | real SQL against a scratch schema |
+| `python3 bin/prove-tests-red.py` | break the code on purpose; every fault must be caught |
 
 Prefix with `docker-compose exec app` for the PHP ones.
 
@@ -260,6 +261,14 @@ human correction severed by a re-parse, 18 idioms deleted by a wrong definition 
   row rather than the request
 - distractors never repeat, never come from the same idiom, and always match the answer
   on verb parity
+
+**A suite that has only ever passed proves nothing.** `bin/prove-tests-red.py` injects 16
+faults one at a time — an inverted guard, a dropped filter, a column missing from an
+upsert, grading taken from the client's own claim — and requires the suite to fail for
+each. Every injection is guarded by a byte comparison against a copy of the original, so
+an edit that silently fails to apply cannot be read as a passing check. A fault that
+survives means an uncovered case or genuinely equivalent behaviour; read the code it
+touches to decide which. Run it after changing anything in `src/`.
 
 The integration suite takes ~9 seconds, nearly all of it re-importing the fixture in
 each test's `setUp`. Cleanup between tests uses `DELETE`, not `TRUNCATE`: TRUNCATE is

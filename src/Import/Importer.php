@@ -75,11 +75,11 @@ final class Importer
 
                 $idiomId = null;
                 if ($status !== 'rejected' && ($entry->term ?? '') !== '') {
-                    // Entries awaiting review still get their idiom, unpublished. It
-                    // keeps raw_entries.idiom_id populated, so the entry stays linked
-                    // to its idiom instead of the idiom looking orphaned the moment a
-                    // stricter rule demotes the entry -- which is how a prune once
-                    // deleted 18 perfectly good idioms.
+                    // Entries awaiting review still get their idiom, unpublished,
+                    // which keeps raw_entries.idiom_id populated. An idiom with no
+                    // entry pointing at it is indistinguishable from a stale one, so
+                    // leaving the link null the moment a stricter rule demotes an
+                    // entry puts good idioms in front of anything that prunes.
                     [$idiomId, $created] = $this->upsertIdiom($entry, $messageId);
                     $stats[$created ? 'idioms_created' : 'idioms_updated']++;
                     $stats['translations'] += $this->writeTranslations($idiomId, $lang, $translations);
@@ -328,9 +328,9 @@ final class Importer
     }
 
     /**
-     * Publication tracks answerability in BOTH directions. Publishing used to be
-     * one-way, so an idiom whose answer later failed a stricter rule stayed published
-     * with nothing to ask -- present in the corpus count, absent from every quiz.
+     * Publication tracks answerability in BOTH directions. One-way publication
+     * leaves an idiom published with nothing to ask when its answer later fails a
+     * stricter rule: counted in the corpus, absent from every quiz.
      */
     private function publishIfAnswerable(int $idiomId, string $lang): void
     {

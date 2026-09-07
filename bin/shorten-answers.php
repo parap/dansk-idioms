@@ -1,9 +1,8 @@
 <?php declare(strict_types=1);
 /**
- * One-off repair: answers longer than the quiz limit, which the review screen used to
- * accept before it validated length. Derives a short form from the leading clause where
- * one exists, keeps the full text as a non-usable variant, and reports anything that
- * still needs a human.
+ * Repairs answers longer than the quiz limit. Derives a short form from the leading
+ * clause where one exists, keeps the full text as a non-usable variant, and reports
+ * anything that still needs a human.
  *
  *   php bin/shorten-answers.php [--dry-run]
  */
