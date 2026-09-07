@@ -44,6 +44,10 @@
   .stats{display:flex;gap:1.4rem;margin:0 0 1.5rem;flex-wrap:wrap}
   .stat b{display:block;font-size:1.5rem;line-height:1.1}
   .stat span{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .dirs{display:flex;gap:.4rem;margin-bottom:.5rem}
+  .dirs .dir{flex:1;padding:.6rem;font-size:.88rem;font-weight:500}
+  .dirs .dir[aria-pressed=true]{background:var(--chip);border-color:var(--accent);font-weight:650}
+  .dirhint{margin:0 0 1rem;font-size:.83rem;color:var(--muted);min-height:1.2em}
   button{font:600 1rem/1 inherit;padding:.85rem 1.3rem;border-radius:10px;border:1px solid var(--line);
     background:var(--card);color:var(--ink);cursor:pointer;transition:border-color .12s,background .12s}
   button:hover:not(:disabled){border-color:var(--accent)}
@@ -53,6 +57,7 @@
   .track{flex:1;height:5px;background:var(--line);border-radius:99px;overflow:hidden}
   .track>i{display:block;height:100%;background:var(--accent);transition:width .3s}
   .term{font-size:1.6rem;font-weight:650;letter-spacing:-.02em;margin:.2rem 0 .3rem;line-height:1.25}
+  .term.ru{font-size:1.3rem;font-weight:600}
   .note{color:var(--muted);font-size:.9rem;margin-bottom:1.3rem}
   .opts{display:grid;gap:.6rem}
   .opt{text-align:left;width:100%;padding:.85rem 1rem;font-weight:500;line-height:1.4;
@@ -115,6 +120,8 @@ const STRINGS = {
     statSeen: 'вы видели',
     statRounds: { one: 'раунд', few: 'раунда', many: 'раундов', other: 'раундов' },
     statBest: 'лучший счёт', statLearned: 'выучено', statDue: 'к повторению',
+    dirForward: 'датский → русский', dirReverse: 'русский → датский',
+    dirHint: 'Обратный режим сложнее: узнать идиому легче, чем вспомнить её.',
     start: 'Начать раунд', startAgain: 'Ещё раунд',
     createAccount: 'Создать аккаунт, чтобы сохранять прогресс',
     signIn: 'войти', signOut: 'выйти',
@@ -135,6 +142,8 @@ const STRINGS = {
     statSeen: 'you have seen',
     statRounds: { one: 'round', other: 'rounds' },
     statBest: 'best score', statLearned: 'learned', statDue: 'due',
+    dirForward: 'Danish → Russian', dirReverse: 'Russian → Danish',
+    dirHint: 'Reverse is harder: recognising an idiom is easier than recalling it.',
     start: 'Start a round', startAgain: 'Another round',
     createAccount: 'Create an account to track progress',
     signIn: 'sign in', signOut: 'log out',
@@ -180,6 +189,10 @@ const api = async (path, opts = {}) => {
 };
 
 let me = null, sid = null, total = 0, asked = 0, shownAt = 0;
+
+// Which way the round runs. Recognising an idiom and producing one are different
+// skills, so the choice is the user's rather than a hidden default.
+let direction = localStorage.getItem('quiz_direction') === 'tr_to_da' ? 'tr_to_da' : 'da_to_tr';
 
 async function refreshMe() {
   try { me = (await api('/me')).user; } catch { me = null; }
@@ -235,9 +248,19 @@ async function home() {
         <div class="stat"><b>${s.idioms_published ?? '—'}</b><span>${esc(t('statIdioms', s.idioms_published))}</span></div>
         ${tiles(s)}
       </div>
+      <div class="dirs">
+        <button class="dir" data-dir="da_to_tr" aria-pressed="${direction === 'da_to_tr'}">${esc(t('dirForward'))}</button>
+        <button class="dir" data-dir="tr_to_da" aria-pressed="${direction === 'tr_to_da'}">${esc(t('dirReverse'))}</button>
+      </div>
+      <p class="dirhint">${direction === 'tr_to_da' ? esc(t('dirHint')) : ''}</p>
       <button class="primary" id="go">${esc(t('start'))}</button>
       ${me ? '' : `<button class="link" id="reg" style="width:100%">${esc(t('createAccount'))}</button>`}
     </div>`;
+  view.querySelectorAll('.dir').forEach(b => b.onclick = () => {
+    direction = b.dataset.dir;
+    try { localStorage.setItem('quiz_direction', direction); } catch {}
+    home();
+  });
   $('#go').onclick = start;
   if ($('#reg')) $('#reg').onclick = () => auth();
 }
@@ -246,7 +269,7 @@ async function home() {
 async function start() {
   $('#go').disabled = true;
   try {
-    const r = await api('/quiz/sessions', {method:'POST', body:{length:10}});
+    const r = await api('/quiz/sessions', {method:'POST', body:{length:10, direction}});
     sid = r.session_id; total = r.question.total; asked = 0;
     render(r.question);
   } catch (e) {
@@ -264,8 +287,8 @@ function render(q) {
         <span class="track"><i style="width:${pct}%"></i></span>
         <span>${asked ? Math.round(100 * q.score.correct / asked) + '%' : ''}</span>
       </div>
-      <div class="term">${esc(q.prompt.term)}</div>
-      <div class="note">${q.prompt.term_note ? esc(q.prompt.term_note) + ' · ' : ''}${esc(q.prompt.kind)}</div>
+      <div class="term${q.direction === 'tr_to_da' ? ' ru' : ''}">${esc(q.prompt.text)}</div>
+      <div class="note">${q.prompt.note ? esc(q.prompt.note) + ' · ' : ''}${esc(q.prompt.kind)}</div>
       <div class="opts">${q.options.map(o =>
         `<button class="opt" data-i="${o.index}"><i>${'ABCD'[o.index]}</i><span>${esc(o.text)}</span></button>`
       ).join('')}</div>

@@ -30,6 +30,101 @@ final class DistractorService
     ];
 
     /**
+     * Wrong Danish terms, for a round that prompts with the meaning and asks for the
+     * idiom. Plausibility rests on different signals from the forward direction: the
+     * options are Danish, so shape parity means the infinitive marker rather than a
+     * Russian verb ending, and overlap is measured on Danish words.
+     *
+     * @param array<string,mixed> $correct        the correct idiom row
+     * @param list<int>           $excludeIdioms  the other idioms in this round
+     * @return list<array<string,mixed>>
+     */
+    public function pickTerms(array $correct, array $excludeIdioms, int $count = 3): array
+    {
+        $exclude = array_values(array_unique(array_merge($excludeIdioms, [(int) $correct['idiom_id']])));
+        $holes   = implode(',', array_fill(0, count($exclude), '?'));
+
+        $params = $exclude;
+        $sql = "SELECT i.id AS idiom_id, i.term, i.term_norm, i.kind, i.register, i.shape
+                FROM idioms i
+                WHERE i.is_published = 1
+                  AND i.id NOT IN ($holes)
+                  AND EXISTS (SELECT 1 FROM idiom_translations t
+                              WHERE t.idiom_id = i.id AND t.is_primary = 1 AND t.quiz_usable = 1)";
+
+        // An idiom that means the same thing is a second correct answer, not a distractor.
+        $sql .= ' AND i.id NOT IN (
+                     SELECT s2.idiom_id FROM idiom_synonyms s1
+                     JOIN idiom_synonyms s2 ON s2.group_id = s1.group_id
+                     WHERE s1.idiom_id = ?)';
+        $params[] = (int) $correct['idiom_id'];
+
+        // Infinitive parity, the Danish counterpart of verb parity: an "at ..." phrase
+        // among bare nouns is identifiable without knowing what either means. The term's
+        // own shape, not the translation's -- they disagree often.
+        $sql .= ($correct['term_shape'] ?? '') === 'verbal'
+            ? " AND i.shape = 'verbal'"
+            : " AND i.shape <> 'verbal'";
+
+        $sql .= ' ORDER BY RAND() LIMIT ' . self::POOL_SIZE;
+
+        $pool = $this->rejectSharedDanishWords(Db::fetchAll($sql, $params), (string) $correct['term']);
+        if (count($pool) < $count) {
+            return [];
+        }
+
+        $correctWords = Text::wordCount((string) $correct['term']);
+        $correctChars = mb_strlen((string) $correct['term'], 'UTF-8');
+
+        foreach ($pool as &$candidate) {
+            $words = Text::wordCount((string) $candidate['term']);
+            $chars = mb_strlen((string) $candidate['term'], 'UTF-8');
+            $candidate['_score'] =
+                  0.40 * (1.0 - min(1.0, abs($words - $correctWords) / 5))
+                + 0.25 * (1.0 - min(1.0, abs($chars - $correctChars) / 30))
+                + 0.20 * ($candidate['kind']     === $correct['kind']     ? 1 : 0)
+                + 0.10 * ($candidate['register'] === $correct['register'] ? 1 : 0)
+                + 0.05 * (mt_rand() / mt_getrandmax());
+        }
+        unset($candidate);
+
+        usort($pool, static fn(array $a, array $b): int => $b['_score'] <=> $a['_score']);
+        $shortlist = array_slice($pool, 0, max($count, self::SHORTLIST));
+        shuffle($shortlist);
+
+        return array_slice($shortlist, 0, $count);
+    }
+
+    /**
+     * Two Danish idioms sharing a content word give the answer away by echo, and may
+     * genuinely overlap in meaning. The infinitive marker and common prepositions carry
+     * no information, so they are ignored.
+     *
+     * @param list<array<string,mixed>> $pool
+     * @return list<array<string,mixed>>
+     */
+    private function rejectSharedDanishWords(array $pool, string $correctTerm): array
+    {
+        $stop = ['at','sig','en','et','den','det','de','i','på','til','af','med','for','om','og','er','som'];
+        $words = static function (string $term) use ($stop): array {
+            $out = [];
+            foreach (preg_split('/\s+/u', mb_strtolower($term, 'UTF-8')) ?: [] as $word) {
+                $word = Text::trimPunctuation($word, false);
+                if ($word !== '' && mb_strlen($word, 'UTF-8') > 2 && !in_array($word, $stop, true)) {
+                    $out[$word] = true;
+                }
+            }
+            return $out;
+        };
+
+        $correctWords = $words($correctTerm);
+
+        return array_values(array_filter($pool, static function (array $c) use ($words, $correctWords): bool {
+            return array_intersect_key($correctWords, $words((string) $c['term'])) === [];
+        }));
+    }
+
+    /**
      * @param array<string,mixed> $correct        the winning translation row
      * @param list<int>           $excludeIdioms  the other idioms in this round
      * @return list<array<string,mixed>>

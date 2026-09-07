@@ -23,9 +23,10 @@ final class TranslationExtractor
      * literal reading wins the primary slot over the real meaning.
      */
     private const LITERAL_COMPOUND_CUE =
-        '/(дословно|буквально|букв\.)\s+(\p{Cyrillic}{1,6}\s+)?(переводится|перевод|значит|означа\w*)\b/ui';
+        '/(?<!\p{L})(дословно|буквально|букв\.)\s+(\p{Cyrillic}{1,6}\s+)?'
+        . '(переводится|перевод|значит|означа\w*)(?!\p{L})/ui';
 
-    private const LITERAL_CUE   = '/(дословно|буквально|букв\.|дословный перевод)\s*[:\-–—]?\s*$/ui';
+    private const LITERAL_CUE   = '/(?<!\p{L})(дословно|буквально|букв\.|дословный перевод)\s*[:\-–—]?\s*$/ui';
     /**
      * Introduces a gloss of some OTHER word -- a component of the idiom, or its
      * etymological source -- never of the headword itself. "Слово grus означает
@@ -33,12 +34,13 @@ final class TranslationExtractor
      * These cues must be tested before the idiomatic ones, since they also contain
      * "означает".
      */
-    private const GLOSS_CUE = '/(происходит от|заимствован\w*|этимолог\w*'
+    private const GLOSS_CUE = '/(?<!\p{L})(происходит от|заимствован\w*|этимолог\w*'
         . '|слов[оаеу]\s+\S+\s+(означа\w*|значит|переводится|это)\s*'
         . '|\p{Latin}+\s+(означа\w*|значит|переводится)\s*'
         . '|от\s+\p{Latin}+\s*)$/ui';
 
-    private const IDIOMATIC_CUE = '/(переводится как|означает\w*|означающ\w+|значит|в значении|аналог\w*|смысл\w*)\s*[:\-–—]?\s*$/ui';
+    private const IDIOMATIC_CUE = '/(?<!\p{L})(переводится как|означает\w*|означающ\w+|значит'
+        . '|в значении|аналог\w*|смысл\w*)\s*[:\-–—]?\s*$/ui';
 
     /** @return list<array{text:string,sense_type:string,quiz_usable:bool,is_primary:bool,confidence:float}> */
     public function extract(ParsedEntry $entry): array
@@ -119,7 +121,7 @@ final class TranslationExtractor
         // 3. Nothing quoted or labelled: take the clause after an explicit cue.
         if ($this->countUsable($candidates) === 0 && $explanation !== '') {
             if (preg_match(
-                '/(?:переводится как|означает|значит)\s*[:\-–—]?\s*([^.;]{2,60})/ui',
+                '/(?<!\p{L})(?:переводится как|означает|значит)(?!\p{L})\s*[:\-–—]?\s*([^.;]{2,60})/ui',
                 $explanation, $m
             )) {
                 $capture = Text::trimPunctuation(trim($m[1]), false);
@@ -213,6 +215,11 @@ final class TranslationExtractor
             // Inside a parenthetical -> it explains an aside, not the headword.
             $insideParens = mb_substr($masked, $charPos, 1, 'UTF-8') === "\x01";
 
+            // A quote inside a parenthetical is an aside, not the meaning. This is the
+            // rule that stops "(происходит от Fanden — «дьявол, чёрт»)" being served as
+            // the meaning of fandeme: the gloss cue does not reach it, because the cue
+            // sits at the start of the parenthetical rather than beside the quote.
+            // An entry whose only candidate is parenthetical goes to review instead.
             [$sense, $conf] = match (true) {
                 $insideParens                                          => ['gloss', 0.5],
                 (bool) preg_match(self::GLOSS_CUE, $before)            => ['gloss', 0.5],

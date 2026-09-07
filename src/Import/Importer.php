@@ -267,6 +267,7 @@ final class Importer
     private function writeTranslations(int $idiomId, string $lang, array $translations): int
     {
         $written = 0;
+        $keep    = [];
 
         // uq_primary allows only one primary per (idiom, lang), so a re-parse that
         // moves the primary would collide with the previous one. Clear it first --
@@ -276,6 +277,16 @@ final class Importer
              WHERE idiom_id = ? AND lang_code = ? AND is_primary = 1 AND source <> 'manual'",
             [$idiomId, $lang]
         );
+
+        // A primary chosen by a human outranks anything the parser picks. Leaving it in
+        // place while also marking an imported row primary breaks uq_primary and aborts
+        // the whole run, so the importer yields the flag entirely when one exists.
+        $humanPrimary = Db::fetchValue(
+            "SELECT id FROM idiom_translations
+             WHERE idiom_id = ? AND lang_code = ? AND is_primary = 1 AND source = 'manual'",
+            [$idiomId, $lang]
+        );
+        $yieldPrimary = $humanPrimary !== false && $humanPrimary !== null;
 
         foreach ($translations as $t) {
             $norm = Normalizer::translation($t['text']);
@@ -298,7 +309,7 @@ final class Importer
                 [
                     $idiomId, $lang, Text::clean($t['text']), $norm, $t['sense_type'],
                     // 1 or NULL, never 0: uq_primary relies on NULLs being ignored.
-                    $t['is_primary'] ? 1 : null,
+                    !$yieldPrimary && $t['is_primary'] ? 1 : null,
                     $t['quiz_usable'] ? 1 : 0,
                     $this->classifier->translationShape($t['text']),
                     Text::wordCount($t['text']),
@@ -306,8 +317,22 @@ final class Importer
                     'import', $t['confidence'],
                 ]
             );
+            $keep[] = $norm;
             $written++;
         }
+
+        // Drop importer-written rows the current parse no longer produces. Without
+        // this an extraction fix only half-applies: the corrected reading is added
+        // while the bad one stays, keeps quiz_usable, and can still hold the primary
+        // flag. Manual rows are never touched -- a human decided those.
+        $placeholders = $keep === [] ? "''" : implode(',', array_fill(0, count($keep), '?'));
+        Db::execute(
+            "DELETE FROM idiom_translations
+             WHERE idiom_id = ? AND lang_code = ? AND source = 'import'
+               AND text_norm NOT IN ($placeholders)",
+            array_merge([$idiomId, $lang], $keep)
+        );
+
         return $written;
     }
 

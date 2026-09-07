@@ -105,13 +105,94 @@ final class QuizFlowTest extends IntegrationTestCase
             $texts = array_column($options, 'text');
             self::assertSame($texts, array_unique($texts), 'no option may be repeated');
 
-            $ids = array_column($options, 'tr_id');
+            $ids = array_column($options, 'ref');
             $idioms = Db::fetchAll(
                 'SELECT DISTINCT idiom_id FROM idiom_translations WHERE id IN ('
                 . implode(',', array_map('intval', $ids)) . ')'
             );
             self::assertCount(4, $idioms, 'two options may never come from the same idiom');
         }
+    }
+
+    // ---- reverse direction -------------------------------------------------
+
+    public function testAReverseRoundPromptsWithTheMeaningAndOffersDanishOptions(): void
+    {
+        $session  = $this->quiz()->start(null, self::ANON, 'ru', 5, QuizService::REVERSE);
+        $question = $this->quiz()->question($session['public_id'], 1);
+
+        self::assertSame(QuizService::REVERSE, $question['direction']);
+        self::assertMatchesRegularExpression('/\p{Cyrillic}/u', $question['prompt']['text'],
+            'the prompt is the meaning, so it is Russian');
+
+        foreach ($question['options'] as $option) {
+            self::assertDoesNotMatchRegularExpression('/\p{Cyrillic}/u', $option['text'],
+                'the options are Danish idioms');
+        }
+    }
+
+    /** In reverse the term is the answer, so it must not appear anywhere in the payload. */
+    public function testAReverseQuestionNeverLeaksTheTermOutsideTheOptions(): void
+    {
+        $session  = $this->quiz()->start(null, self::ANON, 'ru', 5, QuizService::REVERSE);
+        $question = $this->quiz()->question($session['public_id'], 1);
+
+        $term = (string) Db::fetchValue(
+            'SELECT i.term FROM quiz_questions q
+             JOIN quiz_sessions s ON s.id = q.session_id
+             JOIN idioms i ON i.id = q.idiom_id
+             WHERE s.public_id = ? AND q.position = 1',
+            [$session['public_id']]
+        );
+
+        self::assertNotSame('', $term);
+        self::assertNull($question['prompt']['note'], 'the note can name the term');
+        self::assertNotSame($term, $question['prompt']['text']);
+
+        $optionTexts = array_column($question['options'], 'text');
+        self::assertContains($term, $optionTexts, 'the term belongs among the options, and only there');
+    }
+
+    public function testReverseDistractorsMatchTheAnswerOnInfinitiveParity(): void
+    {
+        $rows = Db::fetchAll(
+            "SELECT i.id AS idiom_id, i.term, i.term_norm, i.kind, i.register,
+                    i.shape AS term_shape
+             FROM idioms i WHERE i.is_published = 1"
+        );
+        $service = new DistractorService();
+
+        foreach ($rows as $correct) {
+            foreach ($service->pickTerms($correct, []) as $candidate) {
+                self::assertSame(
+                    $correct['term_shape'] === 'verbal',
+                    $candidate['shape'] === 'verbal',
+                    "infinitive parity broken for “{$correct['term']}” against “{$candidate['term']}”"
+                );
+            }
+        }
+    }
+
+    public function testAReverseRoundCanBeCompleted(): void
+    {
+        $session = $this->quiz()->start(null, self::ANON, 'ru', 4, QuizService::REVERSE);
+
+        for ($position = 1; $position <= $session['question_count']; $position++) {
+            $stored = (int) Db::fetchValue(
+                'SELECT q.correct_index FROM quiz_questions q
+                 JOIN quiz_sessions s ON s.id = q.session_id
+                 WHERE s.public_id = ? AND q.position = ?',
+                [$session['public_id'], $position]
+            );
+            $result = $this->quiz()->answer($session['public_id'], $position, $stored, 700);
+
+            self::assertTrue($result['is_correct']);
+            // Going back, the answer revealed is the idiom, not the meaning.
+            self::assertDoesNotMatchRegularExpression('/\p{Cyrillic}/u', (string) $result['correct_text']);
+        }
+
+        $final = $this->quiz()->result($session['public_id']);
+        self::assertSame($session['question_count'], $final['correct']);
     }
 
     public function testProgressIsRecordedForASignedInPlayer(): void

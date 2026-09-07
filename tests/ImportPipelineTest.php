@@ -378,6 +378,22 @@ final class ImportPipelineTest extends TestCase
         self::assertTrue($seenUnbalanced, 'this input must produce an unbalanced fragment to reject');
     }
 
+    public function testACueInsideALongerWordDoesNotTrigger(): void
+    {
+        // "значит" sits inside "многозначительно". An unbounded cue matches there and
+        // captures from the middle of that word to the next full stop, producing an
+        // answer that begins mid-syllable.
+        $entry = $this->parse(
+            'at smile sigende — устойчивый оборот («улыбаться многозначительно / с намеком»).'
+        );
+
+        foreach ((new TranslationExtractor())->extract($entry) as $t) {
+            self::assertStringStartsNotWith('ельно', $t['text'],
+                'a cue matched inside a word cut the capture mid-syllable');
+            self::assertNotSame('быть', $t['text']);
+        }
+    }
+
     // ---- classification ----------------------------------------------------
 
     /** @dataProvider verbPhrases */

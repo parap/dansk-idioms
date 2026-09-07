@@ -156,6 +156,69 @@ final class ImporterTest extends IntegrationTestCase
         $this->assertCorpusInvariants();
     }
 
+    /**
+     * A human's chosen primary outranks the parser's. Marking an imported row primary
+     * while a manual one stands violates uq_primary and aborts the whole run, leaving
+     * the corpus half-written.
+     */
+    public function testAManualPrimaryDoesNotCollideWithTheImporter(): void
+    {
+        $this->import();
+
+        $idiomId = (int) Db::fetchValue(
+            'SELECT idiom_id FROM idiom_translations WHERE is_primary = 1 AND quiz_usable = 1 LIMIT 1'
+        );
+        Db::execute('UPDATE idiom_translations SET is_primary = NULL WHERE idiom_id = ?', [$idiomId]);
+        Db::execute(
+            "INSERT INTO idiom_translations
+                (idiom_id, lang_code, text, text_norm, sense_type, is_primary, quiz_usable,
+                 shape, word_count, char_count, source, confidence)
+             VALUES (?, 'ru', 'выбранный человеком ответ', 'выбранный человеком ответ',
+                     'idiomatic', 1, 1, 'nominal', 3, 25, 'manual', 1.0)",
+            [$idiomId]
+        );
+
+        $stats = $this->import();
+
+        self::assertSame(16, $stats['messages'], 'the run must reach the end, not abort partway');
+
+        $primaries = Db::fetchAll(
+            'SELECT text, source FROM idiom_translations WHERE idiom_id = ? AND is_primary = 1',
+            [$idiomId]
+        );
+        self::assertCount(1, $primaries);
+        self::assertSame('manual', $primaries[0]['source'], 'the human choice must survive');
+        self::assertSame('выбранный человеком ответ', $primaries[0]['text']);
+        $this->assertCorpusInvariants();
+    }
+
+    /** A corrected parse must remove the reading it no longer produces, not merely add. */
+    public function testStaleImporterRowsAreRemoved(): void
+    {
+        $this->import();
+
+        $idiomId = (int) Db::fetchValue('SELECT id FROM idioms WHERE is_published = 1 LIMIT 1');
+        Db::execute(
+            "INSERT INTO idiom_translations
+                (idiom_id, lang_code, text, text_norm, sense_type, is_primary, quiz_usable,
+                 shape, word_count, char_count, source, confidence)
+             VALUES (?, 'ru', 'ельно / с намеком', 'ельно / с намеком', 'idiomatic', NULL, 1,
+                     'nominal', 3, 17, 'import', 0.6)",
+            [$idiomId]
+        );
+
+        $this->import();
+
+        self::assertSame(
+            0,
+            (int) Db::fetchValue(
+                "SELECT COUNT(*) FROM idiom_translations WHERE idiom_id = ? AND text = 'ельно / с намеком'",
+                [$idiomId]
+            ),
+            'a reading the current parse does not produce must not survive the import'
+        );
+    }
+
     public function testLiteralGlossesAreStoredButNeverTheAnswer(): void
     {
         $this->import();

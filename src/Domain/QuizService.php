@@ -13,10 +13,20 @@ use Dansk\Support\Db;
  */
 final class QuizService
 {
+    public const FORWARD = 'da_to_tr';
+    public const REVERSE = 'tr_to_da';
+
     public function __construct(private DistractorService $distractors = new DistractorService()) {}
 
-    public function start(?int $userId, ?string $anonKey, string $lang = 'ru', int $length = 10): array
-    {
+    public function start(
+        ?int $userId,
+        ?string $anonKey,
+        string $lang = 'ru',
+        int $length = 10,
+        string $direction = self::FORWARD
+    ): array {
+        $direction = $direction === self::REVERSE ? self::REVERSE : self::FORWARD;
+
         $idioms = $this->selectIdioms($userId, $lang, $length);
         if ($idioms === []) {
             throw new \RuntimeException('No published idioms are available yet.');
@@ -26,46 +36,44 @@ final class QuizService
 
         $publicId = $this->ulid();
         Db::execute(
-            'INSERT INTO quiz_sessions (public_id, user_id, anon_key, lang_code, question_count)
-             VALUES (?,?,?,?,?)',
-            [$publicId, $userId, $anonKey, $lang, count($idioms)]
+            'INSERT INTO quiz_sessions (public_id, user_id, anon_key, lang_code, direction, question_count)
+             VALUES (?,?,?,?,?,?)',
+            [$publicId, $userId, $anonKey, $lang, $direction, count($idioms)]
         );
         $sessionId = (int) Db::pdo()->lastInsertId();
 
         $idiomIds = array_map(static fn(array $i): int => (int) $i['idiom_id'], $idioms);
-        $position = 0;
         $built    = 0;
 
         foreach ($idioms as $correct) {
-            $distractors = $this->distractors->pick($correct, $idiomIds, $lang);
-            if (count($distractors) < 3) {
+            $options = $direction === self::REVERSE
+                ? $this->reverseOptions($correct, $idiomIds)
+                : $this->forwardOptions($correct, $idiomIds, $lang);
+
+            if ($options === []) {
                 continue;   // no defensible question for this idiom; skip it
             }
 
-            $options = [['tr_id' => (int) $correct['id'], 'text' => $correct['text']]];
-            foreach ($distractors as $d) {
-                $options[] = ['tr_id' => (int) $d['id'], 'text' => $d['text']];
-            }
             shuffle($options);
-
             $correctIndex = 0;
-            foreach ($options as $i => $o) {
-                if ($o['tr_id'] === (int) $correct['id']) {
+            foreach ($options as $i => $option) {
+                if ($option['correct']) {
                     $correctIndex = $i;
                     break;
                 }
             }
 
-            $position++;
             $built++;
             Db::execute(
                 'INSERT INTO quiz_questions
                     (session_id, position, idiom_id, correct_tr_id, options, correct_index)
                  VALUES (?,?,?,?,?,?)',
                 [
-                    $sessionId, $position, (int) $correct['idiom_id'], (int) $correct['id'],
+                    $sessionId, $built, (int) $correct['idiom_id'], (int) $correct['id'],
                     json_encode(array_map(
-                        static fn(array $o, int $i): array => ['i' => $i] + $o,
+                        static fn(array $o, int $i): array => [
+                            'i' => $i, 'ref' => $o['ref'], 'text' => $o['text'],
+                        ],
                         $options, array_keys($options)
                     ), JSON_UNESCAPED_UNICODE),
                     $correctIndex,
@@ -78,19 +86,60 @@ final class QuizService
         }
         Db::execute('UPDATE quiz_sessions SET question_count = ? WHERE id = ?', [$built, $sessionId]);
 
-        return ['public_id' => $publicId, 'question_count' => $built];
+        return ['public_id' => $publicId, 'question_count' => $built, 'direction' => $direction];
+    }
+
+    /**
+     * Danish prompt, Russian options. `ref` is the translation row behind each option.
+     *
+     * @return list<array{ref:int,text:string,correct:bool}>
+     */
+    private function forwardOptions(array $correct, array $idiomIds, string $lang): array
+    {
+        $distractors = $this->distractors->pick($correct, $idiomIds, $lang);
+        if (count($distractors) < 3) {
+            return [];
+        }
+
+        $options = [['ref' => (int) $correct['id'], 'text' => (string) $correct['text'], 'correct' => true]];
+        foreach ($distractors as $d) {
+            $options[] = ['ref' => (int) $d['id'], 'text' => (string) $d['text'], 'correct' => false];
+        }
+        return $options;
+    }
+
+    /**
+     * Russian prompt, Danish options. `ref` is the idiom behind each option, since the
+     * options are terms rather than translations.
+     *
+     * @return list<array{ref:int,text:string,correct:bool}>
+     */
+    private function reverseOptions(array $correct, array $idiomIds): array
+    {
+        $distractors = $this->distractors->pickTerms($correct, $idiomIds);
+        if (count($distractors) < 3) {
+            return [];
+        }
+
+        $options = [['ref' => (int) $correct['idiom_id'], 'text' => (string) $correct['term'], 'correct' => true]];
+        foreach ($distractors as $d) {
+            $options[] = ['ref' => (int) $d['idiom_id'], 'text' => (string) $d['term'], 'correct' => false];
+        }
+        return $options;
     }
 
     /** The prompt and options only -- never correct_index. */
     public function question(string $publicId, int $position): ?array
     {
         $row = Db::fetchOne(
-            'SELECT q.position, q.options, q.chosen_index, q.is_correct,
+            'SELECT q.position, q.options, q.chosen_index,
                     i.term, i.term_note, i.kind, i.register,
-                    s.question_count, s.correct_count, s.status
+                    t.text AS translation,
+                    s.question_count, s.correct_count, s.direction
              FROM quiz_questions q
              JOIN quiz_sessions s ON s.id = q.session_id
              JOIN idioms i ON i.id = q.idiom_id
+             JOIN idiom_translations t ON t.id = q.correct_tr_id
              WHERE s.public_id = ? AND q.position = ?',
             [$publicId, $position]
         );
@@ -98,17 +147,21 @@ final class QuizService
             return null;
         }
 
+        $reverse = $row['direction'] === self::REVERSE;
         $options = json_decode((string) $row['options'], true) ?: [];
 
         return [
             'position'  => (int) $row['position'],
             'total'     => (int) $row['question_count'],
             'answered'  => $row['chosen_index'] !== null,
+            'direction' => $row['direction'],
             'prompt'    => [
-                'term'      => $row['term'],
-                'term_note' => $row['term_note'],
-                'kind'      => $row['kind'],
-                'register'  => $row['register'],
+                // In reverse the prompt is the meaning and the options are the idioms,
+                // so the term must not appear anywhere in the payload -- it is the answer.
+                'text'     => $reverse ? $row['translation'] : $row['term'],
+                'note'     => $reverse ? null : $row['term_note'],
+                'kind'     => $row['kind'],
+                'register' => $row['register'],
             ],
             'options'   => array_map(
                 static fn(array $o): array => ['index' => $o['i'], 'text' => $o['text']],
@@ -122,7 +175,7 @@ final class QuizService
     {
         $row = Db::fetchOne(
             'SELECT q.id, q.session_id, q.correct_index, q.chosen_index, q.idiom_id, q.correct_tr_id,
-                    s.id AS sid, s.question_count, s.correct_count, s.user_id
+                    s.id AS sid, s.question_count, s.correct_count, s.user_id, s.direction
              FROM quiz_questions q JOIN quiz_sessions s ON s.id = q.session_id
              WHERE s.public_id = ? AND q.position = ?',
             [$publicId, $position]
@@ -164,7 +217,11 @@ final class QuizService
              WHERE i.id = ?',
             [(int) $row['idiom_id']]
         );
-        $correctText = Db::fetchValue('SELECT text FROM idiom_translations WHERE id = ?', [(int) $row['correct_tr_id']]);
+        // What "the correct answer" reads as depends on which way round the question
+        // was asked: the meaning going forward, the idiom going back.
+        $correctText = $row['direction'] === self::REVERSE
+            ? ($detail['term'] ?? null)
+            : Db::fetchValue('SELECT text FROM idiom_translations WHERE id = ?', [(int) $row['correct_tr_id']]);
 
         $answered = ((int) $row['question_count']) <= $position;
 
@@ -226,7 +283,7 @@ final class QuizService
         if ($userId !== null) {
             $rows = Db::fetchAll(
                 "SELECT t.id, t.idiom_id, t.text, t.word_count, t.char_count, t.shape,
-                        i.register, i.kind
+                        i.term, i.shape AS term_shape, i.register, i.kind
                  FROM idiom_translations t
                  JOIN idioms i ON i.id = t.idiom_id AND i.is_published = 1
                  LEFT JOIN user_idiom_progress p ON p.idiom_id = i.id AND p.user_id = ?
@@ -245,7 +302,7 @@ final class QuizService
 
         return Db::fetchAll(
             "SELECT t.id, t.idiom_id, t.text, t.word_count, t.char_count, t.shape,
-                    i.register, i.kind
+                    i.term, i.shape AS term_shape, i.register, i.kind
              FROM idiom_translations t
              JOIN idioms i ON i.id = t.idiom_id AND i.is_published = 1
              WHERE t.lang_code = ? AND t.is_primary = 1 AND t.quiz_usable = 1

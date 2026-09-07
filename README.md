@@ -31,9 +31,21 @@ publishes nothing because host MySQL owns 127.0.0.1:3306.
 
 ## Using the site
 
-**Playing.** Press *Начать раунд*. Each question shows a Danish idiom and four Russian
-translations. Answer with the mouse or with <kbd>A</kbd>–<kbd>D</kbd> / <kbd>1</kbd>–<kbd>4</kbd>;
-<kbd>Enter</kbd> moves on. The full explanation appears after every answer, right or wrong.
+**Playing.** Press *Начать раунд*. Answer with the mouse or with <kbd>A</kbd>–<kbd>D</kbd> /
+<kbd>1</kbd>–<kbd>4</kbd>; <kbd>Enter</kbd> moves on. The full explanation appears after every
+answer, right or wrong.
+
+**Two directions**, chosen on the home screen and remembered per browser:
+
+- **датский → русский** — a Danish idiom, four Russian meanings. Tests recognition.
+- **русский → датский** — a meaning, four Danish idioms. Tests production, which is the
+  harder and more useful skill: an idiom is recognisable long before it is available.
+
+They need different distractors. Forward matches on Russian verb parity, length, register
+and kind. Reverse matches on the *infinitive* marker instead — an `at …` phrase among bare
+nouns is identifiable without knowing either — plus length and kind, and rejects any term
+sharing a content word with the answer. Term shape and translation shape disagree on 26% of
+idioms, so each direction reads its own.
 
 **Accounts** are optional. Without one your progress lives in a browser cookie and you
 still get history and best score. With one you get spaced repetition: each idiom you

@@ -18,10 +18,18 @@ final class QuizController
         $lang      = in_array($requested, ['ru', 'en', 'da'], true) ? $requested : 'ru';
         $length = (int) ($body['length'] ?? Config::get('quiz.questions_per_round', 10));
 
+        $direction = ($body['direction'] ?? QuizService::FORWARD) === QuizService::REVERSE
+            ? QuizService::REVERSE
+            : QuizService::FORWARD;
+
         try {
-            $session  = $this->quiz->start(Auth::userId(), Auth::anonKey(), $lang, $length);
+            $session  = $this->quiz->start(Auth::userId(), Auth::anonKey(), $lang, $length, $direction);
             $question = $this->quiz->question($session['public_id'], 1);
-            Response::json(['session_id' => $session['public_id']] + ['question' => $question]);
+            Response::json([
+                'session_id' => $session['public_id'],
+                'direction'  => $session['direction'],
+                'question'   => $question,
+            ]);
         } catch (\RuntimeException $e) {
             Response::error('cannot_build_round', $e->getMessage(), 409);
         }
@@ -60,7 +68,7 @@ final class QuizController
     public function report(string $sid, int $position, array $body): void
     {
         $row = Db::fetchOne(
-            'SELECT q.id, q.correct_tr_id, q.chosen_index, q.options
+            'SELECT q.id, q.correct_tr_id, q.chosen_index, q.options, s.direction
              FROM quiz_questions q JOIN quiz_sessions s ON s.id = q.session_id
              WHERE s.public_id = ? AND q.position = ?',
             [$sid, $position]
@@ -77,10 +85,19 @@ final class QuizController
             $options = json_decode((string) $row['options'], true) ?: [];
             $blocked = null;
             foreach ($options as $o) {
-                if ((int) $o['i'] === (int) $row['chosen_index']) {
-                    $blocked = (int) $o['tr_id'];
-                    break;
+                if ((int) $o['i'] !== (int) $row['chosen_index']) {
+                    continue;
                 }
+                // Blocks are recorded between translations. Going forward the option
+                // already is one; going back it is an idiom, so resolve its primary.
+                $blocked = $row['direction'] === QuizService::REVERSE
+                    ? (int) Db::fetchValue(
+                        'SELECT id FROM idiom_translations
+                         WHERE idiom_id = ? AND is_primary = 1 LIMIT 1',
+                        [(int) $o['ref']]
+                    )
+                    : (int) $o['ref'];
+                break;
             }
             if ($blocked !== null && $blocked !== (int) $row['correct_tr_id']) {
                 // Two independent reports activate the block automatically.
