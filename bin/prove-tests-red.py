@@ -160,8 +160,11 @@ FAULTS = [
   "            ? array_map(fn(string $k): array => $this->pickPassage($k), self::EXAM_KINDS)",
   "            ? [$this->pickPassage('cloze')]","integration"),
  (53,"the exam page shows feedback anyway","public/read.html",
-  "  if (isExam()) {\n    buttons.forEach(b => b.classList.remove('right'));",
-  "  if (false) {\n    buttons.forEach(b => b.classList.remove('right'));","ui"),
+  "  if (isExam()) {\n    buttons.forEach(b => b.classList.remove('chosen'));",
+  "  if (false) {\n    buttons.forEach(b => b.classList.remove('chosen'));","ui"),
+ (54,"an exam marks a choice right or wrong","public/read.html",
+  "    buttons[chosen]?.classList.add('chosen');",
+  "    buttons[chosen]?.classList.add(res.is_correct ? 'right' : 'wrong');","ui"),
 ]
 
 def run(suite):

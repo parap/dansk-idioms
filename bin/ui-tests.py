@@ -336,8 +336,11 @@ def an_exam_shows_a_countdown(b):
 def an_exam_reveals_nothing_when_an_answer_is_recorded(b):
     start_exam(b)
     click_option(b, 1, 0)
-    b.until('document.querySelectorAll(".opt.right").length === 1', what='the choice to register')
-    # The mark says "chosen", not "correct": nothing here may tell the candidate more.
+    b.until('document.querySelectorAll(".opt.chosen").length === 1', what='the choice to register')
+    # The mark may say "you picked this" and nothing more. Reusing the right/wrong
+    # colours would tell a candidate how they did, which is the whole difference
+    # between an exam and a drill.
+    assert b.js('document.querySelectorAll(".opt.right").length') == 0
     assert b.js('document.querySelectorAll(".opt.wrong").length') == 0
     assert b.js('[...document.querySelectorAll("[id^=fb-]")].every(p => p.hidden)')
 
@@ -346,10 +349,10 @@ def an_exam_reveals_nothing_when_an_answer_is_recorded(b):
 def an_exam_answer_can_be_changed_before_handing_in(b):
     start_exam(b)
     click_option(b, 1, 0)
-    b.until('document.querySelectorAll(".opt.right").length === 1', what='the first choice')
+    b.until('document.querySelectorAll(".opt.chosen").length === 1', what='the first choice')
     click_option(b, 1, 1)
-    b.until(options_js(1) + '[1].classList.contains("right")', what='the revised choice')
-    assert not b.js(options_js(1) + '[0].classList.contains("right")')
+    b.until(options_js(1) + '[1].classList.contains("chosen")', what='the revised choice')
+    assert not b.js(options_js(1) + '[0].classList.contains("chosen")')
 
 
 @check
@@ -357,13 +360,17 @@ def handing_in_reports_a_karakter_and_a_review(b):
     start_exam(b)
     for pos in (1, 2, 3):
         click_option(b, pos, 0)
-    b.until('document.querySelectorAll(".opt.right").length === 3', what='every item answered')
+    b.until('document.querySelectorAll(".opt.chosen").length === 3', what='every item answered')
     b.js('window.confirm = () => true')
     b.js('document.querySelector("#hand").click()')
-    b.until('!!document.querySelector(".score")', what='the result screen')
+    b.until('!!document.querySelector("#final")', what='the result screen')
     assert b.js('document.querySelectorAll(".item").length') == 3
-    assert b.js('/\\d+ \\/ \\d+/.test(document.querySelector(".score").textContent)')
-    assert b.js('document.body.textContent').count('vejledende') >= 0
+    # Options are shuffled per session, so which index is right is not fixed. The
+    # paper is worth five points whatever was clicked.
+    total = b.js('document.querySelector("#final").textContent').split('/')[1].strip()
+    assert total == '5', f'paper reported out of {total}, expected 5'
+    # The karakter is shown, and shown as indicative rather than as an exam grade.
+    assert b.js('document.querySelector("#final").nextElementSibling.textContent.trim().length') > 0
 
 
 # ---- runner ----------------------------------------------------------------

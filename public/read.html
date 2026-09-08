@@ -50,6 +50,7 @@
   .opt:disabled{cursor:default}
   .opt.right{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
   .opt.wrong{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+  .opt.chosen{background:var(--chip);border-color:var(--ink);font-weight:600}
   .primary{background:var(--accent);color:var(--accent-ink);border:none;border-radius:10px;
     padding:11px 18px;font:inherit;font-weight:600;cursor:pointer}
   .link{background:none;border:none;color:var(--accent);font:inherit;cursor:pointer;padding:0}
@@ -63,6 +64,7 @@
   <header>
     <h1>Læseforståelse</h1>
     <span class="spacer"></span>
+    <span id="left" class="score"></span>
     <span id="score" class="score muted"></span>
     <a class="link" href="/">idiomer →</a>
   </header>
@@ -136,6 +138,7 @@ const isExam = () => paper?.mode === 'exam';
 
 function home() {
   stopClock();
+  const left = $('#left'); if (left) left.textContent = '';
   view.innerHTML = `
     <div class="card">
       <p class="lede">${esc(t('intro'))}</p>
@@ -178,8 +181,7 @@ function render() {
         <h2>${esc(t('questions'))}</h2>
         <div id="items"></div>
         ${isExam() ? `<p class="row" style="margin-top:16px">
-            <button class="primary" id="hand">${esc(t('submitExam'))}</button>
-            <span class="muted" id="left"></span></p>` : ''}
+            <button class="primary" id="hand">${esc(t('submitExam'))}</button></p>` : ''}
         <p class="row" style="margin-top:16px" id="foot" hidden>
           <button class="primary" id="again">${esc(t('startAgain'))}</button>
           <span class="muted">${esc(t('done'))}</span>
@@ -248,8 +250,8 @@ async function answer(item, chosen) {
   // An exam says nothing until the paper is handed in, so the page only records the
   // choice. Revealing anything here would be a different test from the real one.
   if (isExam()) {
-    buttons.forEach(b => b.classList.remove('right'));
-    buttons[chosen]?.classList.add('right');
+    buttons.forEach(b => b.classList.remove('chosen'));
+    buttons[chosen]?.classList.add('chosen');
     $(`#gap-${item.position}`)?.classList.add('filled');
     updateScore();
     return;
@@ -285,7 +287,7 @@ function results(r) {
   const label = i => String.fromCharCode(65 + i);
   view.innerHTML = `
     <div class="card">
-      <p class="score" style="font-size:1.4rem">${r.points_scored} / ${r.points_max}</p>
+      <p class="score" id="final" style="font-size:1.4rem">${r.points_scored} / ${r.points_max}</p>
       <p><strong style="font-size:1.6rem">${esc(r.karakter)}</strong>
          <span class="muted">${esc(t('karakter'))} — ${esc(t('indicative'))}</span></p>
       ${r.is_late ? `<p class="muted">${esc(t('late'))}</p>` : ''}
@@ -332,7 +334,7 @@ function stopClock() {
 }
 
 function updateScore() {
-  const answered = view.querySelectorAll('.opt.right, .opt.wrong').length;
+  const answered = view.querySelectorAll('.opt.chosen, .opt.right, .opt.wrong').length;
   $('#score').textContent = isExam()
     ? `${answered} / ${paper.items.length}`
     : `${scored} / ${paper.points_max}`;
