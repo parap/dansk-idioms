@@ -95,6 +95,17 @@ ADMIN_PW_PHP = r"""
     echo (string) Dansk\Support\Config::get('admin.password');
 """
 
+CLEAR_THROTTLE_PHP = r"""
+    use Dansk\Support\Db;
+    Db::execute("DELETE FROM admin_login_attempts");
+"""
+
+
+class AdminAttempts:
+    """Mirrors AdminLoginThrottle::MAX_FAILURES; the check only needs the shape."""
+    LIMIT = 8
+
+
 PUBLISH_PHP = r"""
     use Dansk\Support\Db;
     Db::execute("UPDATE reading_passages SET is_published = 0 WHERE slug LIKE 'ui-fixture%'");
@@ -485,6 +496,34 @@ def clearing_a_flag_empties_the_queue(b):
 
     assert php("use Dansk\\Support\\Db; echo (int) Db::fetchValue("
                "\"SELECT COUNT(*) FROM reading_items WHERE is_flagged = 1\");") == '0'
+
+
+@check
+def the_health_endpoint_keeps_its_internals_to_itself(b):
+    b.goto('/')
+    payload = b.js("fetch('/api/v1/health').then(r => r.json())")
+    # A monitor needs up-or-down. Anything more only narrows the search for a prober.
+    assert payload.get('status') == 'ok', payload
+    for leaked in ('php', 'env', 'db_error'):
+        assert leaked not in payload, 'health leaks %r: %r' % (leaked, payload)
+
+
+@check
+def guessing_the_admin_password_runs_out_of_attempts(b):
+    php(CLEAR_THROTTLE_PHP)
+    b.goto('/admin')
+    try:
+        codes = []
+        for _ in range(AdminAttempts.LIMIT + 1):
+            codes.append(b.js(
+                "fetch('/api/v1/admin/login', {method:'POST',"
+                " headers:{'Content-Type':'application/json'},"
+                " body: JSON.stringify({password:'not-the-password'})}).then(r => r.status)"))
+        assert 429 in codes, 'never rate limited: %r' % codes
+        assert codes.index(429) > 3, 'locked out too eagerly: %r' % codes
+    finally:
+        # Leave nothing behind, or the next run signs in to a locked-out admin.
+        php(CLEAR_THROTTLE_PHP)
 
 
 # ---- runner ----------------------------------------------------------------

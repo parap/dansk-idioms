@@ -6,7 +6,12 @@
  */
 $config = [
     'env'   => getenv('APP_ENV') ?: 'dev',
-    'debug' => (getenv('APP_ENV') ?: 'dev') !== 'prod',
+
+    // Opt in, never inherit. Set APP_DEBUG=1 to have API errors carry exception text
+    // and the health endpoint carry the database error; leave it unset and callers get
+    // neither. 'prod' refuses it outright, so a forgotten APP_DEBUG in an environment
+    // file cannot turn a deployment into a debugging session.
+    'debug' => Dansk\Support\Config::debugFromEnv(getenv('APP_ENV') ?: null, getenv('APP_DEBUG') ?: null),
 
     'db' => [
         'host'    => getenv('DB_HOST') ?: '127.0.0.1',

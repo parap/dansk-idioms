@@ -191,6 +191,60 @@ docker logs dansk_tunnel | grep -o 'https://.*trycloudflare.com'
 The URL changes on every restart, and Cloudflare terminates the TLS, so your traffic is
 readable at their edge. `docker rm -f dansk_tunnel` stops it instantly.
 
+`bin/tunnel.sh` handles the two things that go wrong:
+
+```bash
+bin/tunnel.sh url      # the current public URL
+bin/tunnel.sh check    # does that URL actually serve the app? exit 1 if not
+bin/tunnel.sh heal     # restart a broken tunnel and print the new URL
+```
+
+`check` asks `/api/v1/health` rather than the front page on purpose. A quick tunnel drops
+its control stream and sits in a reconnect loop while the container still reports `Up`,
+and the service worker keeps serving a cached page through it — so the site looks fine and
+every action fails with `Failed to fetch`. Only an API request tells the two apart. If that
+is the symptom, read `docker logs dansk_tunnel` for `control stream encountered a failure`
+before looking at the application.
+
+A **stable** hostname needs a *named* tunnel, and that needs a domain in a Cloudflare DNS
+zone — Cloudflare does not issue fixed hostnames for quick tunnels. Without a domain there
+is no way to keep a URL across restarts.
+
+### What is exposed once the tunnel is up
+
+Everything reachable at `localhost:8080` is reachable by strangers, so the defaults are
+set for that:
+
+- **Debug is opt-in.** `APP_DEBUG` is unset, so API errors say `Internal error.` and
+  `/api/v1/health` reports only status, database and time. Set `APP_DEBUG=1` locally to get
+  exception text and `db_error` back; `APP_ENV=prod` refuses it outright, so a forgotten
+  variable cannot turn a deployment into a debugging session.
+- **Admin sign-in is rate limited.** Eight wrong passwords from one caller, or forty
+  across all of them, and further attempts get `429` with `Retry-After` for fifteen
+  minutes. The caller is identified from `CF-Connecting-IP`, which is why the global cap
+  exists: that header can be set to anything, so per-caller alone would be bypassed by
+  changing it.
+- **Adminer is on `:8081` and is not tunnelled** — only `app:80` is. It is still on your
+  local network.
+
+Credentials live in `.env`, which is gitignored, and `docker-compose.yml` has no working
+default: `DB_PASS` and `MYSQL_ROOT_PASSWORD` use `${VAR:?}`, so the stack refuses to start
+rather than falling back to something published.
+
+```bash
+printf 'DB_PASS=%s\nMYSQL_ROOT_PASSWORD=%s\n' "$(openssl rand -hex 14)" "$(openssl rand -hex 14)" > .env
+```
+
+Changing `DB_PASS` for a database that already exists does not reach the stored user —
+MySQL only applies `MYSQL_PASSWORD` when it first initialises the volume. Rotate it in
+place, then recreate the containers:
+
+```bash
+docker exec -i dansk_db mysql -uroot -p"$OLD_ROOT" \
+  -e "ALTER USER 'dansk'@'%' IDENTIFIED BY '$NEW'; ALTER USER 'root'@'%' IDENTIFIED BY '$NEWROOT';"
+docker-compose up -d
+```
+
 ---
 
 ## Commands

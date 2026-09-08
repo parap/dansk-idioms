@@ -4,11 +4,15 @@ namespace Dansk\Controller;
 
 use Dansk\Domain\ReviewRepository;
 use Dansk\Http\Response;
+use Dansk\Support\AdminLoginThrottle;
 use Dansk\Support\Config;
 
 final class AdminController
 {
-    public function __construct(private ReviewRepository $repo = new ReviewRepository()) {}
+    public function __construct(
+        private ReviewRepository $repo = new ReviewRepository(),
+        private AdminLoginThrottle $throttle = new AdminLoginThrottle(),
+    ) {}
 
     public static function startSession(): void
     {
@@ -42,12 +46,29 @@ final class AdminController
             return;
         }
 
+        // Checked before the password, so a locked-out caller learns nothing from how
+        // long the answer took.
+        $client = AdminLoginThrottle::clientFrom($_SERVER);
+        $wait   = $this->throttle->retryAfter($client);
+        if ($wait !== null) {
+            header('Retry-After: ' . $wait);
+            Response::error(
+                'too_many_attempts',
+                "Too many failed attempts. Try again in {$wait} seconds.",
+                429
+            );
+            return;
+        }
+
         // hash_equals: constant time, so the response cannot be timed for the secret.
         if ($given === '' || !hash_equals($expected, $given)) {
+            $this->throttle->recordFailure($client);
             usleep(300_000);
             Response::error('bad_credentials', 'Wrong password.', 401);
             return;
         }
+
+        $this->throttle->clear($client);
         session_regenerate_id(true);
         $_SESSION['admin'] = true;
         Response::json(['ok' => true]);

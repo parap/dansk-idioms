@@ -14,8 +14,13 @@ services:
       DB_PORT: 3306
       DB_NAME: dansk
       DB_USER: dansk
-      DB_PASS: dansk
+      # No default: a working password in a committed file is a published credential the
+      # moment the repository is. Set it in .env, which is gitignored.
+      DB_PASS: ${DB_PASS:?set DB_PASS in .env}
       APP_ENV: dev
+      # Unset. API errors and the health endpoint stay silent about internals unless a
+      # developer deliberately turns this on, because this app is reachable publicly.
+      APP_DEBUG: ${APP_DEBUG:-}
     depends_on:
       db:
         condition: service_healthy
@@ -31,16 +36,18 @@ services:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_0900_ai_ci
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?set MYSQL_ROOT_PASSWORD in .env}
       MYSQL_DATABASE: dansk
       MYSQL_USER: dansk
-      MYSQL_PASSWORD: dansk
+      MYSQL_PASSWORD: ${DB_PASS:?set DB_PASS in .env}
     volumes:
       - dbdata:/var/lib/mysql
       # Runs only on first initialisation of the volume; see README for an existing one.
       - ./docker/mysql:/docker-entrypoint-initdb.d:ro
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-proot"]
+      # Reads the container's own environment rather than interpolating the secret into
+      # this file. $$ escapes it from compose so the shell inside expands it.
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p\"$$MYSQL_ROOT_PASSWORD\""]
       interval: 5s
       timeout: 5s
       retries: 20

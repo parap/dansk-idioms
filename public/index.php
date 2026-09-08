@@ -107,11 +107,18 @@ try {
             $ok = false; $err = null;
             try { $ok = Db::fetchValue('SELECT 1') == 1; }
             catch (Throwable $e) { $err = $e->getMessage(); }
-            Response::json([
-                'status' => $ok ? 'ok' : 'degraded', 'php' => PHP_VERSION,
-                'env' => Config::get('env'), 'db' => $ok ? 'up' : 'down',
-                'db_error' => Config::get('debug') ? $err : null, 'time' => gmdate('c'),
-            ], $ok ? 200 : 503);
+            // A monitor needs to know whether this is up. It does not need the PHP
+            // version, the environment name or the database's own words about what
+            // went wrong -- those only narrow the search for whoever is probing.
+            $payload = [
+                'status' => $ok ? 'ok' : 'degraded',
+                'db'     => $ok ? 'up' : 'down',
+                'time'   => gmdate('c'),
+            ];
+            if (Config::get('debug')) {
+                $payload += ['php' => PHP_VERSION, 'env' => Config::get('env'), 'db_error' => $err];
+            }
+            Response::json($payload, $ok ? 200 : 503);
         })(),
 
         'stats' => (function (): void {
