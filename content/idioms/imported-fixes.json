@@ -1,0 +1,99 @@
+[
+  {
+    "term": "Boder",
+    "kind": "word",
+    "shape": "nominal",
+    "ru": "лавки",
+    "also": [
+      "будки",
+      "палатки"
+    ],
+    "retire": [
+      "форма множественного числа от bod"
+    ]
+  },
+  {
+    "term": "Kræmmerboder",
+    "kind": "word",
+    "shape": "nominal",
+    "ru": "торговые палатки",
+    "also": [
+      "ларьки"
+    ],
+    "retire": [
+      "Сложное слово во множественном числе: kræmmer"
+    ]
+  },
+  {
+    "term": "ny single",
+    "kind": "phrase",
+    "shape": "nominal",
+    "ru": "свежеиспечённый одиночка",
+    "retire": [
+      "устойчивое разговорное сочетание"
+    ]
+  },
+  {
+    "term": "vrede bobler i kinderne",
+    "kind": "phrase",
+    "shape": "nominal",
+    "ru": "щёки горят от злости",
+    "retire": [
+      "чувство, когда лицо заливает жаром от вспыхнувшего раздражения или злости"
+    ]
+  },
+  {
+    "term": "knap nok",
+    "kind": "particle",
+    "shape": "nominal",
+    "ru": "едва, почти не, вряд ли",
+    "retire": [
+      "Устойчивое усилительное сочетание"
+    ]
+  },
+  {
+    "term": "god smag",
+    "kind": "collocation",
+    "shape": "nominal",
+    "ru": "хороший вкус",
+    "retire": [
+      "Общеупотребительное устойчивое сочетание"
+    ]
+  },
+  {
+    "term": "at tiltale nogen som",
+    "kind": "collocation",
+    "shape": "verbal",
+    "ru": "обращаться к кому-то как к",
+    "retire": [
+      "Официально-употребительное устойчивое сочетание"
+    ]
+  },
+  {
+    "term": "at bevare sit ry",
+    "kind": "collocation",
+    "shape": "verbal",
+    "ru": "сохранять свою репутацию",
+    "retire": [
+      "Устойчивое сочетание"
+    ]
+  },
+  {
+    "term": "at beslutte sig for noget",
+    "kind": "phrase",
+    "shape": "verbal",
+    "ru": "решиться на что-то",
+    "retire": [
+      "Устойчивое возвратное сочетание"
+    ]
+  },
+  {
+    "term": "Vejrudsigten",
+    "kind": "word",
+    "shape": "nominal",
+    "ru": "прогноз погоды",
+    "retire": [
+      "Это сложное слово в определенной форме"
+    ]
+  }
+]

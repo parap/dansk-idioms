@@ -128,6 +128,15 @@ final class ReviewRepository
      *                                  primary has to stay short enough to work as a
      *                                  quiz option, so without this the rest of what an
      *                                  author knows about the idiom has nowhere to go.
+     * @param ?string      $shape       overrides the guess. The classifier reads a term
+     *                                  by its surface form, which misses clauses used
+     *                                  adverbially, and shape is what the distractor
+     *                                  picker scores candidate options on.
+     * @param list<string> $retire      senses to remove outright. Demoting a wrong
+     *                                  translation is not enough: it stays quiz_usable
+     *                                  and goes on being offered as a distractor
+     *                                  elsewhere, where obvious metalanguage tells a
+     *                                  reader which option to rule out.
      */
     public function addByHand(
         string $term,
@@ -136,6 +145,8 @@ final class ReviewRepository
         string $kind = 'phrase',
         ?string $note = null,
         ?string $explanation = null,
+        ?string $shape = null,
+        array $retire = [],
     ): int {
         $term    = Text::collapseWhitespace($term);
         $primary = Text::collapseWhitespace($primary);
@@ -145,18 +156,30 @@ final class ReviewRepository
 
         $this->assertDanishScript($term);
         $this->assertAnswerFits($primary);
+        $this->assertEnum('shape', $shape, ['verbal', 'nominal', 'adverbial', 'interjection', 'other']);
+        $this->assertEnum('kind', $kind, [
+            'idiom', 'phrase', 'collocation', 'word', 'particle', 'proverb', 'borrowed', 'other',
+        ]);
 
         $norm     = Normalizer::term($term);
         $existing = Db::fetchValue("SELECT id FROM idioms WHERE lang_code='da' AND term_norm = ?", [$norm]);
 
+        $shape ??= $this->classifier->termShape($term);
+
         if ($existing !== false && $existing !== null) {
+            // content/idioms/ is the source of truth, so a corrected classification in
+            // the file has to reach the row that already exists.
             $idiomId = (int) $existing;
+            Db::execute(
+                'UPDATE idioms SET term = ?, term_note = ?, kind = ?, shape = ? WHERE id = ?',
+                [$term, $note, $kind, $shape, $idiomId]
+            );
         } else {
             Db::execute(
                 'INSERT INTO idioms (lang_code, term, term_norm, term_note, kind, register, shape,
                                      quality_score, rand_key)
                  VALUES (?,?,?,?,?,?,?,?,RAND())',
-                ['da', $term, $norm, $note, $kind, 'neutral', $this->classifier->termShape($term), 1.0]
+                ['da', $term, $norm, $note, $kind, 'neutral', $shape, 1.0]
             );
             $idiomId = (int) Db::pdo()->lastInsertId();
         }
@@ -167,6 +190,20 @@ final class ReviewRepository
             if ($sense !== '' && $sense !== $primary) {
                 $this->writeTranslation($idiomId, $sense, 'idiomatic', false);
             }
+        }
+
+        foreach ($retire as $dropped) {
+            $droppedNorm = Normalizer::translation(Text::collapseWhitespace($dropped));
+            if ($droppedNorm === '') {
+                continue;
+            }
+            // is_primary IS NULL is what keeps a file from retiring the very sense it
+            // just promoted and leaving the idiom published with no answer at all.
+            Db::execute(
+                "DELETE FROM idiom_translations
+                  WHERE idiom_id = ? AND lang_code = 'ru' AND text_norm = ? AND is_primary IS NULL",
+                [$idiomId, $droppedNorm]
+            );
         }
 
         $explanation = $explanation === null ? null : Text::collapseWhitespace($explanation);
@@ -182,6 +219,23 @@ final class ReviewRepository
         Db::execute('UPDATE idioms SET is_published = 1 WHERE id = ?', [$idiomId]);
 
         return $idiomId;
+    }
+
+    /**
+     * The column is an ENUM, so a value outside it is stored as the empty string with
+     * only a warning. Catching it here names the field and the value instead.
+     *
+     * @param list<string> $allowed
+     */
+    private function assertEnum(string $field, ?string $value, array $allowed): void
+    {
+        if ($value === null || in_array($value, $allowed, true)) {
+            return;
+        }
+
+        throw new \InvalidArgumentException(sprintf(
+            "'%s' is not a valid %s. Use one of: %s.", $value, $field, implode(', ', $allowed)
+        ));
     }
 
     /**

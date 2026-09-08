@@ -210,6 +210,19 @@ FAULTS = [
  (72,"an entry may omit its translation","src/Domain/IdiomFile.php",
   "            if (!isset($entry[$key]) || !is_string($entry[$key]) || trim($entry[$key]) === '') {",
   "            if (false) {","integration"),
+ (73,"an author's shape is ignored","src/Domain/ReviewRepository.php",
+  "        $shape ??= $this->classifier->termShape($term);",
+  "        $shape = $this->classifier->termShape($term);","integration"),
+ (74,"a value outside the ENUM is accepted","src/Domain/ReviewRepository.php",
+  "        if ($value === null || in_array($value, $allowed, true)) {","        if (true) {","integration"),
+ (75,"reloading leaves a stale classification","src/Domain/ReviewRepository.php",
+  "            Db::execute(\n                'UPDATE idioms SET term = ?, term_note = ?, kind = ?, shape = ? WHERE id = ?',",
+  "            Db::execute(\n                'UPDATE idioms SET term = term WHERE id = ? AND ? IS NOT NULL AND ? IS NOT NULL AND ? IS NOT NULL',","integration"),
+ (76,"a retired sense stays in the pool","src/Domain/ReviewRepository.php",
+  "                \"DELETE FROM idiom_translations\n                  WHERE idiom_id = ? AND lang_code = 'ru' AND text_norm = ? AND is_primary IS NULL\",",
+  "                \"DELETE FROM idiom_translations\n                  WHERE idiom_id = ? AND lang_code = 'ru' AND text_norm = ? AND 1 = 0\",","integration"),
+ (77,"retiring may remove the promoted answer","src/Domain/ReviewRepository.php",
+  "AND text_norm = ? AND is_primary IS NULL\",","AND text_norm = ?\",","integration"),
 ]
 
 def run(suite):

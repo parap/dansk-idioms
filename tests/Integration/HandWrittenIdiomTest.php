@@ -122,6 +122,86 @@ final class HandWrittenIdiomTest extends IntegrationTestCase
         ));
     }
 
+    public function testTheShapeIsGuessedWhenTheAuthorDoesNotSayIt(): void
+    {
+        $id = $this->repo->addByHand('at forholde sig til (noget)', 'отреагировать');
+
+        self::assertSame('verbal', Db::fetchValue('SELECT shape FROM idioms WHERE id = ?', [$id]));
+    }
+
+    public function testAnAuthorMayOverrideTheGuessedShape(): void
+    {
+        // The classifier reads "så vidt (nogen) er bekendt" as nominal. It is a clause
+        // used adverbially, and shape is what the distractor picker scores options on.
+        $id = $this->repo->addByHand(
+            'så vidt (nogen) er bekendt', 'насколько кому-либо известно',
+            [], 'phrase', null, null, 'adverbial',
+        );
+
+        self::assertSame('adverbial', Db::fetchValue('SELECT shape FROM idioms WHERE id = ?', [$id]));
+    }
+
+    public function testAnUnknownShapeIsRefused(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->repo->addByHand('med det samme', 'сразу же', [], 'phrase', null, null, 'sideways');
+    }
+
+    public function testReloadingCorrectsTheClassificationOfAnIdiomAlreadyStored(): void
+    {
+        // content/idioms/ is the source of truth and the database is derived from it, so
+        // fixing a kind or a shape in the file has to reach a row that already exists.
+        $id = $this->repo->addByHand('så vidt (nogen) er bekendt', 'насколько известно');
+        self::assertSame('nominal', Db::fetchValue('SELECT shape FROM idioms WHERE id = ?', [$id]));
+
+        $again = $this->repo->addByHand(
+            'så vidt (nogen) er bekendt', 'насколько кому-либо известно',
+            [], 'collocation', null, null, 'adverbial',
+        );
+
+        self::assertSame($id, $again);
+        $row = Db::fetchOne('SELECT kind, shape FROM idioms WHERE id = ?', [$id]);
+        self::assertSame('adverbial', $row['shape']);
+        self::assertSame('collocation', $row['kind']);
+    }
+
+    public function testASenseCanBeRetiredSoItStopsBeingOfferedAtAll(): void
+    {
+        // Demoting a bad primary is not enough: it stays quiz_usable and goes on being
+        // offered as a distractor for other questions, where obvious metalanguage tells
+        // a reader which option to rule out.
+        $id = $this->repo->addByHand('ny single', 'устойчивое разговорное сочетание');
+
+        $this->repo->addByHand(
+            term: 'ny single',
+            primary: 'свежеиспечённый одиночка',
+            retire: ['устойчивое разговорное сочетание'],
+        );
+
+        self::assertSame('свежеиспечённый одиночка', Db::fetchValue(
+            'SELECT text FROM idiom_translations WHERE idiom_id = ? AND is_primary = 1', [$id]
+        ));
+        self::assertSame(0, (int) Db::fetchValue(
+            'SELECT COUNT(*) FROM idiom_translations WHERE idiom_id = ? AND text = ?',
+            [$id, 'устойчивое разговорное сочетание']
+        ));
+    }
+
+    public function testRetiringTheSenseBeingPromotedIsIgnored(): void
+    {
+        // Otherwise a careless file could leave an idiom published with no answer at all.
+        $id = $this->repo->addByHand(
+            term: 'uden effekt',
+            primary: 'безрезультатно',
+            retire: ['безрезультатно'],
+        );
+
+        self::assertSame('безрезультатно', Db::fetchValue(
+            'SELECT text FROM idiom_translations WHERE idiom_id = ? AND is_primary = 1', [$id]
+        ));
+        $this->assertCorpusInvariants();
+    }
+
     public function testTheCorpusInvariantsStillHold(): void
     {
         $this->repo->addByHand('under alle omstændigheder', 'в любом случае', ['при любых обстоятельствах']);
