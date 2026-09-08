@@ -37,6 +37,24 @@ final class ReadingController
         }
     }
 
+    public function submit(string $sid): void
+    {
+        try {
+            Response::json($this->reading->submit($sid));
+        } catch (RuntimeException $e) {
+            Response::error('cannot_submit', $e->getMessage(), 409);
+        }
+    }
+
+    public function result(string $sid): void
+    {
+        try {
+            Response::json($this->reading->result($sid));
+        } catch (RuntimeException $e) {
+            Response::error('not_available', $e->getMessage(), 409);
+        }
+    }
+
     public function answer(string $sid, array $body): void
     {
         $position = (int) ($body['position'] ?? 0);

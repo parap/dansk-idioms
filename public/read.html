@@ -85,6 +85,12 @@ const STRINGS = {
     right: 'Верно', wrong: 'Неверно',
     points: { one: 'балл', few: 'балла', many: 'баллов', other: 'баллов' },
     done: 'Раунд завершён.',
+    modeDrill: 'Тренировка', modeExam: 'Экзамен',
+    examBlurb: 'Полный вариант: три текста, 65 минут, результат в конце.',
+    timeLeft: 'осталось', timeUp: 'Время вышло',
+    submitExam: 'Сдать работу', confirmSubmit: 'Сдать? Изменить ответы будет нельзя.',
+    unanswered: 'без ответа', karakter: 'оценка', indicative: 'ориентировочная',
+    late: 'сдано после звонка', reviewAnswers: 'Разбор ответов',
   },
   en: {
     intro: 'Reading practice for Prøve i Dansk 3. Read the text and answer the questions — ' +
@@ -96,6 +102,12 @@ const STRINGS = {
     right: 'Correct', wrong: 'Not right',
     points: { one: 'point', other: 'points' },
     done: 'Round complete.',
+    modeDrill: 'Practice', modeExam: 'Exam',
+    examBlurb: 'The full paper: three texts, 65 minutes, results at the end.',
+    timeLeft: 'left', timeUp: 'Time is up',
+    submitExam: 'Hand in', confirmSubmit: 'Hand in? Answers cannot be changed afterwards.',
+    unanswered: 'unanswered', karakter: 'grade', indicative: 'indicative',
+    late: 'handed in late', reviewAnswers: 'Review',
   },
   da: {
     intro: 'Læsetræning til Prøve i Dansk 3. Læs teksten og svar på spørgsmålene — ' +
@@ -107,26 +119,40 @@ const STRINGS = {
     right: 'Rigtigt', wrong: 'Forkert',
     points: { one: 'point', other: 'point' },
     done: 'Runden er slut.',
+    modeDrill: 'Traening', modeExam: 'Proeve',
+    examBlurb: 'Hele saettet: tre tekster, 65 minutter, resultat til sidst.',
+    timeLeft: 'tilbage', timeUp: 'Tiden er gaaet',
+    submitExam: 'Aflever', confirmSubmit: 'Aflever? Svarene kan ikke aendres bagefter.',
+    unanswered: 'ubesvaret', karakter: 'karakter', indicative: 'vejledende',
+    late: 'afleveret for sent', reviewAnswers: 'Gennemgang',
   },
 };
 registerStrings(STRINGS);
 
 const view = $('#view');
-let paper = null, scored = 0;
+let paper = null, scored = 0, ticker = null;
+
+const isExam = () => paper?.mode === 'exam';
 
 function home() {
+  stopClock();
   view.innerHTML = `
     <div class="card">
       <p class="lede">${esc(t('intro'))}</p>
-      <p class="row" style="margin-top:14px"><button class="primary" id="go">${esc(t('start'))}</button></p>
+      <p class="row" style="margin-top:14px">
+        <button class="primary" id="go">${esc(t('modeDrill'))}</button>
+        <button class="primary" id="goExam" style="background:var(--chip);color:var(--ink)">${esc(t('modeExam'))}</button>
+      </p>
+      <p class="muted" style="font-size:.85rem;margin:0">${esc(t('examBlurb'))}</p>
     </div>`;
-  $('#go').onclick = start;
+  $('#go').onclick = () => start('drill');
+  $('#goExam').onclick = () => start('exam');
 }
 
-async function start() {
-  $('#go').disabled = true;
+async function start(mode) {
+  $('#go').disabled = $('#goExam').disabled = true;
   try {
-    paper = await api('/reading/sessions', {method: 'POST', body: {mode: 'drill'}});
+    paper = await api('/reading/sessions', {method: 'POST', body: {mode}});
     scored = 0;
     render();
   } catch (e) {
@@ -145,17 +171,15 @@ function passageHtml(body) {
 }
 
 function render() {
-  const hasGaps = paper.passage.kind !== 'mc';
   view.innerHTML = `
     <div class="grid">
-      <section class="card passage">
-        <h2>${esc(paper.passage.title)}</h2>
-        <p>${passageHtml(paper.passage.body)}</p>
-        ${hasGaps ? `<p class="muted" style="font-size:.85rem">${esc(t('gapHint'))}</p>` : ''}
-      </section>
+      <div id="texts"></div>
       <section class="card">
         <h2>${esc(t('questions'))}</h2>
         <div id="items"></div>
+        ${isExam() ? `<p class="row" style="margin-top:16px">
+            <button class="primary" id="hand">${esc(t('submitExam'))}</button>
+            <span class="muted" id="left"></span></p>` : ''}
         <p class="row" style="margin-top:16px" id="foot" hidden>
           <button class="primary" id="again">${esc(t('startAgain'))}</button>
           <span class="muted">${esc(t('done'))}</span>
@@ -163,15 +187,26 @@ function render() {
       </section>
     </div>`;
 
+  $('#texts').innerHTML = paper.passages.map((p, i) => `
+    <section class="card passage">
+      <h2>${esc(p.title)}</h2>
+      <p>${passageHtml(p.body)}</p>
+      ${p.kind === 'mc' ? '' : `<p class="muted" style="font-size:.85rem">${esc(t('gapHint'))}</p>`}
+    </section>`).join('');
+
   $('#items').innerHTML = paper.items.map(itemHtml).join('');
   paper.items.forEach(wire);
   view.querySelectorAll('.gap').forEach(g => {
     g.onclick = () => {
-      const el = $(`#item-${g.dataset.gap}`);
-      el?.scrollIntoView({behavior: 'smooth', block: 'center'});
+      $(`#item-${g.dataset.gap}`)?.scrollIntoView({behavior: 'smooth', block: 'center'});
       view.querySelectorAll('.gap').forEach(o => o.setAttribute('aria-current', o === g));
     };
   });
+
+  if (isExam()) {
+    $('#hand').onclick = hand;
+    startClock();
+  }
   updateScore();
 }
 
@@ -199,7 +234,7 @@ function wire(item) {
 
 async function answer(item, chosen) {
   const buttons = [...view.querySelectorAll(`.opt[data-pos="${item.position}"]`)];
-  buttons.forEach(b => b.disabled = true);
+  if (!isExam()) buttons.forEach(b => b.disabled = true);
 
   let res;
   try {
@@ -210,27 +245,97 @@ async function answer(item, chosen) {
     return;
   }
 
+  // An exam says nothing until the paper is handed in, so the page only records the
+  // choice. Revealing anything here would be a different test from the real one.
+  if (isExam()) {
+    buttons.forEach(b => b.classList.remove('right'));
+    buttons[chosen]?.classList.add('right');
+    $(`#gap-${item.position}`)?.classList.add('filled');
+    updateScore();
+    return;
+  }
+
   buttons[chosen]?.classList.add(res.is_correct ? 'right' : 'wrong');
   if (!res.is_correct) buttons[res.correct_index]?.classList.add('right');
 
   const fb = $(`#fb-${item.position}`);
   fb.textContent = res.is_correct ? t('right') : t('wrong');
   fb.hidden = false;
-
-  const gap = $(`#gap-${item.position}`);
-  if (gap) gap.classList.add('filled');
+  $(`#gap-${item.position}`)?.classList.add('filled');
 
   scored += res.points_scored;
   updateScore();
 
   if (view.querySelectorAll('.opt:not(:disabled)').length === 0) {
     $('#foot').hidden = false;
-    $('#again').onclick = () => { home(); start(); };
+    $('#again').onclick = () => { home(); start('drill'); };
   }
 }
 
+async function hand() {
+  const left = paper.items.length - view.querySelectorAll('.opt.right').length;
+  if (!confirm(t('confirmSubmit'))) return;
+  $('#hand').disabled = true;
+  stopClock();
+  await api(`/reading/sessions/${paper.session_id}/submit`, {method: 'POST'});
+  results(await api(`/reading/sessions/${paper.session_id}/result`));
+}
+
+function results(r) {
+  const label = i => String.fromCharCode(65 + i);
+  view.innerHTML = `
+    <div class="card">
+      <p class="score" style="font-size:1.4rem">${r.points_scored} / ${r.points_max}</p>
+      <p><strong style="font-size:1.6rem">${esc(r.karakter)}</strong>
+         <span class="muted">${esc(t('karakter'))} — ${esc(t('indicative'))}</span></p>
+      ${r.is_late ? `<p class="muted">${esc(t('late'))}</p>` : ''}
+      <p class="row"><button class="primary" id="again">${esc(t('startAgain'))}</button></p>
+    </div>
+    <div class="card">
+      <h2>${esc(t('reviewAnswers'))}</h2>
+      ${r.items.map(i => `
+        <div class="item">
+          <h3>${i.position}. ${i.points_scored} / ${i.points} ${esc(t('points', i.points))}</h3>
+          ${i.prompt ? `<p class="prompt">${esc(i.prompt)}</p>` : ''}
+          <div class="opts">
+            ${i.options.map(o => `
+              <div class="opt ${o.index === i.correct_index ? 'right' : (o.index === i.chosen_index ? 'wrong' : '')}">
+                <strong>${label(o.index)}.</strong> ${esc(o.text)}
+              </div>`).join('')}
+          </div>
+        </div>`).join('')}
+    </div>`;
+  $('#again').onclick = () => home();
+}
+
+// The countdown is decoration: the server decides what counts as late.
+function startClock() {
+  stopClock();
+  let left = paper.remaining_s ?? 0;
+  const paint = () => {
+    const m = String(Math.floor(left / 60)).padStart(2, '0');
+    const sec = String(left % 60).padStart(2, '0');
+    const el = $('#left');
+    if (el) el.textContent = `${m}:${sec} ${t('timeLeft')}`;
+    if (el && left <= 300) el.style.color = 'var(--bad)';
+  };
+  paint();
+  ticker = setInterval(() => {
+    left = Math.max(0, left - 1);
+    paint();
+    if (left === 0) { stopClock(); hand(); }
+  }, 1000);
+}
+
+function stopClock() {
+  if (ticker) { clearInterval(ticker); ticker = null; }
+}
+
 function updateScore() {
-  $('#score').textContent = `${scored} / ${paper.points_max}`;
+  const answered = view.querySelectorAll('.opt.right, .opt.wrong').length;
+  $('#score').textContent = isExam()
+    ? `${answered} / ${paper.items.length}`
+    : `${scored} / ${paper.points_max}`;
 }
 
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});

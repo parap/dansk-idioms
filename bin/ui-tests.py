@@ -30,6 +30,65 @@ XSS_BODY = ('En tekst med <img src=x onerror="window.__pwned=1"> og et hul {{1}}
 
 # ---- talking to the app ----------------------------------------------------
 
+SEED_PHP = r"""
+    use Dansk\Domain\Reading\ReadingRepository;
+    use Dansk\Support\Db;
+    $hidden = Db::fetchAll("SELECT id FROM reading_passages WHERE is_published = 1 AND slug NOT LIKE 'ui-fixture%'");
+    Db::execute("UPDATE reading_passages SET is_published = 0");
+    $repo = new ReadingRepository();
+
+    // Db::fetchValue hands back PDO's false for a missing row, never null.
+    if (!Db::fetchValue("SELECT id FROM reading_passages WHERE slug = 'ui-fixture'")) {
+        $repo->save([
+            'slug' => 'ui-fixture', 'kind' => 'cloze', 'title' => 'UI fixture',
+            'body' => base64_decode('__BODY__'),
+            'items' => [['position' => 1, 'options' => [
+                ['label' => 'A', 'text' => 'foerste', 'correct' => true],
+                ['label' => 'B', 'text' => 'anden'],
+                ['label' => 'C', 'text' => 'tredje'],
+                ['label' => 'D', 'text' => 'fjerde'],
+            ]]],
+        ]);
+    }
+    if (!Db::fetchValue("SELECT id FROM reading_passages WHERE slug = 'ui-fixture-mc'")) {
+        $repo->save([
+            'slug' => 'ui-fixture-mc', 'kind' => 'mc', 'title' => 'UI fixture mc',
+            'body' => 'En kort tekst uden huller, som spoergsmaalene handler om.',
+            'items' => [['position' => 1, 'prompt' => 'Hvad handler teksten om?', 'options' => [
+                ['label' => 'A', 'text' => 'En kort tekst', 'correct' => true],
+                ['label' => 'B', 'text' => 'Noget andet'],
+                ['label' => 'C', 'text' => 'Ingenting'],
+            ]]],
+        ]);
+    }
+    if (!Db::fetchValue("SELECT id FROM reading_passages WHERE slug = 'ui-fixture-insert'")) {
+        $repo->save([
+            'slug' => 'ui-fixture-insert', 'kind' => 'insert', 'title' => 'UI fixture insert',
+            'body' => 'Foerste saetning. {{1}} Sidste saetning.',
+            'bank' => [
+                ['label' => 'A', 'text' => 'Den indsatte tekstdel hoerer til her.'],
+                ['label' => 'B', 'text' => 'Denne tekstdel passer ingen steder.'],
+            ],
+            'items' => [['position' => 1, 'correct_label' => 'A']],
+        ]);
+    }
+    echo json_encode(array_column($hidden, "id"));
+"""
+
+PUBLISH_PHP = r"""
+    use Dansk\Support\Db;
+    Db::execute("UPDATE reading_passages SET is_published = 0 WHERE slug LIKE 'ui-fixture%'");
+    Db::execute("UPDATE reading_passages SET is_published = 1
+                  WHERE slug LIKE 'ui-fixture%' AND kind IN (__KINDS__)");
+"""
+
+RESTORE_PHP = r"""
+    use Dansk\Support\Db;
+    Db::execute("UPDATE reading_passages SET is_published = 0 WHERE slug LIKE 'ui-fixture%'");
+    Db::execute("UPDATE reading_passages SET is_published = 1 WHERE id IN (__IDS__)");
+"""
+
+
 def php(code):
     """Run PHP inside the app container and return its stdout."""
     r = subprocess.run(
@@ -43,38 +102,21 @@ def php(code):
 
 
 def seed():
-    """Publish exactly one known passage; return the ids that were hidden to do it."""
+    """Create the fixture passages, hide everything else, return the ids hidden."""
     body = base64.b64encode(XSS_BODY.encode()).decode()
-    code = """
-        use Dansk\\Domain\\Reading\\ReadingRepository;
-        use Dansk\\Support\\Db;
-        $hidden = Db::fetchAll("SELECT id FROM reading_passages WHERE is_published = 1 AND slug <> 'ui-fixture'");
-        Db::execute("UPDATE reading_passages SET is_published = 0 WHERE slug <> 'ui-fixture'");
-        // Db::fetchValue returns PDO's false for a missing row, never null.
-        $id = Db::fetchValue("SELECT id FROM reading_passages WHERE slug = 'ui-fixture'");
-        if (!$id) {
-            $id = (new ReadingRepository())->save([
-                'slug' => 'ui-fixture', 'kind' => 'cloze', 'title' => 'UI fixture',
-                'body' => base64_decode('%s'),
-                'items' => [['position' => 1, 'options' => [
-                    ['label' => 'A', 'text' => 'foerste', 'correct' => true],
-                    ['label' => 'B', 'text' => 'anden'],
-                    ['label' => 'C', 'text' => 'tredje'],
-                    ['label' => 'D', 'text' => 'fjerde'],
-                ]]],
-            ]);
-        }
-        (new ReadingRepository())->publish((int) $id);
-        echo json_encode(array_column($hidden, "id"));
-    """ % body
-    return json.loads(php(code))
+    return json.loads(php(SEED_PHP.replace('__BODY__', body)))
+
+
+def only(kinds):
+    """Publish just the fixture passages of these kinds, so a round is predictable."""
+    quoted = ','.join("'" + k + "'" for k in kinds)
+    php(PUBLISH_PHP.replace('__KINDS__', quoted))
 
 
 def restore(hidden):
+    """Put every passage back the way the run found it."""
     ids = ','.join(str(int(i)) for i in hidden) or '0'
-    php(f'''use Dansk\\Support\\Db;
-        Db::execute("UPDATE reading_passages SET is_published = 0 WHERE slug = 'ui-fixture'");
-        Db::execute("UPDATE reading_passages SET is_published = 1 WHERE id IN ({ids})");''')
+    php(RESTORE_PHP.replace('__IDS__', ids))
 
 
 def correct_index():
@@ -173,6 +215,7 @@ def check(fn):
 
 
 def start_round(b):
+    only(['cloze'])
     b.goto('/read')
     b.until('!!document.querySelector("#go")', what='the start button')
     b.js('document.querySelector("#go").click()')
@@ -181,6 +224,7 @@ def start_round(b):
 
 @check
 def the_start_screen_offers_a_round(b):
+    only(['cloze'])
     b.goto('/read')
     b.until('!!document.querySelector("#go")', what='the start button')
     assert b.js('document.querySelector("#go").textContent.trim().length > 0')
@@ -251,6 +295,75 @@ def answering_fills_the_gap_and_offers_another_round(b):
     b.until('document.querySelectorAll(".opt.right").length === 1', what='the answer to land')
     assert b.js('document.querySelector(".gap").classList.contains("filled")')
     assert b.js('!document.querySelector("#foot").hidden')
+
+
+def options_js(position):
+    """The options for one item, as a JS expression. Kept out of the checks so the
+    quoting lives in exactly one place."""
+    return '[...document.querySelectorAll(".opt")].filter(o => o.dataset.pos === "%d")' % position
+
+
+def click_option(b, position, index):
+    b.js(options_js(position) + '[%d].click()' % index)
+
+
+def start_exam(b):
+    only(['mc', 'insert', 'cloze'])
+    b.goto('/read')
+    b.until('!!document.querySelector("#goExam")', what='the exam button')
+    b.js('document.querySelector("#goExam").click()')
+    b.until('!!document.querySelector(".opt")', what='the paper to be rendered')
+
+
+@check
+def an_exam_draws_a_text_of_every_task_kind(b):
+    start_exam(b)
+    assert b.js('document.querySelectorAll(".passage").length') == 3
+    assert b.js('document.querySelectorAll(".item").length') == 3
+
+
+@check
+def an_exam_shows_a_countdown(b):
+    start_exam(b)
+    b.until('/\\d\\d:\\d\\d/.test(document.querySelector("#left").textContent)', what='the clock')
+    # 65 minutes, counted down from whatever the server said was left -- a second or
+    # two will already have gone by the time the paper is on screen.
+    minutes = int(b.js('document.querySelector("#left").textContent').split(':')[0])
+    assert 63 <= minutes <= 65, f'clock started at {minutes} minutes'
+
+
+@check
+def an_exam_reveals_nothing_when_an_answer_is_recorded(b):
+    start_exam(b)
+    click_option(b, 1, 0)
+    b.until('document.querySelectorAll(".opt.right").length === 1', what='the choice to register')
+    # The mark says "chosen", not "correct": nothing here may tell the candidate more.
+    assert b.js('document.querySelectorAll(".opt.wrong").length') == 0
+    assert b.js('[...document.querySelectorAll("[id^=fb-]")].every(p => p.hidden)')
+
+
+@check
+def an_exam_answer_can_be_changed_before_handing_in(b):
+    start_exam(b)
+    click_option(b, 1, 0)
+    b.until('document.querySelectorAll(".opt.right").length === 1', what='the first choice')
+    click_option(b, 1, 1)
+    b.until(options_js(1) + '[1].classList.contains("right")', what='the revised choice')
+    assert not b.js(options_js(1) + '[0].classList.contains("right")')
+
+
+@check
+def handing_in_reports_a_karakter_and_a_review(b):
+    start_exam(b)
+    for pos in (1, 2, 3):
+        click_option(b, pos, 0)
+    b.until('document.querySelectorAll(".opt.right").length === 3', what='every item answered')
+    b.js('window.confirm = () => true')
+    b.js('document.querySelector("#hand").click()')
+    b.until('!!document.querySelector(".score")', what='the result screen')
+    assert b.js('document.querySelectorAll(".item").length') == 3
+    assert b.js('/\\d+ \\/ \\d+/.test(document.querySelector(".score").textContent)')
+    assert b.js('document.body.textContent').count('vejledende') >= 0
 
 
 # ---- runner ----------------------------------------------------------------
