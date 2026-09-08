@@ -424,15 +424,29 @@ def admin_password():
     return php(ADMIN_PW_PHP)
 
 
+SIGNED_IN = ('!document.querySelector("#app").hidden'
+             ' || !document.querySelector("#done").hidden'
+             ' || !document.querySelector("#flags").hidden')
+
+
 def sign_in_to_admin(b):
     pw = admin_password()
     if pw == '':
         raise AssertionError('admin.password is not configured, so the queue cannot be reached')
+
     b.goto('/admin')
-    b.until('!!document.querySelector("#pw")', what='the admin login')
+    b.until('!!document.querySelector("#pw")', what='the admin page')
+
+    # Only sign in when the session is actually gone. Logging in again regenerates the
+    # session id and destroys the old one, so a request already in flight comes back 401
+    # -- which is right for the app and wrong for a test that re-authenticates on every
+    # visit. A person does not retype their password on each page either.
+    if b.js(SIGNED_IN):
+        return
+
     b.js('document.querySelector("#pw").value = ' + json.dumps(pw))
     b.js('document.querySelector("#loginBtn").click()')
-    b.until('document.querySelector("#login").hidden', what='the login card to go away')
+    b.until(SIGNED_IN, what='an admin view to appear')
 
 
 @check
