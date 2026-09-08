@@ -69,6 +69,30 @@ final class IdiomFileTest extends IntegrationTestCase
         ));
     }
 
+    public function testASynonymMayBeNamedBeforeTheEntryThatDefinesIt(): void
+    {
+        // Otherwise the order of a JSON list is load-bearing, and reordering it fails
+        // with an error blaming the wrong entry.
+        $path = sys_get_temp_dir() . '/order.json';
+        file_put_contents($path, json_encode([
+            ['term' => 'at smide benene op',  'ru' => 'вытянуть ноги',
+             'synonyms' => ['at skuldrene synker']],
+            ['term' => 'at skuldrene synker', 'ru' => 'сбросить напряжение'],
+        ], JSON_UNESCAPED_UNICODE));
+
+        try {
+            $ids = $this->loader->load($path);
+            self::assertCount(2, $ids);
+            self::assertSame(1, (int) Db::fetchValue(
+                'SELECT COUNT(*) FROM idiom_synonyms s1
+                 JOIN idiom_synonyms s2 ON s2.group_id = s1.group_id AND s2.idiom_id <> s1.idiom_id
+                 WHERE s1.idiom_id = ?', [$ids[0]]
+            ));
+        } finally {
+            @unlink($path);
+        }
+    }
+
     public function testAFileThatIsNotAListOfObjectsIsRefused(): void
     {
         $path = sys_get_temp_dir() . '/bad-idioms.json';

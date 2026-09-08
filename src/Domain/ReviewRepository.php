@@ -136,6 +136,14 @@ final class ReviewRepository
      *                                  answer: a literal gloss is the best distractor
      *                                  there is -- register-matched, idiom-shaped, vivid
      *                                  and guaranteed wrong -- and a terrible answer.
+     * @param list<string> $synonyms    Danish terms that mean the same. The distractor
+     *                                  picker already refuses to offer a declared
+     *                                  synonym, because such an option is a second
+     *                                  correct answer rather than a wrong one. Sharing a
+     *                                  gloss is enough to need this: once two idioms both
+     *                                  mean "расслабиться", either can be served as the
+     *                                  other's wrong answer and a learner is marked down
+     *                                  for being right.
      * @param list<string> $retire      senses to remove outright. Demoting a wrong
      *                                  translation is not enough: it stays quiz_usable
      *                                  and goes on being offered as a distractor
@@ -151,6 +159,7 @@ final class ReviewRepository
         ?string $explanation = null,
         ?string $shape = null,
         array $literal = [],
+        array $synonyms = [],
         array $retire = [],
     ): int {
         $term    = Text::collapseWhitespace($term);
@@ -206,6 +215,10 @@ final class ReviewRepository
             $this->writeTranslation($idiomId, $reading, 'literal', false);
         }
 
+        foreach ($synonyms as $other) {
+            $this->declareSynonym($idiomId, Text::collapseWhitespace($other));
+        }
+
         foreach ($retire as $dropped) {
             $droppedNorm = Normalizer::translation(Text::collapseWhitespace($dropped));
             if ($droppedNorm === '') {
@@ -240,6 +253,72 @@ final class ReviewRepository
         Db::execute('UPDATE idioms SET is_published = 1 WHERE id = ?', [$idiomId]);
 
         return $idiomId;
+    }
+
+    /**
+     * Declares synonyms for a term that is already stored.
+     *
+     * Separate from addByHand so a file can name a synonym before the entry defining it:
+     * the reference is resolved once everything in the file exists, rather than making
+     * the order of a JSON list load-bearing.
+     *
+     * @param list<string> $others
+     */
+    public function declareSynonyms(string $term, array $others): void
+    {
+        $idiomId = Db::fetchValue(
+            "SELECT id FROM idioms WHERE lang_code = 'da' AND term_norm = ?",
+            [Normalizer::term(Text::collapseWhitespace($term))]
+        );
+        if ($idiomId === false || $idiomId === null) {
+            throw new \InvalidArgumentException("'{$term}' is not in the corpus.");
+        }
+
+        foreach ($others as $other) {
+            $this->declareSynonym((int) $idiomId, Text::collapseWhitespace($other));
+        }
+    }
+
+    /**
+     * Puts two idioms in one synonym group, joining whichever group either already
+     * belongs to so that a third synonym extends the set rather than starting a rival.
+     */
+    private function declareSynonym(int $idiomId, string $otherTerm): void
+    {
+        if ($otherTerm === '') {
+            return;
+        }
+
+        $otherId = Db::fetchValue(
+            "SELECT id FROM idioms WHERE lang_code = 'da' AND term_norm = ?",
+            [Normalizer::term($otherTerm)]
+        );
+        if ($otherId === false || $otherId === null) {
+            throw new \InvalidArgumentException(
+                "'{$otherTerm}' is named as a synonym but is not in the corpus. Load it first."
+            );
+        }
+
+        $otherId = (int) $otherId;
+        if ($otherId === $idiomId) {
+            return;
+        }
+
+        $group = Db::fetchValue(
+            'SELECT group_id FROM idiom_synonyms WHERE idiom_id IN (?, ?) LIMIT 1',
+            [$idiomId, $otherId]
+        );
+        if ($group === false || $group === null) {
+            Db::execute('INSERT INTO synonym_groups (note) VALUES (?)', ['declared in content/idioms']);
+            $group = (int) Db::pdo()->lastInsertId();
+        }
+
+        foreach ([$idiomId, $otherId] as $member) {
+            Db::execute(
+                'INSERT IGNORE INTO idiom_synonyms (group_id, idiom_id) VALUES (?, ?)',
+                [(int) $group, $member]
+            );
+        }
     }
 
     /**

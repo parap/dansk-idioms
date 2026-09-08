@@ -47,12 +47,38 @@ final class IdiomFile
             );
         }
 
+        // Two passes: everything is stored first, then the cross-references are
+        // resolved. A synonym is named by term, so a single pass would make the order of
+        // the list load-bearing and fail blaming the entry that did nothing wrong.
         $ids = [];
         foreach ($entries as $i => $entry) {
             $ids[] = $this->loadOne($entry, basename($path), $i);
         }
 
+        foreach ($entries as $entry) {
+            $synonyms = $this->strings($entry['synonyms'] ?? []);
+            if ($synonyms === []) {
+                continue;
+            }
+            try {
+                $this->idioms->declareSynonyms((string) $entry['term'], $synonyms);
+            } catch (InvalidArgumentException $e) {
+                throw new InvalidArgumentException(
+                    basename($path) . ": '{$entry['term']}' — " . $e->getMessage(), 0, $e
+                );
+            }
+        }
+
         return $ids;
+    }
+
+    /**
+     * @param  mixed $value
+     * @return list<string>
+     */
+    private function strings($value): array
+    {
+        return array_values(array_filter((array) $value, 'is_string'));
     }
 
     /** @param mixed $entry */
@@ -75,16 +101,19 @@ final class IdiomFile
         }
 
         try {
+            // Named, not positional. There are enough of these that dropping one
+            // silently slides every later argument into the wrong parameter -- which is
+            // exactly how "retire" once arrived as a list of synonyms.
             return $this->idioms->addByHand(
-                $entry['term'],
-                $entry['ru'],
-                array_values(array_filter((array) ($entry['also'] ?? []), 'is_string')),
-                is_string($entry['kind'] ?? null) ? $entry['kind'] : 'phrase',
-                is_string($entry['note'] ?? null) ? $entry['note'] : null,
-                is_string($entry['explain'] ?? null) ? $entry['explain'] : null,
-                is_string($entry['shape'] ?? null) ? $entry['shape'] : null,
-                array_values(array_filter((array) ($entry['literal'] ?? []), 'is_string')),
-                array_values(array_filter((array) ($entry['retire'] ?? []), 'is_string')),
+                term: $entry['term'],
+                primary: $entry['ru'],
+                extra: $this->strings($entry['also'] ?? []),
+                kind: is_string($entry['kind'] ?? null) ? $entry['kind'] : 'phrase',
+                note: is_string($entry['note'] ?? null) ? $entry['note'] : null,
+                explanation: is_string($entry['explain'] ?? null) ? $entry['explain'] : null,
+                shape: is_string($entry['shape'] ?? null) ? $entry['shape'] : null,
+                literal: $this->strings($entry['literal'] ?? []),
+                retire: $this->strings($entry['retire'] ?? []),
             );
         } catch (InvalidArgumentException $e) {
             throw new InvalidArgumentException("{$file}: {$name} — " . $e->getMessage(), 0, $e);

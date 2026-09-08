@@ -251,6 +251,16 @@ FAULTS = [
   "            // the imported gloss is left in place","integration"),
  (88,"the answer may also be the literal reading","src/Domain/ReviewRepository.php",
   "            if ($reading === '' || $reading === $primary) {","            if ($reading === '') {","integration"),
+ (89,"declared synonyms are not recorded","src/Domain/ReviewRepository.php",
+  "        foreach ($synonyms as $other) {","        foreach ([] as $other) {","integration"),
+ (90,"a synonym that does not exist is accepted","src/Domain/ReviewRepository.php",
+  "        if ($otherId === false || $otherId === null) {","        if (false) {","integration"),
+ (91,"every declaration starts a rival group","src/Domain/ReviewRepository.php",
+  "        if ($group === false || $group === null) {","        if (true) {","integration"),
+ (92,"an idiom may be its own synonym","src/Domain/ReviewRepository.php",
+  "        if ($otherId === $idiomId) {","        if (false) {","integration"),
+ (93,"synonyms are never resolved from a file","src/Domain/IdiomFile.php",
+  "            if ($synonyms === []) {","            if (true) {","integration"),
 ]
 
 def run(suite):
