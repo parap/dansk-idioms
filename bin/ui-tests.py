@@ -86,6 +86,18 @@ RESTORE_PHP = r"""
     use Dansk\Support\Db;
     Db::execute("UPDATE reading_passages SET is_published = 0 WHERE slug LIKE 'ui-fixture%'");
     Db::execute("UPDATE reading_passages SET is_published = 1 WHERE id IN (__IDS__)");
+
+    // The appeal check files a report, and a fresh browser profile means a fresh
+    // anon_key, so two runs look like two independent readers and withdraw the very
+    // item the other checks depend on. Restoring publication alone is not enough.
+    Db::execute("DELETE r FROM reading_reports r
+                 JOIN reading_items i ON i.id = r.item_id
+                 JOIN reading_passages p ON p.id = i.passage_id
+                 WHERE p.slug LIKE 'ui-fixture%'");
+    Db::execute("UPDATE reading_items i
+                 JOIN reading_passages p ON p.id = i.passage_id
+                 SET i.is_flagged = 0, i.report_count = 0
+                 WHERE p.slug LIKE 'ui-fixture%'");
 """
 
 
