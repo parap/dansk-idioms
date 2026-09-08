@@ -83,6 +83,7 @@ final class IdiomFile
                 is_string($entry['note'] ?? null) ? $entry['note'] : null,
                 is_string($entry['explain'] ?? null) ? $entry['explain'] : null,
                 is_string($entry['shape'] ?? null) ? $entry['shape'] : null,
+                array_values(array_filter((array) ($entry['literal'] ?? []), 'is_string')),
                 array_values(array_filter((array) ($entry['retire'] ?? []), 'is_string')),
             );
         } catch (InvalidArgumentException $e) {

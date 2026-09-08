@@ -132,6 +132,10 @@ final class ReviewRepository
      *                                  by its surface form, which misses clauses used
      *                                  adverbially, and shape is what the distractor
      *                                  picker scores candidate options on.
+     * @param list<string> $literal     literal readings. Kept, but never offered as an
+     *                                  answer: a literal gloss is the best distractor
+     *                                  there is -- register-matched, idiom-shaped, vivid
+     *                                  and guaranteed wrong -- and a terrible answer.
      * @param list<string> $retire      senses to remove outright. Demoting a wrong
      *                                  translation is not enough: it stays quiz_usable
      *                                  and goes on being offered as a distractor
@@ -146,6 +150,7 @@ final class ReviewRepository
         ?string $note = null,
         ?string $explanation = null,
         ?string $shape = null,
+        array $literal = [],
         array $retire = [],
     ): int {
         $term    = Text::collapseWhitespace($term);
@@ -192,6 +197,15 @@ final class ReviewRepository
             }
         }
 
+        foreach ($literal as $reading) {
+            $reading = Text::collapseWhitespace($reading);
+            // The primary is the answer, so it cannot also be the literal reading.
+            if ($reading === '' || $reading === $primary) {
+                continue;
+            }
+            $this->writeTranslation($idiomId, $reading, 'literal', false);
+        }
+
         foreach ($retire as $dropped) {
             $droppedNorm = Normalizer::translation(Text::collapseWhitespace($dropped));
             if ($droppedNorm === '') {
@@ -208,10 +222,17 @@ final class ReviewRepository
 
         $explanation = $explanation === null ? null : Text::collapseWhitespace($explanation);
         if ($explanation !== null && $explanation !== '') {
+            // uq_expl is (idiom_id, lang_code, source), so an upsert would leave an
+            // imported gloss in place beside this one. The quiz joins on idiom and
+            // language alone, so two rows return the idiom twice and show whichever
+            // gloss the engine reached first. One explanation per language, always.
+            Db::execute(
+                "DELETE FROM idiom_explanations WHERE idiom_id = ? AND lang_code = 'ru'",
+                [$idiomId]
+            );
             Db::execute(
                 "INSERT INTO idiom_explanations (idiom_id, lang_code, body, source)
-                 VALUES (?, 'ru', ?, 'manual')
-                 ON DUPLICATE KEY UPDATE body = VALUES(body)",
+                 VALUES (?, 'ru', ?, 'manual')",
                 [$idiomId, $explanation]
             );
         }

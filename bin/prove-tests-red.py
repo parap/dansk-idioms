@@ -243,6 +243,14 @@ FAULTS = [
   "            if (Config::get('debug')) {","            if (true) {","ui"),
  (85,"the login endpoint skips the throttle","src/Controller/AdminController.php",
   "        $wait   = $this->throttle->retryAfter($client);","        $wait   = null;","ui"),
+ (86,"a literal reading is offered as an answer","src/Domain/ReviewRepository.php",
+  "            $this->writeTranslation($idiomId, $reading, 'literal', false);",
+  "            $this->writeTranslation($idiomId, $reading, 'idiomatic', false);","integration"),
+ (87,"a hand-written gloss piles up beside the imported one","src/Domain/ReviewRepository.php",
+  "            Db::execute(\n                \"DELETE FROM idiom_explanations WHERE idiom_id = ? AND lang_code = 'ru'\",\n                [$idiomId]\n            );",
+  "            // the imported gloss is left in place","integration"),
+ (88,"the answer may also be the literal reading","src/Domain/ReviewRepository.php",
+  "            if ($reading === '' || $reading === $primary) {","            if ($reading === '') {","integration"),
 ]
 
 def run(suite):

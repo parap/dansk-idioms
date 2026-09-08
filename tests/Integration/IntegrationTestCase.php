@@ -87,6 +87,15 @@ abstract class IntegrationTestCase extends TestCase
     /** Guards the invariants that broke silently in production. */
     protected function assertCorpusInvariants(): void
     {
+        // One explanation per idiom per language. uq_expl includes `source`, so a
+        // hand-written gloss can sit alongside an imported one -- and the quiz joins on
+        // (idiom_id, lang_code) alone, which then returns the idiom twice and shows
+        // whichever gloss the engine happened to reach first.
+        self::assertSame(0, (int) Db::fetchValue(
+            'SELECT COUNT(*) FROM (SELECT idiom_id FROM idiom_explanations
+              WHERE lang_code = \'ru\' GROUP BY idiom_id HAVING COUNT(*) > 1) AS duplicated'
+        ), 'an idiom has more than one Russian explanation');
+
         self::assertSame(
             0,
             (int) Db::fetchValue(

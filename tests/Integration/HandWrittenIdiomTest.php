@@ -202,6 +202,66 @@ final class HandWrittenIdiomTest extends IntegrationTestCase
         $this->assertCorpusInvariants();
     }
 
+    public function testALiteralReadingIsKeptButNeverOffered(): void
+    {
+        // A literal gloss is the best distractor there is: register-matched,
+        // idiom-shaped, vivid and guaranteed wrong. It must never be an answer, so it
+        // is stored with quiz_usable off and only reaches a learner as a wrong option.
+        $id = $this->repo->addByHand(
+            term: 'at smide benene op',
+            primary: 'задрать ноги',
+            literal: ['забросить ноги наверх'],
+        );
+
+        $row = Db::fetchOne(
+            "SELECT sense_type, quiz_usable, is_primary FROM idiom_translations
+             WHERE idiom_id = ? AND text = ?", [$id, 'забросить ноги наверх']
+        );
+
+        self::assertSame('literal', $row['sense_type']);
+        self::assertSame(0, (int) $row['quiz_usable']);
+        self::assertNull($row['is_primary']);
+    }
+
+    public function testALiteralReadingIsNotAllowedToBeThePrimary(): void
+    {
+        $id = $this->repo->addByHand(
+            term: 'at smide benene op',
+            primary: 'задрать ноги',
+            literal: ['задрать ноги'],
+        );
+
+        self::assertSame('idiomatic', Db::fetchValue(
+            'SELECT sense_type FROM idiom_translations WHERE idiom_id = ? AND is_primary = 1', [$id]
+        ));
+        self::assertSame(1, (int) Db::fetchValue(
+            'SELECT COUNT(*) FROM idiom_translations WHERE idiom_id = ?', [$id]
+        ));
+    }
+
+    public function testAHandWrittenExplanationReplacesAnImportedOne(): void
+    {
+        $id = $this->repo->addByHand('at smide benene op', 'задрать ноги');
+        Db::execute(
+            "INSERT INTO idiom_explanations (idiom_id, lang_code, body, source)
+             VALUES (?, 'ru', ?, 'import')", [$id, 'the gloss the importer wrote']
+        );
+
+        $this->repo->addByHand(
+            term: 'at smide benene op',
+            primary: 'задрать ноги',
+            explanation: 'the gloss the author wrote',
+        );
+
+        self::assertSame(1, (int) Db::fetchValue(
+            "SELECT COUNT(*) FROM idiom_explanations WHERE idiom_id = ? AND lang_code = 'ru'", [$id]
+        ));
+        self::assertSame('the gloss the author wrote', Db::fetchValue(
+            "SELECT body FROM idiom_explanations WHERE idiom_id = ? AND lang_code = 'ru'", [$id]
+        ));
+        $this->assertCorpusInvariants();
+    }
+
     public function testTheCorpusInvariantsStillHold(): void
     {
         $this->repo->addByHand('under alle omstændigheder', 'в любом случае', ['при любых обстоятельствах']);
