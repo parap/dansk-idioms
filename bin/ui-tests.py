@@ -297,6 +297,16 @@ def answering_fills_the_gap_and_offers_another_round(b):
     assert b.js('!document.querySelector("#foot").hidden')
 
 
+@check
+def a_learner_can_appeal_an_item_after_answering(b):
+    start_round(b)
+    click_option(b, 1, 0)
+    b.until('!!document.querySelector("[id^=rep-]")', what='the appeal link')
+    b.js('document.querySelector("[id^=rep-]").click()')
+    b.until('!document.querySelector("[id^=rep-]")', what='the link to be replaced')
+    assert b.js('document.querySelector("[id^=fb-]").textContent.length') > 0
+
+
 def options_js(position):
     """The options for one item, as a JS expression. Kept out of the checks so the
     quoting lives in exactly one place."""

@@ -2,6 +2,7 @@
 
 namespace Dansk\Controller;
 
+use Dansk\Domain\Reading\ReadingReportRepository;
 use Dansk\Domain\Reading\ReadingSessionService;
 use Dansk\Http\Response;
 use Dansk\Support\Auth;
@@ -9,7 +10,10 @@ use RuntimeException;
 
 final class ReadingController
 {
-    public function __construct(private ReadingSessionService $reading = new ReadingSessionService()) {}
+    public function __construct(
+        private ReadingSessionService $reading = new ReadingSessionService(),
+        private ReadingReportRepository $reports = new ReadingReportRepository(),
+    ) {}
 
     public function start(array $body): void
     {
@@ -34,6 +38,20 @@ final class ReadingController
             Response::json($this->reading->session($sid));
         } catch (RuntimeException $e) {
             Response::error('not_found', $e->getMessage(), 404);
+        }
+    }
+
+    public function report(string $sid, int $position, array $body): void
+    {
+        $reasons = ['also_correct', 'no_correct', 'unclear', 'typo', 'other'];
+        $reason  = in_array($body['reason'] ?? '', $reasons, true) ? $body['reason'] : 'also_correct';
+        $note    = isset($body['note']) ? mb_substr(trim((string) $body['note']), 0, 500) : null;
+
+        try {
+            $this->reports->report($sid, $position, Auth::userId(), Auth::anonKey(), $reason, $note ?: null);
+            Response::json(['ok' => true]);
+        } catch (RuntimeException $e) {
+            Response::error('cannot_report', $e->getMessage(), 409);
         }
     }
 

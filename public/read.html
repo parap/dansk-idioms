@@ -87,6 +87,7 @@ const STRINGS = {
     right: 'Верно', wrong: 'Неверно',
     points: { one: 'балл', few: 'балла', many: 'баллов', other: 'баллов' },
     done: 'Раунд завершён.',
+    report: 'Мой ответ тоже верный', reported: 'Спасибо — отправлено на проверку',
     modeDrill: 'Тренировка', modeExam: 'Экзамен',
     examBlurb: 'Полный вариант: три текста, 65 минут, результат в конце.',
     timeLeft: 'осталось', timeUp: 'Время вышло',
@@ -104,6 +105,7 @@ const STRINGS = {
     right: 'Correct', wrong: 'Not right',
     points: { one: 'point', other: 'points' },
     done: 'Round complete.',
+    report: 'My answer was also right', reported: 'Thanks — sent for review',
     modeDrill: 'Practice', modeExam: 'Exam',
     examBlurb: 'The full paper: three texts, 65 minutes, results at the end.',
     timeLeft: 'left', timeUp: 'Time is up',
@@ -121,6 +123,7 @@ const STRINGS = {
     right: 'Rigtigt', wrong: 'Forkert',
     points: { one: 'point', other: 'point' },
     done: 'Runden er slut.',
+    report: 'Mit svar var også rigtigt', reported: 'Tak — sendt til gennemsyn',
     modeDrill: 'Traening', modeExam: 'Proeve',
     examBlurb: 'Hele saettet: tre tekster, 65 minutter, resultat til sidst.',
     timeLeft: 'tilbage', timeUp: 'Tiden er gaaet',
@@ -261,8 +264,14 @@ async function answer(item, chosen) {
   if (!res.is_correct) buttons[res.correct_index]?.classList.add('right');
 
   const fb = $(`#fb-${item.position}`);
-  fb.textContent = res.is_correct ? t('right') : t('wrong');
+  fb.innerHTML = esc(res.is_correct ? t('right') : t('wrong'))
+    + ` · <button class="link" id="rep-${item.position}">${esc(t('report'))}</button>`;
   fb.hidden = false;
+  $(`#rep-${item.position}`).onclick = async (e) => {
+    e.target.replaceWith(document.createTextNode(t('reported')));
+    await api(`/reading/sessions/${paper.session_id}/items/${item.position}/report`,
+      {method: 'POST', body: {reason: 'also_correct'}}).catch(() => {});
+  };
   $(`#gap-${item.position}`)?.classList.add('filled');
 
   scored += res.points_scored;

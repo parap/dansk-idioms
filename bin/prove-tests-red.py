@@ -175,6 +175,21 @@ FAULTS = [
   "        if (count($bank) <= count($items)) {","        if (false) {","unit"),
  (59,"a multiple-choice text may carry markers","src/Domain/Reading/PassageDocument.php",
   "            if ($markers !== []) {","            if (false) {","unit"),
+ (60,"one learner may report an item twice","db/migrations/0003_reading_reports.sql",
+  "    UNIQUE KEY uq_reporter (item_id, reporter),",
+  "    KEY uq_reporter (item_id, reporter),","integration"),
+ (61,"a single report withdraws an item","src/Domain/Reading/ReadingReportRepository.php",
+  "            [$after, $after >= self::FLAG_AT ? 1 : 0, $itemId]",
+  "            [$after, 1, $itemId]","integration"),
+ (62,"an item outside the round may be reported","src/Domain/Reading/ReadingReportRepository.php",
+  "        if ($row === null) {\n            throw new RuntimeException('No such item in this round.');",
+  "        if (false) {\n            throw new RuntimeException('No such item in this round.');","integration"),
+ (63,"clearing a flag leaves the item withdrawn","src/Domain/Reading/ReadingReportRepository.php",
+  "        Db::execute('UPDATE reading_items SET is_flagged = 0, report_count = 0 WHERE id = ?', [$itemId]);",
+  "        // the item stays withdrawn","integration"),
+ (64,"the appeal link never appears","public/read.html",
+  "    + ` \u00b7 <button class=\"link\" id=\"rep-${item.position}\">${esc(t('report'))}</button>`;",
+  "    + ``;","ui"),
 ]
 
 def run(suite):
