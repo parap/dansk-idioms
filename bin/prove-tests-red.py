@@ -165,6 +165,16 @@ FAULTS = [
  (54,"an exam marks a choice right or wrong","public/read.html",
   "    buttons[chosen]?.classList.add('chosen');",
   "    buttons[chosen]?.classList.add(res.is_correct ? 'right' : 'wrong');","ui"),
+ (55,"the parser ignores gap/question disagreement","src/Domain/Reading/PassageDocument.php",
+  "        if ($markers !== $positions) {","        if (false) {","unit"),
+ (56,"the parser accepts two starred options","src/Domain/Reading/PassageDocument.php",
+  "        if (count($correct) !== 1) {","        if (false) {","unit"),
+ (57,"the parser lets one part fill two gaps","src/Domain/Reading/PassageDocument.php",
+  "        if (count($used) !== count(array_unique($used))) {","        if (false) {","unit"),
+ (58,"the parser drops the spare-parts rule","src/Domain/Reading/PassageDocument.php",
+  "        if (count($bank) <= count($items)) {","        if (false) {","unit"),
+ (59,"a multiple-choice text may carry markers","src/Domain/Reading/PassageDocument.php",
+  "            if ($markers !== []) {","            if (false) {","unit"),
 ]
 
 def run(suite):
