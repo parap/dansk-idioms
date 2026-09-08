@@ -198,6 +198,18 @@ FAULTS = [
   "          <li></li>","ui"),
  (67,"the appeal queue lists sound items too","src/Domain/Reading/ReadingReportRepository.php",
   "             WHERE i.is_flagged = 1","             WHERE 1 = 1","integration"),
+ (68,"a Danish term may be written in Cyrillic","src/Domain/ReviewRepository.php",
+  "        if (!preg_match_all('/\\p{Cyrillic}/u', $term, $m)) {","        if (true) {","integration"),
+ (69,"a hand-written gloss is dropped","src/Domain/ReviewRepository.php",
+  "        if ($explanation !== null && $explanation !== '') {","        if (false) {","integration"),
+ (70,"an extra sense claims the primary slot","src/Domain/ReviewRepository.php",
+  "                $this->writeTranslation($idiomId, $sense, 'idiomatic', false);",
+  "                $this->writeTranslation($idiomId, $sense, 'idiomatic', true);","integration"),
+ (71,"an idiom file need not be a list","src/Domain/IdiomFile.php",
+  "        if (!is_array($entries) || !array_is_list($entries)) {","        if (false) {","integration"),
+ (72,"an entry may omit its translation","src/Domain/IdiomFile.php",
+  "            if (!isset($entry[$key]) || !is_string($entry[$key]) || trim($entry[$key]) === '') {",
+  "            if (false) {","integration"),
 ]
 
 def run(suite):

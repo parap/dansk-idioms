@@ -84,19 +84,7 @@ final class ReviewRepository
             throw new \InvalidArgumentException('Both a term and a translation are required.');
         }
 
-        // The same limits the importer applies. Without this the review screen was the
-        // one way a 22-word explanation could become a quiz option, which then had no
-        // distractors of comparable length and made the question answerable on sight.
-        $words = Text::wordCount($primary);
-        $chars = mb_strlen($primary, 'UTF-8');
-        if ($words > self::MAX_ANSWER_WORDS || $chars > self::MAX_ANSWER_CHARS) {
-            throw new \InvalidArgumentException(sprintf(
-                'The translation is too long to be a quiz option (%d words, %d characters; '
-                . 'the limit is %d words and %d characters). Shorten it to the core meaning — '
-                . 'the full explanation is kept separately.',
-                $words, $chars, self::MAX_ANSWER_WORDS, self::MAX_ANSWER_CHARS
-            ));
-        }
+        $this->assertAnswerFits($primary);
 
         $parsed  = $this->parser->parse($entry['raw_text']);
         $pdo     = Db::pdo();
@@ -124,6 +112,110 @@ final class ReviewRepository
         );
 
         return ['idiom_id' => $idiomId, 'term' => $term, 'translation' => $primary];
+    }
+
+    /**
+     * Publishes an idiom somebody simply knows.
+     *
+     * Everything else in the corpus arrives through the importer, so publishing one used
+     * to require a raw_entries row to accept. The translation writer is shared with that
+     * path, because the "one primary per idiom, expressed as 1 or NULL" rule is the most
+     * load-bearing convention in the schema and must not exist twice.
+     *
+     * @param list<string> $extra       further senses, kept for the distractor pool and
+     *                                  for reverse rounds, none of them primary
+     * @param ?string      $explanation the full meaning, shown after an answer. The
+     *                                  primary has to stay short enough to work as a
+     *                                  quiz option, so without this the rest of what an
+     *                                  author knows about the idiom has nowhere to go.
+     */
+    public function addByHand(
+        string $term,
+        string $primary,
+        array $extra = [],
+        string $kind = 'phrase',
+        ?string $note = null,
+        ?string $explanation = null,
+    ): int {
+        $term    = Text::collapseWhitespace($term);
+        $primary = Text::collapseWhitespace($primary);
+        if ($term === '' || $primary === '') {
+            throw new \InvalidArgumentException('Both a term and a translation are required.');
+        }
+
+        $this->assertDanishScript($term);
+        $this->assertAnswerFits($primary);
+
+        $norm     = Normalizer::term($term);
+        $existing = Db::fetchValue("SELECT id FROM idioms WHERE lang_code='da' AND term_norm = ?", [$norm]);
+
+        if ($existing !== false && $existing !== null) {
+            $idiomId = (int) $existing;
+        } else {
+            Db::execute(
+                'INSERT INTO idioms (lang_code, term, term_norm, term_note, kind, register, shape,
+                                     quality_score, rand_key)
+                 VALUES (?,?,?,?,?,?,?,?,RAND())',
+                ['da', $term, $norm, $note, $kind, 'neutral', $this->classifier->termShape($term), 1.0]
+            );
+            $idiomId = (int) Db::pdo()->lastInsertId();
+        }
+
+        $this->writeTranslation($idiomId, $primary, 'idiomatic', true);
+        foreach ($extra as $sense) {
+            $sense = Text::collapseWhitespace($sense);
+            if ($sense !== '' && $sense !== $primary) {
+                $this->writeTranslation($idiomId, $sense, 'idiomatic', false);
+            }
+        }
+
+        $explanation = $explanation === null ? null : Text::collapseWhitespace($explanation);
+        if ($explanation !== null && $explanation !== '') {
+            Db::execute(
+                "INSERT INTO idiom_explanations (idiom_id, lang_code, body, source)
+                 VALUES (?, 'ru', ?, 'manual')
+                 ON DUPLICATE KEY UPDATE body = VALUES(body)",
+                [$idiomId, $explanation]
+            );
+        }
+
+        Db::execute('UPDATE idioms SET is_published = 1 WHERE id = ?', [$idiomId]);
+
+        return $idiomId;
+    }
+
+    /**
+     * A Danish term written with Cyrillic letters looks correct and is a different word.
+     * term_norm is accent- and case-sensitive, so it stores as its own idiom that no
+     * search, import or quiz will ever match.
+     */
+    private function assertDanishScript(string $term): void
+    {
+        if (!preg_match_all('/\p{Cyrillic}/u', $term, $m)) {
+            return;
+        }
+
+        throw new \InvalidArgumentException(sprintf(
+            'The Danish term contains Cyrillic letters (%s) — most likely a keyboard slip. '
+            . 'Rewrite it in the Latin alphabet.',
+            implode(' ', array_unique($m[0]))
+        ));
+    }
+
+    private function assertAnswerFits(string $primary): void
+    {
+        // A gloss this long has no distractors of comparable length, which makes the
+        // question answerable on sight. The full explanation is kept separately.
+        $words = Text::wordCount($primary);
+        $chars = mb_strlen($primary, 'UTF-8');
+        if ($words > self::MAX_ANSWER_WORDS || $chars > self::MAX_ANSWER_CHARS) {
+            throw new \InvalidArgumentException(sprintf(
+                'The translation is too long to be a quiz option (%d words, %d characters; '
+                . 'the limit is %d words and %d characters). Shorten it to the core meaning — '
+                . 'the full explanation is kept separately.',
+                $words, $chars, self::MAX_ANSWER_WORDS, self::MAX_ANSWER_CHARS
+            ));
+        }
     }
 
     public function reject(int $entryId): void
