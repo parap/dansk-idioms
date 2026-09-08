@@ -75,6 +75,26 @@ SEED_PHP = r"""
     echo json_encode(array_column($hidden, "id"));
 """
 
+FLAG_PHP = r"""
+    use Dansk\Support\Db;
+    $id = Db::fetchValue("SELECT i.id FROM reading_items i
+                          JOIN reading_passages p ON p.id = i.passage_id
+                          WHERE p.slug = 'ui-fixture' ORDER BY i.position LIMIT 1");
+    // Idempotent: each check flags the item afresh, and one reader may report once.
+    Db::execute("DELETE FROM reading_reports WHERE item_id = ?", [$id]);
+    Db::execute("INSERT INTO reading_reports (item_id, user_id, anon_key, reason, note)
+                 VALUES (?, NULL, ?, 'also_correct', 'Mit svar var ogsaa rigtigt.')",
+                [$id, str_repeat('1', 32)]);
+    Db::execute("INSERT INTO reading_reports (item_id, user_id, anon_key, reason, note)
+                 VALUES (?, NULL, ?, 'no_correct', NULL)", [$id, str_repeat('2', 32)]);
+    Db::execute("UPDATE reading_items SET is_flagged = 1, report_count = 2 WHERE id = ?", [$id]);
+    echo (int) $id;
+"""
+
+ADMIN_PW_PHP = r"""
+    echo (string) Dansk\Support\Config::get('admin.password');
+"""
+
 PUBLISH_PHP = r"""
     use Dansk\Support\Db;
     Db::execute("UPDATE reading_passages SET is_published = 0 WHERE slug LIKE 'ui-fixture%'");
@@ -393,6 +413,64 @@ def handing_in_reports_a_karakter_and_a_review(b):
     assert total == '5', f'paper reported out of {total}, expected 5'
     # The karakter is shown, and shown as indicative rather than as an exam grade.
     assert b.js('document.querySelector("#final").nextElementSibling.textContent.trim().length') > 0
+
+
+def flag_a_fixture_item():
+    """Withdraw one fixture item by hand, so the queue has something in it."""
+    return int(php(FLAG_PHP))
+
+
+def admin_password():
+    return php(ADMIN_PW_PHP)
+
+
+def sign_in_to_admin(b):
+    pw = admin_password()
+    if pw == '':
+        raise AssertionError('admin.password is not configured, so the queue cannot be reached')
+    b.goto('/admin')
+    b.until('!!document.querySelector("#pw")', what='the admin login')
+    b.js('document.querySelector("#pw").value = ' + json.dumps(pw))
+    b.js('document.querySelector("#loginBtn").click()')
+    b.until('document.querySelector("#login").hidden', what='the login card to go away')
+
+
+@check
+def the_flag_queue_shows_a_withdrawn_item_and_what_was_said(b):
+    flag_a_fixture_item()
+    sign_in_to_admin(b)
+    b.js('document.querySelector("#toFlags").click()')
+    b.until('!!document.querySelector(".flag")', what='the flag queue')
+
+    assert b.js('document.querySelectorAll(".flag").length') == 1
+    text = b.js('document.querySelector(".flag").textContent')
+    assert 'UI fixture' in text
+    assert 'Mit svar var ogsaa rigtigt.' in text, 'the note a learner wrote is not shown'
+    assert 'no_correct' in text, 'the second report is not shown'
+
+
+@check
+def the_queue_marks_which_option_the_key_calls_correct(b):
+    flag_a_fixture_item()
+    sign_in_to_admin(b)
+    b.js('document.querySelector("#toFlags").click()')
+    b.until('!!document.querySelector(".flag")', what='the flag queue')
+
+    # A reviewer cannot judge "my answer was also right" without seeing the key.
+    assert b.js('document.querySelectorAll(".flag .opt.right").length') == 1
+
+
+@check
+def clearing_a_flag_empties_the_queue(b):
+    flag_a_fixture_item()
+    sign_in_to_admin(b)
+    b.js('document.querySelector("#toFlags").click()')
+    b.until('!!document.querySelector(".flag")', what='the flag queue')
+    b.js('document.querySelector(".flag .keep").click()')
+    b.until('document.querySelectorAll(".flag").length === 0', what='the queue to empty')
+
+    assert php("use Dansk\\Support\\Db; echo (int) Db::fetchValue("
+               "\"SELECT COUNT(*) FROM reading_items WHERE is_flagged = 1\");") == '0'
 
 
 # ---- runner ----------------------------------------------------------------

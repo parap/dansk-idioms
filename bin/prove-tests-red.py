@@ -190,6 +190,14 @@ FAULTS = [
  (64,"the appeal link never appears","public/read.html",
   "    + ` \u00b7 <button class=\"link\" id=\"rep-${item.position}\">${esc(t('report'))}</button>`;",
   "    + ``;","ui"),
+ (65,"the appeal queue hides the answer key","public/admin.html",
+  "        <div class=\"opt${Number(o.is_correct) === 1 ? ' right' : ''}\">",
+  "        <div class=\"opt\">","ui"),
+ (66,"the appeal queue hides what readers said","public/admin.html",
+  "          <li><span class=\"reason\">${esc(r.reason)}</span>${r.note ? ' \u2014 ' + esc(r.note) : ''}</li>",
+  "          <li></li>","ui"),
+ (67,"the appeal queue lists sound items too","src/Domain/Reading/ReadingReportRepository.php",
+  "             WHERE i.is_flagged = 1","             WHERE 1 = 1","integration"),
 ]
 
 def run(suite):

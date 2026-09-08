@@ -61,6 +61,19 @@
   .msg.err{color:var(--bad)} .msg.ok{color:var(--ok)}
   .login{max-width:22rem;margin:5rem auto}
   [hidden]{display:none!important}
+
+  /* Reading appeals */
+  .flag{border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:14px}
+  .flag h3{margin:0 0 .2rem;font-size:1rem}
+  .flag .where{color:var(--muted);font-size:.85rem;margin:0 0 .8rem}
+  .flag .opt{border:1px solid var(--line);border-radius:8px;padding:7px 10px;margin-bottom:6px}
+  /* Only variables this page defines: an undefined custom property resolves to
+     nothing at all, with no error anywhere to say the rule did not apply. */
+  .flag .opt.right{border-color:var(--ok);background:var(--chip);color:var(--ok);font-weight:600}
+  .flag .said{margin:.8rem 0 0;padding-left:1rem;border-left:3px solid var(--line)}
+  .flag .said li{margin-bottom:.3rem;font-size:.9rem}
+  .flag .reason{color:var(--muted);font-variant:all-small-caps;letter-spacing:.04em}
+  .navlink{background:none;border:none;color:var(--accent);font:inherit;cursor:pointer;padding:0}
 </style>
 </head>
 <body>
@@ -81,11 +94,21 @@
     <header>
       <h1>Review queue</h1>
       <span class="counts" id="counts"></span>
+      <button class="navlink" id="toFlags">Reading appeals &rarr;</button>
     </header>
     <div class="bar"><i id="bar" style="width:0"></i></div>
 
     <div id="card" class="card"></div>
     <div id="msg" class="msg"></div>
+  </div>
+
+  <div id="flags" hidden>
+    <header>
+      <h1>Reading appeals</h1>
+      <span class="counts" id="flagCounts"></span>
+      <button class="navlink" id="toQueue">&larr; Idiom queue</button>
+    </header>
+    <div id="flagList"></div>
   </div>
 
   <div id="done" class="done" hidden>
@@ -110,7 +133,7 @@ const api = async (path, opts = {}) => {
 };
 const $ = s => document.querySelector(s);
 const show = which => {
-  for (const id of ['login','app','done']) $('#'+id).hidden = (id !== which);
+  for (const id of ['login','app','flags','done']) $('#'+id).hidden = (id !== which);
 };
 
 let items = [], idx = 0, counts = {}, total = 0;
@@ -228,6 +251,54 @@ async function load() {
   items = data.items; counts = data.counts; total = items.length; idx = 0;
   draw();
 }
+
+// ---- reading appeals -----------------------------------------------------
+//
+// A withdrawn item cannot be judged without the question, its options, which one the key
+// calls correct, and what the readers actually said. Anything less and the reviewer is
+// guessing at "my answer was also right".
+
+async function loadFlags() {
+  const data = await api('/admin/reading/flags');
+  drawFlags(data.items);
+  show('flags');
+}
+
+function drawFlags(list) {
+  $('#flagCounts').textContent = list.length === 0
+    ? 'nothing withdrawn'
+    : `${list.length} item${list.length === 1 ? '' : 's'} withdrawn from new rounds`;
+
+  $('#flagList').innerHTML = list.map(item => `
+    <div class="flag" data-id="${item.id}">
+      <h3>${esc(item.prompt ?? 'Gap ' + item.position)}</h3>
+      <p class="where">${esc(item.passage_title)} · ${esc(item.kind)} · question ${item.position}
+         · ${item.report_count} report${item.report_count === 1 ? '' : 's'}</p>
+      ${item.options.map(o => `
+        <div class="opt${Number(o.is_correct) === 1 ? ' right' : ''}">
+          <b>${esc(o.label)}.</b> ${esc(o.text)}
+        </div>`).join('')}
+      <ul class="said">
+        ${item.reports.map(r => `
+          <li><span class="reason">${esc(r.reason)}</span>${r.note ? ' — ' + esc(r.note) : ''}</li>`).join('')}
+      </ul>
+      <p style="margin:.9rem 0 0">
+        <button class="primary keep" data-id="${item.id}">Item is sound — put it back</button>
+      </p>
+    </div>`).join('');
+
+  $('#flagList').querySelectorAll('.keep').forEach(b => {
+    b.onclick = async () => {
+      b.disabled = true;
+      await api(`/admin/reading/items/${b.dataset.id}/clear`, {method: 'POST'});
+      await loadFlags();
+    };
+  });
+}
+
+$('#toFlags').onclick = () => loadFlags().catch(() => show('login'));
+$('#toQueue').onclick = () => show(items.length && idx < total ? 'app' : 'done');
+
 load().catch(() => show('login'));
 </script>
 </body>
