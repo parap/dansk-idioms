@@ -11,3 +11,6 @@
 
 # Python bytecode from bin/ scripts
 __pycache__/
+
+# Crash ledger from bin/prove-tests-red.py
+/.prove-tests-red/

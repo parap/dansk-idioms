@@ -253,12 +253,14 @@ docker-compose up -d
 |---|---|
 | `bin/load-export.sh [dir]` | import the newest (or named) Telegram export |
 | `php bin/import.php --file=… [--dry-run]` | import one file; `--dry-run` writes nothing |
+| `php bin/idiom-import.php [file…]` | load the hand-added idioms in `content/idioms/` |
+| `php bin/audit-shared-senses.php` | list idioms that can be served as each other's wrong answer |
 | `php bin/migrate.php [--status]` | apply pending migrations |
 | `php bin/reclassify.php [--dry-run]` | recompute derived shape after changing heuristics |
-| `vendor/bin/phpunit` | the whole suite (65 tests) |
+| `vendor/bin/phpunit` | the whole suite |
 | `vendor/bin/phpunit --testsuite unit` | parser and text logic only, no database |
 | `vendor/bin/phpunit --testsuite integration` | real SQL against a scratch schema |
-| `python3 bin/prove-tests-red.py` | break the code on purpose; every fault must be caught |
+| `python3 bin/prove-tests-red.py [n…]` | break the code on purpose; every fault must be caught |
 
 Prefix with `docker-compose exec app` for the PHP ones.
 
@@ -305,13 +307,13 @@ Russian gets its three forms (1 раунд / 2 раунда / 5 раундов).
 
 Two suites, because the failures came from two different places.
 
-**`unit`** — 40 tests over parsing, extraction and normalisation. Every case is taken
+**`unit`** — parsing, extraction and normalisation. Every case is taken
 from the real export and encodes a failure that was actually observed: a gloss of a
 component word served as the answer, a literal reading outranking the meaning, a
 transliterated Danish word offered as Russian, `trim()` cutting a Cyrillic letter in
 half. These are fast and catch extraction regressions the moment a rule changes.
 
-**`integration`** — 25 tests against a scratch `dansk_test` schema, built from the real
+**`integration`** — a scratch `dansk_test` schema, built from the real
 migrations and dropped afterwards. This suite exists because *every* expensive bug in
 this project lived in code that talks to the database and was unreachable from a unit
 test: a primary flag lost on upsert (which left 320 of 349 idioms unanswerable), a
@@ -328,13 +330,21 @@ human correction severed by a re-parse, 18 idioms deleted by a wrong definition 
 - distractors never repeat, never come from the same idiom, and always match the answer
   on verb parity
 
-**A suite that has only ever passed proves nothing.** `bin/prove-tests-red.py` injects 16
+**A suite that has only ever passed proves nothing.** `bin/prove-tests-red.py` injects
 faults one at a time — an inverted guard, a dropped filter, a column missing from an
 upsert, grading taken from the client's own claim — and requires the suite to fail for
 each. Every injection is guarded by a byte comparison against a copy of the original, so
 an edit that silently fails to apply cannot be read as a passing check. A fault that
 survives means an uncovered case or genuinely equivalent behaviour; read the code it
 touches to decide which. Run it after changing anything in `src/`.
+
+A fault lives in the file for as long as one suite takes to run, so the injection is
+recorded on disk beside an untouched copy before it happens. An interrupt restores the
+file through a signal handler; a `kill -9`, a power cut or a closed container answer to
+nobody, and there the next run finds the record and puts the file back before doing
+anything else. Naming fault numbers or ranges — `prove-tests-red.py 94-99` — runs only
+those, which is what makes the harness usable while writing the code it guards; the gate
+before a commit is the unselected run.
 
 The integration suite takes ~9 seconds, nearly all of it re-importing the fixture in
 each test's `setUp`. Cleanup between tests uses `DELETE`, not `TRUNCATE`: TRUNCATE is

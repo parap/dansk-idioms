@@ -16,7 +16,7 @@ use Dansk\Support\Db;
 
 $files = array_slice($argv, 1);
 if ($files === []) {
-    $files = glob(__DIR__ . '/../content/idioms/*.json') ?: [];
+    $files = IdiomFile::entryFiles(__DIR__ . '/../content/idioms');
 }
 if ($files === []) {
     fwrite(STDERR, "usage: php bin/idiom-import.php <file.json>...\n");
@@ -32,6 +32,17 @@ foreach ($files as $file) {
         printf("  %-32s ok  %d idiom(s)\n", basename($file), count($ids));
     } catch (InvalidArgumentException $e) {
         printf("  %-32s rejected: %s\n", basename($file), $e->getMessage());
+        $failed++;
+    }
+}
+
+// Relationships come after content: a group can only be declared once both idioms exist.
+$synonymFile = IdiomFile::groupFile(__DIR__ . '/../content/idioms');
+if (is_file($synonymFile) && !in_array($synonymFile, $files, true)) {
+    try {
+        printf("  %-32s ok  %d group(s)\n", basename($synonymFile), $loader->loadSynonymGroups($synonymFile));
+    } catch (InvalidArgumentException $e) {
+        printf("  %-32s rejected: %s\n", basename($synonymFile), $e->getMessage());
         $failed++;
     }
 }

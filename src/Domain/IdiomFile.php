@@ -2,6 +2,9 @@
 
 namespace Dansk\Domain;
 
+use Dansk\Import\Normalizer;
+use Dansk\Import\Text;
+use Dansk\Support\Db;
 use InvalidArgumentException;
 
 /**
@@ -27,6 +30,30 @@ use InvalidArgumentException;
 final class IdiomFile
 {
     private const REQUIRED = ['term', 'ru'];
+
+    /**
+     * Declares relationships over the corpus rather than content of its own, so it is
+     * read by loadSynonymGroups() and never by load().
+     */
+    public const GROUP_FILE = 'synonyms.json';
+
+    /**
+     * The entry files of a content directory.
+     *
+     * @return list<string>
+     */
+    public static function entryFiles(string $dir): array
+    {
+        return array_values(array_filter(
+            glob(rtrim($dir, '/') . '/*.json') ?: [],
+            static fn(string $f): bool => basename($f) !== self::GROUP_FILE
+        ));
+    }
+
+    public static function groupFile(string $dir): string
+    {
+        return rtrim($dir, '/') . '/' . self::GROUP_FILE;
+    }
 
     public function __construct(private ReviewRepository $idioms = new ReviewRepository()) {}
 
@@ -70,6 +97,66 @@ final class IdiomFile
         }
 
         return $ids;
+    }
+
+    /**
+     * Declares synonym groups from a JSON list of term lists.
+     *
+     *     [["sgu", "fandeme"], ["at hoppe på", "at melde sig på banen"]]
+     *
+     * Kept apart from the idiom files because these describe relationships over the
+     * imported corpus rather than content this repository owns. A group naming an idiom
+     * that is not present is skipped rather than fatal: the Telegram export is not
+     * committed, so a fresh database has none of those idioms and refusing to load would
+     * make the file unusable exactly where it matters.
+     *
+     * @return int the number of groups actually declared
+     */
+    public function loadSynonymGroups(string $path): int
+    {
+        if (!is_file($path)) {
+            throw new InvalidArgumentException("No such synonym file: {$path}");
+        }
+
+        $groups = json_decode((string) file_get_contents($path), true);
+        if (!is_array($groups) || !array_is_list($groups)) {
+            throw new InvalidArgumentException(
+                basename($path) . ' must contain a JSON list of term lists.'
+            );
+        }
+
+        $declared = 0;
+        foreach ($groups as $index => $group) {
+            $terms = $this->strings($group);
+            if (count($terms) < 2) {
+                throw new InvalidArgumentException(
+                    basename($path) . ": group {$index} needs at least two terms."
+                );
+            }
+
+            $present = array_values(array_filter($terms, fn(string $t): bool => $this->known($t)));
+            if (count($present) < 2) {
+                continue;
+            }
+
+            // Every member joined to the first, and declareSynonym joins whichever group
+            // either already belongs to -- so the whole set ends up in one group.
+            $first = array_shift($present);
+            $this->idioms->declareSynonyms($first, $present);
+            $declared++;
+        }
+
+        return $declared;
+    }
+
+    private function known(string $term): bool
+    {
+        $id = Db::fetchValue(
+            "SELECT id FROM idioms WHERE lang_code = 'da' AND term_norm = ?",
+            [Normalizer::term(Text::collapseWhitespace($term))]
+        );
+
+        return $id !== false && $id !== null;
     }
 
     /**

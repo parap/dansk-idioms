@@ -27,7 +27,7 @@ final class IdiomFileTest extends IntegrationTestCase
     /** @return list<string> */
     private function shipped(): array
     {
-        return glob(dirname(__DIR__, 2) . '/content/idioms/*.json') ?: [];
+        return IdiomFile::entryFiles(dirname(__DIR__, 2) . '/content/idioms');
     }
 
     public function testEveryShippedFileLoads(): void
@@ -88,6 +88,56 @@ final class IdiomFileTest extends IntegrationTestCase
                  JOIN idiom_synonyms s2 ON s2.group_id = s1.group_id AND s2.idiom_id <> s1.idiom_id
                  WHERE s1.idiom_id = ?', [$ids[0]]
             ));
+        } finally {
+            @unlink($path);
+        }
+    }
+
+    public function testASynonymGroupFileDeclaresEveryPairInAGroup(): void
+    {
+        $repo = new \Dansk\Domain\ReviewRepository();
+        foreach (['sgu', 'fandeme', 'bandeme'] as $term) {
+            $repo->addByHand($term, 'чёрт возьми ' . $term);
+        }
+
+        $path = sys_get_temp_dir() . '/syn.json';
+        file_put_contents($path, json_encode([['sgu', 'fandeme', 'bandeme']], JSON_UNESCAPED_UNICODE));
+
+        try {
+            self::assertSame(1, $this->loader->loadSynonymGroups($path));
+            // One group, all three in it, so no pair is ever offered against another.
+            self::assertSame(3, (int) Db::fetchValue('SELECT COUNT(*) FROM idiom_synonyms'));
+            self::assertSame(1, (int) Db::fetchValue('SELECT COUNT(*) FROM synonym_groups'));
+        } finally {
+            @unlink($path);
+        }
+    }
+
+    public function testASynonymGroupNamingAnAbsentIdiomIsSkippedNotFatal(): void
+    {
+        // These groups describe the imported corpus, which the repository cannot
+        // reproduce -- the Telegram export is not committed. A fresh database therefore
+        // has none of those idioms, and refusing to load would make the file unusable
+        // exactly where it is most needed.
+        $path = sys_get_temp_dir() . '/syn-absent.json';
+        file_put_contents($path, json_encode([['at hoppe på', 'at melde sig på banen']], JSON_UNESCAPED_UNICODE));
+
+        try {
+            self::assertSame(0, $this->loader->loadSynonymGroups($path));
+            self::assertSame(0, (int) Db::fetchValue('SELECT COUNT(*) FROM synonym_groups'));
+        } finally {
+            @unlink($path);
+        }
+    }
+
+    public function testASynonymGroupNeedsAtLeastTwoTerms(): void
+    {
+        $path = sys_get_temp_dir() . '/syn-one.json';
+        file_put_contents($path, json_encode([['sgu']], JSON_UNESCAPED_UNICODE));
+
+        try {
+            $this->expectException(InvalidArgumentException::class);
+            $this->loader->loadSynonymGroups($path);
         } finally {
             @unlink($path);
         }

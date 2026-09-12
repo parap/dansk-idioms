@@ -13,14 +13,52 @@ Each injection is guarded by a byte comparison against a copy of the original. A
 that silently fails to apply leaves the suite running against unmodified code, and a
 "red" run that was never red is the one outcome this exercise exists to rule out.
 
-    python3 bin/prove-tests-red.py
+    python3 bin/prove-tests-red.py            # every fault
+    python3 bin/prove-tests-red.py 94-99 12   # only those, while working on them
 
-Restores every file it touches, including on failure.
+Restores every file it touches, including on failure and on a kill it cannot catch.
 """
 
-import subprocess, sys, pathlib, shutil, filecmp, tempfile, os, signal, atexit
+import subprocess, sys, pathlib, shutil, filecmp, tempfile, os, signal, atexit, json
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+
+# A fault lives in a source file for as long as one suite takes to run. Signal handlers
+# cover an interrupt, but SIGKILL, a power cut or a closed container answer to nobody --
+# and what survives is a deliberately broken line in the working tree with nothing to say
+# it is there. So the injection is recorded on disk before it happens, alongside the
+# untouched copy, and the next run puts the file back before doing anything else.
+STATE = ROOT / ".prove-tests-red"
+LEDGER = STATE / "pending.json"
+
+def record_injection(path, backup):
+    STATE.mkdir(exist_ok=True)
+    kept = STATE / "original"
+    shutil.copy2(backup, kept)
+    LEDGER.write_text(json.dumps({
+        "path": str(path.relative_to(ROOT)), "original": kept.name
+    }), encoding='utf-8')
+
+def clear_injection():
+    LEDGER.unlink(missing_ok=True)
+    (STATE / "original").unlink(missing_ok=True)
+
+def recover_injection():
+    """Puts back a file left injected by a run that was killed outright."""
+    if not LEDGER.is_file():
+        return
+    note = json.loads(LEDGER.read_text(encoding='utf-8'))
+    target, kept = ROOT / note["path"], STATE / note["original"]
+    if kept.is_file():
+        shutil.copy2(kept, target)
+        print(f"  a previous run was killed mid-injection — {note['path']} restored\n")
+    else:
+        print(f"  a previous run was killed mid-injection and the copy of "
+              f"{note['path']} is gone. Restore it from git before trusting this run.\n")
+        sys.exit(1)
+    clear_injection()
+
+recover_injection()
 
 FAULTS = [
  (1,"EntrySegmenter always-head","src/Import/EntrySegmenter.php",
@@ -261,6 +299,21 @@ FAULTS = [
   "        if ($otherId === $idiomId) {","        if (false) {","integration"),
  (93,"synonyms are never resolved from a file","src/Domain/IdiomFile.php",
   "            if ($synonyms === []) {","            if (true) {","integration"),
+ (94,"the audit ignores declared synonyms","src/Domain/SharedSenseAudit.php",
+  "                     WHERE s1.idiom_id = a.idiom_id AND s2.idiom_id = b.idiom_id)",
+  "                     WHERE s1.idiom_id = 0 AND s2.idiom_id = 0)","integration"),
+ (95,"the audit misses shared literal readings","src/Domain/SharedSenseAudit.php",
+  "             WHERE (a.quiz_usable = 1 OR a.sense_type = 'literal')",
+  "             WHERE a.quiz_usable = 1","integration"),
+ (96,"the audit reports every pair twice","src/Domain/SharedSenseAudit.php",
+  "              AND b.idiom_id > a.idiom_id","              AND b.idiom_id <> a.idiom_id","integration"),
+ (97,"the audit counts unpublished idioms","src/Domain/SharedSenseAudit.php",
+  "             JOIN idioms ia ON ia.id = a.idiom_id AND ia.is_published = 1",
+  "             JOIN idioms ia ON ia.id = a.idiom_id","integration"),
+ (98,"a synonym group of one is accepted","src/Domain/IdiomFile.php",
+  "            if (count($terms) < 2) {","            if (false) {","integration"),
+ (99,"an absent idiom makes a group file fatal","src/Domain/IdiomFile.php",
+  "            if (count($present) < 2) {","            if (false) {","integration"),
 ]
 
 def run(suite):
@@ -273,6 +326,24 @@ def run(suite):
         cmd = ["docker-compose","exec","-T","app","vendor/bin/phpunit","--testsuite",suite]
     r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
     return r.returncode == 0
+
+# Selecting faults keeps a run on the code being worked on short enough to actually run:
+# the integration suite takes half a minute, and the whole list is most of an hour. A
+# selective run is a development aid -- the gate before a commit is the unselected one.
+if len(sys.argv) > 1:
+    wanted = set()
+    for arg in sys.argv[1:]:
+        lo, _, hi = arg.partition('-')
+        try:
+            wanted.update(range(int(lo), int(hi or lo) + 1))
+        except ValueError:
+            sys.exit(f"  not a fault number or range: {arg}")
+    FAULTS = [f for f in FAULTS if f[0] in wanted]
+    missing = wanted - {f[0] for f in FAULTS}
+    if missing:
+        # Silently running fewer faults than asked for is the failure this whole exercise
+        # exists to prevent, one level up.
+        sys.exit(f"  no such fault(s): {', '.join(str(n) for n in sorted(missing))}")
 
 ambiguous = []
 for num, name, relpath, old, new, suite in FAULTS:
@@ -300,6 +371,7 @@ def restore_pending():
     pending = None
     shutil.copy2(backup, path)
     os.unlink(backup)
+    clear_injection()
 
 def on_signal(signum, _frame):
     restore_pending()
@@ -320,6 +392,7 @@ for num, name, relpath, old, new, suite in FAULTS:
     backup = tempfile.NamedTemporaryFile(delete=False).name
     shutil.copy2(f, backup)
     pending = (f, backup)
+    record_injection(f, backup)
     try:
         text = f.read_text(encoding='utf-8')
         if old not in text:
