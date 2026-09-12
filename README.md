@@ -183,10 +183,12 @@ The machine is behind NAT, so a tunnel is needed. A quick Cloudflare tunnel need
 account and opens no inbound port:
 
 ```bash
-docker run -d --name dansk_tunnel --network danskdiv_default --restart unless-stopped \
-  cloudflare/cloudflared:latest tunnel --no-autoupdate --url http://app:80
-docker logs dansk_tunnel | grep -o 'https://.*trycloudflare.com'
+bin/tunnel.sh start    # creates the container and prints the URL once it serves
 ```
+
+`--protocol http2` is not optional here. cloudflared prefers QUIC, UDP 7844 does not leave
+this network, and the tunnel then registers nothing and retries forever while the
+container still reports `Up`.
 
 The URL changes on every restart, and Cloudflare terminates the TLS, so your traffic is
 readable at their edge. `docker rm -f dansk_tunnel` stops it instantly.
@@ -196,8 +198,19 @@ readable at their edge. `docker rm -f dansk_tunnel` stops it instantly.
 ```bash
 bin/tunnel.sh url      # the current public URL
 bin/tunnel.sh check    # does that URL actually serve the app? exit 1 if not
-bin/tunnel.sh heal     # restart a broken tunnel and print the new URL
+bin/tunnel.sh start    # (re)create the tunnel and print the new URL
+bin/tunnel.sh heal     # check, and rebuild a broken tunnel
 ```
+
+`heal` rebuilds rather than restarts, because a restart keeps the command the container
+was created with: a tunnel created without `--protocol http2` cannot be repaired by
+restarting it.
+
+**Do not look the new hostname up until the tunnel has registered.** The record does not
+exist yet, the network's resolver caches that answer for the zone's negative TTL, and a
+working tunnel then looks dead from this machine for half an hour while it serves everyone
+else. `start` waits for `Registered tunnel connection` and then another 30 seconds before
+its first query, which is why it is the way to bring a tunnel up.
 
 `check` asks `/api/v1/health` rather than the front page on purpose. A quick tunnel drops
 its control stream and sits in a reconnect loop while the container still reports `Up`,
