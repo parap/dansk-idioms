@@ -314,6 +314,12 @@ FAULTS = [
   "            if (count($terms) < 2) {","            if (false) {","integration"),
  (99,"an absent idiom makes a group file fatal","src/Domain/IdiomFile.php",
   "            if (count($present) < 2) {","            if (false) {","integration"),
+ (100,"a wrapped part loses its tail","src/Domain/Reading/PassageDocument.php",
+  "            $bank[array_key_last($bank)]['text'] .= ' ' . trim($line);",
+  "            // dropped","unit"),
+ (101,"a repeated part letter is accepted","src/Domain/Reading/PassageDocument.php",
+  "                if (in_array($m[1], array_column($bank, 'label'), true)) {",
+  "                if (false) {","unit"),
 ]
 
 def run(suite):

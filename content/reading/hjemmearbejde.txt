@@ -1,0 +1,50 @@
+kind: insert
+slug: hjemmearbejde
+title: Hjemmearbejdet har fundet sit leje
+
+--- text ---
+Da kontorerne lukkede i foråret 2020, troede mange, at hjemmearbejde var en midlertidig
+nødløsning. {{1}} I dag er billedet et andet. På de fleste danske kontorarbejdspladser er
+en eller to hjemmedage om ugen blevet det normale, og kun få steder er man gået helt
+tilbage til fem dage på kontoret.
+
+Fordelene er lette at få øje på. Transporttiden forsvinder, og for den, der bor langt fra
+sin arbejdsplads, bliver det til flere timer om ugen, som kan bruges på noget andet.
+{{2}} Netop derfor er hjemmedage blevet et argument i sig selv, når virksomheder skal
+tiltrække nye medarbejdere.
+
+Men noget bliver også sværere. {{3}} Det er sjældent de planlagte møder, der mangler,
+for dem kan man holde over skærmen lige så godt. Det er de korte samtaler ved
+kaffemaskinen, hvor man tilfældigt opdager, at en kollega sidder med præcis det samme
+problem som en selv.
+
+Særligt for de nyansatte er det et problem. {{4}} En erfaren medarbejder kan arbejde
+hjemme i ugevis uden at miste overblikket, fordi hun allerede ved, hvem hun skal spørge
+om hvad. Den nye ved det ikke, og hun ved heller ikke, at hun burde spørge.
+
+Derfor forsøger mange arbejdspladser nu at styre, hvilke dage man mødes, i stedet for at
+lade hver enkelt vælge frit. {{5}} Det lyder banalt, men det er svært at få til at
+fungere i praksis, og det kræver først og fremmest, at lederne selv møder op de dage.
+
+--- parts ---
+A Det blev den ikke. Efter to år med skiftende regler havde både medarbejdere og ledere
+  vænnet sig til en hverdag, hvor arbejdet ikke nødvendigvis foregik på kontoret.
+B Til gengæld melder mange om færre afbrydelser og bedre koncentration, når opgaven
+  kræver, at man sidder med den samme tekst i flere timer i træk.
+C Undersøgelser peger på, at det uformelle samarbejde er det første, der forsvinder, når
+  kollegerne ikke længere sidder i det samme rum til daglig.
+D De skal både lære selve opgaverne og finde ud af, hvordan huset fungerer, og det
+  sidste står der sjældent noget om i en vejledning.
+E Pointen er, at hele teamet er til stede på de samme dage, så en kontordag ikke ender
+  med, at man sidder alene i et tomt lokale.
+F Nogle virksomheder har derfor opsagt en del af deres lokaler og lejer sig i stedet ind
+  efter behov, når en hel afdeling skal samles.
+G Enkelte brancher kan slet ikke bruge ordningen, for man kan hverken passe en
+  børnehave eller reparere en bil hjemmefra.
+
+--- questions ---
+1. A
+2. B
+3. C
+4. D
+5. E

@@ -148,13 +148,25 @@ final class PassageDocument
             if (trim($line) === '') {
                 continue;
             }
-            if (!preg_match('/^\s*([A-Z])\s+(\S.*)$/', $line, $m)) {
+
+            if (preg_match('/^\s*([A-Z])\s+(\S.*)$/', $line, $m)) {
+                if (in_array($m[1], array_column($bank, 'label'), true)) {
+                    throw new InvalidPassage("Part '{$m[1]}' is listed twice, on line {$no}.");
+                }
+                if ($m[1] === chr(ord('A') + count($bank))) {
+                    $bank[] = ['label' => $m[1], 'text' => trim($m[2])];
+                    continue;
+                }
+            }
+
+            // Parts are lettered in order, so a line that does not open the next letter
+            // continues the part above it, as lines in the text section do. A part runs
+            // 25-35 words and wraps where it is written, and a wrapped line may open with
+            // a capital of its own -- "I Danmark er der ..." is a sentence, not part I.
+            if ($bank === []) {
                 throw new InvalidPassage("Expected 'A some text' in the parts section on line {$no}.");
             }
-            if (in_array($m[1], array_column($bank, 'label'), true)) {
-                throw new InvalidPassage("Part '{$m[1]}' is listed twice, on line {$no}.");
-            }
-            $bank[] = ['label' => $m[1], 'text' => trim($m[2])];
+            $bank[array_key_last($bank)]['text'] .= ' ' . trim($line);
         }
 
         if ($bank === []) {

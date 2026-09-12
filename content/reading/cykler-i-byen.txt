@@ -1,0 +1,20 @@
+kind: cloze
+slug: cykler-i-byen
+title: Cykler i byen
+
+--- text ---
+Hver morgen ruller tusindvis af cyklister ind mod centrum. {{1}} har kommunen bygget
+nye stier langs de store veje, og det {{2}} at flere tør cykle til arbejde.
+
+--- questions ---
+1.
+* Derfor
+  Alligevel
+  Dernæst
+  Til gengæld
+
+2.
+* betyder
+  betyde
+  betydning
+  betydet

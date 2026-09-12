@@ -41,9 +41,12 @@ kommunen bygget nye stier, og det {{2}} at flere tør cykle til arbejde.
   Hun flyttede til en anden by
 ```
 
-**Insertion** removes whole sentences. The parts are lettered in their own section, each
-gap names one, and the section must offer more parts than there are gaps — the spare ones
-fit nowhere, so the task cannot be finished by elimination alone.
+**Insertion** removes whole sentences. The parts are lettered A, B, C … in order in their
+own section, each gap names one, and the section must offer more parts than there are gaps
+— the spare ones fit nowhere, so the task cannot be finished by elimination alone. A part
+runs to a couple of lines and wraps like any other text: a line that does not open the
+next letter continues the part above it, so `I Danmark er der …` is a sentence rather than
+part I.
 
 ```
 --- text ---

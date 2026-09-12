@@ -129,7 +129,63 @@ final class PassageDocumentTest extends TestCase
         self::assertSame('C', $doc['items'][1]['correct_label']);
     }
 
+    public function testAWrappedPartRejoinsIntoOneLine(): void
+    {
+        // A part runs 25-35 words. Demanding it on one physical line makes the document
+        // unreadable in the editor it is written in, and the text section already
+        // rejoins, so a part that wraps has to mean the same thing.
+        $doc = $this->parse(<<<'DOC'
+            kind: insert
+            slug: x
+            title: X
+
+            --- text ---
+            En sætning mangler her. {{1}} Resten af teksten fortsætter bagefter.
+
+            --- parts ---
+            A I Danmark er der hver dag 35.000 sygemeldinger, og det tal
+              har ligget stabilt i flere år.
+            B Det forventes at nye medarbejdere møder ind.
+
+            --- questions ---
+            1. A
+            DOC);
+
+        self::assertSame(
+            'I Danmark er der hver dag 35.000 sygemeldinger, og det tal har ligget stabilt i flere år.',
+            $doc['bank'][0]['text']
+        );
+        self::assertSame(['A', 'B'], array_column($doc['bank'], 'label'));
+    }
+
     // ---- what it refuses ----------------------------------------------------
+
+    public function testAPartListedTwiceIsRejected(): void
+    {
+        // A repeated letter is a typo, and an unlabelled line is a continuation -- so
+        // without this check the second B is glued onto the part above it and the
+        // document parses as if nothing were wrong. The bank here keeps a spare part
+        // either way, so nothing but this check can produce the refusal.
+        $this->expectException(InvalidPassage::class);
+        $this->expectExceptionMessage("Part 'B' is listed twice");
+        $this->parse(<<<'DOC'
+            kind: insert
+            slug: x
+            title: X
+
+            --- text ---
+            En sætning mangler her. {{1}} Resten fortsætter bagefter.
+
+            --- parts ---
+            A Den første tekstdel, som hører til i hullet ovenfor.
+            B En tekstdel, der ikke passer nogen steder.
+            C Endnu en tekstdel, der heller ikke passer.
+            B En tekstdel mere med et bogstav, der allerede er brugt.
+
+            --- questions ---
+            1. A
+            DOC);
+    }
 
     public function testADocumentWithoutATextSectionIsRejected(): void
     {

@@ -1,0 +1,58 @@
+kind: mc
+slug: voksne-paa-skolebaenken
+title: Voksne på skolebænken
+
+--- text ---
+Det er langtfra kun unge, der sidder på skolebænken. Hvert år melder tusindvis af voksne
+danskere sig til en uddannelse ved siden af eller i stedet for deres arbejde, og en stor
+del af dem er over fyrre. For nogle handler det om at få papir på noget, de længe har
+kunnet i praksis. For andre er det et skifte til et helt andet fag.
+
+Camilla Bang på 46 år stod i sytten år i den samme tøjbutik, før hun søgte ind på
+uddannelsen til social- og sundhedsassistent. "Jeg havde regnet med, at det faglige ville
+blive det svære. Det var det ikke," fortæller hun. "Det svære var at sidde i en klasse,
+hvor halvdelen kunne have været mine børn, og så række hånden op og sige, at jeg ikke
+havde forstået det. Det tog mig et par måneder at vænne mig til." I praktikken vendte
+billedet. Her viste de mange år bag disken sig at være en fordel, fordi hun var vant til
+at tale med alle slags mennesker og til at mærke, hvornår nogen havde en dårlig dag.
+
+Mikkel Sørensen på 38 år havde derimod ingen planer om at skifte fag. Han er mekaniker og
+har været i det samme værksted, siden han blev udlært. Da værkstedet begyndte at tage
+imod elbiler, meldte han sig til et efteruddannelsesforløb om arbejde med højspænding.
+"Jeg søgte ikke væk. Jeg søgte for at kunne blive," siger han. Arbejdsgiveren betalte
+kurset mod, at han blev i virksomheden i to år bagefter. "Det var jeg helt tryg ved. Jeg
+havde alligevel ikke tænkt mig at gå nogen steder."
+
+De to historier er typiske, siger Lene Krogh, der til daglig vejleder voksne om
+uddannelse. Efter hendes erfaring er det sjældent evnerne, der stopper folk. "Næsten alle
+kan det faglige, hvis de får tid nok. Det, der vælter læsset, er økonomien og
+kalenderen," siger hun. Der findes støtteordninger, men de er ikke lige til at overskue,
+og mange opdager først sent, hvad de kunne have søgt.
+
+Hun peger samtidig på en fælde, som hun ser igen og igen. "De, der falder fra, er næsten
+aldrig dem, der ikke kan følge med fagligt. Det er dem, der har sat timerne af på
+papiret uden at prøve det af først. Man regner med, at der nok skal være to timer om
+aftenen, og så viser det sig, at der er én, og at man er træt." Hendes råd er derfor at
+tale med familien om det, længe før man melder sig til, og at regne med mere tid, end man
+tror, man skal bruge.
+
+Både Camilla og Mikkel ville gøre det om igen. Camilla arbejder i dag på et plejehjem og
+tjener mindre, end hun gjorde i butikken. "Jeg har det bare bedre," siger hun. Mikkel er
+blevet den på værkstedet, som de andre kalder på, når der kommer en elbil ind ad porten.
+"Det havde jeg ikke set komme," siger han.
+
+--- questions ---
+1. Hvad var det sværeste for Camilla i begyndelsen af uddannelsen?
+  At fagene var vanskeligere, end hun havde forventet.
+* At hun skulle bede om hjælp foran meget yngre studerende.
+  At hun ikke kunne få økonomisk støtte til uddannelsen.
+
+2. Hvorfor meldte Mikkel sig til et kursus om elbiler?
+  Han ville skifte til en anden branche.
+  Hans arbejdsgiver krævede, at han fandt et nyt job.
+* Han ville kunne blive i det job, han allerede havde.
+
+3. Hvad peger Lene Krogh på som den typiske grund til, at voksne falder fra?
+* De har undervurderet, hvor meget tid uddannelsen kræver.
+  De mangler de faglige forudsætninger for at følge med.
+  De får ikke opbakning fra deres arbejdsgiver.

@@ -1,0 +1,73 @@
+kind: cloze
+slug: flytter-fra-storbyen
+title: Flere flytter væk fra de store byer
+
+--- text ---
+I mange år gik flyttestrømmen kun én vej: mod København, Aarhus og de andre store byer.
+{{1}} er billedet et andet. Tal fra Danmarks Statistik viser, at der de seneste år er
+flyttet flere børnefamilier ud af hovedstaden, end der er flyttet ind.
+
+Den vigtigste {{2}} er boligpriserne. En familie, der sælger en lejlighed på 85
+kvadratmeter i København, kan mange steder i landet {{3}} et hus med have for det samme
+beløb. {{4}} kommer muligheden for at arbejde hjemmefra et par dage om ugen, som har
+gjort afstanden til arbejdspladsen mindre afgørende, end den var for ti år siden.
+
+Udflytningen er dog ikke uden {{5}}. Flere kommuner uden for de store byer har svært ved
+at skaffe pladser i daginstitutionerne hurtigt nok, og den offentlige transport er nogle
+steder så dårlig, at familien {{6}} at have to biler. Og så er der det sociale: den, der
+flytter til en ny egn uden at kende nogen i forvejen, skal selv gøre arbejdet med at
+komme ind i et lokalsamfund. Det tager længere tid, end de fleste regner med, og nogle familier flytter
+derfor tilbage igen efter et par år.
+
+Alligevel {{7}} de fleste undersøgelser i samme retning. De, der er flyttet ud, er mere
+tilfredse {{8}} deres bolig end dem, der blev boende i byen, og de nævner især én ting,
+de savner: ikke byen selv, men de venner, der stadig bor i den.
+
+--- questions ---
+1.
+* Nu
+  Dengang
+  Siden
+  Endnu
+
+2.
+* årsag
+  følge
+  løsning
+  betingelse
+
+3.
+* købe
+  køber
+  købt
+  at købe
+
+4.
+* Dertil
+  Derfor
+  Derimod
+  Deraf
+
+5.
+* problemer
+  fordele
+  mening
+  grænser
+
+6.
+* bliver nødt til
+  har lyst til
+  holder op med
+  står for
+
+7.
+* peger
+  viser
+  siger
+  ser
+
+8.
+* med
+  af
+  for
+  på
