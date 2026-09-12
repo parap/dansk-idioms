@@ -87,6 +87,7 @@ services:
       - "443:443/udp"
     volumes:
       - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./docker/caddy/options:/etc/caddy/options:ro
       # The certificate and the ACME account live here. Lose this and every restart asks
       # Let's Encrypt for a new certificate, which is what their rate limits are for.
       - caddy_data:/data

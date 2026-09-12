@@ -14,3 +14,7 @@ __pycache__/
 
 # Crash ledger from bin/prove-tests-red.py
 /.prove-tests-red/
+
+# Per-deployment Caddy options; the ACME contact address is personal
+/docker/caddy/options/*
+!/docker/caddy/options/README.md

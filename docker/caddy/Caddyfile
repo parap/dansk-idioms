@@ -12,6 +12,13 @@
 # of it. A plain-http path alongside https would make the certificate decorative, because
 # the login form would still have a way to travel in the clear.
 
+{
+	# Per-deployment global options, the ACME contact address among them. The glob is
+	# what makes it optional: matching no files is a valid configuration, so a clone that
+	# has none still starts. See options/README.md.
+	import /etc/caddy/options/*.conf
+}
+
 danskidioms.com {
 	encode zstd gzip
 
