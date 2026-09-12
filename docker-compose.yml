@@ -8,6 +8,9 @@ services:
       # The laptop's own Apache owns :80, so it publishes 8080; a server with nothing else
       # on :80 sets APP_PORT=80 in .env. The default is the one that cannot collide.
       - "${APP_PORT:-8080}:80"
+      # The admin surface, on the loopback only. Reach it with
+      # ssh -L 8082:localhost:8082 <host> and open http://localhost:8082/admin.
+      - "${ADMIN_BIND:-127.0.0.1:8082}:81"
     restart: unless-stopped
     volumes:
       - .:/var/www/html

@@ -22,6 +22,11 @@ import websocket
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 BASE = 'http://localhost:8080'
 
+# The admin surface answers on its own listener, published to the loopback. Driving it
+# through BASE would prove nothing about the interface a reviewer actually uses, and
+# would quietly pass on a build where the public listener still serves the queue.
+ADMIN_BASE = 'http://localhost:8082'
+
 # Markup in a passage body must reach the page as text. The gap marker sits next to it so
 # a substitution that runs before escaping is caught by the same fixture.
 XSS_BODY = ('En tekst med <img src=x onerror="window.__pwned=1"> og et hul {{1}} midt i. '
@@ -224,8 +229,8 @@ class Browser:
             raise RuntimeError(f"page threw: {r['exceptionDetails'].get('text')}")
         return result.get('value')
 
-    def goto(self, path):
-        self.send('Page.navigate', url=BASE + path)
+    def goto(self, path, base=None):
+        self.send('Page.navigate', url=(base or BASE) + path)
         self.until('document.readyState === "complete"')
 
     def until(self, expression, timeout=10, what=None):
@@ -445,7 +450,7 @@ def sign_in_to_admin(b):
     if pw == '':
         raise AssertionError('admin.password is not configured, so the queue cannot be reached')
 
-    b.goto('/admin')
+    b.goto('/admin', ADMIN_BASE)
     b.until('!!document.querySelector("#pw")', what='the admin page')
 
     # Only sign in when the session is actually gone. Logging in again regenerates the
@@ -511,7 +516,7 @@ def the_health_endpoint_keeps_its_internals_to_itself(b):
 @check
 def guessing_the_admin_password_runs_out_of_attempts(b):
     php(CLEAR_THROTTLE_PHP)
-    b.goto('/admin')
+    b.goto('/admin', ADMIN_BASE)
     try:
         codes = []
         for _ in range(AdminAttempts.LIMIT + 1):
@@ -526,12 +531,34 @@ def guessing_the_admin_password_runs_out_of_attempts(b):
         php(CLEAR_THROTTLE_PHP)
 
 
+@check
+def the_public_listener_does_not_serve_the_admin_surface(b):
+    # The review queue and everything under it answer on the loopback listener only, so
+    # a machine with a public address is not offering its database console to whoever
+    # scans it. A forged Host header must not move the answer, which is the whole reason
+    # the listener marks itself rather than the request being trusted to say where it
+    # arrived.
+    b.goto('/admin')
+    assert b.js('!document.querySelector("#pw")'), 'the login form is served publicly'
+
+    for path in ('/api/v1/admin/review', '/api/v1/admin/reading/flags'):
+        status = b.js("fetch('%s').then(r => r.status)" % path)
+        assert status == 404, '%s answers %s on the public listener' % (path, status)
+
+    forged = b.js(
+        "fetch('/api/v1/admin/review', {headers: {'Dansk-Admin-Listener': '1'}})"
+        ".then(r => r.status)")
+    assert forged == 404, 'a header moved the admin surface onto the public listener'
+
+
 # ---- runner ----------------------------------------------------------------
 
 def main():
-    global BASE
+    global BASE, ADMIN_BASE
     if '--base' in sys.argv:
         BASE = sys.argv[sys.argv.index('--base') + 1]
+    if '--admin-base' in sys.argv:
+        ADMIN_BASE = sys.argv[sys.argv.index('--admin-base') + 1]
 
     hidden = seed()
     browser = None

@@ -6,6 +6,7 @@ use Dansk\Controller\QuizController;
 use Dansk\Controller\ReadingAdminController;
 use Dansk\Controller\ReadingController;
 use Dansk\Http\Response;
+use Dansk\Support\AdminReach;
 use Dansk\Support\Config;
 use Dansk\Support\Db;
 use FastRoute\Dispatcher;
@@ -65,7 +66,10 @@ if ($route[0] === Dispatcher::NOT_FOUND) {
         // Prefix order decides which shell wins, so a longer path that shares a
         // prefix with a shorter one has to be listed above it.
         $shell = match (true) {
-            str_starts_with($uri, '/admin') => '/admin.html',
+            // Off the admin port the review queue has no page, the same as any other
+            // address nobody has defined.
+            AdminReach::isAdminPath($uri)
+                && AdminReach::reachable($_SERVER) => '/admin.html',
             str_starts_with($uri, '/read')  => '/read.html',
             default                         => '/app.html',
         };
@@ -86,6 +90,14 @@ $body    = [];
 if (in_array($method, ['POST', 'PATCH', 'PUT'], true)) {
     $raw  = file_get_contents('php://input') ?: '';
     $body = $raw === '' ? [] : (json_decode($raw, true) ?? []);
+}
+
+// The admin surface answers on the loopback-published port and nowhere else, and off it
+// the endpoints are indistinguishable from addresses that were never defined. Checked
+// before authentication, so the public port never reports even that a password exists.
+if (AdminReach::isAdminHandler($handler) && !AdminReach::reachable($_SERVER)) {
+    Response::error('not_found', 'No such endpoint.', 404);
+    return;
 }
 
 // Everything under admin/ except login requires the session.

@@ -20,9 +20,19 @@ bin/load-export.sh                 # import your Telegram export
 | URL | What |
 |---|---|
 | http://localhost:8080 | the site |
-| http://localhost:8080/admin | review queue |
+| http://127.0.0.1:8082/admin | review queue |
 | http://127.0.0.1:8081 | Adminer (server `db`, user `dansk`, the password from `.env`) |
 | http://localhost:8080/api/v1/health | health + database check |
+
+**The review queue is on its own listener.** Apache serves the application on two ports;
+compose publishes the first to the world and the second to the loopback, and everything
+under `/admin` and `/api/v1/admin/` answers through the second alone — through the first
+those addresses are indistinguishable from ones that were never defined. From another
+machine: `ssh -L 8082:localhost:8082 <host>`, then http://localhost:8082/admin.
+
+The listener marks itself with a `SetEnv` that no client can set. `SERVER_PORT` cannot do
+that job: with `UseCanonicalName` off — the default — Apache takes it from the `Host`
+header, so the client would be choosing which side of the wall it was on.
 
 The container publishes **8080** because this host's Apache owns :80; a host with a free
 :80 sets `APP_PORT=80` in `.env`. The database publishes nothing because host MySQL owns
@@ -94,7 +104,7 @@ Multi-part exports (`messages2.html`, …) are handled automatically.
 
 ### 3. Review what it was unsure about
 
-Open http://localhost:8080/admin. Entries the parser could not confidently split wait
+Open http://127.0.0.1:8082/admin. Entries the parser could not confidently split wait
 there, lowest confidence first. <kbd>Enter</kbd> accepts, <kbd>N</kbd> skips,
 <kbd>R</kbd> rejects a chunk that is not an idiom at all. Extracted candidates appear
 as clickable chips, so you are usually picking rather than typing.

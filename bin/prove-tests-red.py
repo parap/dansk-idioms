@@ -320,6 +320,12 @@ FAULTS = [
  (101,"a repeated part letter is accepted","src/Domain/Reading/PassageDocument.php",
   "                if (in_array($m[1], array_column($bank, 'label'), true)) {",
   "                if (false) {","unit"),
+ (102,"the admin surface answers anywhere","public/index.php",
+  "if (AdminReach::isAdminHandler($handler) && !AdminReach::reachable($_SERVER)) {",
+  "if (false) {","ui"),
+ (103,"a header opens the admin listener","src/Support/AdminReach.php",
+  "        return ($server[self::LISTENER] ?? null) === '1';",
+  "        return ($server[self::LISTENER] ?? $server['HTTP_DANSK_ADMIN_LISTENER'] ?? null) === '1';","unit"),
 ]
 
 def run(suite):
