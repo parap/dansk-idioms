@@ -23,6 +23,9 @@ services:
       # moment the repository is. Set it in .env, which is gitignored.
       DB_PASS: ${DB_PASS:?set DB_PASS in .env}
       APP_ENV: dev
+      # No default and no value in this file. Unset, admin login refuses every attempt,
+      # which is the right failure for a deployment nobody has given a password yet.
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
       # Unset. API errors and the health endpoint stay silent about internals unless a
       # developer deliberately turns this on, because this app is reachable publicly.
       APP_DEBUG: ${APP_DEBUG:-}
