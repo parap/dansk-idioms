@@ -88,7 +88,11 @@ check "https answers"        "$(code "$URL/")"                          200
 check "http redirects"       "$(code "${URL/https:/http:}/")"           308
 check "reading page"         "$(code "$URL/read.html")"                 200
 check "health"               "$(code "$URL/api/v1/health")"             200
-check "admin stays hidden"   "$(code "$URL/api/v1/admin/review")"       404
+# The body, not just the status. A bare 404 is also what a stranger's server says, and
+# a check that passes when the site is missing entirely is not checking anything.
+hidden=$(curl -s --connect-timeout 8 -m 25 "$URL/api/v1/admin/review" \
+         | grep -o '"code":"not_found"' || true)
+check "admin stays hidden"   "${hidden:-something else}"                '"code":"not_found"'
 
 exam=$(curl -s --connect-timeout 8 -m 25 -X POST "$URL/api/v1/reading/sessions" \
         -H 'Content-Type: application/json' -d '{"mode":"exam"}' \
