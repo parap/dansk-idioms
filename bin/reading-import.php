@@ -34,7 +34,8 @@ if ($files === []) {
 
 $parser = new PassageDocument();
 $repo   = new ReadingRepository();
-$failed = 0;
+$failed  = 0;
+$skipped = 0;
 
 foreach ($files as $file) {
     $name = basename($file);
@@ -51,8 +52,11 @@ foreach ($files as $file) {
         $existing = Db::fetchValue('SELECT id FROM reading_passages WHERE slug = ?', [$doc['slug']]);
         if ($existing !== false) {
             if (!$replace) {
+                // Nothing to do is not a rejection. Conflating the two means a batch of
+                // the whole directory can never succeed twice, which is exactly how this
+                // is run from a deployment.
                 printf("  %-40s slug '%s' already loaded -- pass --replace to overwrite\n", $name, $doc['slug']);
-                $failed++;
+                $skipped++;
                 continue;
             }
 
@@ -88,8 +92,12 @@ foreach ($files as $file) {
 }
 
 echo "\n";
-echo $failed === 0
-    ? "  every document loaded\n"
-    : "  {$failed} document(s) rejected\n";
+if ($failed > 0) {
+    echo "  {$failed} document(s) rejected\n";
+} elseif ($skipped > 0) {
+    echo "  every document loaded or already present ({$skipped} unchanged)\n";
+} else {
+    echo "  every document loaded\n";
+}
 
 exit($failed === 0 ? 0 : 1);

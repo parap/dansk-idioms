@@ -24,6 +24,29 @@ bin/load-export.sh                 # import your Telegram export
 | http://127.0.0.1:8081 | Adminer (server `db`, user `dansk`, the password from `.env`) |
 | http://localhost:8080/api/v1/health | health + database check |
 
+### Deploying
+
+```bash
+bin/deploy.sh
+```
+
+Runs the suite, refuses a working tree that is dirty or a HEAD that is not what
+`origin/master` points at — the server must get the commit that was tested — then on the
+server pulls, rebuilds, installs dependencies, migrates, and imports the hand-written
+idioms and the reading documents. Finally it checks the live site **from the machine you
+ran it on**, because a server checking itself cannot tell you that the certificate, the
+redirect or the firewall are right.
+
+Three of those steps fail silently if they are skipped, which is why they are not left to
+memory: `vendor/` is not committed, a pending migration surfaces on the first request that
+needs the column rather than at deploy time, and content under `content/` reaches the
+database only through its importer — a site that never ran it works perfectly and is
+empty.
+
+It does not roll back. A failed check prints the previous commit and the command to return
+to it, and says plainly that an applied migration is not undone by moving the checkout
+backwards.
+
 ### HTTPS
 
 A deployment with a domain runs Caddy in front:
