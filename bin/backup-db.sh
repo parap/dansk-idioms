@@ -44,6 +44,15 @@ refuse() {
     exit 1
 }
 
+# A reboot can land inside the backup window, and a dump taken while MySQL is still
+# starting fails. That failure is caught below rather than written to disk, but the night
+# is lost for no reason, so wait for the database rather than discover it is not ready.
+for _ in $(seq 1 30); do
+    docker compose exec -T db sh -c \
+        'exec mysqladmin ping -h 127.0.0.1 -uroot -p"$MYSQL_ROOT_PASSWORD"' >/dev/null 2>&1 && break
+    sleep 5
+done
+
 # The password is read inside the container from its own environment, so it never reaches
 # this file, the host's process list, or a cron line.
 if ! docker compose exec -T db sh -c 'exec mysqldump -uroot -p"$MYSQL_ROOT_PASSWORD" \
