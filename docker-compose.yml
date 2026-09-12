@@ -5,9 +5,10 @@ services:
     build: .
     container_name: dansk_app
     ports:
-      # The laptop's own Apache owns :80, so it publishes 8080; a server with nothing else
-      # on :80 sets APP_PORT=80 in .env. The default is the one that cannot collide.
-      - "${APP_PORT:-8080}:80"
+      # Where a developer reaches the application directly. A deployment that terminates
+      # TLS in front of it binds this to the loopback (APP_BIND=127.0.0.1:8080 in .env),
+      # so the proxy holding the certificate is the only way in from outside.
+      - "${APP_BIND:-8080}:80"
       # The admin surface, on the loopback only. Reach it with
       # ssh -L 8082:localhost:8082 <host> and open http://localhost:8082/admin.
       - "${ADMIN_BIND:-127.0.0.1:8082}:81"
@@ -73,5 +74,27 @@ services:
     depends_on:
       - db
 
+  # Only present where a domain is pointed at this host: compose profiles keep it out of
+  # a laptop's way, where there is no name to get a certificate for.
+  caddy:
+    image: caddy:2-alpine
+    container_name: dansk_caddy
+    profiles: ["tls"]
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      # The certificate and the ACME account live here. Lose this and every restart asks
+      # Let's Encrypt for a new certificate, which is what their rate limits are for.
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+
 volumes:
   dbdata:
+  caddy_data:
+  caddy_config:

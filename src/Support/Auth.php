@@ -7,7 +7,7 @@ final class Auth
     public static function start(): void
     {
         if (session_status() !== PHP_SESSION_ACTIVE) {
-            session_set_cookie_params(['httponly' => true, 'samesite' => 'Lax', 'path' => '/']);
+            session_set_cookie_params(Scheme::cookieParams($_SERVER));
             session_start();
         }
     }
@@ -41,9 +41,7 @@ final class Auth
             return $_COOKIE['anon_key'];
         }
         $key = bin2hex(random_bytes(16));
-        setcookie('anon_key', $key, [
-            'expires' => time() + 31536000, 'path' => '/', 'httponly' => true, 'samesite' => 'Lax',
-        ]);
+        setcookie('anon_key', $key, ['expires' => time() + 31536000] + Scheme::cookieParams($_SERVER));
         $_COOKIE['anon_key'] = $key;
         return $key;
     }

@@ -326,6 +326,12 @@ FAULTS = [
  (103,"a header opens the admin listener","src/Support/AdminReach.php",
   "        return ($server[self::LISTENER] ?? null) === '1';",
   "        return ($server[self::LISTENER] ?? $server['HTTP_DANSK_ADMIN_LISTENER'] ?? null) === '1';","unit"),
+ (104,"a cookie is never marked secure","src/Support/Scheme.php",
+  "            'secure'   => self::isHttps($server),",
+  "            'secure'   => false,","unit"),
+ (105,"the caller opens the forwarded chain","src/Support/Scheme.php",
+  "        return strtolower((string) end($hops)) === 'https';",
+  "        return strtolower((string) $hops[0]) === 'https';","unit"),
 ]
 
 def run(suite):

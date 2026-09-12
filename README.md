@@ -24,6 +24,28 @@ bin/load-export.sh                 # import your Telegram export
 | http://127.0.0.1:8081 | Adminer (server `db`, user `dansk`, the password from `.env`) |
 | http://localhost:8080/api/v1/health | health + database check |
 
+### HTTPS
+
+A deployment with a domain runs Caddy in front:
+
+```bash
+docker compose --profile tls up -d      # adds dansk_caddy, holding 80 and 443
+```
+
+Set `APP_BIND=127.0.0.1:8080` in `.env` first, so the application leaves the public port
+and the proxy is the only way in. Caddy obtains and renews the certificate itself — there
+is no timer or cron to check, and nothing reloads a container on renewal; what has to be
+true instead is that `caddy_data` survives (the certificate and the ACME account live
+there) and that the container restarts by itself, which `restart: unless-stopped` does.
+
+Plain http redirects permanently and is not served, because a login form reachable over
+http makes the certificate decorative. Requests to the bare address are redirected to the
+canonical name rather than answered under a certificate that does not match.
+
+The proxy overwrites `X-Forwarded-For` and `X-Forwarded-Proto` with what it actually saw.
+Without that a caller supplies both: the login rate limiter keys on an address of the
+caller's choosing, and the application marks its cookies secure on the caller's say-so.
+
 **The review queue is on its own listener.** Apache serves the application on two ports;
 compose publishes the first to the world and the second to the loopback, and everything
 under `/admin` and `/api/v1/admin/` answers through the second alone — through the first

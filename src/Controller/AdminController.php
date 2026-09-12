@@ -6,6 +6,7 @@ use Dansk\Domain\ReviewRepository;
 use Dansk\Http\Response;
 use Dansk\Support\AdminLoginThrottle;
 use Dansk\Support\Config;
+use Dansk\Support\Scheme;
 
 final class AdminController
 {
@@ -17,7 +18,7 @@ final class AdminController
     public static function startSession(): void
     {
         if (session_status() !== PHP_SESSION_ACTIVE) {
-            session_set_cookie_params(['httponly' => true, 'samesite' => 'Lax', 'path' => '/']);
+            session_set_cookie_params(Scheme::cookieParams($_SERVER));
             session_start();
         }
     }

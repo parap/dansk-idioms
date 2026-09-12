@@ -1,0 +1,33 @@
+# The only thing this deployment publishes to the internet. Everything else -- the
+# application, the review queue, Adminer -- binds the loopback, so this is the single
+# door and it is the one holding the certificate.
+#
+# Caddy obtains and renews the certificate itself, in process: there is no timer to
+# forget and no hook that has to reach into a container to reload anything. What it needs
+# instead is for its storage to outlive the container, which is the caddy_data volume,
+# and for the container to come back after a reboot, which is restart: unless-stopped.
+#
+# Naming the site rather than a bare port is what makes http redirect to https: Caddy
+# serves the redirect on :80 for this host by itself, with the ACME challenge carved out
+# of it. A plain-http path alongside https would make the certificate decorative, because
+# the login form would still have a way to travel in the clear.
+
+danskidioms.com {
+	encode zstd gzip
+
+	reverse_proxy app:80 {
+		# Overwritten rather than appended. A client can send any X-Forwarded-For and
+		# X-Forwarded-Proto it likes; these two lines replace whatever arrived with what
+		# this proxy actually saw, so the application's rate limiter keys on a real
+		# address and its cookies are marked secure only when the browser used TLS.
+		header_up X-Forwarded-For {remote_host}
+		header_up X-Forwarded-Proto {scheme}
+	}
+}
+
+# Anything asking for the address rather than the name -- a scanner, an old link -- is
+# sent to the canonical name instead of being served the site under a certificate that
+# does not match it.
+:80 {
+	redir https://danskidioms.com{uri} permanent
+}
