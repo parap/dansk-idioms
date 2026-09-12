@@ -57,7 +57,15 @@ grep -q '^-- Dump completed' <(zcat "$file") \
                                        || refuse "$name stops before mysqldump finished"
 
 # Each label prunes its own, so a run of deploys cannot push the nightly dumps out.
-ls -1t "$DEST/${label}-"*.sql.gz 2>/dev/null | tail -n +$((KEEP + 1)) | xargs -r rm --
-ls -1t "$DEST/${label}-"*.sql.gz.rejected 2>/dev/null | tail -n +$((KEEP + 1)) | xargs -r rm --
+#
+# The `|| true` is not decoration. A glob that matches nothing is handed to ls verbatim,
+# ls fails, and under pipefail that ends the script -- after the dump has been written and
+# before it has been reported, which looks like a backup that did not happen.
+keep_newest() {
+    ls -1t "$@" 2>/dev/null | tail -n +$((KEEP + 1)) | xargs -r rm -- || true
+}
+
+keep_newest "$DEST/${label}-"*.sql.gz
+keep_newest "$DEST/${label}-"*.sql.gz.rejected
 
 echo "$file"
