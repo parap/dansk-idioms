@@ -63,6 +63,12 @@ ssh "$HOST" "set -euo pipefail
     done
 
     $COMPOSE exec -T app composer install --no-interaction --no-progress --quiet
+
+    # Before the migrations, not after. git reset returns the code; nothing returns a
+    # column a migration dropped, so this is the only thing standing between a bad
+    # migration and the corpus.
+    echo '  dumped to' \$(bin/backup-db.sh pre-deploy \$(git rev-parse --short HEAD))
+
     $COMPOSE exec -T app php bin/migrate.php | tail -2
     $COMPOSE exec -T app php bin/idiom-import.php | tail -2
     $COMPOSE exec -T app php bin/reading-import.php content/reading/*.txt | tail -2
