@@ -38,19 +38,26 @@ docker compose exec -T db sh -c 'exec mysqldump -uroot -p"$MYSQL_ROOT_PASSWORD" 
 # The dump carries password hashes and every learner's progress.
 chmod 600 "$file"
 
-refuse() { rm -f "$file"; echo "backup-db: $*" >&2; exit 1; }
+# A rejected dump is kept under .rejected rather than deleted. The check can be wrong --
+# this one already was once -- and a file that at least exists can be looked at, where a
+# deleted one leaves only the complaint.
+refuse() { mv -f "$file" "$file.rejected"; echo "backup-db: $* (kept as $file.rejected)" >&2; exit 1; }
 
 gzip -t "$file" 2>/dev/null            || refuse "$name is not a readable archive"
 
 size=$(stat -c %s "$file")
 [ "$size" -ge 50000 ]                  || refuse "$name is only $size bytes"
 
-zcat "$file" | grep -q 'CREATE TABLE `idioms`' \
+# grep reads from a process substitution, not from a pipe. Under pipefail a `grep -q`
+# that stops at the first match kills zcat with SIGPIPE, and the pipeline reports 141 --
+# so a perfectly good dump is condemned by the check that was meant to protect it.
+grep -q 'CREATE TABLE `idioms`' <(zcat "$file") \
                                        || refuse "$name contains no schema"
-zcat "$file" | grep -q '^-- Dump completed' \
+grep -q '^-- Dump completed' <(zcat "$file") \
                                        || refuse "$name stops before mysqldump finished"
 
 # Each label prunes its own, so a run of deploys cannot push the nightly dumps out.
 ls -1t "$DEST/${label}-"*.sql.gz 2>/dev/null | tail -n +$((KEEP + 1)) | xargs -r rm --
+ls -1t "$DEST/${label}-"*.sql.gz.rejected 2>/dev/null | tail -n +$((KEEP + 1)) | xargs -r rm --
 
 echo "$file"
