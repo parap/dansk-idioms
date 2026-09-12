@@ -5,8 +5,10 @@ services:
     build: .
     container_name: dansk_app
     ports:
-      # Host Apache owns :80 and the host has no free :80 -- publish on 8080.
-      - "8080:80"
+      # The laptop's own Apache owns :80, so it publishes 8080; a server with nothing else
+      # on :80 sets APP_PORT=80 in .env. The default is the one that cannot collide.
+      - "${APP_PORT:-8080}:80"
+    restart: unless-stopped
     volumes:
       - .:/var/www/html
     environment:
@@ -28,6 +30,7 @@ services:
   db:
     image: mysql:8.0
     container_name: dansk_db
+    restart: unless-stopped
     # No host port published: the host already runs MySQL on 127.0.0.1:3306.
     # Uncomment to attach a GUI client on 3307 instead.
     # ports:
@@ -56,7 +59,11 @@ services:
     image: adminer:4
     container_name: dansk_adminer
     ports:
-      - "8081:8080"
+      # Bound to the loopback, not to every interface: a published port bypasses the host
+      # firewall entirely, because Docker writes its own rules into FORWARD and nat
+      # PREROUTING rather than INPUT. Reach it with ssh -L 8081:localhost:8081.
+      - "${ADMINER_BIND:-127.0.0.1:8081}:8080"
+    restart: unless-stopped
     depends_on:
       - db
 

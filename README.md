@@ -21,11 +21,15 @@ bin/load-export.sh                 # import your Telegram export
 |---|---|
 | http://localhost:8080 | the site |
 | http://localhost:8080/admin | review queue |
-| http://localhost:8081 | Adminer (server `db`, user `dansk`, password `dansk`) |
+| http://127.0.0.1:8081 | Adminer (server `db`, user `dansk`, the password from `.env`) |
 | http://localhost:8080/api/v1/health | health + database check |
 
-The container publishes **8080** because host Apache owns :80, and the database
-publishes nothing because host MySQL owns 127.0.0.1:3306.
+The container publishes **8080** because this host's Apache owns :80; a host with a free
+:80 sets `APP_PORT=80` in `.env`. The database publishes nothing because host MySQL owns
+127.0.0.1:3306, and Adminer binds the loopback only — a published port answers to the
+internet whatever the host firewall says, because Docker writes its rules into `FORWARD`
+and nat `PREROUTING` rather than `INPUT`. Reach it from elsewhere with
+`ssh -L 8081:localhost:8081 <host>`.
 
 ---
 
