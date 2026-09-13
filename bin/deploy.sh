@@ -22,7 +22,7 @@ DIR=${DEPLOY_DIR:-dansk.div}
 URL=${DEPLOY_URL:-https://danskidioms.com}
 # --progress quiet: a build log is not a deploy report, and the interesting lines are
 # the ones this script prints itself.
-COMPOSE="docker compose --progress quiet --profile tls"
+COMPOSE="docker compose --progress quiet"
 
 say()  { printf '\n\033[1m%s\033[0m\n' "$*"; }
 fail() { printf '\033[31m%s\033[0m\n' "$*" >&2; exit 1; }
@@ -53,7 +53,7 @@ ssh "$HOST" "set -euo pipefail
     git pull -q origin master
     echo '  now at' \$(git rev-parse --short HEAD)
 
-    $COMPOSE up -d --build
+    $COMPOSE up -d --build --remove-orphans
 
     # Compose returns as soon as the containers start, which is before the database is
     # ready to be migrated against.

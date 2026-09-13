@@ -11,6 +11,13 @@ services:
       # ssh -L 8082:localhost:8082 <host> and open http://localhost:8082/admin.
       - "${ADMIN_BIND:-127.0.0.1:8082}:81"
     restart: unless-stopped
+    networks:
+      # Listed explicitly because naming any network switches off the implicit default,
+      # and db and adminer are reached over that one.
+      - default
+      # Only this container joins the shared network. The database and Adminer stay off it,
+      # so no other project on the host can reach them by name.
+      - edge
     volumes:
       - .:/var/www/html
     environment:
@@ -72,28 +79,17 @@ services:
     depends_on:
       - db
 
-  # Only present where a domain is pointed at this host: compose profiles keep it out of
-  # a laptop's way, where there is no name to get a certificate for.
-  caddy:
-    image: caddy:2-alpine
-    container_name: dansk_caddy
-    profiles: ["tls"]
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"
-    volumes:
-      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
-      - ./docker/caddy/options:/etc/caddy/options:ro
-      # The certificate and the ACME account live here. Lose this and every restart asks
-      # Let's Encrypt for a new certificate, which is what their rate limits are for.
-      - caddy_data:/data
-      - caddy_config:/config
-    depends_on:
-      - app
-
 volumes:
   dbdata:
-  caddy_data:
-  caddy_config:
+
+networks:
+  # Where a deployment that terminates TLS reaches this application. The proxy holding the
+  # certificate lives in its own compose project, so deploying this site never restarts the
+  # entrance and never makes it re-read its certificate storage.
+  #
+  # External, and created by hand: no project owns it, so no project's `compose down` can
+  # take it away from the others. A laptop needs it to exist before this file will start:
+  #   docker network create edge
+  edge:
+    external: true
+    name: edge

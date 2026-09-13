@@ -49,25 +49,27 @@ backwards.
 
 ### HTTPS
 
-A deployment with a domain runs Caddy in front:
+TLS is terminated by a shared proxy that lives in its own compose project, `~/edge`, and
+serves every site on the host. This project publishes no public port: set
+`APP_BIND=127.0.0.1:8080` in `.env`, and the application is reachable only through that
+proxy and over `ssh -L`.
+
+The connection between them is the external `edge` network, which the `app` container
+joins and the database and Adminer do not. Create it once before starting:
 
 ```bash
-docker compose --profile tls up -d      # adds dansk_caddy, holding 80 and 443
+docker network create edge      # once per machine; the laptop needs it too
+docker compose up -d --build
 ```
 
-Set `APP_BIND=127.0.0.1:8080` in `.env` first, so the application leaves the public port
-and the proxy is the only way in. Caddy obtains and renews the certificate itself — there
-is no timer or cron to check, and nothing reloads a container on renewal; what has to be
-true instead is that `caddy_data` survives (the certificate and the ACME account live
-there) and that the container restarts by itself, which `restart: unless-stopped` does.
+The route itself — the hostname, the certificate, the forwarded headers — is declared in
+`~/edge/sites/danskidioms.caddy`, not here. That is the point of the split: deploying this
+site no longer restarts the entrance, so it cannot disturb the other projects sharing it
+and cannot make the proxy re-read its certificate storage.
 
-Plain http redirects permanently and is not served, because a login form reachable over
-http makes the certificate decorative. Requests to the bare address are redirected to the
-canonical name rather than answered under a certificate that does not match.
-
-The proxy overwrites `X-Forwarded-For` and `X-Forwarded-Proto` with what it actually saw.
-Without that a caller supplies both: the login rate limiter keys on an address of the
-caller's choosing, and the application marks its cookies secure on the caller's say-so.
+Caddy obtains and renews the certificate itself, so there is no timer or cron to check. See
+`~/edge/README.md` for why the storage volume is reused rather than renamed, and why every
+script there checks the certificate by serial.
 
 **The review queue is on its own listener.** Apache serves the application on two ports;
 compose publishes the first to the world and the second to the loopback, and everything
