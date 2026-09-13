@@ -67,7 +67,12 @@ ssh "$HOST" "set -euo pipefail
     # Before the migrations, not after. git reset returns the code; nothing returns a
     # column a migration dropped, so this is the only thing standing between a bad
     # migration and the corpus.
-    echo '  dumped to' \$(bin/backup-db.sh pre-deploy \$(git rev-parse --short HEAD))
+    # Assigned on its own line, not interpolated into an echo. A command substitution
+    # used as an argument reports its status to nobody: the echo succeeds, set -e sees
+    # nothing, and a refused dump is followed straight into the migrations it exists to
+    # protect against. An assignment carries the status, so a failed dump stops here.
+    dump=\$(bin/backup-db.sh pre-deploy \$(git rev-parse --short HEAD))
+    echo \"  dumped to \$dump\"
 
     $COMPOSE exec -T app php bin/migrate.php | tail -2
     $COMPOSE exec -T app php bin/idiom-import.php | tail -2
