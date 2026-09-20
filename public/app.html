@@ -134,6 +134,7 @@ const STRINGS = {
     login: 'Вход', register: 'Регистрация', createBtn: 'Создать аккаунт',
     skip: 'Продолжить без аккаунта',
     readingLink: 'Чтение: Prøve i Dansk 3',
+    proeveLink: 'Тест на гражданство: indfødsretsprøven',
   },
   en: {
     tagline: 'Danish idiom trainer',
@@ -157,6 +158,7 @@ const STRINGS = {
     login: 'Sign in', register: 'Register', createBtn: 'Create account',
     skip: 'Continue without an account',
     readingLink: 'Reading: Prøve i Dansk 3',
+    proeveLink: 'Citizenship test: indfødsretsprøven',
   },
 };
 
@@ -225,6 +227,7 @@ async function home() {
       <p class="tagline">${esc(t('tagline'))}</p>
       <p class="lede">${esc(t('intro'))}</p>
       <p><a class="link" href="/read">${esc(t('readingLink'))} →</a></p>
+      <p><a class="link" href="/proeve">${esc(t('proeveLink'))} →</a></p>
       <div class="stats">
         <div class="stat"><b>${s.idioms_published ?? '—'}</b><span>${esc(t('statIdioms', s.idioms_published))}</span></div>
         ${tiles(s)}

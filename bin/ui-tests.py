@@ -77,6 +77,29 @@ SEED_PHP = r"""
             'items' => [['position' => 1, 'correct_label' => 'A']],
         ]);
     }
+    if (!Db::fetchValue("SELECT id FROM reading_passages WHERE slug = 'ui-fixture-quiz'")) {
+        $repo->save([
+            'slug' => 'ui-fixture-quiz', 'kind' => 'quiz', 'title' => 'UI fixture proeve',
+            'body' => null, 'pass' => 3, 'vaerdier_min' => 1,
+            'items' => [
+                ['position' => 1, 'section' => 'laeremateriale', 'prompt' => 'Hvad er hovedstaden?',
+                 'options' => [['label' => 'A', 'text' => 'Koebenhavn', 'correct' => true],
+                               ['label' => 'B', 'text' => 'Odense'],
+                               ['label' => 'C', 'text' => 'Aarhus']]],
+                ['position' => 2, 'section' => 'laeremateriale', 'prompt' => 'Hvilket aar kom grundloven?',
+                 'options' => [['label' => 'A', 'text' => '1849', 'correct' => true],
+                               ['label' => 'B', 'text' => '1864'],
+                               ['label' => 'C', 'text' => '1901']]],
+                ['position' => 3, 'section' => 'aktuelle', 'prompt' => 'Hvem er statsminister?',
+                 'options' => [['label' => 'A', 'text' => 'Den ene', 'correct' => true],
+                               ['label' => 'B', 'text' => 'Den anden'],
+                               ['label' => 'C', 'text' => 'Den tredje']]],
+                ['position' => 4, 'section' => 'vaerdier', 'prompt' => 'Er ytringsfrihed beskyttet?',
+                 'options' => [['label' => 'A', 'text' => 'Ja', 'correct' => true],
+                               ['label' => 'B', 'text' => 'Nej']]],
+            ],
+        ]);
+    }
     echo json_encode(array_column($hidden, "id"));
 """
 
@@ -165,6 +188,15 @@ def restore(hidden):
     """Put every passage back the way the run found it."""
     ids = ','.join(str(int(i)) for i in hidden) or '0'
     php(RESTORE_PHP.replace('__IDS__', ids))
+
+
+def correct_indexes():
+    """Every answer of the newest session, in order -- read from the server, never the page."""
+    return json.loads(php('''use Dansk\\Support\\Db;
+        $sid = Db::fetchValue("SELECT id FROM reading_sessions ORDER BY id DESC LIMIT 1");
+        echo json_encode(array_map("intval", array_column(Db::fetchAll(
+            "SELECT correct_index FROM reading_session_items WHERE session_id = ? ORDER BY position",
+            [$sid]), "correct_index")));'''))
 
 
 def correct_index():
@@ -429,6 +461,94 @@ def handing_in_reports_a_karakter_and_a_review(b):
     assert total == '5', f'paper reported out of {total}, expected 5'
     # The karakter is shown, and shown as indicative rather than as an exam grade.
     assert b.js('document.querySelector("#final").nextElementSibling.textContent.trim().length') > 0
+
+
+
+# ---- the indfoedsretsproeve ------------------------------------------------
+
+def start_paper(b, current_affairs=True):
+    only(['quiz'])
+    b.goto('/proeve')
+    b.until('!!document.querySelector("#go")', what='the start button')
+    if not current_affairs:
+        b.js('document.querySelector("#current").click()')
+    b.js('document.querySelector("#go").click()')
+    b.until('!!document.querySelector(".opt")', what='the paper to be rendered')
+
+
+def sit_paper(b, positions):
+    """Answer each position correctly, then hand in."""
+    for pos, index in zip(positions, correct_indexes()):
+        click_option(b, pos, index)
+    b.until('document.querySelectorAll(".opt.chosen").length === %d' % len(positions),
+            what='every question answered')
+    b.js('window.confirm = () => true')
+    b.js('document.querySelector("#hand").click()')
+    b.until('!!document.querySelector(".verdict")', what='the result screen')
+
+
+@check
+def the_chooser_lists_the_sittings_and_what_passing_takes(b):
+    only(['quiz'])
+    b.goto('/proeve')
+    b.until('!!document.querySelector("#paper option")', what='the paper list')
+    assert b.js('document.querySelector("#paper option").textContent') == 'UI fixture proeve'
+    # The mark is on the start screen, not only in the result: a candidate should know
+    # what they are aiming at before the clock starts.
+    assert '3/4' in b.js('document.querySelector("#about").textContent')
+
+
+@check
+def a_paper_renders_its_blocks_and_every_question(b):
+    start_paper(b)
+    assert b.js('document.querySelectorAll(".item").length') == 4
+    assert b.js('document.querySelectorAll(".block").length') == 3
+    assert b.js('document.querySelectorAll(".opt").length') == 11
+    # Nothing to read: a knowledge paper has no passage pane at all.
+    assert b.js('document.querySelectorAll(".passage").length') == 0
+
+
+@check
+def a_paper_shows_a_forty_five_minute_countdown(b):
+    start_paper(b)
+    b.until('/\\d\\d:\\d\\d/.test(document.querySelector("#left").textContent)', what='the clock')
+    minutes = int(b.js('document.querySelector("#left").textContent').split(':')[0])
+    assert 43 <= minutes <= 45, f'clock started at {minutes} minutes'
+
+
+@check
+def a_recorded_answer_reveals_nothing_and_can_be_changed(b):
+    start_paper(b)
+    click_option(b, 1, 0)
+    b.until('document.querySelectorAll(".opt.chosen").length === 1', what='the choice to register')
+    assert b.js('document.querySelectorAll(".opt.right, .opt.wrong").length') == 0
+
+    click_option(b, 1, 1)
+    b.until(options_js(1) + '[1].classList.contains("chosen")', what='the revised choice')
+    assert not b.js(options_js(1) + '[0].classList.contains("chosen")')
+
+
+@check
+def handing_in_a_correct_paper_reports_a_pass(b):
+    start_paper(b)
+    sit_paper(b, (1, 2, 3, 4))
+    assert b.js('document.querySelector(".verdict").classList.contains("pass")')
+    assert b.js('document.querySelector(".tally b").textContent').strip() == '4 / 4'
+    # The review shows every question again, with the key.
+    assert b.js('document.querySelectorAll(".opt.right").length') == 4
+
+
+@check
+def a_round_without_the_current_affairs_block_is_scored_but_not_judged(b):
+    start_paper(b, current_affairs=False)
+    assert b.js('document.querySelectorAll(".item").length') == 3
+    assert not b.js('[...document.querySelectorAll(".block")].some(e => e.textContent.trim() === "Актуальные вопросы")')
+
+    sit_paper(b, (1, 2, 3))
+    verdict = b.js('document.querySelector(".verdict")')
+    assert not b.js('document.querySelector(".verdict").classList.contains("pass")')
+    assert not b.js('document.querySelector(".verdict").classList.contains("fail")')
+    assert b.js('document.body.textContent').find('сокращённый') > 0
 
 
 def flag_a_fixture_item():

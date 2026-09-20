@@ -20,6 +20,8 @@ bin/load-export.sh                 # import your Telegram export
 | URL | What |
 |---|---|
 | http://localhost:8080 | the site |
+| http://localhost:8080/read | reading practice, Prøve i Dansk 3 |
+| http://localhost:8080/proeve | the citizenship exam, indfødsretsprøven |
 | http://127.0.0.1:8082/admin | review queue |
 | http://127.0.0.1:8081 | Adminer (server `db`, user `dansk`, the password from `.env`) |
 | http://localhost:8080/api/v1/health | health + database check |
@@ -232,6 +234,17 @@ The citizenship exam is a second kind of paper the site serves: 45 multiple-choi
 questions in 45 minutes, no text to read, and a pass mark of its own -- 36 correct, of
 which at least 4 of the 5 questions about Danish values.
 
+**Sitting one** is at `/proeve`: pick a sitting, start, and the paper runs under the
+server's clock with no feedback until it is handed in, as the real one does. The result
+is a verdict rather than a grade -- *bestået* or *ikke bestået* -- with the two numbers it
+turns on: correct answers, and correct answers in the values block.
+
+The current-affairs questions can be left out. They ask about the months before that
+sitting -- which minister was appointed, which party gained -- so they train nobody years
+later. A round sat without them is **scored but not judged**: 36 of 40 is a different exam
+from 36 of 45, and calling it a pass would tell a learner they passed something they never
+sat.
+
 The ministry publishes every paper and its answer sheet as two unrelated PDFs.
 `bin/indfoedsret-convert.php` joins them into the same authoring format the reading
 passages use and writes one document per exam into `content/indfoedsret/`; from there
@@ -246,6 +259,18 @@ Two things about the source material decide how it is read, and both are in
 `content/indfoedsret/README.md`: the answer sheets contain letters that are drawn but
 never rendered, so answers are resolved by glyph geometry rather than by extracted text,
 and the current-affairs block ages out, so every question stores which block asked it.
+
+**Sitting one starts at its own endpoint and continues on the session API**, because a
+session is one resource whatever kind of paper it froze:
+
+```
+GET  /api/v1/indfoedsret/papers      the sittings on offer
+POST /api/v1/indfoedsret/sessions    {"slug": "...", "current_affairs": true}
+     /api/v1/reading/sessions/{id}   serve, answer, submit, result -- as for a reading paper
+```
+
+A second copy of those four endpoints would be four more places for "never serve the
+answer" to be got wrong.
 
 ---
 

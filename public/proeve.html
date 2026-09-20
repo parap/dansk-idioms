@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#c8102e">
+<title>Indfødsretsprøven</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#fff; --ink:#14171c; --muted:#6b7280; --line:#e0e4ea;
+    --accent:#c8102e; --accent-ink:#fff; --ok:#127a4a; --okbg:#e7f6ee;
+    --bad:#b3261e; --badbg:#fdecea; --chip:#eef1f5; --shadow:0 1px 2px rgba(20,23,28,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#121419;--card:#1b1e24;--ink:#e8ebf0;--muted:#98a1b0;--line:#2b3039;
+      --accent:#ff5a6e;--accent-ink:#1b1e24;--ok:#4cc38a;--okbg:#14301f;
+      --bad:#ff6b61;--badbg:#331b19;--chip:#232830;--shadow:none;}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  .wrap{max-width:760px;margin:0 auto;padding:20px 16px 64px}
+  header{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;flex-wrap:wrap;
+    position:sticky;top:0;background:var(--bg);padding-top:8px;z-index:2}
+  header h1{font-size:1.2rem;margin:0}
+  header .spacer{flex:1}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:18px;box-shadow:var(--shadow);margin-bottom:16px}
+  .muted{color:var(--muted)}
+  .lede{color:var(--muted);margin:.4rem 0 0}
+  .block{margin:22px 0 10px;font-size:.85rem;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--muted)}
+  .item{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
+  .item:first-child{border-top:none;padding-top:0;margin-top:0}
+  .item h3{font-size:.9rem;margin:0 0 .5rem;color:var(--muted);font-weight:600}
+  .item .prompt{margin:0 0 .6rem}
+  .opts{display:grid;gap:8px}
+  .opt{display:block;width:100%;text-align:left;padding:10px 12px;border-radius:10px;
+    border:1px solid var(--line);background:var(--card);color:var(--ink);
+    font:inherit;cursor:pointer}
+  .opt:hover:not(:disabled){border-color:var(--accent)}
+  .opt:disabled{cursor:default}
+  .opt.chosen{background:var(--chip);border-color:var(--ink);font-weight:600}
+  .opt.right{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+  .opt.wrong{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+  .primary{background:var(--accent);color:var(--accent-ink);border:none;border-radius:10px;
+    padding:11px 18px;font:inherit;font-weight:600;cursor:pointer}
+  .primary:disabled{opacity:.6;cursor:default}
+  .link{background:none;border:none;color:var(--accent);font:inherit;cursor:pointer;padding:0}
+  .score{font-variant-numeric:tabular-nums;font-weight:600}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  select{font:inherit;padding:9px 10px;border-radius:10px;border:1px solid var(--line);
+    background:var(--card);color:var(--ink);max-width:100%}
+  label.check{display:flex;gap:8px;align-items:flex-start;margin-top:14px}
+  .verdict{font-size:1.6rem;font-weight:700;margin:0 0 .3rem}
+  .verdict.pass{color:var(--ok)} .verdict.fail{color:var(--bad)}
+  .tally{display:grid;gap:4px;margin:10px 0 0;padding:0;list-style:none}
+  .tally b{font-variant-numeric:tabular-nums}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Indfødsretsprøven</h1>
+    <span class="spacer"></span>
+    <span id="left" class="score"></span>
+    <span id="score" class="score muted"></span>
+    <a class="link" href="/">idiomer →</a>
+  </header>
+  <div id="view"></div>
+</div>
+
+<script type="module">
+import { $, esc, api, t, registerStrings } from '/shared.js';
+
+// Interface strings. Adding a language means adding one key here; nothing else in the
+// page hard-codes user-facing text.
+const STRINGS = {
+  ru: {
+    intro: 'Тест на гражданство: 45 вопросов за 45 минут, два-три варианта ответа. ' +
+           'Все наборы — настоящие, как их публиковало министерство.',
+    paper: 'Набор', start: 'Начать', startAgain: 'Другой набор',
+    cannotStart: 'Не удалось начать',
+    passMark: 'для сдачи', questions: 'вопросов',
+    withCurrent: 'Включая актуальные вопросы',
+    withCurrentHint: 'Эти пять вопросов — о событиях перед тем экзаменом. Без них раунд ' +
+                     'короче настоящего, поэтому оценка «сдал/не сдал» не выставляется.',
+    block_laeremateriale: 'По учебнику', block_aktuelle: 'Актуальные вопросы',
+    block_vaerdier: 'Датские ценности',
+    timeLeft: 'осталось', submitExam: 'Сдать работу',
+    confirmSubmit: 'Сдать? Изменить ответы будет нельзя.',
+    unanswered: 'без ответа',
+    bestaaet: 'Сдано', ikke_bestaaet: 'Не сдано', noVerdict: 'Без оценки',
+    partial_round: 'Это был сокращённый раунд, а порог относится к полному набору.',
+    no_pass_mark: 'В ключе этого набора порог сдачи не указан.',
+    correctOf: 'правильных', valuesBlock: 'В блоке о ценностях', needed: 'нужно',
+    late: 'сдано после звонка', reviewAnswers: 'Разбор ответов',
+    yourAnswer: 'ваш ответ',
+  },
+  en: {
+    intro: 'The citizenship test: 45 questions in 45 minutes, two or three answers each. ' +
+           'Every paper is a real one, as the ministry published it.',
+    paper: 'Paper', start: 'Start', startAgain: 'Another paper',
+    cannotStart: 'Cannot start',
+    passMark: 'to pass', questions: 'questions',
+    withCurrent: 'Include the current-affairs questions',
+    withCurrentHint: 'Those five ask about the months before that sitting. Without them the ' +
+                     'round is shorter than the exam, so it is scored but not judged.',
+    block_laeremateriale: 'From the study material', block_aktuelle: 'Current affairs',
+    block_vaerdier: 'Danish values',
+    timeLeft: 'left', submitExam: 'Hand in',
+    confirmSubmit: 'Hand in? Answers cannot be changed afterwards.',
+    unanswered: 'unanswered',
+    bestaaet: 'Passed', ikke_bestaaet: 'Not passed', noVerdict: 'No verdict',
+    partial_round: 'This was a shortened round, and the pass mark belongs to the whole paper.',
+    no_pass_mark: 'This paper’s answer sheet states no pass mark.',
+    correctOf: 'correct', valuesBlock: 'In the values block', needed: 'needed',
+    late: 'handed in late', reviewAnswers: 'Review',
+    yourAnswer: 'your answer',
+  },
+  da: {
+    intro: 'Indfødsretsprøven: 45 spørgsmål på 45 minutter med to eller tre svarmuligheder. ' +
+           'Alle sæt er de rigtige, som ministeriet har offentliggjort dem.',
+    paper: 'Prøvesæt', start: 'Start', startAgain: 'Et andet sæt',
+    cannotStart: 'Kunne ikke starte',
+    passMark: 'for at bestå', questions: 'spørgsmål',
+    withCurrent: 'Tag de aktuelle spørgsmål med',
+    withCurrentHint: 'De fem spørgsmål handler om månederne før den prøve. Uden dem er runden ' +
+                     'kortere end prøven, så den bliver talt op, men ikke bedømt.',
+    block_laeremateriale: 'Fra lærematerialet', block_aktuelle: 'Aktuelle spørgsmål',
+    block_vaerdier: 'Danske værdier',
+    timeLeft: 'tilbage', submitExam: 'Aflever',
+    confirmSubmit: 'Aflever? Svarene kan ikke ændres bagefter.',
+    unanswered: 'ubesvaret',
+    bestaaet: 'Bestået', ikke_bestaaet: 'Ikke bestået', noVerdict: 'Ingen bedømmelse',
+    partial_round: 'Det var en forkortet runde, og bestågrænsen gælder hele sættet.',
+    no_pass_mark: 'Rettearket til dette sæt oplyser ingen bestågrænse.',
+    correctOf: 'rigtige', valuesBlock: 'I værdiblokken', needed: 'kræver',
+    late: 'afleveret for sent', reviewAnswers: 'Gennemgang',
+    yourAnswer: 'dit svar',
+  },
+};
+registerStrings(STRINGS);
+
+const view = $('#view');
+let paper = null, ticker = null;
+
+const label = i => String.fromCharCode(65 + i);
+// One flat key per block: t() reads a non-string value as a plural map, so a nested
+// object of block names would come back as whichever form Intl.PluralRules asked for.
+const blockName = key => t('block_' + key);
+
+async function home() {
+  stopClock();
+  $('#left').textContent = '';
+  $('#score').textContent = '';
+
+  let papers = [];
+  try {
+    ({papers} = await api('/indfoedsret/papers'));
+  } catch (e) {
+    view.innerHTML = `<div class="card"><p><strong>${esc(t('cannotStart'))}</strong></p>
+      <p class="muted">${esc(e.message)}</p></div>`;
+    return;
+  }
+
+  // Newest first: the sitting a learner is preparing for is the one just held.
+  papers = [...papers].reverse();
+
+  view.innerHTML = `
+    <div class="card">
+      <p class="lede">${esc(t('intro'))}</p>
+      <p class="row" style="margin-top:16px">
+        <label for="paper">${esc(t('paper'))}</label>
+        <select id="paper">
+          ${papers.map(p => `<option value="${esc(p.slug)}">${esc(p.title)}</option>`).join('')}
+        </select>
+      </p>
+      <p class="muted" id="about" style="font-size:.9rem;margin:.6rem 0 0"></p>
+      <label class="check">
+        <input type="checkbox" id="current" checked>
+        <span>${esc(t('withCurrent'))}
+          <span class="muted" style="display:block;font-size:.85rem">${esc(t('withCurrentHint'))}</span>
+        </span>
+      </label>
+      <p class="row" style="margin-top:16px"><button class="primary" id="go">${esc(t('start'))}</button></p>
+    </div>`;
+
+  const describe = () => {
+    const p = papers.find(x => x.slug === $('#paper').value);
+    $('#about').textContent = p
+      ? `${p.questions} ${t('questions')}` + (p.pass === null ? '' :
+          ` · ${p.pass}/${p.questions} ${t('passMark')}` +
+          (p.vaerdier_min === null ? '' : ` + ${p.vaerdier_min}/5 ${blockName('vaerdier').toLowerCase()}`))
+      : '';
+  };
+  $('#paper').onchange = describe;
+  describe();
+
+  $('#go').onclick = () => start($('#paper').value, $('#current').checked);
+}
+
+async function start(slug, currentAffairs) {
+  $('#go').disabled = true;
+  try {
+    paper = await api('/indfoedsret/sessions',
+      {method: 'POST', body: {slug, current_affairs: currentAffairs}});
+    render();
+  } catch (e) {
+    view.innerHTML = `<div class="card"><p><strong>${esc(t('cannotStart'))}</strong></p>
+      <p class="muted">${esc(e.message)}</p></div>`;
+  }
+}
+
+function render() {
+  const title = paper.passages[0]?.title ?? '';
+  let block = null;
+
+  view.innerHTML = `
+    <section class="card">
+      <h2 style="margin:0 0 .2rem;font-size:1.05rem">${esc(title)}</h2>
+      <div id="items">
+        ${paper.items.map(item => {
+          const heading = item.section !== block
+            ? `<p class="block">${esc(blockName(item.section))}</p>` : '';
+          block = item.section;
+          return heading + itemHtml(item);
+        }).join('')}
+      </div>
+      <p class="row" style="margin-top:20px">
+        <button class="primary" id="hand">${esc(t('submitExam'))}</button>
+      </p>
+    </section>`;
+
+  paper.items.forEach(wire);
+  $('#hand').onclick = hand;
+  startClock();
+  updateScore();
+}
+
+function itemHtml(item) {
+  return `
+    <div class="item" id="item-${item.position}">
+      <h3>${item.position}.</h3>
+      <p class="prompt">${esc(item.prompt)}</p>
+      <div class="opts">
+        ${item.options.map(o => `
+          <button class="opt" data-pos="${item.position}" data-index="${o.index}">
+            <strong>${label(o.index)}.</strong> ${esc(o.text)}
+          </button>`).join('')}
+      </div>
+    </div>`;
+}
+
+function wire(item) {
+  view.querySelectorAll(`.opt[data-pos="${item.position}"]`).forEach(b => {
+    b.onclick = () => answer(item, Number(b.dataset.index));
+  });
+}
+
+/**
+ * The exam says nothing back until the paper is handed in, and an answer can be changed
+ * until then. The page therefore records the choice and shows only that it was recorded.
+ */
+async function answer(item, chosen) {
+  const buttons = [...view.querySelectorAll(`.opt[data-pos="${item.position}"]`)];
+  try {
+    await api(`/reading/sessions/${paper.session_id}/answers`,
+      {method: 'POST', body: {position: item.position, chosen_index: chosen, response_ms: 0}});
+  } catch (e) {
+    return;
+  }
+
+  buttons.forEach(b => b.classList.remove('chosen'));
+  buttons.find(b => Number(b.dataset.index) === chosen)?.classList.add('chosen');
+  updateScore();
+}
+
+async function hand() {
+  if (!confirm(t('confirmSubmit'))) return;
+  $('#hand').disabled = true;
+  stopClock();
+  await api(`/reading/sessions/${paper.session_id}/submit`, {method: 'POST'});
+  results(await api(`/reading/sessions/${paper.session_id}/result`));
+}
+
+function results(r) {
+  const tally = r.tally ?? {};
+  const passed = r.verdict === 'bestaaet';
+  const headline = r.verdict ? t(r.verdict) : t('noVerdict');
+  let block = null;
+
+  // The clock is over, so it stops saying how long is left.
+  $('#left').textContent = '';
+  $('#score').textContent = '';
+  view.innerHTML = `
+    <div class="card">
+      <p class="verdict ${r.verdict ? (passed ? 'pass' : 'fail') : ''}">${esc(headline)}</p>
+      <ul class="tally">
+        <li><b>${tally.correct ?? r.points_scored} / ${tally.questions ?? r.points_max}</b>
+            ${esc(t('correctOf'))}${tally.pass == null ? '' :
+              ` <span class="muted">(${esc(t('needed'))} ${tally.pass})</span>`}</li>
+        ${tally.vaerdier_questions ? `<li>${esc(t('valuesBlock'))}:
+            <b>${tally.vaerdier_correct} / ${tally.vaerdier_questions}</b>${tally.vaerdier_min == null ? '' :
+              ` <span class="muted">(${esc(t('needed'))} ${tally.vaerdier_min})</span>`}</li>` : ''}
+      </ul>
+      ${tally.reason ? `<p class="muted">${esc(t(tally.reason))}</p>` : ''}
+      ${r.is_late ? `<p class="muted">${esc(t('late'))}</p>` : ''}
+      <p class="row" style="margin-top:14px"><button class="primary" id="again">${esc(t('startAgain'))}</button></p>
+    </div>
+    <div class="card">
+      <h2 style="font-size:1.05rem;margin:0">${esc(t('reviewAnswers'))}</h2>
+      ${r.items.map(i => {
+        const heading = i.section !== block ? `<p class="block">${esc(blockName(i.section))}</p>` : '';
+        block = i.section;
+        return heading + `
+        <div class="item">
+          <h3>${i.position}.</h3>
+          <p class="prompt">${esc(i.prompt)}</p>
+          <div class="opts">
+            ${i.options.map(o => `
+              <div class="opt ${o.index === i.correct_index ? 'right' : (o.index === i.chosen_index ? 'wrong' : '')}">
+                <strong>${label(o.index)}.</strong> ${esc(o.text)}
+                ${o.index === i.chosen_index ? ` <span class="muted">— ${esc(t('yourAnswer'))}</span>` : ''}
+              </div>`).join('')}
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`;
+  $('#again').onclick = () => home();
+}
+
+// The countdown is decoration: the server decides what counts as late.
+function startClock() {
+  stopClock();
+  let left = paper.remaining_s ?? 0;
+  const paint = () => {
+    const m = String(Math.floor(left / 60)).padStart(2, '0');
+    const sec = String(left % 60).padStart(2, '0');
+    const el = $('#left');
+    el.textContent = `${m}:${sec} ${t('timeLeft')}`;
+    if (left <= 300) el.style.color = 'var(--bad)';
+  };
+  paint();
+  ticker = setInterval(() => {
+    left = Math.max(0, left - 1);
+    paint();
+    if (left === 0) { stopClock(); hand(); }
+  }, 1000);
+}
+
+function stopClock() {
+  if (ticker) { clearInterval(ticker); ticker = null; }
+}
+
+function updateScore() {
+  const answered = view.querySelectorAll('.opt.chosen').length;
+  $('#score').textContent = `${answered} / ${paper.items.length}`;
+}
+
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
+home();
+</script>
+</body>
+</html>

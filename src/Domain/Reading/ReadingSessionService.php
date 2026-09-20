@@ -26,6 +26,12 @@ final class ReadingSessionService
     /** Laeseforstaaelse 2 runs 65 minutes, whatever the browser's clock believes. */
     private const EXAM_SECONDS = 3900;
 
+    /** The indfoedsretsproeve runs 45 minutes for its 45 questions. */
+    private const PAPER_SECONDS = 2700;
+
+    /** A knowledge paper is sat under exam conditions: no feedback until it is handed in. */
+    private const PAPER_KIND = 'quiz';
+
     /**
      * The task types a reading round may serve. A knowledge paper lives in the same
      * tables and is graded the same way, but it has no text to read and its own pass
@@ -72,6 +78,46 @@ final class ReadingSessionService
     }
 
     /**
+     * Sits one indfoedsretsproeve.
+     *
+     * A named sitting is the point of the archive -- a learner works through them -- so
+     * the slug is honoured when given and a paper is drawn at random otherwise. The
+     * current-affairs block can be left out: those five questions are about the months
+     * before that sitting and train nobody years later. A round sat without them is
+     * scored but not judged; see PassMark.
+     *
+     * @return array{session_id: string, mode: string, points_max: int}
+     */
+    public function startPaper(
+        ?int $userId,
+        ?string $anonKey,
+        ?string $slug = null,
+        bool $currentAffairs = true,
+    ): array {
+        $passage = $this->pickPaper($slug);
+
+        $publicId = Ulid::generate();
+        Db::execute(
+            'INSERT INTO reading_sessions (public_id, user_id, anon_key, mode, duration_s, scale_id)
+             VALUES (?,?,?,?,?,NULL)',
+            [$publicId, $userId, $anonKey, self::EXAM, self::PAPER_SECONDS]
+        );
+        $sessionId = (int) Db::pdo()->lastInsertId();
+
+        // The karakter scale is deliberately not attached: this exam is passed or failed
+        // against a mark its own answer sheet states.
+        [$pointsMax] = $this->materialise(
+            $sessionId,
+            (int) $passage['id'],
+            self::PAPER_KIND,
+            onlySections: $currentAffairs ? null : ['laeremateriale', 'vaerdier'],
+        );
+        Db::execute('UPDATE reading_sessions SET points_max = ? WHERE id = ?', [$pointsMax, $sessionId]);
+
+        return ['session_id' => $publicId, 'mode' => self::EXAM, 'points_max' => $pointsMax];
+    }
+
+    /**
      * The paper as the learner sees it: the passage, and each item with its options in
      * presentation order. Nothing here identifies the answer.
      */
@@ -80,7 +126,8 @@ final class ReadingSessionService
         $session = $this->loadSession($publicId);
 
         $rows = Db::fetchAll(
-            'SELECT si.position, si.passage_id, si.options, si.points, si.chosen_index, i.prompt
+            'SELECT si.position, si.passage_id, si.options, si.points, si.chosen_index,
+                    i.prompt, i.section
              FROM reading_session_items si
              JOIN reading_items i ON i.id = si.item_id
              WHERE si.session_id = ? ORDER BY si.position',
@@ -88,11 +135,12 @@ final class ReadingSessionService
         );
 
         $passages = Db::fetchAll(
-            'SELECT p.id, p.slug, p.kind, p.title, p.body, MIN(si.position) AS first_position
+            'SELECT p.id, p.slug, p.kind, p.title, p.body, p.pass_points, p.vaerdier_min,
+                    MIN(si.position) AS first_position
              FROM reading_passages p
              JOIN reading_session_items si ON si.passage_id = p.id
              WHERE si.session_id = ?
-             GROUP BY p.id, p.slug, p.kind, p.title, p.body
+             GROUP BY p.id, p.slug, p.kind, p.title, p.body, p.pass_points, p.vaerdier_min
              ORDER BY first_position',
             [(int) $session['id']]
         );
@@ -109,17 +157,29 @@ final class ReadingSessionService
                 'position' => (int) $row['position'],
                 'passage'  => $order[(int) $row['passage_id']] ?? 0,
                 'prompt'   => $row['prompt'],
+                'section'  => $row['section'],
                 'points'   => (int) $row['points'],
                 'answered' => $row['chosen_index'] !== null,
                 'options'  => $this->publicOptions((string) $row['options']),
             ];
         }
 
+        // A knowledge paper carries the mark it is judged by, so the page can say what
+        // passing takes before the learner starts rather than only afterwards.
+        $paper = null;
+        foreach ($passages as $p) {
+            if ($p['kind'] === self::PAPER_KIND) {
+                $paper = $p;
+            }
+        }
+
         return [
-            'session_id'  => $publicId,
-            'mode'        => $session['mode'],
-            'status'      => $session['status'],
-            'points_max'  => (int) $session['points_max'],
+            'session_id'   => $publicId,
+            'mode'         => $session['mode'],
+            'status'       => $session['status'],
+            'points_max'   => (int) $session['points_max'],
+            'pass'         => $paper === null || $paper['pass_points'] === null ? null : (int) $paper['pass_points'],
+            'vaerdier_min' => $paper === null || $paper['vaerdier_min'] === null ? null : (int) $paper['vaerdier_min'],
             'remaining_s' => $this->remaining($session),
             'passages'    => array_map(
                 static fn(array $p): array => [
@@ -221,21 +281,29 @@ final class ReadingSessionService
             'SELECT COALESCE(SUM(points_scored), 0) FROM reading_session_items WHERE session_id = ?',
             [$id]
         );
-        $max      = (int) $session['points_max'];
-        $karakter = $this->grades->karakter($scored, $max);
+        $max = (int) $session['points_max'];
+
+        // The two exams are judged by different instruments and never by both: a
+        // knowledge paper has a stated pass mark, a reading paper a karakter scale that
+        // is recalibrated every session.
+        $tally    = $this->tally($id);
+        $karakter = $tally === null ? $this->grades->karakter($scored, $max) : null;
+        $verdict  = $tally['verdict'] ?? null;
 
         Db::execute(
             "UPDATE reading_sessions
                 SET status = 'submitted', submitted_at = NOW(), elapsed_s = ?, is_late = ?,
-                    points_scored = ?, karakter = ?
+                    points_scored = ?, karakter = ?, verdict = ?
               WHERE id = ?",
-            [$elapsed, $isLate ? 1 : 0, $scored, $karakter, $id]
+            [$elapsed, $isLate ? 1 : 0, $scored, $karakter, $verdict, $id]
         );
 
         return [
             'points_scored' => $scored,
             'points_max'    => $max,
             'karakter'      => $karakter,
+            'verdict'       => $verdict,
+            'tally'         => $tally,
             'is_late'       => $isLate,
             'elapsed_s'     => $elapsed,
         ];
@@ -254,7 +322,7 @@ final class ReadingSessionService
 
         $rows = Db::fetchAll(
             'SELECT si.position, si.options, si.correct_index, si.chosen_index, si.is_correct,
-                    si.points, si.points_scored, i.prompt
+                    si.points, si.points_scored, i.prompt, i.section
              FROM reading_session_items si
              JOIN reading_items i ON i.id = si.item_id
              WHERE si.session_id = ? ORDER BY si.position',
@@ -266,12 +334,17 @@ final class ReadingSessionService
             'points_scored' => (int) $session['points_scored'],
             'points_max'    => (int) $session['points_max'],
             'karakter'      => $session['karakter'],
+            // The verdict is the one recorded at hand-in; the tally is recomputed, so the
+            // review always adds up to the numbers it shows.
+            'verdict'       => $session['verdict'],
+            'tally'         => $this->tally((int) $session['id']),
             'is_late'       => (bool) $session['is_late'],
             'elapsed_s'     => $session['elapsed_s'] === null ? null : (int) $session['elapsed_s'],
             'items'         => array_map(
                 fn(array $r): array => [
                     'position'      => (int) $r['position'],
                     'prompt'        => $r['prompt'],
+                    'section'       => $r['section'],
                     'options'       => $this->publicOptions((string) $r['options']),
                     'correct_index' => (int) $r['correct_index'],
                     'chosen_index'  => $r['chosen_index'] === null ? null : (int) $r['chosen_index'],
@@ -282,6 +355,52 @@ final class ReadingSessionService
                 $rows
             ),
         ];
+    }
+
+    /**
+     * What a knowledge paper was judged on, or null when the session is not one.
+     *
+     * The paper's own question count is read separately from the number asked: a round
+     * sat without the current-affairs block answers fewer questions than the mark was
+     * written for, and PassMark refuses to call that a pass or a failure.
+     *
+     * @return array<string,mixed>|null
+     */
+    private function tally(int $sessionId): ?array
+    {
+        $row = Db::fetchOne(
+            "SELECT p.id AS passage_id, p.pass_points, p.vaerdier_min,
+                    COUNT(*) AS asked,
+                    COALESCE(SUM(si.is_correct = 1), 0) AS correct,
+                    COALESCE(SUM(i.section = 'vaerdier'), 0) AS vaerdier_asked,
+                    COALESCE(SUM(i.section = 'vaerdier' AND si.is_correct = 1), 0) AS vaerdier_correct
+               FROM reading_session_items si
+               JOIN reading_items i ON i.id = si.item_id
+               JOIN reading_passages p ON p.id = si.passage_id
+              WHERE si.session_id = ? AND p.kind = ?
+              GROUP BY p.id, p.pass_points, p.vaerdier_min",
+            [$sessionId, self::PAPER_KIND]
+        );
+
+        if ($row === null) {
+            return null;
+        }
+
+        $paperQuestions = (int) Db::fetchValue(
+            'SELECT COUNT(*) FROM reading_items
+              WHERE passage_id = ? AND is_active = 1 AND is_flagged = 0',
+            [(int) $row['passage_id']]
+        );
+
+        return PassMark::decide(
+            correct: (int) $row['correct'],
+            questions: (int) $row['asked'],
+            paperQuestions: $paperQuestions,
+            pass: $row['pass_points'] === null ? null : (int) $row['pass_points'],
+            vaerdierCorrect: (int) $row['vaerdier_correct'],
+            vaerdierQuestions: (int) $row['vaerdier_asked'],
+            vaerdierMin: $row['vaerdier_min'] === null ? null : (int) $row['vaerdier_min'],
+        );
     }
 
     /** Seconds left on an exam, counted by the server. Null when nothing is timed. */
@@ -321,6 +440,29 @@ final class ReadingSessionService
         return $passage;
     }
 
+    /** @return array<string,mixed> */
+    private function pickPaper(?string $slug): array
+    {
+        $passage = Db::fetchOne(
+            'SELECT p.id, p.kind FROM reading_passages p
+             WHERE p.is_published = 1
+               AND p.kind = ?
+               AND (? IS NULL OR p.slug = ?)
+               AND EXISTS (SELECT 1 FROM reading_items i
+                            WHERE i.passage_id = p.id AND i.is_active = 1 AND i.is_flagged = 0)
+             ORDER BY RAND() LIMIT 1',
+            [self::PAPER_KIND, $slug, $slug]
+        );
+
+        if ($passage === null) {
+            throw new RuntimeException(
+                $slug === null ? 'No published exam paper is available.' : "No published paper '{$slug}'."
+            );
+        }
+
+        return $passage;
+    }
+
     /**
      * Freezes the paper. Option order is decided here, once per session, so an authored
      * order cannot be memorised across attempts and the stored index stays meaningful.
@@ -331,11 +473,21 @@ final class ReadingSessionService
         string $kind,
         int $pointsMax = 0,
         int $position = 0,
+        ?array $onlySections = null,
     ): array {
+        // A filter of [] would silently produce an empty paper, so an empty list is read
+        // as "no filter" rather than "nothing qualifies".
+        $where = '';
+        $args  = [$passageId];
+        if ($onlySections) {
+            $where = ' AND section IN (' . implode(',', array_fill(0, count($onlySections), '?')) . ')';
+            $args  = [...$args, ...$onlySections];
+        }
+
         $items = Db::fetchAll(
             'SELECT id, position, points, correct_option_id FROM reading_items
-             WHERE passage_id = ? AND is_active = 1 AND is_flagged = 0 ORDER BY position',
-            [$passageId]
+             WHERE passage_id = ? AND is_active = 1 AND is_flagged = 0' . $where . ' ORDER BY position',
+            $args
         );
 
         $bank = $kind === 'insert' ? $this->bankOptions($passageId) : null;
@@ -393,7 +545,7 @@ final class ReadingSessionService
     private function loadSession(string $publicId): array
     {
         $session = Db::fetchOne(
-            'SELECT id, user_id, mode, status, points_max, points_scored, karakter, duration_s, is_late,
+            'SELECT id, user_id, mode, status, points_max, points_scored, karakter, verdict, duration_s, is_late,
                     elapsed_s, TIMESTAMPDIFF(SECOND, started_at, NOW()) AS elapsed_now
              FROM reading_sessions WHERE public_id = ?',
             [$publicId]

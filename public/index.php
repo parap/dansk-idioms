@@ -2,6 +2,7 @@
 
 use Dansk\Controller\AdminController;
 use Dansk\Controller\AuthController;
+use Dansk\Controller\IndfoedsretController;
 use Dansk\Controller\QuizController;
 use Dansk\Controller\ReadingAdminController;
 use Dansk\Controller\ReadingController;
@@ -34,6 +35,11 @@ $dispatcher = FastRoute\simpleDispatcher(static function (RouteCollector $r): vo
     $r->addRoute('POST', '/api/v1/quiz/sessions/{sid:[0-9A-Z]{26}}/answers', 'quiz.answer');
     $r->addRoute('GET',  '/api/v1/quiz/sessions/{sid:[0-9A-Z]{26}}/result',  'quiz.result');
     $r->addRoute('POST', '/api/v1/quiz/sessions/{sid:[0-9A-Z]{26}}/questions/{pos:\d+}/report', 'quiz.report');
+
+    // Sitting an indfoedsretsproeve starts here and continues on the session routes
+    // below: a session is one resource whatever kind of paper it froze.
+    $r->addRoute('GET',  '/api/v1/indfoedsret/papers',   'indfoedsret.papers');
+    $r->addRoute('POST', '/api/v1/indfoedsret/sessions', 'indfoedsret.start');
 
     $r->addRoute('POST', '/api/v1/reading/sessions', 'reading.start');
     $r->addRoute('GET',  '/api/v1/reading/sessions/{sid:[0-9A-Z]{26}}', 'reading.session');
@@ -70,7 +76,8 @@ if ($route[0] === Dispatcher::NOT_FOUND) {
             // address nobody has defined.
             AdminReach::isAdminPath($uri)
                 && AdminReach::reachable($_SERVER) => '/admin.html',
-            str_starts_with($uri, '/read')  => '/read.html',
+            str_starts_with($uri, '/read')   => '/read.html',
+            str_starts_with($uri, '/proeve') => '/proeve.html',
             default                         => '/app.html',
         };
         readfile(__DIR__ . $shell);
@@ -112,6 +119,7 @@ try {
     $quiz  = new QuizController();
     $auth  = new AuthController();
     $reading = new ReadingController();
+    $indfoedsret = new IndfoedsretController();
     $readingAdmin = new ReadingAdminController();
 
     match ($handler) {
@@ -174,6 +182,9 @@ try {
         'quiz.answer'   => $quiz->answer($vars['sid'], $body),
         'quiz.result'   => $quiz->result($vars['sid']),
         'quiz.report'   => $quiz->report($vars['sid'], (int) $vars['pos'], $body),
+
+        'indfoedsret.papers' => $indfoedsret->papers(),
+        'indfoedsret.start'  => $indfoedsret->start($body),
 
         'reading.start'   => $reading->start($body),
         'reading.session' => $reading->session($vars['sid']),

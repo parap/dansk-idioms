@@ -68,6 +68,27 @@ final class ReadingRepository
         Db::execute('UPDATE reading_passages SET is_published = 0 WHERE id = ?', [$passageId]);
     }
 
+    /**
+     * The exam papers on offer, oldest first, each with what a learner needs to choose
+     * between them: how long it is, what it takes to pass, and whether it still carries a
+     * current-affairs block to leave out.
+     *
+     * @return list<array<string,mixed>>
+     */
+    public function publishedPapers(): array
+    {
+        return Db::fetchAll(
+            "SELECT p.slug, p.title, p.pass_points AS pass, p.vaerdier_min,
+                    COUNT(i.id) AS questions,
+                    SUM(i.section = 'aktuelle') AS aktuelle
+               FROM reading_passages p
+               JOIN reading_items i ON i.passage_id = p.id AND i.is_active = 1 AND i.is_flagged = 0
+              WHERE p.is_published = 1 AND p.kind = 'quiz'
+              GROUP BY p.id, p.slug, p.title, p.pass_points, p.vaerdier_min
+              ORDER BY p.slug"
+        );
+    }
+
     /** @return list<array<string,mixed>> */
     public function publishedByKind(string $kind): array
     {

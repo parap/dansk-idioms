@@ -99,6 +99,7 @@ code() { curl -s -o /dev/null --connect-timeout 8 -m 25 -w '%{http_code}' "$@" |
 check "https answers"        "$(code "$URL/")"                          200
 check "http redirects"       "$(code "${URL/https:/http:}/")"           308
 check "reading page"         "$(code "$URL/read.html")"                 200
+check "exam page"            "$(code "$URL/proeve.html")"               200
 check "health"               "$(code "$URL/api/v1/health")"             200
 # The body, not just the status. A bare 404 is also what a stranger's server says, and
 # a check that passes when the site is missing entirely is not checking anything.
@@ -110,6 +111,21 @@ exam=$(curl -s --connect-timeout 8 -m 25 -X POST "$URL/api/v1/reading/sessions" 
         -H 'Content-Type: application/json' -d '{"mode":"exam"}' \
        | grep -o '"points_max":[0-9]*' || true)
 check "an exam assembles"    "${exam:-nothing}"                         '"points_max":24'
+
+# A citizenship paper is worth a point per question, and the archive holds sittings of
+# both sizes -- 45 now, 40 before the values block existed -- so the check is the floor
+# rather than a number that would fail on three papers in thirteen. That one assembles
+# proves the content import reached the server as well as the code did.
+points=$(curl -s --connect-timeout 8 -m 25 -X POST "$URL/api/v1/indfoedsret/sessions" \
+          -H 'Content-Type: application/json' -d '{}' \
+         | grep -o '"points_max":[0-9]*' | grep -oE '[0-9]+$' || true)
+# An `a && b` line that ends false returns false, and under `set -e` that ends the
+# deploy instead of reporting a failed check. An if is exempt from it.
+proeve=nothing
+if [ -n "${points:-}" ] && [ "$points" -ge 40 ]; then
+    proeve="at least 40"
+fi
+check "a proeve assembles"   "$proeve"                                  'at least 40'
 
 if [ "$problems" -ne 0 ]; then
     printf '\n\033[31m%s check(s) failed. The previous commit was %s.\033[0m\n' \
