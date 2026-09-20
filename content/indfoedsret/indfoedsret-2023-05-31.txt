@@ -1,0 +1,224 @@
+kind: quiz
+slug: indfoedsret-2023-05-31
+title: Indfødsretsprøven 31. maj 2023
+pass: 36
+vaerdier_min: 4
+
+--- questions ---
+[laeremateriale]
+
+1. Hvilket af følgende områder har kommunerne ansvaret for driften af?
+  Domstole
+* Vuggestuer
+  Sygehuse
+
+2. Hvilken filminstruktør vandt en Oscar for filmen Hævnen fra 2010?
+  Erik Balling
+  Carl Theodor Dreyer
+* Susanne Bier
+
+3. Hvornår besluttede Island ved en folkeafstemning at oprette en republik, der var uafhængig af Danmark?
+  1904
+* 1944
+  1984
+
+4. Hvilket parti tilhørte Lars Løkke Rasmussen, da han var statsminister i perioderne 2009-11 og 2015-19?
+* Venstre
+  Socialdemokratiet
+  Det Konservative Folkeparti
+
+5. Hvem består Rådet for Den Europæiske Union af?
+  Politikere direkte valgt af EU’s befolkninger
+  Embedsmænd udpeget af EU-Kommissionen
+* Ministre fra medlemsstaternes regeringer
+
+6. Hvad hedder Grønlands største by?
+* Nuuk
+  Tórshavn
+  Reykjavik
+
+7. Hvor gammel skal man mindst være for at købe stærk spiritus?
+  15 år
+* 18 år
+  21 år
+
+8. Hvilket af følgende partier er ældst?
+* Det Konservative Folkeparti
+  Dansk Folkeparti
+  Socialistisk Folkeparti
+
+9. Hvad hed forsangeren i bandet Gasolin?
+* Kim Larsen
+  Michael Bundesen
+  Steffen Brandt
+
+10. I hvilket af følgende århundreder fandt dansk slavehandel mellem Afrika og de danske kolonier i Caribien sted?
+  1100-tallet
+  1400-tallet
+* 1700-tallet
+
+11. Kan regionerne opkræve skatter?
+  Ja
+* Nej
+
+12. Hvilket af følgende steder i København blev der begået et terrorangreb i 2015?
+* Ved den jødiske synagoge
+  Ved Hovedbanegården
+  I lufthavnen
+
+13. Hvem fik især betydning for folkehøjskolerne i 1800-tallet?
+  Steen Steensen Blicher
+  Johannes V. Jensen
+* N.F.S. Grundtvig
+
+14. Hvilket emne har der været afholdt flest folkeafstemninger om i Danmark siden 1953?
+  Grundloven
+  Valgretsalderen
+* Danmarks forhold til EU
+
+15. Hvordan har de politiske partiers samlede medlemstal overordnet udviklet sig siden 1950?
+  Det er steget
+* Det er faldet
+
+16. Hvem var Danmarks første socialdemokratiske statsminister?
+* Thorvald Stauning
+  Jens Otto Krag
+  Anker Jørgensen
+
+17. I forbindelse med hvilken krig blev Danmark ramt af influenzaepidemien Den Spanske Syge?
+  2. Slesvigske Krig
+* 1. Verdenskrig
+  2. Verdenskrig
+
+18. Hvem skrev romanen Lykke-Per omkring år 1900?
+  Amalie Skram
+  Martin A. Hansen
+* Henrik Pontoppidan
+
+19. Hvilket symbol indgår i Færøernes flag?
+  En cirkel
+  En stjerne
+* Et kors
+
+20. Hvordan ændrede forholdet mellem kongen og kirken sig som følge af reformationen i 1500-tallet?
+  Kongen fik mindre magt over kirken
+* Kongen fik mere magt over kirken
+
+21. Hvem er aftaleparter, når der skal indgås overenskomster om fx løn, pension og arbejdsforhold på det private arbejdsmarked?
+  Stat og kommuner
+  Regering og embedsmænd
+* Fagforeninger og arbejdsgiverorganisationer
+
+22. Hvad er den kriminelle lavalder i Danmark?
+* 15 år
+  18 år
+  20 år
+
+23. Hvilket land har været i union med Danmark i over 400 år (mellem 1380 og 1814)?
+  Sverige
+* Norge
+  Finland
+
+24. Støttede den daværende danske regering den amerikansk ledede invasion af Irak i 2003 (Irak-krigen)?
+* Ja
+  Nej
+
+25. Kan to personer af samme køn indgå et ægteskab?
+* Ja
+  Nej
+
+26. Hvilket EU-land har flest indvandrere og efterkommere i Danmark oprindelse i?
+  Spanien
+* Polen
+  Frankrig
+
+27. Hvor højt over havets overflade ligger Danmarks højeste naturlige punkt?
+* Cirka 170 meter
+  Cirka 470 meter
+  Cirka 770 meter
+
+28. Hvornår blev Danmark medlem af NATO?
+* 1949
+  1957
+  1973
+
+29. Hvilken politisk bevægelse var rødstrømpebevægelsen en del af?
+  Arbejderbevægelsen i 1930’erne
+* Kvindebevægelsen i 1970’erne
+  Miljøbevægelsen i 1990’erne
+
+30. Kan statsministeren udpege en minister, der ikke er medlem af Folketinget?
+* Ja
+  Nej
+
+31. Hvad er Suzanne Brøgger og Naja Marie Aidt især kendte for?
+  De er skuespillere
+  De er malere
+* De er forfattere
+
+32. Hvordan har andelen af borgere over 64 år udviklet sig siden 1980?
+  Andelen er faldet
+* Andelen er steget
+
+33. Hvilket af følgende partier har flest borgmesterposter i Danmark?
+* Venstre
+  Dansk Folkeparti
+  Det Konservative Folkeparti
+
+34. Skal alle skattepligtige borgere betale kirkeskat?
+  Ja
+* Nej
+
+35. Hvor længe kan politiet tilbageholde en anholdt person med lovligt ophold i Danmark, før personen skal stilles for en dommer?
+* I op til 1 døgn
+  I op til 3 døgn
+  I op til 1 uge
+
+[aktuelle]
+
+36. Hvad hedder formanden for SF (Socialistisk Folkeparti)?
+  Franciska Rosenkilde
+  Mai Villadsen
+* Pia Olsen Dyhr
+
+37. Hvilken helligdag bliver afskaffet fra 2024?
+* Store Bededag
+  Kristi himmelfartsdag
+  Skærtorsdag
+
+38. I hvilken sport vandt det danske herrelandshold verdensmesterskabet i januar 2023?
+  Volleyball
+  Basketball
+* Håndbold
+
+39. Hvilken forfatter til blandt andet tv-serien Matador døde i januar 2023 105 år gammel?
+  Klaus Rifbjerg
+* Lise Nørgaard
+  Inger Christensen
+
+40. Hvilken nobelpris blev Morten Meldal tildelt i december 2022?
+  Nobelprisen i økonomi
+  Nobelprisen i litteratur
+* Nobelprisen i kemi
+
+[vaerdier]
+
+41. Kan en dansk statsborger blive straffet ved en dansk domstol, hvis vedkommende medvirker til menneskehandel i udlandet?
+* Ja
+  Nej
+
+42. Kan forældre ifølge dansk lov bestemme, hvem en søn eller datter på 18 år må være kæreste med?
+  Ja
+* Nej
+
+43. Har alle friskoler i Danmark pligt til at styrke elevernes respekt for ligestilling mellem kønnene?
+* Ja
+  Nej
+
+44. Er Danmark blandt de ti lande i verden, som menes at have den højeste grad af pressefrihed ifølge Reporters Without Borders (Press Freedom Index, 2022)?
+* Ja
+  Nej
+
+45. Kan præster og imamer blive straffet med fængsel, hvis de som led i religiøs oplæring udtrykker støtte til vold, terrorisme, frihedsberøvelse eller tvang?
+* Ja
+  Nej

@@ -1,0 +1,227 @@
+kind: quiz
+slug: indfoedsret-2025-11-26
+title: Indfødsretsprøven 26. november 2025
+pass: 36
+vaerdier_min: 4
+
+--- questions ---
+[laeremateriale]
+
+1. Hvilken politisk bevægelse var rødstrømpebevægelsen en del af?
+  Arbejderbevægelsen i 30’erne
+* Kvindebevægelsen i 70’erne
+  Miljøbevægelsen i 90’erne
+
+2. Var Danmark besat af tyske tropper under 1. verdenskrig (1914-18)?
+  Ja
+* Nej
+
+3. Over hvilket farvand åbnede en bro i 1935?
+  Øresund
+  Storebælt
+* Lillebælt
+
+4. Hvornår blev det ved en folkeafstemning i Island besluttet at oprette en republik, der var uafhængig af Danmark?
+  1904
+* 1944
+  1984
+
+5. Hvilket parti tilhørte Helle Thorning-Schmidt, da hun var statsminister i perioden 2011-15?
+* Socialdemokraterne
+  Radikale Venstre
+  Venstre
+
+6. Kan en regering bestå af et eller flere partier, der ikke tilsammen har flertal i Folketinget?
+* Ja
+  Nej
+
+7. Hvor høj er valgdeltagelsen normalt til folketingsvalg?
+  Cirka 55 procent
+  Cirka 70 procent
+* Cirka 85 procent
+
+8. Hvem er den lovgivende, den udøvende og den dømmende magt fordelt mellem?
+* Folketinget, regeringen og domstolene
+  Folketinget, kommunerne og domstolene
+  Regeringen, regionerne og kommunerne
+
+9. Hvad er Sofie Gråbøl (f. 1968) særligt kendt for?
+  Hun er forfatter
+* Hun er skuespiller
+  Hun er kunstmaler
+
+10. Hvad hed forsangeren i bandet Gasolin?
+  Steffen Brandt
+  Michael Bundesen
+* Kim Larsen
+
+11. Hvilken af følgende fortællinger er skrevet af H.C. Andersen?
+  Hans og Grete
+  Skønheden og udyret
+* Den grimme ælling
+
+12. Hvem er kendt for at have skrevet manuskriptet til tv-serien Matador?
+  Anders Thomas Jensen
+* Lise Nørgaard
+  Nils Malmros
+
+13. Hvilket af følgende årtier var især kendetegnet ved høj vækst, fuld beskæftigelse og stor stigning i produktionen?
+* 1960’erne
+  1970’erne
+  1980’erne
+
+14. Hvilken af følgende virksomheder er kendt for at producere vindmøller?
+  Novo Nordisk
+  Mærsk
+* Vestas
+
+15. Hvad er den kriminelle lavalder i Danmark?
+  12 år
+* 15 år
+  18 år
+
+16. Hvilken ændring trådte i kraft i 2025 angående den fri abort?
+* Grænsen for fri abort blev hævet fra 12 til 18 uger
+  Grænsen for fri abort blev sænket fra 12 til 9 uger
+
+17. Hvad indebar den seneste ændring af grundloven i 1953 blandt andet?
+  At valgretsalderen blev sænket til 18 år
+* At kvinder fik mulighed for at arve tronen
+  At Danmark blev medlem af FN
+
+18. Hvilket af følgende partier er ældst?
+* Radikale Venstre
+  SF
+  Enhedslisten
+
+19. Hvilket land blev Dansk Vestindien solgt til i 1917?
+  Frankrig
+  Storbritannien
+* USA
+
+20. Fik kvinder valgret til Folketinget med grundloven i 1849?
+  Ja
+* Nej
+
+21. Hvilket symbol indgår i Grønlands flag?
+  Et kors
+  En trekant
+* En cirkel
+
+22. Gælder grundloven på Færøerne og i Grønland?
+* Ja
+  Nej
+
+23. Hvilken tidligere dansk statsminister var generalsekretær for NATO i 2009-2014?
+  Poul Nyrup Rasmussen
+* Anders Fogh Rasmussen
+  Lars Løkke Rasmussen
+
+24. Hvilket kontinent modtager den største andel af Danmarks udviklingsbistand?
+  Asien
+  Sydamerika
+* Afrika
+
+25. Er Europa-Parlamentets medlemmer direkte valgt af befolkningerne i EU’s medlemslande?
+* Ja
+  Nej
+
+26. Hvad handler Paris-aftalen, som FN vedtog i 2015, især om?
+* Klima
+  Forsvar
+  Kriminalitet
+
+27. Har Danmark forbehold for EU’s forsvars- og sikkerhedspolitik?
+  Ja
+* Nej
+
+28. Hvilket af følgende lande blev erobret af Svend Tveskæg i 1000-tallet?
+  Frankrig
+  Polen
+* England
+
+29. Hvad hedder den ældste by i Danmark?
+* Ribe
+  Esbjerg
+  Frederikshavn
+
+30. Hvad indebar stavnsbåndet i 1700-tallet?
+  At kongen havde eneret på at handle med udlandet
+* At bønderne havde begrænset ret til at flytte
+  At kristendommen var den eneste tilladte religion
+
+31. Hvilken af følgende åbnede i Danmark i 1840'erne?
+  Den første lufthavn
+  Den første motorvej
+* Den første jernbane
+
+32. På hvilket slot i København bor kongen og hans familie en del af året?
+  Christiansborg
+  Rosenborg
+* Amalienborg
+
+33. Hvilket af følgende områder har kommunerne ansvaret for at drive?
+* Folkeskolerne
+  Domstolene
+  Sygehusene
+
+34. Hvilke myndigheder udskriver skatter?
+  Staten og regionerne
+* Staten og kommunerne
+  Regionerne og kommunerne
+
+35. Hvilket år fik personer af samme køn ret til at indgå et registreret partnerskab?
+  1955
+  1972
+* 1989 Spørgsmål 36-40: aktuelle spørgsmål
+
+[aktuelle]
+
+36. Hvad har Danmark formandskabet for mellem 1. juli og 31. december 2025?
+  FN’s Sikkerhedsråd
+* Rådet for Den Europæiske Union
+  Nordisk Ministerråd
+
+37. Hvilket parti fik flest stemmer på landsplan ved kommunalvalget den 18. november 2025?
+* Socialdemokratiet
+  Venstre
+  Det Konservative Folkeparti
+
+38. Hvilken dansk cykelrytter vandt Vuelta a España i 2025?
+  Magnus Cort
+  Mattias Skjelmose
+* Jonas Vingegaard
+
+39. På hvilke af følgende dagligvarer er priserne i butikkerne steget mest det seneste år (fra oktober 2024 til oktober 2025 ifølge Danmarks Statistiks Forbrugerprisindeks)?
+  Friske grøntsager
+  Mel og gryn
+* Okse- og kalvekød
+
+40. Hvorfor blev Københavns Lufthavn lukket om aftenen den 22. september 2025?
+  Medarbejderne i lufthavnen strejkede
+* Der var rapporteret droner ved lufthavnen
+  En stormflod med kraftig blæst og oversvømmelser ramte lufthavnen Spørgsmål 41-45: danske værdier
+
+[vaerdier]
+
+41. Kan man ifølge dansk lov blive straffet med fængsel i 16 år, hvis man med vold eller trussel om vold forsøger at forhindre Folketinget i at træffe en beslutning?
+* Ja
+  Nej
+
+42. Er der i dansk lov en regel om, at en arbejdsgiver skal give kvinder og mænd lige løn for samme arbejde?
+* Ja
+  Nej
+
+43. Er det som udgangspunkt strafbart at udtale sig kritisk om andres religion?
+  Ja
+* Nej
+
+44. Hvor stor en andel af borgerne i Danmark synes, at det er uacceptabelt, at en mand indimellem slår sin kone/kæreste (ifølge Europabarometer, Kønsstereotyper – vold mod kvinder, 2024)?
+  37 procent
+  65 procent
+* 94 procent
+
+45. Hvor stor en andel af borgerne i Danmark har tillid til, at politiet vil hjælpe dem, hvis de har brug for det (ifølge Justitsministeriets Tryghedsundersøgelse 2023)?
+  Cirka 35 procent
+  Cirka 60 procent
+* Cirka 85 procent

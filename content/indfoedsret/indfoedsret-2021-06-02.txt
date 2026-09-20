@@ -1,0 +1,203 @@
+kind: quiz
+slug: indfoedsret-2021-06-02
+title: Indfødsretsprøven 2. juni 2021
+pass: 32
+
+--- questions ---
+[laeremateriale]
+
+1. Hvilket land var Danmark i union med indtil 1814?
+  Sverige
+  Estland
+* Norge
+
+2. Hvilket år ophørte den danske regerings samarbejdspolitik med den tyske besættelsesmagt under 2. Verdenskrig?
+  1941
+* 1943
+  1945
+
+3. Hvilket parti var Poul Schlüter formand for, da han var statsminister i perioden 1982-1993?
+  Venstre
+  Socialdemokratiet
+* Det Konservative Folkeparti
+
+4. Hvordan fejrer man traditionelt sankthans i Danmark?
+* Man samles om aftenen og tænder bål
+  Man holder fest og giver hinanden gaver
+  Man klæder sig ud og slår katten af tønden
+
+5. Er det et krav, at man som dansk statsborger skal være medlem af folkekirken?
+  Ja
+* Nej
+
+6. Hvem vedtager et lovforslag?
+  Regeringen
+* Folketinget
+
+7. Hvor ofte afholdes der kommunalvalg?
+  Hvert 3. år
+* Hvert 4. år
+  Hvert 5. år
+
+8. Hvilken historisk begivenhed fandt sted i 1864?
+* Danmark tabte Den 2. Slesvigske Krig
+  Kongen underskrev Danmarks Riges Grundlov
+  Briterne bombarderede København
+
+9. Kan et ægtepar ifølge dansk lov blive skilt, selvom den ene part ikke ønsker det?
+* Ja
+  Nej
+
+10. Inden for hvilket område fik Niels Bohr Nobelprisen i 1922?
+  Medicin
+* Fysik
+  Litteratur
+
+11. Hvor stor en del af Danmark er i dag opdyrket landbrugsland?
+  Næsten 1/6
+  Næsten 1/3
+* Næsten 2/3
+
+12. På hvilken af følgende mærkedage holder dronningen hvert år en tale til hele rigsfællesskabet?
+  Juleaften
+* Nytårsaften
+  Grundlovsdag
+
+13. Kan regeringen bestemme, hvordan en dommer skal dømme i en konkret retssag?
+* Nej
+  Ja
+
+14. Hvornår blev den første lov om folkepension vedtaget?
+  1933
+* 1956
+  1982
+
+15. Hvilken af følgende personer gav i 1800-tallet inspiration til oprettelsen af folkehøjskoler?
+  Thomas Kingo
+  Johannes V. Jensen
+* N.F.S. Grundtvig
+
+16. Hvad kaldes den bevægelse, hvor bønderne i 1800-tallet slog sig sammen om at oprette mejerier og brugsforeninger?
+  Græsrodsbevægelsen
+  Modstandsbevægelsen
+* Andelsbevægelsen
+
+17. Hvor stor en del af de samlede offentlige udgifter går til indkomstoverførsler?
+* Ca. 1/3
+  Ca. 1/6
+  Ca. 1/9
+
+18. Hvilken af følgende befolkningsgrupper fik partiet Venstre flest stemmer fra i slutningen af 1800- tallet?
+  Godsejere
+  Arbejdere
+* Bønder
+
+19. Hvilken af følgende øgrupper er i rigsfællesskab med Danmark?
+* Færøerne
+  Orkneyøerne
+  Shetlandsøerne
+
+20. Ved hvilken grundlovsændring fik kvinder valgret til Folketinget?
+  Grundlovsændringen i 1866
+* Grundlovsændringen i 1915
+  Grundlovsændringen i 1953
+
+21. Hvornår fik personer af samme køn ret til at indgå ægteskab?
+  1972
+  1992
+* 2012
+
+22. Hvem skrev omkring år 1200 værket Gesta Danorum, der indeholder fortællinger om Danmarks hi- storie og nordisk mytologi?
+* Saxo
+  Brorson
+  Ansgar
+
+23. Hvem repræsenterer DA, når der skal forhandles kollektive overenskomster på det danske arbejds- marked?
+* Arbejdsgiverne
+  Regeringen
+  Lønmodtagerne
+
+24. Hvor gamle er kvinder i gennemsnit i Danmark, når de føder deres første barn?
+  Ca. 19 år
+  Ca. 24 år
+* Ca. 29 år
+
+25. Hvor mange procent af stemmerne ved et folketingsvalg skal et parti normalt have for at komme i Folketinget?
+* Mindst 2 %
+  Mindst 4 %
+  Mindst 6 %
+
+26. Hvilken type regering har været mest almindelig i Danmark siden 2. Verdenskrig?
+* Mindretalsregeringer
+  Flertalsregeringer
+
+27. Hvilken befolkningsgruppe fik begrænset deres rettigheder med indførelsen af stavnsbåndet i 1733?
+  Borgerskabet
+* Bønderne
+  Adelen
+
+28. Hvem skrev i 1722 komedien Jeppe på Bjerget?
+  Klaus Rifbjerg
+  Karen Blixen
+* Ludvig Holberg
+
+29. Hvilket politisk parti opstod i 1870’erne som en del af arbejderbevægelsen?
+  Radikale Venstre
+* Socialdemokratiet
+  Socialistisk Folkeparti
+
+30. Hvornår blev Grønlands hjemmestyreordning indført?
+  1949
+* 1979
+  2019
+
+31. Hvad stemte danskerne ja til ved en folkeafstemning i 1972?
+  En ændring af tronfølgeloven
+  En nedsættelse af valgretsalderen
+* Medlemskab af Det Europæiske Fællesskab
+
+32. Hvornår ophørte Den Kolde Krig?
+  Omkring 1950
+  Omkring 1970
+* Omkring 1990
+
+33. Hvem skal betale kirkeskat?
+  Alle skattepligtige borgere
+* Skattepligtige medlemmer af folkekirken
+
+34. Hvilke problemer i samfundet skulle Kanslergadeforliget fra 1933 især løse?
+* Økonomiske problemer
+  Miljømæssige problemer
+  Integrationsproblemer
+
+35. Hvornår gjorde en større gruppe af unge oprør mod samfundets traditionelle normer, så det fx blev mere accepteret at få børn uden at være gift?
+  I slutningen af 1920’erne
+  I slutningen af 1940’erne
+* I slutningen af 1960’erne
+
+[aktuelle]
+
+36. Hvad omhandler Folketingets tiltale i rigsretssagen mod tidligere udlændinge- og integrationsmini- ster Inger Støjberg blandt andet?
+  Beslaglæggelse af flygtninges værdigenstande ved indrejse
+  Midlertidigt stop for familiesammenføringer
+* Adskillelse af asylsøgende ægtefæller og samlevende par
+
+37. Hvilken begivenhed blev markeret den 5. april 2021?
+  50-årsdagen for Danmarks indtræden i Det Europæiske Fællesskab (EF)
+* 75-årsdagen for, at den sovjetiske hær forlod Bornholm efter 2. Verdenskrig
+  100-årsdagen for Sønderjyllands genforening med resten af Danmark
+
+38. Hvilken begivenhed fandt sted den 15. maj 2021?
+* Prins Christians konfirmation
+  Prins Joachims 50-års fødselsdag
+  Kronprinsesse Mary og Kronprins Frederiks sølvbryllup
+
+39. Hvilken dansk film vandt i april 2021 en Oscar for bedste internationale film?
+* Druk
+  Festen
+  Idioterne
+
+40. Hvad har protestgruppen Men in Black flere gange demonstreret imod?
+  Globaliseringen
+  Indvandring
+* COVID 19-restriktioner

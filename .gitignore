@@ -2,8 +2,10 @@
 /config/local.php
 /storage/exports/*
 /storage/logs/*
+/storage/indfoedsret/*
 !/storage/exports/.gitkeep
 !/storage/logs/.gitkeep
+!/storage/indfoedsret/.gitkeep
 .env
 .idea/
 /.phpunit.cache/

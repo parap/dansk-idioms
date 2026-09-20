@@ -226,6 +226,29 @@ structured fields.
 
 ---
 
+## Indfødsretsprøven
+
+The citizenship exam is a second kind of paper the site serves: 45 multiple-choice
+questions in 45 minutes, no text to read, and a pass mark of its own -- 36 correct, of
+which at least 4 of the 5 questions about Danish values.
+
+The ministry publishes every paper and its answer sheet as two unrelated PDFs.
+`bin/indfoedsret-convert.php` joins them into the same authoring format the reading
+passages use and writes one document per exam into `content/indfoedsret/`; from there
+`bin/reading-import.php` loads them like any other paper.
+
+```bash
+php bin/indfoedsret-convert.php ~/Documents/Claude/dansk-indfoedsret/pdf
+php bin/reading-import.php content/indfoedsret/*.txt
+```
+
+Two things about the source material decide how it is read, and both are in
+`content/indfoedsret/README.md`: the answer sheets contain letters that are drawn but
+never rendered, so answers are resolved by glyph geometry rather than by extracted text,
+and the current-affairs block ages out, so every question stores which block asked it.
+
+---
+
 ## Administration
 
 The review queue is behind a password. **There is no default** — with none configured,
@@ -328,6 +351,8 @@ docker-compose up -d
 | `bin/load-export.sh [dir]` | import the newest (or named) Telegram export |
 | `php bin/import.php --file=… [--dry-run]` | import one file; `--dry-run` writes nothing |
 | `php bin/idiom-import.php [file…]` | load the hand-added idioms in `content/idioms/` |
+| `php bin/indfoedsret-convert.php <dir>` | turn published exam PDFs into documents |
+| `php bin/reading-import.php [--publish] <file…>` | load reading and exam documents |
 | `php bin/audit-shared-senses.php` | list idioms that can be served as each other's wrong answer |
 | `php bin/migrate.php [--status]` | apply pending migrations |
 | `php bin/reclassify.php [--dry-run]` | recompute derived shape after changing heuristics |

@@ -1,0 +1,228 @@
+kind: quiz
+slug: indfoedsret-2022-11-23
+title: Indfødsretsprøven 23. november 2022
+pass: 36
+vaerdier_min: 4
+
+--- questions ---
+[laeremateriale]
+
+1. Hvilken rettighed er sikret i grundloven?
+  Retten til at holde ferie
+  Retten til at eje jagtvåben
+* Retten til at ytre sig
+
+2. Hvilken dansk film vandt en Oscar i 2021?
+  Festen
+* Druk
+  Jagten
+
+3. Hvad var baggrunden for Kanslergadeforliget i 1933?
+  Integrationsproblemer
+  Miljøproblemer
+* Økonomiske problemer
+
+4. Hvad hedder Kronprins Frederiks og Kronprinsesse Marys ældste søn?
+* Christian
+  Joachim
+  Nikolai
+
+5. I hvilket århundrede blev England erobret af den danske konge Svend Tveskæg?
+* 1000-tallet
+  1300-tallet
+  1600-tallet
+
+6. Hvad fik videnskabsmanden Niels Bohr Nobelprisen for i 1922?
+  En metode til måling af lysets hastighed
+* En model over atomers opbygning
+  En teori om jordens magnetfelt
+
+7. Hvilket af følgende partier har haft statsministerposten i sammenlagt flest år siden Systemskiftet i 1901?
+* Venstre
+  Det Konservative Folkeparti
+
+8. Hvor lang var middellevetiden for mænd i 2020-2021?
+  Cirka 73 år
+* Cirka 80 år
+  Cirka 87 år
+
+9. Hvad hedder den nordiske organisation, der varetager samarbejdet mellem de nordiske landes parlamenter?
+  Den Nordiske Union
+  Nordtinget
+* Nordisk Råd
+
+10. Hvilket land blev Dansk Vestindien solgt til i 1917?
+  Frankrig
+* USA
+  Storbritannien
+
+11. Hvilken gruppe borgere blev i tusindtal hjulpet med at flygte fra Danmark til Sverige i oktober 1943?
+  Danske kommunister
+  Danske soldater
+* Danske jøder
+
+12. Hvem beslutter, om der skal være valg til Folketinget inden valgperiodens udløb?
+  Indenrigsministeren
+* Statsministeren
+  Folketingets formand
+
+13. Hvem er den lovgivende, den udøvende og den dømmende magt fordelt mellem?
+* Folketinget, regeringen og domstolene
+  Folketinget, kommunerne og domstolene
+  Regeringen, regionerne og kommunerne
+
+14. Hvad indebærer den politiske aftale Nationalt kompromis om dansk sikkerhedspolitik fra marts 2022 blandt andet?
+* At udgifterne til forsvaret forøges
+  At udgifterne til forsvaret fastholdes
+  At udgifterne til forsvaret reduceres
+
+15. Hvilket år blev Dansk Folkeparti valgt til Folketinget første gang?
+  1958
+  1978
+* 1998
+
+16. Hvad hedder Færøernes største by?
+  Reykjavik
+  Nuuk
+* Tórshavn
+
+17. Hvornår blev Danmark ramt af pest-epidemien Den Sorte Død, som slog en stor del af befolkningen ihjel?
+* I 1300-tallet
+  I 1600-tallet
+  I 1900-tallet
+
+18. Deltager Danmark i EU’s forsvars- og sikkerhedspolitik?
+* Ja
+  Nej
+
+19. Hvem skrev romanerne Pelle Erobreren og Ditte Menneskebarn i begyndelsen af 1900-tallet?
+  Steen Steensen Blicher
+* Martin Andersen Nexø
+  Klaus Rifbjerg
+
+20. Hvilken dansk arkitekt har tegnet operahuset i Sydney i Australien?
+  Dorte Mandrup
+* Jørn Utzon
+  Arne Jacobsen
+
+21. Hvilket af følgende områder har staten ansvaret for driften af?
+* Politiet
+  Børnehaver
+  Sygehuse
+
+22. Hvornår gjorde en større gruppe af unge oprør mod samfundets traditionelle normer, så det blandt andet blev mere accepteret at få børn uden at være gift?
+  I slutningen af 1920’erne
+  I slutningen af 1940’erne
+* I slutningen af 1960’erne
+
+23. Er Grønland og Færøerne en del af EU?
+  Ja
+* Nej
+
+24. Hvilken historisk begivenhed fandt sted i 1864?
+* Danmark tabte Den 2. Slesvigske Krig
+  Danmark fik sin første socialdemokratiske statsminister
+  Danske kvinder fik valgret til Folketinget
+
+25. Hvilket af følgende lande har Danmark størst samhandel (import og eksport) med?
+  Kina
+* Tyskland
+  Storbritannien
+
+26. Kan den samme person være statsminister i mere end to valgperioder?
+* Ja
+  Nej
+
+27. Hvornår trådte Danmarks Riges Grundlov i kraft?
+  1809
+* 1849
+  1889
+
+28. Hvor ofte afholdes der kommunalvalg?
+  Hvert tredje år
+* Hvert fjerde år
+  Hvert femte år
+
+29. Hvor ligger Danmarks højeste naturlige punkt?
+  I Nordsjælland
+  I Sønderjylland
+* I Østjylland
+
+30. Hvem var Danmarks første kvindelige statsminister?
+  Margrethe Vestager
+* Helle Thorning-Schmidt
+  Mette Frederiksen
+
+31. Hvilken befolkningsgruppe fik begrænset deres rettigheder med indførelsen af stavnsbåndet i 1733?
+  Borgerskabet
+* Bønderne
+  Adelen
+
+32. Hvilken instans har som sin primære opgave at kontrollere offentlige myndigheders sagsbehandling?
+  Etisk Råd
+* Folketingets Ombudsmand
+  Pressenævnet
+
+33. Hvilken international organisation har vedtaget 17 såkaldte verdensmål om for eksempel ligestilling, klima og fattigdom?
+* FN
+  EU
+  WTO
+
+34. Hvilken popgruppe udgav nummeret Barbie Girl i 1990’erne?
+  Whigfield
+  Me & My
+* Aqua
+
+35. Hvordan har dagpengeperioden for arbejdsløse udviklet sig siden 1994?
+  Den er blevet længere
+  Den er uændret
+* Den er blevet kortere
+
+[aktuelle]
+
+36. Hvilken dansk cykelrytter vandt Tour de France i 2022?
+  Magnus Cort
+  Mads Pedersen
+* Jonas Vingegaard
+
+37. Hvilken tidligere minister stiftede partiet Danmarksdemokraterne i juni 2022?
+* Inger Støjberg
+  Sophie Løhde
+  Søren Gade
+
+38. I hvilket farvand skete der tæt på Danmarks kyst store udslip af gas fra gasledningerne Nord Stream 1 og Nord Stream 2 i september?
+  Nordsøen
+* Østersøen
+  Kattegat
+
+39. Hvor høj var valgdeltagelsen ved folketingsvalget i november 2022?
+  Cirka 45 procent
+  Cirka 65 procent
+* Cirka 85 procent
+
+40. Hvor skete der et skudangreb den 3. juli 2022?
+* I shoppingcenteret Fields
+  I Københavns Lufthavn
+  På Hotel Bella Sky
+
+[vaerdier]
+
+41. Kan man ifølge dansk lov blive straffet med fængsel, hvis man ulovligt tvinger nogen til en religiøs vielse?
+* Ja
+  Nej
+
+42. Er det ifølge dansk lov lovligt at have samleje med en person under 15 år, hvis personen har givet samtykke til samlejet?
+  Ja
+* Nej
+
+43. Er det ifølge dansk lov tilladt at slå sin ægtefælle?
+  Ja
+* Nej
+
+44. Er det muligt for en person over 18 år at få et CPR-nr., der svarer til et andet køn (skifte juridisk køn)?
+* Ja
+  Nej
+
+45. Kan man ifølge dansk lov kræve, at svømmehaller har separate åbningstider for kvinder og mænd?
+  Ja
+* Nej

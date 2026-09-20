@@ -26,8 +26,15 @@ final class ReadingSessionService
     /** Laeseforstaaelse 2 runs 65 minutes, whatever the browser's clock believes. */
     private const EXAM_SECONDS = 3900;
 
+    /**
+     * The task types a reading round may serve. A knowledge paper lives in the same
+     * tables and is graded the same way, but it has no text to read and its own pass
+     * mark, so a reading round asked for no particular type must not draw one.
+     */
+    private const READING_KINDS = ['mc', 'insert', 'cloze'];
+
     /** A paper draws one text of each task type, in the order the exam presents them. */
-    private const EXAM_KINDS = ['mc', 'insert', 'cloze'];
+    private const EXAM_KINDS = self::READING_KINDS;
 
     public function __construct(private GradeScale $grades = new GradeScale()) {}
 
@@ -292,9 +299,14 @@ final class ReadingSessionService
     /** @return array<string,mixed> */
     private function pickPassage(?string $kind): array
     {
+        // The kind list is interpolated because it is this class's own constant; the
+        // requested kind stays bound.
+        $kinds = "'" . implode("','", self::READING_KINDS) . "'";
+
         $passage = Db::fetchOne(
             'SELECT p.id, p.kind FROM reading_passages p
              WHERE p.is_published = 1
+               AND p.kind IN (' . $kinds . ')
                AND (? IS NULL OR p.kind = ?)
                AND EXISTS (SELECT 1 FROM reading_items i
                             WHERE i.passage_id = p.id AND i.is_active = 1 AND i.is_flagged = 0)

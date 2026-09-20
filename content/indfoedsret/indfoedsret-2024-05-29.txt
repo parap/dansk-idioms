@@ -1,0 +1,230 @@
+kind: quiz
+slug: indfoedsret-2024-05-29
+title: Indfødsretsprøven 29. maj 2024
+pass: 36
+vaerdier_min: 4
+
+--- questions ---
+[laeremateriale]
+
+1. Hvornår trådte Danmarks Riges Grundlov i kraft?
+* 1849
+  1864
+  1899
+
+2. Hvorfor kaldes folketingsvalget i 1973 for Jordskredsvalget?
+  Fordi der blev valgt flere kvinder end mænd til Folketinget
+* Fordi der var mange vælgere, der stemte på nye partier
+  Fordi Socialdemokratiet opnåede absolut flertal
+
+3. Hvornår fandt den danske regerings samarbejdspolitik med Tyskland under 2. Verdenskrig sted?
+* 1940-43
+  1943-45
+
+4. I hvilken sektor arbejdede der flest mennesker omkring 1850?
+  Industri
+  Fiskeri
+* Landbrug
+
+5. Hvem er den lovgivende, den udøvende og den dømmende magt fordelt mellem?
+* Folketinget, regeringen og domstolene
+  Folketinget, kommunerne og domstolene
+  Regeringen, regionerne og kommunerne
+
+6. Hvilke partier indgår i den nuværende regering?
+  Socialdemokratiet, SF og Radikale Venstre
+  Socialdemokratiet, Liberal Alliance og Det Konservative Folkeparti
+* Socialdemokratiet, Venstre og Moderaterne
+
+7. Hvilken type regering har været mest almindelig i Danmark siden 2. Verdenskrig?
+* Mindretalsregering
+  Flertalsregering
+
+8. Kan statsministeren udpege en minister, der ikke er medlem af Folketinget?
+* Ja
+  Nej
+
+9. Hvad er Inger Christensen (1935-2009) særlig kendt for?
+  Hun var kunstmaler
+* Hun var digter
+  Hun var skuespiller
+
+10. Hvilken dansk tv-serie beskriver blandt andet dagligliv og historiske begivenheder i perioden 1929-47?
+  Krøniken
+  Borgen
+* Matador
+
+11. Hvilken popgruppe udgav nummeret ’Barbie Girl’ i 1990’erne?
+  Whigfield
+  Me & My
+* Aqua
+
+12. Hvilken type vedvarende energi producerer den største andel af Danmarks el-forbrug?
+  Solenergi
+* Vindenergi
+  Bølgeenergi
+
+13. Hvilket af følgende lande har Danmark størst samhandel (import og eksport) med?
+  Kina
+  Storbritannien
+* Tyskland
+
+14. Hvilket af følgende områder har staten ansvaret for driften af?
+* Domstole
+  Folkeskoler
+  Sygehuse
+
+15. Hvilket år blev Margrethe den 2. dronning af Danmark?
+  1962
+* 1972
+  1982
+
+16. Hvad er Knud Rasmussen (1879-1933) særlig kendt for?
+* Han var polarforsker
+  Han var atomfysiker
+  Han var billedhugger
+
+17. Hvad er P.S. Krøyer (1851-1909) særlig kendt for?
+  Han var forfatter
+  Han var komponist
+* Han var kunstmaler
+
+18. I hvilken dansk by kan man besøge H.C. Andersens Hus?
+  Aarhus
+* Odense
+  København
+
+19. Langs hvilken kyst i Danmark ligger der særligt mange bunkere, som tyskerne fik bygget under 2. Verdenskrig?
+  Lollands sydkyst
+  Sjællands østkyst
+* Jyllands vestkyst
+
+20. Hvornår blev Nordslesvig, i dag kaldet Sønderjylland, genforenet med Danmark?
+  1864
+  1901
+* 1920
+
+21. Hvad kendetegnede Danmark i middelalderen (1050-1500)?
+  Danmark fik kolonier i Afrika og Caribien
+* Der blev bygget tusindvis af kirker
+  Danmark fik en demokratisk grundlov
+
+22. Hvilke af følgende er navne på guder i vikingetidens religion ’asatroen’?
+  Thyra og Gorm
+  Ingrid og Saxo
+* Freja og Thor
+
+23. I hvilket årti åbnede Danmarks første jernbane?
+  1740’erne
+  1790’erne
+* 1840’erne
+
+24. Gælder grundloven på Færøerne og i Grønland?
+* Ja
+  Nej
+
+25. Hvilket symbol indgår i Grønlands flag?
+  Et kors
+  En trekant
+* En cirkel
+
+26. Hvad er Danmark og en række andre lande forpligtet til ifølge Paris-aftalen fra 2015?
+* At reducere udslippet af drivhusgasser i atmosfæren
+  At bruge flere penge på forsvaret
+  At samarbejde om forebyggelse af grænseoverskridende kriminalitet
+
+27. Hvilket af de danske EU-forbehold var der folkeafstemning om i 2022?
+  EU's fælles valuta (euroen)
+  EU's fælles rets- og udlændingepolitik
+* EU's forsvars- og sikkerhedspolitik
+
+28. Hvilken international organisation har vedtaget 17 såkaldte verdensmål om for eksempel ligestilling, klima og fattigdom?
+  NATO
+  EU
+* FN
+
+29. Hvilket land sendte Danmark soldater til i 2003 på baggrund af en amerikansk ledet invasion?
+  Syrien
+* Irak
+  Libyen
+
+30. Hvor stor en andel af Danmarks befolkning er medlem af folkekirken?
+  Cirka 40 procent
+  Cirka 55 procent
+* Cirka 70 procent
+
+31. Hvad er den kriminelle lavalder i Danmark?
+* 15 år
+  16 år
+  18 år
+
+32. Hvilken dag markeres kvindernes internationale kampdag?
+* 8. marts
+  9. april
+  5. juni
+
+33. Hvor gammel skal man mindst være for at købe cigaretter i Danmark?
+  16 år
+* 18 år
+  20 år
+
+34. Hvornår blev det forbudt for lærerne at slå eleverne i folkeskolen?
+* 1967
+  1987
+  2007
+
+35. Hvilket parti stemte landmænd typisk på i midten af 1900-tallet?
+  Dansk Folkeparti
+  Det Konservative Folkeparti
+* Venstre Spørgsmål 36-40 er aktuelle spørgsmål
+
+[aktuelle]
+
+36. Hvilken historisk bygning i København brændte den 16. april 2024?
+  Holmens Kirke
+* Børsen
+  Rosenborg Slot
+
+37. Hvem blev Danmarks nye konge i januar 2024?
+  Frederik den 4.
+  Frederik den 7.
+* Frederik den 10.
+
+38. Hvor har krigsskibet Ivar Huitfeldt patruljeret i foråret 2024?
+* Ved den Arabiske Halvø
+  Ved Cuba
+  Ved Taiwan
+
+39. Mikkel Hansen (født 1987) har i 2024 meddelt, at han stopper som professionel sportsmand. I hvilken sport er han professionel?
+  Fodbold
+* Håndbold
+  Badminton
+
+40. Hvilket parti var Søren Pape Poulsen formand for indtil sin død i marts 2024?
+  Venstre
+  Radikale Venstre
+* Det Konservative Folkeparti Spørgsmål 41-45 angår danske værdier
+
+[vaerdier]
+
+41. Kan man komme i fængsel, hvis man ulovligt tvinger nogen til at indgå et ægteskab?
+* Ja
+  Nej
+
+42. Hvad er den seksuelle lavalder i Danmark?
+  13 år
+* 15 år
+  18 år
+
+43. Kan en forælder ifølge dansk lov bestemme, at kød, der serveres i en børnehave, stammer fra dyr, der er rituelt slagtet?
+  Ja
+* Nej
+
+44. Kan man komme i fængsel for at sende sit barn til udlandet til forhold, der bringer barnets sundhed eller udvikling i alvorlig fare (genopdragelsesrejse)?
+* Ja
+  Nej
+
+45. Hvor stor en andel af borgerne i Danmark har tillid til, at politiet vil hjælpe dem, hvis de har brug for det (ifølge Justitsministeriets Tryghedsundersøgelse 2023)?
+  Cirka 25 procent
+  Cirka 55 procent
+* Cirka 85 procent

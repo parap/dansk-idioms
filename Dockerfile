@@ -1,7 +1,7 @@
 FROM php:8.3-apache
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        libicu-dev libzip-dev libonig-dev unzip git \
+        libicu-dev libzip-dev libonig-dev unzip git poppler-utils \
     && docker-php-ext-configure intl \
     && docker-php-ext-install -j"$(nproc)" pdo_mysql intl zip opcache \
     && apt-get purge -y --auto-remove \

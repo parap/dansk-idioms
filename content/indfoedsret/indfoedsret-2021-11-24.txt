@@ -1,0 +1,227 @@
+kind: quiz
+slug: indfoedsret-2021-11-24
+title: Indfødsretsprøven 24. november 2021
+pass: 36
+vaerdier_min: 4
+
+--- questions ---
+[laeremateriale]
+
+1. Hvilken konge står bag opførelsen af blandt andet Rundetårn og Rosenborg Slot i København?
+* Christian den 4.
+  Christian den 7.
+  Christian den 10.
+
+2. Kan en regering bestå af et eller flere partier, der ikke tilsammen har flertal i Folketinget?
+* Ja
+  Nej
+
+3. Hvor stor en andel af Danmarks befolkning er medlem af folkekirken?
+  Cirka én ud af tre
+  Cirka én ud af to
+* Cirka tre ud af fire
+
+4. Fra hvilket land kom der over 200.000 krigsflygtninge til Danmark i forbindelse med 2. Verdenskrig?
+  Frankrig
+* Tyskland
+  Rusland
+
+5. Hvem har designet ”Your rainbow panorama” (Din regnbueudsigt), der er placeret oven på kunstmuseet ARoS i Aarhus?
+  Arne Jacobsen
+* Olafur Eliasson
+  Jørn Utzon
+
+6. Hvilke krige med dansk deltagelse blev udkæmpet i 1600-tallet?
+  De Slesvigske Krige
+  Englandskrigene
+* Svenskekrigene
+
+7. Hvor længe kan politiet tilbageholde en anholdt person med lovligt ophold i Danmark, før personen skal stilles for en dommer?
+* I op til ét døgn
+  I op til tre døgn
+  I op til én uge
+
+8. Hvad karakteriserede blandt andet 1960’erne i Danmark?
+  Oliekrise og høj arbejdsløshed
+* Høj økonomisk vækst med stor stigning i produktion og forbrug
+
+9. Hvilken tidligere dansk statsminister blev i 2009 generalsekretær for NATO?
+  Poul Nyrup Rasmussen
+* Anders Fogh Rasmussen
+  Helle Thorning-Schmidt
+
+10. Hvilken af følgende internationale organisationer blev Danmark medlem af i 1973?
+* EF
+  WTO
+  OECD
+
+11. Hvad hedder den øverste domstol i Danmark?
+  Landsretten
+* Højesteret
+  Statsretten
+
+12. Hvem har ansvaret for driften af jobcentrene?
+* Kommunerne
+  Regionerne
+  Staten
+
+13. I hvilket år blev amterne erstattet af regionerne?
+  1933
+  1968
+* 2007
+
+14. Hvilken begivenhed fandt sted i Danmark i 1807?
+  Danmark måtte afstå Slesvig
+  Kongen underskrev Danmarks Riges Grundlov
+* Briterne bombarderede København
+
+15. Må en dommer bære synlige religiøse symboler i en retssal?
+  Ja
+* Nej
+
+16. Hvad er den kriminelle lavalder i Danmark?
+  12 år
+* 15 år
+  18 år
+
+17. Hvor har USA luftbasen Thulebasen?
+  På Bornholm
+  På Færøerne
+* I Grønland
+
+18. Hvornår blev Nordslesvig, i dag kaldet Sønderjylland, genforenet med Danmark?
+  1901
+* 1920
+  1945
+
+19. Hvad var middel-levetiden for kvinder i 2019-2020?
+  78-79 år
+* 83-84 år
+  88-89 år
+
+20. Hvor stor en del af alle lønmodtagere arbejder i dag i den offentlige sektor?
+* Cirka en tredjedel
+  Cirka to tredjedele
+
+21. Hvad var Knud Rasmussen (1879-1933) særligt kendt for?
+  Han var komponist
+  Han var kunstmaler
+* Han var polarforsker
+
+22. I hvilket årti åbnede Danmarks første jernbanestrækning?
+  1780’erne
+* 1840’erne
+  1910’erne
+
+23. Hvilken af følgende bygninger har den kendte danske arkitekt og designer Arne Jacobsen tegnet?
+  Operaen i København
+  Christiansborg
+* Danmarks Nationalbank
+
+24. Hvor gammel skal man være for at købe cigaretter i Danmark?
+  Mindst 16 år
+* Mindst 18 år
+  Mindst 21 år
+
+25. Hvilket af følgende partier fik flest stemmer ved folketingsvalget i 2019?
+* Venstre
+  Det Konservative Folkeparti
+  Dansk Folkeparti
+
+26. Hvor ofte skal der ifølge grundloven være folketingsvalg i Danmark?
+  Mindst hvert tredje år
+* Mindst hvert fjerde år
+  Mindst hvert femte år
+
+27. Hvilket politisk parti blev dannet i slutningen af 1950’erne som udbryder af Danmarks Kommunistiske Parti (DKP)?
+  Enhedslisten
+  Det Radikale Venstre
+* Socialistisk Folkeparti
+
+28. Hvad indebar den seneste ændring af grundloven i 1953 blandt andet?
+  At valgretsalderen blev sænket til 18 år
+* At kvinder fik mulighed for at arve tronen
+  At Danmark blev medlem af FN
+
+29. Hvor højt er Danmarks højeste naturlige punkt?
+* Cirka 170 meter over havets overflade
+  Cirka 470 meter over havets overflade
+  Cirka 770 meter over havets overflade
+
+30. Omkring hvilken krig blev Danmark ramt af influenza-epidemien ”Den Spanske Syge”?
+  2. Slesvigske Krig
+* 1. Verdenskrig
+  2. Verdenskrig
+
+31. Hvor mange indbyggere har Færøerne?
+* Cirka 50.000
+  Cirka 150.000
+  Cirka 250.000
+
+32. Hvem var Danmarks første socialdemokratiske statsminister?
+* Thorvald Stauning
+  Anker Jørgensen
+  Poul Nyrup Rasmussen
+
+33. Hvorfor kaldes folketingsvalget i 1973 for ”Jordskredsvalget”?
+  Fordi der blev valgt flere kvinder end mænd til Folketinget
+* Fordi mange vælgere stemte på nye partier
+  Fordi Socialdemokratiet opnåede absolut flertal
+
+34. Hvem har skrevet romanen ”Barndommens Gade” fra 1943?
+  Naja Marie Aidt
+  Leonora Christina Skov
+* Tove Ditlevsen
+
+35. Kan man blive minister, hvis man ikke er medlem af Folketinget?
+* Ja
+  Nej
+
+[aktuelle]
+
+36. I hvilken sport vandt Viktor Axelsen guld ved OL i Tokyo?
+* Badminton
+  Hækkeløb
+  Svømning
+
+37. Hvem opløste i september 2021 foreningen ”Loyal to Familia”?
+  Folketinget
+  Regeringen
+* Højesteret
+
+38. Hvem blev udnævnt til kultur- og kirkeminister i august 2021?
+  Pernille Skipper
+  Sophie Løhde
+* Ane Halsboe-Jørgensen
+
+39. Hvilket parti fik flest stemmer ved kommunalvalget på landsplan den 16. november 2021?
+* Socialdemokratiet
+  Venstre
+  Konservative Folkeparti
+
+40. Hvilken gruppe af offentligt ansatte strejkede i sommeren 2021 efter at have stemt nej til et overenskomstforslag?
+  Folkeskolelærere
+* Sygeplejersker
+  Pædagoger
+
+[vaerdier]
+
+41. Har alle friskoler og private grundskoler pligt til at udvikle og styrke elevernes respekt for ligestilling mellem kønnene?
+* Ja
+  Nej
+
+42. Kan man komme i fængsel for at sende sit barn til udlandet til forhold, der bringer barnets sundhed eller udvikling i alvorlig fare (genopdragelsesrejse)?
+* Ja
+  Nej
+
+43. Kan en familie ifølge dansk lov bestemme, hvem et familiemedlem på 18 år må være kæreste med?
+  Ja
+* Nej
+
+44. Er det lovligt at gennemføre en religiøs vielse af mindreårige i Danmark?
+  Ja
+* Nej
+
+45. Kan man ifølge dansk lov kræve, at svømmehaller har separate åbningstider for kvinder og mænd?
+  Ja
+* Nej

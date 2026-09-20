@@ -32,9 +32,15 @@ namespace Dansk\Domain\Reading;
  */
 final class PassageDocument
 {
-    private const KINDS = ['mc', 'insert', 'cloze'];
+    private const KINDS = ['mc', 'insert', 'cloze', 'quiz'];
 
     private const GAP_KINDS = ['insert', 'cloze'];
+
+    /** A knowledge paper is questions alone: there is nothing to read before answering. */
+    private const TEXTLESS_KINDS = ['quiz'];
+
+    /** The blocks a knowledge paper divides its questions into, in the order it asks them. */
+    private const BLOCKS = ['laeremateriale', 'aktuelle', 'vaerdier'];
 
     private const MARKER = '/\{\{(\d+)\}\}/';
 
@@ -82,18 +88,24 @@ final class PassageDocument
                 throw new InvalidPassage("The '{$required}' header is missing.");
             }
         }
-        if ($sections['text'] === []) {
+        $textless = in_array($kind, self::TEXTLESS_KINDS, true);
+        if ($sections['text'] === [] && !$textless) {
             throw new InvalidPassage('The document has no --- text --- section.');
+        }
+        if ($sections['text'] !== [] && $textless) {
+            throw new InvalidPassage("A {$kind} paper has nothing to read, so it takes no --- text --- section.");
         }
         if ($sections['questions'] === []) {
             throw new InvalidPassage('The document has no --- questions --- section.');
         }
 
-        $body  = $this->body($sections['text']);
+        $body  = $textless ? null : $this->body($sections['text']);
         $bank  = $kind === 'insert' ? $this->bank($sections['parts']) : [];
         $items = $this->items($sections['questions'], $kind, $bank);
 
-        $this->checkMarkers($body, $kind, $items);
+        if ($body !== null) {
+            $this->checkMarkers($body, $kind, $items);
+        }
 
         $doc = [
             'slug'  => $headers['slug'],
@@ -105,8 +117,31 @@ final class PassageDocument
         if ($kind === 'insert') {
             $doc['bank'] = $bank;
         }
+        if ($textless) {
+            $doc['pass']         = $this->threshold($headers, 'pass');
+            $doc['vaerdier_min'] = $this->threshold($headers, 'vaerdier_min');
+        }
 
         return $doc;
+    }
+
+    /**
+     * The pass mark travels with the paper because it is the paper's own: the exam asked
+     * for 32 of 40 before the values block existed and asks for 36 of 45 with it.
+     *
+     * @param array<string,string> $headers
+     */
+    private function threshold(array $headers, string $name): ?int
+    {
+        $value = trim($headers[$name] ?? '');
+        if ($value === '') {
+            return null;
+        }
+        if (!preg_match('/^\d+$/', $value)) {
+            throw new InvalidPassage("The '{$name}' header must be a whole number, not '{$value}'.");
+        }
+
+        return (int) $value;
     }
 
     /**
@@ -185,14 +220,16 @@ final class PassageDocument
     {
         $items   = [];
         $current = null;
+        $block   = null;
         $labels  = range('A', 'Z');
+        $textless = in_array($kind, self::TEXTLESS_KINDS, true);
 
         $close = function () use (&$items, &$current, $kind): void {
             if ($current === null) {
                 return;
             }
             if ($kind !== 'insert') {
-                $this->checkOptions($current);
+                $this->checkOptions($current, $kind);
             }
             unset($current['line']);
             $items[] = $current;
@@ -204,9 +241,29 @@ final class PassageDocument
                 continue;
             }
 
+            if (preg_match('/^\s*\[([a-z_]+)\]\s*$/', $line, $m)) {
+                $close();
+                if (!in_array($m[1], self::BLOCKS, true)) {
+                    throw new InvalidPassage(
+                        "Line {$no} opens block '{$m[1]}', which is not one of " . implode(', ', self::BLOCKS) . '.'
+                    );
+                }
+                if (!$textless) {
+                    throw new InvalidPassage("A {$kind} passage has no blocks, but line {$no} opens one.");
+                }
+                $block = $m[1];
+                continue;
+            }
+
             if (preg_match('/^(\d+)\.\s*(.*)$/', $line, $m)) {
                 $close();
                 $current = ['position' => (int) $m[1], 'line' => $no, 'options' => []];
+                if ($textless) {
+                    if ($block === null) {
+                        throw new InvalidPassage("Question {$m[1]} on line {$no} belongs to no block.");
+                    }
+                    $current['section'] = $block;
+                }
 
                 $tail = trim($m[2]);
                 if ($kind === 'insert') {
@@ -249,12 +306,19 @@ final class PassageDocument
         return $items;
     }
 
-    /** @param array<string,mixed> $item */
-    private function checkOptions(array $item): void
+    /**
+     * The exam's values questions are answered Ja or Nej, so a knowledge paper offers two
+     * options where a reading task needs three to be worth asking.
+     *
+     * @param array<string,mixed> $item
+     */
+    private function checkOptions(array $item, string $kind): void
     {
+        $least = in_array($kind, self::TEXTLESS_KINDS, true) ? 2 : 3;
         $count = count($item['options']);
-        if ($count < 3) {
-            throw new InvalidPassage("Question {$item['position']} on line {$item['line']} offers {$count} options, and needs at least three.");
+        if ($count < $least) {
+            $word = $least === 2 ? 'two' : 'three';
+            throw new InvalidPassage("Question {$item['position']} on line {$item['line']} offers {$count} options, and needs at least {$word}.");
         }
 
         $correct = array_filter($item['options'], static fn(array $o): bool => !empty($o['correct']));

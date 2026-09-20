@@ -1,0 +1,228 @@
+kind: quiz
+slug: indfoedsret-2025-05-27
+title: Indfødsretsprøven 27. maj 2025
+pass: 36
+vaerdier_min: 4
+
+--- questions ---
+[laeremateriale]
+
+1. Hvad blev vedtaget med grundlovsændringen i 1915?
+  At kvinder fik mulighed for at arve den danske trone
+* At kvinder fik stemmeret til Folketinget
+  At kvinder skulle aftjene værnepligt
+
+2. Hvad var den primære baggrund for den politiske aftale Kanslergadeforliget i 1933?
+* Økonomiske problemer
+  Udenrigspolitiske problemer
+  Miljøproblemer
+
+3. Hvornår gjorde en større gruppe af unge oprør mod samfundets traditionelle normer, så det blandt andet blev mere accepteret at få børn uden at være gift?
+  I slutningen af 1920'erne
+  I slutningen af 1940'erne
+* I slutningen af 1960'erne
+
+4. Hvilket emne har der været afholdt flest folkeafstemninger om i Danmark siden 1953?
+  Grundloven
+  Valgretsalderen
+* Danmarks forhold til EU
+
+5. Hvilket af følgende partier er nyest?
+* Alternativet
+  Socialistisk Folkeparti
+  Enhedslisten
+
+6. Kan den samme person være statsminister i mere end to valgperioder?
+* Ja
+  Nej
+
+7. Hvad er Susanne Bier (født 1960) særligt kendt for?
+  Hun er fysiker
+  Hun er politiker
+* Hun er filminstruktør
+
+8. Hvem har skrevet romanen Barndommens Gade fra 1943?
+  Herman Bang
+* Tove Ditlevsen
+  Naja Marie Aidt
+
+9. Hvornår levede filosoffen Søren Kierkegaard?
+  I 1700-tallet
+* I 1800-tallet
+  I 1900-tallet
+
+10. Hvad var Carl Nielsen (1865-1931) særligt kendt for?
+* Han var komponist
+  Han var kunstmaler
+  Han var arkitekt
+
+11. Hvilket EU-land har flest indvandrere og efterkommere i Danmark oprindelse i?
+  Italien
+  Spanien
+* Polen
+
+12. Hvad er der sket med folkepensionsalderen siden 2018?
+* Den er blevet højere
+  Den er uændret
+  Den er blevet lavere
+
+13. Er flertallet af lønmodtagerne i Danmark ansat i den offentlige sektor?
+  Ja
+* Nej
+
+14. Hvor ligger flest danske konger og dronninger begravet?
+  Viborg Domkirke
+* Roskilde Domkirke
+  Ribe Domkirke
+
+15. I hvilken dansk by kan man blandt andet besøge Den Gamle By og kunstmuseet ARoS?
+  Helsingør
+  Odense
+* Aarhus
+
+16. Hvilken dansk ø er kendt for sin næsten 130 meter høje klint (skrænt ved kyst)?
+* Møn
+  Læsø
+  Als
+
+17. Hvilket land kommer dronning Mary oprindeligt fra?
+  Canada
+  Storbritannien
+* Australien
+
+18. Hvilket af følgende partier har aldrig været med i en regering?
+  Radikale Venstre
+* Enhedslisten
+  Socialistisk Folkeparti
+
+19. Hvilket parti tilhørte Poul Schlüter, som var statsminister i perioden 1982-93?
+  Socialdemokratiet
+  Det Radikale Venstre
+* Det Konservative Folkeparti
+
+20. Hvem har hovedansvaret for driften af sygehusene?
+  Staten
+* Regionerne
+  Kommunerne
+
+21. Hvilket af følgende partier har flest borgmestre?
+  Liberal Alliance
+  Det Konservative Folkeparti
+* Venstre
+
+22. Er Grønland og Færøerne en del af EU?
+  Ja
+* Nej
+
+23. Hvilket symbol indgår i Færøernes flag?
+  En cirkel
+  En stjerne
+* Et kors
+
+24. Hvad hedder Grønlands største by?
+  Tasiilaq
+  Ilulissat
+* Nuuk
+
+25. Støttede den daværende danske regering den amerikansk ledede invasion af Irak i 2003 (Irak-krigen)?
+* Ja
+  Nej
+
+26. Hvad blev Danmark medlem af i 1949?
+  WTO
+* NATO
+  EF
+
+27. Hvad hedder den organisation, der varetager samarbejdet mellem de nordiske landes parlamenter?
+* Nordisk Råd
+  Nordtinget
+  Den Nordiske Union
+
+28. Hvor har Margrethe Vestager arbejdet i perioden 2014-24?
+  FN
+  NATO
+* EU
+
+29. Hvornår fik kong Harald Blåtand skrevet på den ene af Jellingstenene, at han gjorde danerne (danskerne) kristne?
+* 900-tallet
+  1200-tallet
+  1500-tallet
+
+30. Hvem fik mere magt med enevælden, der blev indført i Danmark 1660-61?
+  Adelen
+  Kirken
+* Kongen
+
+31. Hvad indebar reformationen i Danmark i 1536?
+  Indførelsen af en demokratisk grundlov
+* Overgangen fra katolsk til protestantisk kristendom
+  Ophævelse af kongens eneret på at handle med udlandet
+
+32. Hvad blev resultatet af Den 2. Slesvigske Krig i 1864?
+  Danmark erobrede Slesvig
+* Danmark tabte Slesvig
+
+33. Hvor højt over havets overflade ligger Danmarks højeste naturlige punkt?
+* Cirka 170 meter
+  Cirka 370 meter
+  Cirka 570 meter
+
+34. Hvem har til opgave at kontrollere offentlige myndigheders sagsbehandling?
+* Folketingets Ombudsmand
+  Etisk Råd
+  Pressenævnet
+
+35. Hvor gammel skal man mindst være for at købe cigaretter i Danmark?
+  15 år
+  16 år
+* 18 år Spørgsmål 36-40 er aktuelle spørgsmål
+
+[aktuelle]
+
+36. Hvilken årsdag blev markeret den 5. maj 2025?
+  50-årsdagen for Danmarks indtræden i EF
+* 80-årsdagen for Danmarks befrielse efter 2. Verdenskrig
+  100-årsdagen for Sønderjyllands genforening med Danmark
+
+37. Hvor var der valg til parlamentet i marts 2025?
+* Grønland
+  Færøerne
+
+38. Hvad var Mette Frederiksen og en række andre europæiske stats- og regeringschefer til møde om i London i marts 2025?
+  Klimaforandringer
+* Situationen i Ukraine
+  Grænseoverskridende kriminalitet
+
+39. Hvilken fødselsdag fejrede prinsesse Isabella i april 2025?
+* 18 år
+  20 år
+  25 år
+
+40. Hvem blev i marts 2025 valgt til verdens bedste mandlige håndboldspiller (2024 IHF Male World Player of the Year)?
+  Magnus Saugstrup
+  Emil Jakobsen
+* Mathias Gidsel Spørgsmål 41-45 angår danske værdier
+
+[vaerdier]
+
+41. Kan man blive straffet med fængsel for at hjælpe fremmede staters efterretningstjenester med at virke i Danmark?
+* Ja
+  Nej
+
+42. Kan kvinder være biskopper i den danske folkekirke?
+* Ja
+  Nej
+
+43. Hvad er den seksuelle lavalder i Danmark?
+  13 år
+* 15 år
+  18 år
+
+44. Er det lovligt at lade sit barn under 18 år blive religiøst viet?
+  Ja
+* Nej
+
+45. Hvilken placering indtager Danmark ud af 180 lande, når det gælder den højeste grad af pressefrihed ifølge Reporters Without Borders (2024 World Press Freedom Index)?
+* 2
+  26
+  51

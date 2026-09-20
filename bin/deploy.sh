@@ -77,6 +77,7 @@ ssh "$HOST" "set -euo pipefail
     $COMPOSE exec -T app php bin/migrate.php | tail -2
     $COMPOSE exec -T app php bin/idiom-import.php | tail -2
     $COMPOSE exec -T app php bin/reading-import.php content/reading/*.txt | tail -2
+    $COMPOSE exec -T app php bin/reading-import.php content/indfoedsret/*.txt | tail -2
 "
 
 # ---- the verdict, taken from outside --------------------------------------------------

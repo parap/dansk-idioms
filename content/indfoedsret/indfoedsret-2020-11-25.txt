@@ -1,0 +1,205 @@
+kind: quiz
+slug: indfoedsret-2020-11-25
+title: Indfødsretsprøven 25. november 2020
+pass: 32
+
+--- questions ---
+[laeremateriale]
+
+1. Hvornår blev Danmarks Riges Grundlov indført?
+* 1849
+  1814
+  1789
+
+2. Kan statsministeren udpege en minister, der ikke er medlem af Folketinget?
+  Nej
+* Ja
+
+3. Hvilken rettighed er sikret i grundloven?
+* Retten til at danne en forening
+  Retten til at bære et våben
+  Retten til at holde ferie
+
+4. Hvem har den dømmende magt?
+  Folketinget
+  Regeringen
+* Domstolene
+
+5. Kan man være statsminister i mere end to valgperioder?
+* Ja
+  Nej
+
+6. Kan en regering bestå af et eller flere partier, der ikke tilsammen har flertal i Folketinget?
+* Ja
+  Nej
+
+7. Hvilken konge fik skrevet på den ene af Jellingstenene, at han gjorde danskerne (danerne) kristne?
+  Svend Tveskæg
+* Harald Blåtand
+  Valdemar Sejr
+
+8. Hvornår opstod andelsbevægelsen i Danmark med oprettelsen af de første brugsforeninger og andelsmejerier?
+  I 1700-tallet
+* I 1800-tallet
+  I 1900-tallet
+
+9. Ved hvilken grundlovsændring fik kvinder valgret til Folketinget?
+  Grundlovsændringen i 1866
+* Grundlovsændringen i 1915
+  Grundlovsændringen i 1953
+
+10. Hvornår fik Danmark sin første kvindelige minister?
+* 1924
+  1947
+  1975
+
+11. Hvor mange kommuner er der i Danmark?
+  275
+  179
+* 98
+
+12. Hvilket af følgende områder har kommunerne ansvaret for driften af?
+  Politi
+* Ældrepleje
+  Universiteter
+
+13. Inden for hvilket af følgende områder har Danmark et forbehold i forhold til samarbejdet i EU?
+* Forsvar
+  Miljø
+  Landbrug
+
+14. Hvornår blev regionerne oprettet?
+* 2007
+  1968
+  1929
+
+15. Hvornår fik Danmark sin første socialdemokratiske statsminister?
+  1871
+* 1924
+  1966
+
+16. Hvad arbejdede rødstrømpebevægelsen blandt andet for?
+* Ligestilling mellem mænd og kvinder
+  Indførelse af 12 års grundskole
+  Folkepension til alle
+
+17. Hvilken gruppe borgere blev i tusindtal hjulpet med at flygte fra Danmark til Sverige i oktober 1943?
+  Danske kommunister
+  Danske soldater
+* Danske jøder
+
+18. Hvem skrev i 1950’erne romanen Den kroniske uskyld?
+  Ludvig Holberg
+* Klaus Rifbjerg
+  Peter Høeg
+
+19. Hvornår blev der indført fri abort?
+  1935
+  1951
+* 1973
+
+20. Har et homoseksuelt par ret til at indgå ægteskab?
+* Ja
+  Nej
+
+21. Hvem har som udgangspunkt forældremyndigheden, når en mor og far, der bor sammen, har et fælles barn?
+* Faren og moren i fællesskab
+  Moren
+  Faren
+
+22. Hvilken mærkedag fejres den 5. juni?
+  Dronningens fødselsdag
+  Danmarks befrielse
+* Grundlovsdag
+
+23. Hvilke tre lande dannede Kalmarunionen i 1397?
+  Danmark, Sverige og England
+* Danmark, Norge og Sverige
+  Danmark, England og Norge
+
+24. Hvilken international organisation blev Danmark medlem af i 1945?
+  EU
+  WTO
+* FN
+
+25. Hvornår trådte loven om hjemmestyre i Grønland i kraft?
+  1949
+* 1979
+  2009
+
+26. I hvilket årti ophørte Danmarks Radios monopol og dermed eneretten til at sende dansk tv?
+  1940’erne
+  1960’erne
+* 1980’erne
+
+27. Hvilken bevægelse fik Grundtvig i særlig grad betydning for i 1800-tallet?
+* Højskolebevægelsen
+  Arbejderbevægelsen
+  Modstandsbevægelsen
+
+28. Hvad hedder Danmarks nationalsang med tekst af Adam Oehlenschläger?
+  I Danmark er jeg født
+  Vi elsker vort land
+* Der er et yndigt land
+
+29. Hvem modtog i 1922 Nobelprisen i fysik?
+* Niels Bohr
+  Jens Christian Skou
+  Johannes V. Jensen
+
+30. Hvornår blev det ved en folkeafstemning i Island besluttet at oprette en selvstændig republik uafhængig af Danmark?
+  1901
+  1918
+* 1944
+
+31. Fra hvilket af følgende lande kom der flest indvandrere til Danmark i 1960’erne?
+  Ungarn
+* Tyrkiet
+  Vietnam
+
+32. Hvilket af følgende politiske partier er ældst?
+* Det Konservative Folkeparti
+  Socialistisk Folkeparti
+  Dansk Folkeparti
+
+33. Hvad er Karen Blixen kendt for?
+  Hun var balletdanser
+  Hun var skuespiller
+* Hun var forfatter
+
+34. I hvilket år blev Øresundsbroen åbnet?
+  I 1970
+  I 1985
+* I 2000
+
+35. Hvilket af følgende partier stemte arbejdere typisk på i midten af 1900-tallet?
+  Dansk Folkeparti
+* Socialdemokratiet
+  Venstresocialisterne
+
+[aktuelle]
+
+36. Hvilket ministerium udsteder de officielle rejsevejledninger i forbindelse med COVID-19?
+* Udenrigsministeriet
+  Sundheds- og Ældreministeriet
+  Statsministeriet
+
+37. Hvad hedder Radikale Venstres politiske leder?
+  Pernille Skipper
+  Pia Olsen Dyhr
+* Sofie Carsten Nielsen
+
+38. Hvilken meget omtalt aftale indgik regeringen med en række partier i efteråret 2020?
+  En aftale om en folkeskolereform
+* En aftale om ret til tidlig pension
+  En aftale om afskaffelse af værnepligten
+
+39. Hvilket af følgende emner satte tv-vært Sofie Linde fokus på i et tv-show i august 2020?
+  Terrorisme
+  Racisme
+* Sexisme
+
+40. Hvilken af følgende borgmestre gik af i oktober 2020?
+  Borgmester i Aarhus Jacob Bundsgaard
+* Overborgmester i København Frank Jensen
+  Borgmester i Odense Peter Rahbæk Juel

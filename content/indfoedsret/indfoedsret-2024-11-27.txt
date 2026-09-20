@@ -1,0 +1,231 @@
+kind: quiz
+slug: indfoedsret-2024-11-27
+title: Indfødsretsprøven 27. november 2024
+pass: 36
+vaerdier_min: 4
+
+--- questions ---
+[laeremateriale]
+
+1. Hvor mange procent af stemmerne skal et parti normalt have for at blive repræsenteret i Folketinget?
+* Mindst to procent
+  Mindst fire procent
+  Mindst fem procent
+
+2. Hvilket parti har Inger Støjberg tidligere været medlem af?
+  Socialdemokratiet
+* Venstre
+  Det Konservative Folkeparti
+
+3. Hvornår blev Moderaterne valgt til Folketinget første gang?
+  2007
+  2015
+* 2022
+
+4. Hvilket parti fik flest stemmer ved valget til Europa-Parlamentet i Danmark i juni 2024?
+* Socialistisk Folkeparti
+  Danmarksdemokraterne
+  Radikale Venstre
+
+5. Hvad skete i 1849?
+  Danmark mistede Skåne
+  Stavnsbåndet blev ophævet
+* Grundloven blev indført
+
+6. I hvilket af følgende årtier var Thorvald Stauning statsminister?
+* 1930’erne
+  1950’erne
+  1970’erne
+
+7. Hvornår er landegrænsen mellem Danmark og Tyskland sidst blevet ændret?
+  1720
+  1820
+* 1920
+
+8. Hvilket af følgende partier har samlet set været i regering flest år?
+  Socialistisk Folkeparti
+* Radikale Venstre
+  Dansk Folkeparti
+
+9. Hvem har instrueret filmene 'Idioterne' og 'Dancer in the Dark'?
+  Susanne Bier
+* Lars von Trier
+  Lone Scherfig
+
+10. Hvad er Tycho Brahe (1546-1601) særlig kendt for?
+* Han var astronom
+  Han var salmedigter
+  Han var opdagelsesrejsende
+
+11. Hvilken dansk forfatter har skrevet bogen 'Den Afrikanske Farm'?
+  Tove Ditlevsen
+  H.C. Andersen
+* Karen Blixen
+
+12. Hvad er Yahya Hassan (1995-2020) særligt kendt for?
+  Han var musiker
+* Han var digter
+  Han var fodboldspiller
+
+13. Hvordan har dagpengeperioden for arbejdsløse udviklet sig siden 1994?
+  Den er blevet længere
+  Den er uændret
+* Den er blevet kortere
+
+14. Hvor gammel skal man mindst være for at købe stærk spiritus?
+  14 år
+  16 år
+* 18 år
+
+15. Hvordan har antallet af studerende på de lange videregående uddannelser overordnet udviklet sig de seneste 20 år?
+* Det er steget
+  Det er faldet
+
+16. Hvor stor en andel af Danmarks befolkning udgøres af indvandrere og deres efterkommere?
+  Cirka 5 procent
+* Cirka 15 procent
+  Cirka 25 procent
+
+17. Ved hvilken by i Jylland malede Anna Ancher og Michael Ancher særligt mange af deres billeder i slutningen af 1800-tallet?
+  Silkeborg
+  Sønderborg
+* Skagen
+
+18. Hvilken funktion havde Kronborg Slot i Helsingør frem til 1857?
+  Hjemsted for Højesteret
+  Gravsted for danske konger og dronninger
+* Opkrævning af told fra skibe, der sejlede gennem Øresund
+
+19. Hvilken ø er blandt andet kendt for sine runde kirker?
+* Bornholm
+  Samsø
+  Langeland
+
+20. Hvilket af følgende områder har staten ansvaret for driften af?
+* Politiet
+  Børnehaver
+  Sygehuse
+
+21. Hvem afgør, om en borger skal varetægtsfængsles?
+  En advokat
+* En dommer
+  En politibetjent
+
+22. Hvad er moms?
+* En afgift på blandt andet varer man køber i butikkerne
+  En skat man betaler af sin indkomst
+  Et gebyr man betaler for at have adgang til DR's tv- og radiokanaler
+
+23. Hvor ofte afholdes der valg til kommunalbestyrelser og regionsråd?
+  Hvert tredje år
+* Hvert fjerde år
+  Hvert femte år
+
+24. Hvad hedder Færøernes største by?
+  Reykjavik
+  Nuuk
+* Tórshavn
+
+25. Hvilket land anlagde en militær base i det nordlige Grønland i begyndelsen af 1950'erne?
+  Canada
+  Tyskland
+* USA
+
+26. Hvilket land blev Danmark angrebet og besejret af i Slaget på Reden i 1801 under Napoleonskrigene?
+* Storbritannien
+  Nederlandene
+  Spanien
+
+27. Hvilken religion var den mest udbredte i Danmark i middelalderen (cirka 1050-1500)?
+  Ortodoks kristendom
+* Katolsk kristendom
+  Protestantisk kristendom
+
+28. I hvilket af følgende århundreder fandt dansk slavehandel mellem Afrika og de danske kolonier i Caribien sted?
+  1100-tallet
+  1400-tallet
+* 1700-tallet
+
+29. Hvem består Rådet for Den Europæiske Union af?
+  Politikere direkte valgt af EU's befolkninger
+  Embedsmænd udpeget af EU-Kommissionen
+* Ministre fra medlemsstaternes regeringer
+
+30. Hvad kendetegnede Danmarks forsvarspolitik gennem det meste af Den Kolde Krig?
+* Danmark var allieret med USA gennem NATO
+  Danmark var neutralt
+  Danmark var allieret med Sovjetunionen gennem Warszawa-pagten
+
+31. Hvilken international organisation blev Danmark medlem af i 1945?
+* FN
+  EF
+  WTO
+
+32. På hvilken dato markeres Danmarks befrielse i 1945 efter fem års tysk besættelse?
+  8. marts
+  9. april
+* 5. maj
+
+33. Hvad blev der afholdt en folkeafstemning om i 1972?
+* Danmarks indtræden i EF
+  Indførelsen af folkepension
+  Ophævelsen af DR’s monopol på at sende tv
+
+34. Hvordan har de politiske partiers medlemstal overordnet udviklet sig siden 1950?
+  Det er steget
+* Det er faldet
+
+35. I hvilket årti blev Danmark ramt af en flerårig økonomisk krise, som blev udløst af store prisstigninger på olie?
+  1930'erne
+  1950'erne
+* 1970'erne Spørgsmål 36-40 er aktuelle spørgsmål
+
+[aktuelle]
+
+36. I hvilke to idrætsgrene vandt Danmark guld ved OL i Paris i 2024?
+  Svømning og længdespring
+* Badminton og håndbold
+  Tennis og boksning
+
+37. Hvad blev den tidligere minister Dan Jørgensen indstillet til i august 2024?
+* Danmarks EU-kommissær
+  Formand for FN’s Generalforsamling
+  Formand for Folketinget
+
+38. Hvilken skuespiller og komiker, som blandt andet har medvirket i Cirkus-revyen i perioden 1986-2021, døde i oktober 2024?
+  Dirch Passer
+  Helle Virkner
+* Ulf Pilgaard
+
+39. Hvad blev aftalt i 'Den Grønne Trepart' mellem regeringen, kommunerne og en række erhvervsorganisationer, fagforeninger og miljøorganisationer i juni 2024?
+* At en del af Danmarks landbrugsjord skal omdannes til natur
+  At reducere kvoterne for, hvor meget der må fiskes i dansk farvand
+  At forhøje den offentlige støtte til el-biler
+
+40. Hvem meddelte i september 2024, at hun ikke genopstiller ved næste valg efter 40 år som medlem af Folketinget?
+  Pia Olsen Dyhr
+  Mette Frederiksen
+* Pia Kjærsgaard Spørgsmål 41-45 angår danske værdier
+
+[vaerdier]
+
+41. Har alle friskoler i Danmark pligt til at styrke elevernes respekt for grundlæggende friheds- og menneskerettigheder?
+* Ja
+  Nej
+
+42. Kan man blive straffet med fængsel, hvis man snyder med optællingen af stemmer til Folketinget?
+* Ja
+  Nej
+
+43. Hvilken af følgende handlinger er ulovlig i Danmark?
+  At melde sig ud af et trossamfund
+* At tvinge andre til en religiøs vielse
+
+44. Kan en regering bestemme, at en forening skal opløses for altid?
+  Ja
+* Nej
+
+45. Hvilken placering indtager Danmark ud af 49 europæiske lande, når det gælder rettigheder for LGBTI- personer (Rainbow Map 2024, International Lesbian, Gay, Bisexual, Trans and Intersex Association)?
+* Nr. 5
+  Nr. 15
+  Nr. 25

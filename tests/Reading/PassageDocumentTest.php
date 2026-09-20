@@ -261,6 +261,7 @@ final class PassageDocumentTest extends TestCase
             self::assertMatchesRegularExpression('/line \d+/', $e->getMessage());
         }
     }
+
     /**
      * PCRE's \R matches the byte 0x85 unless the pattern is told the subject is UTF-8,
      * and 0x85 is the second byte of Å. A passage naming Århus or Ålborg was therefore
@@ -287,6 +288,97 @@ final class PassageDocumentTest extends TestCase
         self::assertTrue(mb_check_encoding($doc['body'], 'UTF-8'));
         self::assertStringContainsString('til Århus for', $doc['body']);
         self::assertSame(['Århus', 'Ålborg', 'Åbenrå'], array_column($doc['items'][0]['options'], 'text'));
+    }
+
+
+    private const QUIZ = <<<'DOC'
+        kind: quiz
+        slug: indfoedsret-2026-06-03
+        title: Indfødsretsprøven 3. juni 2026
+        pass: 36
+        vaerdier_min: 4
+
+        --- questions ---
+        [laeremateriale]
+        1. Hvornår trådte Danmarks første grundlov i kraft?
+        * 1849
+          1864
+          1901
+
+        [vaerdier]
+        2. Kan man ifølge dansk lov indgå ægteskab, hvis man allerede er gift?
+          Ja
+        * Nej
+        DOC;
+
+    /**
+     * A knowledge paper is questions and nothing else: there is no text to read, the
+     * values block answers Ja or Nej, and the pass mark is a property of the paper
+     * rather than of a grading scale shared with the reading exam.
+     */
+    public function testReadsAQuizPaperThatHasNoTextToRead(): void
+    {
+        $doc = (new PassageDocument())->parse(self::QUIZ);
+
+        self::assertSame('quiz', $doc['kind']);
+        self::assertNull($doc['body']);
+        self::assertSame(36, $doc['pass']);
+        self::assertSame(4, $doc['vaerdier_min']);
+        self::assertCount(2, $doc['items']);
+    }
+
+    public function testKeepsEachQuizQuestionInTheBlockItBelongsTo(): void
+    {
+        $items = (new PassageDocument())->parse(self::QUIZ)['items'];
+
+        self::assertSame('laeremateriale', $items[0]['section']);
+        self::assertSame('vaerdier', $items[1]['section']);
+    }
+
+    public function testAcceptsATwoOptionQuestionOnlyInAQuizPaper(): void
+    {
+        $items = (new PassageDocument())->parse(self::QUIZ)['items'];
+
+        self::assertCount(2, $items[1]['options']);
+        self::assertSame('B', $items[1]['options'][1]['label']);
+        self::assertTrue($items[1]['options'][1]['correct']);
+    }
+
+    public function testRefusesAQuizQuestionThatBelongsToNoBlock(): void
+    {
+        $this->expectException(InvalidPassage::class);
+        $this->expectExceptionMessageMatches('/block/');
+
+        (new PassageDocument())->parse(<<<'DOC'
+            kind: quiz
+            slug: uden-blok
+            title: Uden blok
+
+            --- questions ---
+            1. Hvornår trådte Danmarks første grundlov i kraft?
+            * 1849
+              1864
+            DOC);
+    }
+
+    public function testRefusesATextSectionInAQuizPaper(): void
+    {
+        $this->expectException(InvalidPassage::class);
+
+        (new PassageDocument())->parse(<<<'DOC'
+            kind: quiz
+            slug: med-tekst
+            title: Med tekst
+
+            --- text ---
+            Der er ingen tekst i denne prøve.
+
+            --- questions ---
+            [vaerdier]
+            1. Er det rigtigt?
+            * Ja
+              Nej
+            DOC);
     }
 
 }

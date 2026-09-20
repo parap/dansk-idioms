@@ -16,7 +16,13 @@ use Throwable;
 final class ReadingRepository
 {
     /** Points per correct answer, as the exam awards them for each task type. */
-    private const POINTS = ['mc' => 2, 'insert' => 2, 'cloze' => 1];
+    private const POINTS = ['mc' => 2, 'insert' => 2, 'cloze' => 1, 'quiz' => 1];
+
+    /** Task types that are questions alone, with nothing to read before answering. */
+    private const TEXTLESS_KINDS = ['quiz'];
+
+    /** The blocks a knowledge paper divides its questions into. */
+    private const BLOCKS = ['laeremateriale', 'aktuelle', 'vaerdier'];
 
     /** Task types whose questions are holes in the text rather than separate prompts. */
     private const GAP_KINDS = ['insert', 'cloze'];
@@ -77,11 +83,16 @@ final class ReadingRepository
     /** @param array<string,mixed> $doc */
     private function insertPassage(array $doc): int
     {
+        $body = $doc['body'] ?? null;
+
         Db::execute(
-            'INSERT INTO reading_passages (slug, kind, title, body, word_count) VALUES (?,?,?,?,?)',
+            'INSERT INTO reading_passages (slug, kind, title, body, word_count, pass_points, vaerdier_min)
+             VALUES (?,?,?,?,?,?,?)',
             [
-                $doc['slug'], $doc['kind'], $doc['title'], $doc['body'],
-                Text::wordCount(preg_replace(self::MARKER, ' ', $doc['body']) ?? $doc['body']),
+                $doc['slug'], $doc['kind'], $doc['title'], $body,
+                $body === null ? 0 : Text::wordCount(preg_replace(self::MARKER, ' ', $body) ?? $body),
+                $doc['pass'] ?? null,
+                $doc['vaerdier_min'] ?? null,
             ]
         );
 
@@ -118,8 +129,8 @@ final class ReadingRepository
     private function insertItem(int $passageId, string $kind, array $item): int
     {
         Db::execute(
-            'INSERT INTO reading_items (passage_id, position, points, prompt) VALUES (?,?,?,?)',
-            [$passageId, $item['position'], self::POINTS[$kind], $item['prompt'] ?? null]
+            'INSERT INTO reading_items (passage_id, position, section, points, prompt) VALUES (?,?,?,?,?)',
+            [$passageId, $item['position'], $item['section'] ?? null, self::POINTS[$kind], $item['prompt'] ?? null]
         );
 
         return (int) Db::pdo()->lastInsertId();
@@ -175,13 +186,55 @@ final class ReadingRepository
             return;
         }
 
-        $this->validateOptions($doc);
+        if (in_array($kind, self::TEXTLESS_KINDS, true)) {
+            $this->validateBlocks($doc);
+        }
+
+        $this->validateOptions($doc, $kind);
+    }
+
+    /**
+     * A knowledge paper is graded against its own pass mark, so a mark the paper cannot
+     * reach -- or a values requirement for a block it never asked -- is refused here
+     * rather than discovered by the first learner who answers everything correctly and
+     * is still told they failed.
+     *
+     * @param array<string,mixed> $doc
+     */
+    private function validateBlocks(array $doc): void
+    {
+        $blocks = [];
+        foreach ($doc['items'] as $item) {
+            $block = $item['section'] ?? null;
+            if (!in_array($block, self::BLOCKS, true)) {
+                throw new InvalidPassage(
+                    "Item {$item['position']} names block '" . ($block ?? 'none') . "', which is not one of "
+                    . implode(', ', self::BLOCKS) . '.'
+                );
+            }
+            $blocks[$block] = ($blocks[$block] ?? 0) + 1;
+        }
+
+        $pass = $doc['pass'] ?? null;
+        if ($pass !== null && $pass > count($doc['items'])) {
+            throw new InvalidPassage(
+                "The pass mark is {$pass} of " . count($doc['items']) . ' questions, which nobody can reach.'
+            );
+        }
+
+        $values = $doc['vaerdier_min'] ?? null;
+        if ($values !== null && $values > ($blocks['vaerdier'] ?? 0)) {
+            throw new InvalidPassage(
+                "The pass mark requires {$values} correct in the vaerdier block, which has "
+                . ($blocks['vaerdier'] ?? 0) . ' question(s).'
+            );
+        }
     }
 
     /** @param array<string,mixed> $doc */
     private function validateMarkers(array $doc, string $kind): void
     {
-        preg_match_all(self::MARKER, (string) $doc['body'], $m);
+        preg_match_all(self::MARKER, (string) ($doc['body'] ?? ''), $m);
         $markers = array_map('intval', $m[1]);
 
         if (!in_array($kind, self::GAP_KINDS, true)) {
@@ -228,12 +281,15 @@ final class ReadingRepository
     }
 
     /** @param array<string,mixed> $doc */
-    private function validateOptions(array $doc): void
+    private function validateOptions(array $doc, string $kind): void
     {
+        $least = in_array($kind, self::TEXTLESS_KINDS, true) ? 2 : 3;
+
         foreach ($doc['items'] as $item) {
             $options = $item['options'] ?? [];
-            if (count($options) < 3) {
-                throw new InvalidPassage("Item {$item['position']} offers fewer than three options.");
+            if (count($options) < $least) {
+                $word = $least === 2 ? 'two' : 'three';
+                throw new InvalidPassage("Item {$item['position']} offers fewer than {$word} options.");
             }
 
             $correct = array_filter($options, static fn(array $o): bool => !empty($o['correct']));

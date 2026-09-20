@@ -1,0 +1,229 @@
+kind: quiz
+slug: indfoedsret-2026-06-03
+title: Indfødsretsprøven 3. juni 2026
+pass: 36
+vaerdier_min: 4
+
+--- questions ---
+[laeremateriale]
+
+1. I hvilket årti blev Danmark ramt af en flerårig økonomisk krise, som blev udløst af store prisstigninger på olie?
+  1930’erne
+  1950’erne
+* 1970’erne
+
+2. Hvordan har de politiske partiers medlemstal overordnet udviklet sig siden 1950?
+  Det er steget
+* Det er faldet
+
+3. Hvilket politisk parti blev dannet i slutningen af 1950’erne af en gruppe tidligere medlemmer af Danmarks Kommunistiske Parti?
+* SF
+  Alternativet
+  Radikale Venstre
+
+4. Hvad blev der afholdt en folkeafstemning om i 1972?
+* Danmarks indtræden i EF
+  Danmarks indtræden i NATO
+  Danmarks indtræden i FN
+
+5. Hvem har værnepligt i Danmark?
+  Kun mænd
+  Kun kvinder
+* Både mænd og kvinder
+
+6. Hvilken rettighed er sikret i grundloven?
+  Retten til at få en bolig
+  Retten til at få gratis lægehjælp
+* Retten til at ytre sig
+
+7. Hvor længe kan politiet tilbageholde en person, der er anholdt, før personen skal stilles for en dommer?
+  12 timer
+* 24 timer
+  48 timer
+
+8. Ved hvilken by i Jylland malede Anna Ancher og Michael Ancher særligt mange af deres billeder i slutningen af 1800-tallet?
+  Silkeborg
+* Skagen
+  Viborg
+
+9. Hvad er Mads Mikkelsen (født 1965) særligt kendt for?
+* Han er skuespiller
+  Han er forfatter
+  Han er musiker
+
+10. Hvad var Inger Christensen (1935-2009) særligt kendt for?
+  Hun var kunstmaler
+* Hun var digter
+  Hun var skuespiller
+
+11. Hvem har skrevet et stort antal salmer i Den Danske Salmebog?
+  Herman Bang
+  Ludvig Holberg
+* N.F.S. Grundtvig
+
+12. Hvad fik videnskabsmanden Niels Bohr Nobelprisen for i 1922?
+  En metode til måling af lysets hastighed
+  En teori om jordens magnetfelt
+* En model over atomers opbygning
+
+13. Hvilken dag markeres kvindernes internationale kampdag?
+* 8. marts
+  4. maj
+  5. juni
+
+14. Hvornår blev Nina Bang udnævnt til Danmarks første kvindelige minister?
+* 1924
+  1943
+  1961
+
+15. Hvor arbejdede der flest mennesker omkring 1850?
+  I industrien
+* I landbruget
+  I fiskeriet
+
+16. Hvornår førte den danske regering samarbejdspolitik med Tyskland under 2. verdenskrig?
+* 1940-43
+  1943-45
+
+17. Hvor stor en andel af Grønland er dækket af is hele året?
+  Cirka 40 procent
+  Cirka 60 procent
+* Cirka 80 procent
+
+18. Hvor mange indbyggere har Færøerne?
+* Cirka 55.000
+  Cirka 155.000
+  Cirka 255.000
+
+19. Hvilket sjællandsk slot danner rammen om William Shakespeares teaterstykke Hamlet?
+  Amalienborg
+* Kronborg
+  Fredensborg Slot
+
+20. På hvilken dansk ø ligger ruinen Hammershus?
+  Samsø
+  Langeland
+* Bornholm
+
+21. Langs hvilken kyst i Danmark ligger der særligt mange bunkere, som tyskerne fik bygget under 2. Verdenskrig?
+  Lollands sydkyst
+  Sjællands østkyst
+* Jyllands vestkyst
+
+22. Hvilken af følgende byer har flest indbyggere?
+  Esbjerg
+* Aarhus
+  Aalborg
+
+23. Hvor stor en andel af kvinder i Danmark mellem 16 og 64 år er i beskæftigelse?
+  Cirka 45 procent
+  Cirka 60 procent
+* Cirka 75 procent
+
+24. Hvad hedder den organisation, der varetager samarbejdet mellem de nordiske landes parlamenter?
+* Nordisk Råd
+  Foreningen Norden
+  Den Nordiske Union
+
+25. Hvad kendetegnede Danmarks forsvarspolitik gennem det meste af Den Kolde Krig?
+  Danmark var allieret med Sovjetunionen gennem Warszawa-pagten
+  Danmark var neutralt
+* Danmark var allieret med USA gennem NATO
+
+26. Hvad hedder Danmarks EU-kommissær?
+* Dan Jørgensen
+  Astrid Krag
+  Morten Bødskov
+
+27. Hvilke af følgende er navne på guder i vikingetidens religion 'asatroen'?
+  Thyra og Gorm
+  Ingrid og Absalon
+* Freja og Thor
+
+28. Hvad blev resultatet af krigen mod Sverige i 1657-58?
+* Danmark mistede Skåne
+  Danmark erobrede Skåne
+
+29. Hvornår blev Danmark ramt af pest-epidemien Den Sorte Død, som slog en stor del af befolkningen ihjel?
+* I 1300-tallet
+  I 1600-tallet
+  I 1900-tallet
+
+30. Hvornår trådte Danmarks første grundlov i kraft?
+  1788
+  1814
+* 1849
+
+31. Hvem består kommunalbestyrelser af?
+  Embedsmænd udpeget af regeringen
+* Politikere valgt af kommunens befolkning
+  Repræsentanter udvalgt af det lokale erhvervs- og foreningsliv
+
+32. Hvem har ansvaret for driften af ældreplejen?
+* Kommunerne
+  Regionerne
+  Staten
+
+33. Hvad blev aftalt i 'Den Grønne Trepart' mellem regeringen, kommunerne og en række organisationer i juni 2024?
+  At reducere kvoterne for, hvor meget der må fiskes i dansk farvand
+* At en del af Danmarks landbrugsjord skal omdannes til natur
+  Et forbud mod atomkraftværker i Danmark
+
+34. Hvilket af følgende partier har haft statsministerposten i sammenlagt flest år siden systemskiftet i 1901?
+* Venstre
+  Det Konservative Folkeparti
+
+35. Hvilket parti blev i 2022 stiftet af tidligere minister Inger Støjberg?
+  Nye Borgerlige
+  Moderaterne
+* Danmarksdemokraterne Spørgsmål 36-40: aktuelle spørgsmål
+
+[aktuelle]
+
+36. I februar 2026 blev der vedtaget en lov om at udbetale en særlig økonomisk støtte til cirka 2 mio. mennesker. Hvad var anledningen?
+* Stigende fødevarepriser
+  Stigende boligpriser
+  Stigende priser på offentlig transport
+
+37. Hvilken grønlandsk og hvilken dansk minister deltog i et møde vedrørende Grønland i Washington D.C. den 14. januar 2026?
+  Naaja Nathanielsen og Troels Lund Poulsen
+* Vivian Motzfeldt og Lars Løkke Rasmussen
+  Anna Wangenheim og Peter Hummelgaard
+
+38. Hvilket parti gik mest frem i antal stemmer ved folketingsvalget i marts 2026 sammenlignet med folketingsvalget i 2022?
+  Venstre
+  Alternativet
+* Dansk Folkeparti
+
+39. Viktor Axelsen (født 1994) stoppede i april 2026 som professionel sportsmand. I hvilken sport var han professionel?
+  Volleyball
+* Badminton
+  Bordtennis
+
+40. Hvad kendetegnede vinteren 2025-26 (ifølge Danmarks Meteorologiske Institut)?
+  Den mest solrige vinter i 13 år
+  Den vådeste vinter i 13 år
+* Den koldeste vinter i 13 år Spørgsmål 41-45: danske værdier
+
+[vaerdier]
+
+41. Er det muligt for en person over 18 år at få et CPR-nr., der svarer til et andet køn (skifte juridisk køn)?
+* Ja
+  Nej
+
+42. Kan man ifølge dansk lov indgå ægteskab, hvis man allerede er gift med en anden person?
+  Ja
+* Nej
+
+43. Kan en forælder ifølge dansk lov bestemme, at kød, der serveres i en børnehave, skal stamme fra dyr, der er rituelt slagtet?
+  Ja
+* Nej
+
+44. Kan man blive straffet med fængsel, hvis man i sit arbejde som embedsmand ulovligt modtager penge eller gaver?
+* Ja
+  Nej
+
+45. Hvilken placering indtager Danmark ud af 167 lande i verden, når det gælder om at have det bedst fungerende demokrati (ifølge The Economist Democracy Index 2025)?
+* 1-5
+  21-25
+  41-45

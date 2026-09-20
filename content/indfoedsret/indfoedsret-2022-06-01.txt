@@ -1,0 +1,225 @@
+kind: quiz
+slug: indfoedsret-2022-06-01
+title: Indfødsretsprøven 1. juni 2022
+pass: 36
+vaerdier_min: 4
+
+--- questions ---
+[laeremateriale]
+
+1. Hvad har regionerne ansvaret for driften af?
+  Politi
+  Børnehaver
+* Sygehuse
+
+2. Hvilken dansk forfatter har skrevet bogen Den Afrikanske Farm?
+* Karen Blixen
+  H.C. Andersen
+  Tove Ditlevsen
+
+3. Hvornår fik Danmark økonomisk hjælp fra USA i forbindelse med Marshall-planen?
+  Omkring 1920
+* Omkring 1950
+  Omkring 1980
+
+4. For hvilken film vandt Gabriel Axel en Oscar i 1988?
+  Druk
+  Italiensk for begyndere
+* Babettes gæstebud
+
+5. Hvilket parti stemte arbejdere typisk på i midten af 1900-tallet?
+  Venstre
+* Socialdemokratiet
+  Radikale Venstre
+
+6. Hvor mange indbyggere har Grønland?
+* Cirka 55.000
+  Cirka 255.000
+  Cirka 455.000
+
+7. Hvilke af følgende landområder mistede Danmark i 1658?
+* Skåne, Halland og Blekinge
+  Shetlandsøerne og Orkneyøerne
+  De Vestindiske Øer
+
+8. Hvad er NATO?
+  Et internationalt frihandelsområde
+* En international forsvarsalliance
+  Et internationalt flygtningesamarbejde
+
+9. Hvornår blev der indført fri abort i Danmark?
+  1935
+  1951
+* 1973
+
+10. Er flertallet af lønmodtagere på det danske arbejdsmarked medlem af en fagforening?
+* Ja
+  Nej
+
+11. Kan en regering bestemme, hvordan en dommer skal dømme i en retssag?
+  Ja
+* Nej
+
+12. I hvilket årti blev Danmark ramt af en flerårig økonomisk krise, som blev udløst af store prisstigninger på olie?
+  1930’erne
+  1950’erne
+* 1970’erne
+
+13. Hvilket af følgende lande har flest indvandrere og efterkommere i Danmark oprindelse i?
+  Pakistan
+  Iran
+* Tyrkiet
+
+14. Ved hvilken grundlovsændring fik kvinder valgret til Folketinget?
+  Grundlovsændringen i 1866
+* Grundlovsændringen i 1915
+  Grundlovsændringen i 1953
+
+15. Hvad er Danmark og en række andre lande især forpligtet til ifølge Paris-aftalen fra 2015?
+* At reducere udslippet af drivhusgasser i atmosfæren
+  At bruge flere penge på forsvaret
+  At samarbejde om forebyggelse af grænseoverskridende kriminalitet
+
+16. Hvilket parti tilhørte Poul Schlüter, som var statsminister i perioden 1982-93?
+  Socialdemokratiet
+  Radikale Venstre
+* Det Konservative Folkeparti
+
+17. Var Danmark besat af tyske tropper under 1. Verdenskrig?
+  Ja
+* Nej
+
+18. Hvem er aftaleparter, når der skal indgås overenskomster om fx løn, pension og arbejdsforhold på det private arbejdsmarked?
+  Stat og kommuner
+  Regering og embedsmænd
+* Fagforeninger og arbejdsgiverorganisationer
+
+19. Hvem har som udgangspunkt forældremyndigheden, når en far og en mor, der er gift med hinanden, har et fælles barn?
+* Faren og moren i fællesskab
+  Faren
+  Moren
+
+20. Hvor mange kommuner er der i Danmark?
+  38
+  68
+* 98
+
+21. Hvilken religion var den mest udbredte i Danmark i middelalderen (cirka 1050-1500)?
+* Katolsk kristendom
+  Protestantisk kristendom
+  Ortodoks kristendom
+
+22. Hvornår blev Enhedslisten valgt til Folketinget første gang?
+  1973
+* 1994
+  2011
+
+23. Hvor længe varede Danmarks officielle militære modstand, da Tyskland angreb Danmark den 9. april 1940?
+* Mindre end en dag
+  Cirka en måned
+  Mere end et år
+
+24. Er der flest mænd eller kvinder, der fuldfører en videregående uddannelse?
+  Mænd
+* Kvinder
+
+25. Hvornår blev andelsbevægelsen grundlagt i Danmark med oprettelsen af de første brugsforeninger og andelsmejerier?
+  I 1700-tallet
+* I 1800-tallet
+  I 1900-tallet
+
+26. Hvilket år blev Margrethe d. 2. dronning af Danmark?
+* 1972
+  1982
+  1992
+
+27. Hvem har skrevet et stort antal af salmerne i Den Danske Salmebog?
+  Herman Bang
+  Ludvig Holberg
+* N.F.S. Grundtvig
+
+28. Hvad er Anna Ancher og Michael Ancher særligt kendt for?
+  De var komponister
+  De var filminstruktører
+* De var kunstmalere
+
+29. I hvilke årtier udspiller det meste af tv-serien Matador sig?
+  1880’erne og 1890’erne
+* 1930’erne og 1940’erne
+  1960’erne og 1970’erne
+
+30. Hvad hedder den danske EU-kommissær?
+* Margrethe Vestager
+  Margrete Auken
+  Helle Thorning-Schmidt
+
+31. Hvordan har de politiske partiers medlemstal overordnet udviklet sig siden 1950?
+* De er faldet
+  De er steget
+
+32. Hvilken organisation blev Danmark medlem af i 1945?
+  Verdenshandelsorganisationen (WTO)
+  Den Europæiske Union (EU)
+* De Forenede Nationer (FN)
+
+33. Hvilken dag er det grundlovsdag i Danmark?
+* Den 5. juni
+  Den 15. juni
+  Den 23. juni
+
+34. Betaler alle skattepligtige borgere kirkeskat?
+  Ja
+* Nej
+
+35. Hvortil kan man anke en afgørelse fra byretten?
+* Landsretten
+  Højesteret
+
+[aktuelle]
+
+36. Hvor stor en andel af Danmarks befolkning er blevet vaccineret mindst to gange mod coronavirus?
+  Cirka 30 procent
+  Cirka 50 procent
+* Cirka 80 procent
+
+37. Hvem blev valgt som ny formand for Dansk Folkeparti i januar 2022?
+  Pia Kjærsgaard
+* Morten Messerschmidt
+  Kristian Thulesen Dahl
+
+38. Hvilke partier anbefaler vælgerne at stemme nej til, at Danmark afskaffer EU-forsvarsforbeholdet ved folkeafstemningen den 1. juni?
+  Socialdemokratiet, Radikale Venstre og Socialistisk Folkeparti
+  Venstre, Det Konservative Folkeparti og Liberal Alliance
+* Dansk Folkeparti, Enhedslisten og Nye Borgerlige
+
+39. Hvilken fodboldspiller spillede igen for landsholdet i marts 2022 efter 9 måneders fravær på grund af et hjertestop?
+  Simon Kjær
+* Christian Eriksen
+  Kasper Schmeichel
+
+40. Hvilken domstol dømte tidligere udlændinge- og integrationsminister Inger Støjberg for ulovligt at have adskilt asylsøgende par?
+  Landsretten
+  Højesteret
+* Rigsretten
+
+[vaerdier]
+
+41. Kan man ifølge dansk lov kræve, at kød, der serveres i daginstitutioner, stammer fra dyr, der er rituelt slagtet?
+  Ja
+* Nej
+
+42. Kan kvinder blive biskopper i den danske folkekirke?
+* Ja
+  Nej
+
+43. Kan personer med bopæl i Danmark blive straffet med fængsel på livstid for at tilslutte sig en væbnet styrke, som kæmper mod den danske stat?
+* Ja
+  Nej
+
+44. Kan man ifølge dansk lov indgå ægteskab med mere end én person ad gangen?
+  Ja
+* Nej
+
+45. Er Danmark blandt de tre lande i verden, som menes at have mindst korruption i den offentlige sektor ifølge Transparency International (Corruption Perception Index, 2021)?
+* Ja
+  Nej
