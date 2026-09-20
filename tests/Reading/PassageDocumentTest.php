@@ -261,4 +261,32 @@ final class PassageDocumentTest extends TestCase
             self::assertMatchesRegularExpression('/line \d+/', $e->getMessage());
         }
     }
+    /**
+     * PCRE's \R matches the byte 0x85 unless the pattern is told the subject is UTF-8,
+     * and 0x85 is the second byte of Å. A passage naming Århus or Ålborg was therefore
+     * cut in half mid-letter, leaving a body that is no longer valid UTF-8 -- which the
+     * database stores and a browser renders as a replacement glyph.
+     */
+    public function testKeepsALetterWhoseSecondByteLooksLikeALineBreak(): void
+    {
+        $doc = (new PassageDocument())->parse(<<<'DOC'
+            kind: mc
+            slug: aarhus
+            title: Århus
+
+            --- text ---
+            Mange studerende flytter til Århus for at læse på universitetet.
+
+            --- questions ---
+            1. Hvor flytter de studerende hen?
+            * Århus
+              Ålborg
+              Åbenrå
+            DOC);
+
+        self::assertTrue(mb_check_encoding($doc['body'], 'UTF-8'));
+        self::assertStringContainsString('til Århus for', $doc['body']);
+        self::assertSame(['Århus', 'Ålborg', 'Åbenrå'], array_column($doc['items'][0]['options'], 'text'));
+    }
+
 }

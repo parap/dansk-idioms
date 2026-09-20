@@ -41,7 +41,7 @@ final class PassageDocument
     /** @return array<string,mixed> the argument ReadingRepository::save() takes */
     public function parse(string $source): array
     {
-        $lines    = preg_split('/\R/', $source) ?: [];
+        $lines    = preg_split('/\R/u', $source) ?: [];
         $headers  = [];
         $sections = ['text' => [], 'parts' => [], 'questions' => []];
         $current  = null;
