@@ -564,6 +564,11 @@ SIGNED_IN = ('!document.querySelector("#app").hidden'
              ' || !document.querySelector("#done").hidden'
              ' || !document.querySelector("#flags").hidden')
 
+# The admin page keeps every panel hidden until its bootstrap has answered "is this
+# session still good?", so a hidden #app means "not decided yet" as often as it means
+# "signed out". SETTLED is the point where the answer exists and SIGNED_IN can be read.
+SETTLED = SIGNED_IN + ' || !document.querySelector("#login").hidden'
+
 
 def sign_in_to_admin(b):
     pw = admin_password()
@@ -571,7 +576,7 @@ def sign_in_to_admin(b):
         raise AssertionError('admin.password is not configured, so the queue cannot be reached')
 
     b.goto('/admin', ADMIN_BASE)
-    b.until('!!document.querySelector("#pw")', what='the admin page')
+    b.until(SETTLED, what='the admin page to settle on a panel')
 
     # Only sign in when the session is actually gone. Logging in again regenerates the
     # session id and destroys the old one, so a request already in flight comes back 401
