@@ -56,6 +56,10 @@
   .link{background:none;border:none;color:var(--accent);font:inherit;cursor:pointer;padding:0}
   .score{font-variant-numeric:tabular-nums;font-weight:600}
   .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .lang{background:none;border:none;color:var(--muted);font:inherit;font-size:.85rem;
+    padding:.2rem .35rem;cursor:pointer;border-radius:5px}
+  .lang[aria-pressed=true]{color:var(--ink);font-weight:600;background:var(--chip)}
+  .langs{display:inline-flex;gap:.1rem}
   [hidden]{display:none!important}
 </style>
 </head>
@@ -66,13 +70,14 @@
     <span class="spacer"></span>
     <span id="left" class="score"></span>
     <span id="score" class="score muted"></span>
+    <span id="langs" class="langs" hidden></span>
     <a class="link" href="/">idiomer →</a>
   </header>
   <div id="view"></div>
 </div>
 
 <script type="module">
-import { $, esc, api, t, registerStrings } from '/shared.js';
+import { $, esc, api, t, registerStrings, currentLang, setLang as applyLang } from '/shared.js';
 
 // Interface strings. Adding a language means adding one key here; nothing else in the
 // page hard-codes user-facing text.
@@ -113,6 +118,27 @@ const STRINGS = {
     unanswered: 'unanswered', karakter: 'grade', indicative: 'indicative',
     late: 'handed in late', reviewAnswers: 'Review',
   },
+  uk: {
+    intro: 'Тренажер із читання для Prøve i Dansk 3. Прочитайте текст і дайте ' +
+           'відповіді на запитання — формат той самий, що й на іспиті.',
+    start: 'Почати', startAgain: 'Ще текст',
+    cannotStart: 'Не вдалося почати',
+    questions: 'Запитання', passage: 'Текст',
+    gapHint: 'Натисніть на пропуск у тексті, щоб перейти до запитання.',
+    right: 'Правильно', wrong: 'Неправильно',
+    points: {one: 'бал', few: 'бали', many: 'балів', other: 'балів'},
+    done: 'Раунд завершено.',
+    report: 'Моя відповідь теж правильна',
+    reported: 'Дякуємо — надіслано на перевірку',
+    modeDrill: 'Тренування', modeExam: 'Іспит',
+    examBlurb: 'Повний варіант: три тексти, 65 хвилин, результат наприкінці.',
+    timeLeft: 'залишилось', timeUp: 'Час вийшов',
+    submitExam: 'Здати роботу',
+    confirmSubmit: 'Здати? Змінити відповіді буде неможливо.',
+    unanswered: 'без відповіді',
+    karakter: 'оцінка', indicative: 'орієнтовна',
+    late: 'здано після дзвінка', reviewAnswers: 'Розбір відповідей',
+  },
   da: {
     intro: 'Læsetræning til Prøve i Dansk 3. Læs teksten og svar på spørgsmålene — ' +
            'formatet er det samme som til prøven.',
@@ -124,10 +150,10 @@ const STRINGS = {
     points: { one: 'point', other: 'point' },
     done: 'Runden er slut.',
     report: 'Mit svar var også rigtigt', reported: 'Tak — sendt til gennemsyn',
-    modeDrill: 'Traening', modeExam: 'Proeve',
-    examBlurb: 'Hele saettet: tre tekster, 65 minutter, resultat til sidst.',
-    timeLeft: 'tilbage', timeUp: 'Tiden er gaaet',
-    submitExam: 'Aflever', confirmSubmit: 'Aflever? Svarene kan ikke aendres bagefter.',
+    modeDrill: 'Træning', modeExam: 'Prøve',
+    examBlurb: 'Hele sættet: tre tekster, 65 minutter, resultat til sidst.',
+    timeLeft: 'tilbage', timeUp: 'Tiden er gået',
+    submitExam: 'Aflever', confirmSubmit: 'Aflever? Svarene kan ikke ændres bagefter.',
     unanswered: 'ubesvaret', karakter: 'karakter', indicative: 'vejledende',
     late: 'afleveret for sent', reviewAnswers: 'Gennemgang',
   },
@@ -139,9 +165,27 @@ let paper = null, scored = 0, ticker = null;
 
 const isExam = () => paper?.mode === 'exam';
 
+/**
+ * The language switch. It is offered on the start screen only: changing language
+ * rebuilds the screen, and rebuilding a round in progress would throw it away.
+ */
+function paintLanguages() {
+  const box = $('#langs');
+  box.hidden = false;
+  box.innerHTML = Object.keys(STRINGS).map(code =>
+    `<button class="lang" data-lang="${code}" aria-pressed="${code === currentLang()}"
+      >${code.toUpperCase()}</button>`).join('');
+  box.querySelectorAll('.lang').forEach(b => b.onclick = () => {
+    applyLang(b.dataset.lang);
+    home();
+  });
+}
+
+
 function home() {
   stopClock();
   const left = $('#left'); if (left) left.textContent = '';
+  paintLanguages();
   view.innerHTML = `
     <div class="card">
       <p class="lede">${esc(t('intro'))}</p>
@@ -177,6 +221,7 @@ function passageHtml(body) {
 }
 
 function render() {
+  $('#langs').hidden = true;
   view.innerHTML = `
     <div class="grid">
       <div id="texts"></div>
@@ -293,6 +338,7 @@ async function hand() {
 }
 
 function results(r) {
+  $('#langs').hidden = true;
   const label = i => String.fromCharCode(65 + i);
   view.innerHTML = `
     <div class="card">

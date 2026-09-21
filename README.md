@@ -115,7 +115,10 @@ still get history and best score. With one you get spaced repetition: each idiom
 answer is scheduled by SM-2, and later rounds put what is due first. Rounds you played
 before registering are adopted into the new account.
 
-**Interface language** switches in the header (RU/EN) and is remembered per browser.
+**Interface language** switches in the header of every page — Russian, English,
+Ukrainian, Danish — and is remembered per browser, so a choice made on one page holds on
+the next. A round in progress withdraws the switch: changing language rebuilds the
+screen, and rebuilding a round would throw it away.
 This is the *interface* only — the answers themselves are Russian until English
 translations exist.
 
@@ -432,10 +435,15 @@ db/         numbered .sql migrations
 tests/      parser fixtures — the regression contract
 ```
 
-Interface strings live in one `STRINGS` object at the top of `public/app.html`, keyed by
+Interface strings live in one `STRINGS` object at the top of each page, keyed by
 language. Everything user-facing goes through `t('key')`, which falls back to Russian.
 A value may be a map of CLDR plural categories, selected by `Intl.PluralRules`, so
-Russian gets its three forms (1 раунд / 2 раунда / 5 раундов).
+Russian and Ukrainian get their three forms (1 раунд / 2 раунда / 5 раундов).
+
+The switch offers whatever languages that page's `STRINGS` defines, so **a language added
+to one page and forgotten on another drops the reader back into Russian halfway through
+the site**, and the fallback says nothing. An interface check walks all three pages and
+requires them to offer the same list.
 
 ### Tests
 

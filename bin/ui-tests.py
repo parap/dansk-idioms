@@ -638,6 +638,53 @@ def a_round_without_the_current_affairs_block_is_scored_but_not_judged(b):
     assert b.js('document.body.textContent').find('сокращённый') > 0
 
 
+LANGUAGES = ['ru', 'en', 'uk', 'da']
+
+
+def offered_languages(b):
+    return b.js('[...document.querySelectorAll(".lang")].map(e => e.dataset.lang)')
+
+
+def choose_language(b, code):
+    b.js("document.querySelector('.lang[data-lang=\"%s\"]').click()" % code)
+
+
+@check
+def every_page_offers_the_same_languages(b):
+    """A language offered on one page and missing on the next drops the reader back into
+    Russian halfway through the site, and the fallback is silent."""
+    try:
+        for path in ('/', '/read', '/proeve'):
+            b.goto(path)
+            b.until('!!document.querySelector(".lang")', what='the language switch on ' + path)
+            assert offered_languages(b) == LANGUAGES, f'{path} offers {offered_languages(b)}'
+    finally:
+        b.js("localStorage.setItem('ui_lang', 'ru')")
+
+
+@check
+def the_language_chosen_on_one_page_holds_on_the_next(b):
+    try:
+        only(['quiz'])
+        b.goto('/proeve')
+        b.until('!!document.querySelector("#go")', what='the start button')
+        choose_language(b, 'uk')
+        b.until('document.querySelector("#go").textContent === "Почати"', what='Ukrainian')
+
+        b.goto('/read')
+        b.until('!!document.querySelector(".lang")', what='the reading page')
+        assert 'Тренування' in b.js('document.body.textContent'), 'the reading page fell back'
+    finally:
+        b.js("localStorage.setItem('ui_lang', 'ru')")
+
+
+@check
+def a_paper_in_progress_does_not_offer_the_language_switch(b):
+    # Changing language rebuilds the start screen, which would abandon the round.
+    start_paper(b)
+    assert b.js('document.querySelector("#langs").hidden'), 'the switch is live during a paper'
+
+
 def flag_a_fixture_item():
     """Withdraw one fixture item by hand, so the queue has something in it."""
     return int(php(FLAG_PHP))

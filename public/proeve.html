@@ -80,6 +80,10 @@
   }
   .nav{display:flex;gap:12px;align-items:center;margin-top:24px;flex-wrap:wrap}
   .nav .spacer{min-width:16px}
+  .lang{background:none;border:none;color:var(--muted);font:inherit;font-size:.85rem;
+    padding:.2rem .35rem;cursor:pointer;border-radius:5px}
+  .lang[aria-pressed=true]{color:var(--ink);font-weight:600;background:var(--chip)}
+  .langs{display:inline-flex;gap:.1rem}
   [hidden]{display:none!important}
 </style>
 </head>
@@ -91,13 +95,14 @@
     <span id="left" class="score"></span>
     <span id="score" class="score muted"></span>
     <button class="link" id="leave" hidden></button>
+    <span id="langs" class="langs" hidden></span>
     <a class="link" href="/">idiomer →</a>
   </header>
   <div id="view"></div>
 </div>
 
 <script type="module">
-import { $, esc, api, t, registerStrings } from '/shared.js';
+import { $, esc, api, t, registerStrings, currentLang, setLang as applyLang } from '/shared.js';
 
 // Interface strings. Adding a language means adding one key here; nothing else in the
 // page hard-codes user-facing text.
@@ -148,6 +153,29 @@ const STRINGS = {
     late: 'handed in late', reviewAnswers: 'Review',
     yourAnswer: 'your answer',
   },
+  uk: {
+    intro: 'Тест на громадянство: 45 запитань за 45 хвилин, два-три варіанти ' +
+           'відповіді. Усі набори — справжні, як їх публікувало міністерство.',
+    paper: 'Набір', start: 'Почати', startAgain: 'Інший набір',
+    cannotStart: 'Не вдалося почати',
+    passMark: 'для складання', questions: 'запитань',
+    withCurrent: 'Разом з актуальними запитаннями',
+    withCurrentHint: 'Ці п’ять запитань — про події перед тим іспитом. Без них раунд ' +
+                     'коротший за справжній, тому оцінка «склав / не склав» не виставляється.',
+    block_laeremateriale: 'За підручником', block_aktuelle: 'Актуальні запитання',
+    block_vaerdier: 'Данські цінності',
+    timeLeft: 'залишилось', submitExam: 'Здати роботу',
+    prevQuestion: 'Назад', nextQuestion: 'Далі',
+    leavePaper: 'Повернутися', confirmLeave: 'Вийти з роботи? Раунд не буде здано.',
+    confirmSubmit: 'Здати? Змінити відповіді буде неможливо.',
+    unanswered: 'без відповіді',
+    bestaaet: 'Складено', ikke_bestaaet: 'Не складено', noVerdict: 'Без оцінки',
+    partial_round: 'Це був скорочений раунд, а поріг стосується повного набору.',
+    no_pass_mark: 'У ключі цього набору поріг складання не вказано.',
+    correctOf: 'правильних', valuesBlock: 'У блоці про цінності', needed: 'потрібно',
+    late: 'здано після дзвінка', reviewAnswers: 'Розбір відповідей',
+    yourAnswer: 'ваша відповідь',
+  },
   da: {
     intro: 'Indfødsretsprøven: 45 spørgsmål på 45 minutter med to eller tre svarmuligheder. ' +
            'Alle sæt er de rigtige, som ministeriet har offentliggjort dem.',
@@ -182,11 +210,29 @@ const label = i => String.fromCharCode(65 + i);
 // object of block names would come back as whichever form Intl.PluralRules asked for.
 const blockName = key => t('block_' + key);
 
+/**
+ * The language switch. It is offered on the start screen only: changing language
+ * rebuilds the screen, and rebuilding a round in progress would throw it away.
+ */
+function paintLanguages() {
+  const box = $('#langs');
+  box.hidden = false;
+  box.innerHTML = Object.keys(STRINGS).map(code =>
+    `<button class="lang" data-lang="${code}" aria-pressed="${code === currentLang()}"
+      >${code.toUpperCase()}</button>`).join('');
+  box.querySelectorAll('.lang').forEach(b => b.onclick = () => {
+    applyLang(b.dataset.lang);
+    home();
+  });
+}
+
+
 async function home() {
   stopClock();
   $('#left').textContent = '';
   $('#score').textContent = '';
   $('#leave').hidden = true;
+  paintLanguages();
 
   let papers = [];
   try {
@@ -273,6 +319,7 @@ function render() {
       </p>
     </section>`;
 
+  $('#langs').hidden = true;
   paper.items.forEach(wire);
   view.querySelectorAll('.tab').forEach(b => {
     b.onclick = () => showQuestion(Number(b.dataset.pos));
@@ -382,6 +429,7 @@ function results(r) {
   $('#left').textContent = '';
   $('#score').textContent = '';
   $('#leave').hidden = true;
+  $('#langs').hidden = true;
   view.innerHTML = `
     <div class="card">
       <p class="verdict ${r.verdict ? (passed ? 'pass' : 'fail') : ''}">${esc(headline)}</p>
