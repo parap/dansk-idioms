@@ -60,6 +60,22 @@
   .link{background:none;border:none;color:var(--accent);font:inherit;cursor:pointer;padding:0}
   .score{font-variant-numeric:tabular-nums;font-weight:600}
   .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  /* One tab per question, coloured by whether that question has an answer yet. */
+  .tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 18px}
+  .tab{min-width:2.4rem;padding:6px 4px;border-radius:8px;font:inherit;font-size:.95rem;
+    font-weight:600;cursor:pointer;background:var(--badbg);color:var(--bad);
+    border:1px solid var(--bad)}
+  .tab.answered{background:var(--okbg);color:var(--ok);border-color:var(--ok)}
+  .tab.current{box-shadow:0 0 0 2px var(--ink)}
+  .btn{padding:13px 20px;border-radius:10px;font:inherit;font-size:1.02rem;font-weight:600;
+    cursor:pointer;border:1px solid var(--line);background:var(--chip);color:var(--ink)}
+  .btn:hover:not(:disabled){border-color:var(--accent)}
+  .btn:disabled{opacity:.4;cursor:default}
+  .nav{display:flex;gap:12px;align-items:center;margin-top:24px;flex-wrap:wrap}
+  @media (max-width:520px){
+    .tabs{gap:5px;margin-bottom:16px}
+    .tab{min-width:2rem;padding:5px 3px;font-size:.85rem}
+  }
   .lang{background:none;border:none;color:var(--muted);font:inherit;font-size:.85rem;
     padding:.2rem .35rem;cursor:pointer;border-radius:5px}
   .lang[aria-pressed=true]{color:var(--ink);font-weight:600;background:var(--chip)}
@@ -87,6 +103,7 @@ import { $, esc, api, t, registerStrings, currentLang, setLang as applyLang } fr
 // page hard-codes user-facing text.
 const STRINGS = {
   ru: {
+    prevQuestion: 'Назад', nextQuestion: 'Дальше',
     intro: 'Тренажёр по чтению для Prøve i Dansk 3. Прочитайте текст и ответьте на вопросы — ' +
            'формат тот же, что на экзамене.',
     start: 'Начать', startAgain: 'Ещё текст',
@@ -105,6 +122,7 @@ const STRINGS = {
     late: 'сдано после звонка', reviewAnswers: 'Разбор ответов',
   },
   en: {
+    prevQuestion: 'Back', nextQuestion: 'Next',
     intro: 'Reading practice for Prøve i Dansk 3. Read the text and answer the questions — ' +
            'the format matches the exam.',
     start: 'Start', startAgain: 'Another text',
@@ -123,6 +141,7 @@ const STRINGS = {
     late: 'handed in late', reviewAnswers: 'Review',
   },
   uk: {
+    prevQuestion: 'Назад', nextQuestion: 'Далі',
     intro: 'Тренажер із читання для Prøve i Dansk 3. Прочитайте текст і дайте ' +
            'відповіді на запитання — формат той самий, що й на іспиті.',
     start: 'Почати', startAgain: 'Ще текст',
@@ -144,6 +163,7 @@ const STRINGS = {
     late: 'здано після дзвінка', reviewAnswers: 'Розбір відповідей',
   },
   da: {
+    prevQuestion: 'Tilbage', nextQuestion: 'Næste',
     intro: 'Læsetræning til Prøve i Dansk 3. Læs teksten og svar på spørgsmålene — ' +
            'formatet er det samme som til prøven.',
     start: 'Start', startAgain: 'En tekst mere',
@@ -165,7 +185,7 @@ const STRINGS = {
 registerStrings(STRINGS);
 
 const view = $('#view');
-let paper = null, scored = 0, ticker = null;
+let paper = null, scored = 0, ticker = null, current = null;
 
 const isExam = () => paper?.mode === 'exam';
 
@@ -231,7 +251,14 @@ function render() {
       <div id="texts"></div>
       <section class="card">
         <h2>${esc(t('questions'))}</h2>
+        ${paper.items.length > 1 ? `<nav class="tabs" id="tabs">
+          ${paper.items.map(i => `<button class="tab" data-pos="${i.position}">${i.position}</button>`).join('')}
+        </nav>` : ''}
         <div id="items"></div>
+        ${paper.items.length > 1 ? `<p class="nav">
+          <button class="btn" id="prev">&larr; ${esc(t('prevQuestion'))}</button>
+          <button class="btn" id="next">${esc(t('nextQuestion'))} &rarr;</button>
+        </p>` : ''}
         ${isExam() ? `<p class="row" style="margin-top:16px">
             <button class="primary" id="hand">${esc(t('submitExam'))}</button></p>` : ''}
         <p class="row" style="margin-top:16px" id="foot" hidden>
@@ -242,7 +269,7 @@ function render() {
     </div>`;
 
   $('#texts').innerHTML = paper.passages.map((p, i) => `
-    <section class="card passage">
+    <section class="card passage" data-passage="${i}">
       <h2>${esc(p.title)}</h2>
       <p>${passageHtml(p.body)}</p>
       ${p.kind === 'mc' ? '' : `<p class="muted" style="font-size:.85rem">${esc(t('gapHint'))}</p>`}
@@ -252,10 +279,18 @@ function render() {
   paper.items.forEach(wire);
   view.querySelectorAll('.gap').forEach(g => {
     g.onclick = () => {
-      $(`#item-${g.dataset.gap}`)?.scrollIntoView({behavior: 'smooth', block: 'center'});
+      showQuestion(Number(g.dataset.gap));
       view.querySelectorAll('.gap').forEach(o => o.setAttribute('aria-current', o === g));
     };
   });
+  view.querySelectorAll('.tab').forEach(t => {
+    t.onclick = () => showQuestion(Number(t.dataset.pos));
+  });
+  if (paper.items.length > 1) {
+    $('#prev').onclick = () => showQuestion(current - 1);
+    $('#next').onclick = () => showQuestion(current + 1);
+  }
+  showQuestion(paper.items[0].position);
 
   if (isExam()) {
     $('#hand').onclick = hand;
@@ -264,10 +299,38 @@ function render() {
   updateScore();
 }
 
+/**
+ * Opens one question, and with it the one text that question is about. Every question
+ * stays in the document: an answer belongs to the paper, and a reader who turns back
+ * must find their earlier answer where they left it.
+ */
+function showQuestion(position) {
+  const positions = paper.items.map(i => i.position);
+  const first = positions[0], last = positions[positions.length - 1];
+  current = Math.min(Math.max(position, first), last);
+  const passage = String(paper.items.find(i => i.position === current).passage ?? 0);
+
+  view.querySelectorAll('.item').forEach(el => {
+    el.hidden = Number(el.dataset.pos) !== current;
+  });
+  view.querySelectorAll('.passage').forEach(el => {
+    el.hidden = el.dataset.passage !== passage;
+  });
+  view.querySelectorAll('.tab').forEach(el => {
+    el.classList.toggle('current', Number(el.dataset.pos) === current);
+  });
+  if (paper.items.length > 1) {
+    $('#prev').disabled = current === first;
+    $('#next').disabled = current === last;
+  }
+}
+
+
 function itemHtml(item) {
   const label = i => String.fromCharCode(65 + i);
   return `
-    <div class="item" id="item-${item.position}">
+    <div class="item" id="item-${item.position}" data-pos="${item.position}"
+         data-passage="${item.passage ?? 0}">
       <h3>${item.position}. ${item.points} ${esc(t('points', item.points))}</h3>
       ${item.prompt ? `<p class="prompt">${esc(item.prompt)}</p>` : ''}
       <div class="opts">
@@ -285,6 +348,10 @@ function wire(item) {
     b.onclick = () => answer(item, Number(b.dataset.index));
   });
 }
+
+const markAnswered = position =>
+  view.querySelector(`.tab[data-pos="${position}"]`)?.classList.add('answered');
+
 
 async function answer(item, chosen) {
   const buttons = [...view.querySelectorAll(`.opt[data-pos="${item.position}"]`)];
@@ -305,6 +372,7 @@ async function answer(item, chosen) {
     buttons.forEach(b => b.classList.remove('chosen'));
     buttons[chosen]?.classList.add('chosen');
     $(`#gap-${item.position}`)?.classList.add('filled');
+    markAnswered(item.position);
     updateScore();
     return;
   }
@@ -322,6 +390,7 @@ async function answer(item, chosen) {
       {method: 'POST', body: {reason: 'also_correct'}}).catch(() => {});
   };
   $(`#gap-${item.position}`)?.classList.add('filled');
+  markAnswered(item.position);
 
   scored += res.points_scored;
   updateScore();

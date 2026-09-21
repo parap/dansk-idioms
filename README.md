@@ -115,6 +115,12 @@ still get history and best score. With one you get spaced repetition: each idiom
 answer is scheduled by SM-2, and later rounds put what is due first. Rounds you played
 before registering are adopted into the new account.
 
+**A paper is read one question at a time**, on both `/read` and `/proeve`: a tab per
+question, red until it has an answer and green after, and only the question you are on is
+on screen. On a reading paper the tab also brings up the one text that question is about,
+and clicking a numbered gap in a text opens the question it stands for. A round of a
+single question shows no tabs, because there is nowhere to turn to.
+
 **The mark sits first in the header of every page** and is the way home, so a reader who
 arrived on a paper or a passage by link is never stranded there.
 

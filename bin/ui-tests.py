@@ -464,6 +464,56 @@ def handing_in_reports_a_karakter_and_a_review(b):
 
 
 
+VISIBLE_PASSAGES = '[...document.querySelectorAll(".passage")].filter(e => e.getClientRects().length)'
+
+
+@check
+def a_reading_exam_shows_one_question_at_a_time(b):
+    start_exam(b)
+    assert b.js('document.querySelectorAll(".item").length') == 3
+    assert b.js(VISIBLE_ITEMS + '.length') == 1
+    assert b.js(VISIBLE_ITEMS + '[0].id') == 'item-1'
+
+
+@check
+def a_reading_tab_opens_its_question_and_the_text_it_belongs_to(b):
+    start_exam(b)
+    b.js(tab_js(2) + '.click()')
+    b.until(VISIBLE_ITEMS + '[0].id === "item-2"', what='the second question')
+    # A reading question cannot be answered without its text, and only its own text is
+    # any use: three at once is the scrolling this change exists to remove.
+    assert b.js(VISIBLE_PASSAGES + '.length') == 1
+    assert b.js(VISIBLE_PASSAGES + '[0].dataset.passage') == b.js(VISIBLE_ITEMS + '[0].dataset.passage')
+
+
+@check
+def a_reading_tab_marks_its_question_answered(b):
+    start_exam(b)
+    assert not b.js(tab_js(1) + '.classList.contains("answered")')
+    click_option(b, 1, 0)
+    b.until(tab_js(1) + '.classList.contains("answered")', what='the tab to mark it answered')
+    assert not b.js(tab_js(2) + '.classList.contains("answered")')
+
+
+@check
+def a_gap_opens_the_question_it_stands_for(b):
+    start_exam(b)
+    position = b.js('Number(document.querySelector(".gap").dataset.gap)')
+    b.js('document.querySelector(".gap").click()')
+    b.until(VISIBLE_ITEMS + '[0].id === "item-%d"' % position,
+            what='the question the gap stands for')
+    # Without this the check passes on a page that shows everything at once.
+    assert b.js(VISIBLE_ITEMS + '.length') == 1
+
+
+@check
+def a_round_of_one_question_offers_no_tabs(b):
+    # A guard rather than a driver: one question has nowhere to turn to.
+    start_round(b)
+    assert b.js('document.querySelectorAll(".item").length') == 1
+    assert b.js('document.querySelectorAll(".tab").length') == 0
+
+
 # ---- the indfoedsretsproeve ------------------------------------------------
 
 def start_paper(b, current_affairs=True):
