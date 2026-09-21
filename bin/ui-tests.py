@@ -638,6 +638,19 @@ def a_round_without_the_current_affairs_block_is_scored_but_not_judged(b):
     assert b.js('document.body.textContent').find('сокращённый') > 0
 
 
+@check
+def every_page_carries_the_way_home(b):
+    """The mark is the way back, so it is the same mark everywhere and it sits where a
+    reader looks for it: first in the header, top left."""
+    for path in ('/', '/read', '/proeve'):
+        b.goto(path)
+        b.until('!!document.querySelector(".brand")', what='the brand on ' + path)
+        assert b.js('document.querySelector(".brand").getAttribute("href")') == '/', path
+        assert 'idiomer' in b.js('document.querySelector(".brand").textContent'), path
+        assert b.js('document.querySelector("header").firstElementChild'
+                    '.classList.contains("brand")'), f'{path} puts something before the mark'
+
+
 LANGUAGES = ['ru', 'en', 'uk', 'da']
 
 

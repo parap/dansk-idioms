@@ -115,6 +115,9 @@ still get history and best score. With one you get spaced repetition: each idiom
 answer is scheduled by SM-2, and later rounds put what is due first. Rounds you played
 before registering are adopted into the new account.
 
+**The mark sits first in the header of every page** and is the way home, so a reader who
+arrived on a paper or a passage by link is never stranded there.
+
 **Interface language** switches in the header of every page — Russian, English,
 Ukrainian, Danish — and is remembered per browser, so a choice made on one page holds on
 the next. A round in progress withdraws the switch: changing language rebuilds the
