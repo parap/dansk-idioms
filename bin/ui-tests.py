@@ -605,6 +605,68 @@ def the_questions_are_set_in_large_type(b):
     assert size >= 20, f'the question is set at {size}px'
 
 
+def press(b, code, key):
+    """A real key event, as Chrome delivers one, rather than a synthetic dispatch."""
+    for kind in ('keyDown', 'keyUp'):
+        b.send('Input.dispatchKeyEvent', type=kind, code=code, key=key)
+
+
+@check
+def a_number_key_answers_and_turns_the_page(b):
+    start_paper(b)
+    press(b, 'Digit2', '2')
+    b.until(options_js(1) + '[1].classList.contains("chosen")', what='the second option')
+    b.until(VISIBLE_ITEMS + '[0].id === "item-2"', what='the next question')
+
+
+@check
+def a_letter_key_answers_whatever_the_keyboard_layout(b):
+    start_paper(b)
+    # 'KeyB' is the physical key. On a Russian layout it types 'и', and it must still
+    # answer B -- this page is read by people typing on Cyrillic keyboards.
+    press(b, 'KeyB', 'и')
+    b.until(options_js(1) + '[1].classList.contains("chosen")', what='option B')
+    b.until(VISIBLE_ITEMS + '[0].id === "item-2"', what='the next question')
+
+
+@check
+def a_key_with_no_option_behind_it_does_nothing(b):
+    start_paper(b)
+    b.js(tab_js(4) + '.click()')
+    b.until(VISIBLE_ITEMS + '[0].id === "item-4"', what='the last question')
+    # The fourth fixture question offers two options; there is no third to choose.
+    press(b, 'Digit3', '3')
+    press(b, 'KeyC', 'c')
+    assert b.js('document.querySelectorAll(".opt.chosen").length') == 0
+    assert b.js(VISIBLE_ITEMS + '[0].id') == 'item-4', 'the page turned on a key that chose nothing'
+
+
+@check
+def leaving_a_paper_takes_the_keyboard_with_it(b):
+    """A listener left behind answers a paper that is no longer on screen: it posts to
+    the abandoned session and then throws where nobody is looking."""
+    start_paper(b)
+    b.js("""window.__errors = []; window.__posts = [];
+            addEventListener('error', e => __errors.push('error: ' + e.message));
+            addEventListener('unhandledrejection', e => __errors.push('rejection: ' + e.reason));
+            const f = fetch; window.fetch = (...a) => { __posts.push(String(a[0])); return f(...a); };""")
+    b.js('window.confirm = () => true')
+    b.js('document.querySelector("#leave").click()')
+    b.until('!!document.querySelector("#go")', what='the chooser')
+
+    press(b, 'Digit1', '1')
+    press(b, 'KeyA', 'a')
+
+    # Both the request and the throw arrive a moment later, so "nothing happened" is a
+    # claim that has to be given time to be wrong.
+    deadline = time.time() + 2
+    while time.time() < deadline:
+        answered = [u for u in b.js('window.__posts') if '/answers' in u]
+        assert not answered, f'a key answered a paper that was left: {answered}'
+        assert b.js('window.__errors') == [], b.js('window.__errors')
+        time.sleep(0.2)
+
+
 @check
 def handing_in_waits_until_every_question_is_answered(b):
     start_paper(b)

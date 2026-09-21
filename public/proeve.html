@@ -236,6 +236,7 @@ async function home() {
   $('#left').textContent = '';
   $('#score').textContent = '';
   $('#leave').hidden = true;
+  document.removeEventListener('keydown', onKey);
   paintLanguages();
 
   let papers = [];
@@ -324,6 +325,7 @@ function render() {
     </section>`;
 
   $('#langs').hidden = true;
+  document.addEventListener('keydown', onKey);
   paper.items.forEach(wire);
   view.querySelectorAll('.tab').forEach(b => {
     b.onclick = () => showQuestion(Number(b.dataset.pos));
@@ -396,13 +398,42 @@ async function answer(item, chosen) {
     await api(`/reading/sessions/${paper.session_id}/answers`,
       {method: 'POST', body: {position: item.position, chosen_index: chosen, response_ms: 0}});
   } catch (e) {
-    return;
+    return false;
   }
 
   buttons.forEach(b => b.classList.remove('chosen'));
   buttons.find(b => Number(b.dataset.index) === chosen)?.classList.add('chosen');
   view.querySelector(`.tab[data-pos="${item.position}"]`)?.classList.add('answered');
   updateScore();
+  return true;
+}
+
+
+/**
+ * The keyboard answers: 1/2/3 or A/B/C picks that option and turns the page.
+ *
+ * The key is read as `event.code`, which names the physical key rather than the
+ * character it produced. A reader on a Cyrillic layout presses the key marked B and
+ * types 'и'; reading the character would leave the letters dead for exactly the people
+ * this page is written for.
+ *
+ * The page turns only once the answer is recorded, so a refused answer does not scroll
+ * away out of sight.
+ */
+function onKey(e) {
+  if (e.ctrlKey || e.altKey || e.metaKey) return;
+  const focused = document.activeElement?.tagName;
+  if (focused === 'INPUT' || focused === 'SELECT' || focused === 'TEXTAREA') return;
+
+  const digit = /^(?:Digit|Numpad)([1-9])$/.exec(e.code);
+  const letter = /^Key([A-Z])$/.exec(e.code);
+  if (!digit && !letter) return;
+  const index = digit ? Number(digit[1]) - 1 : letter[1].charCodeAt(0) - 65;
+
+  const item = paper.items.find(i => i.position === current);
+  if (!item || index >= item.options.length) return;
+  e.preventDefault();
+  answer(item, index).then(recorded => { if (recorded) showQuestion(current + 1); });
 }
 
 /** Leaves the paper unfinished. The round is not handed in, so it gets no verdict. */
@@ -434,6 +465,7 @@ function results(r) {
   $('#score').textContent = '';
   $('#leave').hidden = true;
   $('#langs').hidden = true;
+  document.removeEventListener('keydown', onKey);
   view.innerHTML = `
     <div class="card">
       <p class="verdict ${r.verdict ? (passed ? 'pass' : 'fail') : ''}">${esc(headline)}</p>

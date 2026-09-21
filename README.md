@@ -256,6 +256,12 @@ the question has no answer, green once it has one. Every question stays in the d
 and every answer can be changed until the paper is handed in, so a tab is a way back as
 well as a map of what is left.
 
+**The keyboard answers.** On a paper, `1`/`2`/`3` or `A`/`B`/`C` picks that option and
+turns the page — the options are labelled with those letters already, so the mapping is
+on screen rather than in a help text. Keys are read by physical position, not by the
+character they produce, so a Cyrillic layout answers the same as a Latin one. The page
+turns only once the answer is recorded.
+
 Handing in is shut until nothing is left unanswered, and says how many questions are
 holding it. The clock is not bound by that rule: when time runs out it hands the paper
 in as it stands, and asks nothing first. Leaving without handing in is offered in the
