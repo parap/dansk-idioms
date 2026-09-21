@@ -6,7 +6,7 @@ format, and these documents are the source of truth from there on — the databa
 derived, and so is any correction to the wording of a question.
 
 ```bash
-docker-compose exec app php bin/indfoedsret-convert.php ~/Documents/Claude/dansk-indfoedsret/pdf
+docker-compose exec app php bin/indfoedsret-convert.php ~/Claude/dansk/dansk-indfoedsret/pdf
 docker-compose exec app php bin/reading-import.php content/indfoedsret/*.txt
 docker-compose exec app php bin/reading-import.php --publish content/indfoedsret/indfoedsret-2026-06-03.txt
 ```

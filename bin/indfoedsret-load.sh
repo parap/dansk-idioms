@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Convert published indfødsretsprøve PDFs into documents and load them.
 #
-#   bin/indfoedsret-load.sh                 # reads ~/Documents/Claude/dansk-indfoedsret/pdf
+#   bin/indfoedsret-load.sh                 # reads ~/Claude/dansk/dansk-indfoedsret/pdf
 #   bin/indfoedsret-load.sh /path/to/dir    # or point at a folder of PDFs
 #
 # The folder holds pairs named proeve-YYYY-MM.pdf and retteark-YYYY-MM.pdf, as the
@@ -13,7 +13,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-SRC="${1:-$HOME/Documents/Claude/dansk-indfoedsret/pdf}"
+SRC="${1:-$HOME/Claude/dansk/dansk-indfoedsret/pdf}"
 [ -d "$SRC" ] || { echo "No such folder: $SRC" >&2; exit 1; }
 
 shopt -s nullglob

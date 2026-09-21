@@ -251,7 +251,7 @@ passages use and writes one document per exam into `content/indfoedsret/`; from 
 `bin/reading-import.php` loads them like any other paper.
 
 ```bash
-php bin/indfoedsret-convert.php ~/Documents/Claude/dansk-indfoedsret/pdf
+php bin/indfoedsret-convert.php ~/Claude/dansk/dansk-indfoedsret/pdf
 php bin/reading-import.php content/indfoedsret/*.txt
 ```
 
