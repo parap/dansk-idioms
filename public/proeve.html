@@ -19,12 +19,12 @@
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);
-    font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+    font:18px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
   .wrap{max-width:760px;margin:0 auto;padding:20px 16px 64px}
   header{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;flex-wrap:wrap;
     position:sticky;top:0;background:var(--bg);padding-top:8px;z-index:2}
   header h1{font-size:1.2rem;margin:0}
-  header .spacer{flex:1}
+  .spacer{flex:1}
   .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
     padding:18px;box-shadow:var(--shadow);margin-bottom:16px}
   .muted{color:var(--muted)}
@@ -33,10 +33,10 @@
     text-transform:uppercase;color:var(--muted)}
   .item{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}
   .item:first-child{border-top:none;padding-top:0;margin-top:0}
-  .item h3{font-size:.9rem;margin:0 0 .5rem;color:var(--muted);font-weight:600}
-  .item .prompt{margin:0 0 .6rem}
+  .item h3{font-size:.95rem;margin:0 0 .6rem;color:var(--muted);font-weight:600}
+  .item .prompt{margin:0 0 .9rem;font-size:1.25rem;line-height:1.45}
   .opts{display:grid;gap:8px}
-  .opt{display:block;width:100%;text-align:left;padding:10px 12px;border-radius:10px;
+  .opt{display:block;width:100%;text-align:left;padding:13px 15px;border-radius:10px;
     border:1px solid var(--line);background:var(--card);color:var(--ink);
     font:inherit;cursor:pointer}
   .opt:hover:not(:disabled){border-color:var(--accent)}
@@ -48,6 +48,7 @@
     padding:11px 18px;font:inherit;font-weight:600;cursor:pointer}
   .primary:disabled{opacity:.6;cursor:default}
   .link{background:none;border:none;color:var(--accent);font:inherit;cursor:pointer;padding:0}
+  .link:disabled{opacity:.4;cursor:default}
   .score{font-variant-numeric:tabular-nums;font-weight:600}
   .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
   select{font:inherit;padding:9px 10px;border-radius:10px;border:1px solid var(--line);
@@ -57,6 +58,22 @@
   .verdict.pass{color:var(--ok)} .verdict.fail{color:var(--bad)}
   .tally{display:grid;gap:4px;margin:10px 0 0;padding:0;list-style:none}
   .tally b{font-variant-numeric:tabular-nums}
+  /* One tab per question, coloured by whether that question has an answer yet, so the
+     paper can be read one question at a time without losing sight of what is left. */
+  .tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 20px}
+  .tab{min-width:2.4rem;padding:6px 4px;border-radius:8px;font:inherit;font-size:.95rem;
+    font-weight:600;cursor:pointer;background:var(--badbg);color:var(--bad);
+    border:1px solid var(--bad)}
+  .tab.answered{background:var(--okbg);color:var(--ok);border-color:var(--ok)}
+  .tab.current{box-shadow:0 0 0 2px var(--ink)}
+  /* Forty-five tabs at reading size fill a phone screen on their own, and the question
+     they are there to reach ends up below the fold. */
+  @media (max-width:520px){
+    .tabs{gap:5px;margin-bottom:16px}
+    .tab{min-width:2rem;padding:5px 3px;font-size:.85rem}
+  }
+  .nav{display:flex;gap:18px;align-items:center;margin-top:20px;flex-wrap:wrap}
+  .nav .primary{margin-left:auto}
   [hidden]{display:none!important}
 </style>
 </head>
@@ -90,6 +107,7 @@ const STRINGS = {
     block_laeremateriale: 'По учебнику', block_aktuelle: 'Актуальные вопросы',
     block_vaerdier: 'Датские ценности',
     timeLeft: 'осталось', submitExam: 'Сдать работу',
+    prevQuestion: 'Назад', nextQuestion: 'Дальше',
     confirmSubmit: 'Сдать? Изменить ответы будет нельзя.',
     unanswered: 'без ответа',
     bestaaet: 'Сдано', ikke_bestaaet: 'Не сдано', noVerdict: 'Без оценки',
@@ -111,6 +129,7 @@ const STRINGS = {
     block_laeremateriale: 'From the study material', block_aktuelle: 'Current affairs',
     block_vaerdier: 'Danish values',
     timeLeft: 'left', submitExam: 'Hand in',
+    prevQuestion: 'Back', nextQuestion: 'Next',
     confirmSubmit: 'Hand in? Answers cannot be changed afterwards.',
     unanswered: 'unanswered',
     bestaaet: 'Passed', ikke_bestaaet: 'Not passed', noVerdict: 'No verdict',
@@ -132,6 +151,7 @@ const STRINGS = {
     block_laeremateriale: 'Fra lærematerialet', block_aktuelle: 'Aktuelle spørgsmål',
     block_vaerdier: 'Danske værdier',
     timeLeft: 'tilbage', submitExam: 'Aflever',
+    prevQuestion: 'Tilbage', nextQuestion: 'Næste',
     confirmSubmit: 'Aflever? Svarene kan ikke ændres bagefter.',
     unanswered: 'ubesvaret',
     bestaaet: 'Bestået', ikke_bestaaet: 'Ikke bestået', noVerdict: 'Ingen bedømmelse',
@@ -145,7 +165,7 @@ const STRINGS = {
 registerStrings(STRINGS);
 
 const view = $('#view');
-let paper = null, ticker = null;
+let paper = null, ticker = null, current = null;
 
 const label = i => String.fromCharCode(65 + i);
 // One flat key per block: t() reads a non-string value as a plural map, so a nested
@@ -221,28 +241,41 @@ function render() {
   view.innerHTML = `
     <section class="card">
       <h2 style="margin:0 0 .2rem;font-size:1.05rem">${esc(title)}</h2>
+      <nav class="tabs" id="tabs">
+        ${paper.items.map(i =>
+          `<button class="tab" data-pos="${i.position}">${i.position}</button>`).join('')}
+      </nav>
       <div id="items">
         ${paper.items.map(item => {
           const heading = item.section !== block
-            ? `<p class="block">${esc(blockName(item.section))}</p>` : '';
+            ? `<p class="block" data-section="${esc(item.section)}">${esc(blockName(item.section))}</p>` : '';
           block = item.section;
           return heading + itemHtml(item);
         }).join('')}
       </div>
-      <p class="row" style="margin-top:20px">
+      <p class="nav">
+        <button class="link" id="prev">&larr; ${esc(t('prevQuestion'))}</button>
+        <button class="link" id="next">${esc(t('nextQuestion'))} &rarr;</button>
         <button class="primary" id="hand">${esc(t('submitExam'))}</button>
       </p>
     </section>`;
 
   paper.items.forEach(wire);
+  view.querySelectorAll('.tab').forEach(b => {
+    b.onclick = () => showQuestion(Number(b.dataset.pos));
+  });
+  $('#prev').onclick = () => showQuestion(current - 1);
+  $('#next').onclick = () => showQuestion(current + 1);
   $('#hand').onclick = hand;
+  showQuestion(paper.items[0].position);
   startClock();
   updateScore();
 }
 
 function itemHtml(item) {
   return `
-    <div class="item" id="item-${item.position}">
+    <div class="item" id="item-${item.position}" data-pos="${item.position}"
+         data-section="${esc(item.section)}">
       <h3>${item.position}.</h3>
       <p class="prompt">${esc(item.prompt)}</p>
       <div class="opts">
@@ -253,6 +286,32 @@ function itemHtml(item) {
       </div>
     </div>`;
 }
+
+/**
+ * Opens one question and closes the rest. Every question stays in the document, because
+ * an answer belongs to the paper rather than to the page showing it, and a candidate who
+ * goes back must find their earlier answer where they left it.
+ */
+function showQuestion(position) {
+  const positions = paper.items.map(i => i.position);
+  const first = positions[0], last = positions[positions.length - 1];
+  current = Math.min(Math.max(position, first), last);
+  const section = paper.items.find(i => i.position === current).section;
+
+  view.querySelectorAll('.item').forEach(el => {
+    el.hidden = Number(el.dataset.pos) !== current;
+  });
+  // A block heading belongs to its section, not to the question that happens to open it.
+  view.querySelectorAll('.block').forEach(el => {
+    el.hidden = el.dataset.section !== section;
+  });
+  view.querySelectorAll('.tab').forEach(el => {
+    el.classList.toggle('current', Number(el.dataset.pos) === current);
+  });
+  $('#prev').disabled = current === first;
+  $('#next').disabled = current === last;
+}
+
 
 function wire(item) {
   view.querySelectorAll(`.opt[data-pos="${item.position}"]`).forEach(b => {
@@ -275,6 +334,7 @@ async function answer(item, chosen) {
 
   buttons.forEach(b => b.classList.remove('chosen'));
   buttons.find(b => Number(b.dataset.index) === chosen)?.classList.add('chosen');
+  view.querySelector(`.tab[data-pos="${item.position}"]`)?.classList.add('answered');
   updateScore();
 }
 

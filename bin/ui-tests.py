@@ -508,6 +508,53 @@ def a_paper_renders_its_blocks_and_every_question(b):
     assert b.js('document.querySelectorAll(".passage").length') == 0
 
 
+VISIBLE_ITEMS = '[...document.querySelectorAll(".item")].filter(e => e.getClientRects().length)'
+
+
+def tab_js(position):
+    """One question's tab, as a JS expression, so the quoting lives in one place."""
+    return "document.querySelector('.tab[data-pos=\"%d\"]')" % position
+
+
+@check
+def a_paper_shows_one_question_at_a_time(b):
+    start_paper(b)
+    # Every question stays in the document, because an answer is recorded against the
+    # paper as a whole, but a candidate reads one at a time.
+    assert b.js('document.querySelectorAll(".item").length') == 4
+    assert b.js(VISIBLE_ITEMS + '.length') == 1
+    assert b.js(VISIBLE_ITEMS + '[0].id') == 'item-1'
+
+
+@check
+def a_tab_opens_its_own_question_and_closes_the_others(b):
+    start_paper(b)
+    b.js(tab_js(3) + '.click()')
+    b.until(VISIBLE_ITEMS + '[0].id === "item-3"', what='the third question')
+    assert b.js(VISIBLE_ITEMS + '.length') == 1
+
+
+@check
+def a_tab_stays_marked_until_its_question_is_answered(b):
+    start_paper(b)
+    assert not b.js(tab_js(1) + '.classList.contains("answered")')
+
+    click_option(b, 1, 0)
+    b.until(tab_js(1) + '.classList.contains("answered")', what='the tab to mark it answered')
+    assert not b.js(tab_js(2) + '.classList.contains("answered")')
+
+    # Answered and unanswered have to be told apart by sight, not only by class name.
+    assert b.js('getComputedStyle(%s).backgroundColor !== getComputedStyle(%s).backgroundColor'
+                % (tab_js(1), tab_js(2))), 'the two states are painted the same'
+
+
+@check
+def the_questions_are_set_in_large_type(b):
+    start_paper(b)
+    size = b.js('parseFloat(getComputedStyle(document.querySelector(".prompt")).fontSize)')
+    assert size >= 20, f'the question is set at {size}px'
+
+
 @check
 def a_paper_shows_a_forty_five_minute_countdown(b):
     start_paper(b)

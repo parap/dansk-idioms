@@ -239,6 +239,11 @@ server's clock with no feedback until it is handed in, as the real one does. The
 is a verdict rather than a grade -- *bestået* or *ikke bestået* -- with the two numbers it
 turns on: correct answers, and correct answers in the values block.
 
+The paper is read **one question at a time**, with a tab per question above it: red while
+the question has no answer, green once it has one. Every question stays in the document
+and every answer can be changed until the paper is handed in, so a tab is a way back as
+well as a map of what is left.
+
 The current-affairs questions can be left out. They ask about the months before that
 sitting -- which minister was appointed, which party gained -- so they train nobody years
 later. A round sat without them is **scored but not judged**: 36 of 40 is a different exam
