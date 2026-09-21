@@ -10,7 +10,6 @@ use Dansk\Http\Response;
 use Dansk\Support\AdminReach;
 use Dansk\Support\Config;
 use Dansk\Support\Db;
-use Dansk\Support\Shell;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 
@@ -70,12 +69,17 @@ if ($route[0] === Dispatcher::NOT_FOUND) {
         // what a cache-first service worker did before.
         header('Content-Type: text/html; charset=utf-8');
         header('Cache-Control: no-cache, must-revalidate');
-        $shell = Shell::forPath($uri, AdminReach::reachable($_SERVER));
-        if ($shell === null) {
-            http_response_code(404);
-            readfile(__DIR__ . Shell::NOT_FOUND);
-            return;
-        }
+        // Prefix order decides which shell wins, so a longer path that shares a
+        // prefix with a shorter one has to be listed above it.
+        $shell = match (true) {
+            // Off the admin port the review queue has no page, the same as any other
+            // address nobody has defined.
+            AdminReach::isAdminPath($uri)
+                && AdminReach::reachable($_SERVER) => '/admin.html',
+            str_starts_with($uri, '/read')   => '/read.html',
+            str_starts_with($uri, '/proeve') => '/proeve.html',
+            default                         => '/app.html',
+        };
         readfile(__DIR__ . $shell);
         return;
     }
