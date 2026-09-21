@@ -244,6 +244,11 @@ the question has no answer, green once it has one. Every question stays in the d
 and every answer can be changed until the paper is handed in, so a tab is a way back as
 well as a map of what is left.
 
+Handing in is shut until nothing is left unanswered, and says how many questions are
+holding it. The clock is not bound by that rule: when time runs out it hands the paper
+in as it stands, and asks nothing first. Leaving without handing in is offered in the
+header, away from the button that ends the round.
+
 The current-affairs questions can be left out. They ask about the months before that
 sitting -- which minister was appointed, which party gained -- so they train nobody years
 later. A round sat without them is **scored but not judged**: 36 of 40 is a different exam

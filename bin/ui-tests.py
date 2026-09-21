@@ -556,6 +556,46 @@ def the_questions_are_set_in_large_type(b):
 
 
 @check
+def handing_in_waits_until_every_question_is_answered(b):
+    start_paper(b)
+    answers = correct_indexes()
+    assert b.js('document.querySelector("#hand").disabled'), 'an empty paper can be handed in'
+    assert b.js('document.querySelector("#remaining").textContent').startswith('4')
+
+    for pos in (1, 2, 3):
+        click_option(b, pos, answers[pos - 1])
+    b.until('document.querySelectorAll(".opt.chosen").length === 3', what='three answers')
+    assert b.js('document.querySelector("#hand").disabled'), 'one question is still unanswered'
+    assert b.js('document.querySelector("#remaining").textContent').startswith('1')
+
+    click_option(b, 4, answers[3])
+    b.until('!document.querySelector("#hand").disabled', what='handing in to be allowed')
+    assert b.js('document.querySelector("#remaining").textContent').strip() == ''
+
+
+@check
+def moving_between_questions_is_easy_to_hit(b):
+    start_paper(b)
+    # Turning the page is what a candidate does forty-four times; handing in happens once.
+    # 44px is the touch target a thumb finds without aiming.
+    for which in ('#prev', '#next'):
+        box = 'document.querySelector("%s").getBoundingClientRect()' % which
+        height, width = b.js(box + '.height'), b.js(box + '.width')
+        assert height >= 44, f'{which} is {height}px tall'
+        assert width >= 96, f'{which} is {width}px wide'
+
+
+@check
+def a_paper_can_be_left_without_handing_it_in(b):
+    start_paper(b)
+    b.js('window.confirm = () => true')
+    b.js('document.querySelector("#leave").click()')
+    b.until('!!document.querySelector("#go")', what='the chooser')
+    assert b.js('document.querySelectorAll(".item").length') == 0
+    assert b.js('document.querySelector("#leave").hidden'), 'the way out is offered off a paper'
+
+
+@check
 def a_paper_shows_a_forty_five_minute_countdown(b):
     start_paper(b)
     b.until('/\\d\\d:\\d\\d/.test(document.querySelector("#left").textContent)', what='the clock')

@@ -46,7 +46,13 @@
   .opt.wrong{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
   .primary{background:var(--accent);color:var(--accent-ink);border:none;border-radius:10px;
     padding:11px 18px;font:inherit;font-weight:600;cursor:pointer}
-  .primary:disabled{opacity:.6;cursor:default}
+  .primary:disabled{opacity:.45;cursor:default}
+  /* Turning the page is done once per question; handing in happens once per paper, so
+     the page-turns are the buttons that carry weight. */
+  .btn{padding:13px 20px;border-radius:10px;font:inherit;font-size:1.05rem;font-weight:600;
+    cursor:pointer;border:1px solid var(--line);background:var(--chip);color:var(--ink)}
+  .btn:hover:not(:disabled){border-color:var(--accent)}
+  .btn:disabled{opacity:.4;cursor:default}
   .link{background:none;border:none;color:var(--accent);font:inherit;cursor:pointer;padding:0}
   .link:disabled{opacity:.4;cursor:default}
   .score{font-variant-numeric:tabular-nums;font-weight:600}
@@ -72,8 +78,8 @@
     .tabs{gap:5px;margin-bottom:16px}
     .tab{min-width:2rem;padding:5px 3px;font-size:.85rem}
   }
-  .nav{display:flex;gap:18px;align-items:center;margin-top:20px;flex-wrap:wrap}
-  .nav .primary{margin-left:auto}
+  .nav{display:flex;gap:12px;align-items:center;margin-top:24px;flex-wrap:wrap}
+  .nav .spacer{min-width:16px}
   [hidden]{display:none!important}
 </style>
 </head>
@@ -84,6 +90,7 @@
     <span class="spacer"></span>
     <span id="left" class="score"></span>
     <span id="score" class="score muted"></span>
+    <button class="link" id="leave" hidden></button>
     <a class="link" href="/">idiomer →</a>
   </header>
   <div id="view"></div>
@@ -108,6 +115,7 @@ const STRINGS = {
     block_vaerdier: 'Датские ценности',
     timeLeft: 'осталось', submitExam: 'Сдать работу',
     prevQuestion: 'Назад', nextQuestion: 'Дальше',
+    leavePaper: 'Вернуться', confirmLeave: 'Выйти из работы? Раунд не будет сдан.',
     confirmSubmit: 'Сдать? Изменить ответы будет нельзя.',
     unanswered: 'без ответа',
     bestaaet: 'Сдано', ikke_bestaaet: 'Не сдано', noVerdict: 'Без оценки',
@@ -130,6 +138,7 @@ const STRINGS = {
     block_vaerdier: 'Danish values',
     timeLeft: 'left', submitExam: 'Hand in',
     prevQuestion: 'Back', nextQuestion: 'Next',
+    leavePaper: 'Leave', confirmLeave: 'Leave this paper? It will not be handed in.',
     confirmSubmit: 'Hand in? Answers cannot be changed afterwards.',
     unanswered: 'unanswered',
     bestaaet: 'Passed', ikke_bestaaet: 'Not passed', noVerdict: 'No verdict',
@@ -152,6 +161,7 @@ const STRINGS = {
     block_vaerdier: 'Danske værdier',
     timeLeft: 'tilbage', submitExam: 'Aflever',
     prevQuestion: 'Tilbage', nextQuestion: 'Næste',
+    leavePaper: 'Forlad', confirmLeave: 'Forlad sættet? Det bliver ikke afleveret.',
     confirmSubmit: 'Aflever? Svarene kan ikke ændres bagefter.',
     unanswered: 'ubesvaret',
     bestaaet: 'Bestået', ikke_bestaaet: 'Ikke bestået', noVerdict: 'Ingen bedømmelse',
@@ -176,6 +186,7 @@ async function home() {
   stopClock();
   $('#left').textContent = '';
   $('#score').textContent = '';
+  $('#leave').hidden = true;
 
   let papers = [];
   try {
@@ -254,8 +265,10 @@ function render() {
         }).join('')}
       </div>
       <p class="nav">
-        <button class="link" id="prev">&larr; ${esc(t('prevQuestion'))}</button>
-        <button class="link" id="next">${esc(t('nextQuestion'))} &rarr;</button>
+        <button class="btn" id="prev">&larr; ${esc(t('prevQuestion'))}</button>
+        <button class="btn" id="next">${esc(t('nextQuestion'))} &rarr;</button>
+        <span class="spacer"></span>
+        <span id="remaining" class="muted"></span>
         <button class="primary" id="hand">${esc(t('submitExam'))}</button>
       </p>
     </section>`;
@@ -266,7 +279,10 @@ function render() {
   });
   $('#prev').onclick = () => showQuestion(current - 1);
   $('#next').onclick = () => showQuestion(current + 1);
-  $('#hand').onclick = hand;
+  $('#hand').onclick = () => hand();
+  $('#leave').hidden = false;
+  $('#leave').textContent = '← ' + t('leavePaper');
+  $('#leave').onclick = leave;
   showQuestion(paper.items[0].position);
   startClock();
   updateScore();
@@ -338,8 +354,18 @@ async function answer(item, chosen) {
   updateScore();
 }
 
-async function hand() {
-  if (!confirm(t('confirmSubmit'))) return;
+/** Leaves the paper unfinished. The round is not handed in, so it gets no verdict. */
+function leave() {
+  if (!confirm(t('confirmLeave'))) return;
+  home();
+}
+
+/**
+ * Ends the round. The clock hands in for a candidate who ran out of time, and asks
+ * nothing, because there is nobody left to ask and no answer that would help.
+ */
+async function hand(ask = true) {
+  if (ask && !confirm(t('confirmSubmit'))) return;
   $('#hand').disabled = true;
   stopClock();
   await api(`/reading/sessions/${paper.session_id}/submit`, {method: 'POST'});
@@ -355,6 +381,7 @@ function results(r) {
   // The clock is over, so it stops saying how long is left.
   $('#left').textContent = '';
   $('#score').textContent = '';
+  $('#leave').hidden = true;
   view.innerHTML = `
     <div class="card">
       <p class="verdict ${r.verdict ? (passed ? 'pass' : 'fail') : ''}">${esc(headline)}</p>
@@ -407,7 +434,7 @@ function startClock() {
   ticker = setInterval(() => {
     left = Math.max(0, left - 1);
     paint();
-    if (left === 0) { stopClock(); hand(); }
+    if (left === 0) { stopClock(); hand(false); }
   }, 1000);
 }
 
@@ -417,7 +444,14 @@ function stopClock() {
 
 function updateScore() {
   const answered = view.querySelectorAll('.opt.chosen').length;
+  const blank = paper.items.length - answered;
   $('#score').textContent = `${answered} / ${paper.items.length}`;
+
+  // A paper is handed in once and a blank question can only be scored as wrong, so the
+  // button that ends the round stays shut, and says what is holding it, until there is
+  // nothing left unanswered. The clock is not bound by this: it ends the round itself.
+  if ($('#hand')) $('#hand').disabled = blank > 0;
+  if ($('#remaining')) $('#remaining').textContent = blank > 0 ? `${blank} ${t('unanswered')}` : '';
 }
 
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
