@@ -209,6 +209,7 @@ function paintLanguages() {
 function home() {
   stopClock();
   const left = $('#left'); if (left) left.textContent = '';
+  document.removeEventListener('keydown', onKey);
   paintLanguages();
   view.innerHTML = `
     <div class="card">
@@ -246,6 +247,7 @@ function passageHtml(body) {
 
 function render() {
   $('#langs').hidden = true;
+  document.addEventListener('keydown', onKey);
   view.innerHTML = `
     <div class="grid">
       <div id="texts"></div>
@@ -363,7 +365,7 @@ async function answer(item, chosen) {
       {method: 'POST', body: {position: item.position, chosen_index: chosen, response_ms: 0}});
   } catch (e) {
     buttons.forEach(b => b.disabled = false);
-    return;
+    return false;
   }
 
   // An exam says nothing until the paper is handed in, so the page only records the
@@ -374,7 +376,7 @@ async function answer(item, chosen) {
     $(`#gap-${item.position}`)?.classList.add('filled');
     markAnswered(item.position);
     updateScore();
-    return;
+    return true;
   }
 
   buttons[chosen]?.classList.add(res.is_correct ? 'right' : 'wrong');
@@ -399,6 +401,45 @@ async function answer(item, chosen) {
     $('#foot').hidden = false;
     $('#again').onclick = () => { home(); start('drill'); };
   }
+  return true;
+}
+
+
+/**
+ * The keyboard answers: 1/2/3 or A/B/C picks that option, and the arrows turn the page
+ * without answering anything.
+ *
+ * The key is read as `event.code`, which names the physical key rather than the
+ * character it produced, so a Cyrillic layout answers the same as a Latin one.
+ *
+ * Only an exam turns the page by itself. A drill answers back, and what it says is the
+ * reason to be here -- turning away from it would take the answer off the screen in the
+ * moment it appeared.
+ */
+function onKey(e) {
+  if (e.ctrlKey || e.altKey || e.metaKey) return;
+  const focused = document.activeElement?.tagName;
+  if (focused === 'INPUT' || focused === 'SELECT' || focused === 'TEXTAREA') return;
+
+  if (e.code === 'ArrowRight' || e.code === 'ArrowLeft') {
+    e.preventDefault();
+    showQuestion(current + (e.code === 'ArrowRight' ? 1 : -1));
+    return;
+  }
+
+  const digit = /^(?:Digit|Numpad)([1-9])$/.exec(e.code);
+  const letter = /^Key([A-Z])$/.exec(e.code);
+  if (!digit && !letter) return;
+  const index = digit ? Number(digit[1]) - 1 : letter[1].charCodeAt(0) - 65;
+
+  const item = paper.items.find(i => i.position === current);
+  if (!item || index >= item.options.length) return;
+  const button = view.querySelectorAll(`.opt[data-pos="${current}"]`)[index];
+  if (!button || button.disabled) return;
+  e.preventDefault();
+  answer(item, index).then(recorded => {
+    if (recorded && isExam()) showQuestion(current + 1);
+  });
 }
 
 async function hand() {
@@ -412,6 +453,7 @@ async function hand() {
 
 function results(r) {
   $('#langs').hidden = true;
+  document.removeEventListener('keydown', onKey);
   const label = i => String.fromCharCode(65 + i);
   view.innerHTML = `
     <div class="card">

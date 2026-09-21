@@ -59,11 +59,18 @@ SEED_PHP = r"""
         $repo->save([
             'slug' => 'ui-fixture-mc', 'kind' => 'mc', 'title' => 'UI fixture mc',
             'body' => 'En kort tekst uden huller, som spoergsmaalene handler om.',
-            'items' => [['position' => 1, 'prompt' => 'Hvad handler teksten om?', 'options' => [
-                ['label' => 'A', 'text' => 'En kort tekst', 'correct' => true],
-                ['label' => 'B', 'text' => 'Noget andet'],
-                ['label' => 'C', 'text' => 'Ingenting'],
-            ]]],
+            'items' => [
+                ['position' => 1, 'prompt' => 'Hvad handler teksten om?', 'options' => [
+                    ['label' => 'A', 'text' => 'En kort tekst', 'correct' => true],
+                    ['label' => 'B', 'text' => 'Noget andet'],
+                    ['label' => 'C', 'text' => 'Ingenting'],
+                ]],
+                ['position' => 2, 'prompt' => 'Har teksten huller?', 'options' => [
+                    ['label' => 'A', 'text' => 'Nej', 'correct' => true],
+                    ['label' => 'B', 'text' => 'Ja, et enkelt'],
+                    ['label' => 'C', 'text' => 'Ja, flere'],
+                ]],
+            ],
         ]);
     }
     if (!Db::fetchValue("SELECT id FROM reading_passages WHERE slug = 'ui-fixture-insert'")) {
@@ -409,7 +416,7 @@ def start_exam(b):
 def an_exam_draws_a_text_of_every_task_kind(b):
     start_exam(b)
     assert b.js('document.querySelectorAll(".passage").length') == 3
-    assert b.js('document.querySelectorAll(".item").length') == 3
+    assert b.js('document.querySelectorAll(".item").length') == 4
 
 
 @check
@@ -448,17 +455,17 @@ def an_exam_answer_can_be_changed_before_handing_in(b):
 @check
 def handing_in_reports_a_karakter_and_a_review(b):
     start_exam(b)
-    for pos in (1, 2, 3):
+    for pos in (1, 2, 3, 4):
         click_option(b, pos, 0)
-    b.until('document.querySelectorAll(".opt.chosen").length === 3', what='every item answered')
+    b.until('document.querySelectorAll(".opt.chosen").length === 4', what='every item answered')
     b.js('window.confirm = () => true')
     b.js('document.querySelector("#hand").click()')
     b.until('!!document.querySelector("#final")', what='the result screen')
-    assert b.js('document.querySelectorAll(".item").length') == 3
+    assert b.js('document.querySelectorAll(".item").length') == 4
     # Options are shuffled per session, so which index is right is not fixed. The
-    # paper is worth five points whatever was clicked.
+    # paper is worth seven points whatever was clicked.
     total = b.js('document.querySelector("#final").textContent').split('/')[1].strip()
-    assert total == '5', f'paper reported out of {total}, expected 5'
+    assert total == '7', f'paper reported out of {total}, expected 7'
     # The karakter is shown, and shown as indicative rather than as an exam grade.
     assert b.js('document.querySelector("#final").nextElementSibling.textContent.trim().length') > 0
 
@@ -470,7 +477,7 @@ VISIBLE_PASSAGES = '[...document.querySelectorAll(".passage")].filter(e => e.get
 @check
 def a_reading_exam_shows_one_question_at_a_time(b):
     start_exam(b)
-    assert b.js('document.querySelectorAll(".item").length') == 3
+    assert b.js('document.querySelectorAll(".item").length') == 4
     assert b.js(VISIBLE_ITEMS + '.length') == 1
     assert b.js(VISIBLE_ITEMS + '[0].id') == 'item-1'
 
@@ -512,6 +519,45 @@ def a_round_of_one_question_offers_no_tabs(b):
     start_round(b)
     assert b.js('document.querySelectorAll(".item").length') == 1
     assert b.js('document.querySelectorAll(".tab").length') == 0
+
+
+def start_mc_drill(b):
+    """A drill on the two-question text, so turning the page is a thing that could happen."""
+    only(['mc'])
+    b.goto('/read')
+    b.until('!!document.querySelector("#go")', what='the start button')
+    b.js('document.querySelector("#go").click()')
+    b.until('!!document.querySelector(".opt")', what='a paper to be rendered')
+
+
+@check
+def a_key_answers_a_reading_exam_and_turns_the_page(b):
+    start_exam(b)
+    press(b, 'Digit2', '2')
+    b.until(options_js(1) + '[1].classList.contains("chosen")', what='the second option')
+    b.until(VISIBLE_ITEMS + '[0].id === "item-2"', what='the next question')
+
+
+@check
+def a_drill_answers_from_the_keyboard_and_stays_to_be_read(b):
+    start_mc_drill(b)
+    assert b.js('document.querySelectorAll(".item").length') == 2
+    press(b, 'KeyA', 'ф')
+    b.until('document.querySelectorAll(".opt.right, .opt.wrong").length > 0', what='the verdict')
+    # A drill answers back, and what it says is the reason to be here. Turning the page
+    # would take the answer away in the moment it appeared.
+    assert b.js(VISIBLE_ITEMS + '[0].id') == 'item-1'
+    assert not b.js('document.querySelector("#fb-1").hidden')
+
+
+@check
+def the_arrows_turn_the_page_of_a_reading_paper(b):
+    start_exam(b)
+    press(b, 'ArrowRight', 'ArrowRight')
+    b.until(VISIBLE_ITEMS + '[0].id === "item-2"', what='the next question')
+    press(b, 'ArrowLeft', 'ArrowLeft')
+    b.until(VISIBLE_ITEMS + '[0].id === "item-1"', what='the question before')
+    assert b.js('document.querySelectorAll(".opt.chosen").length') == 0, 'an arrow answered'
 
 
 # ---- the indfoedsretsproeve ------------------------------------------------
@@ -639,6 +685,19 @@ def a_key_with_no_option_behind_it_does_nothing(b):
     press(b, 'KeyC', 'c')
     assert b.js('document.querySelectorAll(".opt.chosen").length') == 0
     assert b.js(VISIBLE_ITEMS + '[0].id') == 'item-4', 'the page turned on a key that chose nothing'
+
+
+@check
+def the_arrows_turn_the_page_without_answering(b):
+    start_paper(b)
+    press(b, 'ArrowRight', 'ArrowRight')
+    b.until(VISIBLE_ITEMS + '[0].id === "item-2"', what='the next question')
+    press(b, 'ArrowLeft', 'ArrowLeft')
+    b.until(VISIBLE_ITEMS + '[0].id === "item-1"', what='the question before')
+    assert b.js('document.querySelectorAll(".opt.chosen").length') == 0, 'an arrow answered'
+    # The first question has nowhere before it, and an arrow there must not wrap around.
+    press(b, 'ArrowLeft', 'ArrowLeft')
+    assert b.js(VISIBLE_ITEMS + '[0].id') == 'item-1'
 
 
 @check

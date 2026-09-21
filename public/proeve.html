@@ -418,12 +418,18 @@ async function answer(item, chosen) {
  * this page is written for.
  *
  * The page turns only once the answer is recorded, so a refused answer does not scroll
- * away out of sight.
+ * away out of sight. The arrows turn it without answering anything.
  */
 function onKey(e) {
   if (e.ctrlKey || e.altKey || e.metaKey) return;
   const focused = document.activeElement?.tagName;
   if (focused === 'INPUT' || focused === 'SELECT' || focused === 'TEXTAREA') return;
+
+  if (e.code === 'ArrowRight' || e.code === 'ArrowLeft') {
+    e.preventDefault();
+    showQuestion(current + (e.code === 'ArrowRight' ? 1 : -1));
+    return;
+  }
 
   const digit = /^(?:Digit|Numpad)([1-9])$/.exec(e.code);
   const letter = /^Key([A-Z])$/.exec(e.code);
