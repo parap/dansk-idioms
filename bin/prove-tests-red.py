@@ -412,6 +412,15 @@ FAULTS = [
   "        if ($group === '') {","        if (false) {","unit"),
  (137,"webhook: a service update is treated as a post","src/Support/CommunicatorWebhook.php",
   "        if (!is_array($message)) {","        if (false) {","unit"),
+ (138,"communicator: offsets counted in characters, not UTF-16 units","src/Support/Communicator.php",
+  "            $units += mb_ord($char, 'UTF-8') >= 0x10000 ? 2 : 1;",
+  "            $units += 1;","unit"),
+ (139,"communicator: an entity running past the text is kept","src/Support/Communicator.php",
+  "            $entity['length'] = min((int) ($entity['length'] ?? 0), $limit - $offset);",
+  "            $entity['length'] = (int) ($entity['length'] ?? 0);","unit"),
+ (140,"communicator: an entity starting past the text is kept","src/Support/Communicator.php",
+  "            if ($offset >= $limit) {\n                continue;\n            }",
+  "            if (false) {\n                continue;\n            }","unit"),
 ]
 
 def run(suite):

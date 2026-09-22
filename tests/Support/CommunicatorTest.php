@@ -99,8 +99,8 @@ final class CommunicatorTest extends TestCase
         // letters are one unit each; an emoji is a surrogate pair and counts as two.
         // Get this wrong and every bold span after an emoji lands on the wrong word --
         // silently, because nothing errors.
-        self::assertSame(4, Communicator::utf16Length('gå nu'));   // g å space n u = 5? no: 'gå n' = 4
         self::assertSame(5, Communicator::utf16Length('gå nu'));
+        self::assertSame(2, Communicator::utf16Length('gå'));
     }
 
     public function testAnEmojiCountsAsTwoUnits(): void

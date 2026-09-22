@@ -38,8 +38,10 @@ final class CommunicatorWebhook
             return 'ignored';
         }
 
-        $text = trim((string) ($message['text'] ?? ''));
-        if ($text === '') {
+        // Left as sent: trimming the front would shift every entity offset, and the
+        // offsets are what say which words are bold.
+        $raw = (string) ($message['text'] ?? '');
+        if (trim($raw) === '') {
             // An empty post is litter that can no longer be removed.
             return 'ignored';
         }
@@ -51,7 +53,11 @@ final class CommunicatorWebhook
             return 'misconfigured';
         }
 
-        $this->api->sendMessage($group, Communicator::tagged($text, Communicator::kindOf($message)));
+        $this->api->sendMessage(
+            $group,
+            Communicator::tagged($raw, Communicator::kindOf($message)),
+            Communicator::clampEntities($message['entities'] ?? [], rtrim($raw))
+        );
 
         return 'published';
     }

@@ -28,10 +28,23 @@ final class BotApi
         $this->transport = $transport ?? $this->curl(...);
     }
 
-    /** Send text. Returns the message_id of what was published. */
-    public function sendMessage(string $chatId, string $text): int
+    /**
+     * Send text, keeping its formatting. Returns the message_id of what was published.
+     *
+     * Formatting travels as `entities`, not as markup in the text: re-rendering it as
+     * Markdown would have to escape whatever the author wrote, and one unescaped
+     * asterisk turns the post into a parse error. Bold carries meaning in this corpus --
+     * a quarter of its entries are split on a bold span -- so losing it is not cosmetic.
+     *
+     * @param array<int,array<string,mixed>> $entities
+     */
+    public function sendMessage(string $chatId, string $text, array $entities = []): int
     {
-        $answer = $this->call('sendMessage', ['chat_id' => $chatId, 'text' => $text]);
+        $params = ['chat_id' => $chatId, 'text' => $text];
+        if ($entities !== []) {
+            $params['entities'] = json_encode($entities, JSON_UNESCAPED_UNICODE);
+        }
+        $answer = $this->call('sendMessage', $params);
 
         return (int) ($answer['result']['message_id'] ?? 0);
     }

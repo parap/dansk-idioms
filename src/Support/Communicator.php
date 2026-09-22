@@ -73,6 +73,50 @@ final class Communicator
     }
 
     /**
+     * Length in UTF-16 code units -- the unit Telegram counts entity offsets in.
+     *
+     * Not characters. Danish letters are one unit each, but an emoji is a surrogate
+     * pair and counts as two. Measure in characters and every bold span after an emoji
+     * points at the wrong word, with nothing to report it.
+     */
+    public static function utf16Length(string $text): int
+    {
+        $units = 0;
+        foreach (preg_split('//u', $text, -1, PREG_SPLIT_NO_EMPTY) ?: [] as $char) {
+            $units += mb_ord($char, 'UTF-8') >= 0x10000 ? 2 : 1;
+        }
+
+        return $units;
+    }
+
+    /**
+     * Entities cut to fit the text they describe.
+     *
+     * The tag is appended, so offsets that were valid stay valid -- but trailing
+     * whitespace is stripped first, and an entity reaching into it would point past the
+     * end. Telegram rejects the whole message for one bad entity, so the post would not
+     * appear at all.
+     *
+     * @param array<int,array<string,mixed>> $entities
+     * @return array<int,array<string,mixed>>
+     */
+    public static function clampEntities(array $entities, string $text): array
+    {
+        $limit = self::utf16Length($text);
+        $kept  = [];
+        foreach ($entities as $entity) {
+            $offset = (int) ($entity['offset'] ?? 0);
+            if ($offset >= $limit) {
+                continue;
+            }
+            $entity['length'] = min((int) ($entity['length'] ?? 0), $limit - $offset);
+            $kept[] = $entity;
+        }
+
+        return $kept;
+    }
+
+    /**
      * The text with its hashtag on a line of its own.
      *
      * A tag already there is not doubled: webhook delivery is not guaranteed to happen
