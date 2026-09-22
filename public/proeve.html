@@ -88,6 +88,16 @@
     padding:.2rem .35rem;cursor:pointer;border-radius:5px}
   .lang[aria-pressed=true]{color:var(--ink);font-weight:600;background:var(--chip)}
   .langs{display:inline-flex;gap:.1rem}
+  /* One line per sitting already handed in. */
+  .sitting{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;
+    border-top:1px solid var(--line);padding:10px 0;font-size:.98rem}
+  .sitting:first-of-type{border-top:none}
+  .sitting .name{flex:1;min-width:12ch}
+  .sitting .when{color:var(--muted);font-size:.85rem;font-variant-numeric:tabular-nums}
+  .sitting .tally{font-variant-numeric:tabular-nums;font-weight:600}
+  .sitting .mark{font-weight:700}
+  .sitting.pass .mark{color:var(--ok)}
+  .sitting.fail .mark{color:var(--bad)}
   [hidden]{display:none!important}
 </style>
 </head>
@@ -103,6 +113,7 @@
     <span id="langs" class="langs" hidden></span>
   </header>
   <div id="view"></div>
+  <div id="history"></div>
 </div>
 
 <script type="module">
@@ -112,6 +123,7 @@ import { $, esc, api, t, registerStrings, currentLang, setLang as applyLang } fr
 // page hard-codes user-facing text.
 const STRINGS = {
   ru: {
+    history: 'Сданные работы',
     intro: 'Тест на гражданство: 45 вопросов за 45 минут, два-три варианта ответа. ' +
            'Все наборы — настоящие, как их публиковало министерство.',
     paper: 'Набор', start: 'Начать', startAgain: 'Другой набор',
@@ -135,6 +147,7 @@ const STRINGS = {
     yourAnswer: 'ваш ответ',
   },
   en: {
+    history: 'Sittings so far',
     intro: 'The citizenship test: 45 questions in 45 minutes, two or three answers each. ' +
            'Every paper is a real one, as the ministry published it.',
     paper: 'Paper', start: 'Start', startAgain: 'Another paper',
@@ -158,6 +171,7 @@ const STRINGS = {
     yourAnswer: 'your answer',
   },
   uk: {
+    history: 'Складені роботи',
     intro: 'Тест на громадянство: 45 запитань за 45 хвилин, два-три варіанти ' +
            'відповіді. Усі набори — справжні, як їх публікувало міністерство.',
     paper: 'Набір', start: 'Почати', startAgain: 'Інший набір',
@@ -181,6 +195,7 @@ const STRINGS = {
     yourAnswer: 'ваша відповідь',
   },
   da: {
+    history: 'Tidligere prøver',
     intro: 'Indfødsretsprøven: 45 spørgsmål på 45 minutter med to eller tre svarmuligheder. ' +
            'Alle sæt er de rigtige, som ministeriet har offentliggjort dem.',
     paper: 'Prøvesæt', start: 'Start', startAgain: 'Et andet sæt',
@@ -228,6 +243,32 @@ function paintLanguages() {
     applyLang(b.dataset.lang);
     home();
   });
+}
+
+
+const whenText = stamp => String(stamp).replace('T', ' ').slice(0, 16);
+
+
+/**
+ * The sittings already handed in, newest first. Shown on the start screen, where the
+ * question "what have I done, and am I getting better" is actually asked.
+ *
+ * Identity lives in the cookie, so this works without an account -- and registering
+ * adopts what was sat before it.
+ */
+async function paintHistory(kinds, markup) {
+  const box = $('#history');
+  box.innerHTML = '';
+  let sessions = [];
+  try { ({sessions} = await api('/reading/sessions')); } catch (e) { return; }
+
+  const mine = sessions.filter(s => kinds.includes(s.kind));
+  if (!mine.length) return;
+
+  box.innerHTML = `<div class="card">
+      <h2 style="margin:0 0 .4rem;font-size:1.05rem">${esc(t('history'))}</h2>
+      ${mine.map(markup).join('')}
+    </div>`;
 }
 
 
@@ -282,6 +323,16 @@ async function home() {
   describe();
 
   $('#go').onclick = () => start($('#paper').value, $('#current').checked);
+
+  paintHistory(['quiz'], s => {
+    const judged = s.verdict !== null;
+    return `<div class="sitting ${judged ? (s.verdict === 'bestaaet' ? 'pass' : 'fail') : ''}">
+      <span class="name">${esc(s.title)}</span>
+      <span class="tally">${s.points_scored} / ${s.points_max}</span>
+      <span class="mark">${esc(judged ? t(s.verdict) : t('noVerdict'))}</span>
+      <span class="when">${esc(whenText(s.submitted_at))}</span>
+    </div>`;
+  });
 }
 
 async function start(slug, currentAffairs) {
@@ -325,6 +376,7 @@ function render() {
     </section>`;
 
   $('#langs').hidden = true;
+  $('#history').innerHTML = '';
   document.addEventListener('keydown', onKey);
   paper.items.forEach(wire);
   view.querySelectorAll('.tab').forEach(b => {
@@ -471,6 +523,7 @@ function results(r) {
   $('#score').textContent = '';
   $('#leave').hidden = true;
   $('#langs').hidden = true;
+  $('#history').innerHTML = '';
   document.removeEventListener('keydown', onKey);
   view.innerHTML = `
     <div class="card">

@@ -810,6 +810,40 @@ def a_round_without_the_current_affairs_block_is_scored_but_not_judged(b):
 
 
 @check
+def a_paper_handed_in_turns_up_in_the_history(b):
+    start_paper(b)
+    sit_paper(b, (1, 2, 3, 4))
+    b.js('document.querySelector("#again").click()')
+    b.until('!!document.querySelector("#go")', what='the chooser')
+
+    b.until('!!document.querySelector(".sitting")', what='the history')
+    first = b.js('document.querySelector(".sitting").textContent')
+    assert 'UI fixture proeve' in first, first
+    # The paper was sat correctly, so the sitting it records passed.
+    assert b.js('document.querySelector(".sitting").classList.contains("pass")'), first
+
+
+@check
+def a_reading_exam_handed_in_turns_up_in_its_own_history(b):
+    start_exam(b)
+    for pos in (1, 2, 3, 4):
+        click_option(b, pos, 0)
+    b.until('document.querySelectorAll(".opt.chosen").length === 4', what='every item answered')
+    b.js('window.confirm = () => true')
+    b.js('document.querySelector("#hand").click()')
+    b.until('!!document.querySelector("#final")', what='the result screen')
+    b.js('document.querySelector("#again").click()')
+    b.until('!!document.querySelector("#go")', what='the start screen')
+
+    b.until('!!document.querySelector(".sitting")', what='the history')
+    # A reading paper is marked with a karakter; the citizenship paper never is, and the
+    # two histories are kept apart so neither shows the other's sittings.
+    assert 'UI fixture' in b.js('document.querySelector(".sitting").textContent')
+    assert not b.js('[...document.querySelectorAll(".sitting")]'
+                    '.some(e => e.textContent.includes("UI fixture proeve"))')
+
+
+@check
 def every_page_carries_the_way_home(b):
     """The mark is the way back, so it is the same mark everywhere and it sits where a
     reader looks for it: first in the header, top left."""

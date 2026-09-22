@@ -43,6 +43,7 @@ $dispatcher = FastRoute\simpleDispatcher(static function (RouteCollector $r): vo
     $r->addRoute('POST', '/api/v1/indfoedsret/sessions', 'indfoedsret.start');
 
     $r->addRoute('POST', '/api/v1/reading/sessions', 'reading.start');
+    $r->addRoute('GET',  '/api/v1/reading/sessions', 'reading.history');
     $r->addRoute('GET',  '/api/v1/reading/sessions/{sid:[0-9A-Z]{26}}', 'reading.session');
     $r->addRoute('POST', '/api/v1/reading/sessions/{sid:[0-9A-Z]{26}}/answers', 'reading.answer');
     $r->addRoute('POST', '/api/v1/reading/sessions/{sid:[0-9A-Z]{26}}/submit',  'reading.submit');
@@ -183,6 +184,7 @@ try {
         'indfoedsret.start'  => $indfoedsret->start($body),
 
         'reading.start'   => $reading->start($body),
+        'reading.history' => $reading->history(),
         'reading.session' => $reading->session($vars['sid']),
         'reading.answer'  => $reading->answer($vars['sid'], $body),
         'reading.submit'  => $reading->submit($vars['sid']),

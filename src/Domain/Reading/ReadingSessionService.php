@@ -313,6 +313,61 @@ final class ReadingSessionService
      * The review, available only once the paper is in. Before that it would be the
      * answer key.
      */
+    /**
+     * The sittings this learner has handed in, newest first.
+     *
+     * Identity is the account when there is one and the browser's cookie when there is
+     * not, and the two are never mixed: a signed-in learner sees their own sittings, not
+     * whatever else was sat on this machine.
+     *
+     * @return list<array<string,mixed>>
+     */
+    public function history(?int $userId, ?string $anonKey, int $limit = 20): array
+    {
+        if ($userId === null && ($anonKey === null || $anonKey === '')) {
+            return [];
+        }
+
+        $where = $userId !== null
+            ? ['s.user_id = ?', [$userId]]
+            : ['s.user_id IS NULL AND s.anon_key = ?', [$anonKey]];
+
+        $rows = Db::fetchAll(
+            'SELECT s.public_id, s.mode, s.points_scored, s.points_max, s.karakter,
+                    s.verdict, s.is_late, s.submitted_at, s.elapsed_s,
+                    (SELECT COUNT(DISTINCT si.passage_id) FROM reading_session_items si
+                      WHERE si.session_id = s.id) AS texts,
+                    -- The paper is named by the text its first question came from, not by
+                    -- whichever title sorts first: a reading exam draws three.
+                    (SELECT p.title FROM reading_session_items si
+                       JOIN reading_passages p ON p.id = si.passage_id
+                      WHERE si.session_id = s.id ORDER BY si.position LIMIT 1) AS title,
+                    (SELECT p.kind FROM reading_session_items si
+                       JOIN reading_passages p ON p.id = si.passage_id
+                      WHERE si.session_id = s.id ORDER BY si.position LIMIT 1) AS kind
+               FROM reading_sessions s
+              WHERE s.status = ? AND ' . $where[0] . '
+              ORDER BY s.submitted_at DESC, s.id DESC
+              LIMIT ' . max(1, min(100, $limit)),
+            array_merge(['submitted'], $where[1])
+        );
+
+        return array_map(static fn (array $r): array => [
+            'session_id'    => (string) $r['public_id'],
+            'kind'          => (string) $r['kind'],
+            'mode'          => (string) $r['mode'],
+            'title'         => (string) $r['title'],
+            'texts'         => (int) $r['texts'],
+            'points_scored' => (int) $r['points_scored'],
+            'points_max'    => (int) $r['points_max'],
+            'karakter'      => $r['karakter'] === null ? null : (string) $r['karakter'],
+            'verdict'       => $r['verdict'] === null ? null : (string) $r['verdict'],
+            'is_late'       => (bool) $r['is_late'],
+            'elapsed_s'     => $r['elapsed_s'] === null ? null : (int) $r['elapsed_s'],
+            'submitted_at'  => (string) $r['submitted_at'],
+        ], $rows);
+    }
+
     public function result(string $publicId): array
     {
         $session = $this->loadSession($publicId);

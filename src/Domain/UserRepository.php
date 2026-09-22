@@ -25,12 +25,16 @@ final class UserRepository
         );
         $id = (int) Db::pdo()->lastInsertId();
 
-        // Adopt the rounds played before signing up, so progress is not lost.
+        // Adopt the rounds played before signing up, so progress is not lost. Every
+        // table that keys work to a browser has to be listed here: one left out orphans
+        // that history silently, because the rows survive and simply stop being anyone's.
         if ($anonKey !== null) {
-            Db::execute(
-                'UPDATE quiz_sessions SET user_id = ? WHERE anon_key = ? AND user_id IS NULL',
-                [$id, $anonKey]
-            );
+            foreach (['quiz_sessions', 'reading_sessions'] as $table) {
+                Db::execute(
+                    "UPDATE {$table} SET user_id = ? WHERE anon_key = ? AND user_id IS NULL",
+                    [$id, $anonKey]
+                );
+            }
         }
         return $id;
     }

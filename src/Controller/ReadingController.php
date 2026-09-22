@@ -32,6 +32,16 @@ final class ReadingController
         }
     }
 
+    /**
+     * What this learner has already sat. Identity comes from the session or the cookie,
+     * never from the request body: a history endpoint that took an identifier would hand
+     * anyone else's sittings to whoever asked.
+     */
+    public function history(): void
+    {
+        Response::json(['sessions' => $this->reading->history(Auth::userId(), Auth::anonKey())]);
+    }
+
     public function session(string $sid): void
     {
         try {

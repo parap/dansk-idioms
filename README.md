@@ -115,6 +115,16 @@ still get history and best score. With one you get spaced repetition: each idiom
 answer is scheduled by SM-2, and later rounds put what is due first. Rounds you played
 before registering are adopted into the new account.
 
+**Sittings already handed in are listed on the start screen** of each page, newest
+first, with the score and the mark that paper gives -- *bestået* / *ikke bestået* for the
+citizenship paper, a karakter for the reading exam. The two histories are kept apart, so
+neither shows the other's marks.
+
+The history needs no account: a sitting is kept against the browser's `anon_key` cookie,
+which lasts a year, and **registering adopts everything sat before it**. Every table that
+keys work to a browser has to be named in `UserRepository::register`; one left out
+orphans that history silently, because the rows survive and merely stop being anyone's.
+
 **A paper is read one question at a time**, on both `/read` and `/proeve`: a tab per
 question, red until it has an answer and green after, and only the question you are on is
 on screen. On a reading paper the tab also brings up the one text that question is about,
