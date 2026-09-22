@@ -31,6 +31,27 @@ $config = [
         'password' => getenv('ADMIN_PASSWORD') ?: null,
     ],
 
+    // The publisher bot: an idiom arrives in the bot's private chat and goes out to
+    // the group carrying its hashtag. The bot writes the tag because nobody can add one
+    // to an existing post: `can_edit_messages` exists only for channels, and even the
+    // author cannot edit an old message -- `MESSAGE_EDIT_TIME_EXPIRED`. Making the bot
+    // the author is what removes the problem rather than working around it.
+    //
+    // Everything is deliberately null. Unset means switched off: the webhook address is
+    // guessable, and admitting callers until it is configured would hand publishing
+    // rights to whoever guessed it.
+    'communicator' => [
+        'token'  => getenv('BOT_COMMUNICATOR_TOKEN') ?: null,
+        // Telegram sends it as X-Telegram-Bot-Api-Secret-Token when setWebhook was
+        // given a secret_token. It is the only thing telling a request that calls
+        // itself the webhook apart from anyone else's.
+        'secret' => getenv('BOT_COMMUNICATOR_SECRET') ?: null,
+        // Whose private chat may publish. A bot can be found by name and written to;
+        // without this check a stranger's message would go out under its name.
+        'owner'  => getenv('BOT_COMMUNICATOR_OWNER') ?: null,
+        'group'  => getenv('BOT_COMMUNICATOR_GROUP') ?: null,
+    ],
+
     'quiz' => [
         'questions_per_round' => 10,
         'options_per_question' => 4,

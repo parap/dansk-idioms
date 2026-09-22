@@ -8,6 +8,8 @@ use Dansk\Controller\ReadingAdminController;
 use Dansk\Controller\ReadingController;
 use Dansk\Http\Response;
 use Dansk\Support\AdminReach;
+use Dansk\Support\BotApi;
+use Dansk\Support\CommunicatorWebhook;
 use Dansk\Support\Config;
 use Dansk\Support\Db;
 use Dansk\Support\Shell;
@@ -53,6 +55,10 @@ $dispatcher = FastRoute\simpleDispatcher(static function (RouteCollector $r): vo
 
     $r->addRoute('GET',  '/api/v1/admin/reading/flags', 'admin.reading.flags');
     $r->addRoute('POST', '/api/v1/admin/reading/items/{id:\d+}/clear', 'admin.reading.clear');
+
+    // The publisher bot's webhook. The address is guessable, so what admits a caller
+    // is the header secret, not the path; with no secret configured it refuses all.
+    $r->addRoute('POST', '/api/v1/communicator/webhook', 'communicator.webhook');
 
     $r->addRoute('POST', '/api/v1/admin/login',  'admin.login');
     $r->addRoute('POST', '/api/v1/admin/logout', 'admin.logout');
@@ -121,6 +127,25 @@ try {
     $readingAdmin = new ReadingAdminController();
 
     match ($handler) {
+        'communicator.webhook' => (function () use ($body): void {
+            $settings = Config::get('communicator') ?? [];
+            $outcome  = 'failed';
+            try {
+                $hook = new CommunicatorWebhook(new BotApi($settings['token'] ?? null), $settings);
+                $outcome = $hook->handle(
+                    $body,
+                    $_SERVER['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN'] ?? null
+                );
+            } catch (Throwable $e) {
+                // To the log, not the response: Telegram reads the body, while the
+                // cause is wanted by whoever investigates and need not leave here.
+                error_log('communicator: ' . $e->getMessage());
+            }
+            // Always 200. Telegram retries delivery on anything but 2xx, and a retry
+            // after a successful publish would put a second post in the group.
+            Response::json(['outcome' => $outcome]);
+        })(),
+
         'health' => (function (): void {
             $ok = false; $err = null;
             try { $ok = Db::fetchValue('SELECT 1') == 1; }
