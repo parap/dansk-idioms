@@ -11,7 +11,7 @@ final class Importer
     private PDO $pdo;
 
     public function __construct(
-        private HtmlExportReader $reader = new HtmlExportReader(),
+        private MessageReader $reader = new HtmlExportReader(),
         private EntrySegmenter $segmenter = new EntrySegmenter(),
         private EntryParser $parser = new EntryParser(),
         private TranslationExtractor $extractor = new TranslationExtractor(),

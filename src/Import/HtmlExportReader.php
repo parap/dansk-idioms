@@ -16,7 +16,7 @@ use DOMXPath;
  * @return iterable<array{tg_message_id:int, from_name:?string, posted_at:?string,
  *                        posted_at_raw:string, text:string}>
  */
-final class HtmlExportReader
+final class HtmlExportReader implements MessageReader
 {
     public function read(string $file): iterable
     {
