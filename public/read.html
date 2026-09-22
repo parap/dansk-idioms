@@ -240,24 +240,34 @@ async function paintHistory(kinds, markup, mistakesKind) {
   const waiting = mistakes?.[mistakesKind] ?? 0;
   if (!mine.length && !waiting) return;
 
-  box.innerHTML = `<div class="card">
-      <h2 style="margin:0 0 .4rem;font-size:1.05rem">${esc(t('history'))}</h2>
-      ${waiting ? `<p class="row" style="margin:.2rem 0 1rem"><button class="primary" id="mistakes"
-          >${esc(t('goOverMistakes'))} (${waiting})</button></p>` : ''}
-      ${mine.map(markup).join('')}
-    </div>`;
-
-  if (waiting) {
-    $('#mistakes').onclick = async () => {
-      $('#mistakes').disabled = true;
-      try {
-        paper = await api('/reading/mistakes', {method: 'POST', body: {kind: mistakesKind}});
-        render();
-      } catch (e) {
-        $('#mistakes').disabled = false;
-      }
-    };
+  if (mine.length) {
+    box.innerHTML = `<div class="card">
+        <h2 style="margin:0 0 .4rem;font-size:1.05rem">${esc(t('history'))}</h2>
+        ${mine.map(markup).join('')}
+      </div>`;
   }
+  if (!waiting) return;
+
+  // Starting a round is an action, so it joins the other ways to start one rather than
+  // sitting inside the record of what has already been sat.
+  // Two paints can overlap -- switching language re-renders the screen while the first
+  // request is still out -- and each would append its own copy.
+  $('#mistakes')?.remove();
+
+  const go = document.createElement('button');
+  go.className = 'btn';
+  go.id = 'mistakes';
+  go.textContent = `${t('goOverMistakes')} (${waiting})`;
+  go.onclick = async () => {
+    go.disabled = true;
+    try {
+      paper = await api('/reading/mistakes', {method: 'POST', body: {kind: mistakesKind}});
+      render();
+    } catch (e) {
+      go.disabled = false;
+    }
+  };
+  $('#actions')?.append(go);
 }
 
 
@@ -269,7 +279,7 @@ function home() {
   view.innerHTML = `
     <div class="card">
       <p class="lede">${esc(t('intro'))}</p>
-      <p class="row" style="margin-top:14px">
+      <p class="row" id="actions" style="margin-top:14px">
         <button class="primary" id="go">${esc(t('modeDrill'))}</button>
         <button class="primary" id="goExam" style="background:var(--chip);color:var(--ink)">${esc(t('modeExam'))}</button>
       </p>

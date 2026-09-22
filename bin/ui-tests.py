@@ -861,6 +861,10 @@ def a_round_of_what_went_wrong_is_offered_after_a_paper(b):
     b.until('!!document.querySelector("#mistakes")', what='the offer to go over what went wrong')
     assert '2' in b.js('document.querySelector("#mistakes").textContent'), \
         b.js('document.querySelector("#mistakes").textContent')
+    # Starting a round is an action, so it stands with the other ways to start one and
+    # not inside the record of what has already been sat.
+    assert b.js('document.querySelector("#actions")'
+                '.contains(document.querySelector("#mistakes"))'), 'the offer is filed as a record'
 
     b.js('document.querySelector("#mistakes").click()')
     b.until('document.querySelectorAll(".item").length === 2', what='a round of the two questions')
