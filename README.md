@@ -125,6 +125,14 @@ which lasts a year, and **registering adopts everything sat before it**. Every t
 keys work to a browser has to be named in `UserRepository::register`; one left out
 orphans that history silently, because the rows survive and merely stop being anyone's.
 
+**A round of what went wrong** is offered beside the history whenever there is anything
+in it, and says how many questions are waiting. It is built from the questions whose most
+recent appearance on a handed-in paper went badly -- wrong, or left blank, which told
+against the learner just the same. Only the latest record counts: a question got wrong in
+May and right in June is learned, and serving it again would teach nothing except that
+the site is not paying attention. The round is scored like any other and given no verdict,
+because a handful of questions is not the paper.
+
 **A paper is read one question at a time**, on both `/read` and `/proeve`: a tab per
 question, red until it has an answer and green after, and only the question you are on is
 on screen. On a reading paper the tab also brings up the one text that question is about,

@@ -844,6 +844,42 @@ def a_reading_exam_handed_in_turns_up_in_its_own_history(b):
 
 
 @check
+def a_round_of_what_went_wrong_is_offered_after_a_paper(b):
+    start_paper(b)
+    answers = correct_indexes()
+    for pos in (1, 2):
+        count = b.js(options_js(pos) + '.length')
+        click_option(b, pos, (answers[pos - 1] + 1) % count)
+    for pos in (3, 4):
+        click_option(b, pos, answers[pos - 1])
+    b.until('document.querySelectorAll(".opt.chosen").length === 4', what='every question answered')
+    b.js('window.confirm = () => true')
+    b.js('document.querySelector("#hand").click()')
+    b.until('!!document.querySelector(".verdict")', what='the result')
+    b.js('document.querySelector("#again").click()')
+
+    b.until('!!document.querySelector("#mistakes")', what='the offer to go over what went wrong')
+    assert '2' in b.js('document.querySelector("#mistakes").textContent'), \
+        b.js('document.querySelector("#mistakes").textContent')
+
+    b.js('document.querySelector("#mistakes").click()')
+    b.until('document.querySelectorAll(".item").length === 2', what='a round of the two questions')
+    # A handful of questions is not the paper, so it is not sat under the paper's clock.
+    assert b.js('document.querySelector("#left").textContent').strip() == '', 'a clock was started'
+
+
+@check
+def nothing_is_offered_to_go_over_when_a_paper_went_perfectly(b):
+    start_paper(b)
+    sit_paper(b, (1, 2, 3, 4))
+    b.js('document.querySelector("#again").click()')
+    b.until('!!document.querySelector("#go")', what='the chooser')
+    b.until('!!document.querySelector(".sitting")', what='the history')
+    # The history is painted by the same call, so its arrival means the answer is in.
+    assert not b.js('!!document.querySelector("#mistakes")'), 'offered a round with nothing in it'
+
+
+@check
 def every_page_carries_the_way_home(b):
     """The mark is the way back, so it is the same mark everywhere and it sits where a
     reader looks for it: first in the header, top left."""

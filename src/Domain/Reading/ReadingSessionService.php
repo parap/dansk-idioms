@@ -118,6 +118,153 @@ final class ReadingSessionService
     }
 
     /**
+     * How many questions are waiting to be gone over.
+     *
+     * @param list<string> $kinds the task types to look at, so a reading history and a
+     *                            citizenship history never draw on one another
+     */
+    public function mistakesWaiting(?int $userId, ?string $anonKey, array $kinds): int
+    {
+        return count($this->mistakenItems($userId, $anonKey, $kinds));
+    }
+
+    /**
+     * A round built from the questions this learner last got wrong or left blank.
+     *
+     * It is a drill in everything but how it was chosen: answered, scored and reviewed
+     * like any other round, and given no verdict, because a handful of questions is not
+     * the paper and reporting one as passed would say something untrue.
+     *
+     * @param list<string> $kinds
+     * @return array{session_id: string, mode: string, points_max: int}
+     */
+    public function startMistakes(?int $userId, ?string $anonKey, array $kinds, int $limit = 45): array
+    {
+        $items = array_slice($this->mistakenItems($userId, $anonKey, $kinds), 0, max(1, $limit));
+        if ($items === []) {
+            throw new RuntimeException('There is nothing to go over yet.');
+        }
+
+        $publicId = Ulid::generate();
+        Db::execute(
+            'INSERT INTO reading_sessions (public_id, user_id, anon_key, mode, duration_s, scale_id)
+             VALUES (?,?,?,?,NULL,NULL)',
+            [$publicId, $userId, $anonKey, self::DRILL]
+        );
+        $sessionId = (int) Db::pdo()->lastInsertId();
+
+        $pointsMax = $this->materialiseItems($sessionId, $items);
+        Db::execute('UPDATE reading_sessions SET points_max = ? WHERE id = ?', [$pointsMax, $sessionId]);
+
+        return ['session_id' => $publicId, 'mode' => self::DRILL, 'points_max' => $pointsMax];
+    }
+
+    /**
+     * The questions whose most recent appearance on a handed-in paper did not go well.
+     *
+     * Only the latest record counts. A question got wrong in May and right in June is
+     * learned, and serving it again would teach a learner nothing except that the site
+     * is not paying attention. A blank counts with the wrong answers: the paper was
+     * handed in without it, and it told against them just the same.
+     *
+     * @param list<string> $kinds
+     * @return list<int>
+     */
+    private function mistakenItems(?int $userId, ?string $anonKey, array $kinds): array
+    {
+        if (($userId === null && ($anonKey === null || $anonKey === '')) || $kinds === []) {
+            return [];
+        }
+
+        $who = static fn (string $n): string => $userId !== null
+            ? sprintf('s%s.user_id = ?', $n)
+            : sprintf('s%s.user_id IS NULL AND s%s.anon_key = ?', $n, $n);
+        $arg  = $userId ?? $anonKey;
+
+        $marks = implode(',', array_fill(0, count($kinds), '?'));
+
+        $rows = Db::fetchAll(
+            "SELECT si.item_id
+               FROM reading_session_items si
+               JOIN reading_sessions s ON s.id = si.session_id
+               JOIN reading_items i ON i.id = si.item_id
+               JOIN reading_passages p ON p.id = i.passage_id
+              WHERE s.status = 'submitted' AND {$who('')}
+                AND i.is_active = 1 AND i.is_flagged = 0
+                AND p.is_published = 1 AND p.kind IN ({$marks})
+                AND COALESCE(si.is_correct, 0) = 0
+                AND si.id = (
+                    SELECT si2.id FROM reading_session_items si2
+                      JOIN reading_sessions s2 ON s2.id = si2.session_id
+                     WHERE si2.item_id = si.item_id AND s2.status = 'submitted' AND {$who('2')}
+                     ORDER BY s2.submitted_at DESC, si2.id DESC LIMIT 1
+                )
+              ORDER BY s.submitted_at DESC, si.id",
+            [$arg, ...$kinds, $arg]
+        );
+
+        return array_map(static fn (array $r): int => (int) $r['item_id'], $rows);
+    }
+
+    /**
+     * Builds session rows from an explicit list of questions, which may come from any
+     * number of texts.
+     *
+     * @param list<int> $itemIds
+     */
+    private function materialiseItems(int $sessionId, array $itemIds): int
+    {
+        $pointsMax = 0;
+        $position  = 0;
+
+        foreach ($itemIds as $itemId) {
+            $item = Db::fetchOne(
+                'SELECT i.id, i.passage_id, i.points, i.correct_option_id, p.kind
+                   FROM reading_items i JOIN reading_passages p ON p.id = i.passage_id
+                  WHERE i.id = ?',
+                [$itemId]
+            );
+            if ($item === null) {
+                continue;
+            }
+
+            // An inserted-sentence text draws its options from the text's own bank, so
+            // which options an item offers depends on the text it came from, not on the
+            // round it is being served in.
+            $options = $item['kind'] === 'insert'
+                ? $this->bankOptions((int) $item['passage_id'])
+                : $this->itemOptions((int) $item['id']);
+            shuffle($options);
+
+            $correctIndex = null;
+            $payload      = [];
+            foreach ($options as $i => $option) {
+                $payload[] = ['i' => $i, 'ref' => (int) $option['id'], 'text' => $option['text']];
+                if ((int) $option['id'] === (int) $item['correct_option_id']) {
+                    $correctIndex = $i;
+                }
+            }
+            if ($correctIndex === null) {
+                throw new RuntimeException('Item ' . $itemId . ' has no correct option among its choices.');
+            }
+
+            $position++;
+            Db::execute(
+                'INSERT INTO reading_session_items
+                    (session_id, position, item_id, passage_id, options, correct_index, points)
+                 VALUES (?,?,?,?,?,?,?)',
+                [
+                    $sessionId, $position, (int) $item['id'], (int) $item['passage_id'],
+                    json_encode($payload, JSON_UNESCAPED_UNICODE), $correctIndex, (int) $item['points'],
+                ]
+            );
+            $pointsMax += (int) $item['points'];
+        }
+
+        return $pointsMax;
+    }
+
+    /**
      * The paper as the learner sees it: the passage, and each item with its options in
      * presentation order. Nothing here identifies the answer.
      */

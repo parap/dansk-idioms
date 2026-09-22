@@ -39,7 +39,31 @@ final class ReadingController
      */
     public function history(): void
     {
-        Response::json(['sessions' => $this->reading->history(Auth::userId(), Auth::anonKey())]);
+        Response::json([
+            'sessions' => $this->reading->history(Auth::userId(), Auth::anonKey()),
+            // Both counts ride along with the history, because both start screens ask
+            // for the history anyway and neither needs a second round trip to find out
+            // whether it has anything to offer.
+            'mistakes' => [
+                'quiz'    => $this->reading->mistakesWaiting(Auth::userId(), Auth::anonKey(), ['quiz']),
+                'reading' => $this->reading->mistakesWaiting(
+                    Auth::userId(), Auth::anonKey(), ['mc', 'insert', 'cloze']
+                ),
+            ],
+        ]);
+    }
+
+    /** A round of the questions this learner last got wrong or left blank. */
+    public function mistakes(array $body): void
+    {
+        $kinds = ($body['kind'] ?? null) === 'quiz' ? ['quiz'] : ['mc', 'insert', 'cloze'];
+
+        try {
+            $session = $this->reading->startMistakes(Auth::userId(), Auth::anonKey(), $kinds);
+            Response::json($this->reading->session($session['session_id']));
+        } catch (RuntimeException $e) {
+            Response::error('nothing_to_review', $e->getMessage(), 409);
+        }
     }
 
     public function session(string $sid): void

@@ -112,6 +112,7 @@ import { $, esc, api, t, registerStrings, currentLang, setLang as applyLang } fr
 // page hard-codes user-facing text.
 const STRINGS = {
   ru: {
+    goOverMistakes: 'Работа над ошибками',
     history: 'Сданные работы',
     prevQuestion: 'Назад', nextQuestion: 'Дальше',
     intro: 'Тренажёр по чтению для Prøve i Dansk 3. Прочитайте текст и ответьте на вопросы — ' +
@@ -132,6 +133,7 @@ const STRINGS = {
     late: 'сдано после звонка', reviewAnswers: 'Разбор ответов',
   },
   en: {
+    goOverMistakes: 'Go over mistakes',
     history: 'Sittings so far',
     prevQuestion: 'Back', nextQuestion: 'Next',
     intro: 'Reading practice for Prøve i Dansk 3. Read the text and answer the questions — ' +
@@ -152,6 +154,7 @@ const STRINGS = {
     late: 'handed in late', reviewAnswers: 'Review',
   },
   uk: {
+    goOverMistakes: 'Робота над помилками',
     history: 'Складені роботи',
     prevQuestion: 'Назад', nextQuestion: 'Далі',
     intro: 'Тренажер із читання для Prøve i Dansk 3. Прочитайте текст і дайте ' +
@@ -175,6 +178,7 @@ const STRINGS = {
     late: 'здано після дзвінка', reviewAnswers: 'Розбір відповідей',
   },
   da: {
+    goOverMistakes: 'Gennemgå fejlene',
     history: 'Tidligere prøver',
     prevQuestion: 'Tilbage', nextQuestion: 'Næste',
     intro: 'Læsetræning til Prøve i Dansk 3. Læs teksten og svar på spørgsmålene — ' +
@@ -226,19 +230,34 @@ const whenText = stamp => String(stamp).replace('T', ' ').slice(0, 16);
  * The rounds already handed in, newest first, on the screen where "what have I done"
  * is actually asked. Identity is the cookie, so it works without an account.
  */
-async function paintHistory(kinds, markup) {
+async function paintHistory(kinds, markup, mistakesKind) {
   const box = $('#history');
   box.innerHTML = '';
-  let sessions = [];
-  try { ({sessions} = await api('/reading/sessions')); } catch (e) { return; }
+  let sessions = [], mistakes = {};
+  try { ({sessions, mistakes} = await api('/reading/sessions')); } catch (e) { return; }
 
   const mine = sessions.filter(s => kinds.includes(s.kind));
-  if (!mine.length) return;
+  const waiting = mistakes?.[mistakesKind] ?? 0;
+  if (!mine.length && !waiting) return;
 
   box.innerHTML = `<div class="card">
       <h2 style="margin:0 0 .4rem;font-size:1.05rem">${esc(t('history'))}</h2>
+      ${waiting ? `<p class="row" style="margin:.2rem 0 1rem"><button class="primary" id="mistakes"
+          >${esc(t('goOverMistakes'))} (${waiting})</button></p>` : ''}
       ${mine.map(markup).join('')}
     </div>`;
+
+  if (waiting) {
+    $('#mistakes').onclick = async () => {
+      $('#mistakes').disabled = true;
+      try {
+        paper = await api('/reading/mistakes', {method: 'POST', body: {kind: mistakesKind}});
+        render();
+      } catch (e) {
+        $('#mistakes').disabled = false;
+      }
+    };
+  }
 }
 
 
@@ -267,7 +286,7 @@ function home() {
       <span class="tally">${s.points_scored} / ${s.points_max}</span>
       <span class="mark">${esc(s.karakter ?? '')}</span>
       <span class="when">${esc(whenText(s.submitted_at))}</span>
-    </div>`);
+    </div>`, 'reading');
 }
 
 async function start(mode) {
