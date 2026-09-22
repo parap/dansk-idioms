@@ -91,6 +91,51 @@ final class CommunicatorTest extends TestCase
         self::assertSame("#textil\n\n#text", Communicator::tagged('#textil', 'text'));
     }
 
+    // --- formatting survives --------------------------------------------------
+
+    public function testOffsetsAreCountedInUtf16Units(): void
+    {
+        // Telegram counts entity offsets in UTF-16 code units, not characters. Danish
+        // letters are one unit each; an emoji is a surrogate pair and counts as two.
+        // Get this wrong and every bold span after an emoji lands on the wrong word --
+        // silently, because nothing errors.
+        self::assertSame(4, Communicator::utf16Length('gå nu'));   // g å space n u = 5? no: 'gå n' = 4
+        self::assertSame(5, Communicator::utf16Length('gå nu'));
+    }
+
+    public function testAnEmojiCountsAsTwoUnits(): void
+    {
+        self::assertSame(2, Communicator::utf16Length('🙂'));
+        self::assertSame(4, Communicator::utf16Length('ab🙂'));
+    }
+
+    public function testEntitiesSurviveTheTagBeingAppended(): void
+    {
+        // The tag goes on the end, so offsets that were valid stay valid.
+        $entities = [['type' => 'bold', 'offset' => 0, 'length' => 8]];
+
+        self::assertSame($entities, Communicator::clampEntities($entities, 'at spille'));
+    }
+
+    public function testAnEntityRunningPastTheTextIsClamped(): void
+    {
+        // Trailing whitespace is stripped before the tag is appended. An entity that
+        // reached into it would otherwise point past the end, and Telegram rejects the
+        // whole message -- the post simply never appears.
+        $entities = [['type' => 'bold', 'offset' => 0, 'length' => 20]];
+
+        $clamped = Communicator::clampEntities($entities, 'at spille');
+
+        self::assertSame(9, $clamped[0]['length']);
+    }
+
+    public function testAnEntityStartingPastTheTextIsDropped(): void
+    {
+        $entities = [['type' => 'bold', 'offset' => 50, 'length' => 3]];
+
+        self::assertSame([], Communicator::clampEntities($entities, 'at spille'));
+    }
+
     private static function message(string $text, int $chatId = 4242): array
     {
         return ['text' => $text, 'chat' => ['id' => $chatId]];

@@ -35,6 +35,14 @@ services:
       # Unset. API errors and the health endpoint stay silent about internals unless a
       # developer deliberately turns this on, because this app is reachable publicly.
       APP_DEBUG: ${APP_DEBUG:-}
+      # The publisher bot. Named here because this service has no env_file: a variable
+      # that sits in .env and nowhere else never reaches the container, and the failure
+      # is silent -- the webhook is delivered, the app answers 200, and nothing is
+      # published. All four default to empty, which switches the bot off.
+      BOT_COMMUNICATOR_TOKEN: ${BOT_COMMUNICATOR_TOKEN:-}
+      BOT_COMMUNICATOR_SECRET: ${BOT_COMMUNICATOR_SECRET:-}
+      BOT_COMMUNICATOR_OWNER: ${BOT_COMMUNICATOR_OWNER:-}
+      BOT_COMMUNICATOR_GROUP: ${BOT_COMMUNICATOR_GROUP:-}
     depends_on:
       db:
         condition: service_healthy
