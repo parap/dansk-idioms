@@ -465,4 +465,41 @@ final class ImportPipelineTest extends TestCase
         // macOS-sourced text arrives NFD; without NFC these silently duplicate.
         self::assertSame(Normalizer::term('hår'), Normalizer::term("ha\u{030A}r"));
     }
+
+    // --- are the boundaries knowable at all? ---------------------------------
+
+    public function testTextCarryingTheSeparatorHasClearBoundaries(): void
+    {
+        // The structured form the group already uses: splitting is decided.
+        $msg = self::ZW . 'at gå agurk — сойти с ума.' . "\n"
+             . self::ZW . 'at slænge sig — развалиться.';
+
+        self::assertTrue((new EntrySegmenter())->boundariesAreClear($msg));
+    }
+
+    public function testOneHeadwordWithoutTheSeparatorHasClearBoundaries(): void
+    {
+        // One idiom and its explanation is one entry however it was typed.
+        $msg = "at gå agurk\nИдиоматическое выражение, описывающее взрыв эмоций.";
+
+        self::assertTrue((new EntrySegmenter())->boundariesAreClear($msg));
+    }
+
+    public function testSeveralHeadwordsWithoutTheSeparatorDoNot(): void
+    {
+        // Pasted fresh, with newlines and no invisible markers: the segmenter would
+        // make one entry of all three, taking the first as the term and the rest as
+        // its explanation. Nothing errors; the corpus just gains a plausible lie.
+        $msg = "at gå agurk — сойти с ума\nat slænge sig — развалиться\nat tage fejl — ошибаться";
+
+        self::assertFalse((new EntrySegmenter())->boundariesAreClear($msg));
+    }
+
+    public function testABoldHeadwordCountsAsOneToo(): void
+    {
+        $msg = self::B0 . 'at gå agurk' . self::B1 . " — сойти с ума\n"
+             . self::B0 . 'at slænge sig' . self::B1 . ' — развалиться';
+
+        self::assertFalse((new EntrySegmenter())->boundariesAreClear($msg));
+    }
 }

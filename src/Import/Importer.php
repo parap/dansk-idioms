@@ -180,7 +180,15 @@ final class Importer
         Db::execute(
             'INSERT INTO import_runs (source_id, file_name, file_hash, parser_version, started_at)
              VALUES (?, ?, ?, ?, NOW())',
-            [$sourceId, basename($file), hash_file('sha256', $file) ?: '', $parserVersion]
+            // A run is not always a file. A webhook update has no path on disk, and
+            // hash_file() on one warns and returns false -- so the name stands in for
+            // the content when there is nothing to open.
+            [
+                $sourceId,
+                basename($file),
+                is_file($file) ? (hash_file('sha256', $file) ?: '') : hash('sha256', $file),
+                $parserVersion,
+            ]
         );
         return (int) $this->pdo->lastInsertId();
     }

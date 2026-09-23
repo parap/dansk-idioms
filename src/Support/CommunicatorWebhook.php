@@ -2,6 +2,8 @@
 
 namespace Dansk\Support;
 
+use Dansk\Import\EntrySegmenter;
+
 /**
  * One update from Telegram: decide, and publish only if everything held.
  *
@@ -14,8 +16,16 @@ namespace Dansk\Support;
  */
 final class CommunicatorWebhook
 {
-    public function __construct(private BotApi $api, private array $settings)
-    {
+    /**
+     * @param ?\Closure $ingest Given the message and the id it was published under,
+     *                          puts it in the corpus. Null leaves the corpus alone.
+     */
+    public function __construct(
+        private BotApi $api,
+        private array $settings,
+        private ?\Closure $ingest = null,
+        private EntrySegmenter $segmenter = new EntrySegmenter(),
+    ) {
     }
 
     /**
@@ -53,11 +63,32 @@ final class CommunicatorWebhook
             return 'misconfigured';
         }
 
-        $this->api->sendMessage(
+        $published = $this->api->sendMessage(
             $group,
             Communicator::tagged($raw, Communicator::kindOf($message)),
             Communicator::clampEntities($message['entities'] ?? [], rtrim($raw))
         );
+
+        if ($this->ingest === null) {
+            return 'published';
+        }
+
+        // The post is out and cannot be recalled, so nothing below may report a
+        // failure to publish: that would invite a second attempt and a second post.
+        if (!$this->segmenter->boundariesAreClear($raw)) {
+            // Several headwords with no separator would fold into one entry, the first
+            // becoming the term and the rest its explanation. The group is fine; the
+            // corpus must not take this blindly.
+            return 'published_not_stored';
+        }
+
+        try {
+            ($this->ingest)($message, $published);
+        } catch (\Throwable $e) {
+            error_log('communicator: published but not stored -- ' . $e->getMessage());
+
+            return 'published_not_stored';
+        }
 
         return 'published';
     }

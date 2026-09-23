@@ -421,6 +421,21 @@ FAULTS = [
  (140,"communicator: an entity starting past the text is kept","src/Support/Communicator.php",
   "            if ($offset >= $limit) {\n                continue;\n            }",
   "            if (false) {\n                continue;\n            }","unit"),
+ (141,"ingest: the tag rides into the corpus","src/Support/CommunicatorIngest.php",
+  "            'text'          => (string) ($update['text'] ?? ''),",
+  "            'text'          => (string) ($update['text'] ?? '') . \"\\n\\n#text\",","unit"),
+ (142,"ingest: records the private message, not the group post","src/Support/CommunicatorIngest.php",
+  "            'tg_message_id' => $publishedId,",
+  "            'tg_message_id' => (int) ($update['message_id'] ?? 0),","unit"),
+ (143,"ingest: the time is filed in the server's zone","src/Support/CommunicatorIngest.php",
+  "            ->setTimezone(new \\DateTimeZone('UTC'));",
+  "            ->setTimezone(new \\DateTimeZone('Europe/Copenhagen'));","unit"),
+ (144,"webhook: stores even when the boundaries are unclear","src/Support/CommunicatorWebhook.php",
+  "        if (!$this->segmenter->boundariesAreClear($raw)) {",
+  "        if (false) {","unit"),
+ (145,"webhook: a failure to store is reported as a failure to publish","src/Support/CommunicatorWebhook.php",
+  "            error_log('communicator: published but not stored -- ' . $e->getMessage());\n\n            return 'published_not_stored';",
+  "            throw $e;","unit"),
 ]
 
 def run(suite):

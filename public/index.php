@@ -9,6 +9,7 @@ use Dansk\Controller\ReadingController;
 use Dansk\Http\Response;
 use Dansk\Support\AdminReach;
 use Dansk\Support\BotApi;
+use Dansk\Support\CommunicatorIngest;
 use Dansk\Support\CommunicatorWebhook;
 use Dansk\Support\Config;
 use Dansk\Support\Db;
@@ -131,7 +132,11 @@ try {
             $settings = Config::get('communicator') ?? [];
             $outcome  = 'failed';
             try {
-                $hook = new CommunicatorWebhook(new BotApi($settings['token'] ?? null), $settings);
+                $hook = new CommunicatorWebhook(
+                    new BotApi($settings['token'] ?? null),
+                    $settings,
+                    (new CommunicatorIngest((string) ($settings['source'] ?? '')))(...)
+                );
                 $outcome = $hook->handle(
                     $body,
                     $_SERVER['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN'] ?? null

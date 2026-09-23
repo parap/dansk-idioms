@@ -50,6 +50,10 @@ $config = [
         // without this check a stranger's message would go out under its name.
         'owner'  => getenv('BOT_COMMUNICATOR_OWNER') ?: null,
         'group'  => getenv('BOT_COMMUNICATOR_GROUP') ?: null,
+        // The same source the export writes under, matched by title. The group's
+        // message ids share one numbering, so uq_msg makes a later re-import of an
+        // export idempotent instead of doubling every post the bot made.
+        'source' => getenv('BOT_COMMUNICATOR_SOURCE') ?: 'Dansk idioms (Telegram)',
     ],
 
     'quiz' => [

@@ -19,6 +19,35 @@ namespace Dansk\Import;
  */
 final class EntrySegmenter
 {
+    /**
+     * Whether this text can be split with confidence.
+     *
+     * Splitting is decided by U+200B, which prefixes every structural line in the
+     * group's own posts -- 190 of its 199 messages carry it. Text typed fresh with
+     * plain newlines carries none, and then the segmenter sees one entry: the first
+     * headword becomes the term and everything after it becomes that term's
+     * explanation. Nothing errors, and the corpus gains a plausible lie.
+     *
+     * So one headword is always safe -- one idiom and its explanation is one entry
+     * however it was typed -- while several headwords with no separator are not.
+     */
+    public function boundariesAreClear(string $text): bool
+    {
+        if (str_contains($text, Text::ZWSP)) {
+            return true;
+        }
+
+        $heads = 0;
+        foreach (explode("\n", $text) as $line) {
+            $line = trim(Text::stripBoldMarkers($line));
+            if ($line !== '' && preg_match('/^\p{Latin}/u', $line) === 1) {
+                $heads++;
+            }
+        }
+
+        return $heads <= 1;
+    }
+
     /** @return array{entries: list<string>, preamble: string|null} */
     public function segment(string $messageText): array
     {

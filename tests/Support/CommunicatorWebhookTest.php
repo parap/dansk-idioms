@@ -16,6 +16,8 @@ use PHPUnit\Framework\TestCase;
 final class CommunicatorWebhookTest extends TestCase
 {
     private array $sent = [];
+    private array $stored = [];
+    private $ingest = null;
 
     private function webhook(array $overrides = []): CommunicatorWebhook
     {
@@ -30,7 +32,7 @@ final class CommunicatorWebhookTest extends TestCase
             'secret' => 's3cret',
             'owner'  => '158493465',
             'group'  => '-5203885388',
-        ], $overrides));
+        ], $overrides), $this->ingest);
     }
 
     private static function update(string $text, int $chatId = 158493465): array
@@ -95,5 +97,52 @@ final class CommunicatorWebhookTest extends TestCase
 
         self::assertSame('ignored', $outcome);
         self::assertSame([], $this->sent);
+    }
+
+    // --- what reaches the corpus ----------------------------------------------
+
+    public function testWhatWasPublishedIsAlsoStored(): void
+    {
+        $this->ingest = function (array $message, int $publishedId): void {
+            $this->stored[] = [$message['text'], $publishedId];
+        };
+
+        $outcome = $this->webhook()->handle(self::update('at spille'), 's3cret');
+
+        self::assertSame('published', $outcome);
+        self::assertSame([['at spille', 1]], $this->stored);
+    }
+
+    public function testStoringIsSkippedWhenTheBoundariesAreUnclear(): void
+    {
+        // Three headwords pasted with newlines and no invisible markers: the segmenter
+        // would fold them into one entry, taking the first as the term and the rest as
+        // its explanation. The post is fine; only the corpus must not take it blindly.
+        $this->ingest = function (array $message): void {
+            $this->stored[] = $message['text'];
+        };
+
+        $outcome = $this->webhook()->handle(
+            self::update("at gå agurk — сойти с ума\nat slænge sig — развалиться\nat tage fejl — ошибаться"),
+            's3cret'
+        );
+
+        self::assertSame('published_not_stored', $outcome);
+        self::assertCount(1, $this->sent, 'the post still goes out');
+        self::assertSame([], $this->stored);
+    }
+
+    public function testAFailureToStoreDoesNotLookLikeAFailureToPublish(): void
+    {
+        // The post is already in the group and cannot be recalled. Reporting this as a
+        // failure would invite a second attempt, and a second post.
+        $this->ingest = function (): void {
+            throw new \RuntimeException('the database is away');
+        };
+
+        $outcome = $this->webhook()->handle(self::update('at spille'), 's3cret');
+
+        self::assertSame('published_not_stored', $outcome);
+        self::assertCount(1, $this->sent);
     }
 }
