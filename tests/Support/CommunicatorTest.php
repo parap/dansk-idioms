@@ -136,6 +136,55 @@ final class CommunicatorTest extends TestCase
         self::assertSame([], Communicator::clampEntities($entities, 'at spille'));
     }
 
+    // --- the proposal shown before anything is published ----------------------
+
+    public function testThePiecesAreNumberedFromOne(): void
+    {
+        $text = Communicator::proposal(['at gå agurk — сойти с ума', 'at slænge sig — развалиться']);
+
+        self::assertStringContainsString('1. at gå agurk', $text);
+        self::assertStringContainsString('2. at slænge sig', $text);
+    }
+
+    public function testALongPieceIsShortenedInTheProposal(): void
+    {
+        // The proposal must fit in one message however long the explanations were;
+        // what it shows is the boundaries, not the whole text.
+        $text = Communicator::proposal([str_repeat('очень длинное объяснение ', 40)]);
+
+        self::assertLessThan(400, mb_strlen($text));
+        self::assertStringContainsString('…', $text);
+    }
+
+    public function testBothChoicesAreOffered(): void
+    {
+        // Splitting is a guess. Publishing it whole must stay one press away, or the
+        // guess becomes the only option and the question was rhetorical.
+        $keyboard = Communicator::splitKeyboard('01JJJJJJJJJJJJJJJJJJJJJJJJ', 3);
+
+        $labels = array_map(static fn(array $row): string => $row[0]['text'], $keyboard['inline_keyboard']);
+        self::assertSame(['Разбить на 3', 'Одним постом'], $labels);
+    }
+
+    public function testEveryButtonFitsTelegramsLimit(): void
+    {
+        // callback_data is capped at 64 bytes and Telegram refuses the whole message
+        // over it -- the proposal would simply never arrive.
+        $keyboard = Communicator::splitKeyboard('01JJJJJJJJJJJJJJJJJJJJJJJJ', 3);
+
+        foreach ($keyboard['inline_keyboard'] as $row) {
+            self::assertLessThanOrEqual(64, strlen($row[0]['callback_data']), $row[0]['text']);
+        }
+    }
+
+    public function testAPressNamesItsDraft(): void
+    {
+        $keyboard = Communicator::splitKeyboard('01JJJJJJJJJJJJJJJJJJJJJJJJ', 2);
+
+        self::assertSame('split:01JJJJJJJJJJJJJJJJJJJJJJJJ', $keyboard['inline_keyboard'][0][0]['callback_data']);
+        self::assertSame('whole:01JJJJJJJJJJJJJJJJJJJJJJJJ', $keyboard['inline_keyboard'][1][0]['callback_data']);
+    }
+
     private static function message(string $text, int $chatId = 4242): array
     {
         return ['text' => $text, 'chat' => ['id' => $chatId]];

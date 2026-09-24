@@ -20,10 +20,18 @@ final class CommunicatorWebhook
      * @param ?\Closure $ingest Given the message and the id it was published under,
      *                          puts it in the corpus. Null leaves the corpus alone.
      */
+    /**
+     * @param ?\Closure $ingest    Given the message and the id it was published under,
+     *                             puts it in the corpus. Null leaves the corpus alone.
+     * @param ?\Closure $keepDraft Given owner, text, entities and kind, holds them and
+     *                             returns a token. Null means no proposal can be made,
+     *                             so an unclear message is left unpublished and said so.
+     */
     public function __construct(
         private BotApi $api,
         private array $settings,
         private ?\Closure $ingest = null,
+        private ?\Closure $keepDraft = null,
         private EntrySegmenter $segmenter = new EntrySegmenter(),
     ) {
     }
@@ -63,6 +71,13 @@ final class CommunicatorWebhook
             return 'misconfigured';
         }
 
+        // Nothing goes to the group before the boundaries are settled. Publishing
+        // first and skipping the corpus afterwards put a post nobody had decided
+        // about in the one place nothing can be taken back from.
+        if (!$this->segmenter->boundariesAreClear($raw)) {
+            return $this->offer($raw, $message);
+        }
+
         $published = $this->api->sendMessage(
             $group,
             Communicator::tagged($raw, Communicator::kindOf($message)),
@@ -75,19 +90,6 @@ final class CommunicatorWebhook
 
         // The post is out and cannot be recalled, so nothing below may report a
         // failure to publish: that would invite a second attempt and a second post.
-        if (!$this->segmenter->boundariesAreClear($raw)) {
-            // Several headwords with no separator would fold into one entry, the first
-            // becoming the term and the rest its explanation. The group is fine; the
-            // corpus must not take this blindly.
-            $this->tell(
-                'Опубликовала, но на сайт не взяла: в сообщении несколько идиом без'
-                . ' невидимых разделителей, и где кончается одна и начинается другая —'
-                . ' непонятно. Пришли по одной, и они доедут.'
-            );
-
-            return 'published_not_stored';
-        }
-
         try {
             ($this->ingest)($message, $published);
         } catch (\Throwable $e) {
@@ -98,6 +100,44 @@ final class CommunicatorWebhook
         }
 
         return 'published';
+    }
+
+    /**
+     * Show the split that would be made, and wait.
+     *
+     * Several headwords with no separator have no authoritative boundary. Acting on the
+     * guess would fold them into one entry -- the first becoming the term, the rest its
+     * explanation -- so the guess is shown instead, with both ways out one press away.
+     */
+    private function offer(string $raw, array $message): string
+    {
+        if ($this->keepDraft === null) {
+            $this->tell(
+                'Не опубликовала: в сообщении несколько идиом без невидимых'
+                . ' разделителей, и где кончается одна и начинается другая — непонятно.'
+                . ' Пришли по одной.'
+            );
+
+            return 'not_published';
+        }
+
+        $pieces = $this->segmenter->proposeSplit($raw);
+        $token  = ($this->keepDraft)(
+            (string) ($this->settings['owner'] ?? ''),
+            $raw,
+            $message['entities'] ?? [],
+            Communicator::kindOf($message),
+        );
+
+        $this->api->sendMessage(
+            (string) ($this->settings['owner'] ?? ''),
+            "Вижу несколько идиом, но границы между ними неточные — вот как я бы разбила:\n\n"
+            . Communicator::proposal($pieces),
+            [],
+            Communicator::splitKeyboard($token, count($pieces)),
+        );
+
+        return 'offered';
     }
 
     /**

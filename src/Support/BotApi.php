@@ -38,15 +38,52 @@ final class BotApi
      *
      * @param array<int,array<string,mixed>> $entities
      */
-    public function sendMessage(string $chatId, string $text, array $entities = []): int
-    {
+    public function sendMessage(
+        string $chatId,
+        string $text,
+        array $entities = [],
+        ?array $markup = null,
+    ): int {
         $params = ['chat_id' => $chatId, 'text' => $text];
         if ($entities !== []) {
             $params['entities'] = json_encode($entities, JSON_UNESCAPED_UNICODE);
         }
+        if ($markup !== null) {
+            $params['reply_markup'] = json_encode($markup, JSON_UNESCAPED_UNICODE);
+        }
         $answer = $this->call('sendMessage', $params);
 
         return (int) ($answer['result']['message_id'] ?? 0);
+    }
+
+    /**
+     * Acknowledge a press.
+     *
+     * Unanswered, Telegram spins on the button for about half a minute and the person
+     * presses again -- which is the one thing an unrepeatable action must not invite.
+     */
+    public function answerCallback(string $callbackId, string $text = ''): void
+    {
+        $this->call('answerCallbackQuery', [
+            'callback_query_id' => $callbackId,
+            'text'              => $text,
+        ]);
+    }
+
+    /**
+     * Take the buttons away.
+     *
+     * A live button under a decision already made says the decision was not made. The
+     * claim on the draft is what actually prevents a second action; this is what stops
+     * the message from inviting one.
+     */
+    public function editReplyMarkup(string $chatId, int $messageId, array $markup): void
+    {
+        $this->call('editMessageReplyMarkup', [
+            'chat_id'      => $chatId,
+            'message_id'   => $messageId,
+            'reply_markup' => json_encode($markup, JSON_UNESCAPED_UNICODE),
+        ]);
     }
 
     private function call(string $method, array $params): array

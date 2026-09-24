@@ -65,4 +65,55 @@ final class BotApiTest extends TestCase
             self::assertFalse($called, 'it must not reach the network');
         }
     }
+
+    // --- buttons --------------------------------------------------------------
+
+    public function testAPressIsAcknowledged(): void
+    {
+        // Unanswered, Telegram spins on the button for half a minute and the person
+        // presses again -- which is the one thing publishing must not invite.
+        $sent = [];
+        $api = new BotApi('token', function (string $method, array $params) use (&$sent): array {
+            $sent = [$method, $params];
+
+            return ['ok' => true, 'result' => true];
+        });
+
+        $api->answerCallback('cb-1', 'Опубликовала');
+
+        self::assertSame('answerCallbackQuery', $sent[0]);
+        self::assertSame('cb-1', $sent[1]['callback_query_id']);
+        self::assertSame('Опубликовала', $sent[1]['text']);
+    }
+
+    public function testTheButtonsCanBeTakenAway(): void
+    {
+        // A live button under a decision already made says the decision was not made.
+        $sent = [];
+        $api = new BotApi('token', function (string $method, array $params) use (&$sent): array {
+            $sent = [$method, $params];
+
+            return ['ok' => true, 'result' => true];
+        });
+
+        $api->editReplyMarkup('158493465', 42, ['inline_keyboard' => []]);
+
+        self::assertSame('editMessageReplyMarkup', $sent[0]);
+        self::assertSame(42, $sent[1]['message_id']);
+        self::assertSame('{"inline_keyboard":[]}', $sent[1]['reply_markup']);
+    }
+
+    public function testAMessageCanCarryButtons(): void
+    {
+        $sent = [];
+        $api = new BotApi('token', function (string $method, array $params) use (&$sent): array {
+            $sent = [$method, $params];
+
+            return ['ok' => true, 'result' => ['message_id' => 9]];
+        });
+
+        $api->sendMessage('1', 'выбери', [], ['inline_keyboard' => [[['text' => 'да', 'callback_data' => 'x']]]]);
+
+        self::assertStringContainsString('callback_data', $sent[1]['reply_markup']);
+    }
 }

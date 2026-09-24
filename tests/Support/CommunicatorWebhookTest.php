@@ -17,6 +17,7 @@ final class CommunicatorWebhookTest extends TestCase
 {
     private array $sent = [];
     private array $stored = [];
+    private array $drafted = [];
     private $ingest = null;
 
     private function webhook(array $overrides = []): CommunicatorWebhook
@@ -32,7 +33,11 @@ final class CommunicatorWebhookTest extends TestCase
             'secret' => 's3cret',
             'owner'  => '158493465',
             'group'  => '-5203885388',
-        ], $overrides), $this->ingest);
+        ], $overrides), $this->ingest, function (string $owner, string $text, array $ents, string $kind): string {
+            $this->drafted[] = [$owner, $text, $kind];
+
+            return '01JJJJJJJJJJJJJJJJJJJJJJJJ';
+        });
     }
 
     /** Only what was posted to the group -- a note to the owner is a send too. */
@@ -122,11 +127,11 @@ final class CommunicatorWebhookTest extends TestCase
         self::assertSame([['at spille', 1]], $this->stored);
     }
 
-    public function testStoringIsSkippedWhenTheBoundariesAreUnclear(): void
+    public function testUnclearBoundariesPublishNothingYet(): void
     {
-        // Three headwords pasted with newlines and no invisible markers: the segmenter
-        // would fold them into one entry, taking the first as the term and the rest as
-        // its explanation. The post is fine; only the corpus must not take it blindly.
+        // The earlier behaviour published and skipped the corpus. That put a post in
+        // the group that no decision had been made about, and the group is the one
+        // place nothing can be taken back from. Now it waits.
         $this->ingest = function (array $message): void {
             $this->stored[] = $message['text'];
         };
@@ -136,9 +141,25 @@ final class CommunicatorWebhookTest extends TestCase
             's3cret'
         );
 
-        self::assertSame('published_not_stored', $outcome);
-        self::assertCount(1, $this->toTheGroup(), 'the post still goes out');
+        self::assertSame('offered', $outcome);
+        self::assertSame([], $this->toTheGroup(), 'nothing reaches the group unasked');
         self::assertSame([], $this->stored);
+    }
+
+    public function testTheProposalShowsTheSplitAndBothWaysOut(): void
+    {
+        $this->webhook()->handle(
+            self::update("at gå agurk — сойти с ума\nat slænge sig — развалиться"),
+            's3cret'
+        );
+
+        [$method, $params] = $this->sent[0];
+        self::assertSame('sendMessage', $method);
+        self::assertSame('158493465', $params['chat_id'], 'asked in his own chat, not the group');
+        self::assertStringContainsString('1. at gå agurk', $params['text']);
+        self::assertStringContainsString('2. at slænge sig', $params['text']);
+        self::assertStringContainsString('Разбить на 2', $params['reply_markup']);
+        self::assertStringContainsString('Одним постом', $params['reply_markup']);
     }
 
     public function testAFailureToStoreDoesNotLookLikeAFailureToPublish(): void
@@ -155,22 +176,28 @@ final class CommunicatorWebhookTest extends TestCase
         self::assertCount(1, $this->toTheGroup());
     }
 
-    public function testUnclearBoundariesAreReportedBackToTheOwner(): void
+    public function testWithNowhereToKeepADraftItPublishesNothingAndSaysSo(): void
     {
-        // A refusal nobody is told about is the failure this guard exists to prevent.
-        // The post is in the group and looks fine; only the corpus quietly skipped it.
-        $this->ingest = function (array $message): void {
-            $this->stored[] = $message['text'];
-        };
+        // Without a place to hold the message there is no proposal to make, and a
+        // guess cannot be acted on. Silence here would leave him waiting for a post
+        // that is never coming.
+        $hook = new CommunicatorWebhook(
+            new BotApi('token', function (string $method, array $params): array {
+                $this->sent[] = [$method, $params];
 
-        $this->webhook()->handle(
-            self::update("at gå agurk — сойти с ума\nat slænge sig — развалиться\nat tage fejl — ошибаться"),
+                return ['ok' => true, 'result' => ['message_id' => 1]];
+            }),
+            ['secret' => 's3cret', 'owner' => '158493465', 'group' => '-5203885388'],
+        );
+
+        $outcome = $hook->handle(
+            self::update("at gå agurk — сойти с ума\nat slænge sig — развалиться"),
             's3cret'
         );
 
-        self::assertCount(2, $this->sent, 'the post, then a word back');
-        self::assertSame('158493465', $this->sent[1][1]['chat_id'], 'the note goes to the owner');
-        self::assertStringContainsString('на сайт', $this->sent[1][1]['text']);
+        self::assertSame('not_published', $outcome);
+        self::assertSame([], $this->toTheGroup());
+        self::assertSame('158493465', $this->sent[0][1]['chat_id']);
     }
 
     public function testTheNoteNeverReachesTheGroup(): void

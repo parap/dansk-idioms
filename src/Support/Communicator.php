@@ -72,6 +72,50 @@ final class Communicator
         return str_starts_with($mime, 'video/') ? 'video' : 'text';
     }
 
+    /** How much of a piece the proposal shows before cutting it short. */
+    public const PREVIEW = 70;
+
+    /**
+     * The split the bot would make, written out for a person to look at.
+     *
+     * What is being shown is the boundaries, not the text -- the text is already in
+     * the sender's own chat. So each piece is cut short: the proposal has to fit one
+     * message however long the explanations were.
+     *
+     * @param list<string> $pieces
+     */
+    public static function proposal(array $pieces): string
+    {
+        $lines = [];
+        foreach ($pieces as $number => $piece) {
+            $flat  = trim(preg_replace('/\s+/u', ' ', $piece) ?? $piece);
+            $short = mb_substr($flat, 0, self::PREVIEW);
+            $lines[] = ($number + 1) . '. ' . $short . (mb_strlen($flat) > self::PREVIEW ? '…' : '');
+        }
+
+        return implode("\n", $lines);
+    }
+
+    /**
+     * The two ways out, both one press away.
+     *
+     * Splitting is a guess. Leaving "whole" equally available is what keeps the
+     * question honest -- offered alone, the guess would be the only answer and the
+     * asking would be decoration.
+     *
+     * `callback_data` is capped at 64 bytes and Telegram refuses the whole message over
+     * it, so the token is a ULID and the prefixes are short.
+     */
+    public static function splitKeyboard(string $token, int $count): array
+    {
+        return [
+            'inline_keyboard' => [
+                [['text' => "Разбить на {$count}", 'callback_data' => 'split:' . $token]],
+                [['text' => 'Одним постом', 'callback_data' => 'whole:' . $token]],
+            ],
+        ];
+    }
+
     /**
      * Length in UTF-16 code units -- the unit Telegram counts entity offsets in.
      *
