@@ -35,6 +35,15 @@ final class CommunicatorWebhookTest extends TestCase
         ], $overrides), $this->ingest);
     }
 
+    /** Only what was posted to the group -- a note to the owner is a send too. */
+    private function toTheGroup(): array
+    {
+        return array_values(array_filter(
+            $this->sent,
+            static fn(array $call): bool => ($call[1]['chat_id'] ?? '') === '-5203885388'
+        ));
+    }
+
     private static function update(string $text, int $chatId = 158493465): array
     {
         return ['message' => ['text' => $text, 'chat' => ['id' => $chatId]]];
@@ -128,7 +137,7 @@ final class CommunicatorWebhookTest extends TestCase
         );
 
         self::assertSame('published_not_stored', $outcome);
-        self::assertCount(1, $this->sent, 'the post still goes out');
+        self::assertCount(1, $this->toTheGroup(), 'the post still goes out');
         self::assertSame([], $this->stored);
     }
 
@@ -143,6 +152,36 @@ final class CommunicatorWebhookTest extends TestCase
         $outcome = $this->webhook()->handle(self::update('at spille'), 's3cret');
 
         self::assertSame('published_not_stored', $outcome);
-        self::assertCount(1, $this->sent);
+        self::assertCount(1, $this->toTheGroup());
+    }
+
+    public function testUnclearBoundariesAreReportedBackToTheOwner(): void
+    {
+        // A refusal nobody is told about is the failure this guard exists to prevent.
+        // The post is in the group and looks fine; only the corpus quietly skipped it.
+        $this->ingest = function (array $message): void {
+            $this->stored[] = $message['text'];
+        };
+
+        $this->webhook()->handle(
+            self::update("at gå agurk — сойти с ума\nat slænge sig — развалиться\nat tage fejl — ошибаться"),
+            's3cret'
+        );
+
+        self::assertCount(2, $this->sent, 'the post, then a word back');
+        self::assertSame('158493465', $this->sent[1][1]['chat_id'], 'the note goes to the owner');
+        self::assertStringContainsString('на сайт', $this->sent[1][1]['text']);
+    }
+
+    public function testTheNoteNeverReachesTheGroup(): void
+    {
+        // Telling the owner is between the two of them; the group gets the idiom only.
+        $this->ingest = function (): void {
+            throw new \RuntimeException('the database is away');
+        };
+
+        $this->webhook()->handle(self::update('at spille'), 's3cret');
+
+        self::assertCount(1, $this->toTheGroup());
     }
 }

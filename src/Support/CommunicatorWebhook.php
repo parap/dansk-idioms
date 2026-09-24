@@ -79,6 +79,12 @@ final class CommunicatorWebhook
             // Several headwords with no separator would fold into one entry, the first
             // becoming the term and the rest its explanation. The group is fine; the
             // corpus must not take this blindly.
+            $this->tell(
+                'Опубликовала, но на сайт не взяла: в сообщении несколько идиом без'
+                . ' невидимых разделителей, и где кончается одна и начинается другая —'
+                . ' непонятно. Пришли по одной, и они доедут.'
+            );
+
             return 'published_not_stored';
         }
 
@@ -86,10 +92,35 @@ final class CommunicatorWebhook
             ($this->ingest)($message, $published);
         } catch (\Throwable $e) {
             error_log('communicator: published but not stored -- ' . $e->getMessage());
+            $this->tell('Опубликовала, но на сайт не взяла: сорвалась запись в базу.');
 
             return 'published_not_stored';
         }
 
         return 'published';
+    }
+
+    /**
+     * A word back to the owner, in his own chat.
+     *
+     * A refusal nobody is told about is the failure the guard exists to prevent: the
+     * post stands in the group looking finished while the corpus quietly skipped it.
+     * Never to the group -- this is between the bot and whoever sent the idiom.
+     *
+     * Failing to report changes nothing about what happened to the post, so it cannot
+     * be allowed to raise.
+     */
+    private function tell(string $text): void
+    {
+        $owner = (string) ($this->settings['owner'] ?? '');
+        if ($owner === '') {
+            return;
+        }
+
+        try {
+            $this->api->sendMessage($owner, $text);
+        } catch (\Throwable $e) {
+            error_log('communicator: could not report back -- ' . $e->getMessage());
+        }
     }
 }

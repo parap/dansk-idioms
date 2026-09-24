@@ -436,6 +436,12 @@ FAULTS = [
  (145,"webhook: a failure to store is reported as a failure to publish","src/Support/CommunicatorWebhook.php",
   "            error_log('communicator: published but not stored -- ' . $e->getMessage());\n\n            return 'published_not_stored';",
   "            throw $e;","unit"),
+ (146,"webhook: the refusal is never reported to the owner","src/Support/CommunicatorWebhook.php",
+  "            $this->tell(\n                'Опубликовала, но на сайт не взяла: в сообщении несколько идиом без'",
+  "            $this->silence(\n                'Опубликовала, но на сайт не взяла: в сообщении несколько идиом без'","unit"),
+ (147,"webhook: the note goes to the group instead of the owner","src/Support/CommunicatorWebhook.php",
+  "        $owner = (string) ($this->settings['owner'] ?? '');",
+  "        $owner = (string) ($this->settings['group'] ?? '');","unit"),
 ]
 
 def run(suite):
