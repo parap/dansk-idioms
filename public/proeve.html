@@ -123,6 +123,7 @@ import { $, esc, api, t, registerStrings, currentLang, setLang as applyLang } fr
 // page hard-codes user-facing text.
 const STRINGS = {
   ru: {
+    practical: 'Как записаться на настоящий экзамен',
     goOverMistakes: 'Работа над ошибками',
     history: 'Сданные работы',
     intro: 'Тест на гражданство: 45 вопросов за 45 минут, два-три варианта ответа. ' +
@@ -148,6 +149,7 @@ const STRINGS = {
     yourAnswer: 'ваш ответ',
   },
   en: {
+    practical: 'How to sit the real test',
     goOverMistakes: 'Go over mistakes',
     history: 'Sittings so far',
     intro: 'The citizenship test: 45 questions in 45 minutes, two or three answers each. ' +
@@ -173,6 +175,7 @@ const STRINGS = {
     yourAnswer: 'your answer',
   },
   uk: {
+    practical: 'Як записатися на справжній іспит',
     goOverMistakes: 'Робота над помилками',
     history: 'Складені роботи',
     intro: 'Тест на громадянство: 45 запитань за 45 хвилин, два-три варіанти ' +
@@ -198,6 +201,7 @@ const STRINGS = {
     yourAnswer: 'ваша відповідь',
   },
   da: {
+    practical: 'Sådan tilmelder du dig den rigtige prøve',
     goOverMistakes: 'Gennemgå fejlene',
     history: 'Tidligere prøver',
     intro: 'Indfødsretsprøven: 45 spørgsmål på 45 minutter med to eller tre svarmuligheder. ' +
@@ -331,6 +335,8 @@ async function home() {
         </select>
       </p>
       <p class="muted" id="about" style="font-size:.9rem;margin:.6rem 0 0"></p>
+      <p style="margin:.6rem 0 0"><a class="link" href="/proeve/praktisk"
+        >${esc(t('practical'))} →</a></p>
       <label class="check">
         <input type="checkbox" id="current" checked>
         <span>${esc(t('withCurrent'))}

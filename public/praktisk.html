@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#c8102e">
+<title>Tilmelding til indfødsretsprøven</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#fff; --ink:#14171c; --muted:#6b7280; --line:#e0e4ea;
+    --accent:#c8102e; --accent-ink:#fff; --ok:#127a4a; --okbg:#e7f6ee;
+    --bad:#b3261e; --badbg:#fdecea; --chip:#eef1f5; --shadow:0 1px 2px rgba(20,23,28,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#121419;--card:#1b1e24;--ink:#e8ebf0;--muted:#98a1b0;--line:#2b3039;
+      --accent:#ff5a6e;--accent-ink:#1b1e24;--ok:#4cc38a;--okbg:#14301f;
+      --bad:#ff6b61;--badbg:#331b19;--chip:#232830;--shadow:none;}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:18px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  .wrap{max-width:760px;margin:0 auto;padding:20px 16px 64px}
+  header{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+  .brand{font-weight:700;letter-spacing:-.02em;font-size:1.05rem;color:inherit;
+    text-decoration:none;cursor:pointer}
+  .brand:hover span{text-decoration:underline}
+  .brand span{color:var(--accent)}
+  header h1{font-size:1.2rem;margin:0}
+  .spacer{flex:1}
+  .lang{background:none;border:none;color:var(--muted);font:inherit;font-size:.85rem;
+    padding:.2rem .35rem;cursor:pointer;border-radius:5px}
+  .lang[aria-pressed=true]{color:var(--ink);font-weight:600;background:var(--chip)}
+  .langs{display:inline-flex;gap:.1rem}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:18px;box-shadow:var(--shadow);margin-bottom:16px}
+  .card h2{font-size:1.05rem;margin:0 0 .6rem}
+  .muted{color:var(--muted)}
+  .facts{display:grid;grid-template-columns:auto 1fr;gap:10px 18px;margin:0}
+  .facts dt{color:var(--muted);font-size:.95rem}
+  .facts dd{margin:0;font-weight:600}
+  .facts dd.big{font-size:1.15rem}
+  .left{margin:14px 0 0;font-weight:600}
+  .left.soon{color:var(--bad)}
+  .primary{display:inline-block;background:var(--accent);color:var(--accent-ink);
+    border:none;border-radius:10px;padding:12px 20px;font:inherit;font-weight:600;
+    cursor:pointer;text-decoration:none;margin-top:16px}
+  .stale{background:var(--badbg);color:var(--bad);border:1px solid var(--bad);
+    border-radius:10px;padding:12px 14px;margin:0 0 16px;font-weight:600}
+  a{color:var(--accent)}
+  #sources{margin:.4rem 0 0;padding-left:1.1rem}
+  #sources li{margin:.25rem 0;font-size:.92rem}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/">Dansk <span>idiomer</span></a>
+    <h1 id="title"></h1>
+    <span class="spacer"></span>
+    <span id="langs" class="langs"></span>
+    <a class="link" href="/proeve" id="toProeve"></a>
+  </header>
+  <div id="view"></div>
+</div>
+
+<script type="module">
+import { $, esc, t, registerStrings, currentLang, setLang as applyLang } from '/shared.js';
+
+const STRINGS = {
+  ru: {
+    title: 'Запись на экзамен',
+    toProeve: '← к тренировке',
+    nextSitting: 'Ближайшая сессия',
+    testDate: 'Экзамен', deadline: 'Запись до', fee: 'Цена', place: 'Где',
+    daysLeft: {one: 'остался {n} день', few: 'осталось {n} дня',
+               many: 'осталось {n} дней', other: 'осталось {n} дней'},
+    deadlinePassed: 'Срок записи прошёл.',
+    register: 'Записаться',
+    registerHint: 'Запись идёт не через министерство, а у того центра, который проводит экзамен. ' +
+                  'Эта дата уже открыта в системе Ольборгской коммуны.',
+    missedTitle: 'Если срок пропущен',
+    missedText: 'Это не автоматически полгода ожидания. Нужно просить у SIRI через Digital Post ' +
+                'разрешение искать центр со свободным местом, а затем обзванивать центры самому.',
+    materialTitle: 'Учебный материал обновлён',
+    materialText: 'К этой сессии материал переиздан: добавлены председательство Дании в ЕС, ' +
+                  'муниципальные и парламентские выборы и формирование правительства. ' +
+                  'Тренажёр собран из прошлых работ, поэтому этих тем в нём нет.',
+    materialLink: 'Учебный материал',
+    previous: 'Предыдущая сессия была',
+    cadence: 'Экзамен проводится дважды в год — летом и зимой.',
+    checked: 'Сведения проверены',
+    checkedHint: 'Дата, срок и цена меняются каждые полгода. Перед записью стоит сверить по ссылкам.',
+    stale: 'Эти сведения устарели: все известные сессии уже прошли. Проверьте по ссылкам ниже.',
+    sources: 'Источники',
+  },
+  en: {
+    title: 'Registering for the test',
+    toProeve: '← to practice',
+    nextSitting: 'The next sitting',
+    testDate: 'Test', deadline: 'Register by', fee: 'Fee', place: 'Where',
+    daysLeft: {one: '{n} day left', other: '{n} days left'},
+    deadlinePassed: 'Registration has closed.',
+    register: 'Register',
+    registerHint: 'Registration is not done through the ministry but with the centre that holds ' +
+                  'the test. This date is already open in Aalborg municipality’s system.',
+    missedTitle: 'If the deadline has passed',
+    missedText: 'It does not automatically mean waiting half a year. Ask SIRI through Digital Post ' +
+                'for permission to look for a centre with a free place, then ring round yourself.',
+    materialTitle: 'The study material has been updated',
+    materialText: 'It was reissued for this sitting: Denmark’s EU presidency, the municipal and ' +
+                  'parliamentary elections and the forming of the government were added. This ' +
+                  'trainer is built from past papers, so none of that is in it.',
+    materialLink: 'The study material',
+    previous: 'The previous sitting was',
+    cadence: 'The test is held twice a year, in summer and in winter.',
+    checked: 'Checked on',
+    checkedHint: 'The date, the deadline and the fee change every half-year. Confirm against the ' +
+                 'sources before registering.',
+    stale: 'This is out of date: every sitting listed here has been held. Check the sources below.',
+    sources: 'Sources',
+  },
+  uk: {
+    title: 'Запис на іспит',
+    toProeve: '← до тренування',
+    nextSitting: 'Найближча сесія',
+    testDate: 'Іспит', deadline: 'Запис до', fee: 'Ціна', place: 'Де',
+    daysLeft: {one: 'залишився {n} день', few: 'залишилося {n} дні',
+               many: 'залишилося {n} днів', other: 'залишилося {n} днів'},
+    deadlinePassed: 'Строк запису минув.',
+    register: 'Записатися',
+    registerHint: 'Запис іде не через міністерство, а в тому центрі, який проводить іспит. ' +
+                  'Ця дата вже відкрита в системі Ольборзької комуни.',
+    missedTitle: 'Якщо строк минув',
+    missedText: 'Це не автоматично пів року очікування. Треба просити в SIRI через Digital Post ' +
+                'дозвіл шукати центр із вільним місцем, а потім обдзвонювати центри самому.',
+    materialTitle: 'Навчальний матеріал оновлено',
+    materialText: 'До цієї сесії матеріал перевидано: додано головування Данії в ЄС, муніципальні ' +
+                  'та парламентські вибори і формування уряду. Тренажер зібрано з минулих робіт, ' +
+                  'тому цих тем у ньому немає.',
+    materialLink: 'Навчальний матеріал',
+    previous: 'Попередня сесія була',
+    cadence: 'Іспит проводиться двічі на рік — влітку та взимку.',
+    checked: 'Відомості перевірено',
+    checkedHint: 'Дата, строк і ціна змінюються щопівроку. Перед записом варто звірити за посиланнями.',
+    stale: 'Ці відомості застаріли: усі відомі сесії вже відбулися. Перевірте за посиланнями нижче.',
+    sources: 'Джерела',
+  },
+  da: {
+    title: 'Tilmelding til prøven',
+    toProeve: '← til træningen',
+    nextSitting: 'Næste prøve',
+    testDate: 'Prøve', deadline: 'Tilmelding senest', fee: 'Pris', place: 'Hvor',
+    daysLeft: {one: '{n} dag tilbage', other: '{n} dage tilbage'},
+    deadlinePassed: 'Tilmeldingsfristen er udløbet.',
+    register: 'Tilmeld dig',
+    registerHint: 'Tilmeldingen sker ikke gennem ministeriet, men hos den prøveafholder, der ' +
+                  'afholder prøven. Datoen er allerede åben i Aalborg Kommunes system.',
+    missedTitle: 'Hvis fristen er overskredet',
+    missedText: 'Det betyder ikke automatisk et halvt års ventetid. Bed SIRI gennem Digital Post ' +
+                'om lov til at finde et sprogcenter med en ledig plads, og ring derefter rundt selv.',
+    materialTitle: 'Lærematerialet er opdateret',
+    materialText: 'Det er ajourført til denne prøve: Danmarks EU-formandskab, kommunal- og ' +
+                  'folketingsvalget og regeringsdannelsen er kommet til. Denne træner er bygget ' +
+                  'på tidligere prøvesæt, så de emner er ikke med.',
+    materialLink: 'Lærematerialet',
+    previous: 'Den forrige prøve var',
+    cadence: 'Prøven afholdes to gange om året — sommer og vinter.',
+    checked: 'Oplysningerne er kontrolleret',
+    checkedHint: 'Dato, frist og pris ændrer sig hvert halve år. Tjek kilderne, før du tilmelder dig.',
+    stale: 'Oplysningerne er forældede: alle prøver på listen er afholdt. Tjek kilderne nedenfor.',
+    sources: 'Kilder',
+  },
+};
+registerStrings(STRINGS);
+
+/**
+ * Every figure below was copied off an official page on the day named in CHECKED, and
+ * every one of them moves: the fee is set per year and the sitting every half-year. The page
+ * therefore shows when it was checked and what it was checked against, and says plainly
+ * when the list has run out, rather than presenting a passed date as if it stood.
+ */
+const CHECKED = '2026-09-24';
+
+const SITTINGS = [
+  // Held. Kept so the cadence is visible and so the page is seen to choose rather than
+  // to print the first row it has.
+  {date: '2026-06-03'},
+  {
+    date: '2026-11-25', time: '13.00–13.45', deadline: '2026-10-21', fee: '946 kr.',
+    place: 'Sprogcenter Aalborg, Kastetvej 26, 9000 Aalborg',
+    registerAt: 'https://sprogcentertilmelding.aalborg.dk/prove.aspx',
+  },
+];
+
+const SOURCES = [
+  ['Aalborg Kommune — tilmelding til prøven', 'https://sprogcentertilmelding.aalborg.dk/prove.aspx'],
+  ['Dansk og Prøver — tilmeldingsfrister og prøvedatoer',
+   'https://danskogproever.dk/tilmeldingsfrister-og-proevedatoer/'],
+  ['SIRI — lærematerialet er opdateret',
+   'https://siri.dk/nyheder/2026/laeremateriale-til-indfoedsretsproeven-er-opdateret/'],
+  ['Udlændinge- og Integrationsministeriet — Indfødsretsprøven af 2021',
+   'https://uim.dk/statsborgerskab/udenlandske-statsborgere/betingelser/indfoedsretsproeven-af-2021/'],
+];
+
+const MATERIAL = 'https://danskogproever.dk/borger/indfoedsretsproeve-statsborgerskab/forberedelse-til-indfoedsretsproeven/';
+
+// A date is written down as its own day, not as a moment: built from the parts it is the
+// same calendar day in every timezone the page is read in.
+const asDate = iso => { const [y, m, d] = iso.split('-').map(Number); return new Date(y, m - 1, d); };
+const today = () => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); };
+const shown = iso => asDate(iso).toLocaleDateString(currentLang(), {day: 'numeric', month: 'long', year: 'numeric'});
+const days = (from, to) => Math.round((asDate(to) - from) / 86400000);
+const stamp = iso => `<time datetime="${iso}">${esc(shown(iso))}</time>`;
+
+function paintLanguages() {
+  const box = $('#langs');
+  box.innerHTML = Object.keys(STRINGS).map(code =>
+    `<button class="lang" data-lang="${code}" aria-pressed="${code === currentLang()}"
+      >${code.toUpperCase()}</button>`).join('');
+  box.querySelectorAll('.lang').forEach(b => b.onclick = () => { applyLang(b.dataset.lang); render(); });
+}
+
+function render() {
+  document.documentElement.lang = currentLang();
+  $('#title').textContent = t('title');
+  $('#toProeve').textContent = t('toProeve');
+  paintLanguages();
+
+  const now  = today();
+  const next = SITTINGS.filter(s => asDate(s.date) >= now && s.deadline).sort(
+    (a, b) => asDate(a.date) - asDate(b.date))[0];
+  const held = SITTINGS.filter(s => asDate(s.date) < now).sort(
+    (a, b) => asDate(b.date) - asDate(a.date))[0];
+
+  const left = next ? days(now, next.deadline) : 0;
+
+  $('#view').innerHTML = `
+    ${next ? '' : `<p class="stale">${esc(t('stale'))}</p>`}
+    ${next ? `<div class="card">
+      <h2>${esc(t('nextSitting'))}</h2>
+      <dl class="facts">
+        <dt>${esc(t('testDate'))}</dt>
+        <dd class="big" id="sitting">${stamp(next.date)}${next.time ? `, ${esc(next.time)}` : ''}</dd>
+        <dt>${esc(t('deadline'))}</dt>
+        <dd id="deadline">${stamp(next.deadline)}</dd>
+        <dt>${esc(t('fee'))}</dt><dd>${esc(next.fee)}</dd>
+        <dt>${esc(t('place'))}</dt><dd>${esc(next.place)}</dd>
+      </dl>
+      <p class="left ${left <= 14 ? 'soon' : ''}" id="left">${
+        left >= 0 ? esc(t('daysLeft', left).replace('{n}', left)) : esc(t('deadlinePassed'))}</p>
+      <p class="muted" style="font-size:.92rem;margin:.6rem 0 0">${esc(t('registerHint'))}</p>
+      <a class="primary" href="${esc(next.registerAt)}" target="_blank" rel="noopener"
+        >${esc(t('register'))}</a>
+    </div>` : ''}
+
+    <div class="card">
+      <h2>${esc(t('materialTitle'))}</h2>
+      <p style="margin:0">${esc(t('materialText'))}</p>
+      <p style="margin:.6rem 0 0"><a href="${esc(MATERIAL)}" target="_blank" rel="noopener"
+        >${esc(t('materialLink'))} →</a></p>
+    </div>
+
+    <div class="card">
+      <h2>${esc(t('missedTitle'))}</h2>
+      <p style="margin:0">${esc(t('missedText'))}</p>
+    </div>
+
+    <div class="card">
+      <p class="muted" style="margin:0">${esc(t('cadence'))}${
+        held ? ` ${esc(t('previous'))} ${stamp(held.date)}` : ''}</p>
+      <p class="muted" style="margin:.6rem 0 0" id="checked">${esc(t('checked'))} ${stamp(CHECKED)} — ${esc(t('checkedHint'))}</p>
+      <h2 style="margin:1rem 0 0;font-size:.95rem">${esc(t('sources'))}</h2>
+      <ul id="sources">
+        ${SOURCES.map(([name, url]) =>
+          `<li><a href="${esc(url)}" target="_blank" rel="noopener">${esc(name)}</a></li>`).join('')}
+      </ul>
+    </div>`;
+}
+
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
+render();
+</script>
+</body>
+</html>

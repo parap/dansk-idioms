@@ -22,6 +22,7 @@ bin/load-export.sh                 # import your Telegram export
 | http://localhost:8080 | the site |
 | http://localhost:8080/read | reading practice, Prøve i Dansk 3 |
 | http://localhost:8080/proeve | the citizenship exam, indfødsretsprøven |
+| http://localhost:8080/proeve/praktisk | how to sit the real one: date, deadline, fee |
 | http://127.0.0.1:8082/admin | review queue |
 | http://127.0.0.1:8081 | Adminer (server `db`, user `dansk`, the password from `.env`) |
 | http://localhost:8080/api/v1/health | health + database check |
@@ -124,6 +125,14 @@ The history needs no account: a sitting is kept against the browser's `anon_key`
 which lasts a year, and **registering adopts everything sat before it**. Every table that
 keys work to a browser has to be named in `UserRepository::register`; one left out
 orphans that history silently, because the rows survive and merely stop being anyone's.
+
+**Sitting the real exam** is a separate page, `/proeve/praktisk`: the next sitting, the
+registration deadline, the fee, where it is held in Aalborg, and what to do if the
+deadline is missed. Every one of those figures moves -- the fee is set per year, the
+sitting every half-year -- so the page carries the date the figures were checked and the
+official pages they came from, and it is built from a list of sittings rather than a
+single hard-coded date: a sitting already held drops out, and when the list runs out the
+page says so instead of presenting a passed date as current.
 
 **A round of what went wrong** is offered beside the history whenever there is anything
 in it, and says how many questions are waiting. It is built from the questions whose most
