@@ -884,10 +884,49 @@ def nothing_is_offered_to_go_over_when_a_paper_went_perfectly(b):
 
 
 @check
+def the_practical_page_names_the_sitting_still_to_come(b):
+    """Dates, deadline and fee change every half-year. The page is built from a list of
+    sittings and shows the next one, so a passed date drops out instead of being read as
+    current."""
+    b.goto('/proeve/praktisk')
+    b.until('!!document.querySelector("#sitting")', what='the practical page')
+
+    # The dates are asserted from the machine-readable attribute, not the rendered text:
+    # the page speaks four languages and the month is spelled differently in each.
+    assert b.js('document.querySelector("#sitting time").getAttribute("datetime")') == '2026-11-25'
+    assert b.js('document.querySelector("#deadline time").getAttribute("datetime")') == '2026-10-21'
+    # The June 2026 sitting is in the same list and is over.
+    assert b.js('document.querySelector("#sitting").textContent').find('2026') > 0
+
+    assert '946' in b.js('document.body.textContent'), 'the fee is missing'
+    assert b.js('!!document.querySelector("a[href*=\'sprogcentertilmelding.aalborg.dk\']")'), \
+        'no way to reach the registration itself'
+
+
+@check
+def the_practical_page_says_when_it_was_last_checked(b):
+    # Figures copied off an official site go stale silently. The date they were taken on
+    # is what lets a reader tell current from merely written down.
+    b.goto('/proeve/praktisk')
+    b.until('!!document.querySelector("#checked")', what='the date it was checked')
+    assert '2026' in b.js('document.querySelector("#checked").textContent')
+    assert b.js('document.querySelectorAll("#sources a").length') >= 2, 'nothing to check it against'
+
+
+@check
+def the_exam_page_offers_the_practical_page(b):
+    only(['quiz'])
+    b.goto('/proeve')
+    b.until('!!document.querySelector("#go")', what='the chooser')
+    assert b.js('!!document.querySelector("a[href=\'/proeve/praktisk\']")'), \
+        'the exam page does not mention how to sit the real one'
+
+
+@check
 def every_page_carries_the_way_home(b):
     """The mark is the way back, so it is the same mark everywhere and it sits where a
     reader looks for it: first in the header, top left."""
-    for path in ('/', '/read', '/proeve'):
+    for path in ('/', '/read', '/proeve', '/proeve/praktisk'):
         b.goto(path)
         b.until('!!document.querySelector(".brand")', what='the brand on ' + path)
         assert b.js('document.querySelector(".brand").getAttribute("href")') == '/', path
@@ -912,7 +951,7 @@ def every_page_offers_the_same_languages(b):
     """A language offered on one page and missing on the next drops the reader back into
     Russian halfway through the site, and the fallback is silent."""
     try:
-        for path in ('/', '/read', '/proeve'):
+        for path in ('/', '/read', '/proeve', '/proeve/praktisk'):
             b.goto(path)
             b.until('!!document.querySelector(".lang")', what='the language switch on ' + path)
             assert offered_languages(b) == LANGUAGES, f'{path} offers {offered_languages(b)}'

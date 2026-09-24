@@ -502,4 +502,54 @@ final class ImportPipelineTest extends TestCase
 
         self::assertFalse((new EntrySegmenter())->boundariesAreClear($msg));
     }
+
+    // --- a split to show, not to apply ---------------------------------------
+
+    public function testTheProposedSplitBreaksAtEachLatinOpeningLine(): void
+    {
+        $msg = "at gå agurk — сойти с ума\nat slænge sig — развалиться\nat tage fejl — ошибаться";
+
+        $pieces = (new EntrySegmenter())->proposeSplit($msg);
+
+        self::assertCount(3, $pieces);
+        self::assertSame('at gå agurk — сойти с ума', $pieces[0]);
+        self::assertSame('at tage fejl — ошибаться', $pieces[2]);
+    }
+
+    public function testARussianLineStaysWithTheIdiomAbove(): void
+    {
+        // An explanation is not an idiom. Guessing otherwise is the lie this split
+        // is shown for rather than applied.
+        $msg = "at gå agurk\nИдиоматическое выражение, описывающее взрыв эмоций.\nat slænge sig\nРазвалиться.";
+
+        $pieces = (new EntrySegmenter())->proposeSplit($msg);
+
+        self::assertCount(2, $pieces);
+        self::assertStringContainsString('взрыв эмоций', $pieces[0]);
+    }
+
+    public function testTextWithOneHeadwordIsNotSplit(): void
+    {
+        $msg = "at gå agurk\nИдиоматическое выражение.";
+
+        self::assertCount(1, (new EntrySegmenter())->proposeSplit($msg));
+    }
+
+    public function testABoldHeadwordOpensAPieceToo(): void
+    {
+        $msg = self::B0 . 'at gå agurk' . self::B1 . " — сойти с ума\n"
+             . self::B0 . 'at slænge sig' . self::B1 . ' — развалиться';
+
+        self::assertCount(2, (new EntrySegmenter())->proposeSplit($msg));
+    }
+
+    public function testBlankLinesDoNotBecomePieces(): void
+    {
+        $msg = "at gå agurk — сойти с ума\n\nat slænge sig — развалиться\n";
+
+        $pieces = (new EntrySegmenter())->proposeSplit($msg);
+
+        self::assertCount(2, $pieces);
+        self::assertSame('at slænge sig — развалиться', $pieces[1]);
+    }
 }

@@ -20,6 +20,50 @@ namespace Dansk\Import;
 final class EntrySegmenter
 {
     /**
+     * A split to show a person, never one to apply on its own.
+     *
+     * Without U+200B there is nothing authoritative to cut on, so this guesses: a line
+     * opening with a Latin letter starts a piece, anything else belongs to the piece
+     * above. On the group's own posts that rule is right far more often than not, but
+     * "far more often" is exactly what must not be acted on unseen -- a Danish word
+     * opening a continuation line would silently become an idiom of its own.
+     *
+     * So the guess is rendered, numbered, and applied only once someone has looked at
+     * it. Whoever calls this owes the reader that look.
+     *
+     * @return list<string>
+     */
+    public function proposeSplit(string $text): array
+    {
+        $pieces  = [];
+        $current = null;
+
+        foreach (explode("\n", $text) as $line) {
+            $line = rtrim($line);
+            if (trim($line) === '') {
+                continue;
+            }
+
+            $opens = preg_match('/^\p{Latin}/u', trim(Text::stripBoldMarkers($line))) === 1;
+            if ($current === null || $opens) {
+                if ($current !== null) {
+                    $pieces[] = $current;
+                }
+                $current = $line;
+                continue;
+            }
+
+            $current .= "\n" . $line;
+        }
+
+        if ($current !== null) {
+            $pieces[] = $current;
+        }
+
+        return $pieces;
+    }
+
+    /**
      * Whether this text can be split with confidence.
      *
      * Splitting is decided by U+200B, which prefixes every structural line in the
