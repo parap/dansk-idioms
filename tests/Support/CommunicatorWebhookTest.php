@@ -75,7 +75,11 @@ final class CommunicatorWebhookTest extends TestCase
 
     private static function update(string $text, int $chatId = 158493465): array
     {
-        return ['message' => ['text' => $text, 'chat' => ['id' => $chatId]]];
+        return ['message' => [
+            'text' => $text,
+            'chat' => ['id' => $chatId],
+            'from' => ['id' => $chatId, 'first_name' => 'Alex'],
+        ]];
     }
 
     // --- what gets published -------------------------------------------------
@@ -242,7 +246,7 @@ final class CommunicatorWebhookTest extends TestCase
     {
         return ['callback_query' => [
             'id'      => 'cb-1',
-            'from'    => ['id' => $from],
+            'from'    => ['id' => $from, 'first_name' => 'Alex'],
             'data'    => $data,
             'message' => ['message_id' => 42, 'chat' => ['id' => 158493465]],
         ]];
@@ -274,6 +278,25 @@ final class CommunicatorWebhookTest extends TestCase
         self::assertSame("at gå agurk — сойти с ума\n\n#text", $posts[0][1]['text']);
         self::assertSame("at slænge sig — развалиться\n\n#text", $posts[1][1]['text']);
         self::assertCount(2, $this->stored, 'each piece is its own entry');
+    }
+
+    public function testTheAuthorReachesTheCorpusWhicheverWayItWasPublished(): void
+    {
+        // Both doors record the same person: the bot acts on nobody else's messages and
+        // answers nobody else's buttons, so whoever pressed is whoever wrote. A post
+        // stored without its author reports nothing -- the entry reads perfectly and
+        // only the byline is gone, which is why each door needs saying so out loud.
+        $this->ingest = function (array $message): void {
+            $this->stored[] = $message['from']['first_name'] ?? null;
+        };
+
+        $this->webhook()->handle(self::update('at spille'), 's3cret');
+        self::assertSame(['Alex'], $this->stored, 'straight through');
+
+        $token = $this->offerTwo();
+        $this->webhook()->handle(self::press('split:' . $token), 's3cret');
+
+        self::assertSame(['Alex', 'Alex', 'Alex'], $this->stored, 'and each split piece');
     }
 
     public function testPublishingWholeKeepsItOnePost(): void

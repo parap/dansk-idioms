@@ -162,7 +162,22 @@ final class CommunicatorWebhook
 
             if ($this->ingest !== null) {
                 try {
-                    ($this->ingest)(['text' => $part['text']], $published);
+                    ($this->ingest)(
+                        [
+                            'text' => $part['text'],
+                            // The press names the author. The bot acts on nobody else's
+                            // messages and answers nobody else's buttons, so whoever
+                            // pressed is whoever wrote. Left out, a split post joins the
+                            // corpus with no author at all and nothing reports it: the
+                            // entries read perfectly, only the byline is missing.
+                            'from' => $press['from'] ?? [],
+                            // The group post exists as of now, however long the draft
+                            // waited. Stated here rather than left to a fallback that
+                            // happens to give the same answer.
+                            'date' => time(),
+                        ],
+                        $published
+                    );
                 } catch (\Throwable $e) {
                     error_log('communicator: published but not stored -- ' . $e->getMessage());
                 }

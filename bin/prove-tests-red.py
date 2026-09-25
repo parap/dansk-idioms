@@ -172,6 +172,10 @@ FAULTS = [
   "        $correctIndex = null;",
   "integration:testOptionOrderIsDecidedPerSessionRatherThanByTheAuthor,"
   "testOptionOrderInAMistakesRoundIsDecidedPerRound"),
+ (153,"a split post loses its author","src/Support/CommunicatorWebhook.php",
+  "                            'from' => $press['from'] ?? [],",
+  "                            'from' => [],",
+  "unit:testTheAuthorReachesTheCorpusWhicheverWayItWasPublished"),
  (40,"a client response time is trusted","src/Domain/Reading/ReadingSessionService.php",
   "        $ms        = $responseMs === null ? null : max(0, min(self::MAX_RESPONSE_MS, $responseMs));",
   "        $ms        = $responseMs;","integration"),
