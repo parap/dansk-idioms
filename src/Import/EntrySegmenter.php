@@ -35,32 +35,55 @@ final class EntrySegmenter
      */
     public function proposeSplit(string $text): array
     {
-        $pieces  = [];
+        return array_map(
+            static fn(array $part): string => $part['text'],
+            $this->proposeSplitParts($text)
+        );
+    }
+
+    /**
+     * The same split, each piece knowing where it begins.
+     *
+     * The offset is what lets a bold span follow its own piece into its own post, and
+     * it is counted in UTF-16 units because that is what Telegram counts. Trailing
+     * whitespace is trimmed off a piece's text but still counted here: the position a
+     * piece starts at does not move because the line above ended untidily.
+     *
+     * @return list<array{text:string, offset:int}>
+     */
+    public function proposeSplitParts(string $text): array
+    {
+        $parts   = [];
         $current = null;
+        $offset  = 0;
 
         foreach (explode("\n", $text) as $line) {
-            $line = rtrim($line);
-            if (trim($line) === '') {
+            $units   = Text::utf16Length($line) + 1;   // the newline that followed it
+            $trimmed = rtrim($line);
+
+            if (trim($trimmed) === '') {
+                $offset += $units;
                 continue;
             }
 
-            $opens = preg_match('/^\p{Latin}/u', trim(Text::stripBoldMarkers($line))) === 1;
+            $opens = preg_match('/^\p{Latin}/u', trim(Text::stripBoldMarkers($trimmed))) === 1;
             if ($current === null || $opens) {
                 if ($current !== null) {
-                    $pieces[] = $current;
+                    $parts[] = $current;
                 }
-                $current = $line;
-                continue;
+                $current = ['text' => $trimmed, 'offset' => $offset];
+            } else {
+                $current['text'] .= "\n" . $trimmed;
             }
 
-            $current .= "\n" . $line;
+            $offset += $units;
         }
 
         if ($current !== null) {
-            $pieces[] = $current;
+            $parts[] = $current;
         }
 
-        return $pieces;
+        return $parts;
     }
 
     /**

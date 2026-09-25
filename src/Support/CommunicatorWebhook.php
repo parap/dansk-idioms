@@ -3,6 +3,7 @@
 namespace Dansk\Support;
 
 use Dansk\Import\EntrySegmenter;
+use Dansk\Import\Text;
 
 /**
  * One update from Telegram: decide, and publish only if everything held.
@@ -23,15 +24,15 @@ final class CommunicatorWebhook
     /**
      * @param ?\Closure $ingest    Given the message and the id it was published under,
      *                             puts it in the corpus. Null leaves the corpus alone.
-     * @param ?\Closure $keepDraft Given owner, text, entities and kind, holds them and
-     *                             returns a token. Null means no proposal can be made,
-     *                             so an unclear message is left unpublished and said so.
+     * @param ?Drafts   $drafts   Where a message waits for a decision. Null means no
+     *                             proposal can be made, so an unclear message is left
+     *                             unpublished and said so.
      */
     public function __construct(
         private BotApi $api,
         private array $settings,
         private ?\Closure $ingest = null,
-        private ?\Closure $keepDraft = null,
+        private ?Drafts $drafts = null,
         private EntrySegmenter $segmenter = new EntrySegmenter(),
     ) {
     }
@@ -43,6 +44,11 @@ final class CommunicatorWebhook
     {
         if (!Communicator::accepts($this->settings['secret'] ?? null, $offeredSecret)) {
             return 'refused';
+        }
+
+        $press = $update['callback_query'] ?? null;
+        if (is_array($press)) {
+            return $this->press($press);
         }
 
         $message = $update['message'] ?? null;
@@ -103,6 +109,97 @@ final class CommunicatorWebhook
     }
 
     /**
+     * A decision on a waiting message.
+     *
+     * The draft is claimed before anything is sent: publishing cannot be undone, so the
+     * second press has to find nothing left to act on. Rejecting the split is not a
+     * refusal -- it is a person saying "this is one thing", which is the answer the
+     * guess could not supply, so the corpus may then take it as one entry.
+     */
+    private function press(array $press): string
+    {
+        $owner = (string) ($this->settings['owner'] ?? '');
+        if ($owner === '' || (string) ($press['from']['id'] ?? '') !== $owner) {
+            return 'ignored';
+        }
+
+        [$action, $token] = array_pad(explode(':', (string) ($press['data'] ?? ''), 2), 2, '');
+        if (!in_array($action, ['split', 'whole'], true) || $token === '' || $this->drafts === null) {
+            return 'ignored';
+        }
+
+        $draft = $this->drafts->claim($token);
+        if ($draft === null) {
+            $this->acknowledge($press, 'Уже сделано');
+
+            return 'already_decided';
+        }
+
+        $group = (string) ($this->settings['group'] ?? '');
+        if ($group === '') {
+            $this->acknowledge($press, 'Группа не настроена');
+
+            return 'misconfigured';
+        }
+
+        $parts = $action === 'split'
+            ? $this->segmenter->proposeSplitParts($draft['text'])
+            : [['text' => $draft['text'], 'offset' => 0]];
+
+        foreach ($parts as $part) {
+            $published = $this->api->sendMessage(
+                $group,
+                Communicator::tagged($part['text'], $draft['kind']),
+                // Rebased to the piece: offsets count from the start of the whole text,
+                // and left alone Telegram would put the bold wherever those numbers
+                // land in the shorter post.
+                Communicator::sliceEntities(
+                    $draft['entities'],
+                    $part['offset'],
+                    Text::utf16Length($part['text'])
+                ),
+            );
+
+            if ($this->ingest !== null) {
+                try {
+                    ($this->ingest)(['text' => $part['text']], $published);
+                } catch (\Throwable $e) {
+                    error_log('communicator: published but not stored -- ' . $e->getMessage());
+                }
+            }
+        }
+
+        $this->acknowledge($press, count($parts) > 1 ? 'Опубликовала ' . count($parts) : 'Опубликовала');
+        $this->unbutton($press);
+
+        return 'published';
+    }
+
+    /** Failing to answer changes nothing about the posts, so it cannot be allowed to raise. */
+    private function acknowledge(array $press, string $text): void
+    {
+        try {
+            $this->api->answerCallback((string) ($press['id'] ?? ''), $text);
+        } catch (\Throwable $e) {
+            error_log('communicator: could not acknowledge -- ' . $e->getMessage());
+        }
+    }
+
+    /** A live button under a decision already made says the decision was not made. */
+    private function unbutton(array $press): void
+    {
+        try {
+            $this->api->editReplyMarkup(
+                (string) ($press['message']['chat']['id'] ?? ''),
+                (int) ($press['message']['message_id'] ?? 0),
+                ['inline_keyboard' => []],
+            );
+        } catch (\Throwable $e) {
+            error_log('communicator: could not take the buttons away -- ' . $e->getMessage());
+        }
+    }
+
+    /**
      * Show the split that would be made, and wait.
      *
      * Several headwords with no separator have no authoritative boundary. Acting on the
@@ -111,7 +208,7 @@ final class CommunicatorWebhook
      */
     private function offer(string $raw, array $message): string
     {
-        if ($this->keepDraft === null) {
+        if ($this->drafts === null) {
             $this->tell(
                 'Не опубликовала: в сообщении несколько идиом без невидимых'
                 . ' разделителей, и где кончается одна и начинается другая — непонятно.'
@@ -122,7 +219,7 @@ final class CommunicatorWebhook
         }
 
         $pieces = $this->segmenter->proposeSplit($raw);
-        $token  = ($this->keepDraft)(
+        $token  = $this->drafts->keep(
             (string) ($this->settings['owner'] ?? ''),
             $raw,
             $message['entities'] ?? [],

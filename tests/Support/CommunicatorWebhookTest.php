@@ -13,16 +13,44 @@ use PHPUnit\Framework\TestCase;
  * sent**, not by the returned value: a handler that refused and published anyway
  * would return exactly the same refusal.
  */
+/** A place to put a draft that is not a database. */
+final class FakeDrafts implements \Dansk\Support\Drafts
+{
+    public array $kept = [];
+    public array $claimable = [];
+
+    public function keep(string $ownerChatId, string $text, array $entities, string $kind): string
+    {
+        $token = '01JJJJJJJJJJJJJJJJJJJJJJJJ';
+        $this->kept[] = [$ownerChatId, $text, $kind];
+        $this->claimable[$token] = [
+            'text' => $text, 'entities' => $entities,
+            'kind' => $kind, 'owner_chat_id' => $ownerChatId,
+        ];
+
+        return $token;
+    }
+
+    public function claim(string $token): ?array
+    {
+        $draft = $this->claimable[$token] ?? null;
+        unset($this->claimable[$token]);
+
+        return $draft;
+    }
+}
+
 final class CommunicatorWebhookTest extends TestCase
 {
     private array $sent = [];
     private array $stored = [];
-    private array $drafted = [];
+    private ?\Dansk\Support\Drafts $drafts = null;
     private $ingest = null;
 
     private function webhook(array $overrides = []): CommunicatorWebhook
     {
-        $this->sent = [];
+        $this->sent   = [];
+        $this->drafts ??= new FakeDrafts();
         $api = new BotApi('токен', function (string $method, array $params): array {
             $this->sent[] = [$method, $params];
 
@@ -33,11 +61,7 @@ final class CommunicatorWebhookTest extends TestCase
             'secret' => 's3cret',
             'owner'  => '158493465',
             'group'  => '-5203885388',
-        ], $overrides), $this->ingest, function (string $owner, string $text, array $ents, string $kind): string {
-            $this->drafted[] = [$owner, $text, $kind];
-
-            return '01JJJJJJJJJJJJJJJJJJJJJJJJ';
-        });
+        ], $overrides), $this->ingest, $this->drafts);
     }
 
     /** Only what was posted to the group -- a note to the owner is a send too. */
@@ -210,5 +234,109 @@ final class CommunicatorWebhookTest extends TestCase
         $this->webhook()->handle(self::update('at spille'), 's3cret');
 
         self::assertCount(1, $this->toTheGroup());
+    }
+
+    // --- the press -------------------------------------------------------------
+
+    private static function press(string $data, int $from = 158493465): array
+    {
+        return ['callback_query' => [
+            'id'      => 'cb-1',
+            'from'    => ['id' => $from],
+            'data'    => $data,
+            'message' => ['message_id' => 42, 'chat' => ['id' => 158493465]],
+        ]];
+    }
+
+    private function offerTwo(): string
+    {
+        $this->webhook()->handle(
+            self::update("at gå agurk — сойти с ума\nat slænge sig — развалиться"),
+            's3cret'
+        );
+        $this->sent = [];
+
+        return '01JJJJJJJJJJJJJJJJJJJJJJJJ';
+    }
+
+    public function testSplittingPostsEachPieceOnItsOwn(): void
+    {
+        $this->ingest = function (array $message): void {
+            $this->stored[] = $message['text'];
+        };
+        $token = $this->offerTwo();
+
+        $outcome = $this->webhook()->handle(self::press('split:' . $token), 's3cret');
+
+        self::assertSame('published', $outcome);
+        $posts = $this->toTheGroup();
+        self::assertCount(2, $posts);
+        self::assertSame("at gå agurk — сойти с ума\n\n#text", $posts[0][1]['text']);
+        self::assertSame("at slænge sig — развалиться\n\n#text", $posts[1][1]['text']);
+        self::assertCount(2, $this->stored, 'each piece is its own entry');
+    }
+
+    public function testPublishingWholeKeepsItOnePost(): void
+    {
+        // Rejecting the split is a person saying "this is one thing" -- which is the
+        // answer the guess could not supply, so the corpus may take it as one entry.
+        $this->ingest = function (array $message): void {
+            $this->stored[] = $message['text'];
+        };
+        $token = $this->offerTwo();
+
+        $outcome = $this->webhook()->handle(self::press('whole:' . $token), 's3cret');
+
+        self::assertSame('published', $outcome);
+        self::assertCount(1, $this->toTheGroup());
+        self::assertCount(1, $this->stored);
+    }
+
+    public function testASecondPressPublishesNothingMore(): void
+    {
+        // The draft is claimed once. Publishing cannot be undone, so the second press
+        // must find nothing -- and be told so rather than left spinning.
+        $token = $this->offerTwo();
+        // One instance for both presses: the factory clears the record of what was
+        // sent, and a second call would wipe the very evidence under test.
+        $hook = $this->webhook();
+        $hook->handle(self::press('split:' . $token), 's3cret');
+        $before = count($this->toTheGroup());
+
+        $outcome = $hook->handle(self::press('split:' . $token), 's3cret');
+
+        self::assertSame('already_decided', $outcome);
+        self::assertCount($before, $this->toTheGroup());
+    }
+
+    public function testAPressFromAnyoneElseDoesNothing(): void
+    {
+        $token = $this->offerTwo();
+
+        $outcome = $this->webhook()->handle(self::press('split:' . $token, 99), 's3cret');
+
+        self::assertSame('ignored', $outcome);
+        self::assertSame([], $this->toTheGroup());
+    }
+
+    public function testAPressIsAlwaysAcknowledged(): void
+    {
+        // Unanswered, Telegram spins for half a minute and invites a second press.
+        $token = $this->offerTwo();
+
+        $this->webhook()->handle(self::press('split:' . $token), 's3cret');
+
+        $answers = array_filter($this->sent, static fn(array $c): bool => $c[0] === 'answerCallbackQuery');
+        self::assertCount(1, $answers);
+    }
+
+    public function testTheButtonsAreTakenAwayAfterwards(): void
+    {
+        $token = $this->offerTwo();
+
+        $this->webhook()->handle(self::press('whole:' . $token), 's3cret');
+
+        $edits = array_filter($this->sent, static fn(array $c): bool => $c[0] === 'editMessageReplyMarkup');
+        self::assertCount(1, $edits, 'a live button says the decision was not made');
     }
 }

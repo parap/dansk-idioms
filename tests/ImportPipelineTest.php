@@ -552,4 +552,39 @@ final class ImportPipelineTest extends TestCase
         self::assertCount(2, $pieces);
         self::assertSame('at slænge sig — развалиться', $pieces[1]);
     }
+
+    public function testEachPieceKnowsWhereItStarts(): void
+    {
+        // Offsets are what let a bold span follow its own piece into its own post.
+        // Counted in UTF-16 units, because that is what Telegram counts.
+        $msg = "at gå agurk\nat slænge sig";
+
+        $parts = (new EntrySegmenter())->proposeSplitParts($msg);
+
+        self::assertSame(0, $parts[0]['offset']);
+        self::assertSame(12, $parts[1]['offset'], 'eleven characters and the newline');
+    }
+
+    public function testAnEmojiMakesThePieceAfterItStartTwoUnitsLater(): void
+    {
+        // A surrogate pair counts as two. Counting characters here would put every
+        // bold span after the emoji on the wrong word, and nothing would say so.
+        $msg = "at gå agurk 🙂\nat slænge sig";
+
+        $parts = (new EntrySegmenter())->proposeSplitParts($msg);
+
+        self::assertSame(15, $parts[1]['offset']);
+    }
+
+    public function testThePiecesStillReadTheSame(): void
+    {
+        $msg = "at gå agurk — сойти с ума\nat slænge sig — развалиться";
+
+        $parts = (new EntrySegmenter())->proposeSplitParts($msg);
+
+        self::assertSame(
+            (new EntrySegmenter())->proposeSplit($msg),
+            array_map(static fn(array $p): string => $p['text'], $parts)
+        );
+    }
 }

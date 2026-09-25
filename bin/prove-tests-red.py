@@ -441,6 +441,18 @@ FAULTS = [
  (147,"webhook: the note goes to the group instead of the owner","src/Support/CommunicatorWebhook.php",
   "        $owner = (string) ($this->settings['owner'] ?? '');",
   "        $owner = (string) ($this->settings['group'] ?? '');","unit"),
+ (149,"webhook: anyone's press is obeyed","src/Support/CommunicatorWebhook.php",
+  "        if ($owner === '' || (string) ($press['from']['id'] ?? '') !== $owner) {",
+  "        if (false) {","unit"),
+ (150,"webhook: a claimed draft is acted on twice","src/Support/CommunicatorWebhook.php",
+  "        if ($draft === null) {\n            $this->acknowledge($press, 'Уже сделано');\n\n            return 'already_decided';\n        }",
+  "        $draft ??= ['text' => '', 'entities' => [], 'kind' => 'text', 'owner_chat_id' => ''];","unit"),
+ (151,"communicator: a piece's formatting keeps the whole text's offsets","src/Support/Communicator.php",
+  "            $entity['offset'] = $lo - $start;",
+  "            $entity['offset'] = $lo;","unit"),
+ (152,"webhook: splitting publishes one post anyway","src/Support/CommunicatorWebhook.php",
+  "            ? $this->segmenter->proposeSplitParts($draft['text'])",
+  "            ? [['text' => $draft['text'], 'offset' => 0]]","unit"),
 ]
 
 def run(suite):

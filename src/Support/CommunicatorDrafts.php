@@ -11,7 +11,7 @@ namespace Dansk\Support;
  * the entities that say which words are bold, which is a quarter of what this corpus
  * splits on. So the text is kept verbatim and the rendered list is only a view of it.
  */
-final class CommunicatorDrafts
+final class CommunicatorDrafts implements Drafts
 {
     /** @param array<int,array<string,mixed>> $entities */
     public function keep(string $ownerChatId, string $text, array $entities, string $kind): string

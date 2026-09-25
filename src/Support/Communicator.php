@@ -2,6 +2,8 @@
 
 namespace Dansk\Support;
 
+use Dansk\Import\Text;
+
 /**
  * What the publisher bot decides before anything reaches Telegram.
  *
@@ -125,12 +127,42 @@ final class Communicator
      */
     public static function utf16Length(string $text): int
     {
-        $units = 0;
-        foreach (preg_split('//u', $text, -1, PREG_SPLIT_NO_EMPTY) ?: [] as $char) {
-            $units += mb_ord($char, 'UTF-8') >= 0x10000 ? 2 : 1;
+        return Text::utf16Length($text);
+    }
+
+    /**
+     * The entities belonging to one piece, rebased to it.
+     *
+     * When a message is split into several posts, a bold span has to follow its own
+     * piece: offsets are counted from the start of the whole text, and left as they
+     * are Telegram would place them wherever those numbers happen to land in the
+     * shorter post -- on whatever words sit there.
+     *
+     * A span crossing a boundary is cut at it rather than dropped: half a bold phrase
+     * is wrong in a way a reader sees, while a missing one is wrong in a way nobody
+     * does.
+     *
+     * @param array<int,array<string,mixed>> $entities
+     * @return array<int,array<string,mixed>>
+     */
+    public static function sliceEntities(array $entities, int $start, int $length): array
+    {
+        $end  = $start + $length;
+        $kept = [];
+        foreach ($entities as $entity) {
+            $from = (int) ($entity['offset'] ?? 0);
+            $to   = $from + (int) ($entity['length'] ?? 0);
+            $lo   = max($from, $start);
+            $hi   = min($to, $end);
+            if ($hi <= $lo) {
+                continue;
+            }
+            $entity['offset'] = $lo - $start;
+            $entity['length'] = $hi - $lo;
+            $kept[] = $entity;
         }
 
-        return $units;
+        return $kept;
     }
 
     /**

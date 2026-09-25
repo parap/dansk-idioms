@@ -9,6 +9,7 @@ use Dansk\Controller\ReadingController;
 use Dansk\Http\Response;
 use Dansk\Support\AdminReach;
 use Dansk\Support\BotApi;
+use Dansk\Support\CommunicatorDrafts;
 use Dansk\Support\CommunicatorIngest;
 use Dansk\Support\CommunicatorWebhook;
 use Dansk\Support\Config;
@@ -135,7 +136,8 @@ try {
                 $hook = new CommunicatorWebhook(
                     new BotApi($settings['token'] ?? null),
                     $settings,
-                    (new CommunicatorIngest((string) ($settings['source'] ?? '')))(...)
+                    (new CommunicatorIngest((string) ($settings['source'] ?? '')))(...),
+                    new CommunicatorDrafts()
                 );
                 $outcome = $hook->handle(
                     $body,

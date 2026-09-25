@@ -13,6 +13,23 @@ final class Text
 {
     public const ZWSP = "\u{200B}";
 
+    /**
+     * Length in UTF-16 code units -- what Telegram counts entity offsets in.
+     *
+     * Not characters. A Danish letter is one unit; an emoji is a surrogate pair and
+     * counts as two. Measure in characters and every span after an emoji lands on the
+     * wrong word, with nothing to report it.
+     */
+    public static function utf16Length(string $text): int
+    {
+        $units = 0;
+        foreach (preg_split('//u', $text, -1, PREG_SPLIT_NO_EMPTY) ?: [] as $char) {
+            $units += mb_ord($char, 'UTF-8') >= 0x10000 ? 2 : 1;
+        }
+
+        return $units;
+    }
+
     /** Sentinels marking where <strong> ran, so bold survives plain-text processing. */
     public const BOLD_OPEN  = "\x02";
     public const BOLD_CLOSE = "\x03";

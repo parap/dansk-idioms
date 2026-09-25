@@ -185,6 +185,49 @@ final class CommunicatorTest extends TestCase
         self::assertSame('whole:01JJJJJJJJJJJJJJJJJJJJJJJJ', $keyboard['inline_keyboard'][1][0]['callback_data']);
     }
 
+    // --- formatting follows its own piece -------------------------------------
+
+    public function testAnEntityInsideAPieceIsRebasedToIt(): void
+    {
+        // The second post starts at offset 12 in the original; a bold span at 12 is at
+        // the start of its own post, not twelve units into it.
+        $entities = [['type' => 'bold', 'offset' => 12, 'length' => 13]];
+
+        $sliced = Communicator::sliceEntities($entities, 12, 13);
+
+        self::assertSame(0, $sliced[0]['offset']);
+        self::assertSame(13, $sliced[0]['length']);
+    }
+
+    public function testAnEntityBelongingToAnotherPieceIsDropped(): void
+    {
+        // Left in, Telegram would place it somewhere inside this post -- on whatever
+        // words happen to sit there.
+        $entities = [['type' => 'bold', 'offset' => 40, 'length' => 5]];
+
+        self::assertSame([], Communicator::sliceEntities($entities, 0, 11));
+    }
+
+    public function testAnEntityCrossingTheBoundaryIsCutAtIt(): void
+    {
+        $entities = [['type' => 'bold', 'offset' => 8, 'length' => 10]];
+
+        $sliced = Communicator::sliceEntities($entities, 0, 11);
+
+        self::assertSame(8, $sliced[0]['offset']);
+        self::assertSame(3, $sliced[0]['length']);
+    }
+
+    public function testAnEntityStartingBeforeThePieceKeepsOnlyItsTail(): void
+    {
+        $entities = [['type' => 'bold', 'offset' => 5, 'length' => 20]];
+
+        $sliced = Communicator::sliceEntities($entities, 12, 13);
+
+        self::assertSame(0, $sliced[0]['offset']);
+        self::assertSame(13, $sliced[0]['length']);
+    }
+
     private static function message(string $text, int $chatId = 4242): array
     {
         return ['text' => $text, 'chat' => ['id' => $chatId]];
