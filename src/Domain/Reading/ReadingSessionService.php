@@ -42,6 +42,25 @@ final class ReadingSessionService
     /** A paper draws one text of each task type, in the order the exam presents them. */
     private const EXAM_KINDS = self::READING_KINDS;
 
+    /**
+     * Which questions a reader may be served, as SQL over `reading_items i`.
+     *
+     * A question withdrawn from service or reported as wrong must not reach a reader
+     * through any door -- a fresh round, an exam paper, a mistakes round, or the count a
+     * pass mark is measured against. Being stated once is what makes that true: a second
+     * copy of the condition is a door that stays open when this one is narrowed, and it
+     * also makes the rule look guarded when only the other copy is under test.
+     */
+    private const SERVABLE = 'i.is_active = 1 AND i.is_flagged = 0';
+
+    /**
+     * Which texts a reader may be served, as SQL over `reading_passages p`.
+     *
+     * An unpublished text is a draft: it is still being written, and its questions may
+     * have no settled answer yet. One copy, for the reason above.
+     */
+    private const PUBLISHED = 'p.is_published = 1';
+
     public function __construct(private GradeScale $grades = new GradeScale()) {}
 
     /**
@@ -190,8 +209,8 @@ final class ReadingSessionService
                JOIN reading_items i ON i.id = si.item_id
                JOIN reading_passages p ON p.id = i.passage_id
               WHERE s.status = 'submitted' AND {$who('')}
-                AND i.is_active = 1 AND i.is_flagged = 0
-                AND p.is_published = 1 AND p.kind IN ({$marks})
+                AND " . self::SERVABLE . "
+                AND " . self::PUBLISHED . " AND p.kind IN ({$marks})
                 AND COALESCE(si.is_correct, 0) = 0
                 AND si.id = (
                     SELECT si2.id FROM reading_session_items si2
@@ -234,19 +253,12 @@ final class ReadingSessionService
             $options = $item['kind'] === 'insert'
                 ? $this->bankOptions((int) $item['passage_id'])
                 : $this->itemOptions((int) $item['id']);
-            shuffle($options);
 
-            $correctIndex = null;
-            $payload      = [];
-            foreach ($options as $i => $option) {
-                $payload[] = ['i' => $i, 'ref' => (int) $option['id'], 'text' => $option['text']];
-                if ((int) $option['id'] === (int) $item['correct_option_id']) {
-                    $correctIndex = $i;
-                }
-            }
-            if ($correctIndex === null) {
-                throw new RuntimeException('Item ' . $itemId . ' has no correct option among its choices.');
-            }
+            [$payload, $correctIndex] = self::layOutOptions(
+                $options,
+                (int) $item['correct_option_id'],
+                'Item ' . $itemId
+            );
 
             $position++;
             Db::execute(
@@ -589,8 +601,8 @@ final class ReadingSessionService
         }
 
         $paperQuestions = (int) Db::fetchValue(
-            'SELECT COUNT(*) FROM reading_items
-              WHERE passage_id = ? AND is_active = 1 AND is_flagged = 0',
+            'SELECT COUNT(*) FROM reading_items i
+              WHERE i.passage_id = ? AND ' . self::SERVABLE,
             [(int) $row['passage_id']]
         );
 
@@ -626,11 +638,11 @@ final class ReadingSessionService
 
         $passage = Db::fetchOne(
             'SELECT p.id, p.kind FROM reading_passages p
-             WHERE p.is_published = 1
+             WHERE ' . self::PUBLISHED . '
                AND p.kind IN (' . $kinds . ')
                AND (? IS NULL OR p.kind = ?)
                AND EXISTS (SELECT 1 FROM reading_items i
-                            WHERE i.passage_id = p.id AND i.is_active = 1 AND i.is_flagged = 0)
+                            WHERE i.passage_id = p.id AND ' . self::SERVABLE . ')
              ORDER BY RAND() LIMIT 1',
             [$kind, $kind]
         );
@@ -647,11 +659,11 @@ final class ReadingSessionService
     {
         $passage = Db::fetchOne(
             'SELECT p.id, p.kind FROM reading_passages p
-             WHERE p.is_published = 1
+             WHERE ' . self::PUBLISHED . '
                AND p.kind = ?
                AND (? IS NULL OR p.slug = ?)
                AND EXISTS (SELECT 1 FROM reading_items i
-                            WHERE i.passage_id = p.id AND i.is_active = 1 AND i.is_flagged = 0)
+                            WHERE i.passage_id = p.id AND ' . self::SERVABLE . ')
              ORDER BY RAND() LIMIT 1',
             [self::PAPER_KIND, $slug, $slug]
         );
@@ -666,8 +678,8 @@ final class ReadingSessionService
     }
 
     /**
-     * Freezes the paper. Option order is decided here, once per session, so an authored
-     * order cannot be memorised across attempts and the stored index stays meaningful.
+     * Freezes the paper: every item is written into the session with its options already
+     * laid out, before any of it is served. `layOutOptions` decides that layout.
      */
     private function materialise(
         int $sessionId,
@@ -687,28 +699,19 @@ final class ReadingSessionService
         }
 
         $items = Db::fetchAll(
-            'SELECT id, position, points, correct_option_id FROM reading_items
-             WHERE passage_id = ? AND is_active = 1 AND is_flagged = 0' . $where . ' ORDER BY position',
+            'SELECT i.id, i.position, i.points, i.correct_option_id FROM reading_items i
+             WHERE i.passage_id = ? AND ' . self::SERVABLE . $where . ' ORDER BY i.position',
             $args
         );
 
         $bank = $kind === 'insert' ? $this->bankOptions($passageId) : null;
 
         foreach ($items as $item) {
-            $options = $bank ?? $this->itemOptions((int) $item['id']);
-            shuffle($options);
-
-            $correctIndex = null;
-            $payload      = [];
-            foreach ($options as $i => $option) {
-                $payload[] = ['i' => $i, 'ref' => (int) $option['id'], 'text' => $option['text']];
-                if ((int) $option['id'] === (int) $item['correct_option_id']) {
-                    $correctIndex = $i;
-                }
-            }
-            if ($correctIndex === null) {
-                throw new RuntimeException('Item ' . $item['position'] . ' has no correct option among its choices.');
-            }
+            [$payload, $correctIndex] = self::layOutOptions(
+                $bank ?? $this->itemOptions((int) $item['id']),
+                (int) $item['correct_option_id'],
+                'Item ' . $item['position']
+            );
 
             $position++;
             Db::execute(
@@ -724,6 +727,39 @@ final class ReadingSessionService
         }
 
         return [$pointsMax, $position];
+    }
+
+    /**
+     * Lays out an item's options in the order this session will serve them, and says
+     * which position the right answer landed in.
+     *
+     * The order is decided once, when the session is materialised, and stored with it.
+     * An authored order is memorisable across attempts, and the stored index is what a
+     * later answer is graded against -- so the order and the index have to be settled in
+     * the same breath, by whoever builds the row. Shuffling at serve time would grade
+     * against a layout the reader never saw.
+     *
+     * @param  list<array<string,mixed>> $options
+     * @param  string $item                       Names the item if it has no right answer
+     * @return array{0: list<array<string,mixed>>, 1: int}
+     */
+    private static function layOutOptions(array $options, int $correctOptionId, string $item): array
+    {
+        shuffle($options);
+
+        $correctIndex = null;
+        $payload      = [];
+        foreach ($options as $i => $option) {
+            $payload[] = ['i' => $i, 'ref' => (int) $option['id'], 'text' => $option['text']];
+            if ((int) $option['id'] === $correctOptionId) {
+                $correctIndex = $i;
+            }
+        }
+        if ($correctIndex === null) {
+            throw new RuntimeException($item . ' has no correct option among its choices.');
+        }
+
+        return [$payload, $correctIndex];
     }
 
     /** @return list<array<string,mixed>> */

@@ -155,14 +155,23 @@ FAULTS = [
  (36,"the option row id reaches the client","src/Domain/Reading/ReadingSessionService.php",
   "            $out[] = ['index' => (int) $option['i'], 'text' => (string) $option['text']];",
   "            $out[] = ['index' => (int) $option['i'], 'text' => (string) $option['text'], 'ref' => $option['ref']];","integration"),
- (37,"an unpublished passage is served","src/Domain/Reading/ReadingSessionService.php",
-  "            'SELECT p.id, p.kind FROM reading_passages p\n             WHERE p.is_published = 1",
-  "            'SELECT p.id, p.kind FROM reading_passages p\n             WHERE 1 = 1","integration"),
- (38,"a flagged item is still served","src/Domain/Reading/ReadingSessionService.php",
-  "             WHERE passage_id = ? AND is_active = 1 AND is_flagged = 0 ORDER BY position',",
-  "             WHERE passage_id = ? AND 1 = 1 ORDER BY position',","integration"),
+ # Each of the next three states a rule that every door into a reading round shares, so
+ # one injection reaches all of them at once and each door answers with its own witness.
+ (37,"an unpublished text is served","src/Domain/Reading/ReadingSessionService.php",
+  "    private const PUBLISHED = 'p.is_published = 1';",
+  "    private const PUBLISHED = '1 = 1';",
+  "integration:testAnUnpublishedPassageIsNeverServed,testAnUnpublishedPaperIsNeverSat,"
+  "testAnUnpublishedTextsQuestionDoesNotComeBackAsAMistake"),
+ (38,"a withdrawn or flagged question is served","src/Domain/Reading/ReadingSessionService.php",
+  "    private const SERVABLE = 'i.is_active = 1 AND i.is_flagged = 0';",
+  "    private const SERVABLE = '1 = 1';",
+  "integration:testAFlaggedItemIsLeftOutAndTheTotalDropsWithIt,"
+  "testAFlaggedQuestionDoesNotComeBackAsAMistake"),
  (39,"options are served in authored order","src/Domain/Reading/ReadingSessionService.php",
-  "            shuffle($options);","            // order left as authored","integration"),
+  "        shuffle($options);\n\n        $correctIndex = null;",
+  "        $correctIndex = null;",
+  "integration:testOptionOrderIsDecidedPerSessionRatherThanByTheAuthor,"
+  "testOptionOrderInAMistakesRoundIsDecidedPerRound"),
  (40,"a client response time is trusted","src/Domain/Reading/ReadingSessionService.php",
   "        $ms        = $responseMs === null ? null : max(0, min(self::MAX_RESPONSE_MS, $responseMs));",
   "        $ms        = $responseMs;","integration"),
@@ -455,16 +464,48 @@ FAULTS = [
   "            ? [['text' => $draft['text'], 'offset' => 0]]","unit"),
 ]
 
+def phpunit(*args):
+    return subprocess.run(
+        ["docker-compose","exec","-T","app","vendor/bin/phpunit",*args],
+        cwd=ROOT, capture_output=True, text=True,
+    )
+
 def run(suite):
+    """
+    Does anything still pass that should not, with the fault in place?
+
+    `suite` is a suite name, optionally followed by `:` and the tests that must each
+    notice this fault on their own. A rule stated in one place is broken in one place,
+    so a whole-suite run reports the first door that noticed and says nothing about the
+    rest -- including a door whose test was deleted or renamed, which leaves that door
+    unwatched while the run still reports the rule as guarded. Naming one witness per
+    door is what keeps them individually accountable.
+
+    Returns (green, why): green is True when the fault went unnoticed, and why names
+    the witness that let it through.
+    """
     # The interface checks drive a real browser, so they answer to a different runner.
     # Without them a rendering fault -- an escape that stopped escaping, a button that
     # stopped disabling -- is invisible to every suite in the repo.
     if suite == "ui":
-        cmd = [sys.executable, str(ROOT/"bin"/"ui-tests.py")]
-    else:
-        cmd = ["docker-compose","exec","-T","app","vendor/bin/phpunit","--testsuite",suite]
-    r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-    return r.returncode == 0
+        r = subprocess.run([sys.executable, str(ROOT/"bin"/"ui-tests.py")],
+                           cwd=ROOT, capture_output=True, text=True)
+        return r.returncode == 0, None
+
+    name, _, witnesses = suite.partition(':')
+    if witnesses == '':
+        return phpunit("--testsuite", name).returncode == 0, None
+
+    for test in witnesses.split(','):
+        r = phpunit("--testsuite", name, "--filter", test)
+        # A filter matching nothing passes, which would read as a surviving fault and
+        # send the reader hunting for a missing guard instead of a renamed test.
+        if "No tests executed" in r.stdout:
+            return True, f"no test named {test}"
+        if r.returncode == 0:
+            return True, f"{test} did not notice"
+
+    return False, None
 
 # Selecting faults keeps a run on the code being worked on short enough to actually run:
 # the integration suite takes half a minute, and the whole list is most of an hour. A
@@ -543,17 +584,17 @@ for num, name, relpath, old, new, suite in FAULTS:
             print(f"  {num:2d}. {name:34s} THE EDIT DID NOT LAND")
             skipped.append((num, name, "the edit did not land"))
             continue
-        green = run(suite)
+        green, why = run(suite)
         verdict = "SURVIVED (green)" if green else "caught (red)"
-        if green: survived.append((num, name))
-        print(f"  {num:2d}. {name:34s} {verdict}")
+        if green: survived.append((num, name, why))
+        print(f"  {num:2d}. {name:34s} {verdict}{'' if why is None else f' — {why}'}")
     finally:
         restore_pending()
 
 print()
 if survived:
     print("  FAULTS THAT SURVIVED:")
-    for n, s in survived: print(f"    {n}. {s}")
+    for n, s, why in survived: print(f"    {n}. {s}{'' if why is None else f' — {why}'}")
 if skipped:
     print("  FAULTS THAT WERE NEVER APPLIED:")
     for n, s, why in skipped: print(f"    {n}. {s} — {why}")

@@ -190,4 +190,52 @@ final class MistakesRoundTest extends IntegrationTestCase
         // A handful of questions is not the paper, so it gets no verdict of its own.
         self::assertNull($result['verdict']);
     }
+
+    // ---- what a mistakes round may serve -----------------------------------
+
+    public function testAFlaggedQuestionDoesNotComeBackAsAMistake(): void
+    {
+        // A question pulled for being wrong is still a question withdrawn from use.
+        // Serving it here would put the one item somebody flagged in front of the one
+        // learner most likely to trip over it again.
+        $sid     = $this->sit(self::MINE, [1, 2]);
+        $flagged = $this->itemIdAt($sid, 1);
+        $kept    = $this->itemIdAt($sid, 2);
+        Db::execute('UPDATE reading_items SET is_flagged = 1 WHERE id = ?', [$flagged]);
+
+        $waiting = $this->waiting();
+
+        self::assertNotContains($flagged, $waiting);
+        self::assertContains($kept, $waiting, 'the other mistake still waits');
+    }
+
+    public function testAnUnpublishedTextsQuestionDoesNotComeBackAsAMistake(): void
+    {
+        // A text pulled from publication is being rewritten, and its answers may move
+        // with it. A mistakes round is the one door that already knows each question by
+        // id, so it could keep serving them without ever consulting the text again.
+        $this->sit(self::MINE, [1, 2]);
+        self::assertSame(2, $this->service->mistakesWaiting(null, self::MINE, self::QUIZ));
+
+        Db::execute('UPDATE reading_passages SET is_published = 0 WHERE slug = ?', [$this->slug]);
+
+        self::assertSame(0, $this->service->mistakesWaiting(null, self::MINE, self::QUIZ));
+    }
+
+    public function testOptionOrderInAMistakesRoundIsDecidedPerRound(): void
+    {
+        // Going over a question a second time is exactly when remembering "it was the
+        // third one" would pass for knowing the answer.
+        $this->sit(self::MINE, [1]);
+
+        $orders = [];
+        for ($i = 0; $i < 20; $i++) {
+            $round = $this->service->session(
+                $this->service->startMistakes(null, self::MINE, self::QUIZ)['session_id']
+            );
+            $orders[] = implode('|', array_column($round['items'][0]['options'], 'text'));
+        }
+
+        self::assertGreaterThan(1, count(array_unique($orders)));
+    }
 }
