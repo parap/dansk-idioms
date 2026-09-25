@@ -15,6 +15,13 @@ that silently fails to apply leaves the suite running against unmodified code, a
 
     python3 bin/prove-tests-red.py            # every fault
     python3 bin/prove-tests-red.py 94-99 12   # only those, while working on them
+    python3 bin/prove-tests-red.py --anchors  # seconds: does the list still fit the code
+
+A fault may name the tests that must each go red on their own, written after the suite as
+`unit:testOne,testTwo`. A rule stated in one place is broken in one place, so a whole-suite
+run reports the first door that noticed and says nothing about the others -- including a
+door whose test has since been deleted. `--anchors` checks that every anchor still names
+exactly one site and every named witness still exists, and deploy.sh calls it.
 
 Restores every file it touches, including on failure and on a kill it cannot catch.
 """
@@ -417,15 +424,16 @@ FAULTS = [
   "        if (!Communicator::accepts($this->settings['secret'] ?? null, $offeredSecret)) {",
   "        if (false) {","unit"),
  (134,"webhook: anyone's message is published","src/Support/CommunicatorWebhook.php",
-  "        if (!Communicator::fromOwner($message, $this->settings['owner'] ?? null)) {",
+  "        if (!Communicator::fromOwner($message, $this->owner())) {",
   "        if (false) {","unit"),
  (135,"webhook: an empty post reaches the group","src/Support/CommunicatorWebhook.php",
   "        if (trim($raw) === '') {","        if (false) {","unit"),
  (136,"webhook: publishes with no group configured","src/Support/CommunicatorWebhook.php",
-  "        if ($group === '') {","        if (false) {","unit"),
+  "        return $group === '' ? null : $group;","        return $group;",
+  "unit:testAnUnconfiguredGroupPublishesNothing,testAPressWithNoGroupConfiguredPublishesNothing"),
  (137,"webhook: a service update is treated as a post","src/Support/CommunicatorWebhook.php",
   "        if (!is_array($message)) {","        if (false) {","unit"),
- (138,"communicator: offsets counted in characters, not UTF-16 units","src/Support/Communicator.php",
+ (138,"communicator: offsets counted in characters, not UTF-16 units","src/Import/Text.php",
   "            $units += mb_ord($char, 'UTF-8') >= 0x10000 ? 2 : 1;",
   "            $units += 1;","unit"),
  (139,"communicator: an entity running past the text is kept","src/Support/Communicator.php",
@@ -452,10 +460,10 @@ FAULTS = [
   "            $this->tell(\n                'Не опубликовала: в сообщении несколько идиом без невидимых'",
   "            $this->silence(\n                'Не опубликовала: в сообщении несколько идиом без невидимых'","unit"),
  (147,"webhook: the note goes to the group instead of the owner","src/Support/CommunicatorWebhook.php",
-  "        $owner = (string) ($this->settings['owner'] ?? '');",
-  "        $owner = (string) ($this->settings['group'] ?? '');","unit"),
+  "            $this->api->sendMessage($owner, $text);",
+  "            $this->api->sendMessage((string) $this->group(), $text);","unit"),
  (149,"webhook: anyone's press is obeyed","src/Support/CommunicatorWebhook.php",
-  "        if ($owner === '' || (string) ($press['from']['id'] ?? '') !== $owner) {",
+  "        if ($owner === null || (string) ($press['from']['id'] ?? '') !== $owner) {",
   "        if (false) {","unit"),
  (150,"webhook: a claimed draft is acted on twice","src/Support/CommunicatorWebhook.php",
   "        if ($draft === null) {\n            $this->acknowledge($press, 'Уже сделано');\n\n            return 'already_decided';\n        }",
@@ -511,12 +519,22 @@ def run(suite):
 
     return False, None
 
+# Whether every anchor still names exactly one site, without running a single test.
+#
+# A fault whose anchor stops matching is not injected, and the rule it was written for is
+# then guarded by nothing while the run it was left out of still reports success. Only a
+# whole-list run notices, and a whole-list run is most of an hour, so in practice it is
+# not the thing standing between a refactor and a deploy. This check is seconds, reads no
+# test output, and is what deploy.sh calls.
+args = [a for a in sys.argv[1:] if a != '--anchors']
+anchors_only = '--anchors' in sys.argv[1:]
+
 # Selecting faults keeps a run on the code being worked on short enough to actually run:
 # the integration suite takes half a minute, and the whole list is most of an hour. A
 # selective run is a development aid -- the gate before a commit is the unselected one.
-if len(sys.argv) > 1:
+if args:
     wanted = set()
-    for arg in sys.argv[1:]:
+    for arg in args:
         lo, _, hi = arg.partition('-')
         try:
             wanted.update(range(int(lo), int(hi or lo) + 1))
@@ -541,6 +559,31 @@ if ambiguous:
         print(f"    {num}. {name} — {found} in {relpath}")
     print("\n  Nothing was injected. Re-derive each anchor from the current source.")
     sys.exit(1)
+
+if anchors_only:
+    # A witness that no longer exists reads as a surviving fault, which is loud -- but
+    # only to whoever runs that fault. Asking PHPUnit what it can see costs one call per
+    # suite and names the drift here instead, where the anchors are already being
+    # checked. PHPUnit is asked rather than the test files read, so a witness inherited
+    # from a base class still counts.
+    unknown = []
+    for wanted_suite in sorted({s.partition(':')[0] for _, _, _, _, _, s in FAULTS if ':' in s}):
+        listed = phpunit("--testsuite", wanted_suite, "--list-tests").stdout
+        known = {line.rpartition('::')[2].strip() for line in listed.splitlines() if '::' in line}
+        for num, name, _, _, _, s in FAULTS:
+            head, _, witnesses = s.partition(':')
+            if head != wanted_suite or witnesses == '':
+                continue
+            unknown += [(num, name, w) for w in witnesses.split(',') if w not in known]
+    if unknown:
+        print("  NAMED WITNESSES THAT NO LONGER EXIST:")
+        for num, name, w in unknown:
+            print(f"    {num}. {name} — no test named {w}")
+        sys.exit(1)
+
+    print(f"  every anchor names exactly one site, every witness exists"
+          f" ({len(FAULTS)} faults)")
+    sys.exit(0)
 
 # The working tree must never be left holding an injected fault. A signal arriving
 # mid-run would otherwise leave a deliberately broken line in a source file with nothing

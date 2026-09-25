@@ -58,7 +58,7 @@ final class CommunicatorWebhook
             return 'ignored';
         }
 
-        if (!Communicator::fromOwner($message, $this->settings['owner'] ?? null)) {
+        if (!Communicator::fromOwner($message, $this->owner())) {
             return 'ignored';
         }
 
@@ -70,10 +70,8 @@ final class CommunicatorWebhook
             return 'ignored';
         }
 
-        $group = (string) ($this->settings['group'] ?? '');
-        if ($group === '') {
-            // With no group address the chat_id would go out empty and Telegram would
-            // refuse -- after the handler had already counted the work as done.
+        $group = $this->group();
+        if ($group === null) {
             return 'misconfigured';
         }
 
@@ -118,8 +116,8 @@ final class CommunicatorWebhook
      */
     private function press(array $press): string
     {
-        $owner = (string) ($this->settings['owner'] ?? '');
-        if ($owner === '' || (string) ($press['from']['id'] ?? '') !== $owner) {
+        $owner = $this->owner();
+        if ($owner === null || (string) ($press['from']['id'] ?? '') !== $owner) {
             return 'ignored';
         }
 
@@ -135,8 +133,8 @@ final class CommunicatorWebhook
             return 'already_decided';
         }
 
-        $group = (string) ($this->settings['group'] ?? '');
-        if ($group === '') {
+        $group = $this->group();
+        if ($group === null) {
             $this->acknowledge($press, 'Группа не настроена');
 
             return 'misconfigured';
@@ -235,14 +233,14 @@ final class CommunicatorWebhook
 
         $pieces = $this->segmenter->proposeSplit($raw);
         $token  = $this->drafts->keep(
-            (string) ($this->settings['owner'] ?? ''),
+            (string) $this->owner(),
             $raw,
             $message['entities'] ?? [],
             Communicator::kindOf($message),
         );
 
         $this->api->sendMessage(
-            (string) ($this->settings['owner'] ?? ''),
+            (string) $this->owner(),
             "Вижу несколько идиом, но границы между ними неточные — вот как я бы разбила:\n\n"
             . Communicator::proposal($pieces),
             [],
@@ -250,6 +248,28 @@ final class CommunicatorWebhook
         );
 
         return 'offered';
+    }
+
+    /**
+     * The group's address, or null when none is configured.
+     *
+     * Stated once because every door into publishing needs it and an empty chat_id is
+     * refused by Telegram only after the handler has counted the work as done. A second
+     * copy of the check is a door that keeps publishing when this one is corrected.
+     */
+    private function group(): ?string
+    {
+        $group = (string) ($this->settings['group'] ?? '');
+
+        return $group === '' ? null : $group;
+    }
+
+    /** The owner's own chat, or null when none is configured. */
+    private function owner(): ?string
+    {
+        $owner = (string) ($this->settings['owner'] ?? '');
+
+        return $owner === '' ? null : $owner;
     }
 
     /**
@@ -264,8 +284,8 @@ final class CommunicatorWebhook
      */
     private function tell(string $text): void
     {
-        $owner = (string) ($this->settings['owner'] ?? '');
-        if ($owner === '') {
+        $owner = $this->owner();
+        if ($owner === null) {
             return;
         }
 

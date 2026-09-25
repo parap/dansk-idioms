@@ -280,6 +280,20 @@ final class CommunicatorWebhookTest extends TestCase
         self::assertCount(2, $this->stored, 'each piece is its own entry');
     }
 
+    public function testAPressWithNoGroupConfiguredPublishesNothing(): void
+    {
+        // The draft is already claimed by the time the address is wanted, so a press
+        // that gets this far has spent its one chance. Going on with an empty chat_id
+        // would lose the message: Telegram refuses the send, and there is no draft left
+        // to press again.
+        $token = $this->offerTwo();
+
+        $outcome = $this->webhook(['group' => null])->handle(self::press('split:' . $token), 's3cret');
+
+        self::assertSame('misconfigured', $outcome);
+        self::assertSame([], $this->toTheGroup());
+    }
+
     public function testTheAuthorReachesTheCorpusWhicheverWayItWasPublished(): void
     {
         // Both doors record the same person: the bot acts on nobody else's messages and
