@@ -12,10 +12,16 @@ use Dansk\Import\SingleMessageReader;
  * import's, and reusing them is the point -- a second copy of that loop would drift
  * away from the first and nothing would say when.
  *
- * It writes under the **same source** as the export. The group's message ids share one
- * numbering, so `uq_msg (source_id, tg_message_id)` makes a later re-import of an
- * export idempotent: the same post arrives again and updates its row instead of
- * doubling it.
+ * It writes under the **same source** as the export, so one group stays one source
+ * however a post arrived.
+ *
+ * What the group does not have is one id space. The ids the Bot API hands back and the
+ * ids a desktop export of the same group carries are different sequences -- exporting
+ * the group shows its own posts under numbers the bot has never seen. So
+ * `uq_msg (source_id, tg_message_id)` makes a re-import idempotent for the posts the
+ * export itself describes, and not for the ones the bot published: those come back under
+ * a second id and take a second row. What that doubles is provenance, not content, since
+ * `uq_term_norm` maps both rows onto the one idiom.
  */
 final class CommunicatorIngest
 {
