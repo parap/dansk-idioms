@@ -78,6 +78,8 @@
   .verdict{font-weight:700;margin-bottom:.5rem}
   .verdict.y{color:var(--ok)} .verdict.n{color:var(--bad)}
   .expl{font-size:.93rem;color:var(--muted);white-space:pre-wrap;max-height:11rem;overflow:auto}
+  .expl b{display:block;color:var(--ink);font-weight:650}
+  .expl b+span{display:block;margin-top:10px}
   .row{display:flex;gap:.6rem;margin-top:1.1rem;align-items:center}
   .row .primary{flex:1}
   .link{background:none;border:none;color:var(--muted);text-decoration:underline;
@@ -284,6 +286,14 @@ function tiles(s) {
   return out.join('');
 }
 
+// First line of an explanation is the meaning itself: bold, with the rest below it.
+// The importer's «Значение:» label adds nothing on screen and is dropped.
+function explanationHtml(text) {
+  const [head, ...rest] = text.replace(/^Значение:\s*/gm, '').trim().split('\n');
+  const tail = rest.join('\n').trim();
+  return `<b>${esc(head)}</b>` + (tail ? `<span>${esc(tail)}</span>` : '');
+}
+
 // ---------- home ----------
 async function home() {
   const s = await api('/stats').catch(() => ({}));
@@ -367,7 +377,7 @@ async function answer(q, chosen) {
       <div class="verdict ${res.is_correct ? 'y' : 'n'}">
         ${res.is_correct ? esc(t('correct')) : esc(t('wrong')) + ' ' + esc(res.correct_text)}
       </div>
-      ${res.explanation ? `<div class="expl">${esc(res.explanation)}</div>` : ''}
+      ${res.explanation ? `<div class="expl">${explanationHtml(res.explanation)}</div>` : ''}
       <div class="row">
         <button class="primary" id="next">${res.next_position ? esc(t('next')) : esc(t('seeResults'))}</button>
         ${res.is_correct ? '' : `<button class="link" id="rep">${esc(t('alsoRight'))}</button>`}
