@@ -31,6 +31,7 @@
   .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
     padding:18px;box-shadow:var(--shadow);margin-bottom:16px}
   .muted{color:var(--muted)}
+  b.ok{color:var(--ok)} b.bad{color:var(--bad)}
   .lede{color:var(--muted);margin:.4rem 0 0}
   .grid{display:grid;gap:16px;grid-template-columns:1fr}
   @media (min-width:900px){ .grid{grid-template-columns:1.05fr .95fr;align-items:start}
@@ -459,10 +460,11 @@ async function answer(item, chosen) {
   if (!res.is_correct) buttons[res.correct_index]?.classList.add('right');
 
   const fb = $(`#fb-${item.position}`);
-  fb.innerHTML = esc(res.is_correct ? t('right') : t('wrong'))
-    + ` · <button class="link" id="rep-${item.position}">${esc(t('report'))}</button>`;
+  // An appeal says "my answer was also right", which only means something after a miss.
+  fb.innerHTML = `<b class="${res.is_correct ? 'ok' : 'bad'}">${esc(res.is_correct ? t('right') : t('wrong'))}</b>`
+    + (res.is_correct ? '' : ` · <button class="link" id="rep-${item.position}">${esc(t('report'))}</button>`);
   fb.hidden = false;
-  $(`#rep-${item.position}`).onclick = async (e) => {
+  if (!res.is_correct) $(`#rep-${item.position}`).onclick = async (e) => {
     e.target.replaceWith(document.createTextNode(t('reported')));
     await api(`/reading/sessions/${paper.session_id}/items/${item.position}/report`,
       {method: 'POST', body: {reason: 'also_correct'}}).catch(() => {});

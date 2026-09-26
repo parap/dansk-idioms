@@ -385,13 +385,21 @@ def answering_fills_the_gap_and_offers_another_round(b):
 
 
 @check
-def a_learner_can_appeal_an_item_after_answering(b):
+def a_learner_can_appeal_an_item_after_a_miss(b):
     start_round(b)
-    click_option(b, 1, 0)
+    click_option(b, 1, (correct_index() + 1) % 4)
     b.until('!!document.querySelector("[id^=rep-]")', what='the appeal link')
     b.js('document.querySelector("[id^=rep-]").click()')
     b.until('!document.querySelector("[id^=rep-]")', what='the link to be replaced')
     assert b.js('document.querySelector("[id^=fb-]").textContent.length') > 0
+
+
+@check
+def a_correct_answer_offers_no_appeal(b):
+    start_round(b)
+    click_option(b, 1, correct_index())
+    b.until('!document.querySelector("[id^=fb-]").hidden', what='the verdict')
+    assert b.js('!document.querySelector("[id^=rep-]")')
 
 
 def options_js(position):
