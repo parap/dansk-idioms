@@ -6,22 +6,15 @@ use Dansk\Import\Importer;
 use Dansk\Import\SingleMessageReader;
 
 /**
- * Puts a published post into the corpus, through the same import the export uses.
+ * Puts a published post into the corpus through the same import the export uses:
+ * segmenting, parsing, confidence and publication are all the import's, and a second
+ * copy of that loop would drift from the first with nothing to say when.
  *
- * Nothing here is new work: segmenting, parsing, confidence and publication are the
- * import's, and reusing them is the point -- a second copy of that loop would drift
- * away from the first and nothing would say when.
- *
- * It writes under the **same source** as the export, so one group stays one source
- * however a post arrived.
- *
- * What the group does not have is one id space. The ids the Bot API hands back and the
- * ids a desktop export of the same group carries are different sequences -- exporting
- * the group shows its own posts under numbers the bot has never seen. So
- * `uq_msg (source_id, tg_message_id)` makes a re-import idempotent for the posts the
- * export itself describes, and not for the ones the bot published: those come back under
- * a second id and take a second row. What that doubles is provenance, not content, since
- * `uq_term_norm` maps both rows onto the one idiom.
+ * One group is one source however a post arrived -- but not one id space. The ids the
+ * Bot API returns and the ids a desktop export carries are different sequences, so
+ * `uq_msg` makes a re-import idempotent for what the export describes, not for what the
+ * bot published. `uq_term_norm` keeps both rows on one idiom: provenance doubles, not
+ * content.
  */
 final class CommunicatorIngest
 {

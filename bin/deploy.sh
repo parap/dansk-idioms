@@ -41,12 +41,8 @@ if [ "${1:-}" != "--no-tests" ]; then
     say "running the suite"
     docker-compose exec -T app vendor/bin/phpunit 2>&1 | tail -3
 
-    # A green suite says the tests pass, not that they still watch anything. A mutation
-    # anchor that stopped matching its line, or a witness renamed out from under one,
-    # leaves the rule it was written for guarded by nothing -- and reports success, in
-    # every run it was silently left out of. The whole fault list is most of an hour and
-    # so is never what stands before a deploy; this check runs no tests and takes
-    # seconds.
+    # A green suite says the tests pass, not that they still watch anything: an anchor
+    # that stopped matching drops its fault and reports success. Seconds, no tests.
     say "checking the fault list still points at live code"
     python3 bin/prove-tests-red.py --anchors
 fi

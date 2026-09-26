@@ -163,15 +163,10 @@ final class CommunicatorWebhook
                     ($this->ingest)(
                         [
                             'text' => $part['text'],
-                            // The press names the author. The bot acts on nobody else's
-                            // messages and answers nobody else's buttons, so whoever
-                            // pressed is whoever wrote. Left out, a split post joins the
-                            // corpus with no author at all and nothing reports it: the
-                            // entries read perfectly, only the byline is missing.
+                            // The bot acts on nobody else's messages and answers
+                            // nobody else's buttons: whoever pressed is whoever wrote.
                             'from' => $press['from'] ?? [],
-                            // The group post exists as of now, however long the draft
-                            // waited. Stated here rather than left to a fallback that
-                            // happens to give the same answer.
+                            // The group post exists as of now, however long it waited.
                             'date' => time(),
                         ],
                         $published
@@ -253,9 +248,8 @@ final class CommunicatorWebhook
     /**
      * The group's address, or null when none is configured.
      *
-     * Stated once because every door into publishing needs it and an empty chat_id is
-     * refused by Telegram only after the handler has counted the work as done. A second
-     * copy of the check is a door that keeps publishing when this one is corrected.
+     * An empty chat_id is refused by Telegram only after the handler has counted the
+     * work as done, and a second copy of the check is a door that keeps publishing.
      */
     private function group(): ?string
     {

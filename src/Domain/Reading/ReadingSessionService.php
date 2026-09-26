@@ -45,19 +45,15 @@ final class ReadingSessionService
     /**
      * Which questions a reader may be served, as SQL over `reading_items i`.
      *
-     * A question withdrawn from service or reported as wrong must not reach a reader
-     * through any door -- a fresh round, an exam paper, a mistakes round, or the count a
-     * pass mark is measured against. Being stated once is what makes that true: a second
-     * copy of the condition is a door that stays open when this one is narrowed, and it
-     * also makes the rule look guarded when only the other copy is under test.
+     * Every door shares it -- a round, a paper, a mistakes round, a pass mark's count --
+     * and a second copy is a door that stays open when this one is narrowed.
      */
     private const SERVABLE = 'i.is_active = 1 AND i.is_flagged = 0';
 
     /**
      * Which texts a reader may be served, as SQL over `reading_passages p`.
      *
-     * An unpublished text is a draft: it is still being written, and its questions may
-     * have no settled answer yet. One copy, for the reason above.
+     * An unpublished text is a draft; its questions may have no settled answer yet.
      */
     private const PUBLISHED = 'p.is_published = 1';
 
@@ -730,17 +726,14 @@ final class ReadingSessionService
     }
 
     /**
-     * Lays out an item's options in the order this session will serve them, and says
-     * which position the right answer landed in.
+     * Lays out an item's options in serving order, and where the right answer landed.
      *
-     * The order is decided once, when the session is materialised, and stored with it.
-     * An authored order is memorisable across attempts, and the stored index is what a
-     * later answer is graded against -- so the order and the index have to be settled in
-     * the same breath, by whoever builds the row. Shuffling at serve time would grade
-     * against a layout the reader never saw.
+     * Decided once per session and stored with it: an authored order is memorisable, and
+     * the stored index is what a later answer is graded against, so the order and the
+     * index are settled together.
      *
      * @param  list<array<string,mixed>> $options
-     * @param  string $item                       Names the item if it has no right answer
+     * @param  string $item Names the item if it has no right answer
      * @return array{0: list<array<string,mixed>>, 1: int}
      */
     private static function layOutOptions(array $options, int $correctOptionId, string $item): array

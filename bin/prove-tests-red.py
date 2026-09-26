@@ -486,15 +486,11 @@ def run(suite):
     """
     Does anything still pass that should not, with the fault in place?
 
-    `suite` is a suite name, optionally followed by `:` and the tests that must each
-    notice this fault on their own. A rule stated in one place is broken in one place,
-    so a whole-suite run reports the first door that noticed and says nothing about the
-    rest -- including a door whose test was deleted or renamed, which leaves that door
-    unwatched while the run still reports the rule as guarded. Naming one witness per
-    door is what keeps them individually accountable.
+    `suite` is a suite name, optionally followed by `:` and the tests that must each go
+    red on their own. A rule stated in one place is broken in one place, so a whole-suite
+    run reports the first door that noticed and nothing about the rest.
 
-    Returns (green, why): green is True when the fault went unnoticed, and why names
-    the witness that let it through.
+    Returns (green, why): green is True when the fault went unnoticed.
     """
     # The interface checks drive a real browser, so they answer to a different runner.
     # Without them a rendering fault -- an escape that stopped escaping, a button that
@@ -561,11 +557,9 @@ if ambiguous:
     sys.exit(1)
 
 if anchors_only:
-    # A witness that no longer exists reads as a surviving fault, which is loud -- but
-    # only to whoever runs that fault. Asking PHPUnit what it can see costs one call per
-    # suite and names the drift here instead, where the anchors are already being
-    # checked. PHPUnit is asked rather than the test files read, so a witness inherited
-    # from a base class still counts.
+    # A witness that no longer exists reads as a surviving fault, but only to whoever
+    # runs that fault. PHPUnit is asked rather than the files read, so a witness
+    # inherited from a base class still counts.
     unknown = []
     for wanted_suite in sorted({s.partition(':')[0] for _, _, _, _, _, s in FAULTS if ':' in s}):
         listed = phpunit("--testsuite", wanted_suite, "--list-tests").stdout
