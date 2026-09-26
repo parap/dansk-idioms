@@ -246,8 +246,8 @@ FAULTS = [
   "        Db::execute('UPDATE reading_items SET is_flagged = 0, report_count = 0 WHERE id = ?', [$itemId]);",
   "        // the item stays withdrawn","integration"),
  (64,"the appeal link never appears","public/read.html",
-  "    + ` \u00b7 <button class=\"link\" id=\"rep-${item.position}\">${esc(t('report'))}</button>`;",
-  "    + ``;","ui"),
+  "    + (res.is_correct ? '' : ` \u00b7 <button class=\"link\" id=\"rep-${item.position}\">${esc(t('report'))}</button>`);",
+  "    + '';","ui"),
  (65,"the appeal queue hides the answer key","public/admin.html",
   "        <div class=\"opt${Number(o.is_correct) === 1 ? ' right' : ''}\">",
   "        <div class=\"opt\">","ui"),
@@ -474,6 +474,8 @@ FAULTS = [
  (152,"webhook: splitting publishes one post anyway","src/Support/CommunicatorWebhook.php",
   "            ? $this->segmenter->proposeSplitParts($draft['text'])",
   "            ? [['text' => $draft['text'], 'offset' => 0]]","unit"),
+ (154,"the appeal link shows after a correct answer too","public/read.html",
+  "    + (res.is_correct ? '' : ` \u00b7 <button","    + (false ? '' : ` \u00b7 <button","ui"),
 ]
 
 def phpunit(*args):
