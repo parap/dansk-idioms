@@ -12,6 +12,24 @@ final class ImporterTest extends IntegrationTestCase
         return (new Importer())->import($this->fixtureExport(), 'Fixture');
     }
 
+    public function testTheBotsTagStaysOutOfTheCorpus(): void
+    {
+        // The bot's posts come back in the export with the tag it appended, and the
+        // explanation is overwritten on every import -- so the tag would ride into it.
+        (new Importer(new \Dansk\Import\SingleMessageReader([
+            'tg_message_id' => 640392, 'from_name' => 'Alex',
+            'posted_at' => '2026-09-27 12:00:00', 'posted_at_raw' => '27.09.2026 14:00:00 UTC+02:00',
+            'text' => "\u{200B}at gå agurk — сойти с ума. Идиоматическое выражение о взрыве эмоций.\n\n#text",
+        ])))->import('telegram:export', 'Fixture');
+
+        self::assertSame(0, (int) Db::fetchValue(
+            "SELECT (SELECT COUNT(*) FROM idiom_explanations WHERE body LIKE '%#%')
+                  + (SELECT COUNT(*) FROM idiom_translations WHERE text LIKE '%#%')
+                  + (SELECT COUNT(*) FROM messages WHERE text_plain LIKE '%#%')"
+        ));
+        self::assertSame(1, (int) Db::fetchValue('SELECT COUNT(*) FROM idiom_explanations'));
+    }
+
     public function testImportBuildsAnAnswerableCorpus(): void
     {
         $stats = $this->import();

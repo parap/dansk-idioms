@@ -524,6 +524,10 @@ FAULTS = [
   "        $norm  = Normalizer::term((new EntryParser())->parse($entry)->term ?? '');",
   "        $norm  = Normalizer::term($entry);",
   "integration:testAKnownIdiomIsFoundUnderItsStoredTerm,testTheExplanationDoesNotDecide"),
+ (167,"an exported bot post carries its tag into the corpus","src/Import/Importer.php",
+  "            $message['text'] = Communicator::untagged($message['text']);",
+  "",
+  "integration:testTheBotsTagStaysOutOfTheCorpus"),
 ]
 def phpunit(*args):
     return subprocess.run(

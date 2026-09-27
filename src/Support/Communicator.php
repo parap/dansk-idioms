@@ -219,6 +219,14 @@ final class Communicator
         return $kept;
     }
 
+    /** The text without the tag `tagged()` appended -- ours, not the author's words. */
+    public static function untagged(string $text): string
+    {
+        $tags = implode('|', array_map(static fn(string $t): string => preg_quote($t, '/'), self::TAGS));
+
+        return preg_replace('/\s*(?:' . $tags . ')\s*$/u', '', $text) ?? $text;
+    }
+
     /**
      * The text with its hashtag on a line of its own.
      *

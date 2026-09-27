@@ -2,6 +2,7 @@
 
 namespace Dansk\Import;
 
+use Dansk\Support\Communicator;
 use Dansk\Support\Config;
 use Dansk\Support\Db;
 use PDO;
@@ -40,6 +41,8 @@ final class Importer
 
         foreach ($this->reader->read($file) as $message) {
             $stats['messages']++;
+            // The bot's posts come back in an export with its tag appended.
+            $message['text'] = Communicator::untagged($message['text']);
             $segmented = $this->segmenter->segment($message['text']);
             $entries   = $segmented['entries'];
 

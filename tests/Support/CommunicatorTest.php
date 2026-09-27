@@ -85,6 +85,17 @@ final class CommunicatorTest extends TestCase
         self::assertSame("at spille\n\n#text", Communicator::tagged("at spille\n\n#text", 'text'));
     }
 
+    public function testTheTagIsTakenOffWhatWasTagged(): void
+    {
+        self::assertSame('at spille', Communicator::untagged(Communicator::tagged('at spille', 'video')));
+    }
+
+    public function testOnlyATrailingTagIsTakenOff(): void
+    {
+        // A tag inside the text is the author's, and "#textil" is a word.
+        self::assertSame("om #text her\n\n#textil", Communicator::untagged("om #text her\n\n#textil"));
+    }
+
     public function testTheTagNeverLandsInsideAWord(): void
     {
         // "#textil" does not count as a tag already there.
