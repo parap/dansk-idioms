@@ -78,32 +78,57 @@ final class CommunicatorWebhook
         // Nothing goes to the group before the boundaries are settled. Publishing
         // first and skipping the corpus afterwards put a post nobody had decided
         // about in the one place nothing can be taken back from.
-        if (!$this->segmenter->boundariesAreClear($raw)) {
+        $parts = $this->segmenter->entryParts($raw);
+        if ($parts === null) {
             return $this->offer($raw, $message);
         }
 
-        $published = $this->api->sendMessage(
-            $group,
-            Communicator::tagged($raw, Communicator::kindOf($message)),
-            Communicator::clampEntities($message['entities'] ?? [], rtrim($raw))
-        );
-
-        if ($this->ingest === null) {
-            return 'published';
-        }
-
-        // The post is out and cannot be recalled, so nothing below may report a
-        // failure to publish: that would invite a second attempt and a second post.
-        try {
-            ($this->ingest)($message, $published);
-        } catch (\Throwable $e) {
-            error_log('communicator: published but not stored -- ' . $e->getMessage());
+        $stored = $this->publishParts($group, $parts, $message['entities'] ?? [],
+            Communicator::kindOf($message), $message['from'] ?? [], (int) ($message['date'] ?? 0));
+        if (!$stored) {
             $this->tell('Опубликовала, но на сайт не взяла: сорвалась запись в базу.');
 
             return 'published_not_stored';
         }
 
         return 'published';
+    }
+
+    /**
+     * Each piece as its own post, its own bold, and its own entry in the corpus.
+     *
+     * Returns false when some post went out but was not stored. A post is out and cannot
+     * be recalled, so a failure to store never stops the pieces after it.
+     *
+     * @param list<array{text:string, offset:int}> $parts
+     */
+    private function publishParts(string $group, array $parts, array $entities, string $kind, array $from, int $date): bool
+    {
+        $stored = true;
+        foreach ($parts as $part) {
+            $published = $this->api->sendMessage(
+                $group,
+                Communicator::tagged($part['text'], $kind),
+                // Rebased to the piece: offsets count from the start of the whole text.
+                Communicator::withBoldHead($part['text'], Communicator::sliceEntities(
+                    $entities,
+                    $part['offset'],
+                    Text::utf16Length($part['text'])
+                )),
+            );
+
+            if ($this->ingest === null) {
+                continue;
+            }
+            try {
+                ($this->ingest)(['text' => $part['text'], 'from' => $from, 'date' => $date], $published);
+            } catch (\Throwable $e) {
+                error_log('communicator: published but not stored -- ' . $e->getMessage());
+                $stored = false;
+            }
+        }
+
+        return $stored;
     }
 
     /**
@@ -144,38 +169,9 @@ final class CommunicatorWebhook
             ? $this->segmenter->proposeSplitParts($draft['text'])
             : [['text' => $draft['text'], 'offset' => 0]];
 
-        foreach ($parts as $part) {
-            $published = $this->api->sendMessage(
-                $group,
-                Communicator::tagged($part['text'], $draft['kind']),
-                // Rebased to the piece: offsets count from the start of the whole text,
-                // and left alone Telegram would put the bold wherever those numbers
-                // land in the shorter post.
-                Communicator::sliceEntities(
-                    $draft['entities'],
-                    $part['offset'],
-                    Text::utf16Length($part['text'])
-                ),
-            );
-
-            if ($this->ingest !== null) {
-                try {
-                    ($this->ingest)(
-                        [
-                            'text' => $part['text'],
-                            // The bot acts on nobody else's messages and answers
-                            // nobody else's buttons: whoever pressed is whoever wrote.
-                            'from' => $press['from'] ?? [],
-                            // The group post exists as of now, however long it waited.
-                            'date' => time(),
-                        ],
-                        $published
-                    );
-                } catch (\Throwable $e) {
-                    error_log('communicator: published but not stored -- ' . $e->getMessage());
-                }
-            }
-        }
+        // The bot answers nobody else's buttons: whoever pressed is whoever wrote, and
+        // the group post exists as of now, however long it waited.
+        $this->publishParts($group, $parts, $draft['entities'], $draft['kind'], $press['from'] ?? [], time());
 
         $this->acknowledge($press, count($parts) > 1 ? 'Опубликовала ' . count($parts) : 'Опубликовала');
         $this->unbutton($press);

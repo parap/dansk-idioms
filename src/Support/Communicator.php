@@ -166,6 +166,33 @@ final class Communicator
     }
 
     /**
+     * The entities with the headword made bold, unless the author already bolded it.
+     *
+     * The headword is the Latin text before the first spaced dash, past any leading
+     * U+200B -- which counts as a unit like any other character. A Russian note in
+     * brackets just before the dash stays out of the bold.
+     *
+     * @param array<int,array<string,mixed>> $entities
+     * @return array<int,array<string,mixed>>
+     */
+    public static function withBoldHead(string $text, array $entities): array
+    {
+        if (preg_match('/^([\s\x{200B}]*)(\p{Latin}[^\p{Cyrillic}\n]*?)\s+(?:\([^()\n]*\p{Cyrillic}[^()\n]*\)\s+)?[—–-]\s/u', $text, $m) !== 1) {
+            return $entities;
+        }
+        $offset = self::utf16Length($m[1]);
+        $end    = $offset + self::utf16Length($m[2]);
+        foreach ($entities as $entity) {
+            $from = (int) ($entity['offset'] ?? 0);
+            if (($entity['type'] ?? '') === 'bold' && $from < $end && $from + (int) ($entity['length'] ?? 0) > $offset) {
+                return $entities;
+            }
+        }
+
+        return [['type' => 'bold', 'offset' => $offset, 'length' => $end - $offset], ...$entities];
+    }
+
+    /**
      * Entities cut to fit the text they describe.
      *
      * The tag is appended, so offsets that were valid stay valid -- but trailing

@@ -155,6 +155,125 @@ final class CommunicatorWebhookTest extends TestCase
         self::assertSame([['at spille', 1]], $this->stored);
     }
 
+    // --- several idioms, one to a line ----------------------------------------
+
+    private const ONE_PER_LINE =
+        "at udstøde et gisp — издать возглас (ахнуть от изумления/испуга). Устойчивое глагольное сочетание.\n"
+        . "at gøre (nogen) bange — напугать (кого-то), вселить страх. Устойчивое сочетание с прилагательным.\n"
+        . "at regne med (noget) — рассчитывать на (что-то), ожидать (чего-то). Фразовый глагол..\n"
+        . "der er god tid til (noget) — для этого еще полно/достаточно времени. Устойчивый разговорный оборот.";
+
+    public function testIdiomsOneToALineArePublishedAsSeparatePosts(): void
+    {
+        // Each line opens with its headword and a dash, so the boundaries are the
+        // line breaks themselves: there is nothing left to ask about.
+        $this->ingest = function (array $message, int $publishedId): void {
+            $this->stored[] = $message['text'];
+        };
+
+        $outcome = $this->webhook()->handle(self::update(self::ONE_PER_LINE), 's3cret');
+
+        self::assertSame('published', $outcome);
+        $posts = $this->toTheGroup();
+        self::assertCount(4, $posts);
+        self::assertSame(
+            "at regne med (noget) — рассчитывать на (что-то), ожидать (чего-то). Фразовый глагол..\n\n#text",
+            $posts[2][1]['text']
+        );
+        self::assertCount(4, $this->stored, 'each idiom is its own entry');
+        self::assertStringStartsWith('der er god tid til (noget) —', $this->stored[3]);
+    }
+
+    public function testAForwardedQuoteIsPublishedIdiomByIdiom(): void
+    {
+        // Copied text carries U+200B before every line, which makes the boundaries
+        // certain -- and was exactly why the whole quote used to go out as one post.
+        $this->ingest = function (array $message): void {
+            $this->stored[] = $message['text'];
+        };
+        $quote = "\u{200B}" . str_replace("\n", "\n\n\u{200B}", self::ONE_PER_LINE);
+
+        $outcome = $this->webhook()->handle(self::update($quote), 's3cret');
+
+        self::assertSame('published', $outcome);
+        $posts = $this->toTheGroup();
+        self::assertCount(4, $posts);
+        self::assertSame(
+            "\u{200B}at gøre (nogen) bange — напугать (кого-то), вселить страх. Устойчивое сочетание с прилагательным.\n\n#text",
+            $posts[1][1]['text']
+        );
+        self::assertSame(
+            [['type' => 'bold', 'offset' => 1, 'length' => 21]],
+            json_decode($posts[1][1]['entities'] ?? '[]', true),
+            'the invisible separator is one unit ahead of the idiom'
+        );
+        self::assertCount(4, $this->stored);
+    }
+
+    public function testBlankLinesBetweenThemChangeNothing(): void
+    {
+        $this->webhook()->handle(self::update(str_replace("\n", "\n\n", self::ONE_PER_LINE)), 's3cret');
+
+        self::assertCount(4, $this->toTheGroup());
+    }
+
+    public function testARussianLineStaysWithTheIdiomAboveIt(): void
+    {
+        $this->webhook()->handle(
+            self::update("at regne med — рассчитывать\nПример: jeg regner med dig.\nder er god tid — времени полно"),
+            's3cret'
+        );
+
+        $posts = $this->toTheGroup();
+        self::assertCount(2, $posts);
+        self::assertSame("at regne med — рассчитывать\nПример: jeg regner med dig.\n\n#text", $posts[0][1]['text']);
+    }
+
+    public function testEachIdiomIsBoldInItsOwnPost(): void
+    {
+        $this->webhook()->handle(self::update(self::ONE_PER_LINE), 's3cret');
+
+        $bold = array_map(
+            static fn(array $post): array => json_decode($post[1]['entities'] ?? '[]', true),
+            $this->toTheGroup()
+        );
+        self::assertSame([['type' => 'bold', 'offset' => 0, 'length' => 18]], $bold[0]);
+        self::assertSame([['type' => 'bold', 'offset' => 0, 'length' => 26]], $bold[3]);
+    }
+
+    public function testAnIdiomSentAloneIsBoldToo(): void
+    {
+        $this->webhook()->handle(self::update('at gå agurk — сойти с ума'), 's3cret');
+
+        self::assertSame(
+            [['type' => 'bold', 'offset' => 0, 'length' => 11]],
+            json_decode($this->toTheGroup()[0][1]['entities'] ?? '[]', true)
+        );
+    }
+
+    public function testARussianNoteInBracketsIsLeftOutOfTheBold(): void
+    {
+        $this->webhook()->handle(self::update('at stanse op (в тексте: var standset op) — остановиться'), 's3cret');
+
+        self::assertSame(
+            [['type' => 'bold', 'offset' => 0, 'length' => 12]],
+            json_decode($this->toTheGroup()[0][1]['entities'] ?? '[]', true)
+        );
+    }
+
+    public function testTheAuthorsOwnBoldIsLeftAsItIs(): void
+    {
+        $update = self::update('at gå agurk — сойти с ума');
+        $update['message']['entities'] = [['type' => 'bold', 'offset' => 3, 'length' => 2]];
+
+        $this->webhook()->handle($update, 's3cret');
+
+        self::assertSame(
+            [['type' => 'bold', 'offset' => 3, 'length' => 2]],
+            json_decode($this->toTheGroup()[0][1]['entities'] ?? '[]', true)
+        );
+    }
+
     public function testUnclearBoundariesPublishNothingYet(): void
     {
         // The earlier behaviour published and skipped the corpus. That put a post in
@@ -165,7 +284,7 @@ final class CommunicatorWebhookTest extends TestCase
         };
 
         $outcome = $this->webhook()->handle(
-            self::update("at gå agurk — сойти с ума\nat slænge sig — развалиться\nat tage fejl — ошибаться"),
+            self::update("at gå agurk\nсойти с ума\nat slænge sig\nразвалиться\nat tage fejl\nошибаться"),
             's3cret'
         );
 
@@ -177,7 +296,7 @@ final class CommunicatorWebhookTest extends TestCase
     public function testTheProposalShowsTheSplitAndBothWaysOut(): void
     {
         $this->webhook()->handle(
-            self::update("at gå agurk — сойти с ума\nat slænge sig — развалиться"),
+            self::update("at gå agurk\nсойти с ума\nat slænge sig\nразвалиться"),
             's3cret'
         );
 
@@ -219,7 +338,7 @@ final class CommunicatorWebhookTest extends TestCase
         );
 
         $outcome = $hook->handle(
-            self::update("at gå agurk — сойти с ума\nat slænge sig — развалиться"),
+            self::update("at gå agurk\nсойти с ума\nat slænge sig\nразвалиться"),
             's3cret'
         );
 
@@ -255,7 +374,7 @@ final class CommunicatorWebhookTest extends TestCase
     private function offerTwo(): string
     {
         $this->webhook()->handle(
-            self::update("at gå agurk — сойти с ума\nat slænge sig — развалиться"),
+            self::update("at gå agurk\nсойти с ума\nat slænge sig\nразвалиться"),
             's3cret'
         );
         $this->sent = [];
@@ -275,8 +394,8 @@ final class CommunicatorWebhookTest extends TestCase
         self::assertSame('published', $outcome);
         $posts = $this->toTheGroup();
         self::assertCount(2, $posts);
-        self::assertSame("at gå agurk — сойти с ума\n\n#text", $posts[0][1]['text']);
-        self::assertSame("at slænge sig — развалиться\n\n#text", $posts[1][1]['text']);
+        self::assertSame("at gå agurk\nсойти с ума\n\n#text", $posts[0][1]['text']);
+        self::assertSame("at slænge sig\nразвалиться\n\n#text", $posts[1][1]['text']);
         self::assertCount(2, $this->stored, 'each piece is its own entry');
     }
 

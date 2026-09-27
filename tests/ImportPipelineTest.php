@@ -468,39 +468,65 @@ final class ImportPipelineTest extends TestCase
 
     // --- are the boundaries knowable at all? ---------------------------------
 
-    public function testTextCarryingTheSeparatorHasClearBoundaries(): void
+    public function testTextCarryingTheSeparatorIsCutAtIt(): void
     {
-        // The structured form the group already uses: splitting is decided.
+        // The structured form the group already uses: splitting is decided, and each
+        // piece keeps its separator and where it began.
         $msg = self::ZW . 'at gå agurk — сойти с ума.' . "\n"
              . self::ZW . 'at slænge sig — развалиться.';
 
-        self::assertTrue((new EntrySegmenter())->boundariesAreClear($msg));
+        self::assertSame([
+            ['text' => self::ZW . 'at gå agurk — сойти с ума.', 'offset' => 0],
+            ['text' => self::ZW . 'at slænge sig — развалиться.', 'offset' => 28],
+        ], (new EntrySegmenter())->entryParts($msg));
     }
 
-    public function testOneHeadwordWithoutTheSeparatorHasClearBoundaries(): void
+    public function testARussianLineAfterTheSeparatorStaysWithItsEntry(): void
+    {
+        $msg = self::ZW . "at gå agurk — сойти с ума.\n" . self::ZW . "Пример: han gik agurk.\n"
+             . self::ZW . 'at slænge sig — развалиться.';
+
+        self::assertSame(
+            [self::ZW . "at gå agurk — сойти с ума.\n" . self::ZW . 'Пример: han gik agurk.',
+             self::ZW . 'at slænge sig — развалиться.'],
+            array_column((new EntrySegmenter())->entryParts($msg), 'text')
+        );
+    }
+
+    public function testOneHeadwordWithoutTheSeparatorIsOnePiece(): void
     {
         // One idiom and its explanation is one entry however it was typed.
         $msg = "at gå agurk\nИдиоматическое выражение, описывающее взрыв эмоций.";
 
-        self::assertTrue((new EntrySegmenter())->boundariesAreClear($msg));
+        self::assertSame([['text' => $msg, 'offset' => 0]], (new EntrySegmenter())->entryParts($msg));
     }
 
-    public function testSeveralHeadwordsWithoutTheSeparatorDoNot(): void
+    public function testHeadwordLinesWithoutTheSeparatorAreCutAtTheLines(): void
     {
-        // Pasted fresh, with newlines and no invisible markers: the segmenter would
-        // make one entry of all three, taking the first as the term and the rest as
-        // its explanation. Nothing errors; the corpus just gains a plausible lie.
+        // Every Latin line names its idiom before a dash, so no line can be an example.
         $msg = "at gå agurk — сойти с ума\nat slænge sig — развалиться\nat tage fejl — ошибаться";
 
-        self::assertFalse((new EntrySegmenter())->boundariesAreClear($msg));
+        self::assertSame(
+            ['at gå agurk — сойти с ума', 'at slænge sig — развалиться', 'at tage fejl — ошибаться'],
+            array_column((new EntrySegmenter())->entryParts($msg), 'text')
+        );
     }
 
-    public function testABoldHeadwordCountsAsOneToo(): void
+    public function testABareLatinLineMakesTheCutAGuess(): void
+    {
+        // "Han gik agurk" may be an example or an idiom: the segmenter would have to
+        // guess, and a guess is not acted on unseen.
+        $msg = "at gå agurk — сойти с ума\nHan gik agurk\nat slænge sig — развалиться";
+
+        self::assertNull((new EntrySegmenter())->entryParts($msg));
+    }
+
+    public function testABoldHeadwordIsCutAtToo(): void
     {
         $msg = self::B0 . 'at gå agurk' . self::B1 . " — сойти с ума\n"
              . self::B0 . 'at slænge sig' . self::B1 . ' — развалиться';
 
-        self::assertFalse((new EntrySegmenter())->boundariesAreClear($msg));
+        self::assertCount(2, (new EntrySegmenter())->entryParts($msg));
     }
 
     // --- a split to show, not to apply ---------------------------------------

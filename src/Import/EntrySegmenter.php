@@ -87,32 +87,82 @@ final class EntrySegmenter
     }
 
     /**
-     * Whether this text can be split with confidence.
+     * The entries of a message as pieces to publish, or null when the cut is a guess.
      *
-     * Splitting is decided by U+200B, which prefixes every structural line in the
-     * group's own posts -- 190 of its 199 messages carry it. Text typed fresh with
-     * plain newlines carries none, and then the segmenter sees one entry: the first
-     * headword becomes the term and everything after it becomes that term's
-     * explanation. Nothing errors, and the corpus gains a plausible lie.
+     * U+200B before every structural line makes the cut certain, and so does text whose
+     * every Latin-initial line is "headword — explanation". Several bare Latin lines do
+     * not: one may be an example sentence, and cutting there invents an idiom.
      *
-     * So one headword is always safe -- one idiom and its explanation is one entry
-     * however it was typed -- while several headwords with no separator are not.
+     * @return ?list<array{text:string, offset:int}>
      */
-    public function boundariesAreClear(string $text): bool
+    public function entryParts(string $text): ?array
     {
         if (str_contains($text, Text::ZWSP)) {
-            return true;
+            return $this->partsAtSeparators($text);
         }
 
         $heads = 0;
+        $bare  = false;
         foreach (explode("\n", $text) as $line) {
             $line = trim(Text::stripBoldMarkers($line));
-            if ($line !== '' && preg_match('/^\p{Latin}/u', $line) === 1) {
-                $heads++;
+            if ($line === '' || preg_match('/^\p{Latin}/u', $line) !== 1) {
+                continue;
             }
+            $heads++;
+            $bare = $bare || preg_match(self::HEADED_LINE, $line) !== 1;
         }
 
-        return $heads <= 1;
+        if ($heads <= 1) {
+            return [['text' => rtrim($text), 'offset' => 0]];
+        }
+
+        return $bare ? null : $this->proposeSplitParts($text);
+    }
+
+    /** "headword — explanation": Latin before a spaced dash, Cyrillic after it. */
+    private const HEADED_LINE = '/^[^\p{Cyrillic}\n]+?\s[—–-]\s.*\p{Cyrillic}/u';
+
+    /**
+     * Cut before each U+200B that opens an entry, keeping the separator with its piece.
+     * Whatever precedes the first entry travels with it rather than being dropped.
+     *
+     * @return list<array{text:string, offset:int}>
+     */
+    private function partsAtSeparators(string $text): array
+    {
+        $parts   = [];
+        $current = null;
+        $offset  = 0;
+
+        foreach (explode(Text::ZWSP, $text) as $index => $chunk) {
+            $start   = $index === 0 ? $offset : $offset - 1;   // the separator before it
+            $offset += Text::utf16Length($chunk) + 1;
+            $piece   = $index === 0 ? $chunk : Text::ZWSP . $chunk;
+
+            if ($current !== null && $this->isEntryHead($chunk, true) && !$this->isPreamble($current)) {
+                $parts[] = $current;
+                $current = null;
+            }
+            if ($current === null) {
+                $current = ['text' => $piece, 'offset' => $start, 'head' => $this->isEntryHead($chunk, false)];
+                continue;
+            }
+            $current['text'] .= $piece;
+            $current['head'] = $current['head'] || $this->isEntryHead($chunk, false);
+        }
+
+        $parts[] = $current;
+
+        return array_values(array_filter(array_map(
+            static fn(array $part): array => ['text' => rtrim($part['text']), 'offset' => $part['offset']],
+            $parts
+        ), static fn(array $part): bool => trim(str_replace(Text::ZWSP, '', $part['text'])) !== ''));
+    }
+
+    /** A piece holding no entry yet is preamble, and the next entry joins it. */
+    private function isPreamble(array $part): bool
+    {
+        return !$part['head'];
     }
 
     /** @return array{entries: list<string>, preamble: string|null} */
