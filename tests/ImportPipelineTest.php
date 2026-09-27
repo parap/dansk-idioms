@@ -359,6 +359,33 @@ final class ImportPipelineTest extends TestCase
         self::assertSame('стокроновая купюра', $primary[0]['text']);
     }
 
+    /** One-line posts as the bot publishes them: "term — reading (aside). Kind of phrase." */
+    public static function oneLinePosts(): array
+    {
+        return [
+            'object placeholder kept' => ['at gøre (nogen) bange — напугать (кого-то), вселить страх. Устойчивое сочетание с прилагательным.', 'напугать (кого-то), вселить страх'],
+            'placeholder after a preposition' => ['at overfalde (nogen) — напасть на (кого-то), совершить нападение. Глагол с неразделяемой приставкой.', 'напасть на (кого-то), совершить нападение'],
+            'aside dropped, kind of phrase dropped' => ['i håb om (at) — в надежде (на то, чтобы). Устойчивое предложное сочетание.', 'в надежде'],
+            'slash placeholder' => ['At lægge mærke til (nogen/noget) — обращать внимание на (кого-либо/что-либо), замечать.', 'обращать внимание на (кого-либо/что-либо), замечать'],
+            'aside before a comma' => ['bortset fra (at) — за исключением того (что), если не считать (того что). Устойчивый предложный оборот.', 'за исключением того, если не считать'],
+            'aside before the full stop' => ['at udstøde et gisp — издать возглас (ахнуть от изумления/испуга). Устойчивое глагольное сочетание.', 'издать возглас'],
+        ];
+    }
+
+    #[\PHPUnit\Framework\Attributes\DataProvider('oneLinePosts')]
+    public function testAOneLinePostGivesItsReadingWithoutGapsOrLabels(string $post, string $answer): void
+    {
+        // Cutting an aside out left "напасть на , совершить нападение", and a short
+        // head kept its trailing "Устойчивое сочетание" -- both served as answers.
+        $translations = (new TranslationExtractor())->extract($this->parse($post));
+
+        $primary = array_values(array_filter($translations, fn($t) => $t['is_primary']));
+        self::assertSame($answer, $primary[0]['text'] ?? null);
+        foreach ($translations as $t) {
+            self::assertDoesNotMatchRegularExpression('/\s[,.;:]|Устойчив|глагол/u', $t['text']);
+        }
+    }
+
     public function testTextCutMidQuoteIsNeverAnAnswer(): void
     {
         // Splitting a label value on ";" can cut a quoted span in half, leaving a

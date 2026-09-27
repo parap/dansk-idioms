@@ -544,6 +544,18 @@ FAULTS = [
   "            \"SELECT 1 FROM idiom_explanations WHERE idiom_id = ? AND lang_code = ? AND source = 'manual'\",",
   "            \"SELECT 0\",",
   "integration:testAHumansExplanationIsTheOnlyOne"),
+ (172,"an object placeholder is cut out of the reading","src/Import/TranslationExtractor.php",
+  "                static fn(array $m): string => preg_match(self::OBJECT_PLACEHOLDER, $m[0]) === 1 ? $m[0] : '',",
+  "                static fn(array $m): string => '',",
+  "unit:testAOneLinePostGivesItsReadingWithoutGapsOrLabels"),
+ (173,"a cut aside leaves a gap before the comma","src/Import/TranslationExtractor.php",
+  "            $head = preg_replace('/\\s+(?=[,.;:])/u', '', Text::collapseWhitespace($head)) ?? $head;",
+  "            $head = Text::collapseWhitespace($head);",
+  "unit:testAOneLinePostGivesItsReadingWithoutGapsOrLabels"),
+ (174,"the kind of phrase rides into the reading","src/Import/TranslationExtractor.php",
+  "            $head = preg_split('/[.;]\\s+(?=\\p{Lu})/u', $head, 2)[0];",
+  "",
+  "unit:testAOneLinePostGivesItsReadingWithoutGapsOrLabels"),
 ]
 def phpunit(*args):
     return subprocess.run(
@@ -632,7 +644,9 @@ if anchors_only:
     unknown = []
     for wanted_suite in sorted({s.partition(':')[0] for _, _, _, _, _, s in FAULTS if ':' in s}):
         listed = phpunit("--testsuite", wanted_suite, "--list-tests").stdout
-        known = {line.rpartition('::')[2].strip() for line in listed.splitlines() if '::' in line}
+        # A data-provider test is listed once per data set, its name followed by "set".
+        known = {line.rpartition('::')[2].strip().partition('"')[0]
+                 for line in listed.splitlines() if '::' in line}
         for num, name, _, _, _, s in FAULTS:
             head, _, witnesses = s.partition(':')
             if head != wanted_suite or witnesses == '':

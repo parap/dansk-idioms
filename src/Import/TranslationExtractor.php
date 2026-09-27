@@ -39,6 +39,8 @@ final class TranslationExtractor
         . '|\p{Latin}+\s+(означа\w*|значит|переводится)\s*'
         . '|от\s+\p{Latin}+\s*)$/ui';
 
+    private const OBJECT_PLACEHOLDER = '/^\((?:(?:кого|кем|кому|ком|кто|что|чего|чем|чему|чём)-(?:то|либо|нибудь)\/?)+\)$/u';
+
     private const IDIOMATIC_CUE = '/(?<!\p{L})(переводится как|означает\w*|означающ\w+|значит'
         . '|в значении|аналог\w*|смысл\w*)\s*[:\-–—]?\s*$/ui';
 
@@ -58,8 +60,18 @@ final class TranslationExtractor
             // merely quotes a component word must not disqualify the head-line
             // translation:
             //   "стокроновая купюра (… слово lap означает «лоскут», «заплатка»)"
-            $head = trim(preg_replace('/\([^()]*\)|\[[^\[\]]*\]/u', '', $head) ?? $head);
-            $head = Text::trimPunctuation(Text::collapseWhitespace($head));
+            // An object placeholder -- "(кого-то)", "(кого-либо/что-либо)" -- is part of
+            // the reading and stays; the gap an aside leaves before punctuation does not.
+            $head = preg_replace_callback(
+                '/\([^()]*\)|\[[^\[\]]*\]/u',
+                static fn(array $m): string => preg_match(self::OBJECT_PLACEHOLDER, $m[0]) === 1 ? $m[0] : '',
+                $head
+            ) ?? $head;
+            $head = preg_replace('/\s+(?=[,.;:])/u', '', Text::collapseWhitespace($head)) ?? $head;
+            // "напугать, вселить страх. Устойчивое сочетание." -- the reading is the
+            // first sentence; what follows says what kind of phrase it is.
+            $head = preg_split('/[.;]\s+(?=\p{Lu})/u', $head, 2)[0];
+            $head = Text::trimPunctuation($head);
         }
         if ($head !== null && $head !== '' && !str_contains($head, '«')) {
             $clause = $this->firstClause($head);
