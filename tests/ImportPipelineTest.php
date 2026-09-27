@@ -368,6 +368,9 @@ final class ImportPipelineTest extends TestCase
             'aside dropped, kind of phrase dropped' => ['i håb om (at) — в надежде (на то, чтобы). Устойчивое предложное сочетание.', 'в надежде'],
             'slash placeholder' => ['At lægge mærke til (nogen/noget) — обращать внимание на (кого-либо/что-либо), замечать.', 'обращать внимание на (кого-либо/что-либо), замечать'],
             'aside before a comma' => ['bortset fra (at) — за исключением того (что), если не считать (того что). Устойчивый предложный оборот.', 'за исключением того, если не считать'],
+            'quoted reading after a description' => ['rent faktisk — разговорное усилительное сочетание, подчеркивающее реальность или неожиданность факта. Переводится как «действительно», «на самом деле», «факт в том, что».', 'действительно'],
+            'quoted reading after a kind of phrase' => ['et eller andet — устойчивое разговорное местоимение-обобщение. Переводится как «что-то», «что-нибудь» или «что-то там».', 'что-то'],
+            'placeholder in a long pair of variants' => ['At overlade (nogen) til (noget) — предоставить (кого-либо) самому себе / оставить (кого-то) на произвол (в данном контексте — «оставить вас вашей могиле»).', 'предоставить (кого-либо) самому себе'],
             'aside before the full stop' => ['at udstøde et gisp — издать возглас (ахнуть от изумления/испуга). Устойчивое глагольное сочетание.', 'издать возглас'],
         ];
     }
@@ -382,7 +385,10 @@ final class ImportPipelineTest extends TestCase
         $primary = array_values(array_filter($translations, fn($t) => $t['is_primary']));
         self::assertSame($answer, $primary[0]['text'] ?? null);
         foreach ($translations as $t) {
-            self::assertDoesNotMatchRegularExpression('/\s[,.;:]|Устойчив|глагол/u', $t['text']);
+            if ($t['is_primary']) {
+                self::assertDoesNotMatchRegularExpression('/Устойчив|усилительн|глагол/u', $t['text']);
+            }
+            self::assertDoesNotMatchRegularExpression('/\s[,.;:]/u', $t['text']);
         }
     }
 

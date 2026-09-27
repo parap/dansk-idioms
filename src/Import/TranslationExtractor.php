@@ -68,10 +68,13 @@ final class TranslationExtractor
                 $head
             ) ?? $head;
             $head = preg_replace('/\s+(?=[,.;:])/u', '', Text::collapseWhitespace($head)) ?? $head;
+        }
+        // Quotes anywhere in the head mean it describes and quotes the reading, so the
+        // quotes are the answer -- decided before the head is cut to its first sentence.
+        if ($head !== null && $head !== '' && !str_contains($head, '«')) {
             // "напугать, вселить страх. Устойчивое сочетание." -- the reading is the
             // first sentence; what follows says what kind of phrase it is.
-            $head = preg_split('/[.;]\s+(?=\p{Lu})/u', $head, 2)[0];
-            $head = Text::trimPunctuation($head);
+            $head = Text::trimPunctuation(preg_split('/[.;]\s+(?=\p{Lu})/u', $head, 2)[0]);
         }
         if ($head !== null && $head !== '' && !str_contains($head, '«')) {
             $clause = $this->firstClause($head);
@@ -330,7 +333,8 @@ final class TranslationExtractor
         if (mb_strlen($s, 'UTF-8') <= self::MAX_QUIZ_CHARS) {
             return $s;
         }
-        $cut = preg_split('/(?<=[.;])\s+|\s+\(/u', $s, 2);
+        // Not at an object placeholder: "(кого-либо)" belongs to the reading.
+        $cut = preg_split('/(?<=[.;])\s+|\s+\((?!(?:кого|кем|кому|ком|кто|что|чего|чем|чему|чём)-)/u', $s, 2);
         $first = trim($cut[0] ?? $s);
         if (mb_strlen($first, 'UTF-8') <= self::MAX_QUIZ_CHARS) {
             return $first;

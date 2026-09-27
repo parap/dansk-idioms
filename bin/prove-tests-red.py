@@ -553,8 +553,16 @@ FAULTS = [
   "            $head = Text::collapseWhitespace($head);",
   "unit:testAOneLinePostGivesItsReadingWithoutGapsOrLabels"),
  (174,"the kind of phrase rides into the reading","src/Import/TranslationExtractor.php",
-  "            $head = preg_split('/[.;]\\s+(?=\\p{Lu})/u', $head, 2)[0];",
-  "",
+  "            $head = Text::trimPunctuation(preg_split('/[.;]\\s+(?=\\p{Lu})/u', $head, 2)[0]);",
+  "            $head = Text::trimPunctuation($head);",
+  "unit:testAOneLinePostGivesItsReadingWithoutGapsOrLabels"),
+ (175,"a quoted reading is lost when the head is cut first","src/Import/TranslationExtractor.php",
+  "        if ($head !== null && $head !== '' && !str_contains($head, '«')) {\n            // \"напугать",
+  "        if ($head !== null && $head !== '') {\n            // \"напугать",
+  "unit:testAOneLinePostGivesItsReadingWithoutGapsOrLabels"),
+ (176,"a long reading is cut at its object placeholder","src/Import/TranslationExtractor.php",
+  "|\\s+\\((?!(?:кого|кем|кому|ком|кто|что|чего|чем|чему|чём)-)/u', $s, 2);",
+  "|\\s+\\(/u', $s, 2);",
   "unit:testAOneLinePostGivesItsReadingWithoutGapsOrLabels"),
 ]
 def phpunit(*args):
