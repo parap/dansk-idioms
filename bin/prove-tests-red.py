@@ -576,6 +576,10 @@ FAULTS = [
   "                    text        = IF(source = \\'manual\\', text, VALUES(text)),\n",
   "",
   "integration:testAReadingTheImportNowGetsRightReplacesItsOldWording"),
+ (180,"\"устойчивое сочетание\" is offered as the answer","src/Import/TranslationExtractor.php",
+  "            '/(выражени\\w*|оборот\\w*|сочетани\\w*|",
+  "            '/(выражени\\w*|оборот\\w*|словосочетани\\w*|",
+  "unit:testAOneLinePostGivesItsReadingWithoutGapsOrLabels"),
 ]
 def phpunit(*args):
     return subprocess.run(
