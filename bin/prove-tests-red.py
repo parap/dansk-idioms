@@ -98,7 +98,7 @@ FAULTS = [
   "            'score'     => ['correct' => (int) $row['correct_count']],",
   "            'score'     => ['correct' => (int) $row['correct_count']], 'correct_index' => 1,","integration"),
  (13,"upsert drops is_primary","src/Import/Importer.php",
-  "                    is_primary  = VALUES(is_primary),","                    ","integration"),
+  "                    is_primary  = IF(source = \\'manual\\', is_primary, VALUES(is_primary)),","                    ","integration"),
  (14,"drop fixed-status protection","src/Import/Importer.php",
   "                status            = IF(raw_entries.status = \\'fixed\\', \\'fixed\\', VALUES(status))",
   "                status            = VALUES(status)","integration"),
@@ -528,6 +528,10 @@ FAULTS = [
   "            $message['text'] = Communicator::untagged($message['text']);",
   "",
   "integration:testTheBotsTagStaysOutOfTheCorpus"),
+ (168,"an imported reading takes a human's primary away","src/Import/Importer.php",
+  "                    is_primary  = IF(source = \\'manual\\', is_primary, VALUES(is_primary)),",
+  "                    is_primary  = VALUES(is_primary),",
+  "integration:testAnImportedReadingEqualToAHumanPrimaryLeavesItPrimary"),
 ]
 def phpunit(*args):
     return subprocess.run(

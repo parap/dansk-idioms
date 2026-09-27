@@ -312,10 +312,10 @@ final class Importer
                  ON DUPLICATE KEY UPDATE
                     sense_type  = VALUES(sense_type),
                     quiz_usable = VALUES(quiz_usable),
-                    -- is_primary MUST be updated here. The statement above clears the
-                    -- previous primary, so omitting it leaves the idiom with no answer
-                    -- at all whenever the winning row already existed.
-                    is_primary  = VALUES(is_primary),
+                    -- is_primary MUST be updated here: the statement above clears the
+                    -- previous primary. A row a human wrote keeps its own, or the parse reaching
+                    -- the same words would unpublish the idiom.
+                    is_primary  = IF(source = \'manual\', is_primary, VALUES(is_primary)),
                     confidence  = GREATEST(confidence, VALUES(confidence))',
                 [
                     $idiomId, $lang, Text::clean($t['text']), $norm, $t['sense_type'],

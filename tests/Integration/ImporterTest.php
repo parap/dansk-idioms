@@ -12,6 +12,27 @@ final class ImporterTest extends IntegrationTestCase
         return (new Importer())->import($this->fixtureExport(), 'Fixture');
     }
 
+    public function testAnImportedReadingEqualToAHumanPrimaryLeavesItPrimary(): void
+    {
+        // The parse arrives at the very reading a human made primary. Updating that
+        // row with the importer's "no primary" took the flag away, and the idiom
+        // dropped off the site with nothing in the run's output to say so.
+        $id = (new \Dansk\Domain\ReviewRepository())
+            ->addByHand('at skuldrene synker', 'сбросить напряжение', ['расслабиться']);
+
+        (new Importer(new \Dansk\Import\SingleMessageReader([
+            'tg_message_id' => 113, 'from_name' => 'Alex',
+            'posted_at' => '2026-09-27 12:00:00', 'posted_at_raw' => '27.09.2026 14:00:00 UTC+02:00',
+            'text' => "\u{200B}at skuldrene synker (ned) — метафора, означающий «сбросить напряжение»,"
+                . ' «расслабиться», «выдохнуть с облегчением».',
+        ])))->import('telegram:export', 'Fixture');
+
+        self::assertSame('сбросить напряжение', Db::fetchValue(
+            "SELECT text FROM idiom_translations WHERE idiom_id = ? AND is_primary = 1", [$id]
+        ));
+        self::assertSame(1, (int) Db::fetchValue('SELECT is_published FROM idioms WHERE id = ?', [$id]));
+    }
+
     public function testTheBotsTagStaysOutOfTheCorpus(): void
     {
         // The bot's posts come back in the export with the tag it appended, and the
