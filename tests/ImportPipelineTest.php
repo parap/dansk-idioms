@@ -371,12 +371,14 @@ final class ImportPipelineTest extends TestCase
             'quoted reading after a description' => ['rent faktisk — разговорное усилительное сочетание, подчеркивающее реальность или неожиданность факта. Переводится как «действительно», «на самом деле», «факт в том, что».', 'действительно'],
             'quoted reading after a kind of phrase' => ['et eller andet — устойчивое разговорное местоимение-обобщение. Переводится как «что-то», «что-нибудь» или «что-то там».', 'что-то'],
             'placeholder in a long pair of variants' => ['At overlade (nogen) til (noget) — предоставить (кого-либо) самому себе / оставить (кого-то) на произвол (в данном контексте — «оставить вас вашей могиле»).', 'предоставить (кого-либо) самому себе'],
+            'placeholder at the end of the reading' => ["At spøge med (noget) — шутить с (чем-либо), относиться легкомысленно к чему-то важному или опасному.\nКонтекст: «I spøger ikke med sikkerheden» — «Вы не шутите с безопасностью / Вы относитесь к безопасности всерьёз».", 'шутить с (чем-либо)'],
+            'an etymology is no answer' => ['lige (одинаково, равно) — из древнескандинавского líkr («похожий, равный»). Ещё и это значение...', null],
             'aside before the full stop' => ['at udstøde et gisp — издать возглас (ахнуть от изумления/испуга). Устойчивое глагольное сочетание.', 'издать возглас'],
         ];
     }
 
     #[\PHPUnit\Framework\Attributes\DataProvider('oneLinePosts')]
-    public function testAOneLinePostGivesItsReadingWithoutGapsOrLabels(string $post, string $answer): void
+    public function testAOneLinePostGivesItsReadingWithoutGapsOrLabels(string $post, ?string $answer): void
     {
         // Cutting an aside out left "напасть на , совершить нападение", and a short
         // head kept its trailing "Устойчивое сочетание" -- both served as answers.

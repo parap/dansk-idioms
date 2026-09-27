@@ -39,7 +39,9 @@ final class TranslationExtractor
         . '|\p{Latin}+\s+(означа\w*|значит|переводится)\s*'
         . '|от\s+\p{Latin}+\s*)$/ui';
 
-    private const OBJECT_PLACEHOLDER = '/^\((?:(?:кого|кем|кому|ком|кто|что|чего|чем|чему|чём)-(?:то|либо|нибудь)\/?)+\)$/u';
+    private const OBJECT_PRONOUNS = 'кого|кем|кому|ком|кто|что|чего|чем|чему|чём';
+
+    private const OBJECT_PLACEHOLDER = '/^\((?:(?:' . self::OBJECT_PRONOUNS . ')-(?:то|либо|нибудь)\/?)+\)$/u';
 
     private const IDIOMATIC_CUE = '/(?<!\p{L})(переводится как|означает\w*|означающ\w+|значит'
         . '|в значении|аналог\w*|смысл\w*)\s*[:\-–—]?\s*$/ui';
@@ -74,7 +76,7 @@ final class TranslationExtractor
         if ($head !== null && $head !== '' && !str_contains($head, '«')) {
             // "напугать, вселить страх. Устойчивое сочетание." -- the reading is the
             // first sentence; what follows says what kind of phrase it is.
-            $head = Text::trimPunctuation(preg_split('/[.;]\s+(?=\p{Lu})/u', $head, 2)[0]);
+            $head = $this->trimReading(preg_split('/[.;]\s+(?=\p{Lu})/u', $head, 2)[0], true);
         }
         if ($head !== null && $head !== '' && !str_contains($head, '«')) {
             $clause = $this->firstClause($head);
@@ -284,7 +286,7 @@ final class TranslationExtractor
 
         $out = [];
         foreach ($parts as $part) {
-            $part = Text::trimPunctuation($part, false);
+            $part = $this->trimReading($part);
             if ($part !== '') {
                 $out[] = $part;
             }
@@ -334,7 +336,7 @@ final class TranslationExtractor
             return $s;
         }
         // Not at an object placeholder: "(кого-либо)" belongs to the reading.
-        $cut = preg_split('/(?<=[.;])\s+|\s+\((?!(?:кого|кем|кому|ком|кто|что|чего|чем|чему|чём)-)/u', $s, 2);
+        $cut = preg_split('/(?<=[.;])\s+|\s+\((?!(?:' . self::OBJECT_PRONOUNS . ')-)/u', $s, 2);
         $first = trim($cut[0] ?? $s);
         if (mb_strlen($first, 'UTF-8') <= self::MAX_QUIZ_CHARS) {
             return $first;
@@ -345,11 +347,20 @@ final class TranslationExtractor
         return trim($comma[0] ?? $first);
     }
 
+    /** Trims punctuation, but gives back the ")" of a trailing "(чем-либо)". */
+    private function trimReading(string $s, bool $withDashes = false): string
+    {
+        $trimmed = Text::trimPunctuation($s, $withDashes);
+        $closes  = preg_match('/\((?:(?:' . self::OBJECT_PRONOUNS . ')-(?:то|либо|нибудь)\/?)+\)[\s.,;:!?]*$/u', $s) === 1;
+
+        return $closes && !str_ends_with($trimmed, ')') ? $trimmed . ')' : $trimmed;
+    }
+
     private function make(string $text, string $sense, float $confidence): array
     {
         // Final guard: guillemets can survive when a variant was not split, and they
         // would otherwise be shown to the user as part of the answer.
-        $text  = Text::collapseWhitespace(Text::trimPunctuation($text, false));
+        $text  = Text::collapseWhitespace($this->trimReading($text));
         $words = Text::wordCount($text);
         $chars = mb_strlen($text, 'UTF-8');
 
@@ -387,7 +398,9 @@ final class TranslationExtractor
             '/(выражени\w*|оборот\w*|словосочетани\w*|фразеологизм\w*|конструкци\w*'
             . '|идиом\w*|глагол\w*|существительн\w*|прилагательн\w*|наречи\w*'
             . '|частиц\w*|союз\w*|предлог\w*|междомети\w*|термин\w*'
-            . '|поговорк\w*|пословиц\w*|описани\w*|обозначени\w*)/ui',
+            . '|поговорк\w*|пословиц\w*|описани\w*|обозначени\w*'
+            // Where the word comes from, not what it means: "из древнескандинавского líkr".
+            . '|калька|^(?:из|от)\s+\p{L}+(?:ского|цкого)(?!\p{L}))/ui',
             $text
         );
     }
