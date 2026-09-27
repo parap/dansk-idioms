@@ -33,6 +33,46 @@ final class ImporterTest extends IntegrationTestCase
         self::assertSame(1, (int) Db::fetchValue('SELECT is_published FROM idioms WHERE id = ?', [$id]));
     }
 
+    private static function importText(int $tgId, string $text): void
+    {
+        (new Importer(new \Dansk\Import\SingleMessageReader([
+            'tg_message_id' => $tgId, 'from_name' => 'Alex',
+            'posted_at' => '2026-09-27 12:00:00', 'posted_at_raw' => '27.09.2026 14:00:00 UTC+02:00',
+            'text' => "\u{200B}" . $text,
+        ])))->import('telegram:export', 'Fixture');
+    }
+
+    public function testAnEntryAwaitingReviewLeavesAnAcceptedIdiomAlone(): void
+    {
+        // The idiom's readings came from whichever entry was imported last, so a later
+        // post the parser was unsure about replaced the accepted answer and the idiom
+        // left the site.
+        self::importText(5198, 'At være klar over (noget) — осознавать, понимать, быть в курсе чего-либо.');
+        $id = (int) Db::fetchValue("SELECT id FROM idioms WHERE term_norm = 'være klar over'");
+        self::assertSame(1, (int) Db::fetchValue('SELECT is_published FROM idioms WHERE id = ?', [$id]));
+        $primary = Db::fetchValue('SELECT text FROM idiom_translations WHERE idiom_id = ? AND is_primary = 1', [$id]);
+
+        self::importText(5209, 'være klar over — сознавать, быть в курсе, отдавать себе отчет.');
+
+        self::assertSame(1, (int) Db::fetchValue('SELECT is_published FROM idioms WHERE id = ?', [$id]));
+        self::assertSame($primary, Db::fetchValue(
+            'SELECT text FROM idiom_translations WHERE idiom_id = ? AND is_primary = 1', [$id]
+        ));
+    }
+
+    public function testAnImportedReadingLeavesAHumansReadingUsable(): void
+    {
+        $id = (new \Dansk\Domain\ReviewRepository())->addByHand('ny single', 'свежеиспечённый одиночка');
+
+        self::importText(144, 'ny single — устойчивое разговорное сочетание, описывающее человека, который'
+            . ' только что вышел из отношений и вновь стал свободен («свежеиспечённый одиночка»).');
+
+        self::assertSame(1, (int) Db::fetchValue(
+            "SELECT quiz_usable FROM idiom_translations WHERE idiom_id = ? AND text = 'свежеиспечённый одиночка'", [$id]
+        ));
+        self::assertSame(1, (int) Db::fetchValue('SELECT is_published FROM idioms WHERE id = ?', [$id]));
+    }
+
     public function testTheBotsTagStaysOutOfTheCorpus(): void
     {
         // The bot's posts come back in the export with the tag it appended, and the

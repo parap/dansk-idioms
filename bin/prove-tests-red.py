@@ -532,6 +532,14 @@ FAULTS = [
   "                    is_primary  = IF(source = \\'manual\\', is_primary, VALUES(is_primary)),",
   "                    is_primary  = VALUES(is_primary),",
   "integration:testAnImportedReadingEqualToAHumanPrimaryLeavesItPrimary"),
+ (169,"an entry awaiting review replaces an accepted idiom's readings","src/Import/Importer.php",
+  "                    if ($status === 'auto_accepted' || $created) {",
+  "                    if (true) {",
+  "integration:testAnEntryAwaitingReviewLeavesAnAcceptedIdiomAlone"),
+ (170,"an imported reading makes a human's reading unusable","src/Import/Importer.php",
+  "                    quiz_usable = IF(source = \\'manual\\', quiz_usable, VALUES(quiz_usable)),",
+  "                    quiz_usable = VALUES(quiz_usable),",
+  "integration:testAnImportedReadingLeavesAHumansReadingUsable"),
 ]
 def phpunit(*args):
     return subprocess.run(

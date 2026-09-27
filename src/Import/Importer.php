@@ -85,8 +85,12 @@ final class Importer
                     // entry puts good idioms in front of anything that prunes.
                     [$idiomId, $created] = $this->upsertIdiom($entry, $messageId);
                     $stats[$created ? 'idioms_created' : 'idioms_updated']++;
-                    $stats['translations'] += $this->writeTranslations($idiomId, $lang, $translations);
-                    $this->writeExplanation($idiomId, $lang, $entry);
+                    // An entry the parser is unsure of fills only an idiom it created:
+                    // its readings would otherwise replace an accepted answer.
+                    if ($status === 'auto_accepted' || $created) {
+                        $stats['translations'] += $this->writeTranslations($idiomId, $lang, $translations);
+                        $this->writeExplanation($idiomId, $lang, $entry);
+                    }
 
                     if ($status === 'auto_accepted') {
                         $this->publishIfAnswerable($idiomId, $lang);
@@ -311,10 +315,10 @@ final class Importer
                  VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
                  ON DUPLICATE KEY UPDATE
                     sense_type  = VALUES(sense_type),
-                    quiz_usable = VALUES(quiz_usable),
-                    -- is_primary MUST be updated here: the statement above clears the
-                    -- previous primary. A row a human wrote keeps its own, or the parse reaching
-                    -- the same words would unpublish the idiom.
+                    -- A row a human wrote keeps its flags, or the parse reaching the
+                    -- same words would unpublish the idiom. Otherwise is_primary MUST
+                    -- be updated: the statement above cleared the previous primary.
+                    quiz_usable = IF(source = \'manual\', quiz_usable, VALUES(quiz_usable)),
                     is_primary  = IF(source = \'manual\', is_primary, VALUES(is_primary)),
                     confidence  = GREATEST(confidence, VALUES(confidence))',
                 [
