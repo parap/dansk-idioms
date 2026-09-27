@@ -57,7 +57,7 @@ done
 # this file, the host's process list, or a cron line.
 if ! docker compose exec -T db sh -c 'exec mysqldump -uroot -p"$MYSQL_ROOT_PASSWORD" \
         --single-transaction --routines --triggers --events \
-        --default-character-set=utf8mb4 --databases dansk' 2>/dev/null | gzip > "$partial"
+        --default-character-set=utf8mb4 dansk' 2>/dev/null | gzip > "$partial"
 then
     refuse "mysqldump did not finish"
 fi
@@ -74,6 +74,10 @@ grep -q 'CREATE TABLE `idioms`' <(zcat "$partial") \
                                        || refuse "$name contains no schema"
 grep -q '^-- Dump completed' <(zcat "$partial") \
                                        || refuse "$name stops before mysqldump finished"
+# A dump that names its database restores into it wherever it is piped: loading it
+# into a scratch database for a comparison overwrites production instead.
+! grep -qE '^(USE|CREATE DATABASE) ' <(zcat "$partial") \
+                                       || refuse "$name switches to its own database"
 
 # Only now is it a backup. The dump carries password hashes and every learner's progress.
 mv "$partial" "$file"
