@@ -359,6 +359,14 @@ final class Importer
         if ($body === '') {
             return;
         }
+        // A human's explanation is the only one: rows are unique per source, so an
+        // imported one would sit beside it and the quiz would show the idiom twice.
+        if (Db::fetchValue(
+            "SELECT 1 FROM idiom_explanations WHERE idiom_id = ? AND lang_code = ? AND source = 'manual'",
+            [$idiomId, $lang]
+        )) {
+            return;
+        }
         Db::execute(
             "INSERT INTO idiom_explanations (idiom_id, lang_code, body, source)
              VALUES (?,?,?, 'import')

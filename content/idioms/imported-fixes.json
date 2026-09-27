@@ -130,5 +130,63 @@
     "synonyms": [
       "at skuldrene synker"
     ]
+  },
+  {
+    "term": "at stå i vejen for (noget)",
+    "kind": "phrase",
+    "shape": "verbal",
+    "ru": "стоять на пути",
+    "also": [
+      "мешать",
+      "препятствовать"
+    ],
+    "retire": [
+      "стоять на пути у , мешать"
+    ],
+    "explain": "стоять на пути у кого-либо или чего-либо, мешать, препятствовать чьим-либо планам или мечтам (в тексте: vil ikke stå i vejen for hans drømme)"
+  },
+  {
+    "term": "at være en del af (noget)",
+    "kind": "phrase",
+    "shape": "verbal",
+    "ru": "входить в состав чего-либо",
+    "also": [
+      "быть частью чего-либо"
+    ],
+    "retire": [
+      "hvis alt går vel — если всё пройдет хорошо",
+      "en dag — в один прекрасный день, когда-нибудь"
+    ],
+    "explain": "быть частью чего-либо, входить в состав, принадлежать к коллективу или структуре (в тексте: blev jeg en del af)"
+  },
+  {
+    "term": "hvis alt går vel",
+    "kind": "phrase",
+    "shape": "adverbial",
+    "ru": "если всё пройдёт хорошо",
+    "also": [
+      "при благоприятном исходе"
+    ],
+    "explain": "если всё пройдёт хорошо, при благоприятном исходе"
+  },
+  {
+    "term": "en dag",
+    "kind": "phrase",
+    "shape": "adverbial",
+    "ru": "в один прекрасный день",
+    "also": [
+      "когда-нибудь"
+    ],
+    "explain": "в один прекрасный день, когда-нибудь (о неопределённом будущем)"
+  },
+  {
+    "term": "ikke at have godt af (noget)",
+    "kind": "phrase",
+    "shape": "verbal",
+    "ru": "быть не на пользу",
+    "also": [
+      "идти во вред"
+    ],
+    "explain": "быть не на пользу, идти во вред (в тексте: «Almindelige mennesker havde ikke godt af at vide...» — «Обычным людям не пошло бы на пользу знать...»)"
   }
 ]

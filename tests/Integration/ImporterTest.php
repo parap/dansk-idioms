@@ -73,6 +73,21 @@ final class ImporterTest extends IntegrationTestCase
         self::assertSame(1, (int) Db::fetchValue('SELECT is_published FROM idioms WHERE id = ?', [$id]));
     }
 
+    public function testAHumansExplanationIsTheOnlyOne(): void
+    {
+        // Explanations are unique per source, so an imported one lands beside the
+        // human's and the quiz, joining on idiom and language, shows the idiom twice.
+        $id = (new \Dansk\Domain\ReviewRepository())
+            ->addByHand('med det samme', 'сразу же', explanation: 'сразу же, немедленно, тут же');
+
+        self::importText(5205, 'Med det samme — сразу же / немедленно.');
+
+        self::assertSame([['manual', 'сразу же, немедленно, тут же']], array_map(
+            'array_values',
+            Db::fetchAll("SELECT source, body FROM idiom_explanations WHERE idiom_id = ? AND lang_code = 'ru'", [$id])
+        ));
+    }
+
     public function testTheBotsTagStaysOutOfTheCorpus(): void
     {
         // The bot's posts come back in the export with the tag it appended, and the

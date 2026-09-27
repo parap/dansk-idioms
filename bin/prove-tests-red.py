@@ -540,6 +540,10 @@ FAULTS = [
   "                    quiz_usable = IF(source = \\'manual\\', quiz_usable, VALUES(quiz_usable)),",
   "                    quiz_usable = VALUES(quiz_usable),",
   "integration:testAnImportedReadingLeavesAHumansReadingUsable"),
+ (171,"an imported explanation lands beside a human's","src/Import/Importer.php",
+  "            \"SELECT 1 FROM idiom_explanations WHERE idiom_id = ? AND lang_code = ? AND source = 'manual'\",",
+  "            \"SELECT 0\",",
+  "integration:testAHumansExplanationIsTheOnlyOne"),
 ]
 def phpunit(*args):
     return subprocess.run(
