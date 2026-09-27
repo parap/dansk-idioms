@@ -88,6 +88,26 @@ final class ImporterTest extends IntegrationTestCase
         ));
     }
 
+    public function testAReadingTheImportNowGetsRightReplacesItsOldWording(): void
+    {
+        // An older extractor stored "…(чего-либо" without its bracket. The corrected
+        // reading keys the same, so the upsert found the old row and kept its text.
+        $post = "Masser af (noget) — Множество, масса, огромное количество (чего-либо).";
+        self::importText(373, $post);
+        $id = (int) Db::fetchValue("SELECT id FROM idioms WHERE term_norm = 'masser af'");
+        Db::execute(
+            "UPDATE idiom_translations SET text = 'Множество, масса, огромное количество (чего-либо'
+              WHERE idiom_id = ? AND is_primary = 1",
+            [$id]
+        );
+
+        self::importText(373, $post);
+
+        self::assertSame('Множество, масса, огромное количество (чего-либо)', Db::fetchValue(
+            'SELECT text FROM idiom_translations WHERE idiom_id = ? AND is_primary = 1', [$id]
+        ));
+    }
+
     public function testTheBotsTagStaysOutOfTheCorpus(): void
     {
         // The bot's posts come back in the export with the tag it appended, and the

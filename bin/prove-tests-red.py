@@ -572,6 +572,10 @@ FAULTS = [
   "            . '|калька|^(?:из|от)\\s+\\p{L}+(?:ского|цкого)(?!\\p{L}))/ui',",
   "            . ')/ui',",
   "unit:testAOneLinePostGivesItsReadingWithoutGapsOrLabels"),
+ (179,"an old wording of a reading outlives the corrected one","src/Import/Importer.php",
+  "                    text        = IF(source = \\'manual\\', text, VALUES(text)),\n",
+  "",
+  "integration:testAReadingTheImportNowGetsRightReplacesItsOldWording"),
 ]
 def phpunit(*args):
     return subprocess.run(
@@ -701,6 +705,13 @@ def on_signal(signum, _frame):
 signal.signal(signal.SIGINT, on_signal)
 signal.signal(signal.SIGTERM, on_signal)
 atexit.register(restore_pending)
+
+# A fault proves something only against a tree that passes without it. On a tree already
+# red -- a syntax error, a failing test -- every fault reads as caught.
+for base in sorted({s.partition(':')[0] for *_, s in FAULTS} - {"ui"}):
+    if phpunit("--testsuite", base).returncode != 0:
+        print(f"  the {base} suite is red before any fault is injected — nothing can be proven")
+        sys.exit(1)
 
 survived = []
 # A fault that never reached the file proves nothing, so a skip fails the run rather

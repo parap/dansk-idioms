@@ -314,6 +314,9 @@ final class Importer
                      quiz_usable, shape, word_count, char_count, source, confidence)
                  VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
                  ON DUPLICATE KEY UPDATE
+                    -- The key drops punctuation, so an older, worse wording of this
+                    -- reading keys the same; a row the importer wrote takes the new one.
+                    text        = IF(source = \'manual\', text, VALUES(text)),
                     sense_type  = VALUES(sense_type),
                     -- A row a human wrote keeps its flags, or the parse reaching the
                     -- same words would unpublish the idiom. Otherwise is_primary MUST
