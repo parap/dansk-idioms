@@ -12,6 +12,7 @@ use Dansk\Support\BotApi;
 use Dansk\Support\CommunicatorDrafts;
 use Dansk\Support\CommunicatorIngest;
 use Dansk\Support\CommunicatorWebhook;
+use Dansk\Support\KnownIdioms;
 use Dansk\Support\Config;
 use Dansk\Support\Db;
 use Dansk\Support\Shell;
@@ -137,7 +138,8 @@ try {
                     new BotApi($settings['token'] ?? null),
                     $settings,
                     (new CommunicatorIngest((string) ($settings['source'] ?? '')))(...),
-                    new CommunicatorDrafts()
+                    new CommunicatorDrafts(),
+                    known: (new KnownIdioms())(...),
                 );
                 $outcome = $hook->handle(
                     $body,

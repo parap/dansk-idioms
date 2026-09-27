@@ -180,8 +180,8 @@ FAULTS = [
   "integration:testOptionOrderIsDecidedPerSessionRatherThanByTheAuthor,"
   "testOptionOrderInAMistakesRoundIsDecidedPerRound"),
  (153,"a split post loses its author","src/Support/CommunicatorWebhook.php",
-  "        $this->publishParts($group, $parts, $draft['entities'], $draft['kind'], $press['from'] ?? [], time());",
-  "        $this->publishParts($group, $parts, $draft['entities'], $draft['kind'], [], time());",
+  "        $done = $this->publishParts($group, $parts, $draft['entities'], $draft['kind'], $press['from'] ?? [], time());",
+  "        $done = $this->publishParts($group, $parts, $draft['entities'], $draft['kind'], [], time());",
   "unit:testTheAuthorReachesTheCorpusWhicheverWayItWasPublished"),
  (40,"a client response time is trusted","src/Domain/Reading/ReadingSessionService.php",
   "        $ms        = $responseMs === null ? null : max(0, min(self::MAX_RESPONSE_MS, $responseMs));",
@@ -508,6 +508,22 @@ FAULTS = [
   "\\s+(?:\\([^()\\n]*\\p{Cyrillic}[^()\\n]*\\)\\s+)?[—–-]",
   "\\s+[—–-]",
   "unit:testARussianNoteInBracketsIsLeftOutOfTheBold"),
+ (163,"an idiom already in the corpus is published again","src/Support/CommunicatorWebhook.php",
+  "            if ($term !== null) {\n                $skipped[] = $term;",
+  "            if (false) {\n                $skipped[] = $term;",
+  "unit:testAnIdiomAlreadyInTheCorpusGoesNowhere,testNothingNewPublishesNothing,testAPressedSplitLeavesOutWhatIsKnownToo"),
+ (164,"a skipped idiom is skipped in silence","src/Support/CommunicatorWebhook.php",
+  "        if ($skipped !== []) {",
+  "        if (false) {",
+  "unit:testTheOwnerIsToldWhatWasLeftOut"),
+ (165,"nothing new is reported as published","src/Support/CommunicatorWebhook.php",
+  "        if ($done['published'] === 0) {\n            return 'nothing_new';",
+  "        if (false) {\n            return 'nothing_new';",
+  "unit:testNothingNewPublishesNothing"),
+ (166,"known idioms are looked up by the whole line, not the term","src/Support/KnownIdioms.php",
+  "        $norm  = Normalizer::term((new EntryParser())->parse($entry)->term ?? '');",
+  "        $norm  = Normalizer::term($entry);",
+  "integration:testAKnownIdiomIsFoundUnderItsStoredTerm,testTheExplanationDoesNotDecide"),
 ]
 def phpunit(*args):
     return subprocess.run(

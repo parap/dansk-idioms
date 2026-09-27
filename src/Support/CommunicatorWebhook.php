@@ -18,15 +18,13 @@ use Dansk\Import\Text;
 final class CommunicatorWebhook
 {
     /**
-     * @param ?\Closure $ingest Given the message and the id it was published under,
-     *                          puts it in the corpus. Null leaves the corpus alone.
-     */
-    /**
      * @param ?\Closure $ingest    Given the message and the id it was published under,
      *                             puts it in the corpus. Null leaves the corpus alone.
      * @param ?Drafts   $drafts   Where a message waits for a decision. Null means no
      *                             proposal can be made, so an unclear message is left
      *                             unpublished and said so.
+     * @param ?\Closure $known     Given a piece, the term it names when that term is
+     *                             already in the corpus, else null. Null checks nothing.
      */
     public function __construct(
         private BotApi $api,
@@ -34,6 +32,7 @@ final class CommunicatorWebhook
         private ?\Closure $ingest = null,
         private ?Drafts $drafts = null,
         private EntrySegmenter $segmenter = new EntrySegmenter(),
+        private ?\Closure $known = null,
     ) {
     }
 
@@ -83,9 +82,12 @@ final class CommunicatorWebhook
             return $this->offer($raw, $message);
         }
 
-        $stored = $this->publishParts($group, $parts, $message['entities'] ?? [],
+        $done = $this->publishParts($group, $parts, $message['entities'] ?? [],
             Communicator::kindOf($message), $message['from'] ?? [], (int) ($message['date'] ?? 0));
-        if (!$stored) {
+        if ($done['published'] === 0) {
+            return 'nothing_new';
+        }
+        if (!$done['stored']) {
             $this->tell('Опубликовала, но на сайт не взяла: сорвалась запись в базу.');
 
             return 'published_not_stored';
@@ -95,18 +97,31 @@ final class CommunicatorWebhook
     }
 
     /**
-     * Each piece as its own post, its own bold, and its own entry in the corpus.
+     * Each new piece as its own post, its own bold, and its own entry in the corpus.
      *
-     * Returns false when some post went out but was not stored. A post is out and cannot
-     * be recalled, so a failure to store never stops the pieces after it.
+     * A piece whose idiom the corpus already has goes nowhere, and the owner is told.
+     * A post is out and cannot be recalled, so a failure to store never stops the
+     * pieces after it; `stored` reports it.
      *
      * @param list<array{text:string, offset:int}> $parts
+     * @return array{published:int, stored:bool}
      */
-    private function publishParts(string $group, array $parts, array $entities, string $kind, array $from, int $date): bool
+    private function publishParts(string $group, array $parts, array $entities, string $kind, array $from, int $date): array
     {
-        $stored = true;
+        $stored    = true;
+        $published = 0;
+        $skipped   = [];
         foreach ($parts as $part) {
-            $published = $this->api->sendMessage(
+            // Asked per piece, after the ones before it were stored: a batch naming one
+            // idiom twice publishes it once.
+            $term = $this->known === null ? null : ($this->known)($part['text']);
+            if ($term !== null) {
+                $skipped[] = $term;
+                continue;
+            }
+
+            $published++;
+            $postId = $this->api->sendMessage(
                 $group,
                 Communicator::tagged($part['text'], $kind),
                 // Rebased to the piece: offsets count from the start of the whole text.
@@ -121,14 +136,18 @@ final class CommunicatorWebhook
                 continue;
             }
             try {
-                ($this->ingest)(['text' => $part['text'], 'from' => $from, 'date' => $date], $published);
+                ($this->ingest)(['text' => $part['text'], 'from' => $from, 'date' => $date], $postId);
             } catch (\Throwable $e) {
                 error_log('communicator: published but not stored -- ' . $e->getMessage());
                 $stored = false;
             }
         }
 
-        return $stored;
+        if ($skipped !== []) {
+            $this->tell("Уже есть на сайте, не публиковала:\n" . implode("\n", $skipped));
+        }
+
+        return ['published' => $published, 'stored' => $stored];
     }
 
     /**
@@ -171,9 +190,13 @@ final class CommunicatorWebhook
 
         // The bot answers nobody else's buttons: whoever pressed is whoever wrote, and
         // the group post exists as of now, however long it waited.
-        $this->publishParts($group, $parts, $draft['entities'], $draft['kind'], $press['from'] ?? [], time());
+        $done = $this->publishParts($group, $parts, $draft['entities'], $draft['kind'], $press['from'] ?? [], time());
 
-        $this->acknowledge($press, count($parts) > 1 ? 'Опубликовала ' . count($parts) : 'Опубликовала');
+        $this->acknowledge($press, match (true) {
+            $done['published'] === 0 => 'Всё это уже есть',
+            $done['published'] > 1   => 'Опубликовала ' . $done['published'],
+            default                  => 'Опубликовала',
+        });
         $this->unbutton($press);
 
         return 'published';

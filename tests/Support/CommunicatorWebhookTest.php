@@ -46,6 +46,8 @@ final class CommunicatorWebhookTest extends TestCase
     private array $stored = [];
     private ?\Dansk\Support\Drafts $drafts = null;
     private $ingest = null;
+    /** Terms already in the corpus, by the text that names them. */
+    private array $known = [];
 
     private function webhook(array $overrides = []): CommunicatorWebhook
     {
@@ -61,7 +63,15 @@ final class CommunicatorWebhookTest extends TestCase
             'secret' => 's3cret',
             'owner'  => '158493465',
             'group'  => '-5203885388',
-        ], $overrides), $this->ingest, $this->drafts);
+        ], $overrides), $this->ingest, $this->drafts, known: function (string $piece): ?string {
+            foreach ($this->known as $term) {
+                if (str_starts_with(str_replace("\u{200B}", '', $piece), $term)) {
+                    return $term;
+                }
+            }
+
+            return null;
+        });
     }
 
     /** Only what was posted to the group -- a note to the owner is a send too. */
@@ -272,6 +282,60 @@ final class CommunicatorWebhookTest extends TestCase
             [['type' => 'bold', 'offset' => 3, 'length' => 2]],
             json_decode($this->toTheGroup()[0][1]['entities'] ?? '[]', true)
         );
+    }
+
+    // --- only what is new ------------------------------------------------------
+
+    public function testAnIdiomAlreadyInTheCorpusGoesNowhere(): void
+    {
+        $this->ingest = function (array $message): void {
+            $this->stored[] = $message['text'];
+        };
+        $this->known = ['at regne med (noget)'];
+
+        $outcome = $this->webhook()->handle(self::update(self::ONE_PER_LINE), 's3cret');
+
+        self::assertSame('published', $outcome);
+        $posts = $this->toTheGroup();
+        self::assertCount(3, $posts);
+        self::assertStringStartsWith('der er god tid til', $posts[2][1]['text']);
+        self::assertCount(3, $this->stored);
+    }
+
+    public function testTheOwnerIsToldWhatWasLeftOut(): void
+    {
+        // Silence would read as a post that got lost.
+        $this->known = ['at regne med (noget)', 'at udstøde et gisp'];
+
+        $this->webhook()->handle(self::update(self::ONE_PER_LINE), 's3cret');
+
+        $notes = array_values(array_filter(
+            $this->sent,
+            static fn(array $call): bool => ($call[1]['chat_id'] ?? '') === '158493465'
+        ));
+        self::assertCount(1, $notes);
+        self::assertStringContainsString('at udstøde et gisp', $notes[0][1]['text']);
+        self::assertStringContainsString('at regne med (noget)', $notes[0][1]['text']);
+    }
+
+    public function testNothingNewPublishesNothing(): void
+    {
+        $this->known = ['at gå agurk'];
+
+        $outcome = $this->webhook()->handle(self::update('at gå agurk — сойти с ума'), 's3cret');
+
+        self::assertSame('nothing_new', $outcome);
+        self::assertSame([], $this->toTheGroup());
+    }
+
+    public function testAPressedSplitLeavesOutWhatIsKnownToo(): void
+    {
+        $token = $this->offerTwo();
+        $this->known = ['at gå agurk'];
+
+        $this->webhook()->handle(self::press('split:' . $token), 's3cret');
+
+        self::assertCount(1, $this->toTheGroup());
     }
 
     public function testUnclearBoundariesPublishNothingYet(): void
