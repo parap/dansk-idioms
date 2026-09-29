@@ -192,4 +192,51 @@ final class ReadingRepositoryTest extends IntegrationTestCase
         self::assertCount(1, $found);
         self::assertSame('cykler-i-byen', $found[0]['slug']);
     }
+
+    /** @return array<string,mixed> */
+    private function video(array $overrides = []): array
+    {
+        return $overrides + [
+            'slug'    => 'svinedrengen',
+            'kind'    => 'video',
+            'title'   => 'Svinedrengen',
+            'youtube' => 'mvvRh8db3HY',
+            'body'    => null,
+            'items'   => [
+                ['position' => 1, 'prompt' => 'Hvad sender prinsen?', 'options' => [
+                    ['label' => 'A', 'text' => 'En rose', 'correct' => true],
+                    ['label' => 'B', 'text' => 'En hest'],
+                    ['label' => 'C', 'text' => 'En ring'],
+                ]],
+            ],
+        ];
+    }
+
+    public function testAVideoTaskKeepsTheFilmItIsAbout(): void
+    {
+        $id = $this->repo->save($this->video());
+
+        self::assertSame(
+            'mvvRh8db3HY',
+            Db::fetchValue('SELECT youtube_id FROM reading_passages WHERE id = ?', [$id])
+        );
+    }
+
+    public function testAVideoTaskWithoutAFilmIsRejected(): void
+    {
+        $this->expectException(InvalidPassage::class);
+
+        $this->repo->save($this->video(['youtube' => '']));
+    }
+
+    public function testPublishedVideosListEachFilmWithItsQuestionCount(): void
+    {
+        $this->repo->publish($this->repo->save($this->video()));
+        $this->repo->save($this->video(['slug' => 'kladde', 'title' => 'Kladde']));
+
+        self::assertSame(
+            [['slug' => 'svinedrengen', 'title' => 'Svinedrengen', 'youtube' => 'mvvRh8db3HY', 'questions' => 1]],
+            $this->repo->publishedVideos()
+        );
+    }
 }

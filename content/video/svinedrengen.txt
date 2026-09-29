@@ -1,0 +1,45 @@
+kind: video
+slug: svinedrengen
+title: Svinedrengen
+youtube: mvvRh8db3HY
+
+--- questions ---
+1. Hvordan var prinsen?
+* Venlig og klog, men fattig
+  Rig og forkælet
+  Gammel og streng
+
+2. Hvem ville prinsen giftes med?
+  En fattig bondepige
+* Kejserens datter
+  Nabokongens datter
+
+3. Hvilke gaver sendte prinsen til prinsessen?
+  Guld og juveler
+  En sølvkedel
+* En rose og en nattergal
+
+4. Hvorfor smed prinsessen rosen ud?
+* Den var ikke af guld
+  Den var visnet
+  Hun kunne ikke lide roser
+
+5. Hvilket arbejde fik prinsen på slottet?
+  Kok
+* Svinehyrde
+  Gartner
+
+6. Hvad kunne den særlige sølvkedel?
+* Spille en melodi, når den kogte
+  Lave guld
+  Tale som et menneske
+
+7. Hvad ville prinsen have for kedlen?
+  Hundrede guldmønter
+  Prinsessens krone
+* Hundrede kys
+
+8. Hvordan ender historien?
+  Prinsen og prinsessen bliver gift
+* Prinsen går, og prinsessen står tilbage med kedlen
+  Kejseren gør prinsen til konge

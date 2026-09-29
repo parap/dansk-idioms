@@ -381,4 +381,72 @@ final class PassageDocumentTest extends TestCase
             DOC);
     }
 
+    private const VIDEO = <<<'DOC'
+        kind: video
+        slug: svinedrengen
+        title: Svinedrengen
+        youtube: mvvRh8db3HY
+
+        --- questions ---
+        1. Hvad sender prinsen til prinsessen?
+        * En rose og en nattergal
+          En guldkrone og en hest
+          Et brev og en ring
+        DOC;
+
+    /**
+     * A listening task is a film and questions about it: nothing to read, no exam blocks,
+     * and the film is named by its YouTube id so the page can embed it.
+     */
+    public function testReadsAVideoTaskThatNamesItsFilm(): void
+    {
+        $doc = (new PassageDocument())->parse(self::VIDEO);
+
+        self::assertSame('video', $doc['kind']);
+        self::assertNull($doc['body']);
+        self::assertSame('mvvRh8db3HY', $doc['youtube']);
+        self::assertSame('Hvad sender prinsen til prinsessen?', $doc['items'][0]['prompt']);
+        self::assertArrayNotHasKey('section', $doc['items'][0]);
+    }
+
+    public function testRefusesAVideoTaskWithoutAFilm(): void
+    {
+        $this->expectException(InvalidPassage::class);
+        $this->expectExceptionMessageMatches('/youtube/');
+
+        (new PassageDocument())->parse(str_replace("youtube: mvvRh8db3HY\n", '', self::VIDEO));
+    }
+
+    public function testRefusesAFilmIdThatIsNotAYouTubeId(): void
+    {
+        $this->expectException(InvalidPassage::class);
+        $this->expectExceptionMessageMatches('/youtube/');
+
+        (new PassageDocument())->parse(
+            str_replace('mvvRh8db3HY', 'https://www.youtube.com/watch?v=mvvRh8db3HY', self::VIDEO)
+        );
+    }
+
+    public function testRefusesABlockInAVideoTask(): void
+    {
+        $this->expectException(InvalidPassage::class);
+        $this->expectExceptionMessageMatches('/block/');
+
+        (new PassageDocument())->parse(str_replace("--- questions ---\n", "--- questions ---\n[vaerdier]\n", self::VIDEO));
+    }
+
+    public function testRefusesATwoOptionQuestionInAVideoTask(): void
+    {
+        $this->expectException(InvalidPassage::class);
+        $this->expectExceptionMessageMatches('/three/');
+
+        (new PassageDocument())->parse(str_replace("\n  Et brev og en ring", '', self::VIDEO));
+    }
+
+    public function testRefusesATextSectionInAVideoTask(): void
+    {
+        $this->expectException(InvalidPassage::class);
+
+        (new PassageDocument())->parse(self::VIDEO . "\n--- text ---\nDer er ingen tekst.\n");
+    }
 }

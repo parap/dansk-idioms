@@ -1,0 +1,45 @@
+kind: video
+slug: klods-hans
+title: Klods Hans
+youtube: ktq_KAe4tRo
+
+--- questions ---
+1. Hvad lovede kongen den, der kunne få prinsessen til at grine?
+* At han måtte gifte sig med hende
+  En kiste med guld
+  Sit eget slot
+
+2. Hvor fik drengen arbejde?
+  På slottet
+* I en restaurant ved siden af slottet
+  Hos en bonde
+
+3. Hvad fik drengen efter sin første arbejdsdag?
+  En gris
+  En fisk
+* Et dusin æg
+
+4. Hvad sagde moren, at han skulle have gjort med æggene?
+* Lagt dem i sin hat
+  Båret dem i hænderne
+  Spist dem med det samme
+
+5. Hvad skete der med fisken, som han trak efter sig i et reb?
+  Den svømmede væk
+* Kattene spiste den
+  Prinsessen tog den
+
+6. Hvad fik drengen, den dag prinsessen endelig grinede?
+  En hest
+  En gris
+* En ko
+
+7. Hvorfor grinede prinsessen til sidst?
+* Hun så ham prøve at bære koen hjem
+  Han faldt i en mudderpøl
+  Han fortalte en vittighed
+
+8. Hvordan ender historien?
+  Prinsessen bliver trist igen
+* Drengen gifter sig med prinsessen
+  Drengen flytter med sin mor til en anden by

@@ -1,0 +1,45 @@
+kind: video
+slug: fyrtoejet
+title: Fyrtøjet
+youtube: GkM2PghXC8M
+
+--- questions ---
+1. Hvor var soldaten på vej hen, da historien begynder?
+* Hjem fra krigen
+  Ud i krig
+  Til kongens slot
+
+2. Hvad skulle soldaten hente til heksen nede i træet?
+  En kiste med guld
+* Hendes bedstemors gamle fyrtøj
+  De tre hunde
+
+3. Hvad skulle soldaten sætte hundene på?
+  Sin rygsæk
+  Låget på kisten
+* Heksens ternede forklæde
+
+4. Hvad lå der i kisten i det tredje rum?
+* Guldpenge
+  Sølvpenge
+  Kobberpenge
+
+5. Hvad gjorde soldaten, da heksen ikke ville sige, hvad fyrtøjet skulle bruges til?
+  Han gav hende fyrtøjet
+* Han huggede hovedet af hende
+  Han løb sin vej
+
+6. Hvorfor måtte ingen se prinsessen?
+  Hun var meget syg
+* Det var spået, at hun skulle giftes med en simpel soldat
+  Hun var bortført af en trold
+
+7. Hvordan fandt dronningen ud af, hvor prinsessen havde været?
+* Hun syede en pose med ris fast i prinsessens tøj
+  Hun satte et kryds på døren
+  Hun fulgte efter hunden
+
+8. Hvad reddede soldaten fra at blive hængt?
+  Prinsessen bad for ham
+  Drengen hentede kongens vagter
+* De tre hunde, som han kaldte med fyrtøjet

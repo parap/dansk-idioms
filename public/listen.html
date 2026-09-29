@@ -66,6 +66,8 @@ const STRINGS = {
     danskioererne: 'Подкаст медленным и чётким датским для уровня A2–B2, на сайте есть тексты выпусков.',
     godnat: 'Учебные блоки по датскому на основе историй; на сайте есть и начитанные сказки.',
     dido: 'Учебные блоки по датскому для 0–3 классов школы.',
+    films: 'Фильмы с вопросами',
+    filmsNote: 'Сказки Андерсена мультфильмами на датском, с вопросами на понимание.',
   },
   en: {
     title: 'Listening',
@@ -73,6 +75,8 @@ const STRINGS = {
     danskioererne: 'A podcast in slow, clear Danish for A2–B2 learners, with episode transcripts on the site.',
     godnat: 'Danish lessons built around stories; the site also has read-aloud tales.',
     dido: 'Danish lesson plans for school years 0–3.',
+    films: 'Films with questions',
+    filmsNote: 'Andersen fairy tales as Danish cartoons, with comprehension questions.',
   },
   uk: {
     title: 'Аудіювання',
@@ -80,6 +84,8 @@ const STRINGS = {
     danskioererne: 'Подкаст повільною і чіткою данською для рівня A2–B2, на сайті є тексти випусків.',
     godnat: 'Навчальні блоки з данської на основі історій; на сайті є й начитані казки.',
     dido: 'Навчальні блоки з данської для 0–3 класів школи.',
+    films: 'Фільми з питаннями',
+    filmsNote: 'Казки Андерсена мультфільмами данською, з питаннями на розуміння.',
   },
   da: {
     title: 'Lytning',
@@ -87,6 +93,8 @@ const STRINGS = {
     danskioererne: 'Podcast på langsomt og tydeligt dansk til niveau A2–B2, med tekster til afsnittene.',
     godnat: 'Undervisningsforløb i dansk bygget på historier; sitet har også oplæste eventyr.',
     dido: 'Undervisningsforløb i dansk til 0.–3. klasse.',
+    films: 'Film med spørgsmål',
+    filmsNote: 'H.C. Andersens eventyr som tegnefilm på dansk, med spørgsmål til forståelsen.',
   },
 };
 registerStrings(STRINGS);
@@ -111,6 +119,10 @@ function render() {
   paintLanguages();
 
   $('#view').innerHTML = `
+    <div class="card">
+      <a href="/video" style="font-weight:600">${esc(t('films'))} →</a>
+      <p class="muted" style="margin:.2rem 0 0;font-size:.95rem">${esc(t('filmsNote'))}</p>
+    </div>
     <div class="card">
       <p class="muted" style="margin:0 0 .9rem">${esc(t('intro'))}</p>
       <ul id="resources">

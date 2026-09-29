@@ -1,0 +1,45 @@
+kind: video
+slug: den-standhaftige-tinsoldat
+title: Den standhaftige tinsoldat
+youtube: hJNJ10wrhBk
+
+--- questions ---
+1. Hvor mange tinsoldater fik drengen?
+  Tolv
+* 25
+  Fem
+
+2. Hvorfor havde én af soldaterne kun ét ben?
+* Der var ikke tin nok til at gøre ham færdig
+  Han var blevet skudt i krigen
+  En hund havde bidt det af
+
+3. Hvad var den lille danserinde lavet af?
+  Tin
+* Papir
+  Træ
+
+4. Hvem sprang op af snustobaksæsken, da uret slog 12?
+  En mus
+  En anden tinsoldat
+* En lille sort trold
+
+5. Hvordan kom tinsoldaten ned på gaden?
+* Vinduet fløj op, og han faldt ud
+  Trolden bar ham derned
+  Drengen smed ham ud
+
+6. Hvad sejlede tinsoldaten i?
+  En træsko
+* En båd af avispapir
+  En tom æske
+
+7. Hvem ville se hans pas inde i tunnelen?
+* En stor vandrotte
+  En fisk
+  Trolden
+
+8. Hvor fandt kokken tinsoldaten?
+  I rendestenen
+  I pejsen
+* Inde i en fisk

@@ -1,0 +1,45 @@
+kind: video
+slug: tommelise
+title: Tommelise
+youtube: CA-NsDRab38
+
+--- questions ---
+1. Hvad fik konen af den gamle heks?
+  En tulipan
+* Et bygkorn
+  En valnød
+
+2. Hvorfor fik pigen navnet Tommelise?
+* Hun var ikke højere end en tommelfinger
+  Hun blev født i en tulipan
+  Hun havde en tommelfinger af guld
+
+3. Hvad sov Tommelise i?
+  Et tulipanblad
+  En lille æske
+* En valnøddeskal
+
+4. Hvem ville tudsen have, at Tommelise skulle giftes med?
+* Sin søn
+  Oldenborren
+  Muldvarpen
+
+5. Hvordan slap Tommelise væk fra åkandebladet?
+  En svale bar hende væk
+* De små fisk gnavede stilken over
+  Hun svømmede i land
+
+6. Hvorfor syntes oldenborrerne, at hun var hæslig?
+  Hun var for stor
+  Hun kunne ikke flyve
+* Hun havde kun to ben og ingen følehorn
+
+7. Hvad fandt Tommelise i muldvarpens mørke gange?
+* En døende svale
+  En gammel skat
+  Markmusens nabo
+
+8. Hvem giftede Tommelise sig med til sidst?
+  Muldvarpen
+* Blomstens engel
+  Svalen
