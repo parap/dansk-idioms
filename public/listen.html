@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#c8102e">
+<title>Lytteøvelser</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#fff; --ink:#14171c; --muted:#6b7280; --line:#e0e4ea;
+    --accent:#c8102e; --accent-ink:#fff; --ok:#127a4a; --okbg:#e7f6ee;
+    --bad:#b3261e; --badbg:#fdecea; --chip:#eef1f5; --shadow:0 1px 2px rgba(20,23,28,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#121419;--card:#1b1e24;--ink:#e8ebf0;--muted:#98a1b0;--line:#2b3039;
+      --accent:#ff5a6e;--accent-ink:#1b1e24;--ok:#4cc38a;--okbg:#14301f;
+      --bad:#ff6b61;--badbg:#331b19;--chip:#232830;--shadow:none;}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:18px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  .wrap{max-width:760px;margin:0 auto;padding:20px 16px 64px}
+  header{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+  .brand{font-weight:700;letter-spacing:-.02em;font-size:1.05rem;color:inherit;
+    text-decoration:none;cursor:pointer}
+  .brand:hover span{text-decoration:underline}
+  .brand span{color:var(--accent)}
+  header h1{font-size:1.2rem;margin:0}
+  .spacer{flex:1}
+  .lang{background:none;border:none;color:var(--muted);font:inherit;font-size:.85rem;
+    padding:.2rem .35rem;cursor:pointer;border-radius:5px}
+  .lang[aria-pressed=true]{color:var(--ink);font-weight:600;background:var(--chip)}
+  .langs{display:inline-flex;gap:.1rem}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:18px;box-shadow:var(--shadow);margin-bottom:16px}
+  .card h2{font-size:1.05rem;margin:0 0 .6rem}
+  .muted{color:var(--muted)}
+  #resources{list-style:none;margin:0;padding:0}
+  #resources li{margin:0 0 14px}
+  #resources li:last-child{margin:0}
+  #resources a{font-weight:600}
+  #resources p{margin:.2rem 0 0;color:var(--muted);font-size:.95rem}
+  a{color:var(--accent)}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/">Dansk <span>idiomer</span></a>
+    <h1 id="title"></h1>
+    <span class="spacer"></span>
+    <span id="langs" class="langs"></span>
+  </header>
+  <div id="view"></div>
+</div>
+
+<script type="module">
+import { $, esc, t, registerStrings, currentLang, setLang as applyLang } from '/shared.js';
+
+const STRINGS = {
+  ru: {
+    title: 'Аудирование',
+    intro: 'Где слушать датский.',
+    danskioererne: 'Подкаст медленным и чётким датским для уровня A2–B2, на сайте есть тексты выпусков.',
+    godnat: 'Учебные блоки по датскому на основе историй; на сайте есть и начитанные сказки.',
+    dido: 'Учебные блоки по датскому для 0–3 классов школы.',
+  },
+  en: {
+    title: 'Listening',
+    intro: 'Where to listen to Danish.',
+    danskioererne: 'A podcast in slow, clear Danish for A2–B2 learners, with episode transcripts on the site.',
+    godnat: 'Danish lessons built around stories; the site also has read-aloud tales.',
+    dido: 'Danish lesson plans for school years 0–3.',
+  },
+  uk: {
+    title: 'Аудіювання',
+    intro: 'Де слухати данську.',
+    danskioererne: 'Подкаст повільною і чіткою данською для рівня A2–B2, на сайті є тексти випусків.',
+    godnat: 'Навчальні блоки з данської на основі історій; на сайті є й начитані казки.',
+    dido: 'Навчальні блоки з данської для 0–3 класів школи.',
+  },
+  da: {
+    title: 'Lytning',
+    intro: 'Her kan du lytte til dansk.',
+    danskioererne: 'Podcast på langsomt og tydeligt dansk til niveau A2–B2, med tekster til afsnittene.',
+    godnat: 'Undervisningsforløb i dansk bygget på historier; sitet har også oplæste eventyr.',
+    dido: 'Undervisningsforløb i dansk til 0.–3. klasse.',
+  },
+};
+registerStrings(STRINGS);
+
+const RESOURCES = [
+  ['Dansk i ørerne', 'https://danskioererne.dk/', 'danskioererne'],
+  ['Godnat-historier', 'https://godnat-historier.dk/undervisningsforloeb-dansk/', 'godnat'],
+  ['Dido', 'https://dido.dk/', 'dido'],
+];
+
+function paintLanguages() {
+  const box = $('#langs');
+  box.innerHTML = Object.keys(STRINGS).map(code =>
+    `<button class="lang" data-lang="${code}" aria-pressed="${code === currentLang()}"
+      >${code.toUpperCase()}</button>`).join('');
+  box.querySelectorAll('.lang').forEach(b => b.onclick = () => { applyLang(b.dataset.lang); render(); });
+}
+
+function render() {
+  document.documentElement.lang = currentLang();
+  $('#title').textContent = t('title');
+  paintLanguages();
+
+  $('#view').innerHTML = `
+    <div class="card">
+      <p class="muted" style="margin:0 0 .9rem">${esc(t('intro'))}</p>
+      <ul id="resources">
+        ${RESOURCES.map(([name, url, key]) => `<li>
+          <a href="${esc(url)}" target="_blank" rel="noopener">${esc(name)} →</a>
+          <p>${esc(t(key))}</p>
+        </li>`).join('')}
+      </ul>
+    </div>`;
+}
+
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
+render();
+</script>
+</body>
+</html>

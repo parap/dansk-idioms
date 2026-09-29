@@ -26,6 +26,7 @@ final class Shell
         '/read'   => '/read.html',
         '/proeve' => '/proeve.html',
         '/proeve/praktisk' => '/praktisk.html',
+        '/listen' => '/listen.html',
     ];
 
     public const ADMIN = '/admin.html';

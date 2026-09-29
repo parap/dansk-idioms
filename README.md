@@ -23,6 +23,7 @@ bin/load-export.sh                 # import your Telegram export
 | http://localhost:8080/read | reading practice, Prøve i Dansk 3 |
 | http://localhost:8080/proeve | the citizenship exam, indfødsretsprøven |
 | http://localhost:8080/proeve/praktisk | how to sit the real one: date, deadline, fee |
+| http://localhost:8080/listen | listening: links to podcasts and audio material |
 | http://127.0.0.1:8082/admin | review queue |
 | http://127.0.0.1:8081 | Adminer (server `db`, user `dansk`, the password from `.env`) |
 | http://localhost:8080/api/v1/health | health + database check |

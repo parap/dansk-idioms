@@ -931,10 +931,26 @@ def the_exam_page_offers_the_practical_page(b):
 
 
 @check
+def the_listening_page_links_the_three_listening_resources(b):
+    b.goto('/listen')
+    b.until('!!document.querySelector("#resources")', what='the listening page')
+    hrefs = b.js('[...document.querySelectorAll("#resources a")].map(a => a.href)')
+    for site in ('danskioererne.dk', 'godnat-historier.dk/undervisningsforloeb-dansk', 'dido.dk'):
+        assert any(site in h for h in hrefs), f'{site} is missing from {hrefs}'
+
+
+@check
+def the_start_page_offers_the_listening_page(b):
+    b.goto('/')
+    b.until('!!document.querySelector(".cta")', what='the start page')
+    assert b.js('!!document.querySelector("a.cta[href=\'/listen\']")'), 'no way to reach /listen'
+
+
+@check
 def every_page_carries_the_way_home(b):
     """The mark is the way back, so it is the same mark everywhere and it sits where a
     reader looks for it: first in the header, top left."""
-    for path in ('/', '/read', '/proeve', '/proeve/praktisk'):
+    for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen'):
         b.goto(path)
         b.until('!!document.querySelector(".brand")', what='the brand on ' + path)
         assert b.js('document.querySelector(".brand").getAttribute("href")') == '/', path
@@ -959,7 +975,7 @@ def every_page_offers_the_same_languages(b):
     """A language offered on one page and missing on the next drops the reader back into
     Russian halfway through the site, and the fallback is silent."""
     try:
-        for path in ('/', '/read', '/proeve', '/proeve/praktisk'):
+        for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen'):
             b.goto(path)
             b.until('!!document.querySelector(".lang")', what='the language switch on ' + path)
             assert offered_languages(b) == LANGUAGES, f'{path} offers {offered_languages(b)}'

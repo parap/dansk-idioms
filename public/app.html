@@ -143,6 +143,7 @@ const STRINGS = {
     skip: 'Продолжить без аккаунта',
     readingLink: 'Чтение: Prøve i Dansk 3',
     proeveLink: 'Тест на гражданство: indfødsretsprøven',
+    listenLink: 'Аудирование',
   },
   en: {
     tagline: 'Danish idiom trainer',
@@ -167,6 +168,7 @@ const STRINGS = {
     skip: 'Continue without an account',
     readingLink: 'Reading: Prøve i Dansk 3',
     proeveLink: 'Citizenship test: indfødsretsprøven',
+    listenLink: 'Listening',
   },
   uk: {
     tagline: 'Тренажер данських ідіом',
@@ -197,6 +199,7 @@ const STRINGS = {
     skip: 'Продовжити без акаунта',
     readingLink: 'Читання: Prøve i Dansk 3',
     proeveLink: 'Тест на громадянство: indfødsretsprøven',
+    listenLink: 'Аудіювання',
   },
   da: {
     tagline: 'Træning i danske idiomer',
@@ -227,6 +230,7 @@ const STRINGS = {
     skip: 'Fortsæt uden konto',
     readingLink: 'Læsning: Prøve i Dansk 3',
     proeveLink: 'Indfødsretsprøven',
+    listenLink: 'Lytning',
   },
 };
 
@@ -305,6 +309,7 @@ async function home() {
       <div class="ctas">
         <a class="cta" href="/read"><span>${esc(t('readingLink'))}</span><b aria-hidden="true">→</b></a>
         <a class="cta" href="/proeve"><span>${esc(t('proeveLink'))}</span><b aria-hidden="true">→</b></a>
+        <a class="cta" href="/listen"><span>${esc(t('listenLink'))}</span><b aria-hidden="true">→</b></a>
       </div>
       <div class="stats">
         <div class="stat"><b>${s.idioms_published ?? '—'}</b><span>${esc(t('statIdioms', s.idioms_published))}</span></div>
