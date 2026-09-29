@@ -1,0 +1,45 @@
+kind: video
+slug: den-lille-havfrue
+title: Den lille havfrue
+youtube: wl5brfa-ICY
+
+--- questions ---
+1. Hvor mange døtre havde havkongen?
+  Tre
+* Seks
+  Syv
+
+2. Hvornår måtte en havfrue dykke op til havets overflade?
+* Når hun fyldte 15 år
+  Når hun blev gift
+  Hver nat ved fuldmåne
+
+3. Hvad fejrede prinsen på skibet?
+  Sit bryllup
+  En sejr i krigen
+* Sin fødselsdag
+
+4. Hvad gjorde den lille havfrue under stormen?
+* Hun reddede prinsen og bar ham til kysten
+  Hun sank skibet
+  Hun hentede sine søstre
+
+5. Hvad skulle havheksen have for trylledrikken?
+  Hendes lange hår
+* Hendes stemme
+  Hendes fiskehale
+
+6. Hvem giftede prinsen sig med?
+  Den lille havfrue
+  Havheksens datter
+* En prinsesse fra nabokongens land
+
+7. Hvad skulle havfruen bruge dolken til?
+* At dræbe prinsen
+  At klippe sit hår af
+  At betale havheksen
+
+8. Hvad blev den lille havfrue til sidst?
+  Havskum for evigt
+* En af luftens døtre
+  En havfrue igen

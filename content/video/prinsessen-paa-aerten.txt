@@ -1,0 +1,45 @@
+kind: video
+slug: prinsessen-paa-aerten
+title: Prinsessen på ærten
+youtube: rsOUjZFINss
+
+--- questions ---
+1. Hvad ledte prinsen efter?
+* En rigtig prinsesse
+  Et nyt kongerige
+  En skjult skat
+
+2. Hvad var problemet med de prinsesser, han mødte på sin rejse?
+  De ville ikke gifte sig
+* Der var altid noget, der ikke var, som det skulle være
+  De boede for langt væk
+
+3. Hvordan var vejret den aften, prinsessen bankede på?
+  Stille og stjerneklart
+  Det sneede tæt
+* Et frygteligt stormvejr
+
+4. Hvem gik ud og åbnede porten?
+* Den gamle konge
+  Prinsen
+  Dronningen
+
+5. Hvad lagde dronningen i bunden af sengen?
+  En lille sten
+* En lillebitte ært
+  En smaragd
+
+6. Hvor mange madrasser kom der oven på?
+  Ti
+* Tyve
+  Fyrre
+
+7. Hvordan havde prinsessen sovet?
+* Næsten ikke, for hun lå på noget hårdt
+  Rigtig godt hele natten
+  Hun sov på gulvet
+
+8. Hvad var ærten blevet til, da dronningen ville hente den?
+  En hvid perle
+  En gylden nød
+* En glitrende smaragd

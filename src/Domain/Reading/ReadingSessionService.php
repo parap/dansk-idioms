@@ -32,6 +32,8 @@ final class ReadingSessionService
     /** A knowledge paper is sat under exam conditions: no feedback until it is handed in. */
     private const PAPER_KIND = 'quiz';
 
+    private const VIDEO_KIND = 'video';
+
     /**
      * The task types a reading round may serve. A knowledge paper lives in the same
      * tables and is graded the same way, but it has no text to read and its own pass
@@ -109,7 +111,7 @@ final class ReadingSessionService
         ?string $slug = null,
         bool $currentAffairs = true,
     ): array {
-        $passage = $this->pickPaper($slug);
+        $passage = $this->pickNamed(self::PAPER_KIND, $slug);
 
         $publicId = Ulid::generate();
         Db::execute(
@@ -130,6 +132,30 @@ final class ReadingSessionService
         Db::execute('UPDATE reading_sessions SET points_max = ? WHERE id = ?', [$pointsMax, $sessionId]);
 
         return ['session_id' => $publicId, 'mode' => self::EXAM, 'points_max' => $pointsMax];
+    }
+
+    /**
+     * Sits the questions about one film as a drill: each answer is checked at once, with
+     * no clock and no grade, because the learner is still watching.
+     *
+     * @return array{session_id: string, mode: string, points_max: int}
+     */
+    public function startVideo(?int $userId, ?string $anonKey, string $slug): array
+    {
+        $passage = $this->pickNamed(self::VIDEO_KIND, $slug);
+
+        $publicId = Ulid::generate();
+        Db::execute(
+            'INSERT INTO reading_sessions (public_id, user_id, anon_key, mode, duration_s, scale_id)
+             VALUES (?,?,?,?,NULL,NULL)',
+            [$publicId, $userId, $anonKey, self::DRILL]
+        );
+        $sessionId = (int) Db::pdo()->lastInsertId();
+
+        [$pointsMax] = $this->materialise($sessionId, (int) $passage['id'], self::VIDEO_KIND);
+        Db::execute('UPDATE reading_sessions SET points_max = ? WHERE id = ?', [$pointsMax, $sessionId]);
+
+        return ['session_id' => $publicId, 'mode' => self::DRILL, 'points_max' => $pointsMax];
     }
 
     /**
@@ -290,12 +316,12 @@ final class ReadingSessionService
         );
 
         $passages = Db::fetchAll(
-            'SELECT p.id, p.slug, p.kind, p.title, p.body, p.pass_points, p.vaerdier_min,
+            'SELECT p.id, p.slug, p.kind, p.title, p.body, p.youtube_id, p.pass_points, p.vaerdier_min,
                     MIN(si.position) AS first_position
              FROM reading_passages p
              JOIN reading_session_items si ON si.passage_id = p.id
              WHERE si.session_id = ?
-             GROUP BY p.id, p.slug, p.kind, p.title, p.body, p.pass_points, p.vaerdier_min
+             GROUP BY p.id, p.slug, p.kind, p.title, p.body, p.youtube_id, p.pass_points, p.vaerdier_min
              ORDER BY first_position',
             [(int) $session['id']]
         );
@@ -340,8 +366,9 @@ final class ReadingSessionService
                 static fn(array $p): array => [
                     'slug'  => $p['slug'],
                     'kind'  => $p['kind'],
-                    'title' => $p['title'],
-                    'body'  => $p['body'],
+                    'title'   => $p['title'],
+                    'body'    => $p['body'],
+                    'youtube' => $p['youtube_id'],
                 ],
                 $passages
             ),
@@ -438,11 +465,11 @@ final class ReadingSessionService
         );
         $max = (int) $session['points_max'];
 
-        // The two exams are judged by different instruments and never by both: a
-        // knowledge paper has a stated pass mark, a reading paper a karakter scale that
-        // is recalibrated every session.
+        // A round is judged by the instrument it was started with, never by two: a
+        // knowledge paper by its stated pass mark, a reading round by the karakter scale
+        // attached to it, and a film by neither.
         $tally    = $this->tally($id);
-        $karakter = $tally === null ? $this->grades->karakter($scored, $max) : null;
+        $karakter = $tally === null && $session['scale_id'] !== null ? $this->grades->karakter($scored, $max) : null;
         $verdict  = $tally['verdict'] ?? null;
 
         Db::execute(
@@ -651,7 +678,7 @@ final class ReadingSessionService
     }
 
     /** @return array<string,mixed> */
-    private function pickPaper(?string $slug): array
+    private function pickNamed(string $kind, ?string $slug): array
     {
         $passage = Db::fetchOne(
             'SELECT p.id, p.kind FROM reading_passages p
@@ -661,12 +688,12 @@ final class ReadingSessionService
                AND EXISTS (SELECT 1 FROM reading_items i
                             WHERE i.passage_id = p.id AND ' . self::SERVABLE . ')
              ORDER BY RAND() LIMIT 1',
-            [self::PAPER_KIND, $slug, $slug]
+            [$kind, $slug, $slug]
         );
 
         if ($passage === null) {
             throw new RuntimeException(
-                $slug === null ? 'No published exam paper is available.' : "No published paper '{$slug}'."
+                $slug === null ? "No published {$kind} is available." : "No published {$kind} '{$slug}'."
             );
         }
 
@@ -777,7 +804,7 @@ final class ReadingSessionService
     {
         $session = Db::fetchOne(
             'SELECT id, user_id, mode, status, points_max, points_scored, karakter, verdict, duration_s, is_late,
-                    elapsed_s, TIMESTAMPDIFF(SECOND, started_at, NOW()) AS elapsed_now
+                    scale_id, elapsed_s, TIMESTAMPDIFF(SECOND, started_at, NOW()) AS elapsed_now
              FROM reading_sessions WHERE public_id = ?',
             [$publicId]
         );

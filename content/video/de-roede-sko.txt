@@ -1,0 +1,45 @@
+kind: video
+slug: de-roede-sko
+title: De røde sko
+youtube: beXnl0RZgxI
+
+--- questions ---
+1. Hvad havde Karen på fødderne om vinteren, da hun var lille?
+* Store træsko
+  Sin mors støvler
+  Ingenting
+
+2. Hvem syede de første røde sko til Karen?
+  Den rige gamle dame
+* Mor Skomagers
+  Hendes mor
+
+3. Hvornår fik Karen de første røde sko?
+  Til sin fødselsdag
+  Til sin konfirmation
+* Samme dag som hendes mor døde
+
+4. Hvad gjorde den rige gamle dame med de første sko?
+* Hun brændte dem
+  Hun gav dem til en prinsesse
+  Hun gemte dem i et skab
+
+5. Hvornår havde Karen de nye røde sko på i kirken?
+  Til et bryllup
+* Til sin konfirmation
+  Juleaften
+
+6. Hvad skete der, efter at den gamle soldat havde rost skoene?
+  Skoene blev sorte
+  Karen gav ham skoene
+* Karen dansede og kunne ikke stoppe
+
+7. Hvad bad Karen skarpretteren om?
+* At hugge skoene af hendes fødder
+  At lave et par nye sko
+  At følge hende hjem
+
+8. Hvad havde englen i hånden, da han kom til Karen til sidst?
+  Et sværd
+* En gren med roser
+  Et par nye sko

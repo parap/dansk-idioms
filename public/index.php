@@ -6,6 +6,7 @@ use Dansk\Controller\IndfoedsretController;
 use Dansk\Controller\QuizController;
 use Dansk\Controller\ReadingAdminController;
 use Dansk\Controller\ReadingController;
+use Dansk\Controller\VideoController;
 use Dansk\Http\Response;
 use Dansk\Support\AdminReach;
 use Dansk\Support\BotApi;
@@ -46,6 +47,10 @@ $dispatcher = FastRoute\simpleDispatcher(static function (RouteCollector $r): vo
     // below: a session is one resource whatever kind of paper it froze.
     $r->addRoute('GET',  '/api/v1/indfoedsret/papers',   'indfoedsret.papers');
     $r->addRoute('POST', '/api/v1/indfoedsret/sessions', 'indfoedsret.start');
+
+    // A film's questions start here and continue on the session routes, like a paper.
+    $r->addRoute('GET',  '/api/v1/videos',          'videos.list');
+    $r->addRoute('POST', '/api/v1/videos/sessions', 'videos.start');
 
     $r->addRoute('POST', '/api/v1/reading/sessions', 'reading.start');
     $r->addRoute('GET',  '/api/v1/reading/sessions', 'reading.history');
@@ -127,6 +132,7 @@ try {
     $auth  = new AuthController();
     $reading = new ReadingController();
     $indfoedsret = new IndfoedsretController();
+    $videos = new VideoController();
     $readingAdmin = new ReadingAdminController();
 
     match ($handler) {
@@ -217,6 +223,9 @@ try {
 
         'indfoedsret.papers' => $indfoedsret->papers(),
         'indfoedsret.start'  => $indfoedsret->start($body),
+
+        'videos.list'  => $videos->list(),
+        'videos.start' => $videos->start($body),
 
         'reading.start'   => $reading->start($body),
         'reading.history' => $reading->history(),

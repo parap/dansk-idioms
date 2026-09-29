@@ -1,0 +1,45 @@
+kind: video
+slug: den-grimme-aelling
+title: Den grimme ælling
+youtube: 8yHIuluLAjc
+
+--- questions ---
+1. Hvor lå andemoren og rugede på sine æg?
+* Gemt under de store skræppeblade
+  Inde i en lade
+  På en ø midt i søen
+
+2. Hvordan så den sidste ælling ud?
+  Lille og gylden
+* Stor, grå og grim
+  Hvid og smuk
+
+3. Hvad kunne den grimme ælling lige så godt som de andre?
+  Flyve
+  Synge
+* Svømme
+
+4. Hvem var den værste ved ællingen i andegården?
+* Kalkunhanen
+  Katten
+  Andemoren
+
+5. Hvad skete der med de to vildgæs, som ællingen mødte?
+  De fløj mod syd uden ham
+* De blev skudt af jægere
+  De tog ham med hjem
+
+6. Hvad tænkte ællingen, da jagthunden løb væk fra ham?
+  At hunden var bange for ham
+* At han var for grim til at blive bidt
+  At jægeren havde kaldt den hjem
+
+7. Hvad skete der, da bondemanden bar ællingen ind i stuen?
+  Ællingen faldt i søvn ved kaminen
+  Børnene legede med ham hele vinteren
+* Han blev bange, og mælken skvulpede ud
+
+8. Hvad så ællingen i vandet, da foråret kom?
+* At han var blevet en svane
+  Sin mor og sine søskende
+  En stor fisk

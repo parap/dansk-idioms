@@ -32,12 +32,17 @@ namespace Dansk\Domain\Reading;
  */
 final class PassageDocument
 {
-    private const KINDS = ['mc', 'insert', 'cloze', 'quiz'];
+    private const KINDS = ['mc', 'insert', 'cloze', 'quiz', 'video'];
 
     private const GAP_KINDS = ['insert', 'cloze'];
 
-    /** A knowledge paper is questions alone: there is nothing to read before answering. */
-    private const TEXTLESS_KINDS = ['quiz'];
+    /** A knowledge paper and a film are questions alone: there is nothing to read before answering. */
+    private const TEXTLESS_KINDS = ['quiz', 'video'];
+
+    /** Only the knowledge paper divides its questions into the exam's blocks. */
+    private const BLOCK_KINDS = ['quiz'];
+
+    private const YOUTUBE_ID = '/^[A-Za-z0-9_-]{11}$/';
 
     /** The blocks a knowledge paper divides its questions into, in the order it asks them. */
     private const BLOCKS = ['laeremateriale', 'aktuelle', 'vaerdier'];
@@ -117,12 +122,31 @@ final class PassageDocument
         if ($kind === 'insert') {
             $doc['bank'] = $bank;
         }
+        if ($kind === 'video') {
+            $doc['youtube'] = $this->youtube($headers);
+        }
         if ($textless) {
             $doc['pass']         = $this->threshold($headers, 'pass');
             $doc['vaerdier_min'] = $this->threshold($headers, 'vaerdier_min');
         }
 
         return $doc;
+    }
+
+    /**
+     * The id alone, not a URL: the page builds the embed address itself, so a link pasted
+     * from the browser would name no film at all.
+     *
+     * @param array<string,string> $headers
+     */
+    private function youtube(array $headers): string
+    {
+        $id = $headers['youtube'] ?? '';
+        if (!preg_match(self::YOUTUBE_ID, $id)) {
+            throw new InvalidPassage("The 'youtube' header must be an 11-character YouTube id, not '{$id}'.");
+        }
+
+        return $id;
     }
 
     /**
@@ -222,7 +246,7 @@ final class PassageDocument
         $current = null;
         $block   = null;
         $labels  = range('A', 'Z');
-        $textless = in_array($kind, self::TEXTLESS_KINDS, true);
+        $blocks  = in_array($kind, self::BLOCK_KINDS, true);
 
         $close = function () use (&$items, &$current, $kind): void {
             if ($current === null) {
@@ -248,7 +272,7 @@ final class PassageDocument
                         "Line {$no} opens block '{$m[1]}', which is not one of " . implode(', ', self::BLOCKS) . '.'
                     );
                 }
-                if (!$textless) {
+                if (!$blocks) {
                     throw new InvalidPassage("A {$kind} passage has no blocks, but line {$no} opens one.");
                 }
                 $block = $m[1];
@@ -258,7 +282,7 @@ final class PassageDocument
             if (preg_match('/^(\d+)\.\s*(.*)$/', $line, $m)) {
                 $close();
                 $current = ['position' => (int) $m[1], 'line' => $no, 'options' => []];
-                if ($textless) {
+                if ($blocks) {
                     if ($block === null) {
                         throw new InvalidPassage("Question {$m[1]} on line {$no} belongs to no block.");
                     }
@@ -314,7 +338,7 @@ final class PassageDocument
      */
     private function checkOptions(array $item, string $kind): void
     {
-        $least = in_array($kind, self::TEXTLESS_KINDS, true) ? 2 : 3;
+        $least = in_array($kind, self::BLOCK_KINDS, true) ? 2 : 3;
         $count = count($item['options']);
         if ($count < $least) {
             $word = $least === 2 ? 'two' : 'three';

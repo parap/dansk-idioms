@@ -1,0 +1,45 @@
+kind: video
+slug: den-lille-pige-med-svovlstikkerne
+title: Den lille pige med svovlstikkerne
+youtube: XdArTv0LISc
+
+--- questions ---
+1. Hvornår foregår historien?
+* På årets sidste aften
+  Juleaften
+  En sommeraften
+
+2. Hvorfor gik pigen med bare fødder?
+  Hun havde aldrig haft sko
+* Hun havde tabt sin mors store tøfler
+  Hun havde solgt sine sko
+
+3. Hvad skulle pigen sælge?
+  Blomster
+  Brød
+* Svovlstikker
+
+4. Hvorfor gik hun ikke hjem til sine forældre?
+* Hun havde ikke solgt noget
+  Hun var faret vild
+  Der var ingen hjemme
+
+5. Hvad syntes hun, at hun sad foran, da hun strøg den første svovlstik?
+  Et stort juletræ
+* Et stort ildsted med knitrende træ
+  Et bord med mad
+
+6. Hvad gjorde gåsestegen?
+  Den forsvandt ind i ovnen
+* Den sprang ned fra fadet og vraltede hen mod hende
+  Den fløj op mod stjernerne
+
+7. Hvem stod i lyset fra den fjerde svovlstik?
+* Hendes gamle mormor
+  Hendes mor
+  En engel
+
+8. Hvad fandt folk i passagen næste morgen?
+  Pigen, som sov i en varm seng
+* Pigen, frosset ihjel med et smil om munden
+  Kun hendes svovlstikker

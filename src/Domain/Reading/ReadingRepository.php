@@ -16,10 +16,13 @@ use Throwable;
 final class ReadingRepository
 {
     /** Points per correct answer, as the exam awards them for each task type. */
-    private const POINTS = ['mc' => 2, 'insert' => 2, 'cloze' => 1, 'quiz' => 1];
+    private const POINTS = ['mc' => 2, 'insert' => 2, 'cloze' => 1, 'quiz' => 1, 'video' => 1];
 
     /** Task types that are questions alone, with nothing to read before answering. */
-    private const TEXTLESS_KINDS = ['quiz'];
+    private const TEXTLESS_KINDS = ['quiz', 'video'];
+
+    /** Only the knowledge paper divides its questions into the exam's blocks. */
+    private const BLOCK_KINDS = ['quiz'];
 
     /** The blocks a knowledge paper divides its questions into. */
     private const BLOCKS = ['laeremateriale', 'aktuelle', 'vaerdier'];
@@ -89,6 +92,25 @@ final class ReadingRepository
         );
     }
 
+    /**
+     * The films on offer, each with the number of questions a learner will be asked.
+     *
+     * @return list<array{slug:string,title:string,youtube:string,questions:int}>
+     */
+    public function publishedVideos(): array
+    {
+        $rows = Db::fetchAll(
+            "SELECT p.slug, p.title, p.youtube_id AS youtube, COUNT(i.id) AS questions
+               FROM reading_passages p
+               JOIN reading_items i ON i.passage_id = p.id AND i.is_active = 1 AND i.is_flagged = 0
+              WHERE p.is_published = 1 AND p.kind = 'video'
+              GROUP BY p.id, p.slug, p.title, p.youtube_id
+              ORDER BY p.id"
+        );
+
+        return array_map(static fn(array $r): array => array_merge($r, ['questions' => (int) $r['questions']]), $rows);
+    }
+
     /** @return list<array<string,mixed>> */
     public function publishedByKind(string $kind): array
     {
@@ -107,10 +129,10 @@ final class ReadingRepository
         $body = $doc['body'] ?? null;
 
         Db::execute(
-            'INSERT INTO reading_passages (slug, kind, title, body, word_count, pass_points, vaerdier_min)
-             VALUES (?,?,?,?,?,?,?)',
+            'INSERT INTO reading_passages (slug, kind, title, body, youtube_id, word_count, pass_points, vaerdier_min)
+             VALUES (?,?,?,?,?,?,?,?)',
             [
-                $doc['slug'], $doc['kind'], $doc['title'], $body,
+                $doc['slug'], $doc['kind'], $doc['title'], $body, $doc['youtube'] ?? null,
                 $body === null ? 0 : Text::wordCount(preg_replace(self::MARKER, ' ', $body) ?? $body),
                 $doc['pass'] ?? null,
                 $doc['vaerdier_min'] ?? null,
@@ -207,8 +229,11 @@ final class ReadingRepository
             return;
         }
 
-        if (in_array($kind, self::TEXTLESS_KINDS, true)) {
+        if (in_array($kind, self::BLOCK_KINDS, true)) {
             $this->validateBlocks($doc);
+        }
+        if ($kind === 'video' && !preg_match('/^[A-Za-z0-9_-]{11}$/', (string) ($doc['youtube'] ?? ''))) {
+            throw new InvalidPassage('A video task names no YouTube film.');
         }
 
         $this->validateOptions($doc, $kind);
@@ -304,7 +329,7 @@ final class ReadingRepository
     /** @param array<string,mixed> $doc */
     private function validateOptions(array $doc, string $kind): void
     {
-        $least = in_array($kind, self::TEXTLESS_KINDS, true) ? 2 : 3;
+        $least = in_array($kind, self::BLOCK_KINDS, true) ? 2 : 3;
 
         foreach ($doc['items'] as $item) {
             $options = $item['options'] ?? [];

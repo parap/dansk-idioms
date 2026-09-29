@@ -107,6 +107,24 @@ SEED_PHP = r"""
             ],
         ]);
     }
+    if (!Db::fetchValue("SELECT id FROM reading_passages WHERE slug = 'ui-fixture-video'")) {
+        $repo->save([
+            'slug' => 'ui-fixture-video', 'kind' => 'video', 'title' => 'UI fixture film',
+            'youtube' => 'mvvRh8db3HY', 'body' => null,
+            'items' => [
+                ['position' => 1, 'prompt' => 'Hvad sender prinsen?', 'options' => [
+                    ['label' => 'A', 'text' => 'En rose', 'correct' => true],
+                    ['label' => 'B', 'text' => 'En hest'],
+                    ['label' => 'C', 'text' => 'En ring'],
+                ]],
+                ['position' => 2, 'prompt' => 'Hvad koster kedlen?', 'options' => [
+                    ['label' => 'A', 'text' => 'Hundrede kys', 'correct' => true],
+                    ['label' => 'B', 'text' => 'Ti kys'],
+                    ['label' => 'C', 'text' => 'Et kys'],
+                ]],
+            ],
+        ]);
+    }
     echo json_encode(array_column($hidden, "id"));
 """
 
@@ -947,10 +965,61 @@ def the_start_page_offers_the_listening_page(b):
 
 
 @check
+def the_film_list_links_every_published_film(b):
+    only(['video'])
+    b.goto('/video')
+    b.until('!!document.querySelector("#films")', what='the film list')
+    assert b.js('!!document.querySelector("#films a[href=\'/video?v=ui-fixture-video\']")'), \
+        'the fixture film is not listed'
+
+
+def open_film(b):
+    only(['video'])
+    b.goto('/video?v=ui-fixture-video')
+    b.until('document.querySelectorAll(".q").length === 2', what='the film questions')
+
+
+@check
+def a_film_page_embeds_its_film_and_asks_every_question(b):
+    open_film(b)
+    src = b.js('document.querySelector("iframe").src')
+    assert src.startswith('https://www.youtube-nocookie.com/embed/mvvRh8db3HY'), src
+    assert 'Hvad sender prinsen?' in b.js('document.querySelector(".q").textContent')
+
+
+@check
+def a_film_answer_is_marked_at_once(b):
+    open_film(b)
+    right = correct_indexes()[0]
+    b.js(f'document.querySelector(\'.q[data-pos="1"] .opt[data-i="{right}"]\').click()')
+    b.until('!!document.querySelector(\'.q[data-pos="1"] .opt.right\')', what='the answer marked right')
+    wrong = (correct_indexes()[1] + 1) % 3
+    b.js(f'document.querySelector(\'.q[data-pos="2"] .opt[data-i="{wrong}"]\').click()')
+    b.until('!!document.querySelector(\'.q[data-pos="2"] .opt.wrong\')', what='the answer marked wrong')
+    assert b.js('!!document.querySelector(\'.q[data-pos="2"] .opt.right\')'), 'the right answer is not revealed'
+    b.until('/1\\s*\\/\\s*2/.test(document.querySelector("#score").textContent)', what='the score 1 / 2')
+
+
+@check
+def an_unknown_film_says_it_does_not_exist(b):
+    only(['video'])
+    b.goto('/video?v=ingen-saadan-film')
+    b.until('!!document.querySelector("#missing")', what='the missing-film notice')
+    assert not b.js('!!document.querySelector("iframe")'), 'an unknown film still embeds something'
+
+
+@check
+def the_listening_page_offers_the_films(b):
+    b.goto('/listen')
+    b.until('!!document.querySelector("#resources")', what='the listening page')
+    assert b.js('!!document.querySelector("a[href=\'/video\']")'), 'no way to reach /video'
+
+
+@check
 def every_page_carries_the_way_home(b):
     """The mark is the way back, so it is the same mark everywhere and it sits where a
     reader looks for it: first in the header, top left."""
-    for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen'):
+    for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video'):
         b.goto(path)
         b.until('!!document.querySelector(".brand")', what='the brand on ' + path)
         assert b.js('document.querySelector(".brand").getAttribute("href")') == '/', path
@@ -975,7 +1044,7 @@ def every_page_offers_the_same_languages(b):
     """A language offered on one page and missing on the next drops the reader back into
     Russian halfway through the site, and the fallback is silent."""
     try:
-        for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen'):
+        for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video'):
             b.goto(path)
             b.until('!!document.querySelector(".lang")', what='the language switch on ' + path)
             assert offered_languages(b) == LANGUAGES, f'{path} offers {offered_languages(b)}'
