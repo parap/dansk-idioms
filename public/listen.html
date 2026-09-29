@@ -39,8 +39,12 @@
   #resources{list-style:none;margin:0;padding:0}
   #resources li{margin:0 0 14px}
   #resources li:last-child{margin:0}
-  #resources a{font-weight:600}
-  #resources p{margin:.2rem 0 0;color:var(--muted);font-size:.95rem}
+  #resources p,.note{margin:.35rem .2rem 0;color:var(--muted);font-size:.95rem}
+  .cta{display:flex;align-items:center;justify-content:space-between;gap:.8rem;
+    padding:.85rem 1.1rem;border:1px solid var(--line);border-radius:10px;background:var(--chip);
+    color:var(--ink);font-weight:600;text-decoration:none;transition:border-color .12s,background .12s}
+  .cta:hover,.cta:focus-visible{border-color:var(--accent)}
+  .cta b{color:var(--accent);font-size:1.15rem}
   a{color:var(--accent)}
   [hidden]{display:none!important}
 </style>
@@ -120,14 +124,15 @@ function render() {
 
   $('#view').innerHTML = `
     <div class="card">
-      <a href="/video" style="font-weight:600">${esc(t('films'))} →</a>
-      <p class="muted" style="margin:.2rem 0 0;font-size:.95rem">${esc(t('filmsNote'))}</p>
+      <a class="cta" href="/video"><span>${esc(t('films'))}</span><b aria-hidden="true">→</b></a>
+      <p class="note">${esc(t('filmsNote'))}</p>
     </div>
     <div class="card">
       <p class="muted" style="margin:0 0 .9rem">${esc(t('intro'))}</p>
       <ul id="resources">
         ${RESOURCES.map(([name, url, key]) => `<li>
-          <a href="${esc(url)}" target="_blank" rel="noopener">${esc(name)} →</a>
+          <a class="cta" href="${esc(url)}" target="_blank" rel="noopener"
+            ><span>${esc(name)}</span><b aria-hidden="true">→</b></a>
           <p>${esc(t(key))}</p>
         </li>`).join('')}
       </ul>

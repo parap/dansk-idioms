@@ -56,6 +56,12 @@
   .opt.right{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
   .opt.wrong{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
   #score{font-weight:600}
+  .cta{display:flex;align-items:center;justify-content:space-between;gap:.8rem;
+    padding:.85rem 1.1rem;border:1px solid var(--line);border-radius:10px;background:var(--chip);
+    color:var(--ink);font-weight:600;text-decoration:none;transition:border-color .12s,background .12s}
+  .cta:hover,.cta:focus-visible{border-color:var(--accent)}
+  .cta b{color:var(--accent);font-size:1.15rem}
+  .cta.back{display:inline-flex;justify-content:flex-start;margin:0 0 14px}
   .done{margin:.8rem 0 0}
   a{color:var(--accent)}
   [hidden]{display:none!important}
@@ -82,7 +88,7 @@ const STRINGS = {
     questions: {one: '{n} вопрос', few: '{n} вопроса', many: '{n} вопросов', other: '{n} вопроса'},
     empty: 'Фильмов пока нет.',
     missing: 'Такого фильма нет.',
-    back: '← Все фильмы',
+    back: 'Все фильмы',
     score: 'Верно',
     done: 'Все вопросы отвечены.',
     error: 'Не удалось загрузить. Попробуйте обновить страницу.',
@@ -93,7 +99,7 @@ const STRINGS = {
     questions: {one: '{n} question', other: '{n} questions'},
     empty: 'No films yet.',
     missing: 'There is no such film.',
-    back: '← All films',
+    back: 'All films',
     score: 'Correct',
     done: 'Every question is answered.',
     error: 'Could not load. Try reloading the page.',
@@ -104,7 +110,7 @@ const STRINGS = {
     questions: {one: '{n} питання', few: '{n} питання', many: '{n} питань', other: '{n} питання'},
     empty: 'Фільмів поки немає.',
     missing: 'Такого фільму немає.',
-    back: '← Усі фільми',
+    back: 'Усі фільми',
     score: 'Правильно',
     done: 'На всі питання дано відповідь.',
     error: 'Не вдалося завантажити. Спробуйте оновити сторінку.',
@@ -115,7 +121,7 @@ const STRINGS = {
     questions: {one: '{n} spørgsmål', other: '{n} spørgsmål'},
     empty: 'Der er ingen film endnu.',
     missing: 'Den film findes ikke.',
-    back: '← Alle film',
+    back: 'Alle film',
     score: 'Rigtige',
     done: 'Alle spørgsmål er besvaret.',
     error: 'Kunne ikke hente siden. Prøv at genindlæse den.',
@@ -155,7 +161,7 @@ function filmView() {
   const film = round.passages[0];
   const right = Object.values(marks).filter(m => m.chosen === m.correct).length;
   const answered = Object.keys(marks).length;
-  return `<p style="margin:0 0 12px"><a href="/video">${esc(t('back'))}</a></p>
+  return `<a class="cta back" href="/video"><b aria-hidden="true">←</b><span>${esc(t('back'))}</span></a>
     <h2 style="margin:0 0 12px">${esc(film.title)}</h2>
     <div class="film"><iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(film.youtube)}"
       title="${esc(film.title)}" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
@@ -196,7 +202,7 @@ function render() {
   if (failed) { view.innerHTML = `<div class="card"><p style="margin:0">${esc(t('error'))}</p></div>`; return; }
   if (missing) {
     view.innerHTML = `<div class="card" id="missing"><p style="margin:0 0 .6rem">${esc(t('missing'))}</p>
-      <a href="/video">${esc(t('back'))}</a></div>`;
+      <a class="cta back" href="/video"><b aria-hidden="true">←</b><span>${esc(t('back'))}</span></a></div>`;
     return;
   }
   if (slug === null && films) { view.innerHTML = listView(); return; }
