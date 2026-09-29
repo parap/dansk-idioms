@@ -1012,7 +1012,24 @@ def an_unknown_film_says_it_does_not_exist(b):
 def the_listening_page_offers_the_films(b):
     b.goto('/listen')
     b.until('!!document.querySelector("#resources")', what='the listening page')
-    assert b.js('!!document.querySelector("a[href=\'/video\']")'), 'no way to reach /video'
+    assert b.js('!!document.querySelector("a.cta[href=\'/video\']")'), 'no button to reach /video'
+
+
+@check
+def the_listening_resources_are_buttons(b):
+    b.goto('/listen')
+    b.until('!!document.querySelector("#resources")', what='the listening page')
+    plain = b.js('[...document.querySelectorAll("#resources a")].filter(a => !a.classList.contains("cta")).length')
+    assert plain == 0, f'{plain} listening links are plain text links'
+
+
+@check
+def the_way_back_to_the_films_is_a_button(b):
+    open_film(b)
+    assert b.js('!!document.querySelector("a.cta[href=\'/video\']")'), 'the film page has no back button'
+    b.goto('/video?v=ingen-saadan-film')
+    b.until('!!document.querySelector("#missing")', what='the missing-film notice')
+    assert b.js('!!document.querySelector("#missing a.cta[href=\'/video\']")'), 'the notice has no back button'
 
 
 @check
