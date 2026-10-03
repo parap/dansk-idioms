@@ -112,7 +112,7 @@ final class Communicator
     ];
 
     /**
-     * One message telling the owner where every piece went.
+     * One message telling the owner where every piece went, idioms in bold.
      *
      * Each list names the idioms themselves: a count says something arrived, not which.
      * Sections with nothing in them are left out, and so is the site when nobody asked it.
@@ -120,34 +120,44 @@ final class Communicator
      * @param list<array{0:string, 1:?string}> $sent  headword and its state on the site
      * @param list<string> $known    terms the corpus already had
      * @param list<string> $refused  pieces that held no idiom
+     * @return array{text:string, entities:list<array<string,mixed>>}
      */
-    public static function report(array $sent, array $known, array $refused): string
+    public static function report(array $sent, array $known, array $refused): array
     {
-        $sections = [];
-        $section  = static function (string $title, array $items) use (&$sections): void {
-            if ($items !== []) {
-                $sections[] = $title . ":\n" . implode("\n", array_map(static fn(string $i): string => '• ' . $i, $items));
+        $text     = $sent === [] ? '' : 'Приняла и передала.';
+        $entities = [];
+        $add      = static function (string $block) use (&$text): void {
+            $text .= ($text === '' ? '' : "\n\n") . $block;
+        };
+        $section  = static function (string $title, array $items, bool $bold) use (&$text, &$entities, $add): void {
+            if ($items === []) {
+                return;
+            }
+            $add($title . ':');
+            foreach ($items as $item) {
+                $text .= "\n• ";
+                if ($bold) {
+                    $entities[] = ['type' => 'bold', 'offset' => self::utf16Length($text), 'length' => self::utf16Length($item)];
+                }
+                $text .= $item;
             }
         };
         $where = static fn(?string $state): array =>
             array_column(array_filter($sent, static fn(array $s): bool => $s[1] === $state), 0);
 
-        $section('В канал (' . count($sent) . ')', array_column($sent, 0));
-        $section('На сайт (' . count($where('published')) . ')', $where('published'));
+        $section('В канал (' . count($sent) . ')', array_column($sent, 0), true);
+        $section('На сайт (' . count($where('published')) . ')', $where('published'), true);
         foreach (self::SITE as $state => $title) {
-            $section($title, $where($state));
+            $section($title, $where($state), true);
         }
-        $section('Уже есть на сайте, не публиковала', $known);
-        $section('Отсеяла, идиомы не нашла', $refused);
+        $section('Уже есть на сайте, не публиковала', $known, true);
+        $section('Отсеяла, идиомы не нашла', $refused, false);
 
         if ($refused !== []) {
-            $sections[] = 'Идиома присылается так: at gå agurk — сойти с ума';
-        }
-        if ($sent !== []) {
-            array_unshift($sections, 'Приняла и передала.');
+            $add('Идиома присылается так: at gå agurk — сойти с ума');
         }
 
-        return implode("\n\n", $sections);
+        return ['text' => $text, 'entities' => $entities];
     }
 
     /**

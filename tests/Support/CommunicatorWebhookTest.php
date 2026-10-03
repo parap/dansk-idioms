@@ -527,6 +527,47 @@ final class CommunicatorWebhookTest extends TestCase
         self::assertStringContainsString('at gøre bange', $waiting);
     }
 
+    /** The spans of the owner's report that Telegram shows in bold. */
+    private function boldInTheReport(): array
+    {
+        $call = array_values(array_filter(
+            $this->sent,
+            static fn(array $c): bool => $c[0] === 'sendMessage' && ($c[1]['chat_id'] ?? '') === '158493465'
+        ))[0][1];
+        $units = mb_convert_encoding($call['text'], 'UTF-16LE', 'UTF-8');
+
+        return array_map(
+            static fn(array $e): string => mb_convert_encoding(
+                substr($units, $e['offset'] * 2, $e['length'] * 2), 'UTF-8', 'UTF-16LE'
+            ),
+            array_filter(json_decode($call['entities'] ?? '[]', true), static fn(array $e): bool => $e['type'] === 'bold')
+        );
+    }
+
+    public function testTheIdiomsInTheReportAreBold(): void
+    {
+        $this->ingest = static fn(array $message): string =>
+            str_starts_with($message['text'], 'at gøre') ? 'review' : 'published';
+        $this->known = ['at regne med (noget)'];
+
+        $this->webhook()->handle(self::update(self::ONE_PER_LINE), 's3cret');
+
+        $bold = $this->boldInTheReport();
+        self::assertSame(
+            ['at udstøde et gisp', 'at gøre bange', 'der er god tid til', 'at regne med (noget)'],
+            array_values(array_unique($bold)),
+            'each idiom, and nothing but idioms'
+        );
+        self::assertCount(2, array_keys($bold, 'at udstøde et gisp'), 'in the channel list and the site list both');
+    }
+
+    public function testWhatHoldsNoIdiomIsNotBold(): void
+    {
+        $this->webhook()->handle(self::update('https://youtu.be/Qczpi7eDgzw'), 's3cret');
+
+        self::assertSame([], $this->boldInTheReport());
+    }
+
     public function testThePressGetsTheSameReport(): void
     {
         $this->ingest = static fn(): string => 'published';
