@@ -90,12 +90,64 @@ final class Communicator
     {
         $lines = [];
         foreach ($pieces as $number => $piece) {
-            $flat  = trim(preg_replace('/\s+/u', ' ', $piece) ?? $piece);
-            $short = mb_substr($flat, 0, self::PREVIEW);
-            $lines[] = ($number + 1) . '. ' . $short . (mb_strlen($flat) > self::PREVIEW ? '…' : '');
+            $lines[] = ($number + 1) . '. ' . self::shortened($piece);
         }
 
         return implode("\n", $lines);
+    }
+
+    /** A piece on one line, cut short: enough to recognise it, never a whole explanation. */
+    public static function shortened(string $piece): string
+    {
+        $flat = trim(preg_replace('/[\s\x{200B}]+/u', ' ', $piece) ?? $piece);
+
+        return mb_substr($flat, 0, self::PREVIEW) . (mb_strlen($flat) > self::PREVIEW ? '…' : '');
+    }
+
+    /** Where a piece stands on the site, as the owner reads it. */
+    private const SITE = [
+        'review'   => 'Ждут проверки в админке, на сайте пока нет',
+        'rejected' => 'Импорт не разобрал, на сайт не взяла',
+        'failed'   => 'На сайт не записала, сорвалась запись в базу',
+    ];
+
+    /**
+     * One message telling the owner where every piece went.
+     *
+     * Each list names the idioms themselves: a count says something arrived, not which.
+     * Sections with nothing in them are left out, and so is the site when nobody asked it.
+     *
+     * @param list<array{0:string, 1:?string}> $sent  headword and its state on the site
+     * @param list<string> $known    terms the corpus already had
+     * @param list<string> $refused  pieces that held no idiom
+     */
+    public static function report(array $sent, array $known, array $refused): string
+    {
+        $sections = [];
+        $section  = static function (string $title, array $items) use (&$sections): void {
+            if ($items !== []) {
+                $sections[] = $title . ":\n" . implode("\n", array_map(static fn(string $i): string => '• ' . $i, $items));
+            }
+        };
+        $where = static fn(?string $state): array =>
+            array_column(array_filter($sent, static fn(array $s): bool => $s[1] === $state), 0);
+
+        $section('В канал (' . count($sent) . ')', array_column($sent, 0));
+        $section('На сайт (' . count($where('published')) . ')', $where('published'));
+        foreach (self::SITE as $state => $title) {
+            $section($title, $where($state));
+        }
+        $section('Уже есть на сайте, не публиковала', $known);
+        $section('Отсеяла, идиомы не нашла', $refused);
+
+        if ($refused !== []) {
+            $sections[] = 'Идиома присылается так: at gå agurk — сойти с ума';
+        }
+        if ($sent !== []) {
+            array_unshift($sections, 'Приняла и передала.');
+        }
+
+        return implode("\n\n", $sections);
     }
 
     /**

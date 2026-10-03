@@ -19,12 +19,16 @@ final class CommunicatorWebhook
 {
     /**
      * @param ?\Closure $ingest    Given the message and the id it was published under,
-     *                             puts it in the corpus. Null leaves the corpus alone.
+     *                             puts it in the corpus and says where it stands on the
+     *                             site: `published` | `review` | `rejected`. Null leaves
+     *                             the corpus alone.
      * @param ?Drafts   $drafts   Where a message waits for a decision. Null means no
      *                             proposal can be made, so an unclear message is left
      *                             unpublished and said so.
      * @param ?\Closure $known     Given a piece, the term it names when that term is
      *                             already in the corpus, else null. Null checks nothing.
+     * @param ?\Closure $idiom     Given a piece, its headword, or null when it holds no
+     *                             idiom. Null admits everything.
      */
     public function __construct(
         private BotApi $api,
@@ -33,6 +37,7 @@ final class CommunicatorWebhook
         private ?Drafts $drafts = null,
         private EntrySegmenter $segmenter = new EntrySegmenter(),
         private ?\Closure $known = null,
+        private ?\Closure $idiom = null,
     ) {
     }
 
@@ -84,34 +89,37 @@ final class CommunicatorWebhook
 
         $done = $this->publishParts($group, $parts, $message['entities'] ?? [],
             Communicator::kindOf($message), $message['from'] ?? [], (int) ($message['date'] ?? 0));
-        if ($done['published'] === 0) {
-            return 'nothing_new';
-        }
-        if (!$done['stored']) {
-            $this->tell('Опубликовала, но на сайт не взяла: сорвалась запись в базу.');
 
-            return 'published_not_stored';
-        }
-
-        return 'published';
+        return match (true) {
+            $done['published'] === 0 => $done['known'] === 0 ? 'screened' : 'nothing_new',
+            !$done['stored']         => 'published_not_stored',
+            default                  => 'published',
+        };
     }
 
     /**
      * Each new piece as its own post, its own bold, and its own entry in the corpus.
      *
-     * A piece whose idiom the corpus already has goes nowhere, and the owner is told.
-     * A post is out and cannot be recalled, so a failure to store never stops the
-     * pieces after it; `stored` reports it.
+     * A piece holding no idiom, or one the corpus already has, goes nowhere. A post is
+     * out and cannot be recalled, so a failure to store never stops the pieces after it.
+     * The owner gets one report of where every piece went.
      *
      * @param list<array{text:string, offset:int}> $parts
-     * @return array{published:int, stored:bool}
+     * @return array{published:int, known:int, stored:bool}
      */
     private function publishParts(string $group, array $parts, array $entities, string $kind, array $from, int $date): array
     {
-        $stored    = true;
-        $published = 0;
-        $skipped   = [];
+        $stored  = true;
+        $sent    = [];
+        $skipped = [];
+        $refused = [];
         foreach ($parts as $part) {
+            $head = $this->idiom === null ? Communicator::shortened($part['text']) : ($this->idiom)($part['text']);
+            if ($head === null) {
+                $refused[] = Communicator::shortened($part['text']);
+                continue;
+            }
+
             // Asked per piece, after the ones before it were stored: a batch naming one
             // idiom twice publishes it once.
             $term = $this->known === null ? null : ($this->known)($part['text']);
@@ -120,7 +128,6 @@ final class CommunicatorWebhook
                 continue;
             }
 
-            $published++;
             $postId = $this->api->sendMessage(
                 $group,
                 Communicator::tagged($part['text'], $kind),
@@ -133,21 +140,22 @@ final class CommunicatorWebhook
             );
 
             if ($this->ingest === null) {
+                $sent[] = [$head, null];
                 continue;
             }
             try {
-                ($this->ingest)(['text' => $part['text'], 'from' => $from, 'date' => $date], $postId);
+                $site   = ($this->ingest)(['text' => $part['text'], 'from' => $from, 'date' => $date], $postId);
+                $sent[] = [$head, is_string($site) ? $site : null];
             } catch (\Throwable $e) {
                 error_log('communicator: published but not stored -- ' . $e->getMessage());
                 $stored = false;
+                $sent[] = [$head, 'failed'];
             }
         }
 
-        if ($skipped !== []) {
-            $this->tell("Уже есть на сайте, не публиковала:\n" . implode("\n", $skipped));
-        }
+        $this->tell(Communicator::report($sent, $skipped, $refused));
 
-        return ['published' => $published, 'stored' => $stored];
+        return ['published' => count($sent), 'known' => count($skipped), 'stored' => $stored];
     }
 
     /**
@@ -193,7 +201,7 @@ final class CommunicatorWebhook
         $done = $this->publishParts($group, $parts, $draft['entities'], $draft['kind'], $press['from'] ?? [], time());
 
         $this->acknowledge($press, match (true) {
-            $done['published'] === 0 => 'Всё это уже есть',
+            $done['published'] === 0 => $done['known'] === 0 ? 'Идиом не нашла' : 'Всё это уже есть',
             $done['published'] > 1   => 'Опубликовала ' . $done['published'],
             default                  => 'Опубликовала',
         });
@@ -235,6 +243,14 @@ final class CommunicatorWebhook
      */
     private function offer(string $raw, array $message): string
     {
+        // Several links on their own lines look like several headwords; nothing to ask.
+        $pieces = $this->segmenter->proposeSplit($raw);
+        if ($this->idiom !== null && array_filter($pieces, fn(string $p): bool => ($this->idiom)($p) !== null) === []) {
+            $this->tell(Communicator::report([], [], array_map(Communicator::shortened(...), $pieces)));
+
+            return 'screened';
+        }
+
         if ($this->drafts === null) {
             $this->tell(
                 'Не опубликовала: в сообщении несколько идиом без невидимых'
@@ -245,8 +261,7 @@ final class CommunicatorWebhook
             return 'not_published';
         }
 
-        $pieces = $this->segmenter->proposeSplit($raw);
-        $token  = $this->drafts->keep(
+        $token = $this->drafts->keep(
             (string) $this->owner(),
             $raw,
             $message['entities'] ?? [],
@@ -298,7 +313,7 @@ final class CommunicatorWebhook
     private function tell(string $text): void
     {
         $owner = $this->owner();
-        if ($owner === null) {
+        if ($owner === null || $text === '') {
             return;
         }
 

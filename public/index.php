@@ -13,6 +13,7 @@ use Dansk\Support\BotApi;
 use Dansk\Support\CommunicatorDrafts;
 use Dansk\Support\CommunicatorIngest;
 use Dansk\Support\CommunicatorWebhook;
+use Dansk\Support\IdiomScreen;
 use Dansk\Support\KnownIdioms;
 use Dansk\Support\Config;
 use Dansk\Support\Db;
@@ -146,6 +147,7 @@ try {
                     (new CommunicatorIngest((string) ($settings['source'] ?? '')))(...),
                     new CommunicatorDrafts(),
                     known: (new KnownIdioms())(...),
+                    idiom: (new IdiomScreen())(...),
                 );
                 $outcome = $hook->handle(
                     $body,

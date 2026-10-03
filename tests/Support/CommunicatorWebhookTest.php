@@ -4,6 +4,7 @@ namespace Dansk\Tests\Support;
 
 use Dansk\Support\BotApi;
 use Dansk\Support\CommunicatorWebhook;
+use Dansk\Support\IdiomScreen;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -63,7 +64,7 @@ final class CommunicatorWebhookTest extends TestCase
             'secret' => 's3cret',
             'owner'  => '158493465',
             'group'  => '-5203885388',
-        ], $overrides), $this->ingest, $this->drafts, known: function (string $piece): ?string {
+        ], $overrides), $this->ingest, $this->drafts, idiom: (new IdiomScreen())(...), known: function (string $piece): ?string {
             foreach ($this->known as $term) {
                 if (str_starts_with(str_replace("\u{200B}", '', $piece), $term)) {
                     return $term;
@@ -83,6 +84,18 @@ final class CommunicatorWebhookTest extends TestCase
         ));
     }
 
+    /** What the owner was told, in his own chat. */
+    private function toTheOwner(): array
+    {
+        return array_values(array_map(
+            static fn(array $call): string => $call[1]['text'],
+            array_filter(
+                $this->sent,
+                static fn(array $call): bool => $call[0] === 'sendMessage' && ($call[1]['chat_id'] ?? '') === '158493465'
+            )
+        ));
+    }
+
     private static function update(string $text, int $chatId = 158493465): array
     {
         return ['message' => [
@@ -96,20 +109,20 @@ final class CommunicatorWebhookTest extends TestCase
 
     public function testTheOwnersTextGoesToTheGroupTagged(): void
     {
-        $outcome = $this->webhook()->handle(self::update('at spille'), 's3cret');
+        $outcome = $this->webhook()->handle(self::update('at spille — играть'), 's3cret');
 
         self::assertSame('published', $outcome);
-        self::assertCount(1, $this->sent);
+        self::assertCount(1, $this->toTheGroup());
         self::assertSame('sendMessage', $this->sent[0][0]);
         self::assertSame('-5203885388', $this->sent[0][1]['chat_id']);
-        self::assertSame("at spille\n\n#text", $this->sent[0][1]['text']);
+        self::assertSame("at spille — играть\n\n#text", $this->sent[0][1]['text']);
     }
 
     // --- what does not -------------------------------------------------------
 
     public function testAWrongSecretPublishesNothing(): void
     {
-        $outcome = $this->webhook()->handle(self::update('at spille'), 'не тот');
+        $outcome = $this->webhook()->handle(self::update('at spille — играть'), 'не тот');
 
         self::assertSame('refused', $outcome);
         self::assertSame([], $this->sent);
@@ -127,7 +140,7 @@ final class CommunicatorWebhookTest extends TestCase
     {
         // Otherwise the chat_id would go out empty and Telegram would refuse --
         // after the handler had already counted the work as done.
-        $outcome = $this->webhook(['group' => null])->handle(self::update('at spille'), 's3cret');
+        $outcome = $this->webhook(['group' => null])->handle(self::update('at spille — играть'), 's3cret');
 
         self::assertSame('misconfigured', $outcome);
         self::assertSame([], $this->sent);
@@ -159,10 +172,10 @@ final class CommunicatorWebhookTest extends TestCase
             $this->stored[] = [$message['text'], $publishedId];
         };
 
-        $outcome = $this->webhook()->handle(self::update('at spille'), 's3cret');
+        $outcome = $this->webhook()->handle(self::update('at spille — играть'), 's3cret');
 
         self::assertSame('published', $outcome);
-        self::assertSame([['at spille', 1]], $this->stored);
+        self::assertSame([['at spille — играть', 1]], $this->stored);
     }
 
     // --- several idioms, one to a line ----------------------------------------
@@ -381,7 +394,7 @@ final class CommunicatorWebhookTest extends TestCase
             throw new \RuntimeException('the database is away');
         };
 
-        $outcome = $this->webhook()->handle(self::update('at spille'), 's3cret');
+        $outcome = $this->webhook()->handle(self::update('at spille — играть'), 's3cret');
 
         self::assertSame('published_not_stored', $outcome);
         self::assertCount(1, $this->toTheGroup());
@@ -418,9 +431,128 @@ final class CommunicatorWebhookTest extends TestCase
             throw new \RuntimeException('the database is away');
         };
 
-        $this->webhook()->handle(self::update('at spille'), 's3cret');
+        $this->webhook()->handle(self::update('at spille — играть'), 's3cret');
 
         self::assertCount(1, $this->toTheGroup());
+    }
+
+    // --- what holds no idiom ---------------------------------------------------
+
+    /** @return array<string,array{string}> */
+    public static function noIdiom(): array
+    {
+        return [
+            'a link'           => ['https://youtu.be/Qczpi7eDgzw?is=Hl25CScpCTwKUGFW'],
+            'a link explained' => ['https://danskidioms.com — идиомы, поставил на сайт'],
+            'a thumbs-up'      => ['👍'],
+            'chatter'          => ['Вот как после этого верить ИИ Клоду 😂'],
+            'links, one a line' => ["https://youtu.be/one\nhttps://youtu.be/two"],
+        ];
+    }
+
+    /** @dataProvider noIdiom */
+    public function testWhatHoldsNoIdiomReachesNeitherTheGroupNorTheSite(string $text): void
+    {
+        $this->ingest = function (array $message): void {
+            $this->stored[] = $message['text'];
+        };
+
+        $outcome = $this->webhook()->handle(self::update($text), 's3cret');
+
+        self::assertSame('screened', $outcome);
+        self::assertSame([], $this->toTheGroup());
+        self::assertSame([], $this->stored);
+        self::assertSame([], $this->drafts->kept, 'nothing is offered for splitting either');
+    }
+
+    public function testTheOwnerIsToldWhatWasScreenedOut(): void
+    {
+        $this->webhook()->handle(self::update('https://youtu.be/Qczpi7eDgzw'), 's3cret');
+
+        $notes = $this->toTheOwner();
+        self::assertCount(1, $notes);
+        self::assertStringContainsString('Отсеяла', $notes[0]);
+        self::assertStringContainsString('https://youtu.be/Qczpi7eDgzw', $notes[0]);
+    }
+
+    public function testOnlyTheIdiomsOfAMixedMessageArePublished(): void
+    {
+        $this->ingest = function (array $message): void {
+            $this->stored[] = $message['text'];
+        };
+
+        $outcome = $this->webhook()->handle(
+            self::update("\u{200B}at gå agurk — сойти с ума\n\u{200B}https://youtu.be/Qczpi7eDgzw"),
+            's3cret'
+        );
+
+        self::assertSame('published', $outcome);
+        self::assertCount(1, $this->toTheGroup());
+        self::assertSame(["\u{200B}at gå agurk — сойти с ума"], $this->stored);
+        self::assertStringContainsString('https://youtu.be/Qczpi7eDgzw', $this->toTheOwner()[0]);
+    }
+
+    public function testAPressedSplitLeavesOutWhatHoldsNoIdiom(): void
+    {
+        $this->webhook()->handle(
+            self::update("at gå agurk\nсойти с ума\nhttps://youtu.be/one\nat slænge sig\nразвалиться"),
+            's3cret'
+        );
+        $this->sent = [];
+
+        $this->webhook()->handle(self::press('split:01JJJJJJJJJJJJJJJJJJJJJJJJ'), 's3cret');
+
+        self::assertCount(2, $this->toTheGroup());
+    }
+
+    // --- the report ------------------------------------------------------------
+
+    public function testTheOwnerIsToldWhatWentToTheGroupAndWhatToTheSite(): void
+    {
+        // A silent success reads the same as a post that got lost on the way.
+        $this->ingest = static fn(array $message): string =>
+            str_starts_with($message['text'], 'at gøre') ? 'review' : 'published';
+
+        $this->webhook()->handle(self::update(self::ONE_PER_LINE), 's3cret');
+
+        $notes = $this->toTheOwner();
+        self::assertCount(1, $notes, 'one report, not a message per idiom');
+        [$group, $site] = explode('На сайт', $notes[0], 2) + [1 => ''];
+        foreach (['at udstøde et gisp', 'at gøre bange', 'at regne med', 'der er god tid til'] as $term) {
+            self::assertStringContainsString($term, $group);
+        }
+        [$published, $waiting] = explode('Ждут проверки', $site, 2) + [1 => ''];
+        self::assertStringContainsString('at regne med', $published);
+        self::assertStringNotContainsString('at gøre bange', $published);
+        self::assertStringContainsString('at gøre bange', $waiting);
+    }
+
+    public function testThePressGetsTheSameReport(): void
+    {
+        $this->ingest = static fn(): string => 'published';
+        $token = $this->offerTwo();
+
+        $this->webhook()->handle(self::press('split:' . $token), 's3cret');
+
+        $notes = $this->toTheOwner();
+        self::assertCount(1, $notes);
+        self::assertStringContainsString('at gå agurk', $notes[0]);
+        self::assertStringContainsString('at slænge sig', $notes[0]);
+        self::assertStringContainsString('На сайт', $notes[0]);
+    }
+
+    public function testAFailureToStoreIsNamedInTheReport(): void
+    {
+        $this->ingest = function (): void {
+            throw new \RuntimeException('the database is away');
+        };
+
+        $this->webhook()->handle(self::update('at gå agurk — сойти с ума'), 's3cret');
+
+        $notes = $this->toTheOwner();
+        self::assertCount(1, $notes);
+        self::assertStringContainsString('сорвалась запись', $notes[0]);
+        self::assertStringContainsString('at gå agurk', $notes[0]);
     }
 
     // --- the press -------------------------------------------------------------
@@ -487,7 +619,7 @@ final class CommunicatorWebhookTest extends TestCase
             $this->stored[] = $message['from']['first_name'] ?? null;
         };
 
-        $this->webhook()->handle(self::update('at spille'), 's3cret');
+        $this->webhook()->handle(self::update('at spille — играть'), 's3cret');
         self::assertSame(['Alex'], $this->stored, 'straight through');
 
         $token = $this->offerTwo();

@@ -55,7 +55,13 @@ final class CommunicatorIngest
         ];
     }
 
-    public function __invoke(array $update, int $publishedId): void
+    /**
+     * Imports the post and says where it now stands on the site.
+     *
+     * @return string `published` when an idiom from it is live, `review` when one waits
+     *                in the admin, `rejected` when the import filed nothing
+     */
+    public function __invoke(array $update, int $publishedId): string
     {
         $message = self::messageFrom($update, $publishedId);
         $run     = $this->runImport ?? static function (array $m, string $title): void {
@@ -64,5 +70,26 @@ final class CommunicatorIngest
         };
 
         $run($message, $this->sourceTitle);
+
+        return $this->stateOf($publishedId);
+    }
+
+    /** Read from what the import stored, not from what it was expected to do. */
+    private function stateOf(int $publishedId): string
+    {
+        $rows = Db::fetchAll(
+            "SELECT r.status, i.is_published FROM raw_entries r
+             JOIN messages m ON m.id = r.message_id
+             JOIN sources s  ON s.id = m.source_id
+             LEFT JOIN idioms i ON i.id = r.idiom_id
+             WHERE s.kind = 'telegram_group' AND s.title = ? AND m.tg_message_id = ?",
+            [$this->sourceTitle, $publishedId]
+        );
+
+        return match (true) {
+            in_array(1, array_map('intval', array_column($rows, 'is_published')), true) => 'published',
+            array_filter($rows, static fn(array $r): bool => $r['status'] !== 'rejected') !== [] => 'review',
+            default => 'rejected',
+        };
     }
 }
