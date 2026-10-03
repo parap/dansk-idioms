@@ -153,7 +153,7 @@ final class CommunicatorWebhook
             }
         }
 
-        $this->tell(Communicator::report($sent, $skipped, $refused));
+        $this->tell(...Communicator::report($sent, $skipped, $refused));
 
         return ['published' => count($sent), 'known' => count($skipped), 'stored' => $stored];
     }
@@ -246,7 +246,7 @@ final class CommunicatorWebhook
         // Several links on their own lines look like several headwords; nothing to ask.
         $pieces = $this->segmenter->proposeSplit($raw);
         if ($this->idiom !== null && array_filter($pieces, fn(string $p): bool => ($this->idiom)($p) !== null) === []) {
-            $this->tell(Communicator::report([], [], array_map(Communicator::shortened(...), $pieces)));
+            $this->tell(...Communicator::report([], [], array_map(Communicator::shortened(...), $pieces)));
 
             return 'screened';
         }
@@ -310,7 +310,8 @@ final class CommunicatorWebhook
      * Failing to report changes nothing about what happened to the post, so it cannot
      * be allowed to raise.
      */
-    private function tell(string $text): void
+    /** @param array<int,array<string,mixed>> $entities */
+    private function tell(string $text, array $entities = []): void
     {
         $owner = $this->owner();
         if ($owner === null || $text === '') {
@@ -318,7 +319,7 @@ final class CommunicatorWebhook
         }
 
         try {
-            $this->api->sendMessage($owner, $text);
+            $this->api->sendMessage($owner, $text, $entities);
         } catch (\Throwable $e) {
             error_log('communicator: could not report back -- ' . $e->getMessage());
         }
