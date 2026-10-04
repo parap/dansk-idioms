@@ -563,9 +563,10 @@ final class CommunicatorWebhookTest extends TestCase
 
     public function testWhatHoldsNoIdiomIsNotBold(): void
     {
+        // Only the Danish of the example below it is bold.
         $this->webhook()->handle(self::update('https://youtu.be/Qczpi7eDgzw'), 's3cret');
 
-        self::assertSame([], $this->boldInTheReport());
+        self::assertSame(['at gå agurk'], array_values($this->boldInTheReport()));
     }
 
     public function testThePressGetsTheSameReport(): void
