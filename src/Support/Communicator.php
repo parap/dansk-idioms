@@ -154,7 +154,9 @@ final class Communicator
         $section('Отсеяла, идиомы не нашла', $refused, false);
 
         if ($refused !== []) {
-            $add('Идиома присылается так: at gå agurk — сойти с ума');
+            $add('Идиома присылается так: ');
+            $entities[] = ['type' => 'bold', 'offset' => self::utf16Length($text), 'length' => self::utf16Length('at gå agurk')];
+            $text .= 'at gå agurk — сойти с ума';
         }
 
         return ['text' => $text, 'entities' => $entities];

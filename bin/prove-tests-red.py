@@ -634,6 +634,10 @@ FAULTS = [
   "                    $entities[] = ['type' => 'bold', 'offset' => self::utf16Length($text), 'length' => self::utf16Length($item)];",
   "                    $entities[] = ['type' => 'bold', 'offset' => self::utf16Length($text) - 2, 'length' => self::utf16Length($item)];",
   "unit:testTheIdiomsInTheReportAreBold"),
+ (194,"the example's Danish is not bold","src/Support/Communicator.php",
+  "            $entities[] = ['type' => 'bold', 'offset' => self::utf16Length($text), 'length' => self::utf16Length('at gå agurk')];",
+  "",
+  "unit:testWhatHoldsNoIdiomIsNotBold"),
 ]
 def phpunit(*args):
     return subprocess.run(
