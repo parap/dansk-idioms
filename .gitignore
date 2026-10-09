@@ -14,7 +14,7 @@
 # Python bytecode from bin/ scripts
 __pycache__/
 
-# Crash ledger from bin/prove-tests-red.py
+# The copy bin/prove-tests-red.py injects faults into
 /.prove-tests-red/
 
 

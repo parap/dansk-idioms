@@ -20,7 +20,7 @@ services:
       - edge
     volumes:
       - .:/var/www/html
-    environment:
+    environment: &app-env
       DB_HOST: db
       DB_PORT: 3306
       DB_NAME: dansk
@@ -47,6 +47,26 @@ services:
       db:
         condition: service_healthy
 
+  # The application again, serving the copy bin/prove-tests-red.py breaks on purpose, so
+  # an injected fault never touches the working tree or the site a developer is using.
+  # Started by that script alone; `up` without the profile leaves it out.
+  mutants:
+    build: .
+    container_name: dansk_mutants
+    profiles: [mutants]
+    ports:
+      - "127.0.0.1:${MUTANTS_PORT:-8083}:80"
+      - "127.0.0.1:${MUTANTS_ADMIN_PORT:-8084}:81"
+    volumes:
+      - ./.prove-tests-red/tree:/var/www/html
+    environment:
+      <<: *app-env
+      # Its own scratch schema: two integration runs sharing one drop each other's tables.
+      DANSK_TEST_DB: dansk_mutants
+    depends_on:
+      db:
+        condition: service_healthy
+
   db:
     image: mysql:8.0
     container_name: dansk_db
@@ -58,6 +78,11 @@ services:
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_0900_ai_ci
+      # Durable by default: every commit reaches the disk before it is acknowledged. A
+      # laptop sets these to 2 and 0 in .env and trades the last second of writes on a
+      # crash for an integration suite several times faster, which commits row by row.
+      - --innodb-flush-log-at-trx-commit=${DB_FLUSH_LOG_AT_COMMIT:-1}
+      - --sync-binlog=${DB_SYNC_BINLOG:-1}
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?set MYSQL_ROOT_PASSWORD in .env}
       MYSQL_DATABASE: dansk
