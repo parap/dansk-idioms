@@ -542,7 +542,7 @@ those, which is what makes the harness usable while writing the code it guards.
 The gate before a commit is `--changed`: the faults in the files the branch changed against
 `master`, uncommitted edits included. A branch through the reading code selects about forty
 and takes under ten minutes, because a whole-suite run stops at the first failure and only
-a surviving fault runs it to the end. The whole list
+a surviving fault runs it to the end. The whole list, about half an hour,
 runs before a deploy, because a test deleted or weakened elsewhere lets a fault in an
 untouched file survive, and only a full run sees that.
 
