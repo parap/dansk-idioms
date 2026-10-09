@@ -142,7 +142,18 @@ final class ReadingSessionService
      */
     public function startVideo(?int $userId, ?string $anonKey, string $slug): array
     {
-        $passage = $this->pickNamed(self::VIDEO_KIND, $slug);
+        return $this->startNamedDrill(self::VIDEO_KIND, $userId, $anonKey, $slug);
+    }
+
+    /**
+     * Sits one named set of a textless kind as a drill: untimed, ungraded, every answer
+     * checked at once.
+     *
+     * @return array{session_id: string, mode: string, points_max: int}
+     */
+    private function startNamedDrill(string $kind, ?int $userId, ?string $anonKey, string $slug): array
+    {
+        $passage = $this->pickNamed($kind, $slug);
 
         $publicId = Ulid::generate();
         Db::execute(
@@ -152,7 +163,7 @@ final class ReadingSessionService
         );
         $sessionId = (int) Db::pdo()->lastInsertId();
 
-        [$pointsMax] = $this->materialise($sessionId, (int) $passage['id'], self::VIDEO_KIND);
+        [$pointsMax] = $this->materialise($sessionId, (int) $passage['id'], $kind);
         Db::execute('UPDATE reading_sessions SET points_max = ? WHERE id = ?', [$pointsMax, $sessionId]);
 
         return ['session_id' => $publicId, 'mode' => self::DRILL, 'points_max' => $pointsMax];

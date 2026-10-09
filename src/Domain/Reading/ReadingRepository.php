@@ -99,13 +99,24 @@ final class ReadingRepository
      */
     public function publishedVideos(): array
     {
+        return $this->publishedSets('video');
+    }
+
+    /**
+     * The published passages of one textless kind, each with its servable question count.
+     *
+     * @return list<array{slug:string,title:string,youtube:?string,questions:int}>
+     */
+    private function publishedSets(string $kind): array
+    {
         $rows = Db::fetchAll(
             "SELECT p.slug, p.title, p.youtube_id AS youtube, COUNT(i.id) AS questions
                FROM reading_passages p
                JOIN reading_items i ON i.passage_id = p.id AND i.is_active = 1 AND i.is_flagged = 0
-              WHERE p.is_published = 1 AND p.kind = 'video'
+              WHERE p.is_published = 1 AND p.kind = ?
               GROUP BY p.id, p.slug, p.title, p.youtube_id
-              ORDER BY p.id"
+              ORDER BY p.id",
+            [$kind]
         );
 
         return array_map(static fn(array $r): array => array_merge($r, ['questions' => (int) $r['questions']]), $rows);
