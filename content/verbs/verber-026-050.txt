@@ -1,0 +1,153 @@
+kind: verbs
+slug: verber-026-050
+title: Verber 26–50
+
+--- questions ---
+1. ske — происходить, случаться. Perfektum participium?
+* sket
+  skete
+  sker
+  skeet
+
+2. spille — играть. Præteritum?
+* spillede
+  spillet
+  spiller
+  spilte
+
+3. tale — говорить, разговаривать. Perfektum participium?
+* talt
+  talte
+  taler
+  talet
+
+4. lave — делать. Præteritum?
+* lavede
+  lavet
+  laver
+  lavte
+
+5. vide — знать (факт). Perfektum participium?
+* vidst
+  vidste
+  ved
+  vidt
+
+6. tro — верить. Præteritum?
+* troede
+  troet
+  tror
+  trote
+
+7. arbejde — работать. Perfektum participium?
+* arbejdet
+  arbejdede
+  arbejder
+  arbejdt
+
+8. lægge — класть. Præteritum?
+* lagde
+  lagt
+  lægger
+  læggede
+
+9. begynde — начинать(ся). Perfektum participium?
+* begyndt
+  begyndte
+  begynder
+  begyndet
+
+10. lade — позволять, оставлять. Præteritum?
+* lod
+  ladet
+  lader
+  lade
+
+11. skabe — создавать. Perfektum participium?
+* skabt
+  skabte
+  skaber
+  skabe
+
+12. vælge — выбирать. Præteritum?
+* valgte
+  valgt
+  vælger
+  vælgede
+
+13. køre — ехать, водить (машину). Perfektum participium?
+* kørt
+  kørte
+  kører
+  køret
+
+14. sidde — сидеть. Præteritum?
+* sad
+  siddet
+  sidder
+  sidte
+
+15. følge — следовать. Perfektum participium?
+* fulgt
+  fulgte
+  følger
+  følget
+
+16. synes — считать, находить (мнение). Præteritum?
+* syntes
+  synes
+  synedes
+
+17. betyde — значить, означать. Perfektum participium?
+* betydet
+  betød
+  betyder
+  betydt
+
+18. kende — знать (быть знакомым). Præteritum?
+* kendte
+  kendt
+  kender
+  kendede
+
+19. høre — слышать. Perfektum participium?
+* hørt
+  hørte
+  hører
+  høret
+
+20. slå — бить, ударять. Præteritum?
+* slog
+  slået
+  slår
+  slåte
+
+21. tænke — думать. Perfektum participium?
+* tænkt
+  tænkte
+  tænker
+  tænket
+
+22. møde — встречать. Præteritum?
+* mødte
+  mødt
+  møder
+  mødede
+
+23. sende — посылать, отправлять. Perfektum participium?
+* sendt
+  sendte
+  sender
+  sendet
+
+24. vinde — выигрывать, побеждать. Præteritum?
+* vandt
+  vundet
+  vinder
+  vindede
+
+25. samle — собирать. Perfektum participium?
+* samlet
+  samlede
+  samler
+  samlt

@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-326-350
+title: Verber 326–350
+
+--- questions ---
+1. råbe — кричать. Perfektum participium?
+* råbt
+  råbte
+  råber
+  råbet
+
+2. godkende — одобрять, утверждать. Præteritum?
+* godkendte
+  godkendt
+  godkender
+  godkendede
+
+3. fokusere — сосредоточиваться. Perfektum participium?
+* fokuseret
+  fokuserede
+  fokuserer
+  fokusert
+
+4. involvere — вовлекать. Præteritum?
+* involverede
+  involveret
+  involverer
+  involverte
+
+5. arrangere — устраивать, организовывать. Perfektum participium?
+* arrangeret
+  arrangerede
+  arrangerer
+  arrangert
+
+6. beskæftige — занимать, давать работу. Præteritum?
+* beskæftigede
+  beskæftiget
+  beskæftiger
+  beskæftigte
+
+7. anholde — арестовывать, задерживать. Perfektum participium?
+* anholdt
+  anholder
+  anholdet
+  anholde
+
+8. reagere — реагировать. Præteritum?
+* reagerede
+  reageret
+  reagerer
+  reagerte
+
+9. eksistere — существовать. Perfektum participium?
+* eksisteret
+  eksisterede
+  eksisterer
+  eksistert
+
+10. springe — прыгать. Præteritum?
+* sprang
+  sprunget
+  springer
+  springede
+
+11. studere — учиться (в вузе), изучать. Perfektum participium?
+* studeret
+  studerede
+  studerer
+  studert
+
+12. brede — расстилать. Præteritum?
+* bredte
+  bredt
+  breder
+  bredede
+
+13. tilhøre — принадлежать. Perfektum participium?
+* tilhørt
+  tilhørte
+  tilhører
+  tilhøret
+
+14. trænge — проникать. Præteritum?
+* trængte
+  trængt
+  trænger
+  trængede
+
+15. sove — спать. Perfektum participium?
+* sovet
+  sov
+  sover
+  sovt
+
+16. male — красить. Præteritum?
+* malede
+  malet
+  maler
+  male
+
+17. forhandle — вести переговоры. Perfektum participium?
+* forhandlet
+  forhandlede
+  forhandler
+  forhandlt
+
+18. takke — благодарить. Præteritum?
+* takkede
+  takket
+  takker
+  takte
+
+19. fordele — распределять. Perfektum participium?
+* fordelt
+  fordelte
+  fordeler
+  fordelet
+
+20. anse — считать (кем-то). Præteritum?
+* anså
+  anset
+  anser
+  ansede
+
+21. vare — длиться. Perfektum participium?
+* varet
+  varede
+  varer
+  vart
+
+22. administrere — управлять, администрировать. Præteritum?
+* administrerede
+  administreret
+  administrerer
+  administrerte
+
+23. forberede — готовить(ся). Perfektum participium?
+* forberedt
+  forberedte
+  forbereder
+  forberedet
+
+24. fremhæve — выделять, подчёркивать. Præteritum?
+* fremhævede
+  fremhævet
+  fremhæver
+  fremhævte
+
+25. binde — связывать. Perfektum participium?
+* bundet
+  bandt
+  binder
+  bindet

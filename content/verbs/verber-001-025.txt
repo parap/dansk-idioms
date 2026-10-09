@@ -1,0 +1,153 @@
+kind: verbs
+slug: verber-001-025
+title: Verber 1–25
+
+--- questions ---
+1. være — быть. Præteritum?
+* var
+  været
+  er
+  værede
+
+2. have — иметь. Perfektum participium?
+* haft
+  havde
+  har
+  havet
+
+3. kunne — мочь, уметь. Præteritum?
+* kunne
+  kunnet
+  kan
+  kunte
+
+4. blive — становиться. Perfektum participium?
+* blevet
+  blev
+  bliver
+  blivet
+
+5. skulle — быть должным. Præteritum?
+* skulle
+  skullet
+  skal
+  skulte
+
+6. ville — хотеть. Perfektum participium?
+* villet
+  ville
+  vil
+  vilt
+
+7. få — получать. Præteritum?
+* fik
+  fået
+  får
+  fåte
+
+8. sige — сказать, говорить. Perfektum participium?
+* sagt
+  sagde
+  siger
+  siget
+
+9. komme — приходить, приезжать. Præteritum?
+* kom
+  kommet
+  kommer
+  komte
+
+10. gå — идти (пешком). Perfektum participium?
+* gået
+  gik
+  går
+  gåt
+
+11. gøre — делать. Præteritum?
+* gjorde
+  gjort
+  gør
+  gørede
+
+12. se — видеть. Perfektum participium?
+* set
+  så
+  ser
+  seet
+
+13. tage — брать. Præteritum?
+* tog
+  taget
+  tager
+  tagede
+
+14. give — давать. Perfektum participium?
+* givet
+  gav
+  giver
+  givt
+
+15. finde — находить. Præteritum?
+* fandt
+  fundet
+  finder
+  findede
+
+16. måtte — можно. Perfektum participium?
+* måttet
+  måtte
+  må
+
+17. stå — стоять. Præteritum?
+* stod
+  stået
+  står
+  ståte
+
+18. bruge — использовать. Perfektum participium?
+* brugt
+  brugte
+  bruger
+  bruget
+
+19. vise — показывать. Præteritum?
+* viste
+  vist
+  viser
+  visede
+
+20. sætte — ставить, сажать. Perfektum participium?
+* sat
+  satte
+  sætter
+  sættet
+
+21. holde — держать. Præteritum?
+* holdt
+  holder
+  holdede
+  holde
+
+22. mene — считать, полагать. Perfektum participium?
+* ment
+  mente
+  mener
+  menet
+
+23. skrive — писать. Præteritum?
+* skrev
+  skrevet
+  skriver
+  skrivede
+
+24. fortælle — рассказывать. Perfektum participium?
+* fortalt
+  fortalte
+  fortæller
+  fortællet
+
+25. ligge — лежать. Præteritum?
+* lå
+  ligget
+  ligger
+  ligte

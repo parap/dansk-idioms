@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-451-475
+title: Verber 451–475
+
+--- questions ---
+1. dokumentere — документировать. Præteritum?
+* dokumenterede
+  dokumenteret
+  dokumenterer
+  dokumenterte
+
+2. fremstå — выглядеть, представать. Perfektum participium?
+* fremstået
+  fremstod
+  fremstår
+  fremståt
+
+3. udelukke — исключать. Præteritum?
+* udelukkede
+  udelukket
+  udelukker
+  udelukte
+
+4. kvalificere — (kvalificere sig) квалифицироваться. Perfektum participium?
+* kvalificeret
+  kvalificerede
+  kvalificerer
+  kvalificert
+
+5. angå — касаться. Præteritum?
+* angik
+  angået
+  angår
+  angåte
+
+6. udvise — проявлять. Perfektum participium?
+* udvist
+  udviste
+  udviser
+  udviset
+
+7. nærme — (nærme sig) приближаться. Præteritum?
+* nærmede
+  nærmet
+  nærmer
+  nærmte
+
+8. tiltale — привлекать к суду. Perfektum participium?
+* tiltalt
+  tiltalte
+  tiltaler
+  tiltalet
+
+9. droppe — бросать, отказываться. Præteritum?
+* droppede
+  droppet
+  dropper
+  dropte
+
+10. leje — снимать (в аренду), сдавать. Perfektum participium?
+* lejet
+  lejede
+  lejer
+  lejt
+
+11. beskylde — обвинять. Præteritum?
+* beskyldte
+  beskyldt
+  beskylder
+  beskyldede
+
+12. organisere — организовывать. Perfektum participium?
+* organiseret
+  organiserede
+  organiserer
+  organisert
+
+13. beholde — сохранять, оставлять себе. Præteritum?
+* beholdt
+  beholder
+  beholdede
+  beholde
+
+14. koge — варить, кипятить. Perfektum participium?
+* kogt
+  kogte
+  koger
+  koget
+
+15. formulere — формулировать. Præteritum?
+* formulerede
+  formuleret
+  formulerer
+  formulerte
+
+16. inddrage — вовлекать. Perfektum participium?
+* inddraget
+  inddrog
+  inddrager
+  inddragt
+
+17. notere — записывать. Præteritum?
+* noterede
+  noteret
+  noterer
+  noterte
+
+18. vække — будить. Perfektum participium?
+* vækket
+  vækkede
+  vækker
+  vækt
+
+19. hilse — здороваться. Præteritum?
+* hilste
+  hilst
+  hilser
+  hilsede
+
+20. uddele — раздавать. Perfektum participium?
+* uddelt
+  uddelte
+  uddeler
+  uddelet
+
+21. prioritere — расставлять приоритеты. Præteritum?
+* prioriterede
+  prioriteret
+  prioriterer
+  prioriterte
+
+22. adskille — разделять. Perfektum participium?
+* adskilt
+  adskilte
+  adskiller
+  adskillet
+
+23. anlægge — строить, прокладывать. Præteritum?
+* anlagde
+  anlagt
+  anlægger
+  anlæggede
+
+24. operere — оперировать. Perfektum participium?
+* opereret
+  opererede
+  opererer
+  operert
+
+25. skubbe — толкать. Præteritum?
+* skubbede
+  skubbet
+  skubber
+  skubte

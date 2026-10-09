@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-301-325
+title: Verber 301–325
+
+--- questions ---
+1. forholde — (forholde sig til) относиться к. Præteritum?
+* forholdt
+  forholder
+  forholdede
+  forholde
+
+2. inspirere — вдохновлять. Perfektum participium?
+* inspireret
+  inspirerede
+  inspirerer
+  inspirert
+
+3. anbefale — рекомендовать. Præteritum?
+* anbefalede
+  anbefalet
+  anbefaler
+  anbefalte
+
+4. fejre — праздновать. Perfektum participium?
+* fejret
+  fejrede
+  fejrer
+  fejrt
+
+5. opfatte — воспринимать. Præteritum?
+* opfattede
+  opfattet
+  opfatter
+  opfatte
+
+6. hæve — поднимать. Perfektum participium?
+* hævet
+  hævede
+  hæver
+  hævt
+
+7. udsende — выпускать, транслировать. Præteritum?
+* udsendte
+  udsendt
+  udsender
+  udsendede
+
+8. overleve — выживать. Perfektum participium?
+* overlevet
+  overlevede
+  overlever
+  overlevt
+
+9. undre — удивлять. Præteritum?
+* undrede
+  undret
+  undrer
+  undrte
+
+10. dyrke — выращивать. Perfektum participium?
+* dyrket
+  dyrkede
+  dyrker
+  dyrkt
+
+11. hævde — утверждать. Præteritum?
+* hævdede
+  hævdet
+  hævder
+  hævdte
+
+12. afholde — проводить (мероприятие). Perfektum participium?
+* afholdt
+  afholder
+  afholdet
+  afholde
+
+13. angribe — нападать. Præteritum?
+* angreb
+  angrebet
+  angriber
+  angribede
+
+14. formå — быть в состоянии. Perfektum participium?
+* formået
+  formåede
+  formår
+  formåt
+
+15. omtale — упоминать, отзываться. Præteritum?
+* omtalte
+  omtalt
+  omtaler
+  omtalede
+
+16. forbinde — соединять, связывать. Perfektum participium?
+* forbundet
+  forbandt
+  forbinder
+  forbindet
+
+17. nægte — отказываться. Præteritum?
+* nægtede
+  nægtet
+  nægter
+  nægte
+
+18. satse — делать ставку. Perfektum participium?
+* satset
+  satsede
+  satser
+  satst
+
+19. fremstille — производить. Præteritum?
+* fremstillede
+  fremstillet
+  fremstiller
+  fremstilte
+
+20. offentliggøre — публиковать, обнародовать. Perfektum participium?
+* offentliggjort
+  offentliggjorde
+  offentliggør
+  offentliggøret
+
+21. advare — предупреждать. Præteritum?
+* advarede
+  advaret
+  advarer
+  advarte
+
+22. opgive — сдаваться, бросать. Perfektum participium?
+* opgivet
+  opgav
+  opgiver
+  opgivt
+
+23. fange — ловить. Præteritum?
+* fangede
+  fanget
+  fanger
+  fangte
+
+24. gemme — прятать. Perfektum participium?
+* gemt
+  gemte
+  gemmer
+  gemmet
+
+25. betegne — обозначать. Præteritum?
+* betegnede
+  betegnet
+  betegner
+  betegnte

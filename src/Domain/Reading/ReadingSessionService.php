@@ -34,6 +34,8 @@ final class ReadingSessionService
 
     private const VIDEO_KIND = 'video';
 
+    private const VERBS_KIND = 'verbs';
+
     /**
      * The task types a reading round may serve. A knowledge paper lives in the same
      * tables and is graded the same way, but it has no text to read and its own pass
@@ -143,6 +145,17 @@ final class ReadingSessionService
     public function startVideo(?int $userId, ?string $anonKey, string $slug): array
     {
         return $this->startNamedDrill(self::VIDEO_KIND, $userId, $anonKey, $slug);
+    }
+
+    /**
+     * Sits one set of verb-form questions as a drill, so a wrong form is corrected while
+     * the verb is still in front of the learner.
+     *
+     * @return array{session_id: string, mode: string, points_max: int}
+     */
+    public function startVerbs(?int $userId, ?string $anonKey, string $slug): array
+    {
+        return $this->startNamedDrill(self::VERBS_KIND, $userId, $anonKey, $slug);
     }
 
     /**

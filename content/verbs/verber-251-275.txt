@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-251-275
+title: Verber 251–275
+
+--- questions ---
+1. smide — бросать, выбрасывать. Præteritum?
+* smed
+  smidt
+  smider
+  smidede
+
+2. begå — совершать (ошибку, преступление). Perfektum participium?
+* begået
+  begik
+  begår
+  begåt
+
+3. udvide — расширять. Præteritum?
+* udvidede
+  udvidet
+  udvider
+  udvidte
+
+4. træffe — встречать. Perfektum participium?
+* truffet
+  traf
+  træffer
+  træffet
+
+5. bevare — сохранять. Præteritum?
+* bevarede
+  bevaret
+  bevarer
+  bevarte
+
+6. styrke — укреплять. Perfektum participium?
+* styrket
+  styrkede
+  styrker
+  styrkt
+
+7. risikere — рисковать. Præteritum?
+* risikerede
+  risikeret
+  risikerer
+  risikerte
+
+8. minde — напоминать. Perfektum participium?
+* mindet
+  mindede
+  minder
+  mindt
+
+9. sammenligne — сравнивать. Præteritum?
+* sammenlignede
+  sammenlignet
+  sammenligner
+  sammenlignte
+
+10. skaffe — доставать, раздобыть. Perfektum participium?
+* skaffet
+  skaffede
+  skaffer
+  skaft
+
+11. præge — накладывать отпечаток, определять. Præteritum?
+* prægede
+  præget
+  præger
+  prægte
+
+12. redde — спасать. Perfektum participium?
+* reddet
+  reddede
+  redder
+  redt
+
+13. fastholde — удерживать, настаивать. Præteritum?
+* fastholdt
+  fastholder
+  fastholdede
+  fastholde
+
+14. planlægge — планировать. Perfektum participium?
+* planlagt
+  planlagde
+  planlægger
+  planlægget
+
+15. score — забивать (гол). Præteritum?
+* scorede
+  scoret
+  scorer
+  scorte
+
+16. basere — основывать. Perfektum participium?
+* baseret
+  baserede
+  baserer
+  basert
+
+17. repræsentere — представлять (интересы). Præteritum?
+* repræsenterede
+  repræsenteret
+  repræsenterer
+  repræsenterte
+
+18. befinde — (befinde sig) находиться. Perfektum participium?
+* befundet
+  befandt
+  befinder
+  befindet
+
+19. udtrykke — выражать. Præteritum?
+* udtrykte
+  udtrykt
+  udtrykker
+  udtrykkede
+
+20. flyve — летать. Perfektum participium?
+* fløjet
+  fløj
+  flyver
+  flyvet
+
+21. snakke — болтать, разговаривать. Præteritum?
+* snakkede
+  snakket
+  snakker
+  snakte
+
+22. reducere — сокращать. Perfektum participium?
+* reduceret
+  reducerede
+  reducerer
+  reducert
+
+23. dukke — (dukke op) появляться. Præteritum?
+* dukkede
+  dukket
+  dukker
+  dukte
+
+24. erklære — объявлять, заявлять. Perfektum participium?
+* erklæret
+  erklærede
+  erklærer
+  erklært
+
+25. forsvare — защищать. Præteritum?
+* forsvarede
+  forsvaret
+  forsvarer
+  forsvarte

@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-151-175
+title: Verber 151–175
+
+--- questions ---
+1. bestemme — решать, определять. Præteritum?
+* bestemte
+  bestemt
+  bestemmer
+  bestemmede
+
+2. dræbe — убивать. Perfektum participium?
+* dræbt
+  dræbte
+  dræber
+  dræbet
+
+3. løse — решать (задачу). Præteritum?
+* løste
+  løst
+  løser
+  løsede
+
+4. forsvinde — исчезать. Perfektum participium?
+* forsvundet
+  forsvandt
+  forsvinder
+  forsvindet
+
+5. besøge — навещать, посещать. Præteritum?
+* besøgte
+  besøgt
+  besøger
+  besøgede
+
+6. tilbyde — предлагать. Perfektum participium?
+* tilbudt
+  tilbød
+  tilbyder
+  tilbydet
+
+7. spise — есть. Præteritum?
+* spiste
+  spist
+  spiser
+  spisede
+
+8. tjene — зарабатывать. Perfektum participium?
+* tjent
+  tjente
+  tjener
+  tjenet
+
+9. konstatere — констатировать. Præteritum?
+* konstaterede
+  konstateret
+  konstaterer
+  konstaterte
+
+10. lede — искать. Perfektum participium?
+* ledt
+  ledte
+  leder
+  lede
+
+11. træde — ступать, шагать. Præteritum?
+* trådte
+  trådt
+  træder
+  trædede
+
+12. undersøge — исследовать, проверять. Perfektum participium?
+* undersøgt
+  undersøgte
+  undersøger
+  undersøget
+
+13. kæmpe — бороться. Præteritum?
+* kæmpede
+  kæmpet
+  kæmper
+  kæmpte
+
+14. byde — предлагать. Perfektum participium?
+* budt
+  bød
+  byder
+  bydet
+
+15. dreje — поворачивать. Præteritum?
+* drejede
+  drejet
+  drejer
+  drejte
+
+16. foretage — предпринимать, производить. Perfektum participium?
+* foretaget
+  foretog
+  foretager
+  foretagt
+
+17. kaste — бросать. Præteritum?
+* kastede
+  kastet
+  kaster
+  kaste
+
+18. opstå — возникать. Perfektum participium?
+* opstået
+  opstod
+  opstår
+  opståt
+
+19. opnå — достигать. Præteritum?
+* opnåede
+  opnået
+  opnår
+  opnåte
+
+20. tilføje — добавлять. Perfektum participium?
+* tilføjet
+  tilføjede
+  tilføjer
+  tilføjt
+
+21. slutte — заканчивать. Præteritum?
+* sluttede
+  sluttet
+  slutter
+  slutte
+
+22. stemme — голосовать. Perfektum participium?
+* stemt
+  stemte
+  stemmer
+  stemme
+
+23. slippe — отпускать. Præteritum?
+* slap
+  sluppet
+  slipper
+  slippede
+
+24. glæde — радовать. Perfektum participium?
+* glædet
+  glædede
+  glæder
+  glædt
+
+25. rette — исправлять. Præteritum?
+* rettede
+  rettet
+  retter
+  rette
