@@ -3,150 +3,150 @@ slug: verber-026-050
 title: Verber 26–50
 
 --- questions ---
-1. ske — происходить, случаться. Perfektum participium?
+1. ske — происходить, случаться. Førnutid?
 * sket
   skete
   sker
   skeet
 
-2. spille — играть. Præteritum?
+2. spille — играть. Datid?
 * spillede
   spillet
   spiller
   spilte
 
-3. tale — говорить, разговаривать. Perfektum participium?
+3. tale — говорить, разговаривать. Førnutid?
 * talt
   talte
   taler
   talet
 
-4. lave — делать. Præteritum?
+4. lave — делать. Datid?
 * lavede
   lavet
   laver
   lavte
 
-5. vide — знать (факт). Perfektum participium?
+5. vide — знать (факт). Førnutid?
 * vidst
   vidste
   ved
   vidt
 
-6. tro — верить. Præteritum?
+6. tro — верить. Datid?
 * troede
   troet
   tror
   trote
 
-7. arbejde — работать. Perfektum participium?
+7. arbejde — работать. Førnutid?
 * arbejdet
   arbejdede
   arbejder
   arbejdt
 
-8. lægge — класть. Præteritum?
+8. lægge — класть. Datid?
 * lagde
   lagt
   lægger
   læggede
 
-9. begynde — начинать(ся). Perfektum participium?
+9. begynde — начинать(ся). Førnutid?
 * begyndt
   begyndte
   begynder
   begyndet
 
-10. lade — позволять, оставлять. Præteritum?
+10. lade — позволять, оставлять. Datid?
 * lod
   ladet
   lader
   lade
 
-11. skabe — создавать. Perfektum participium?
+11. skabe — создавать. Førnutid?
 * skabt
   skabte
   skaber
   skabe
 
-12. vælge — выбирать. Præteritum?
+12. vælge — выбирать. Datid?
 * valgte
   valgt
   vælger
   vælgede
 
-13. køre — ехать, водить (машину). Perfektum participium?
+13. køre — ехать, водить (машину). Førnutid?
 * kørt
   kørte
   kører
   køret
 
-14. sidde — сидеть. Præteritum?
+14. sidde — сидеть. Datid?
 * sad
   siddet
   sidder
   sidte
 
-15. følge — следовать. Perfektum participium?
+15. følge — следовать. Førnutid?
 * fulgt
   fulgte
   følger
   følget
 
-16. synes — считать, находить (мнение). Præteritum?
+16. synes — считать, находить (мнение). Datid?
 * syntes
   synes
   synedes
 
-17. betyde — значить, означать. Perfektum participium?
+17. betyde — значить, означать. Førnutid?
 * betydet
   betød
   betyder
   betydt
 
-18. kende — знать (быть знакомым). Præteritum?
+18. kende — знать (быть знакомым). Datid?
 * kendte
   kendt
   kender
   kendede
 
-19. høre — слышать. Perfektum participium?
+19. høre — слышать. Førnutid?
 * hørt
   hørte
   hører
   høret
 
-20. slå — бить, ударять. Præteritum?
+20. slå — бить, ударять. Datid?
 * slog
   slået
   slår
   slåte
 
-21. tænke — думать. Perfektum participium?
+21. tænke — думать. Førnutid?
 * tænkt
   tænkte
   tænker
   tænket
 
-22. møde — встречать. Præteritum?
+22. møde — встречать. Datid?
 * mødte
   mødt
   møder
   mødede
 
-23. sende — посылать, отправлять. Perfektum participium?
+23. sende — посылать, отправлять. Førnutid?
 * sendt
   sendte
   sender
   sendet
 
-24. vinde — выигрывать, побеждать. Præteritum?
+24. vinde — выигрывать, побеждать. Datid?
 * vandt
   vundet
   vinder
   vindede
 
-25. samle — собирать. Perfektum participium?
+25. samle — собирать. Førnutid?
 * samlet
   samlede
   samler

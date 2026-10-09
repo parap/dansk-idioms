@@ -3,151 +3,151 @@ slug: verber-351-375
 title: Verber 351–375
 
 --- questions ---
-1. yde — оказывать (помощь), выдавать. Præteritum?
+1. yde — оказывать (помощь), выдавать. Datid?
 * ydede
   ydet
   yder
   ydeede
 
-2. indstille — настраивать. Perfektum participium?
+2. indstille — настраивать. Førnutid?
 * indstillet
   indstillede
   indstiller
   indstilt
 
-3. pleje — ухаживать. Præteritum?
+3. pleje — ухаживать. Datid?
 * plejede
   plejet
   plejer
   plejte
 
-4. modsætte — (modsætte sig) противиться. Perfektum participium?
+4. modsætte — (modsætte sig) противиться. Førnutid?
 * modsat
   modsatte
   modsætter
   modsættet
 
-5. bemærke — замечать. Præteritum?
+5. bemærke — замечать. Datid?
 * bemærkede
   bemærket
   bemærker
   bemærkte
 
-6. markere — отмечать. Perfektum participium?
+6. markere — отмечать. Førnutid?
 * markeret
   markerede
   markerer
   markert
 
-7. gentage — повторять. Præteritum?
+7. gentage — повторять. Datid?
 * gentog
   gentaget
   gentager
   gentagede
 
-8. sejle — плыть (на судне). Perfektum participium?
+8. sejle — плыть (на судне). Førnutid?
 * sejlet
   sejlede
   sejler
   sejlt
 
-9. servere — подавать (еду). Præteritum?
+9. servere — подавать (еду). Datid?
 * serverede
   serveret
   serverer
   serverte
 
-10. drømme — мечтать. Perfektum participium?
+10. drømme — мечтать. Førnutid?
 * drømt
   drømte
   drømmer
   drømmet
 
-11. dominere — доминировать. Præteritum?
+11. dominere — доминировать. Datid?
 * dominerede
   domineret
   dominerer
   dominerte
 
-12. indtage — принимать (пищу). Perfektum participium?
+12. indtage — принимать (пищу). Førnutid?
 * indtaget
   indtog
   indtager
   indtagt
 
-13. savne — скучать по. Præteritum?
+13. savne — скучать по. Datid?
 * savnede
   savnet
   savner
   savnte
 
-14. udløse — вызывать, запускать. Perfektum participium?
+14. udløse — вызывать, запускать. Førnutid?
 * udløst
   udløste
   udløser
   udløset
 
-15. skuffe — разочаровывать. Præteritum?
+15. skuffe — разочаровывать. Datid?
 * skuffede
   skuffet
   skuffer
   skufte
 
-16. forbyde — запрещать. Perfektum participium?
+16. forbyde — запрещать. Førnutid?
 * forbudt
   forbød
   forbyder
   forbydet
 
-17. indrette — обустраивать. Præteritum?
+17. indrette — обустраивать. Datid?
 * indrettede
   indrettet
   indretter
   indrette
 
-18. drage — отправляться. Perfektum participium?
+18. drage — отправляться. Førnutid?
 * draget
   drog
   drager
   dragt
 
-19. flygte — бежать, спасаться. Præteritum?
+19. flygte — бежать, спасаться. Datid?
 * flygtede
   flygtet
   flygter
   flygte
 
-20. efterlade — оставлять. Perfektum participium?
+20. efterlade — оставлять. Førnutid?
 * efterladt
   efterlod
   efterlader
   efterladet
 
-21. sigte — целиться. Præteritum?
+21. sigte — целиться. Datid?
 * sigtede
   sigtet
   sigter
   sigte
 
-22. opfylde — выполнять, удовлетворять. Perfektum participium?
+22. opfylde — выполнять, удовлетворять. Førnutid?
 * opfyldt
   opfyldte
   opfylder
   opfyldet
 
-23. erstatte — заменять. Præteritum?
+23. erstatte — заменять. Datid?
 * erstattede
   erstattet
   erstatter
   erstatte
 
-24. sprede — распространять. Perfektum participium?
+24. sprede — распространять. Førnutid?
 * spredt
   spredte
   spreder
   spredet
 
-25. undervise — преподавать. Præteritum?
+25. undervise — преподавать. Datid?
 * underviste
   undervist
   underviser

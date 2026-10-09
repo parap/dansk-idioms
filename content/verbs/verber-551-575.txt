@@ -3,151 +3,151 @@ slug: verber-551-575
 title: Verber 551–575
 
 --- questions ---
-1. vågne — просыпаться. Præteritum?
+1. vågne — просыпаться. Datid?
 * vågnede
   vågnet
   vågner
   vågnte
 
-2. slukke — гасить, выключать. Perfektum participium?
+2. slukke — гасить, выключать. Førnutid?
 * slukket
   slukkede
   slukker
   slukt
 
-3. græde — плакать. Præteritum?
+3. græde — плакать. Datid?
 * græd
   grædt
   græder
   grædede
 
-4. overstå — пережить, преодолеть. Perfektum participium?
+4. overstå — пережить, преодолеть. Førnutid?
 * overstået
   overstod
   overstår
   overståt
 
-5. efterlyse — разыскивать (объявить в розыск). Præteritum?
+5. efterlyse — разыскивать (объявить в розыск). Datid?
 * efterlyste
   efterlyst
   efterlyser
   efterlysede
 
-6. aflyse — отменять. Perfektum participium?
+6. aflyse — отменять. Førnutid?
 * aflyst
   aflyste
   aflyser
   aflyset
 
-7. opretholde — поддерживать, сохранять. Præteritum?
+7. opretholde — поддерживать, сохранять. Datid?
 * opretholdt
   opretholder
   opretholdede
   opretholde
 
-8. hoppe — прыгать. Perfektum participium?
+8. hoppe — прыгать. Førnutid?
 * hoppet
   hoppede
   hopper
   hopt
 
-9. veje — весить. Præteritum?
+9. veje — весить. Datid?
 * vejede
   vejet
   vejer
   vejte
 
-10. afhænge — зависеть. Perfektum participium?
+10. afhænge — зависеть. Førnutid?
 * afhængt
   afhang
   afhænger
   afhænget
 
-11. cykle — ездить на велосипеде. Præteritum?
+11. cykle — ездить на велосипеде. Datid?
 * cyklede
   cyklet
   cykler
   cyklte
 
-12. afgive — отдавать (голос), сдавать. Perfektum participium?
+12. afgive — отдавать (голос), сдавать. Førnutid?
 * afgivet
   afgav
   afgiver
   afgivt
 
-13. antyde — намекать. Præteritum?
+13. antyde — намекать. Datid?
 * antydede
   antydet
   antyder
   antydte
 
-14. citere — цитировать. Perfektum participium?
+14. citere — цитировать. Førnutid?
 * citeret
   citerede
   citerer
   citert
 
-15. påtage — (påtage sig) брать на себя. Præteritum?
+15. påtage — (påtage sig) брать на себя. Datid?
 * påtog
   påtaget
   påtager
   påtagede
 
-16. indkalde — созывать, вызывать. Perfektum participium?
+16. indkalde — созывать, вызывать. Førnutid?
 * indkaldt
   indkaldte
   indkalder
   indkaldet
 
-17. argumentere — аргументировать. Præteritum?
+17. argumentere — аргументировать. Datid?
 * argumenterede
   argumenteret
   argumenterer
   argumenterte
 
-18. lyse — светить. Perfektum participium?
+18. lyse — светить. Førnutid?
 * lyst
   lyste
   lyser
   lyset
 
-19. praktisere — практиковать. Præteritum?
+19. praktisere — практиковать. Datid?
 * praktiserede
   praktiseret
   praktiserer
   praktiserte
 
-20. forene — объединять. Perfektum participium?
+20. forene — объединять. Førnutid?
 * forenet
   forenede
   forener
   forent
 
-21. forme — формировать, лепить. Præteritum?
+21. forme — формировать, лепить. Datid?
 * formede
   formet
   former
   formte
 
-22. forandre — изменять. Perfektum participium?
+22. forandre — изменять. Førnutid?
 * forandret
   forandrede
   forandrer
   forandrt
 
-23. grundlægge — основывать. Præteritum?
+23. grundlægge — основывать. Datid?
 * grundlagde
   grundlagt
   grundlægger
   grundlæggede
 
-24. svække — ослаблять. Perfektum participium?
+24. svække — ослаблять. Førnutid?
 * svækket
   svækkede
   svækker
   svækt
 
-25. integrere — интегрировать. Præteritum?
+25. integrere — интегрировать. Datid?
 * integrerede
   integreret
   integrerer
