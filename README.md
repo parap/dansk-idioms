@@ -25,6 +25,7 @@ bin/load-export.sh                 # import your Telegram export
 | http://localhost:8080/proeve/praktisk | how to sit the real one: date, deadline, fee |
 | http://localhost:8080/listen | listening: links to podcasts and audio material |
 | http://localhost:8080/video | films with comprehension questions (`content/video/`) |
+| http://localhost:8080/verbs | the 700 most frequent verbs, past tense and participle (`content/verbs/`) |
 | http://127.0.0.1:8082/admin | review queue |
 | http://127.0.0.1:8081 | Adminer (server `db`, user `dansk`, the password from `.env`) |
 | http://localhost:8080/api/v1/health | health + database check |
@@ -444,7 +445,8 @@ docker-compose up -d
 | `vendor/bin/phpunit` | the whole suite |
 | `vendor/bin/phpunit --testsuite unit` | parser and text logic only, no database |
 | `vendor/bin/phpunit --testsuite integration` | real SQL against a scratch schema |
-| `python3 bin/prove-tests-red.py [n…]` | break the code on purpose; every fault must be caught |
+| `python3 bin/prove-tests-red.py --changed` | break the code this branch changed; every fault must be caught |
+| `python3 bin/prove-tests-red.py [n…]` | the same for all faults, or only the numbered ones |
 
 Prefix with `docker-compose exec app` for the PHP ones.
 
@@ -527,25 +529,37 @@ an edit that silently fails to apply cannot be read as a passing check. A fault 
 survives means an uncovered case or genuinely equivalent behaviour; read the code it
 touches to decide which. Run it after changing anything in `src/`.
 
-A fault lives in the file for as long as one suite takes to run, so the injection is
-recorded on disk beside an untouched copy before it happens. An interrupt restores the
-file through a signal handler; a `kill -9`, a power cut or a closed container answer to
-nobody, and there the next run finds the record and puts the file back before doing
-anything else. Naming fault numbers or ranges — `prove-tests-red.py 94-99` — runs only
-those, which is what makes the harness usable while writing the code it guards; the gate
-before a commit is the unselected run.
+Faults never touch the working tree. Each run syncs the tree, uncommitted edits included,
+into `.prove-tests-red/tree/` and starts the `mutants` container (a compose profile, so
+`up` alone leaves it out), which serves that copy on 127.0.0.1:8083/8084 and runs its
+suites against a scratch schema of its own, `dansk_mutants`. Commit, edit, browse the site
+or run the suite while it works; a run killed outright leaves its fault in the copy, and
+the next sync puts it back. One thing is still shared: the interface checks seed and hide
+passages in the development database, so `bin/ui-tests.py` must not run while a run is on
+its `ui` faults. Naming fault numbers or ranges — `prove-tests-red.py 94-99` — runs only
+those, which is what makes the harness usable while writing the code it guards.
 
-The integration suite takes ~9 seconds, nearly all of it re-importing the fixture in
-each test's `setUp`. Cleanup between tests uses `DELETE`, not `TRUNCATE`: TRUNCATE is
+The gate before a commit is `--changed`: the faults in the files the branch changed against
+`master`, uncommitted edits included. A branch through the reading code selects about forty
+and takes under ten minutes, because a whole-suite run stops at the first failure and only
+a surviving fault runs it to the end. The whole list, about half an hour,
+runs before a deploy, because a test deleted or weakened elsewhere lets a fault in an
+untouched file survive, and only a full run sees that.
+
+The integration suite takes ~25 seconds on the laptop, most of it re-importing the fixture
+in each test's `setUp`. It commits row by row, so it needs the fast-commit settings in a
+development `.env` — `DB_FLUSH_LOG_AT_COMMIT=2` and `DB_SYNC_BINLOG=0`, applied when the
+`db` container is recreated; with the durable defaults the server keeps, it runs three
+times slower. Cleanup between tests uses `DELETE`, not `TRUNCATE`: TRUNCATE is
 DDL and InnoDB recreates the tablespace, which at 20 tables per test was over half the
 suite's runtime (23s down to 9s from that one change).
 
-The scratch schema needs a grant, applied automatically on a fresh volume by
-`docker/mysql/01-test-database.sql`. On an existing volume, run it once by hand:
+The scratch schemas — `dansk_test`, and `dansk_mutants` for the fault-injection runner —
+need a grant, applied automatically on a fresh volume by
+`docker/mysql/01-test-database.sql`. On an existing volume, apply that file once by hand:
 
 ```bash
-docker-compose exec db mysql -uroot -proot \
-  -e "GRANT ALL ON \`dansk_test\`.* TO 'dansk'@'%'; FLUSH PRIVILEGES;"
+docker-compose exec -T db sh -c 'mysql -uroot -p"$MYSQL_ROOT_PASSWORD"' < docker/mysql/01-test-database.sql
 ```
 
 ### Gotchas worth knowing

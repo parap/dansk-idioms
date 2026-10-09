@@ -34,6 +34,8 @@ final class ReadingSessionService
 
     private const VIDEO_KIND = 'video';
 
+    private const VERBS_KIND = 'verbs';
+
     /**
      * The task types a reading round may serve. A knowledge paper lives in the same
      * tables and is graded the same way, but it has no text to read and its own pass
@@ -142,7 +144,29 @@ final class ReadingSessionService
      */
     public function startVideo(?int $userId, ?string $anonKey, string $slug): array
     {
-        $passage = $this->pickNamed(self::VIDEO_KIND, $slug);
+        return $this->startNamedDrill(self::VIDEO_KIND, $userId, $anonKey, $slug);
+    }
+
+    /**
+     * Sits one set of verb-form questions as a drill, so a wrong form is corrected while
+     * the verb is still in front of the learner.
+     *
+     * @return array{session_id: string, mode: string, points_max: int}
+     */
+    public function startVerbs(?int $userId, ?string $anonKey, string $slug): array
+    {
+        return $this->startNamedDrill(self::VERBS_KIND, $userId, $anonKey, $slug);
+    }
+
+    /**
+     * Sits one named set of a textless kind as a drill: untimed, ungraded, every answer
+     * checked at once.
+     *
+     * @return array{session_id: string, mode: string, points_max: int}
+     */
+    private function startNamedDrill(string $kind, ?int $userId, ?string $anonKey, string $slug): array
+    {
+        $passage = $this->pickNamed($kind, $slug);
 
         $publicId = Ulid::generate();
         Db::execute(
@@ -152,7 +176,7 @@ final class ReadingSessionService
         );
         $sessionId = (int) Db::pdo()->lastInsertId();
 
-        [$pointsMax] = $this->materialise($sessionId, (int) $passage['id'], self::VIDEO_KIND);
+        [$pointsMax] = $this->materialise($sessionId, (int) $passage['id'], $kind);
         Db::execute('UPDATE reading_sessions SET points_max = ? WHERE id = ?', [$pointsMax, $sessionId]);
 
         return ['session_id' => $publicId, 'mode' => self::DRILL, 'points_max' => $pointsMax];

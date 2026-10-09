@@ -64,8 +64,9 @@ final class ImporterTest extends IntegrationTestCase
     {
         $id = (new \Dansk\Domain\ReviewRepository())->addByHand('ny single', 'свежеиспечённый одиночка');
 
-        self::importText(144, 'ny single — устойчивое разговорное сочетание, описывающее человека, который'
-            . ' только что вышел из отношений и вновь стал свободен («свежеиспечённый одиночка»).');
+        // Accepted, and carrying the human's words as a reading the quiz cannot use: an entry
+        // sent to review, or one without those words, never reaches the upsert this guards.
+        self::importText(144, 'ny single — снова свободный после расставания (дословно «свежеиспечённый одиночка»).');
 
         self::assertSame(1, (int) Db::fetchValue(
             "SELECT quiz_usable FROM idiom_translations WHERE idiom_id = ? AND text = 'свежеиспечённый одиночка'", [$id]

@@ -239,4 +239,34 @@ final class ReadingRepositoryTest extends IntegrationTestCase
             $this->repo->publishedVideos()
         );
     }
+
+    /** @return array<string,mixed> */
+    private function verbs(array $overrides = []): array
+    {
+        return $overrides + [
+            'slug'  => 'verber-001-025',
+            'kind'  => 'verbs',
+            'title' => 'Verber 1–25',
+            'body'  => null,
+            'items' => [
+                ['position' => 1, 'prompt' => 'gå (идти) — præteritum', 'options' => [
+                    ['label' => 'A', 'text' => 'gik', 'correct' => true],
+                    ['label' => 'B', 'text' => 'gået'],
+                    ['label' => 'C', 'text' => 'går'],
+                ]],
+            ],
+        ];
+    }
+
+    public function testPublishedVerbSetsListEachSetWithItsQuestionCount(): void
+    {
+        $this->repo->publish($this->repo->save($this->verbs()));
+        $this->repo->save($this->verbs(['slug' => 'kladde', 'title' => 'Kladde']));
+        $this->repo->publish($this->repo->save($this->video()));
+
+        self::assertSame(
+            [['slug' => 'verber-001-025', 'title' => 'Verber 1–25', 'questions' => 1]],
+            $this->repo->publishedVerbSets()
+        );
+    }
 }

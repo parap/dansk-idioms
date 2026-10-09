@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-501-525
+title: Verber 501–525
+
+--- questions ---
+1. beklage — сожалеть. Præteritum?
+* beklagede
+  beklaget
+  beklager
+  beklagte
+
+2. ane — догадываться (ingen anelse). Perfektum participium?
+* anet
+  anede
+  aner
+  aneet
+
+3. drøfte — обсуждать. Præteritum?
+* drøftede
+  drøftet
+  drøfter
+  drøfte
+
+4. rose — хвалить. Perfektum participium?
+* rost
+  roste
+  roser
+  roset
+
+5. konkurrere — соревноваться. Præteritum?
+* konkurrerede
+  konkurreret
+  konkurrerer
+  konkurrerte
+
+6. indlægge — госпитализировать. Perfektum participium?
+* indlagt
+  indlagde
+  indlægger
+  indlægget
+
+7. hive — тянуть, тащить. Præteritum?
+* hev
+  hevet
+  hiver
+  hivede
+
+8. anføre — указывать. Perfektum participium?
+* anført
+  anførte
+  anfører
+  anføret
+
+9. udlevere — выдавать. Præteritum?
+* udleverede
+  udleveret
+  udleverer
+  udleverte
+
+10. idømme — назначать (наказание). Perfektum participium?
+* idømt
+  idømte
+  idømmer
+  idømmet
+
+11. besætte — занимать, оккупировать. Præteritum?
+* besatte
+  besat
+  besætter
+  besættede
+
+12. afspejle — отражать. Perfektum participium?
+* afspejlet
+  afspejlede
+  afspejler
+  afspejlt
+
+13. designe — проектировать, дизайнить. Præteritum?
+* designede
+  designet
+  designer
+  designte
+
+14. instruere — инструктировать. Perfektum participium?
+* instrueret
+  instruerede
+  instruerer
+  instruert
+
+15. straffe — наказывать. Præteritum?
+* straffede
+  straffet
+  straffer
+  strafte
+
+16. snyde — обманывать. Perfektum participium?
+* snydt
+  snød
+  snyder
+  snydet
+
+17. strække — растягивать. Præteritum?
+* strakte
+  strakt
+  strækker
+  strækkede
+
+18. afskaffe — отменять. Perfektum participium?
+* afskaffet
+  afskaffede
+  afskaffer
+  afskaft
+
+19. svigte — подводить, предавать. Præteritum?
+* svigtede
+  svigtet
+  svigter
+  svigte
+
+20. forvandle — превращать. Perfektum participium?
+* forvandlet
+  forvandlede
+  forvandler
+  forvandlt
+
+21. genkende — узнавать. Præteritum?
+* genkendte
+  genkendt
+  genkender
+  genkendede
+
+22. insistere — настаивать. Perfektum participium?
+* insisteret
+  insisterede
+  insisterer
+  insistert
+
+23. blæse — дуть. Præteritum?
+* blæste
+  blæst
+  blæser
+  blæsede
+
+24. udbetale — выплачивать. Perfektum participium?
+* udbetalt
+  udbetalte
+  udbetaler
+  udbetalet
+
+25. forudse — предвидеть. Præteritum?
+* forudså
+  forudset
+  forudser
+  forudsede

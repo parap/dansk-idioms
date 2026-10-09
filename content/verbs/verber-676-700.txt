@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-676-700
+title: Verber 676–700
+
+--- questions ---
+1. vaske — мыть, стирать. Perfektum participium?
+* vasket
+  vaskede
+  vasker
+  vaskt
+
+2. medbringe — брать с собой. Præteritum?
+* medbragte
+  medbragt
+  medbringer
+  medbringede
+
+3. chokere — шокировать. Perfektum participium?
+* chokeret
+  chokerede
+  chokerer
+  chokert
+
+4. misbruge — злоупотреблять. Præteritum?
+* misbrugte
+  misbrugt
+  misbruger
+  misbrugede
+
+5. krænke — оскорблять, нарушать. Perfektum participium?
+* krænket
+  krænkede
+  krænker
+  krænkt
+
+6. regulere — регулировать. Præteritum?
+* regulerede
+  reguleret
+  regulerer
+  regulerte
+
+7. styrte — падать. Perfektum participium?
+* styrtet
+  styrtede
+  styrter
+  styrte
+
+8. appellere — обжаловать. Præteritum?
+* appellerede
+  appelleret
+  appellerer
+  appellerte
+
+9. indspille — записывать (альбом). Perfektum participium?
+* indspillet
+  indspillede
+  indspiller
+  indspilt
+
+10. fremlægge — представлять, излагать. Præteritum?
+* fremlagde
+  fremlagt
+  fremlægger
+  fremlæggede
+
+11. indsætte — вставлять. Perfektum participium?
+* indsat
+  indsatte
+  indsætter
+  indsættet
+
+12. bosætte — (bosætte sig) поселяться. Præteritum?
+* bosatte
+  bosat
+  bosætter
+  bosættede
+
+13. pille — ковырять. Perfektum participium?
+* pillet
+  pillede
+  piller
+  pilt
+
+14. kendetegne — характеризовать. Præteritum?
+* kendetegnede
+  kendetegnet
+  kendetegner
+  kendetegnte
+
+15. efterfølge — следовать за. Perfektum participium?
+* efterfulgt
+  efterfulgte
+  efterfølger
+  efterfølget
+
+16. tilslutte — подключать. Præteritum?
+* tilsluttede
+  tilsluttet
+  tilslutter
+  tilslutte
+
+17. interviewe — брать интервью. Perfektum participium?
+* interviewet
+  interviewede
+  interviewer
+  interviewt
+
+18. udskifte — заменять. Præteritum?
+* udskiftede
+  udskiftet
+  udskifter
+  udskifte
+
+19. kommunikere — общаться. Perfektum participium?
+* kommunikeret
+  kommunikerede
+  kommunikerer
+  kommunikert
+
+20. stole — (stole på) доверять. Præteritum?
+* stolede
+  stolet
+  stoler
+  stolte
+
+21. udspille — (udspille sig) разыгрываться. Perfektum participium?
+* udspillet
+  udspillede
+  udspiller
+  udspilt
+
+22. tøve — колебаться. Præteritum?
+* tøvede
+  tøvet
+  tøver
+  tøvte
+
+23. skrige — кричать, визжать. Perfektum participium?
+* skreget
+  skreg
+  skriger
+  skriget
+
+24. fatte — понимать, постигать. Præteritum?
+* fattede
+  fattet
+  fatter
+  fatte
+
+25. strømme — струиться, стекаться. Perfektum participium?
+* strømmet
+  strømmede
+  strømmer
+  strømt

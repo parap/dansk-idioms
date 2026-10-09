@@ -449,4 +449,44 @@ final class PassageDocumentTest extends TestCase
 
         (new PassageDocument())->parse(self::VIDEO . "\n--- text ---\nDer er ingen tekst.\n");
     }
+
+    private const VERBS = <<<'DOC'
+        kind: verbs
+        slug: verber-001-025
+        title: Verber 1–25
+
+        --- questions ---
+        1. gå (идти) — præteritum
+        * gik
+          gået
+          går
+          gåede
+        DOC;
+
+    /** A verb drill is questions about forms alone: nothing to read, no film, no exam blocks. */
+    public function testReadsAVerbDrill(): void
+    {
+        $doc = (new PassageDocument())->parse(self::VERBS);
+
+        self::assertSame('verbs', $doc['kind']);
+        self::assertNull($doc['body']);
+        self::assertArrayNotHasKey('youtube', $doc);
+        self::assertSame('gå (идти) — præteritum', $doc['items'][0]['prompt']);
+        self::assertArrayNotHasKey('section', $doc['items'][0]);
+    }
+
+    public function testRefusesABlockInAVerbDrill(): void
+    {
+        $this->expectException(InvalidPassage::class);
+        $this->expectExceptionMessageMatches('/block/');
+
+        (new PassageDocument())->parse(str_replace("--- questions ---\n", "--- questions ---\n[vaerdier]\n", self::VERBS));
+    }
+
+    public function testRefusesATextSectionInAVerbDrill(): void
+    {
+        $this->expectException(InvalidPassage::class);
+
+        (new PassageDocument())->parse(self::VERBS . "\n--- text ---\nDer er ingen tekst.\n");
+    }
 }

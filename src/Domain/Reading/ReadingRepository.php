@@ -16,10 +16,10 @@ use Throwable;
 final class ReadingRepository
 {
     /** Points per correct answer, as the exam awards them for each task type. */
-    private const POINTS = ['mc' => 2, 'insert' => 2, 'cloze' => 1, 'quiz' => 1, 'video' => 1];
+    private const POINTS = ['mc' => 2, 'insert' => 2, 'cloze' => 1, 'quiz' => 1, 'video' => 1, 'verbs' => 1];
 
     /** Task types that are questions alone, with nothing to read before answering. */
-    private const TEXTLESS_KINDS = ['quiz', 'video'];
+    private const TEXTLESS_KINDS = ['quiz', 'video', 'verbs'];
 
     /** Only the knowledge paper divides its questions into the exam's blocks. */
     private const BLOCK_KINDS = ['quiz'];
@@ -99,13 +99,37 @@ final class ReadingRepository
      */
     public function publishedVideos(): array
     {
+        return $this->publishedSets('video');
+    }
+
+    /**
+     * The verb drills on offer, each with the number of questions a learner will be asked.
+     *
+     * @return list<array{slug:string,title:string,questions:int}>
+     */
+    public function publishedVerbSets(): array
+    {
+        return array_map(
+            static fn(array $r): array => ['slug' => $r['slug'], 'title' => $r['title'], 'questions' => $r['questions']],
+            $this->publishedSets('verbs')
+        );
+    }
+
+    /**
+     * The published passages of one textless kind, each with its servable question count.
+     *
+     * @return list<array{slug:string,title:string,youtube:?string,questions:int}>
+     */
+    private function publishedSets(string $kind): array
+    {
         $rows = Db::fetchAll(
             "SELECT p.slug, p.title, p.youtube_id AS youtube, COUNT(i.id) AS questions
                FROM reading_passages p
                JOIN reading_items i ON i.passage_id = p.id AND i.is_active = 1 AND i.is_flagged = 0
-              WHERE p.is_published = 1 AND p.kind = 'video'
+              WHERE p.is_published = 1 AND p.kind = ?
               GROUP BY p.id, p.slug, p.title, p.youtube_id
-              ORDER BY p.id"
+              ORDER BY p.id",
+            [$kind]
         );
 
         return array_map(static fn(array $r): array => array_merge($r, ['questions' => (int) $r['questions']]), $rows);

@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-551-575
+title: Verber 551–575
+
+--- questions ---
+1. vågne — просыпаться. Præteritum?
+* vågnede
+  vågnet
+  vågner
+  vågnte
+
+2. slukke — гасить, выключать. Perfektum participium?
+* slukket
+  slukkede
+  slukker
+  slukt
+
+3. græde — плакать. Præteritum?
+* græd
+  grædt
+  græder
+  grædede
+
+4. overstå — пережить, преодолеть. Perfektum participium?
+* overstået
+  overstod
+  overstår
+  overståt
+
+5. efterlyse — разыскивать (объявить в розыск). Præteritum?
+* efterlyste
+  efterlyst
+  efterlyser
+  efterlysede
+
+6. aflyse — отменять. Perfektum participium?
+* aflyst
+  aflyste
+  aflyser
+  aflyset
+
+7. opretholde — поддерживать, сохранять. Præteritum?
+* opretholdt
+  opretholder
+  opretholdede
+  opretholde
+
+8. hoppe — прыгать. Perfektum participium?
+* hoppet
+  hoppede
+  hopper
+  hopt
+
+9. veje — весить. Præteritum?
+* vejede
+  vejet
+  vejer
+  vejte
+
+10. afhænge — зависеть. Perfektum participium?
+* afhængt
+  afhang
+  afhænger
+  afhænget
+
+11. cykle — ездить на велосипеде. Præteritum?
+* cyklede
+  cyklet
+  cykler
+  cyklte
+
+12. afgive — отдавать (голос), сдавать. Perfektum participium?
+* afgivet
+  afgav
+  afgiver
+  afgivt
+
+13. antyde — намекать. Præteritum?
+* antydede
+  antydet
+  antyder
+  antydte
+
+14. citere — цитировать. Perfektum participium?
+* citeret
+  citerede
+  citerer
+  citert
+
+15. påtage — (påtage sig) брать на себя. Præteritum?
+* påtog
+  påtaget
+  påtager
+  påtagede
+
+16. indkalde — созывать, вызывать. Perfektum participium?
+* indkaldt
+  indkaldte
+  indkalder
+  indkaldet
+
+17. argumentere — аргументировать. Præteritum?
+* argumenterede
+  argumenteret
+  argumenterer
+  argumenterte
+
+18. lyse — светить. Perfektum participium?
+* lyst
+  lyste
+  lyser
+  lyset
+
+19. praktisere — практиковать. Præteritum?
+* praktiserede
+  praktiseret
+  praktiserer
+  praktiserte
+
+20. forene — объединять. Perfektum participium?
+* forenet
+  forenede
+  forener
+  forent
+
+21. forme — формировать, лепить. Præteritum?
+* formede
+  formet
+  former
+  formte
+
+22. forandre — изменять. Perfektum participium?
+* forandret
+  forandrede
+  forandrer
+  forandrt
+
+23. grundlægge — основывать. Præteritum?
+* grundlagde
+  grundlagt
+  grundlægger
+  grundlæggede
+
+24. svække — ослаблять. Perfektum participium?
+* svækket
+  svækkede
+  svækker
+  svækt
+
+25. integrere — интегрировать. Præteritum?
+* integrerede
+  integreret
+  integrerer
+  integrerte

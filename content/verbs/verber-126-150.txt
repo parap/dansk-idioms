@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-126-150
+title: Verber 126–150
+
+--- questions ---
+1. afvise — отклонять, отказывать. Perfektum participium?
+* afvist
+  afviste
+  afviser
+  afviset
+
+2. dele — делить(ся). Præteritum?
+* delte
+  delt
+  deler
+  delede
+
+3. skifte — менять, сменять. Perfektum participium?
+* skiftet
+  skiftede
+  skifter
+  skifte
+
+4. støtte — поддерживать. Præteritum?
+* støttede
+  støttet
+  støtter
+  støtte
+
+5. regne — считать (вычислять). Perfektum participium?
+* regnet
+  regnede
+  regner
+  regnt
+
+6. gennemføre — проводить, осуществлять. Præteritum?
+* gennemførte
+  gennemført
+  gennemfører
+  gennemførede
+
+7. forlade — покидать. Perfektum participium?
+* forladt
+  forlod
+  forlader
+  forladet
+
+8. nævne — упоминать. Præteritum?
+* nævnte
+  nævnt
+  nævner
+  nævne
+
+9. understrege — подчёркивать. Perfektum participium?
+* understreget
+  understregede
+  understreger
+  understregt
+
+10. indgå — заключать (договор). Præteritum?
+* indgik
+  indgået
+  indgår
+  indgåte
+
+11. klare — справляться. Perfektum participium?
+* klaret
+  klarede
+  klarer
+  klart
+
+12. kigge — смотреть, глядеть. Præteritum?
+* kiggede
+  kigget
+  kigger
+  kigte
+
+13. fungere — функционировать, работать. Perfektum participium?
+* fungeret
+  fungerede
+  fungerer
+  fungert
+
+14. mærke — замечать, ощущать. Præteritum?
+* mærkede
+  mærket
+  mærker
+  mærkte
+
+15. hente — забирать, приносить. Perfektum participium?
+* hentet
+  hentede
+  henter
+  hente
+
+16. stoppe — останавливать(ся). Præteritum?
+* stoppede
+  stoppet
+  stopper
+  stopte
+
+17. melde — сообщать. Perfektum participium?
+* meldt
+  meldte
+  melder
+  meldet
+
+18. levere — поставлять, доставлять. Præteritum?
+* leverede
+  leveret
+  leverer
+  leverte
+
+19. pege — указывать. Perfektum participium?
+* peget
+  pegede
+  peger
+  pegt
+
+20. drive — вести (дело). Præteritum?
+* drev
+  drevet
+  driver
+  drivede
+
+21. beskrive — описывать. Perfektum participium?
+* beskrevet
+  beskrev
+  beskriver
+  beskrivet
+
+22. bære — нести, носить. Præteritum?
+* bar
+  båret
+  bærer
+  bærede
+
+23. undgå — избегать. Perfektum participium?
+* undgået
+  undgik
+  undgår
+  undgåt
+
+24. overtage — перенимать, брать на себя. Præteritum?
+* overtog
+  overtaget
+  overtager
+  overtagte
+
+25. lide — страдать. Perfektum participium?
+* lidt
+  led
+  lider
+  lidet

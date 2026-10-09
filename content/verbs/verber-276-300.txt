@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-276-300
+title: Verber 276–300
+
+--- questions ---
+1. investere — инвестировать. Perfektum participium?
+* investeret
+  investerede
+  investerer
+  investert
+
+2. drikke — пить. Præteritum?
+* drak
+  drukket
+  drikker
+  drikkede
+
+3. afslutte — завершать. Perfektum participium?
+* afsluttet
+  afsluttede
+  afslutter
+  afslutte
+
+4. oprette — создавать, учреждать. Præteritum?
+* oprettede
+  oprettet
+  opretter
+  oprette
+
+5. fremgå — следовать (из), явствовать. Perfektum participium?
+* fremgået
+  fremgik
+  fremgår
+  fremgåt
+
+6. stjæle — красть. Præteritum?
+* stjal
+  stjålet
+  stjæler
+  stjælede
+
+7. påpege — указывать (на). Perfektum participium?
+* påpeget
+  påpegede
+  påpeger
+  påpegt
+
+8. rumme — вмещать. Præteritum?
+* rummede
+  rummet
+  rummer
+  rumte
+
+9. stikke — колоть. Perfektum participium?
+* stukket
+  stak
+  stikker
+  stikket
+
+10. brænde — гореть. Præteritum?
+* brændte
+  brændt
+  brænder
+  brændede
+
+11. tyde — (tyde på) указывать на. Perfektum participium?
+* tydet
+  tydede
+  tyder
+  tydt
+
+12. lytte — слушать. Præteritum?
+* lyttede
+  lyttet
+  lytter
+  lytte
+
+13. kritisere — критиковать. Perfektum participium?
+* kritiseret
+  kritiserede
+  kritiserer
+  kritisert
+
+14. udnytte — использовать (выгодно). Præteritum?
+* udnyttede
+  udnyttet
+  udnytter
+  udnytte
+
+15. udkomme — выходить (о книге). Perfektum participium?
+* udkommet
+  udkom
+  udkommer
+  udkomt
+
+16. forbedre — улучшать. Præteritum?
+* forbedrede
+  forbedret
+  forbedrer
+  forbedrte
+
+17. løfte — поднимать. Perfektum participium?
+* løftet
+  løftede
+  løfter
+  løfte
+
+18. forhindre — предотвращать, мешать. Præteritum?
+* forhindrede
+  forhindret
+  forhindrer
+  forhindrte
+
+19. meddele — сообщать. Perfektum participium?
+* meddelt
+  meddelte
+  meddeler
+  meddelet
+
+20. medføre — влечь за собой. Præteritum?
+* medførte
+  medført
+  medfører
+  medførede
+
+21. beskytte — защищать. Perfektum participium?
+* beskyttet
+  beskyttede
+  beskytter
+  beskytte
+
+22. anerkende — признавать. Præteritum?
+* anerkendte
+  anerkendt
+  anerkender
+  anerkendede
+
+23. måle — измерять. Perfektum participium?
+* målt
+  målte
+  måler
+  målet
+
+24. henvise — ссылаться, направлять. Præteritum?
+* henviste
+  henvist
+  henviser
+  henvisede
+
+25. bekymre — беспокоить. Perfektum participium?
+* bekymret
+  bekymrede
+  bekymrer
+  bekymrt

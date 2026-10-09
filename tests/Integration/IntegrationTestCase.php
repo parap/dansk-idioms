@@ -17,19 +17,23 @@ use PHPUnit\Framework\TestCase;
  */
 abstract class IntegrationTestCase extends TestCase
 {
-    protected const TEST_DB = 'dansk_test';
+    /** The scratch schema; a second runner beside the developer's names its own. */
+    protected static function testDb(): string
+    {
+        return getenv('DANSK_TEST_DB') ?: 'dansk_test';
+    }
 
     public static function setUpBeforeClass(): void
     {
-        Config::override(['db' => ['name' => self::TEST_DB]]);
+        Config::override(['db' => ['name' => self::testDb()]]);
         Db::reset();
 
         // Built from db/migrations, not a hand-maintained copy: a schema that has
         // drifted from production would make these tests worse than useless.
         $server = Db::serverPdo();
-        $server->exec('DROP DATABASE IF EXISTS ' . self::TEST_DB);
+        $server->exec('DROP DATABASE IF EXISTS ' . self::testDb());
         $server->exec(
-            'CREATE DATABASE ' . self::TEST_DB
+            'CREATE DATABASE ' . self::testDb()
             . ' CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci'
         );
 
@@ -48,7 +52,7 @@ abstract class IntegrationTestCase extends TestCase
 
     public static function tearDownAfterClass(): void
     {
-        Db::serverPdo()->exec('DROP DATABASE IF EXISTS ' . self::TEST_DB);
+        Db::serverPdo()->exec('DROP DATABASE IF EXISTS ' . self::testDb());
         Db::reset();
         self::$tables = null;
     }

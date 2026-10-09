@@ -38,6 +38,11 @@ final class ShellTest extends TestCase
         self::assertSame('/video.html', Shell::forPath('/video', false));
     }
 
+    public function testTheVerbPageHasItsOwnDocument(): void
+    {
+        self::assertSame('/verbs.html', Shell::forPath('/verbs', false));
+    }
+
     public function testATrailingSlashIsTheSameAddress(): void
     {
         self::assertSame('/read.html', Shell::forPath('/read/', false));

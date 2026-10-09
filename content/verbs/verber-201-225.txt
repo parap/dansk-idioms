@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-201-225
+title: Verber 201–225
+
+--- questions ---
+1. sørge — заботиться (sørge for). Præteritum?
+* sørgede
+  sørget
+  sørger
+  sørgte
+
+2. optræde — выступать. Perfektum participium?
+* optrådt
+  optrådte
+  optræder
+  optrædet
+
+3. dømme — судить. Præteritum?
+* dømte
+  dømt
+  dømmer
+  dømmede
+
+4. udtale — произносить. Perfektum participium?
+* udtalt
+  udtalte
+  udtaler
+  udtalet
+
+5. overveje — обдумывать. Præteritum?
+* overvejede
+  overvejet
+  overvejer
+  overvejte
+
+6. tvinge — заставлять. Perfektum participium?
+* tvunget
+  tvang
+  tvinger
+  tvinget
+
+7. love — обещать. Præteritum?
+* lovede
+  lovet
+  lover
+  lovte
+
+8. presse — давить, прессовать. Perfektum participium?
+* presset
+  pressede
+  presser
+  prest
+
+9. tegne — рисовать. Præteritum?
+* tegnede
+  tegnet
+  tegner
+  tegnte
+
+10. producere — производить. Perfektum participium?
+* produceret
+  producerede
+  producerer
+  producert
+
+11. erkende — признавать. Præteritum?
+* erkendte
+  erkendt
+  erkender
+  erkendede
+
+12. nyde — наслаждаться. Perfektum participium?
+* nydt
+  nød
+  nyder
+  nydet
+
+13. indeholde — содержать. Præteritum?
+* indeholdt
+  indeholder
+  indeholdede
+  indeholde
+
+14. spare — экономить, копить. Perfektum participium?
+* sparet
+  sparede
+  sparer
+  spart
+
+15. afsløre — разоблачать, раскрывать. Præteritum?
+* afslørede
+  afsløret
+  afslører
+  afslørte
+
+16. ryge — курить. Perfektum participium?
+* røget
+  røg
+  ryger
+  ryget
+
+17. indlede — начинать. Præteritum?
+* indledte
+  indledt
+  indleder
+  indlede
+
+18. bidrage — вносить вклад. Perfektum participium?
+* bidraget
+  bidrog
+  bidrager
+  bidragt
+
+19. foreslå — предлагать. Præteritum?
+* foreslog
+  foreslået
+  foreslår
+  foreslåte
+
+20. opføre — возводить. Perfektum participium?
+* opført
+  opførte
+  opfører
+  opføret
+
+21. diskutere — обсуждать, спорить. Præteritum?
+* diskuterede
+  diskuteret
+  diskuterer
+  diskuterte
+
+22. rykke — двигать(ся). Perfektum participium?
+* rykket
+  rykkede
+  rykker
+  rykt
+
+23. opfordre — призывать. Præteritum?
+* opfordrede
+  opfordret
+  opfordrer
+  opfordrte
+
+24. opdage — обнаруживать. Perfektum participium?
+* opdaget
+  opdagede
+  opdager
+  opdagt
+
+25. betragte — рассматривать, считать. Præteritum?
+* betragtede
+  betragtet
+  betragter
+  betragte

@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-651-675
+title: Verber 651–675
+
+--- questions ---
+1. plante — сажать (растения). Præteritum?
+* plantede
+  plantet
+  planter
+  plante
+
+2. tåle — терпеть, выносить. Perfektum participium?
+* tålt
+  tålte
+  tåler
+  tålet
+
+3. annoncere — объявлять. Præteritum?
+* annoncerede
+  annonceret
+  annoncerer
+  annoncerte
+
+4. forsyne — снабжать. Perfektum participium?
+* forsynet
+  forsynede
+  forsyner
+  forsynt
+
+5. tilsætte — добавлять (в смесь). Præteritum?
+* tilsatte
+  tilsat
+  tilsætter
+  tilsættede
+
+6. blokere — блокировать. Perfektum participium?
+* blokeret
+  blokerede
+  blokerer
+  blokert
+
+7. formode — предполагать. Præteritum?
+* formodede
+  formodet
+  formoder
+  formodte
+
+8. splitte — раскалывать. Perfektum participium?
+* splittet
+  splittede
+  splitter
+  splitte
+
+9. uddybe — углублять, уточнять. Præteritum?
+* uddybede
+  uddybet
+  uddyber
+  uddybte
+
+10. tvivle — сомневаться. Perfektum participium?
+* tvivlet
+  tvivlede
+  tvivler
+  tvivlt
+
+11. provokere — провоцировать. Præteritum?
+* provokerede
+  provokeret
+  provokerer
+  provokerte
+
+12. øve — (øve sig) упражняться. Perfektum participium?
+* øvet
+  øvede
+  øver
+  øveet
+
+13. løslade — освобождать. Præteritum?
+* løslod
+  løsladt
+  løslader
+  løsladede
+
+14. restere — оставаться (недостающее). Perfektum participium?
+* resteret
+  resterede
+  resterer
+  restert
+
+15. regere — править. Præteritum?
+* regerede
+  regeret
+  regerer
+  regerte
+
+16. udstede — выдавать (документ). Perfektum participium?
+* udstedt
+  udstedte
+  udsteder
+  udstedet
+
+17. besvare — отвечать (на). Præteritum?
+* besvarede
+  besvaret
+  besvarer
+  besvarte
+
+18. bage — печь. Perfektum participium?
+* bagt
+  bagte
+  bager
+  bage
+
+19. bøje — сгибать. Præteritum?
+* bøjede
+  bøjet
+  bøjer
+  bøjte
+
+20. blomstre — цвести. Perfektum participium?
+* blomstret
+  blomstrede
+  blomstrer
+  blomstrt
+
+21. protestere — протестовать. Præteritum?
+* protesterede
+  protesteret
+  protesterer
+  protesterte
+
+22. udbygge — расширять, достраивать. Perfektum participium?
+* udbygget
+  udbyggede
+  udbygger
+  udbygt
+
+23. genere — мешать, беспокоить. Præteritum?
+* generede
+  generet
+  generer
+  generte
+
+24. omdanne — преобразовывать. Perfektum participium?
+* omdannet
+  omdannede
+  omdanner
+  omdant
+
+25. vandre — бродить, ходить в поход. Præteritum?
+* vandrede
+  vandret
+  vandrer
+  vandrte

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#c8102e">
+<title>Verber</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#fff; --ink:#14171c; --muted:#6b7280; --line:#e0e4ea;
+    --accent:#c8102e; --accent-ink:#fff; --ok:#127a4a; --okbg:#e7f6ee;
+    --bad:#b3261e; --badbg:#fdecea; --chip:#eef1f5; --shadow:0 1px 2px rgba(20,23,28,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#121419;--card:#1b1e24;--ink:#e8ebf0;--muted:#98a1b0;--line:#2b3039;
+      --accent:#ff5a6e;--accent-ink:#1b1e24;--ok:#4cc38a;--okbg:#14301f;
+      --bad:#ff6b61;--badbg:#331b19;--chip:#232830;--shadow:none;}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:18px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  .wrap{max-width:760px;margin:0 auto;padding:20px 16px 64px}
+  header{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+  .brand{font-weight:700;letter-spacing:-.02em;font-size:1.05rem;color:inherit;
+    text-decoration:none;cursor:pointer}
+  .brand:hover span{text-decoration:underline}
+  .brand span{color:var(--accent)}
+  header h1{font-size:1.2rem;margin:0}
+  .spacer{flex:1}
+  .lang{background:none;border:none;color:var(--muted);font:inherit;font-size:.85rem;
+    padding:.2rem .35rem;cursor:pointer;border-radius:5px}
+  .lang[aria-pressed=true]{color:var(--ink);font-weight:600;background:var(--chip)}
+  .langs{display:inline-flex;gap:.1rem}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:18px;box-shadow:var(--shadow);margin-bottom:16px}
+  .card h2{font-size:1.05rem;margin:0 0 .6rem}
+  .muted{color:var(--muted)}
+  #sets{list-style:none;margin:0;padding:0;display:grid;gap:10px;
+    grid-template-columns:repeat(auto-fill,minmax(10rem,1fr))}
+  #sets a{font-weight:600}
+  #sets .n{display:block;color:var(--muted);font-size:.85rem}
+  .q{margin:0 0 18px}
+  .q:last-child{margin:0}
+  .q p{margin:0 0 .45rem;font-weight:600}
+  .opts{display:grid;gap:8px}
+  .opt{display:block;width:100%;text-align:left;font:inherit;padding:.6rem .8rem;
+    border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--ink);
+    cursor:pointer;min-height:44px}
+  .opt:hover:not([disabled]){border-color:var(--accent)}
+  .opt[disabled]{cursor:default}
+  .opt.right{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+  .opt.wrong{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+  #score{font-weight:600}
+  .cta{display:flex;align-items:center;justify-content:space-between;gap:.8rem;
+    padding:.85rem 1.1rem;border:1px solid var(--line);border-radius:10px;background:var(--chip);
+    color:var(--ink);font-weight:600;text-decoration:none;transition:border-color .12s,background .12s}
+  .cta:hover,.cta:focus-visible{border-color:var(--accent)}
+  .cta b{color:var(--accent);font-size:1.15rem}
+  .cta.back{display:inline-flex;justify-content:flex-start;margin:0 0 14px}
+  .done{margin:.8rem 0 0}
+  a{color:var(--accent)}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/">Dansk <span>idiomer</span></a>
+    <h1 id="title"></h1>
+    <span class="spacer"></span>
+    <span id="langs" class="langs"></span>
+  </header>
+  <div id="view"></div>
+</div>
+
+<script type="module">
+import { $, esc, t, api, registerStrings, currentLang, setLang as applyLang } from '/shared.js';
+
+const STRINGS = {
+  ru: {
+    title: 'Глаголы',
+    intro: '700 самых употребительных датских глаголов, по 25 в наборе, от частых к редким. В каждом вопросе — форма прошедшего времени или причастие.',
+    questions: {one: '{n} вопрос', few: '{n} вопроса', many: '{n} вопросов', other: '{n} вопроса'},
+    empty: 'Наборов пока нет.',
+    missing: 'Такого набора нет.',
+    back: 'Все наборы',
+    score: 'Верно',
+    done: 'Все вопросы отвечены.',
+    error: 'Не удалось загрузить. Попробуйте обновить страницу.',
+  },
+  en: {
+    title: 'Verbs',
+    intro: 'The 700 most frequent Danish verbs, 25 to a set, from common to rare. Each question asks for the past tense or the past participle.',
+    questions: {one: '{n} question', other: '{n} questions'},
+    empty: 'No sets yet.',
+    missing: 'There is no such set.',
+    back: 'All sets',
+    score: 'Correct',
+    done: 'Every question is answered.',
+    error: 'Could not load. Try reloading the page.',
+  },
+  uk: {
+    title: 'Дієслова',
+    intro: '700 найуживаніших данських дієслів, по 25 у наборі, від частих до рідших. У кожному питанні — форма минулого часу або дієприкметник.',
+    questions: {one: '{n} питання', few: '{n} питання', many: '{n} питань', other: '{n} питання'},
+    empty: 'Наборів поки немає.',
+    missing: 'Такого набору немає.',
+    back: 'Усі набори',
+    score: 'Правильно',
+    done: 'На всі питання дано відповідь.',
+    error: 'Не вдалося завантажити. Спробуйте оновити сторінку.',
+  },
+  da: {
+    title: 'Verber',
+    intro: 'De 700 mest brugte danske verber, 25 i hvert sæt, fra de hyppigste til de sjældnere. Hvert spørgsmål gælder præteritum eller perfektum participium.',
+    questions: {one: '{n} spørgsmål', other: '{n} spørgsmål'},
+    empty: 'Der er ingen sæt endnu.',
+    missing: 'Det sæt findes ikke.',
+    back: 'Alle sæt',
+    score: 'Rigtige',
+    done: 'Alle spørgsmål er besvaret.',
+    error: 'Kunne ikke hente siden. Prøv at genindlæse den.',
+  },
+};
+registerStrings(STRINGS);
+
+const slug = new URLSearchParams(location.search).get('s');
+let sets = null;      // the list, once fetched
+let round = null;     // the session for one set, once started
+let missing = false;
+let failed = false;
+const marks = {};     // position -> {chosen, correct}
+
+function paintLanguages() {
+  const box = $('#langs');
+  box.innerHTML = Object.keys(STRINGS).map(code =>
+    `<button class="lang" data-lang="${code}" aria-pressed="${code === currentLang()}"
+      >${code.toUpperCase()}</button>`).join('');
+  box.querySelectorAll('.lang').forEach(b => b.onclick = () => { applyLang(b.dataset.lang); render(); });
+}
+
+function listView() {
+  if (sets.length === 0) return `<div class="card"><p class="muted" style="margin:0">${esc(t('empty'))}</p></div>`;
+  return `<div class="card">
+      <p class="muted" style="margin:0 0 .9rem">${esc(t('intro'))}</p>
+      <ul id="sets">
+        ${sets.map(f => `<li>
+          <a href="/verbs?s=${encodeURIComponent(f.slug)}">${esc(f.title)}</a>
+          <span class="n">${esc(t('questions', f.questions).replace('{n}', f.questions))}</span>
+        </li>`).join('')}
+      </ul>
+    </div>`;
+}
+
+function setView() {
+  const set = round.passages[0];
+  const right = Object.values(marks).filter(m => m.chosen === m.correct).length;
+  const answered = Object.keys(marks).length;
+  return `<a class="cta back" href="/verbs"><b aria-hidden="true">←</b><span>${esc(t('back'))}</span></a>
+    <h2 style="margin:0 0 12px">${esc(set.title)}</h2>
+    <div class="card">
+      ${round.items.map(item => {
+        const m = marks[item.position];
+        return `<div class="q" data-pos="${item.position}">
+          <p>${item.position}. ${esc(item.prompt)}</p>
+          <div class="opts">${item.options.map(o => {
+            const cls = !m ? '' : o.index === m.correct ? 'right' : o.index === m.chosen ? 'wrong' : '';
+            return `<button class="opt ${cls}" data-i="${o.index}" ${m ? 'disabled' : ''}>${esc(o.text)}</button>`;
+          }).join('')}</div>
+        </div>`;
+      }).join('')}
+      <p class="done"><span class="muted">${esc(t('score'))}:</span>
+        <span id="score">${right} / ${round.items.length}</span></p>
+      ${answered === round.items.length ? `<p class="muted" style="margin:.2rem 0 0">${esc(t('done'))}</p>` : ''}
+    </div>`;
+}
+
+async function answer(position, chosen) {
+  if (marks[position]) return;
+  const r = await api(`/reading/sessions/${round.session_id}/answers`,
+    {method: 'POST', body: {position, chosen_index: chosen}});
+  marks[position] = {chosen, correct: r.correct_index};
+  render();
+  if (Object.keys(marks).length === round.items.length) {
+    api(`/reading/sessions/${round.session_id}/submit`, {method: 'POST'}).catch(() => {});
+  }
+}
+
+function render() {
+  document.documentElement.lang = currentLang();
+  $('#title').textContent = t('title');
+  paintLanguages();
+
+  const view = $('#view');
+  if (failed) { view.innerHTML = `<div class="card"><p style="margin:0">${esc(t('error'))}</p></div>`; return; }
+  if (missing) {
+    view.innerHTML = `<div class="card" id="missing"><p style="margin:0 0 .6rem">${esc(t('missing'))}</p>
+      <a class="cta back" href="/verbs"><b aria-hidden="true">←</b><span>${esc(t('back'))}</span></a></div>`;
+    return;
+  }
+  if (slug === null && sets) { view.innerHTML = listView(); return; }
+  if (slug !== null && round) {
+    view.innerHTML = setView();
+    view.querySelectorAll('.opt:not([disabled])').forEach(b => b.onclick = () =>
+      answer(Number(b.closest('.q').dataset.pos), Number(b.dataset.i)).catch(() => { failed = true; render(); }));
+  }
+}
+
+async function load() {
+  try {
+    if (slug === null) sets = (await api('/verbs')).sets;
+    else round = await api('/verbs/sessions', {method: 'POST', body: {slug}});
+  } catch (e) {
+    if (e.status === 404) missing = true; else failed = true;
+  }
+  render();
+}
+
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
+render();
+load();
+</script>
+</body>
+</html>

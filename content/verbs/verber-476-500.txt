@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-476-500
+title: Verber 476–500
+
+--- questions ---
+1. forpligte — обязывать. Perfektum participium?
+* forpligtet
+  forpligtede
+  forpligter
+  forpligte
+
+2. råde — (råde over) располагать. Præteritum?
+* rådede
+  rådet
+  råder
+  rådte
+
+3. indebære — подразумевать, влечь. Perfektum participium?
+* indebåret
+  indebar
+  indebærer
+  indebæret
+
+4. klage — жаловаться. Præteritum?
+* klagede
+  klaget
+  klager
+  klagte
+
+5. bekæmpe — бороться с. Perfektum participium?
+* bekæmpet
+  bekæmpede
+  bekæmper
+  bekæmpt
+
+6. overføre — переводить (деньги), передавать. Præteritum?
+* overførte
+  overført
+  overfører
+  overførede
+
+7. resultere — приводить (к). Perfektum participium?
+* resulteret
+  resulterede
+  resulterer
+  resultert
+
+8. spænde — натягивать. Præteritum?
+* spændte
+  spændt
+  spænder
+  spændede
+
+9. definere — определять. Perfektum participium?
+* defineret
+  definerede
+  definerer
+  definert
+
+10. opstille — выставлять (кандидатуру), расставлять. Præteritum?
+* opstillede
+  opstillet
+  opstiller
+  opstilte
+
+11. skærpe — ужесточать, обострять. Perfektum participium?
+* skærpet
+  skærpede
+  skærper
+  skærpt
+
+12. lokke — заманивать. Præteritum?
+* lokkede
+  lokket
+  lokker
+  lokte
+
+13. tilbringe — проводить (время). Perfektum participium?
+* tilbragt
+  tilbragte
+  tilbringer
+  tilbringet
+
+14. gennemgå — просматривать. Præteritum?
+* gennemgik
+  gennemgået
+  gennemgår
+  gennemgåte
+
+15. passere — проходить мимо. Perfektum participium?
+* passeret
+  passerede
+  passerer
+  passert
+
+16. standse — останавливать(ся). Præteritum?
+* standsede
+  standset
+  standser
+  standste
+
+17. rydde — убирать (rydde op). Perfektum participium?
+* ryddet
+  ryddede
+  rydder
+  rydt
+
+18. respektere — уважать. Præteritum?
+* respekterede
+  respekteret
+  respekterer
+  respekterte
+
+19. glide — скользить. Perfektum participium?
+* gledet
+  gled
+  glider
+  glidet
+
+20. svinge — качать(ся). Præteritum?
+* svingede
+  svinget
+  svinger
+  svingte
+
+21. demonstrere — демонстрировать. Perfektum participium?
+* demonstreret
+  demonstrerede
+  demonstrerer
+  demonstrert
+
+22. hælde — наливать. Præteritum?
+* hældte
+  hældt
+  hælder
+  hælde
+
+23. underholde — развлекать. Perfektum participium?
+* underholdt
+  underholder
+  underholdet
+  underholde
+
+24. pakke — паковать. Præteritum?
+* pakkede
+  pakket
+  pakker
+  pakte
+
+25. klæde — (klæde sig på) одеваться. Perfektum participium?
+* klædt
+  klædte
+  klæder
+  klædet
