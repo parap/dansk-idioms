@@ -16,6 +16,7 @@ that silently fails to apply leaves the suite running against unmodified code, a
     python3 bin/prove-tests-red.py            # every fault
     python3 bin/prove-tests-red.py 94-99 12   # only those, while working on them
     python3 bin/prove-tests-red.py --anchors  # seconds: does the list still fit the code
+    python3 bin/prove-tests-red.py --changed  # the faults in files this branch changed
 
 A fault may name the tests that must each go red on their own, written after the suite as
 `unit:testOne,testTwo`. A rule stated in one place is broken in one place, so a whole-suite
@@ -23,49 +24,25 @@ run reports the first door that noticed and says nothing about the others -- inc
 door whose test has since been deleted. `--anchors` checks that every anchor still names
 exactly one site and every named witness still exists, and deploy.sh calls it.
 
-Restores every file it touches, including on failure and on a kill it cannot catch.
+Faults are injected into a copy of the tree, served and tested by the `mutants` container,
+so the working tree, the developer's site and the developer's test schema are never
+touched: commit, edit or run the suite while it works.
 """
 
-import subprocess, sys, pathlib, shutil, filecmp, tempfile, os, signal, atexit, json
+import subprocess, sys, pathlib, shutil, filecmp, tempfile, os, atexit
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
-# A fault lives in a source file for as long as one suite takes to run. Signal handlers
-# cover an interrupt, but SIGKILL, a power cut or a closed container answer to nobody --
-# and what survives is a deliberately broken line in the working tree with nothing to say
-# it is there. So the injection is recorded on disk before it happens, alongside the
-# untouched copy, and the next run puts the file back before doing anything else.
-STATE = ROOT / ".prove-tests-red"
-LEDGER = STATE / "pending.json"
+# The copy the faults go into. It sits inside the project so the mutants container can
+# mount it, and is gitignored. A run killed outright leaves a fault there and nowhere else;
+# the next run's sync puts the file back.
+TREE = ROOT / ".prove-tests-red" / "tree"
+COPY_EXCLUDES = [".git/", ".prove-tests-red/", ".claude/", ".idea/", "backups/", ".phpunit.cache/",
+                 "storage/exports/*", "storage/logs/*", "storage/indfoedsret/*", "__pycache__/"]
 
-def record_injection(path, backup):
-    STATE.mkdir(exist_ok=True)
-    kept = STATE / "original"
-    shutil.copy2(backup, kept)
-    LEDGER.write_text(json.dumps({
-        "path": str(path.relative_to(ROOT)), "original": kept.name
-    }), encoding='utf-8')
-
-def clear_injection():
-    LEDGER.unlink(missing_ok=True)
-    (STATE / "original").unlink(missing_ok=True)
-
-def recover_injection():
-    """Puts back a file left injected by a run that was killed outright."""
-    if not LEDGER.is_file():
-        return
-    note = json.loads(LEDGER.read_text(encoding='utf-8'))
-    target, kept = ROOT / note["path"], STATE / note["original"]
-    if kept.is_file():
-        shutil.copy2(kept, target)
-        print(f"  a previous run was killed mid-injection — {note['path']} restored\n")
-    else:
-        print(f"  a previous run was killed mid-injection and the copy of "
-              f"{note['path']} is gone. Restore it from git before trusting this run.\n")
-        sys.exit(1)
-    clear_injection()
-
-recover_injection()
+# Where the mutants container serves the copy, for the interface checks.
+MUTANTS_BASE = "http://localhost:" + os.environ.get("MUTANTS_PORT", "8083")
+MUTANTS_ADMIN_BASE = "http://localhost:" + os.environ.get("MUTANTS_ADMIN_PORT", "8084")
 
 FAULTS = [
  (1,"EntrySegmenter always-head","src/Import/EntrySegmenter.php",
@@ -651,9 +628,9 @@ FAULTS = [
   "",
   "unit:testTheVerbPageHasItsOwnDocument"),
 ]
-def phpunit(*args):
+def phpunit(*args, service="mutants"):
     return subprocess.run(
-        ["docker-compose","exec","-T","app","vendor/bin/phpunit",*args],
+        ["docker-compose","--profile","mutants","exec","-T",service,"vendor/bin/phpunit",*args],
         cwd=ROOT, capture_output=True, text=True,
     )
 
@@ -671,13 +648,15 @@ def run(suite):
     # Without them a rendering fault -- an escape that stopped escaping, a button that
     # stopped disabling -- is invisible to every suite in the repo.
     if suite == "ui":
-        r = subprocess.run([sys.executable, str(ROOT/"bin"/"ui-tests.py")],
+        r = subprocess.run([sys.executable, str(ROOT/"bin"/"ui-tests.py"),
+                            "--base", MUTANTS_BASE, "--admin-base", MUTANTS_ADMIN_BASE],
                            cwd=ROOT, capture_output=True, text=True)
         return r.returncode == 0, None
 
     name, _, witnesses = suite.partition(':')
     if witnesses == '':
-        return phpunit("--testsuite", name).returncode == 0, None
+        # The first failure answers the question; only a surviving fault runs to the end.
+        return phpunit("--testsuite", name, "--stop-on-failure", "--stop-on-error").returncode == 0, None
 
     for test in witnesses.split(','):
         r = phpunit("--testsuite", name, "--filter", test)
@@ -694,15 +673,24 @@ def run(suite):
 #
 # A fault whose anchor stops matching is not injected, and the rule it was written for is
 # then guarded by nothing while the run it was left out of still reports success. Only a
-# whole-list run notices, and a whole-list run is most of an hour, so in practice it is
-# not the thing standing between a refactor and a deploy. This check is seconds, reads no
+# whole-list run notices, and a whole-list run takes long enough that it is not the thing
+# standing between a refactor and a deploy. This check is seconds, reads no
 # test output, and is what deploy.sh calls.
-args = [a for a in sys.argv[1:] if a != '--anchors']
+args = [a for a in sys.argv[1:] if a not in ('--anchors', '--changed')]
 anchors_only = '--anchors' in sys.argv[1:]
 
-# Selecting faults keeps a run on the code being worked on short enough to actually run:
-# the integration suite takes half a minute, and the whole list is most of an hour. A
-# selective run is a development aid -- the gate before a commit is the unselected one.
+# A commit is gated by the faults in the files its branch changed, uncommitted edits
+# included; the whole list runs before a deploy, where a deleted test elsewhere shows up.
+if '--changed' in sys.argv[1:]:
+    git = lambda *a: subprocess.run(["git", *a], cwd=ROOT, capture_output=True, text=True, check=True).stdout
+    changed = set(git("diff", "--name-only", git("merge-base", "HEAD", "master").strip()).split())
+    FAULTS = [f for f in FAULTS if f[2] in changed]
+    if not FAULTS:
+        print("  no fault lives in a file this branch changed")
+        sys.exit(0)
+
+# Selecting faults by number keeps a run on the code being worked on short enough to run
+# while writing it.
 if args:
     wanted = set()
     for arg in args:
@@ -737,7 +725,7 @@ if anchors_only:
     # inherited from a base class still counts.
     unknown = []
     for wanted_suite in sorted({s.partition(':')[0] for _, _, _, _, _, s in FAULTS if ':' in s}):
-        listed = phpunit("--testsuite", wanted_suite, "--list-tests").stdout
+        listed = phpunit("--testsuite", wanted_suite, "--list-tests", service="app").stdout
         # A data-provider test is listed once per data set, its name followed by "set".
         known = {line.rpartition('::')[2].strip().partition('"')[0]
                  for line in listed.splitlines() if '::' in line}
@@ -756,34 +744,23 @@ if anchors_only:
           f" ({len(FAULTS)} faults)")
     sys.exit(0)
 
-# The working tree must never be left holding an injected fault. A signal arriving
-# mid-run would otherwise leave a deliberately broken line in a source file with nothing
-# to report it, and the next commit ships it.
-pending = None
-
-def restore_pending():
-    global pending
-    if pending is None:
-        return
-    path, backup = pending
-    pending = None
-    shutil.copy2(backup, path)
-    os.unlink(backup)
-    clear_injection()
-
-def on_signal(signum, _frame):
-    restore_pending()
-    print(f"\n  interrupted by {signal.Signals(signum).name} — working tree restored")
-    sys.exit(130)
-
-signal.signal(signal.SIGINT, on_signal)
-signal.signal(signal.SIGTERM, on_signal)
-atexit.register(restore_pending)
+# The copy is the working tree as it stands now, uncommitted edits included; later edits
+# do not reach this run. Checksums, not timestamps: a fault left by a killed run can share
+# its original's size and age.
+TREE.mkdir(parents=True, exist_ok=True)
+subprocess.run(["rsync", "-a", "--checksum", "--delete",
+                *[f"--exclude={e}" for e in COPY_EXCLUDES], f"{ROOT}/", f"{TREE}/"], check=True)
+compose = ["docker-compose", "--profile", "mutants"]
+subprocess.run([*compose, "up", "-d", "--build", "--quiet-pull", "mutants"], cwd=ROOT, check=True,
+               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+atexit.register(lambda: subprocess.run([*compose, "stop", "mutants"], cwd=ROOT,
+                                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL))
 
 # A fault proves something only against a tree that passes without it. On a tree already
 # red -- a syntax error, a failing test -- every fault reads as caught.
-for base in sorted({s.partition(':')[0] for *_, s in FAULTS} - {"ui"}):
-    if phpunit("--testsuite", base).returncode != 0:
+# The interface checks too: an unreachable mutants site would read every fault as caught.
+for base in sorted({s.partition(':')[0] for *_, s in FAULTS}):
+    if not (run(base)[0] if base == "ui" else phpunit("--testsuite", base).returncode == 0):
         print(f"  the {base} suite is red before any fault is injected — nothing can be proven")
         sys.exit(1)
 
@@ -793,11 +770,9 @@ survived = []
 # drop its fault from the suite silently, and the run would still report success.
 skipped = []
 for num, name, relpath, old, new, suite in FAULTS:
-    f = ROOT/relpath
+    f = TREE/relpath
     backup = tempfile.NamedTemporaryFile(delete=False).name
     shutil.copy2(f, backup)
-    pending = (f, backup)
-    record_injection(f, backup)
     try:
         text = f.read_text(encoding='utf-8')
         if old not in text:
@@ -814,7 +789,8 @@ for num, name, relpath, old, new, suite in FAULTS:
         if green: survived.append((num, name, why))
         print(f"  {num:2d}. {name:34s} {verdict}{'' if why is None else f' — {why}'}")
     finally:
-        restore_pending()
+        shutil.copy2(backup, f)
+        os.unlink(backup)
 
 print()
 if survived:
