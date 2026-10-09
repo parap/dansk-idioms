@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-351-375
+title: Verber 351–375
+
+--- questions ---
+1. yde — оказывать (помощь), выдавать. Præteritum?
+* ydede
+  ydet
+  yder
+  ydeede
+
+2. indstille — настраивать. Perfektum participium?
+* indstillet
+  indstillede
+  indstiller
+  indstilt
+
+3. pleje — ухаживать. Præteritum?
+* plejede
+  plejet
+  plejer
+  plejte
+
+4. modsætte — (modsætte sig) противиться. Perfektum participium?
+* modsat
+  modsatte
+  modsætter
+  modsættet
+
+5. bemærke — замечать. Præteritum?
+* bemærkede
+  bemærket
+  bemærker
+  bemærkte
+
+6. markere — отмечать. Perfektum participium?
+* markeret
+  markerede
+  markerer
+  markert
+
+7. gentage — повторять. Præteritum?
+* gentog
+  gentaget
+  gentager
+  gentagede
+
+8. sejle — плыть (на судне). Perfektum participium?
+* sejlet
+  sejlede
+  sejler
+  sejlt
+
+9. servere — подавать (еду). Præteritum?
+* serverede
+  serveret
+  serverer
+  serverte
+
+10. drømme — мечтать. Perfektum participium?
+* drømt
+  drømte
+  drømmer
+  drømmet
+
+11. dominere — доминировать. Præteritum?
+* dominerede
+  domineret
+  dominerer
+  dominerte
+
+12. indtage — принимать (пищу). Perfektum participium?
+* indtaget
+  indtog
+  indtager
+  indtagt
+
+13. savne — скучать по. Præteritum?
+* savnede
+  savnet
+  savner
+  savnte
+
+14. udløse — вызывать, запускать. Perfektum participium?
+* udløst
+  udløste
+  udløser
+  udløset
+
+15. skuffe — разочаровывать. Præteritum?
+* skuffede
+  skuffet
+  skuffer
+  skufte
+
+16. forbyde — запрещать. Perfektum participium?
+* forbudt
+  forbød
+  forbyder
+  forbydet
+
+17. indrette — обустраивать. Præteritum?
+* indrettede
+  indrettet
+  indretter
+  indrette
+
+18. drage — отправляться. Perfektum participium?
+* draget
+  drog
+  drager
+  dragt
+
+19. flygte — бежать, спасаться. Præteritum?
+* flygtede
+  flygtet
+  flygter
+  flygte
+
+20. efterlade — оставлять. Perfektum participium?
+* efterladt
+  efterlod
+  efterlader
+  efterladet
+
+21. sigte — целиться. Præteritum?
+* sigtede
+  sigtet
+  sigter
+  sigte
+
+22. opfylde — выполнять, удовлетворять. Perfektum participium?
+* opfyldt
+  opfyldte
+  opfylder
+  opfyldet
+
+23. erstatte — заменять. Præteritum?
+* erstattede
+  erstattet
+  erstatter
+  erstatte
+
+24. sprede — распространять. Perfektum participium?
+* spredt
+  spredte
+  spreder
+  spredet
+
+25. undervise — преподавать. Præteritum?
+* underviste
+  undervist
+  underviser
+  undervisede

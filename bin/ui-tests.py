@@ -125,6 +125,23 @@ SEED_PHP = r"""
             ],
         ]);
     }
+    if (!Db::fetchValue("SELECT id FROM reading_passages WHERE slug = 'ui-fixture-verbs'")) {
+        $repo->save([
+            'slug' => 'ui-fixture-verbs', 'kind' => 'verbs', 'title' => 'UI fixture verbs', 'body' => null,
+            'items' => [
+                ['position' => 1, 'prompt' => 'gå — идти. Præteritum?', 'options' => [
+                    ['label' => 'A', 'text' => 'gik', 'correct' => true],
+                    ['label' => 'B', 'text' => 'gået'],
+                    ['label' => 'C', 'text' => 'går'],
+                ]],
+                ['position' => 2, 'prompt' => 'se — видеть. Perfektum participium?', 'options' => [
+                    ['label' => 'A', 'text' => 'set', 'correct' => true],
+                    ['label' => 'B', 'text' => 'så'],
+                    ['label' => 'C', 'text' => 'ser'],
+                ]],
+            ],
+        ]);
+    }
     echo json_encode(array_column($hidden, "id"));
 """
 
@@ -1033,10 +1050,60 @@ def the_way_back_to_the_films_is_a_button(b):
 
 
 @check
+def the_start_page_offers_the_verb_drills(b):
+    b.goto('/')
+    b.until('!!document.querySelector(".cta")', what='the start page')
+    assert b.js('!!document.querySelector("a.cta[href=\'/verbs\']")'), 'no way to reach /verbs'
+
+
+@check
+def the_verb_list_links_every_published_set(b):
+    only(['verbs'])
+    b.goto('/verbs')
+    b.until('!!document.querySelector("#sets")', what='the verb set list')
+    assert b.js('!!document.querySelector("#sets a[href=\'/verbs?s=ui-fixture-verbs\']")'), \
+        'the fixture set is not listed'
+
+
+def open_verb_set(b):
+    only(['verbs'])
+    b.goto('/verbs?s=ui-fixture-verbs')
+    b.until('document.querySelectorAll(".q").length === 2', what='the verb questions')
+
+
+@check
+def a_verb_set_asks_every_question(b):
+    open_verb_set(b)
+    assert 'gå — идти. Præteritum?' in b.js('document.querySelector(".q").textContent')
+    assert b.js('document.querySelectorAll(".q .opt").length') == 6
+
+
+@check
+def a_verb_answer_is_marked_at_once(b):
+    open_verb_set(b)
+    right = correct_indexes()[0]
+    b.js(f'document.querySelector(\'.q[data-pos="1"] .opt[data-i="{right}"]\').click()')
+    b.until('!!document.querySelector(\'.q[data-pos="1"] .opt.right\')', what='the answer marked right')
+    wrong = (correct_indexes()[1] + 1) % 3
+    b.js(f'document.querySelector(\'.q[data-pos="2"] .opt[data-i="{wrong}"]\').click()')
+    b.until('!!document.querySelector(\'.q[data-pos="2"] .opt.wrong\')', what='the answer marked wrong')
+    assert b.js('!!document.querySelector(\'.q[data-pos="2"] .opt.right\')'), 'the right answer is not revealed'
+    b.until('/1\\s*\\/\\s*2/.test(document.querySelector("#score").textContent)', what='the score 1 / 2')
+
+
+@check
+def an_unknown_verb_set_says_it_does_not_exist(b):
+    only(['verbs'])
+    b.goto('/verbs?s=ingen-saadan')
+    b.until('!!document.querySelector("#missing")', what='the missing-set notice')
+    assert b.js('!!document.querySelector("#missing a.cta[href=\'/verbs\']")'), 'the notice has no back button'
+
+
+@check
 def every_page_carries_the_way_home(b):
     """The mark is the way back, so it is the same mark everywhere and it sits where a
     reader looks for it: first in the header, top left."""
-    for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video'):
+    for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs'):
         b.goto(path)
         b.until('!!document.querySelector(".brand")', what='the brand on ' + path)
         assert b.js('document.querySelector(".brand").getAttribute("href")') == '/', path
@@ -1061,7 +1128,7 @@ def every_page_offers_the_same_languages(b):
     """A language offered on one page and missing on the next drops the reader back into
     Russian halfway through the site, and the fallback is silent."""
     try:
-        for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video'):
+        for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs'):
             b.goto(path)
             b.until('!!document.querySelector(".lang")', what='the language switch on ' + path)
             assert offered_languages(b) == LANGUAGES, f'{path} offers {offered_languages(b)}'

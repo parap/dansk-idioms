@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-401-425
+title: Verber 401–425
+
+--- questions ---
+1. sænke — опускать, снижать. Præteritum?
+* sænkede
+  sænket
+  sænker
+  sænkte
+
+2. henvende — (henvende sig) обращаться. Perfektum participium?
+* henvendt
+  henvendte
+  henvender
+  henvendet
+
+3. bestille — заказывать. Præteritum?
+* bestilte
+  bestilt
+  bestiller
+  bestillede
+
+4. udpege — назначать, указывать. Perfektum participium?
+* udpeget
+  udpegede
+  udpeger
+  udpegt
+
+5. knytte — связывать. Præteritum?
+* knyttede
+  knyttet
+  knytter
+  knytte
+
+6. finansiere — финансировать. Perfektum participium?
+* finansieret
+  finansierede
+  finansierer
+  finansiert
+
+7. udstille — выставлять. Præteritum?
+* udstillede
+  udstillet
+  udstiller
+  udstilte
+
+8. foretrække — предпочитать. Perfektum participium?
+* foretrukket
+  foretrak
+  foretrækker
+  foretrækket
+
+9. påstå — утверждать. Præteritum?
+* påstod
+  påstået
+  påstår
+  påståte
+
+10. konkludere — делать вывод. Perfektum participium?
+* konkluderet
+  konkluderede
+  konkluderer
+  konkludert
+
+11. skille — разделять. Præteritum?
+* skilte
+  skilt
+  skiller
+  skillede
+
+12. aflevere — сдавать, отдавать. Perfektum participium?
+* afleveret
+  afleverede
+  afleverer
+  aflevert
+
+13. lege — играть (о детях). Præteritum?
+* legede
+  leget
+  leger
+  legte
+
+14. kommentere — комментировать. Perfektum participium?
+* kommenteret
+  kommenterede
+  kommenterer
+  kommentert
+
+15. rulle — катить(ся). Præteritum?
+* rullede
+  rullet
+  ruller
+  rulte
+
+16. udarbejde — разрабатывать, составлять. Perfektum participium?
+* udarbejdet
+  udarbejdede
+  udarbejder
+  udarbejdt
+
+17. række — протягивать. Præteritum?
+* rakte
+  rakt
+  rækker
+  rækkede
+
+18. stifte — основывать. Perfektum participium?
+* stiftet
+  stiftede
+  stifter
+  stifte
+
+19. smage — пробовать на вкус. Præteritum?
+* smagte
+  smagt
+  smager
+  smagede
+
+20. bevise — доказывать. Perfektum participium?
+* bevist
+  beviste
+  beviser
+  beviset
+
+21. aftale — договариваться. Præteritum?
+* aftalte
+  aftalt
+  aftaler
+  aftalede
+
+22. tildele — присуждать, выделять. Perfektum participium?
+* tildelt
+  tildelte
+  tildeler
+  tildelet
+
+23. afløse — сменять. Præteritum?
+* afløste
+  afløst
+  afløser
+  afløsede
+
+24. opbygge — выстраивать. Perfektum participium?
+* opbygget
+  opbyggede
+  opbygger
+  opbygt
+
+25. skrue — закручивать. Præteritum?
+* skruede
+  skruet
+  skruer
+  skrute

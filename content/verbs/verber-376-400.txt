@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-376-400
+title: Verber 376–400
+
+--- questions ---
+1. tælle — считать (количество). Perfektum participium?
+* talt
+  talte
+  tæller
+  tællet
+
+2. udvælge — отбирать. Præteritum?
+* udvalgte
+  udvalgt
+  udvælger
+  udvælgede
+
+3. samarbejde — сотрудничать. Perfektum participium?
+* samarbejdet
+  samarbejdede
+  samarbejder
+  samarbejdt
+
+4. trykke — нажимать. Præteritum?
+* trykkede
+  trykket
+  trykker
+  trykke
+
+5. registrere — регистрировать. Perfektum participium?
+* registreret
+  registrerede
+  registrerer
+  registrert
+
+6. udbrede — распространять. Præteritum?
+* udbredte
+  udbredt
+  udbreder
+  udbredede
+
+7. stamme — (stamme fra) происходить из. Perfektum participium?
+* stammet
+  stammede
+  stammer
+  stamt
+
+8. håndtere — обращаться с, справляться. Præteritum?
+* håndterede
+  håndteret
+  håndterer
+  håndterte
+
+9. nedsætte — снижать. Perfektum participium?
+* nedsat
+  nedsatte
+  nedsætter
+  nedsættet
+
+10. udfordre — бросать вызов. Præteritum?
+* udfordrede
+  udfordret
+  udfordrer
+  udfordrte
+
+11. smile — улыбаться. Perfektum participium?
+* smilet
+  smilede
+  smiler
+  smile
+
+12. låne — одалживать, брать взаймы. Præteritum?
+* lånte
+  lånt
+  låner
+  lånede
+
+13. udnævne — назначать. Perfektum participium?
+* udnævnt
+  udnævnte
+  udnævner
+  udnævnet
+
+14. røre — трогать. Præteritum?
+* rørte
+  rørt
+  rører
+  rørede
+
+15. vælte — опрокидывать(ся). Perfektum participium?
+* væltet
+  væltede
+  vælter
+  vælte
+
+16. oversætte — переводить. Præteritum?
+* oversatte
+  oversat
+  oversætter
+  oversættede
+
+17. ankomme — прибывать. Perfektum participium?
+* ankommet
+  ankom
+  ankommer
+  ankomt
+
+18. ryste — трясти(сь). Præteritum?
+* rystede
+  rystet
+  ryster
+  ryste
+
+19. fyre — увольнять. Perfektum participium?
+* fyret
+  fyrede
+  fyrer
+  fyrt
+
+20. nedlægge — закрывать, упразднять. Præteritum?
+* nedlagde
+  nedlagt
+  nedlægger
+  nedlæggede
+
+21. indrømme — признаваться. Perfektum participium?
+* indrømmet
+  indrømmede
+  indrømmer
+  indrømt
+
+22. skade — вредить. Præteritum?
+* skadede
+  skadet
+  skader
+  skadte
+
+23. koncentrere — сосредоточивать(ся). Perfektum participium?
+* koncentreret
+  koncentrerede
+  koncentrerer
+  koncentrert
+
+24. tiltrække — привлекать. Præteritum?
+* tiltrak
+  tiltrukket
+  tiltrækker
+  tiltrækkede
+
+25. grine — смеяться. Perfektum participium?
+* grinet
+  grinede
+  griner
+  grine

@@ -1,0 +1,153 @@
+kind: verbs
+slug: verber-101-125
+title: Verber 101–125
+
+--- questions ---
+1. starte — начинать, запускать. Præteritum?
+* startede
+  startet
+  starter
+  starte
+
+2. deltage — участвовать. Perfektum participium?
+* deltaget
+  deltog
+  deltager
+  deltagt
+
+3. søge — искать. Præteritum?
+* søgte
+  søgt
+  søger
+  søgede
+
+4. virke — работать (действовать). Perfektum participium?
+* virket
+  virkede
+  virker
+  virkt
+
+5. løbe — бежать. Præteritum?
+* løb
+  løbet
+  løber
+  løbte
+
+6. vokse — расти. Perfektum participium?
+* vokset
+  voksede
+  vokser
+  vokst
+
+7. føde — рожать. Præteritum?
+* fødte
+  født
+  føder
+  føde
+
+8. bringe — приносить. Perfektum participium?
+* bragt
+  bragte
+  bringer
+  bringet
+
+9. håbe — надеяться. Præteritum?
+* håbede
+  håbet
+  håber
+  håbte
+
+10. modtage — получать. Perfektum participium?
+* modtaget
+  modtog
+  modtager
+  modtagt
+
+11. lykkes — удаваться. Præteritum?
+* lykkedes
+  lykkes
+  lyktes
+
+12. vurdere — оценивать. Perfektum participium?
+* vurderet
+  vurderede
+  vurderer
+  vurdert
+
+13. miste — терять. Præteritum?
+* mistede
+  mistet
+  mister
+  miste
+
+14. bestå — сдать (экзамен). Perfektum participium?
+* bestået
+  bestod
+  består
+  beståt
+
+15. øge — увеличивать. Præteritum?
+* øgede
+  øget
+  øger
+  øgeede
+
+16. dø — умирать. Perfektum participium?
+* død
+  døde
+  dør
+  døt
+
+17. skylde — быть должным (деньги). Præteritum?
+* skyldte
+  skyldt
+  skylder
+  skyldede
+
+18. passe — подходить. Perfektum participium?
+* passet
+  passede
+  passer
+  past
+
+19. bryde — ломать. Præteritum?
+* brød
+  brudt
+  bryder
+  brydede
+
+20. hænge — висеть. Perfektum participium?
+* hængt
+  hang
+  hænger
+  hænget
+
+21. beslutte — решать. Præteritum?
+* besluttede
+  besluttet
+  beslutter
+  beslutte
+
+22. huske — помнить. Perfektum participium?
+* husket
+  huskede
+  husker
+  huskt
+
+23. tabe — ронять. Præteritum?
+* tabte
+  tabt
+  taber
+  tabede
+
+24. foregå — происходить. Perfektum participium?
+* foregået
+  foregik
+  foregår
+  foregåt
+
+25. bede — просить. Præteritum?
+* bad
+  bedt
+  beder
+  bede

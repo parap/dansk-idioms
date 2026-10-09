@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-526-550
+title: Verber 526–550
+
+--- questions ---
+1. beregne — рассчитывать. Perfektum participium?
+* beregnet
+  beregnede
+  beregner
+  beregnt
+
+2. herske — господствовать. Præteritum?
+* herskede
+  hersket
+  hersker
+  herskte
+
+3. forske — исследовать (научно). Perfektum participium?
+* forsket
+  forskede
+  forsker
+  forskt
+
+4. banke — стучать. Præteritum?
+* bankede
+  banket
+  banker
+  bankte
+
+5. tilknytte — прикреплять, присоединять. Perfektum participium?
+* tilknyttet
+  tilknyttede
+  tilknytter
+  tilknytte
+
+6. rådgive — консультировать. Præteritum?
+* rådgav
+  rådgivet
+  rådgiver
+  rådgivte
+
+7. havne — оказываться (в итоге). Perfektum participium?
+* havnet
+  havnede
+  havner
+  havnt
+
+8. overlade — оставлять, передавать. Præteritum?
+* overlod
+  overladt
+  overlader
+  overladede
+
+9. forlange — требовать. Perfektum participium?
+* forlangt
+  forlangte
+  forlanger
+  forlanget
+
+10. underskrive — подписывать. Præteritum?
+* underskrev
+  underskrevet
+  underskriver
+  underskrivede
+
+11. mistænke — подозревать. Perfektum participium?
+* mistænkt
+  mistænkte
+  mistænker
+  mistænket
+
+12. berøre — касаться, затрагивать. Præteritum?
+* berørte
+  berørt
+  berører
+  berørede
+
+13. iføre — (iføre sig) облачаться. Perfektum participium?
+* iført
+  iførte
+  ifører
+  iføret
+
+14. orientere — информировать. Præteritum?
+* orienterede
+  orienteret
+  orienterer
+  orienterte
+
+15. opholde — (opholde sig) находиться, пребывать. Perfektum participium?
+* opholdt
+  opholder
+  opholdet
+  opholde
+
+16. såre — ранить, обижать. Præteritum?
+* sårede
+  såret
+  sårer
+  sårte
+
+17. gifte — (gifte sig) жениться, выходить замуж. Perfektum participium?
+* giftet
+  giftede
+  gifter
+  gifte
+
+18. tjekke — проверять. Præteritum?
+* tjekkede
+  tjekket
+  tjekker
+  tjekte
+
+19. isolere — изолировать. Perfektum participium?
+* isoleret
+  isolerede
+  isolerer
+  isolert
+
+20. omgive — окружать. Præteritum?
+* omgav
+  omgivet
+  omgiver
+  omgivte
+
+21. undlade — воздерживаться. Perfektum participium?
+* undladt
+  undlod
+  undlader
+  undladet
+
+22. irritere — раздражать. Præteritum?
+* irriterede
+  irriteret
+  irriterer
+  irriterte
+
+23. antage — предполагать. Perfektum participium?
+* antaget
+  antog
+  antager
+  antagt
+
+24. variere — варьироваться. Præteritum?
+* varierede
+  varieret
+  varierer
+  varierte
+
+25. tilpasse — приспосабливать. Perfektum participium?
+* tilpasset
+  tilpassede
+  tilpasser
+  tilpast

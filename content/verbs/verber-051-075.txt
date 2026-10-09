@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-051-075
+title: Verber 51–75
+
+--- questions ---
+1. falde — падать. Præteritum?
+* faldt
+  faldet
+  falder
+  faldede
+
+2. kalde — звать, называть. Perfektum participium?
+* kaldt
+  kaldte
+  kalder
+  kalde
+
+3. burde — следует, должен бы. Præteritum?
+* burde
+  burdet
+  bør
+  burdte
+
+4. handle — делать покупки. Perfektum participium?
+* handlet
+  handlede
+  handler
+  handlt
+
+5. købe — покупать. Præteritum?
+* købte
+  købt
+  køber
+  købede
+
+6. leve — жить (существовать). Perfektum participium?
+* levet
+  levede
+  lever
+  levt
+
+7. nå — успеть, достичь. Præteritum?
+* nåede
+  nået
+  når
+  nåte
+
+8. lyde — звучать. Perfektum participium?
+* lydt
+  lød
+  lyder
+  lydet
+
+9. ønske — желать. Præteritum?
+* ønskede
+  ønsket
+  ønsker
+  ønskte
+
+10. sælge — продавать. Perfektum participium?
+* solgt
+  solgte
+  sælger
+  sælget
+
+11. stige — подниматься, расти. Præteritum?
+* steg
+  steget
+  stiger
+  stigede
+
+12. betale — платить. Perfektum participium?
+* betalt
+  betalte
+  betaler
+  betalet
+
+13. forsøge — пытаться. Præteritum?
+* forsøgte
+  forsøgt
+  forsøger
+  forsøgede
+
+14. vente — ждать. Perfektum participium?
+* ventet
+  ventede
+  venter
+  vente
+
+15. føre — вести. Præteritum?
+* førte
+  ført
+  fører
+  førede
+
+16. stille — ставить. Perfektum participium?
+* stillet
+  stillede
+  stiller
+  stilt
+
+17. læse — читать. Præteritum?
+* læste
+  læst
+  læser
+  læsede
+
+18. gælde — касаться, действовать (о правиле). Perfektum participium?
+* gjaldt
+  gælder
+  gældet
+  gælde
+
+19. trække — тянуть. Præteritum?
+* trak
+  trukket
+  trækker
+  trækkede
+
+20. forklare — объяснять. Perfektum participium?
+* forklaret
+  forklarede
+  forklarer
+  forklart
+
+21. sikre — обеспечивать, гарантировать. Præteritum?
+* sikrede
+  sikret
+  sikrer
+  sikrte
+
+22. opleve — переживать, испытывать. Perfektum participium?
+* oplevet
+  oplevede
+  oplever
+  oplevt
+
+23. føle — чувствовать. Præteritum?
+* følte
+  følt
+  føler
+  følede
+
+24. bo — жить (проживать). Perfektum participium?
+* boet
+  boede
+  bor
+  bot
+
+25. ansætte — нанимать на работу. Præteritum?
+* ansatte
+  ansat
+  ansætter
+  ansættede

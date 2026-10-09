@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-601-625
+title: Verber 601–625
+
+--- questions ---
+1. krydse — пересекать. Præteritum?
+* krydsede
+  krydset
+  krydser
+  krydste
+
+2. forebygge — предотвращать. Perfektum participium?
+* forebygget
+  forebyggede
+  forebygger
+  forebygt
+
+3. hvile — отдыхать. Præteritum?
+* hvilede
+  hvilet
+  hviler
+  hvile
+
+4. besejre — побеждать. Perfektum participium?
+* besejret
+  besejrede
+  besejrer
+  besejrt
+
+5. omsætte — превращать, воплощать. Præteritum?
+* omsatte
+  omsat
+  omsætter
+  omsættede
+
+6. realisere — осуществлять. Perfektum participium?
+* realiseret
+  realiserede
+  realiserer
+  realisert
+
+7. anslå — оценивать (примерно). Præteritum?
+* anslog
+  anslået
+  anslår
+  anslåte
+
+8. iværksætte — начинать, запускать. Perfektum participium?
+* iværksat
+  iværksatte
+  iværksætter
+  iværksættet
+
+9. tilfredsstille — удовлетворять. Præteritum?
+* tilfredsstillede
+  tilfredsstillet
+  tilfredsstiller
+  tilfredsstilte
+
+10. analysere — анализировать. Perfektum participium?
+* analyseret
+  analyserede
+  analyserer
+  analysert
+
+11. forfølge — преследовать. Præteritum?
+* forfulgte
+  forfulgt
+  forfølger
+  forfølgede
+
+12. imponere — впечатлять. Perfektum participium?
+* imponeret
+  imponerede
+  imponerer
+  imponert
+
+13. forløbe — проходить (о событии). Præteritum?
+* forløb
+  forløbet
+  forløber
+  forløbede
+
+14. skildre — описывать, изображать. Perfektum participium?
+* skildret
+  skildrede
+  skildrer
+  skildrt
+
+15. forelske — (forelske sig) влюбляться. Præteritum?
+* forelskede
+  forelsket
+  forelsker
+  forelskte
+
+16. klippe — стричь, резать. Perfektum participium?
+* klippet
+  klippede
+  klipper
+  klipt
+
+17. alliere — (alliere sig) объединяться. Præteritum?
+* allierede
+  allieret
+  allierer
+  allierte
+
+18. inkludere — включать. Perfektum participium?
+* inkluderet
+  inkluderede
+  inkluderer
+  inkludert
+
+19. vidne — свидетельствовать. Præteritum?
+* vidnede
+  vidnet
+  vidner
+  vidnte
+
+20. udskyde — откладывать. Perfektum participium?
+* udskudt
+  udskød
+  udskyder
+  udskydet
+
+21. introducere — вводить, знакомить. Præteritum?
+* introducerede
+  introduceret
+  introducerer
+  introducerte
+
+22. mindske — уменьшать. Perfektum participium?
+* mindsket
+  mindskede
+  mindsker
+  mindskt
+
+23. friste — соблазнять. Præteritum?
+* fristede
+  fristet
+  frister
+  friste
+
+24. bremse — тормозить. Perfektum participium?
+* bremset
+  bremsede
+  bremser
+  bremst
+
+25. kåre — избирать (лучшим). Præteritum?
+* kårede
+  kåret
+  kårer
+  kårte

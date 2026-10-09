@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-076-100
+title: Verber 76–100
+
+--- questions ---
+1. hjælpe — помогать. Perfektum participium?
+* hjulpet
+  hjalp
+  hjælper
+  hjælpet
+
+2. forstå — понимать. Præteritum?
+* forstod
+  forstået
+  forstår
+  forståte
+
+3. kræve — требовать. Perfektum participium?
+* krævet
+  krævede
+  kræver
+  krævt
+
+4. spørge — спрашивать. Præteritum?
+* spurgte
+  spurgt
+  spørger
+  spørgede
+
+5. svare — отвечать. Perfektum participium?
+* svaret
+  svarede
+  svarer
+  svart
+
+6. fortsætte — продолжать. Præteritum?
+* fortsatte
+  fortsat
+  fortsætter
+  fortsættede
+
+7. flytte — переезжать. Perfektum participium?
+* flyttet
+  flyttede
+  flytter
+  flytte
+
+8. ændre — изменять. Præteritum?
+* ændrede
+  ændret
+  ændrer
+  ændrte
+
+9. bygge — строить. Perfektum participium?
+* bygget
+  byggede
+  bygger
+  bygt
+
+10. vende — поворачивать. Præteritum?
+* vendte
+  vendt
+  vender
+  vendede
+
+11. ramme — попадать, поражать. Perfektum participium?
+* ramt
+  ramte
+  rammer
+  ramme
+
+12. udvikle — развивать. Præteritum?
+* udviklede
+  udviklet
+  udvikler
+  udviklte
+
+13. fylde — наполнять. Perfektum participium?
+* fyldt
+  fyldte
+  fylder
+  fyldet
+
+14. åbne — открывать. Præteritum?
+* åbnede
+  åbnet
+  åbner
+  åbnte
+
+15. oplyse — сообщать, информировать. Perfektum participium?
+* oplyst
+  oplyste
+  oplyser
+  oplyset
+
+16. lære — учить(ся). Præteritum?
+* lærte
+  lært
+  lærer
+  lærede
+
+17. ende — заканчивать(ся). Perfektum participium?
+* endt
+  endte
+  ender
+  endet
+
+18. rejse — путешествовать. Præteritum?
+* rejste
+  rejst
+  rejser
+  rejsede
+
+19. koste — стоить. Perfektum participium?
+* kostet
+  kostede
+  koster
+  koste
+
+20. ligne — быть похожим. Præteritum?
+* lignede
+  lignet
+  ligner
+  lignte
+
+21. mangle — не хватать. Perfektum participium?
+* manglet
+  manglede
+  mangler
+  manglt
+
+22. hedde — называться, зваться. Præteritum?
+* hed
+  heddet
+  hedder
+  hedte
+
+23. prøve — пробовать. Perfektum participium?
+* prøvet
+  prøvede
+  prøver
+  prøvt
+
+24. lukke — закрывать. Præteritum?
+* lukkede
+  lukket
+  lukker
+  lukte
+
+25. forvente — ожидать (рассчитывать). Perfektum participium?
+* forventet
+  forventede
+  forventer
+  forvente

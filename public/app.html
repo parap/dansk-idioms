@@ -144,6 +144,7 @@ const STRINGS = {
     readingLink: 'Чтение: Prøve i Dansk 3',
     proeveLink: 'Тест на гражданство: indfødsretsprøven',
     listenLink: 'Аудирование',
+    verbsLink: 'Глаголы',
   },
   en: {
     tagline: 'Danish idiom trainer',
@@ -169,6 +170,7 @@ const STRINGS = {
     readingLink: 'Reading: Prøve i Dansk 3',
     proeveLink: 'Citizenship test: indfødsretsprøven',
     listenLink: 'Listening',
+    verbsLink: 'Verbs',
   },
   uk: {
     tagline: 'Тренажер данських ідіом',
@@ -200,6 +202,7 @@ const STRINGS = {
     readingLink: 'Читання: Prøve i Dansk 3',
     proeveLink: 'Тест на громадянство: indfødsretsprøven',
     listenLink: 'Аудіювання',
+    verbsLink: 'Дієслова',
   },
   da: {
     tagline: 'Træning i danske idiomer',
@@ -231,6 +234,7 @@ const STRINGS = {
     readingLink: 'Læsning: Prøve i Dansk 3',
     proeveLink: 'Indfødsretsprøven',
     listenLink: 'Lytning',
+    verbsLink: 'Verber',
   },
 };
 
@@ -310,6 +314,7 @@ async function home() {
         <a class="cta" href="/read"><span>${esc(t('readingLink'))}</span><b aria-hidden="true">→</b></a>
         <a class="cta" href="/proeve"><span>${esc(t('proeveLink'))}</span><b aria-hidden="true">→</b></a>
         <a class="cta" href="/listen"><span>${esc(t('listenLink'))}</span><b aria-hidden="true">→</b></a>
+        <a class="cta" href="/verbs"><span>${esc(t('verbsLink'))}</span><b aria-hidden="true">→</b></a>
       </div>
       <div class="stats">
         <div class="stat"><b>${s.idioms_published ?? '—'}</b><span>${esc(t('statIdioms', s.idioms_published))}</span></div>

@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-226-250
+title: Verber 226–250
+
+--- questions ---
+1. frygte — бояться. Perfektum participium?
+* frygtet
+  frygtede
+  frygter
+  frygte
+
+2. behøve — нуждаться. Præteritum?
+* behøvede
+  behøvet
+  behøver
+  behøvte
+
+3. gribe — хватать, ловить. Perfektum participium?
+* grebet
+  greb
+  griber
+  gribet
+
+4. lande — приземляться. Præteritum?
+* landede
+  landet
+  lander
+  landte
+
+5. styre — управлять. Perfektum participium?
+* styret
+  styrede
+  styrer
+  styrt
+
+6. forestille — представлять (себе — forestille sig). Præteritum?
+* forestillede
+  forestillet
+  forestiller
+  forestilte
+
+7. udføre — выполнять. Perfektum participium?
+* udført
+  udførte
+  udfører
+  udføret
+
+8. medvirke — участвовать, способствовать. Præteritum?
+* medvirkede
+  medvirket
+  medvirker
+  medvirkte
+
+9. ride — ездить верхом. Perfektum participium?
+* redet
+  red
+  rider
+  ridet
+
+10. bevæge — двигать(ся). Præteritum?
+* bevægede
+  bevæget
+  bevæger
+  bevægte
+
+11. begrænse — ограничивать. Perfektum participium?
+* begrænset
+  begrænsede
+  begrænser
+  begrænst
+
+12. blande — смешивать. Præteritum?
+* blandede
+  blandet
+  blander
+  blandte
+
+13. omfatte — охватывать, включать. Perfektum participium?
+* omfattet
+  omfattede
+  omfatter
+  omfatte
+
+14. påvirke — влиять. Præteritum?
+* påvirkede
+  påvirket
+  påvirker
+  påvirkte
+
+15. glemme — забывать. Perfektum participium?
+* glemt
+  glemte
+  glemmer
+  glemmet
+
+16. acceptere — принимать, соглашаться. Præteritum?
+* accepterede
+  accepteret
+  accepterer
+  accepterte
+
+17. bekræfte — подтверждать. Perfektum participium?
+* bekræftet
+  bekræftede
+  bekræfter
+  bekræfte
+
+18. fastslå — установить, констатировать. Præteritum?
+* fastslog
+  fastslået
+  fastslår
+  fastslåte
+
+19. turde — сметь, осмелиться. Perfektum participium?
+* turdet
+  turde
+  tør
+  turdt
+
+20. overbevise — убеждать. Præteritum?
+* overbeviste
+  overbevist
+  overbeviser
+  overbevisede
+
+21. invitere — приглашать. Perfektum participium?
+* inviteret
+  inviterede
+  inviterer
+  invitert
+
+22. afgøre — решать (окончательно). Præteritum?
+* afgjorde
+  afgjort
+  afgør
+  afgørede
+
+23. ødelægge — разрушать, портить. Perfektum participium?
+* ødelagt
+  ødelagde
+  ødelægger
+  ødelægget
+
+24. vedtage — принимать (закон, решение). Præteritum?
+* vedtog
+  vedtaget
+  vedtager
+  vedtagede
+
+25. tillade — разрешать. Perfektum participium?
+* tilladt
+  tillod
+  tillader
+  tilladet

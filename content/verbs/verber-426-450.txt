@@ -1,0 +1,154 @@
+kind: verbs
+slug: verber-426-450
+title: Verber 426–450
+
+--- questions ---
+1. tænde — зажигать, включать. Perfektum participium?
+* tændt
+  tændte
+  tænder
+  tændet
+
+2. afsætte — выделять (средства). Præteritum?
+* afsatte
+  afsat
+  afsætter
+  afsættede
+
+3. kontakte — связываться. Perfektum participium?
+* kontaktet
+  kontaktede
+  kontakter
+  kontakte
+
+4. skræmme — пугать. Præteritum?
+* skræmte
+  skræmt
+  skræmmer
+  skræmmede
+
+5. skjule — скрывать, прятать. Perfektum participium?
+* skjult
+  skjulte
+  skjuler
+  skjulet
+
+6. kontrollere — контролировать, проверять. Præteritum?
+* kontrollerede
+  kontrolleret
+  kontrollerer
+  kontrollerte
+
+7. bide — кусать. Perfektum participium?
+* bidt
+  bed
+  bider
+  bidet
+
+8. lancere — запускать (продукт). Præteritum?
+* lancerede
+  lanceret
+  lancerer
+  lancerte
+
+9. danse — танцевать. Perfektum participium?
+* danset
+  dansede
+  danser
+  danst
+
+10. teste — тестировать. Præteritum?
+* testede
+  testet
+  tester
+  teste
+
+11. engagere — вовлекать. Perfektum participium?
+* engageret
+  engagerede
+  engagerer
+  engagert
+
+12. forblive — оставаться. Præteritum?
+* forblev
+  forblevet
+  forbliver
+  forblivede
+
+13. støde — толкать. Perfektum participium?
+* stødt
+  stødte
+  støder
+  stødet
+
+14. gide — хотеть (иметь охоту). Præteritum?
+* gad
+  gidet
+  gider
+  gidte
+
+15. anklage — обвинять. Perfektum participium?
+* anklaget
+  anklagede
+  anklager
+  anklagt
+
+16. fortjene — заслуживать. Præteritum?
+* fortjente
+  fortjent
+  fortjener
+  fortjenede
+
+17. rive — рвать. Perfektum participium?
+* revet
+  rev
+  river
+  rivet
+
+18. supplere — дополнять. Præteritum?
+* supplerede
+  suppleret
+  supplerer
+  supplerte
+
+19. smitte — заражать. Perfektum participium?
+* smittet
+  smittede
+  smitter
+  smitte
+
+20. forlænge — продлевать. Præteritum?
+* forlængede
+  forlænget
+  forlænger
+  forlængte
+
+21. forekomme — встречаться. Perfektum participium?
+* forekommet
+  forekom
+  forekommer
+  forekomt
+
+22. overholde — соблюдать. Præteritum?
+* overholdt
+  overholder
+  overholdede
+  overholde
+
+23. afvikle — проводить. Perfektum participium?
+* afviklet
+  afviklede
+  afvikler
+  afviklt
+
+24. anmelde — заявлять (в полицию). Præteritum?
+* anmeldte
+  anmeldt
+  anmelder
+  anmeldede
+
+25. kombinere — сочетать. Perfektum participium?
+* kombineret
+  kombinerede
+  kombinerer
+  kombinert
