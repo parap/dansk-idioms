@@ -1289,7 +1289,7 @@ def the_public_listener_does_not_serve_the_admin_surface(b):
 # belongs on <html> and every run of Danish needs lang="da" of its own; otherwise Danish is
 # read aloud with a Russian voice. WCAG 3.1.1, 3.1.2, 1.4.3 and 2.4.1.
 
-PAGES = ['/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video']
+PAGES = ['/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs']
 
 
 def open_in(b, path, ui_lang='ru'):
@@ -1377,6 +1377,13 @@ def danish_text_in_a_film_quiz_is_marked_danish(b):
     open_in(b, '/video')
     open_film(b)
     assert_danish_marked(b, ['.q p', '.q .opt'], ['#title'])
+
+
+@check
+def the_options_of_a_verb_drill_are_marked_danish(b):
+    open_in(b, '/verbs')
+    open_verb_set(b)
+    assert_danish_marked(b, ['.q .opt'], ['#title'])
 
 
 @check
