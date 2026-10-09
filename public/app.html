@@ -8,7 +8,7 @@
 <link rel="manifest" href="/manifest.webmanifest">
 <style>
   :root{
-    --bg:#f5f6f8; --card:#fff; --ink:#14171c; --muted:#6b7280; --line:#e0e4ea;
+    --bg:#f5f6f8; --card:#fff; --ink:#14171c; --muted:#676e7b; --line:#e0e4ea;
     --accent:#c8102e; --accent-ink:#fff; --ok:#127a4a; --okbg:#e7f6ee;
     --bad:#b3261e; --badbg:#fdecea; --chip:#eef1f5; --shadow:0 1px 2px rgba(20,23,28,.06);
   }
@@ -359,10 +359,10 @@ function render(q) {
         <span class="track"><i style="width:${pct}%"></i></span>
         <span>${asked ? Math.round(100 * q.score.correct / asked) + '%' : ''}</span>
       </div>
-      <div class="term${q.direction === 'tr_to_da' ? ' ru' : ''}">${esc(q.prompt.text)}</div>
+      <div class="term${q.direction === 'tr_to_da' ? ' ru' : ''}"${q.direction === 'tr_to_da' ? '' : ' lang="da"'}>${esc(q.prompt.text)}</div>
       <div class="note">${q.prompt.note ? esc(q.prompt.note) + ' · ' : ''}${esc(q.prompt.kind)}</div>
       <div class="opts">${q.options.map(o =>
-        `<button class="opt" data-i="${o.index}"><i>${'ABCD'[o.index]}</i><span>${esc(o.text)}</span></button>`
+        `<button class="opt" data-i="${o.index}"><i>${'ABCD'[o.index]}</i><span${q.direction === 'tr_to_da' ? ' lang="da"' : ''}>${esc(o.text)}</span></button>`
       ).join('')}</div>
       <div id="fb"></div>
     </div>`;

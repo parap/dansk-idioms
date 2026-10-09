@@ -8,7 +8,7 @@
 <link rel="manifest" href="/manifest.webmanifest">
 <style>
   :root{
-    --bg:#f5f6f8; --card:#fff; --ink:#14171c; --muted:#6b7280; --line:#e0e4ea;
+    --bg:#f5f6f8; --card:#fff; --ink:#14171c; --muted:#676e7b; --line:#e0e4ea;
     --accent:#c8102e; --accent-ink:#fff; --ok:#127a4a; --okbg:#e7f6ee;
     --bad:#b3261e; --badbg:#fdecea; --chip:#eef1f5; --shadow:0 1px 2px rgba(20,23,28,.06);
   }
@@ -75,7 +75,7 @@
     <span class="spacer"></span>
     <span id="langs" class="langs"></span>
   </header>
-  <div id="view"></div>
+  <main id="view"></main>
 </div>
 
 <script type="module">
@@ -150,7 +150,7 @@ function listView() {
       <p class="muted" style="margin:0 0 .9rem">${esc(t('intro'))}</p>
       <ul id="films">
         ${films.map(f => `<li>
-          <a href="/video?v=${encodeURIComponent(f.slug)}">${esc(f.title)}</a>
+          <a href="/video?v=${encodeURIComponent(f.slug)}" lang="da">${esc(f.title)}</a>
           <span class="n">${esc(t('questions', f.questions).replace('{n}', f.questions))}</span>
         </li>`).join('')}
       </ul>
@@ -162,15 +162,15 @@ function filmView() {
   const right = Object.values(marks).filter(m => m.chosen === m.correct).length;
   const answered = Object.keys(marks).length;
   return `<a class="cta back" href="/video"><b aria-hidden="true">←</b><span>${esc(t('back'))}</span></a>
-    <h2 style="margin:0 0 12px">${esc(film.title)}</h2>
+    <h2 style="margin:0 0 12px" lang="da">${esc(film.title)}</h2>
     <div class="film"><iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(film.youtube)}"
       title="${esc(film.title)}" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
     <div class="card">
       ${round.items.map(item => {
         const m = marks[item.position];
         return `<div class="q" data-pos="${item.position}">
-          <p>${item.position}. ${esc(item.prompt)}</p>
-          <div class="opts">${item.options.map(o => {
+          <p lang="da">${item.position}. ${esc(item.prompt)}</p>
+          <div class="opts" lang="da">${item.options.map(o => {
             const cls = !m ? '' : o.index === m.correct ? 'right' : o.index === m.chosen ? 'wrong' : '';
             return `<button class="opt ${cls}" data-i="${o.index}" ${m ? 'disabled' : ''}>${esc(o.text)}</button>`;
           }).join('')}</div>

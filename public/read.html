@@ -8,7 +8,7 @@
 <link rel="manifest" href="/manifest.webmanifest">
 <style>
   :root{
-    --bg:#f5f6f8; --card:#fff; --ink:#14171c; --muted:#6b7280; --line:#e0e4ea;
+    --bg:#f5f6f8; --card:#fff; --ink:#14171c; --muted:#676e7b; --line:#e0e4ea;
     --accent:#c8102e; --accent-ink:#fff; --ok:#127a4a; --okbg:#e7f6ee;
     --bad:#b3261e; --badbg:#fdecea; --chip:#eef1f5; --shadow:0 1px 2px rgba(20,23,28,.06);
   }
@@ -102,7 +102,7 @@
     <span id="score" class="score muted"></span>
     <span id="langs" class="langs" hidden></span>
   </header>
-  <div id="view"></div>
+  <main id="view"></main>
   <div id="history"></div>
 </div>
 
@@ -212,6 +212,7 @@ const isExam = () => paper?.mode === 'exam';
  * rebuilds the screen, and rebuilding a round in progress would throw it away.
  */
 function paintLanguages() {
+  document.documentElement.lang = currentLang();
   const box = $('#langs');
   box.hidden = false;
   box.innerHTML = Object.keys(STRINGS).map(code =>
@@ -327,7 +328,7 @@ function render() {
   document.addEventListener('keydown', onKey);
   view.innerHTML = `
     <div class="grid">
-      <div id="texts"></div>
+      <div id="texts" lang="da"></div>
       <section class="card">
         <h2>${esc(t('questions'))}</h2>
         ${paper.items.length > 1 ? `<nav class="tabs" id="tabs">
@@ -411,8 +412,8 @@ function itemHtml(item) {
     <div class="item" id="item-${item.position}" data-pos="${item.position}"
          data-passage="${item.passage ?? 0}">
       <h3>${item.position}. ${item.points} ${esc(t('points', item.points))}</h3>
-      ${item.prompt ? `<p class="prompt">${esc(item.prompt)}</p>` : ''}
-      <div class="opts">
+      ${item.prompt ? `<p class="prompt" lang="da">${esc(item.prompt)}</p>` : ''}
+      <div class="opts" lang="da">
         ${item.options.map(o => `
           <button class="opt" data-pos="${item.position}" data-index="${o.index}">
             <strong>${label(o.index)}.</strong> ${esc(o.text)}

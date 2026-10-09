@@ -1284,6 +1284,120 @@ def the_public_listener_does_not_serve_the_admin_surface(b):
     assert forged == 404, 'a header moved the admin surface onto the public listener'
 
 
+# ---- accessibility ---------------------------------------------------------
+# A screen reader picks its voice from the nearest lang attribute, so the interface language
+# belongs on <html> and every run of Danish needs lang="da" of its own; otherwise Danish is
+# read aloud with a Russian voice. WCAG 3.1.1, 3.1.2, 1.4.3 and 2.4.1.
+
+PAGES = ['/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs']
+
+
+def open_in(b, path, ui_lang='ru'):
+    b.goto(path)
+    b.js(f'localStorage.setItem("ui_lang", "{ui_lang}")')
+    b.goto(path)
+    b.until('!!document.querySelector("button.lang")', what=f'{path} to render')
+
+
+def lang_of(b, selector):
+    return b.js(f'document.querySelector({json.dumps(selector)})?.closest("[lang]")?.lang ?? null')
+
+
+CONTRAST_JS = r"""(() => {
+  const rgb = c => c.match(/[\d.]+/g).slice(0, 4).map(Number);
+  const lum = ([r, g, b]) => [r, g, b].map(v => v / 255)
+    .map(v => v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4)
+    .reduce((a, v, i) => a + v * [0.2126, 0.7152, 0.0722][i], 0);
+  const el = document.querySelector('button.lang[aria-pressed="false"]');
+  let bg = el, c;
+  do { c = rgb(getComputedStyle(bg).backgroundColor); bg = bg.parentElement; } while (c[3] === 0 && bg);
+  const [a, b] = [lum(rgb(getComputedStyle(el).color)), lum(c)].sort((x, y) => y - x);
+  return Math.round((a + 0.05) / (b + 0.05) * 100) / 100;
+})()"""
+
+
+@check
+def every_page_declares_the_interface_language(b):
+    wrong = []
+    for path in PAGES:
+        open_in(b, path, 'ru')
+        lang = b.js('document.documentElement.lang')
+        if lang != 'ru':
+            wrong.append(f'{path}={lang}')
+    assert not wrong, f'pages declare a language other than the interface one: {wrong}'
+
+
+@check
+def every_page_has_a_main_region(b):
+    missing = []
+    for path in PAGES:
+        open_in(b, path)
+        if not b.js('!!document.querySelector("main, [role=main]")'):
+            missing.append(path)
+    assert not missing, f'no main region on {missing}'
+
+
+@check
+def muted_text_is_readable_in_both_colour_schemes(b):
+    low = []
+    for scheme in ('light', 'dark'):
+        b.send('Emulation.setEmulatedMedia', features=[{'name': 'prefers-color-scheme', 'value': scheme}])
+        for path in PAGES:
+            open_in(b, path)
+            ratio = b.js(CONTRAST_JS)
+            if ratio < 4.5:
+                low.append(f'{path} {scheme} {ratio}')
+    b.send('Emulation.setEmulatedMedia', features=[])
+    assert not low, f'muted text below 4.5:1: {low}'
+
+
+def assert_danish_marked(b, danish, interface):
+    for sel in danish:
+        assert lang_of(b, sel) == 'da', f'{sel} is Danish but sits under lang={lang_of(b, sel)}'
+    for sel in interface:
+        assert lang_of(b, sel) != 'da', f'{sel} is interface text but sits under lang="da"'
+
+
+@check
+def danish_text_in_a_reading_paper_is_marked_danish(b):
+    open_in(b, '/read')
+    start_round(b)
+    assert_danish_marked(b, ['.opt'], ['.item h3'])
+
+
+@check
+def danish_text_in_an_exam_paper_is_marked_danish(b):
+    open_in(b, '/proeve')
+    start_paper(b)
+    assert_danish_marked(b, ['.opt'], ['.item h3'])
+
+
+@check
+def danish_text_in_a_film_quiz_is_marked_danish(b):
+    open_in(b, '/video')
+    open_film(b)
+    assert_danish_marked(b, ['.q p', '.q .opt'], ['#title'])
+
+
+@check
+def the_options_of_a_verb_drill_are_marked_danish(b):
+    open_in(b, '/verbs')
+    open_verb_set(b)
+    assert_danish_marked(b, ['.q .opt'], ['#title'])
+
+
+@check
+def an_idiom_round_marks_whichever_side_is_danish(b):
+    for direction, danish, translated in (('da_to_tr', '.term', '.opt span'), ('tr_to_da', '.opt span', '.term')):
+        open_in(b, '/')
+        b.js(f'localStorage.setItem("quiz_direction", "{direction}")')
+        b.goto('/')
+        b.until('!!document.querySelector("#go")', what='the start button')
+        b.js('document.querySelector("#go").click()')
+        b.until('!!document.querySelector(".opt")', what='an idiom question')
+        assert_danish_marked(b, [danish], [translated])
+
+
 # ---- runner ----------------------------------------------------------------
 
 def main():
