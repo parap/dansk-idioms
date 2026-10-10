@@ -54,8 +54,10 @@ foreach ($files as $file) {
             if (!$replace) {
                 // Nothing to do is not a rejection. Conflating the two means a batch of
                 // the whole directory can never succeed twice, which is exactly how this
-                // is run from a deployment.
-                printf("  %-40s slug '%s' already loaded -- pass --replace to overwrite\n", $name, $doc['slug']);
+                // is run from a deployment. Notes are display only, so they are kept current.
+                $notes = $repo->refreshNotes($doc);
+                printf("  %-40s slug '%s' already loaded -- pass --replace to overwrite%s\n",
+                    $name, $doc['slug'], $notes > 0 ? ", {$notes} note(s) refreshed" : '');
                 $skipped++;
                 continue;
             }

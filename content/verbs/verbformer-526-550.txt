@@ -4,150 +4,175 @@ title: Verber 526–550
 
 --- questions ---
 1. beregnede (datid) — рассчитывать. Førnutid?
+> navneform beregne · nutid beregner · datid beregnede · førnutid beregnet · bydeform beregn — рассчитывать
 * beregnet
   beregner
   beregne
   beregn
 
 2. hersker (nutid) — господствовать. Navneform?
+> navneform herske · nutid hersker · datid herskede · førnutid hersket · bydeform hersk — господствовать
 * herske
   herskede
   hersket
   hersk
 
 3. forske (navneform) — исследовать (научно). Datid?
+> navneform forske · nutid forsker · datid forskede · førnutid forsket · bydeform forsk — исследовать (научно)
 * forskede
   forsket
   forsker
   forsk
 
 4. banke (navneform) — стучать. Datid?
+> navneform banke · nutid banker · datid bankede · førnutid banket · bydeform bank — стучать; бить
 * bankede
   banket
   banker
   bank
 
 5. tilknytte (navneform) — прикреплять, присоединять. Førnutid?
+> navneform tilknytte · nutid tilknytter · datid tilknyttede · førnutid tilknyttet · bydeform tilknyt — прикреплять, присоединять
 * tilknyttet
   tilknyttede
   tilknytter
   tilknyt
 
 6. rådgiver (nutid) — консультировать. Datid?
+> navneform rådgive · nutid rådgiver · datid rådgav · førnutid rådgivet · bydeform rådgiv — консультировать
 * rådgav
   rådgivet
   rådgive
   rådgiv
 
 7. havnet (førnutid) — оказываться (в итоге). Navneform?
+> navneform havne · nutid havner · datid havnede · førnutid havnet · bydeform havn — оказываться (в итоге)
 * havne
   havnede
   havner
   havn
 
 8. overlad (bydeform) — оставлять, передавать. Nutid?
+> navneform overlade · nutid overlader · datid overlod · førnutid overladt · bydeform overlad — оставлять, передавать
 * overlader
   overlod
   overladt
   overlade
 
 9. forlangte (datid) — требовать. Navneform?
+> navneform forlange · nutid forlanger · datid forlangte · førnutid forlangt · bydeform forlang — требовать
 * forlange
   forlangt
   forlanger
   forlang
 
 10. underskrive (navneform) — подписывать. Datid?
+> navneform underskrive · nutid underskriver · datid underskrev · førnutid underskrevet · bydeform underskriv — подписывать
 * underskrev
   underskrevet
   underskriver
   underskriv
 
 11. mistænker (nutid) — подозревать. Datid?
+> navneform mistænke · nutid mistænker · datid mistænkte · førnutid mistænkt · bydeform mistænk — подозревать
 * mistænkte
   mistænkt
   mistænke
   mistænk
 
 12. berører (nutid) — касаться, затрагивать. Bydeform?
+> navneform berøre · nutid berører · datid berørte · førnutid berørt · bydeform berør — касаться, затрагивать
 * berør
   berørte
   berørt
   berøre
 
 13. ifør (bydeform) — (iføre sig) облачаться. Navneform?
+> navneform iføre · nutid ifører · datid iførte · førnutid iført · bydeform ifør — (iføre sig) облачаться
 * iføre
   iførte
   iført
   ifører
 
 14. orienter (bydeform) — информировать. Nutid?
+> navneform orientere · nutid orienterer · datid orienterede · førnutid orienteret · bydeform orienter — информировать; (orientere sig) ориентироваться
 * orienterer
   orienterede
   orienteret
   orientere
 
 15. opholder (nutid) — (opholde sig) находиться, пребывать. Førnutid?
+> navneform opholde · nutid opholder · datid opholdt · førnutid opholdt · bydeform ophold — (opholde sig) находиться, пребывать
 * opholdt
   opholde
   ophold
   opholdet
 
 16. sårer (nutid) — ранить, обижать. Førnutid?
+> navneform såre · nutid sårer · datid sårede · førnutid såret · bydeform sår — ранить, обижать
 * såret
   sårede
   såre
   sår
 
 17. gifte (navneform) — (gifte sig) жениться, выходить замуж. Bydeform?
+> navneform gifte · nutid gifter · datid giftede · førnutid giftet · bydeform gift — (gifte sig) жениться, выходить замуж
 * gift
   giftede
   giftet
   gifter
 
 18. tjekke (navneform) — проверять. Nutid?
+> navneform tjekke · nutid tjekker · datid tjekkede · førnutid tjekket · bydeform tjek — проверять
 * tjekker
   tjekkede
   tjekket
   tjek
 
 19. isolerede (datid) — изолировать. Nutid?
+> navneform isolere · nutid isolerer · datid isolerede · førnutid isoleret · bydeform isoler — изолировать
 * isolerer
   isoleret
   isolere
   isoler
 
 20. omgav (datid) — окружать. Nutid?
+> navneform omgive · nutid omgiver · datid omgav · førnutid omgivet · bydeform omgiv — окружать
 * omgiver
   omgivet
   omgive
   omgiv
 
 21. undlad (bydeform) — воздерживаться. Datid?
+> navneform undlade · nutid undlader · datid undlod · førnutid undladt · bydeform undlad — воздерживаться
 * undlod
   undladt
   undlader
   undlade
 
 22. irriterede (datid) — раздражать. Bydeform?
+> navneform irritere · nutid irriterer · datid irriterede · førnutid irriteret · bydeform irriter — раздражать
 * irriter
   irriteret
   irriterer
   irritere
 
 23. antager (nutid) — предполагать. Datid?
+> navneform antage · nutid antager · datid antog · førnutid antaget · bydeform antag — предполагать
 * antog
   antaget
   antage
   antag
 
 24. variere (navneform) — варьироваться. Bydeform?
+> navneform variere · nutid varierer · datid varierede · førnutid varieret · bydeform varier — варьироваться
 * varier
   varierede
   varieret
   varierer
 
 25. tilpasser (nutid) — приспосабливать. Bydeform?
+> navneform tilpasse · nutid tilpasser · datid tilpassede · førnutid tilpasset · bydeform tilpas — приспосабливать
 * tilpas
   tilpassede
   tilpasset

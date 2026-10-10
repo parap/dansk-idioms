@@ -4,149 +4,174 @@ title: Verber 1–25
 
 --- questions ---
 1. er (nutid) — быть. Navneform?
+> navneform være · nutid er · datid var · førnutid været · bydeform vær — быть
 * være
   var
   været
   vær
 
 2. haft (førnutid) — иметь. Bydeform?
+> navneform have · nutid har · datid havde · førnutid haft · bydeform hav — иметь; (вспом.) перфект
 * hav
   havde
   har
   have
 
 3. kan (nutid) — мочь, уметь. Navneform?
+> navneform kunne · nutid kan · datid kunne · førnutid kunnet — мочь, уметь
 * kunne
   kunnet
   kunte
   kunner
 
 4. blevet (førnutid) — становиться. Bydeform?
+> navneform blive · nutid bliver · datid blev · førnutid blevet · bydeform bliv — становиться; оставаться; (вспом.) пассив
 * bliv
   blev
   bliver
   blive
 
 5. skulle (navneform) — быть должным. Førnutid?
+> navneform skulle · nutid skal · datid skulle · førnutid skullet — быть должным; собираться (будущее)
 * skullet
   skal
   skult
   skuller
 
 6. vil (nutid) — хотеть. Datid?
+> navneform ville · nutid vil · datid ville · førnutid villet — хотеть; (вспом.) будущее
 * ville
   villet
   vilte
   viller
 
 7. få (bydeform) — получать. Datid?
+> navneform få · nutid får · datid fik · førnutid fået · bydeform få — получать; (få lov) получить разрешение
 * fik
   fået
   får
   fåte
 
 8. sagde (datid) — сказать, говорить. Førnutid?
+> navneform sige · nutid siger · datid sagde · førnutid sagt · bydeform sig — сказать, говорить
 * sagt
   siger
   sige
   sig
 
 9. kom (datid) — приходить, приезжать. Førnutid?
+> navneform komme · nutid kommer · datid kom · førnutid kommet · bydeform kom — приходить, приезжать
 * kommet
   kommer
   komme
   komt
 
 10. gå (navneform) — идти (пешком). Nutid?
+> navneform gå · nutid går · datid gik · førnutid gået · bydeform gå — идти (пешком); уходить
 * går
   gik
   gået
   gåte
 
 11. gør (bydeform) — делать. Førnutid?
+> navneform gøre · nutid gør · datid gjorde · førnutid gjort · bydeform gør — делать
 * gjort
   gjorde
   gøre
   gøret
 
 12. se (bydeform) — видеть. Nutid?
+> navneform se · nutid ser · datid så · førnutid set · bydeform se — видеть; смотреть
 * ser
   så
   set
   seede
 
 13. taget (førnutid) — брать. Nutid?
+> navneform tage · nutid tager · datid tog · førnutid taget · bydeform tag — брать; ехать (на транспорте)
 * tager
   tog
   tage
   tag
 
 14. giv (bydeform) — давать. Nutid?
+> navneform give · nutid giver · datid gav · førnutid givet · bydeform giv — давать
 * giver
   gav
   givet
   give
 
 15. fundet (førnutid) — находить. Bydeform?
+> navneform finde · nutid finder · datid fandt · førnutid fundet · bydeform find — находить
 * find
   fandt
   finder
   finde
 
 16. må (nutid) — можно. Datid?
+> navneform måtte · nutid må · datid måtte · førnutid måttet — можно; быть вынужденным
 * måtte
   måttet
   måtter
 
 17. står (nutid) — стоять. Navneform?
+> navneform stå · nutid står · datid stod · førnutid stået · bydeform stå — стоять
 * stå
   stod
   stået
   ståte
 
 18. bruger (nutid) — использовать. Bydeform?
+> navneform bruge · nutid bruger · datid brugte · førnutid brugt · bydeform brug — использовать; тратить
 * brug
   brugte
   brugt
   bruge
 
 19. vist (førnutid) — показывать. Datid?
+> navneform vise · nutid viser · datid viste · førnutid vist · bydeform vis — показывать
 * viste
   viser
   vise
   vis
 
 20. satte (datid) — ставить, сажать. Navneform?
+> navneform sætte · nutid sætter · datid satte · førnutid sat · bydeform sæt — ставить, сажать
 * sætte
   sat
   sætter
   sæt
 
 21. holdt (førnutid) — держать. Navneform?
+> navneform holde · nutid holder · datid holdt · førnutid holdt · bydeform hold — держать; (holde af) любить; (holde op) прекращать
 * holde
   holder
   hold
   holdede
 
 22. mente (datid) — считать, полагать. Navneform?
+> navneform mene · nutid mener · datid mente · førnutid ment · bydeform men — считать, полагать; иметь в виду
 * mene
   ment
   mener
   men
 
 23. skriv (bydeform) — писать. Nutid?
+> navneform skrive · nutid skriver · datid skrev · førnutid skrevet · bydeform skriv — писать
 * skriver
   skrev
   skrevet
   skrive
 
 24. fortalt (førnutid) — рассказывать. Navneform?
+> navneform fortælle · nutid fortæller · datid fortalte · førnutid fortalt · bydeform fortæl — рассказывать
 * fortælle
   fortalte
   fortæller
   fortæl
 
 25. lå (datid) — лежать. Nutid?
+> navneform ligge · nutid ligger · datid lå · førnutid ligget · bydeform lig — лежать
 * ligger
   ligget
   ligge

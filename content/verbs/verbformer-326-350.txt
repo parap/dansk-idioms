@@ -4,150 +4,175 @@ title: Verber 326–350
 
 --- questions ---
 1. råbt (førnutid) — кричать. Navneform?
+> navneform råbe · nutid råber · datid råbte · førnutid råbt · bydeform råb — кричать
 * råbe
   råbte
   råber
   råb
 
 2. godkende (navneform) — одобрять, утверждать. Førnutid?
+> navneform godkende · nutid godkender · datid godkendte · førnutid godkendt · bydeform godkend — одобрять, утверждать
 * godkendt
   godkendte
   godkender
   godkend
 
 3. fokuserer (nutid) — сосредоточиваться. Førnutid?
+> navneform fokusere · nutid fokuserer · datid fokuserede · førnutid fokuseret · bydeform fokuser — сосредоточиваться
 * fokuseret
   fokuserede
   fokusere
   fokuser
 
 4. involveret (førnutid) — вовлекать. Nutid?
+> navneform involvere · nutid involverer · datid involverede · førnutid involveret · bydeform involver — вовлекать
 * involverer
   involverede
   involvere
   involver
 
 5. arranger (bydeform) — устраивать, организовывать. Datid?
+> navneform arrangere · nutid arrangerer · datid arrangerede · førnutid arrangeret · bydeform arranger — устраивать, организовывать
 * arrangerede
   arrangeret
   arrangerer
   arrangere
 
 6. beskæftige (navneform) — занимать, давать работу. Nutid?
+> navneform beskæftige · nutid beskæftiger · datid beskæftigede · førnutid beskæftiget · bydeform beskæftig — занимать, давать работу; (beskæftige sig med) заниматься
 * beskæftiger
   beskæftigede
   beskæftiget
   beskæftig
 
 7. anholdt (førnutid) — арестовывать, задерживать. Bydeform?
+> navneform anholde · nutid anholder · datid anholdt · førnutid anholdt · bydeform anhold — арестовывать, задерживать
 * anhold
   anholder
   anholde
   anholdede
 
 8. reagerede (datid) — реагировать. Navneform?
+> navneform reagere · nutid reagerer · datid reagerede · førnutid reageret · bydeform reager — реагировать
 * reagere
   reageret
   reagerer
   reager
 
 9. eksistere (navneform) — существовать. Datid?
+> navneform eksistere · nutid eksisterer · datid eksisterede · førnutid eksisteret · bydeform eksister — существовать
 * eksisterede
   eksisteret
   eksisterer
   eksister
 
 10. springe (navneform) — прыгать. Nutid?
+> navneform springe · nutid springer · datid sprang · førnutid sprunget · bydeform spring — прыгать
 * springer
   sprang
   sprunget
   spring
 
 11. studerer (nutid) — учиться (в вузе), изучать. Navneform?
+> navneform studere · nutid studerer · datid studerede · førnutid studeret · bydeform studer — учиться (в вузе), изучать
 * studere
   studerede
   studeret
   studer
 
 12. bredte (datid) — расстилать. Førnutid?
+> navneform brede · nutid breder · datid bredte · førnutid bredt · bydeform bred — расстилать; (brede sig) распространяться
 * bredt
   breder
   brede
   bred
 
 13. tilhører (nutid) — принадлежать. Bydeform?
+> navneform tilhøre · nutid tilhører · datid tilhørte · førnutid tilhørt · bydeform tilhør — принадлежать
 * tilhør
   tilhørte
   tilhørt
   tilhøre
 
 14. trænger (nutid) — проникать. Bydeform?
+> navneform trænge · nutid trænger · datid trængte · førnutid trængt · bydeform træng — проникать; (trænge til) нуждаться
 * træng
   trængte
   trængt
   trænge
 
 15. sov (datid) — спать. Navneform?
+> navneform sove · nutid sover · datid sov · førnutid sovet · bydeform sov — спать
 * sove
   sovet
   sover
   sovte
 
 16. malede (datid) — красить. Nutid?
+> navneform male · nutid maler · datid malede · førnutid malet · bydeform mal — красить; рисовать (красками)
 * maler
   malet
   male
   mal
 
 17. forhandlet (førnutid) — вести переговоры. Bydeform?
+> navneform forhandle · nutid forhandler · datid forhandlede · førnutid forhandlet · bydeform forhandl — вести переговоры
 * forhandl
   forhandlede
   forhandler
   forhandle
 
 18. tak (bydeform) — благодарить. Navneform?
+> navneform takke · nutid takker · datid takkede · førnutid takket · bydeform tak — благодарить
 * takke
   takkede
   takket
   takker
 
 19. fordelte (datid) — распределять. Bydeform?
+> navneform fordele · nutid fordeler · datid fordelte · førnutid fordelt · bydeform fordel — распределять
 * fordel
   fordelt
   fordeler
   fordele
 
 20. anså (datid) — считать (кем-то). Førnutid?
+> navneform anse · nutid anser · datid anså · førnutid anset · bydeform anse — считать (кем-то)
 * anset
   anser
   anse
   anst
 
 21. vare (navneform) — длиться. Nutid?
+> navneform vare · nutid varer · datid varede · førnutid varet · bydeform var — длиться
 * varer
   varede
   varet
   var
 
 22. administrerer (nutid) — управлять, администрировать. Bydeform?
+> navneform administrere · nutid administrerer · datid administrerede · førnutid administreret · bydeform administrer — управлять, администрировать
 * administrer
   administrerede
   administreret
   administrere
 
 23. forberedt (førnutid) — готовить(ся). Nutid?
+> navneform forberede · nutid forbereder · datid forberedte · førnutid forberedt · bydeform forbered — готовить(ся)
 * forbereder
   forberedte
   forberede
   forbered
 
 24. fremhævede (datid) — выделять, подчёркивать. Navneform?
+> navneform fremhæve · nutid fremhæver · datid fremhævede · førnutid fremhævet · bydeform fremhæv — выделять, подчёркивать
 * fremhæve
   fremhævet
   fremhæver
   fremhæv
 
 25. binde (navneform) — связывать. Datid?
+> navneform binde · nutid binder · datid bandt · førnutid bundet · bydeform bind — связывать
 * bandt
   bundet
   binder

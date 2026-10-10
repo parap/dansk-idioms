@@ -4,132 +4,154 @@ title: Genkend verbet 1
 
 --- questions ---
 1. var — datid af …?
+> navneform være · nutid er · datid var · førnutid været · bydeform vær — быть
 * være
   svare
   varme
   advare
 
 2. er — nutid af …?
+> navneform være · nutid er · datid var · førnutid været · bydeform vær — быть
 * være
   levere
   lære
   bære
 
 3. har — nutid af …?
+> navneform have · nutid har · datid havde · førnutid haft · bydeform hav — иметь; (вспом.) перфект
 * have
   havne
   hade
   høre
 
 4. kan — nutid af …?
+> navneform kunne · nutid kan · datid kunne · førnutid kunnet — мочь, уметь
 * kunne
   ane
   danne
   knuse
 
 5. blev — datid af …?
+> navneform blive · nutid bliver · datid blev · førnutid blevet · bydeform bliv — становиться; оставаться; (вспом.) пассив
 * blive
   leve
   blæse
   lave
 
 6. skal — nutid af …?
+> navneform skulle · nutid skal · datid skulle · førnutid skullet — быть должным; собираться (будущее)
 * skulle
   skille
   skjule
   skylde
 
 7. vil — nutid af …?
+> navneform ville · nutid vil · datid ville · førnutid villet — хотеть; (вспом.) будущее
 * ville
   hvile
   tvivle
   pille
 
 8. fik — datid af …?
+> navneform få · nutid får · datid fik · førnutid fået · bydeform få — получать; (få lov) получить разрешение
 * få
   afvikle
   formå
   finde
 
 9. sagde — datid af …?
+> navneform sige · nutid siger · datid sagde · førnutid sagt · bydeform sig — сказать, говорить
 * sige
   stige
   sigte
   smage
 
 10. kom — datid af …?
+> navneform komme · nutid kommer · datid kom · førnutid kommet · bydeform kom — приходить, приезжать
 * komme
   koge
   kommentere
   koste
 
 11. gik — datid af …?
+> navneform gå · nutid går · datid gik · førnutid gået · bydeform gå — идти (пешком); уходить
 * gå
   give
   gide
   gribe
 
 12. gjorde — datid af …?
+> navneform gøre · nutid gør · datid gjorde · førnutid gjort · bydeform gør — делать
 * gøre
   græde
   gribe
   grine
 
 13. gør — nutid af …?
+> navneform gøre · nutid gør · datid gjorde · førnutid gjort · bydeform gør — делать
 * gøre
   køre
   høre
   føre
 
 14. så — datid af …?
+> navneform se · nutid ser · datid så · førnutid set · bydeform se — видеть; смотреть
 * se
   såre
   stå
   ske
 
 15. tog — datid af …?
+> navneform tage · nutid tager · datid tog · førnutid taget · bydeform tag — брать; ехать (на транспорте)
 * tage
   stige
   koge
   tvinge
 
 16. gav — datid af …?
+> navneform give · nutid giver · datid gav · førnutid givet · bydeform giv — давать
 * give
   begrave
   have
   lave
 
 17. fandt — datid af …?
+> navneform finde · nutid finder · datid fandt · førnutid fundet · bydeform find — находить
 * finde
   forandre
   vinde
   minde
 
 18. må — nutid af …?
+> navneform måtte · nutid må · datid måtte · førnutid måttet — можно; быть вынужденным
 * måtte
   måle
   smitte
   formå
 
 19. stod — datid af …?
+> navneform stå · nutid står · datid stod · førnutid stået · bydeform stå — стоять
 * stå
   støde
   stole
   stoppe
 
 20. satte — datid af …?
+> navneform sætte · nutid sætter · datid satte · førnutid sat · bydeform sæt — ставить, сажать
 * sætte
   starte
   støtte
   slutte
 
 21. holdt — datid af …?
+> navneform holde · nutid holder · datid holdt · førnutid holdt · bydeform hold — держать; (holde af) любить; (holde op) прекращать
 * holde
   hælde
   hylde
   lade
 
 22. skrev — datid af …?
+> navneform skrive · nutid skriver · datid skrev · førnutid skrevet · bydeform skriv — писать
 * skrive
   skride
   skrige

@@ -4,150 +4,175 @@ title: Verber 476–500
 
 --- questions ---
 1. forpligtede (datid) — обязывать. Bydeform?
+> navneform forpligte · nutid forpligter · datid forpligtede · førnutid forpligtet · bydeform forpligt — обязывать
 * forpligt
   forpligtet
   forpligter
   forpligte
 
 2. råd (bydeform) — (råde over) располагать. Førnutid?
+> navneform råde · nutid råder · datid rådede · førnutid rådet · bydeform råd — (råde over) располагать; советовать
 * rådet
   rådede
   råder
   råde
 
 3. indebærer (nutid) — подразумевать, влечь. Navneform?
+> navneform indebære · nutid indebærer · datid indebar · førnutid indebåret · bydeform indebær — подразумевать, влечь
 * indebære
   indebar
   indebåret
   indebær
 
 4. klage (navneform) — жаловаться. Nutid?
+> navneform klage · nutid klager · datid klagede · førnutid klaget · bydeform klag — жаловаться
 * klager
   klagede
   klaget
   klag
 
 5. bekæmper (nutid) — бороться с. Bydeform?
+> navneform bekæmpe · nutid bekæmper · datid bekæmpede · førnutid bekæmpet · bydeform bekæmp — бороться с
 * bekæmp
   bekæmpede
   bekæmpet
   bekæmpe
 
 6. overføre (navneform) — переводить (деньги), передавать. Datid?
+> navneform overføre · nutid overfører · datid overførte · førnutid overført · bydeform overfør — переводить (деньги), передавать
 * overførte
   overført
   overfører
   overfør
 
 7. resulter (bydeform) — приводить (к). Førnutid?
+> navneform resultere · nutid resulterer · datid resulterede · førnutid resulteret · bydeform resulter — приводить (к)
 * resulteret
   resulterede
   resulterer
   resultere
 
 8. spænde (navneform) — натягивать. Datid?
+> navneform spænde · nutid spænder · datid spændte · førnutid spændt · bydeform spænd — натягивать; застёгивать
 * spændte
   spændt
   spænder
   spænd
 
 9. definere (navneform) — определять. Førnutid?
+> navneform definere · nutid definerer · datid definerede · førnutid defineret · bydeform definer — определять
 * defineret
   definerede
   definerer
   definer
 
 10. opstille (navneform) — выставлять (кандидатуру), расставлять. Førnutid?
+> navneform opstille · nutid opstiller · datid opstillede · førnutid opstillet · bydeform opstil — выставлять (кандидатуру), расставлять
 * opstillet
   opstillede
   opstiller
   opstil
 
 11. skærper (nutid) — ужесточать, обострять. Datid?
+> navneform skærpe · nutid skærper · datid skærpede · førnutid skærpet · bydeform skærp — ужесточать, обострять
 * skærpede
   skærpet
   skærpe
   skærp
 
 12. lok (bydeform) — заманивать. Datid?
+> navneform lokke · nutid lokker · datid lokkede · førnutid lokket · bydeform lok — заманивать
 * lokkede
   lokket
   lokker
   lokke
 
 13. tilbringer (nutid) — проводить (время). Datid?
+> navneform tilbringe · nutid tilbringer · datid tilbragte · førnutid tilbragt · bydeform tilbring — проводить (время)
 * tilbragte
   tilbragt
   tilbringe
   tilbring
 
 14. gennemgår (nutid) — просматривать. Bydeform?
+> navneform gennemgå · nutid gennemgår · datid gennemgik · førnutid gennemgået · bydeform gennemgå — просматривать; проходить через
 * gennemgå
   gennemgik
   gennemgået
   gennemgåte
 
 15. passer (bydeform) — проходить мимо. Nutid?
+> navneform passere · nutid passerer · datid passerede · førnutid passeret · bydeform passer — проходить мимо
 * passerer
   passerede
   passeret
   passere
 
 16. standser (nutid) — останавливать(ся). Datid?
+> navneform standse · nutid standser · datid standsede · førnutid standset · bydeform stands — останавливать(ся)
 * standsede
   standset
   standse
   stands
 
 17. ryd (bydeform) — убирать (rydde op). Førnutid?
+> navneform rydde · nutid rydder · datid ryddede · førnutid ryddet · bydeform ryd — убирать (rydde op)
 * ryddet
   ryddede
   rydder
   rydde
 
 18. respekterede (datid) — уважать. Førnutid?
+> navneform respektere · nutid respekterer · datid respekterede · førnutid respekteret · bydeform respekter — уважать
 * respekteret
   respekterer
   respektere
   respekter
 
 19. glide (navneform) — скользить. Datid?
+> navneform glide · nutid glider · datid gled · førnutid gledet · bydeform glid — скользить
 * gled
   gledet
   glider
   glid
 
 20. svinger (nutid) — качать(ся). Datid?
+> navneform svinge · nutid svinger · datid svingede/svang · førnutid svinget · bydeform sving — качать(ся); поворачивать
 * svingede
   svinget
   svinge
   sving
 
 21. demonstrere (navneform) — демонстрировать. Datid?
+> navneform demonstrere · nutid demonstrerer · datid demonstrerede · førnutid demonstreret · bydeform demonstrer — демонстрировать
 * demonstrerede
   demonstreret
   demonstrerer
   demonstrer
 
 22. hældt (førnutid) — наливать. Navneform?
+> navneform hælde · nutid hælder · datid hældte · førnutid hældt · bydeform hæld — наливать
 * hælde
   hældte
   hælder
   hæld
 
 23. underhold (bydeform) — развлекать. Datid?
+> navneform underholde · nutid underholder · datid underholdt · førnutid underholdt · bydeform underhold — развлекать
 * underholdt
   underholder
   underholde
   underholdede
 
 24. pakkede (datid) — паковать. Navneform?
+> navneform pakke · nutid pakker · datid pakkede · førnutid pakket · bydeform pak — паковать
 * pakke
   pakket
   pakker
   pak
 
 25. klæde (navneform) — (klæde sig på) одеваться. Førnutid?
+> navneform klæde · nutid klæder · datid klædte · førnutid klædt · bydeform klæd — (klæde sig på) одеваться; идти (об одежде)
 * klædt
   klædte
   klæder

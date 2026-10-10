@@ -63,6 +63,8 @@
   .opt[disabled]{cursor:default}
   .opt.right{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
   .opt.wrong{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+  .q .note{margin:.55rem 0 0;font-size:.9rem;font-weight:400;line-height:1.55}
+  .note b{font-weight:600}
   #score{font-weight:600}
   .tip{position:relative;top:-.2em;display:inline-block;vertical-align:middle}
   .info{width:24px;height:24px;margin:0 .1rem 0 .15rem;padding:0;border:none;background:none;
@@ -302,6 +304,18 @@ function wireTips(view) {
 }
 document.addEventListener('click', () => closeTips());
 
+// "navneform være · nutid er … — быть": each form under its name, then the meaning.
+function noteHtml(note) {
+  const cut = note.indexOf(' — ');
+  if (cut < 0) return `<p class="note">${esc(note)}</p>`;
+  const forms = note.slice(0, cut).split(' · ').map(pair => {
+    const sp = pair.indexOf(' ');
+    return sp < 0 ? `<b>${esc(pair)}</b>`
+      : `<span class="muted">${esc(pair.slice(0, sp))}</span> <b>${esc(pair.slice(sp + 1))}</b>`;
+  }).join(' · ');
+  return `<p class="note"><span lang="da">${forms}</span> — ${esc(note.slice(cut + 3))}</p>`;
+}
+
 function setView() {
   const set = round.passages[0];
   const right = Object.values(marks).filter(m => m.chosen === m.correct).length;
@@ -317,6 +331,7 @@ function setView() {
             const cls = !m ? '' : o.index === m.correct ? 'right' : o.index === m.chosen ? 'wrong' : '';
             return `<button class="opt ${cls}" data-i="${o.index}" ${m ? 'disabled' : ''}>${esc(o.text)}</button>`;
           }).join('')}</div>
+          ${m && m.note ? noteHtml(m.note) : ''}
         </div>`;
       }).join('')}
       <p class="done"><span class="muted">${esc(t('score'))}:</span>
@@ -329,7 +344,7 @@ async function answer(position, chosen) {
   if (marks[position]) return;
   const r = await api(`/reading/sessions/${round.session_id}/answers`,
     {method: 'POST', body: {position, chosen_index: chosen}});
-  marks[position] = {chosen, correct: r.correct_index};
+  marks[position] = {chosen, correct: r.correct_index, note: r.note};
   render();
   if (Object.keys(marks).length === round.items.length) {
     api(`/reading/sessions/${round.session_id}/submit`, {method: 'POST'}).catch(() => {});

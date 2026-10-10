@@ -4,150 +4,175 @@ title: Verber 401–425
 
 --- questions ---
 1. sænk (bydeform) — опускать, снижать. Førnutid?
+> navneform sænke · nutid sænker · datid sænkede · førnutid sænket · bydeform sænk — опускать, снижать
 * sænket
   sænkede
   sænker
   sænke
 
 2. henvendte (datid) — (henvende sig) обращаться. Navneform?
+> navneform henvende · nutid henvender · datid henvendte · førnutid henvendt · bydeform henvend — (henvende sig) обращаться
 * henvende
   henvendt
   henvender
   henvend
 
 3. bestille (navneform) — заказывать. Nutid?
+> navneform bestille · nutid bestiller · datid bestilte · førnutid bestilt · bydeform bestil — заказывать; делать
 * bestiller
   bestilte
   bestilt
   bestil
 
 4. udpege (navneform) — назначать, указывать. Nutid?
+> navneform udpege · nutid udpeger · datid udpegede · førnutid udpeget · bydeform udpeg — назначать, указывать
 * udpeger
   udpegede
   udpeget
   udpeg
 
 5. knyttet (førnutid) — связывать. Navneform?
+> navneform knytte · nutid knytter · datid knyttede · førnutid knyttet · bydeform knyt — связывать; (knytte sig) привязываться
 * knytte
   knyttede
   knytter
   knyt
 
 6. finansierer (nutid) — финансировать. Bydeform?
+> navneform finansiere · nutid finansierer · datid finansierede · førnutid finansieret · bydeform finansier — финансировать
 * finansier
   finansierede
   finansieret
   finansiere
 
 7. udstil (bydeform) — выставлять. Datid?
+> navneform udstille · nutid udstiller · datid udstillede · førnutid udstillet · bydeform udstil — выставлять
 * udstillede
   udstillet
   udstiller
   udstille
 
 8. foretræk (bydeform) — предпочитать. Datid?
+> navneform foretrække · nutid foretrækker · datid foretrak · førnutid foretrukket · bydeform foretræk — предпочитать
 * foretrak
   foretrukket
   foretrækker
   foretrække
 
 9. påstået (førnutid) — утверждать. Nutid?
+> navneform påstå · nutid påstår · datid påstod · førnutid påstået · bydeform påstå — утверждать
 * påstår
   påstod
   påstå
   påståte
 
 10. konkludere (navneform) — делать вывод. Nutid?
+> navneform konkludere · nutid konkluderer · datid konkluderede · førnutid konkluderet · bydeform konkluder — делать вывод
 * konkluderer
   konkluderede
   konkluderet
   konkluder
 
 11. skilt (førnutid) — разделять. Datid?
+> navneform skille · nutid skiller · datid skilte · førnutid skilt · bydeform skil — разделять; (skilles) разводиться
 * skilte
   skiller
   skille
   skil
 
 12. afleverer (nutid) — сдавать, отдавать. Førnutid?
+> navneform aflevere · nutid afleverer · datid afleverede · førnutid afleveret · bydeform aflever — сдавать, отдавать
 * afleveret
   afleverede
   aflevere
   aflever
 
 13. legede (datid) — играть (о детях). Nutid?
+> navneform lege · nutid leger · datid legede · førnutid leget · bydeform leg — играть (о детях)
 * leger
   leget
   lege
   leg
 
 14. kommenter (bydeform) — комментировать. Førnutid?
+> navneform kommentere · nutid kommenterer · datid kommenterede · førnutid kommenteret · bydeform kommenter — комментировать
 * kommenteret
   kommenterede
   kommenterer
   kommentere
 
 15. rul (bydeform) — катить(ся). Førnutid?
+> navneform rulle · nutid ruller · datid rullede · førnutid rullet · bydeform rul — катить(ся)
 * rullet
   rullede
   ruller
   rulle
 
 16. udarbejd (bydeform) — разрабатывать, составлять. Navneform?
+> navneform udarbejde · nutid udarbejder · datid udarbejdede · førnutid udarbejdet · bydeform udarbejd — разрабатывать, составлять
 * udarbejde
   udarbejdede
   udarbejdet
   udarbejder
 
 17. række (navneform) — протягивать. Bydeform?
+> navneform række · nutid rækker · datid rakte · førnutid rakt · bydeform ræk — протягивать; хватать (быть достаточным)
 * ræk
   rakte
   rakt
   rækker
 
 18. stifte (navneform) — основывать. Bydeform?
+> navneform stifte · nutid stifter · datid stiftede · førnutid stiftet · bydeform stift — основывать
 * stift
   stiftede
   stiftet
   stifter
 
 19. smag (bydeform) — пробовать на вкус. Nutid?
+> navneform smage · nutid smager · datid smagte · førnutid smagt · bydeform smag — пробовать на вкус; иметь вкус
 * smager
   smagte
   smagt
   smage
 
 20. beviser (nutid) — доказывать. Bydeform?
+> navneform bevise · nutid beviser · datid beviste · førnutid bevist · bydeform bevis — доказывать
 * bevis
   beviste
   bevist
   bevise
 
 21. aftal (bydeform) — договариваться. Nutid?
+> navneform aftale · nutid aftaler · datid aftalte · førnutid aftalt · bydeform aftal — договариваться
 * aftaler
   aftalte
   aftalt
   aftale
 
 22. tildele (navneform) — присуждать, выделять. Nutid?
+> navneform tildele · nutid tildeler · datid tildelte · førnutid tildelt · bydeform tildel — присуждать, выделять
 * tildeler
   tildelte
   tildelt
   tildel
 
 23. afløs (bydeform) — сменять. Datid?
+> navneform afløse · nutid afløser · datid afløste · førnutid afløst · bydeform afløs — сменять
 * afløste
   afløst
   afløser
   afløse
 
 24. opbyggede (datid) — выстраивать. Navneform?
+> navneform opbygge · nutid opbygger · datid opbyggede · førnutid opbygget · bydeform opbyg — выстраивать
 * opbygge
   opbygget
   opbygger
   opbyg
 
 25. skruet (førnutid) — закручивать. Navneform?
+> navneform skrue · nutid skruer · datid skruede · førnutid skruet · bydeform skru — закручивать; (skrue op/ned) прибавлять/убавлять
 * skrue
   skruede
   skruer

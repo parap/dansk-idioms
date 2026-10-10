@@ -4,132 +4,154 @@ title: Genkend verbet 3
 
 --- questions ---
 1. brød — datid af …?
+> navneform bryde · nutid bryder · datid brød · førnutid brudt · bydeform bryd — ломать; нарушать; (bryde sig om) любить
 * bryde
   burde
   brede
   byde
 
 2. hang — datid af …?
+> navneform hænge · nutid hænger · datid hang/hængte · førnutid hængt · bydeform hæng — висеть; вешать
 * hænge
   fange
   havne
   handle
 
 3. bad — datid af …?
+> navneform bede · nutid beder · datid bad · førnutid bedt · bydeform bed — просить; молиться
 * bede
   brede
   byde
   bide
 
 4. drev — datid af …?
+> navneform drive · nutid driver · datid drev · førnutid drevet · bydeform driv — вести (дело); бездельничать
 * drive
   rive
   drikke
   ændre
 
 5. bar — datid af …?
+> navneform bære · nutid bærer · datid bar · førnutid båret · bydeform bær — нести, носить
 * bære
   basere
   bruge
   burde
 
 6. led — datid af …?
+> navneform lide · nutid lider · datid led · førnutid lidt · bydeform lid — страдать; (kunne lide) нравиться
 * lide
   glide
   lade
   lyde
 
 7. forsvandt — datid af …?
+> navneform forsvinde · nutid forsvinder · datid forsvandt · førnutid forsvundet · bydeform forsvind — исчезать
 * forsvinde
   forvandle
   forandre
   forsyne
 
 8. trådte — datid af …?
+> navneform træde · nutid træder · datid trådte · førnutid trådt · bydeform træd — ступать, шагать
 * træde
   turde
   råde
   træne
 
 9. bød — datid af …?
+> navneform byde · nutid byder · datid bød · førnutid budt · bydeform byd — предлагать; приглашать (byde velkommen)
 * byde
   bryde
   bede
   bide
 
 10. slap — datid af …?
+> navneform slippe · nutid slipper · datid slap · førnutid sluppet · bydeform slip — отпускать; избежать
 * slippe
   klippe
   stoppe
   slå
 
 11. skød — datid af …?
+> navneform skyde · nutid skyder · datid skød · førnutid skudt · bydeform skyd — стрелять
 * skyde
   skylde
   skade
   skride
 
 12. sang — datid af …?
+> navneform synge · nutid synger · datid sang · førnutid sunget · bydeform syng — петь
 * synge
   svinge
   fange
   savne
 
 13. skar — datid af …?
+> navneform skære · nutid skærer · datid skar · førnutid skåret · bydeform skær — резать
 * skære
   skærpe
   sikre
   skrue
 
 14. tvang — datid af …?
+> navneform tvinge · nutid tvinger · datid tvang · førnutid tvunget · bydeform tving — заставлять
 * tvinge
   svinge
   tage
   trænge
 
 15. nød — datid af …?
+> navneform nyde · nutid nyder · datid nød · førnutid nydt · bydeform nyd — наслаждаться
 * nyde
   snyde
   ende
   yde
 
 16. røg — datid af …?
+> navneform ryge · nutid ryger · datid røg · førnutid røget · bydeform ryg — курить; лететь (вылететь)
 * ryge
   frygte
   øge
   bruge
 
 17. greb — datid af …?
+> navneform gribe · nutid griber · datid greb · førnutid grebet · bydeform grib — хватать, ловить
 * gribe
   grine
   gøre
   græde
 
 18. red — datid af …?
+> navneform ride · nutid rider · datid red · førnutid redet · bydeform rid — ездить верхом
 * ride
   brede
   rive
   råde
 
 19. tør — nutid af …?
+> navneform turde · nutid tør · datid turde · førnutid turdet — сметь, осмелиться
 * turde
   træde
   true
   tro
 
 20. smed — datid af …?
+> navneform smide · nutid smider · datid smed · førnutid smidt · bydeform smid — бросать, выбрасывать
 * smide
   smile
   smitte
   sende
 
 21. traf — datid af …?
+> navneform træffe · nutid træffer · datid traf · førnutid truffet · bydeform træf — встречать; принимать (решение)
 * træffe
   straffe
   træde
   træne
 
 22. fløj — datid af …?
+> navneform flyve · nutid flyver · datid fløj · førnutid fløjet · bydeform flyv — летать
 * flyve
   flyde
   føle

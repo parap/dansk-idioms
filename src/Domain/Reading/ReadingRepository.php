@@ -198,11 +198,39 @@ final class ReadingRepository
     private function insertItem(int $passageId, string $kind, array $item): int
     {
         Db::execute(
-            'INSERT INTO reading_items (passage_id, position, section, points, prompt) VALUES (?,?,?,?,?)',
-            [$passageId, $item['position'], $item['section'] ?? null, self::POINTS[$kind], $item['prompt'] ?? null]
+            'INSERT INTO reading_items (passage_id, position, section, points, prompt, note) VALUES (?,?,?,?,?,?)',
+            [$passageId, $item['position'], $item['section'] ?? null, self::POINTS[$kind], $item['prompt'] ?? null,
+             $item['note'] ?? null]
         );
 
         return (int) Db::pdo()->lastInsertId();
+    }
+
+    /**
+     * Writes a loaded document's notes onto the passage already stored under its slug. A
+     * note is matched to its question by position and wording, so a reworded question
+     * keeps what it had; nothing graded is touched, which is why a set already sat can
+     * take this where a replacement would be refused.
+     *
+     * @param  array<string,mixed> $doc
+     * @return int how many questions' notes changed
+     */
+    public function refreshNotes(array $doc): int
+    {
+        $passageId = Db::fetchValue('SELECT id FROM reading_passages WHERE slug = ?', [$doc['slug']]);
+        if ($passageId === false || $passageId === null) {
+            return 0;
+        }
+
+        $changed = 0;
+        foreach ($doc['items'] as $item) {
+            $changed += Db::execute(
+                'UPDATE reading_items SET note = ?
+                  WHERE passage_id = ? AND position = ? AND prompt <=> ? AND NOT (note <=> ?)',
+                [$item['note'] ?? null, (int) $passageId, $item['position'], $item['prompt'] ?? null, $item['note'] ?? null]
+            );
+        }
+        return $changed;
     }
 
     /**

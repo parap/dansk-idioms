@@ -30,6 +30,9 @@ kommunen bygget nye stier, og det {{2}} at flere tør cykle til arbejde.
 - Wrapped lines rejoin; a blank line stays a paragraph break.
 - `{{1}}`, `{{2}}` … are the gaps, and must match the question numbers exactly.
 - A star marks the correct option. Exactly one per question, at least three options.
+- A line opening with `>` under the question is a note, shown once the question is answered.
+  Notes are display only: loading the directory again writes changed notes onto a passage
+  already loaded, even one that has been sat, where `--replace` would be refused.
 
 **Multiple choice** carries the question on the numbered line and has no gap markers:
 

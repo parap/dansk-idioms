@@ -4,150 +4,175 @@ title: Verber 376–400
 
 --- questions ---
 1. talte (datid) — считать (количество). Bydeform?
+> navneform tælle · nutid tæller · datid talte · førnutid talt · bydeform tæl — считать (количество)
 * tæl
   talt
   tæller
   tælle
 
 2. udvælge (navneform) — отбирать. Førnutid?
+> navneform udvælge · nutid udvælger · datid udvalgte · førnutid udvalgt · bydeform udvælg — отбирать
 * udvalgt
   udvalgte
   udvælger
   udvælg
 
 3. samarbejdet (førnutid) — сотрудничать. Nutid?
+> navneform samarbejde · nutid samarbejder · datid samarbejdede · førnutid samarbejdet · bydeform samarbejd — сотрудничать
 * samarbejder
   samarbejdede
   samarbejde
   samarbejd
 
 4. tryk (bydeform) — нажимать. Nutid?
+> navneform trykke · nutid trykker · datid trykkede · førnutid trykket · bydeform tryk — нажимать; печатать
 * trykker
   trykkede
   trykket
   trykke
 
 5. registrerede (datid) — регистрировать. Navneform?
+> navneform registrere · nutid registrerer · datid registrerede · førnutid registreret · bydeform registrer — регистрировать
 * registrere
   registreret
   registrerer
   registrer
 
 6. udbreder (nutid) — распространять. Datid?
+> navneform udbrede · nutid udbreder · datid udbredte · førnutid udbredt · bydeform udbred — распространять
 * udbredte
   udbredt
   udbrede
   udbred
 
 7. stammede (datid) — (stamme fra) происходить из. Navneform?
+> navneform stamme · nutid stammer · datid stammede · førnutid stammet · bydeform stam — (stamme fra) происходить из; заикаться
 * stamme
   stammet
   stammer
   stam
 
 8. håndterede (datid) — обращаться с, справляться. Bydeform?
+> navneform håndtere · nutid håndterer · datid håndterede · førnutid håndteret · bydeform håndter — обращаться с, справляться
 * håndter
   håndteret
   håndterer
   håndtere
 
 9. nedsæt (bydeform) — снижать. Nutid?
+> navneform nedsætte · nutid nedsætter · datid nedsatte · førnutid nedsat · bydeform nedsæt — снижать; учреждать (комиссию)
 * nedsætter
   nedsatte
   nedsat
   nedsætte
 
 10. udfordret (førnutid) — бросать вызов. Datid?
+> navneform udfordre · nutid udfordrer · datid udfordrede · førnutid udfordret · bydeform udfordr — бросать вызов
 * udfordrede
   udfordrer
   udfordre
   udfordr
 
 11. smilet (førnutid) — улыбаться. Bydeform?
+> navneform smile · nutid smiler · datid smilede/smilte · førnutid smilet · bydeform smil — улыбаться
 * smil
   smilede
   smiler
   smile
 
 12. låne (navneform) — одалживать, брать взаймы. Nutid?
+> navneform låne · nutid låner · datid lånte · førnutid lånt · bydeform lån — одалживать, брать взаймы
 * låner
   lånte
   lånt
   lån
 
 13. udnævne (navneform) — назначать. Bydeform?
+> navneform udnævne · nutid udnævner · datid udnævnte · førnutid udnævnt · bydeform udnævn — назначать
 * udnævn
   udnævnte
   udnævnt
   udnævner
 
 14. rører (nutid) — трогать. Navneform?
+> navneform røre · nutid rører · datid rørte · førnutid rørt · bydeform rør — трогать; мешать (помешивать)
 * røre
   rørte
   rørt
   rør
 
 15. vælter (nutid) — опрокидывать(ся). Datid?
+> navneform vælte · nutid vælter · datid væltede · førnutid væltet · bydeform vælt — опрокидывать(ся)
 * væltede
   væltet
   vælte
   vælt
 
 16. oversæt (bydeform) — переводить. Navneform?
+> navneform oversætte · nutid oversætter · datid oversatte · førnutid oversat · bydeform oversæt — переводить
 * oversætte
   oversatte
   oversat
   oversætter
 
 17. ankom (bydeform) — прибывать. Nutid?
+> navneform ankomme · nutid ankommer · datid ankom · førnutid ankommet · bydeform ankom — прибывать
 * ankommer
   ankommet
   ankomme
   ankommede
 
 18. rystede (datid) — трясти(сь). Nutid?
+> navneform ryste · nutid ryster · datid rystede · førnutid rystet · bydeform ryst — трясти(сь)
 * ryster
   rystet
   ryste
   ryst
 
 19. fyrede (datid) — увольнять. Bydeform?
+> navneform fyre · nutid fyrer · datid fyrede · førnutid fyret · bydeform fyr — увольнять; топить (печь)
 * fyr
   fyret
   fyrer
   fyre
 
 20. nedlagt (førnutid) — закрывать, упразднять. Bydeform?
+> navneform nedlægge · nutid nedlægger · datid nedlagde · førnutid nedlagt · bydeform nedlæg — закрывать, упразднять
 * nedlæg
   nedlagde
   nedlægger
   nedlægge
 
 21. indrøm (bydeform) — признаваться. Førnutid?
+> navneform indrømme · nutid indrømmer · datid indrømmede · førnutid indrømmet · bydeform indrøm — признаваться
 * indrømmet
   indrømmede
   indrømmer
   indrømme
 
 22. skadede (datid) — вредить. Bydeform?
+> navneform skade · nutid skader · datid skadede · førnutid skadet · bydeform skad — вредить
 * skad
   skadet
   skader
   skade
 
 23. koncentrerede (datid) — сосредоточивать(ся). Bydeform?
+> navneform koncentrere · nutid koncentrerer · datid koncentrerede · førnutid koncentreret · bydeform koncentrer — сосредоточивать(ся)
 * koncentrer
   koncentreret
   koncentrerer
   koncentrere
 
 24. tiltrække (navneform) — привлекать. Nutid?
+> navneform tiltrække · nutid tiltrækker · datid tiltrak · førnutid tiltrukket · bydeform tiltræk — привлекать
 * tiltrækker
   tiltrak
   tiltrukket
   tiltræk
 
 25. grin (bydeform) — смеяться. Datid?
+> navneform grine · nutid griner · datid grinede/grinte · førnutid grinet · bydeform grin — смеяться
 * grinede
   grinet
   griner

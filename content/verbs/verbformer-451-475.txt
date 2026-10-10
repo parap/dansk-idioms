@@ -4,150 +4,175 @@ title: Verber 451–475
 
 --- questions ---
 1. dokumenteret (førnutid) — документировать. Datid?
+> navneform dokumentere · nutid dokumenterer · datid dokumenterede · førnutid dokumenteret · bydeform dokumenter — документировать
 * dokumenterede
   dokumenterer
   dokumentere
   dokumenter
 
 2. fremstod (datid) — выглядеть, представать. Bydeform?
+> navneform fremstå · nutid fremstår · datid fremstod · førnutid fremstået · bydeform fremstå — выглядеть, представать
 * fremstå
   fremstået
   fremstår
   fremståte
 
 3. udelukkede (datid) — исключать. Nutid?
+> navneform udelukke · nutid udelukker · datid udelukkede · førnutid udelukket · bydeform udeluk — исключать
 * udelukker
   udelukket
   udelukke
   udeluk
 
 4. kvalificerer (nutid) — (kvalificere sig) квалифицироваться. Navneform?
+> navneform kvalificere · nutid kvalificerer · datid kvalificerede · førnutid kvalificeret · bydeform kvalificer — (kvalificere sig) квалифицироваться
 * kvalificere
   kvalificerede
   kvalificeret
   kvalificer
 
 5. angået (førnutid) — касаться. Navneform?
+> navneform angå · nutid angår · datid angik · førnutid angået · bydeform angå — касаться
 * angå
   angik
   angår
   angåte
 
 6. udvise (navneform) — проявлять. Bydeform?
+> navneform udvise · nutid udviser · datid udviste · førnutid udvist · bydeform udvis — проявлять; выдворять
 * udvis
   udviste
   udvist
   udviser
 
 7. nærmede (datid) — (nærme sig) приближаться. Nutid?
+> navneform nærme · nutid nærmer · datid nærmede · førnutid nærmet · bydeform nærm — (nærme sig) приближаться
 * nærmer
   nærmet
   nærme
   nærm
 
 8. tiltal (bydeform) — привлекать к суду. Navneform?
+> navneform tiltale · nutid tiltaler · datid tiltalte · førnutid tiltalt · bydeform tiltal — привлекать к суду; нравиться
 * tiltale
   tiltalte
   tiltalt
   tiltaler
 
 9. drop (bydeform) — бросать, отказываться. Datid?
+> navneform droppe · nutid dropper · datid droppede · førnutid droppet · bydeform drop — бросать, отказываться
 * droppede
   droppet
   dropper
   droppe
 
 10. lejet (førnutid) — снимать (в аренду), сдавать. Datid?
+> navneform leje · nutid lejer · datid lejede · førnutid lejet · bydeform lej — снимать (в аренду), сдавать
 * lejede
   lejer
   leje
   lej
 
 11. beskylde (navneform) — обвинять. Nutid?
+> navneform beskylde · nutid beskylder · datid beskyldte · førnutid beskyldt · bydeform beskyld — обвинять
 * beskylder
   beskyldte
   beskyldt
   beskyld
 
 12. organiserer (nutid) — организовывать. Bydeform?
+> navneform organisere · nutid organiserer · datid organiserede · førnutid organiseret · bydeform organiser — организовывать
 * organiser
   organiserede
   organiseret
   organisere
 
 13. behold (bydeform) — сохранять, оставлять себе. Datid?
+> navneform beholde · nutid beholder · datid beholdt · førnutid beholdt · bydeform behold — сохранять, оставлять себе
 * beholdt
   beholder
   beholde
   beholdede
 
 14. kog (bydeform) — варить, кипятить. Nutid?
+> navneform koge · nutid koger · datid kogte · førnutid kogt · bydeform kog — варить, кипятить
 * koger
   kogte
   kogt
   koge
 
 15. formulere (navneform) — формулировать. Bydeform?
+> navneform formulere · nutid formulerer · datid formulerede · førnutid formuleret · bydeform formuler — формулировать
 * formuler
   formulerede
   formuleret
   formulerer
 
 16. inddrage (navneform) — вовлекать. Bydeform?
+> navneform inddrage · nutid inddrager · datid inddrog · førnutid inddraget · bydeform inddrag — вовлекать
 * inddrag
   inddrog
   inddraget
   inddrager
 
 17. noterer (nutid) — записывать. Førnutid?
+> navneform notere · nutid noterer · datid noterede · førnutid noteret · bydeform noter — записывать
 * noteret
   noterede
   notere
   noter
 
 18. vækkede (datid) — будить. Navneform?
+> navneform vække · nutid vækker · datid vækkede · førnutid vækket/vakt · bydeform væk — будить
 * vække
   vækket
   vækker
   væk
 
 19. hilste (datid) — здороваться. Førnutid?
+> navneform hilse · nutid hilser · datid hilste · førnutid hilst · bydeform hils — здороваться; передавать привет
 * hilst
   hilser
   hilse
   hils
 
 20. uddelte (datid) — раздавать. Bydeform?
+> navneform uddele · nutid uddeler · datid uddelte · førnutid uddelt · bydeform uddel — раздавать
 * uddel
   uddelt
   uddeler
   uddele
 
 21. prioriteret (førnutid) — расставлять приоритеты. Navneform?
+> navneform prioritere · nutid prioriterer · datid prioriterede · førnutid prioriteret · bydeform prioriter — расставлять приоритеты
 * prioritere
   prioriterede
   prioriterer
   prioriter
 
 22. adskilte (datid) — разделять. Bydeform?
+> navneform adskille · nutid adskiller · datid adskilte · førnutid adskilt · bydeform adskil — разделять
 * adskil
   adskilt
   adskiller
   adskille
 
 23. anlagt (førnutid) — строить, прокладывать. Nutid?
+> navneform anlægge · nutid anlægger · datid anlagde · førnutid anlagt · bydeform anlæg — строить, прокладывать; возбуждать (дело)
 * anlægger
   anlagde
   anlægge
   anlæg
 
 24. opereret (førnutid) — оперировать. Bydeform?
+> navneform operere · nutid opererer · datid opererede · førnutid opereret · bydeform operer — оперировать
 * operer
   opererede
   opererer
   operere
 
 25. skub (bydeform) — толкать. Datid?
+> navneform skubbe · nutid skubber · datid skubbede · førnutid skubbet · bydeform skub — толкать
 * skubbede
   skubbet
   skubber

@@ -4,150 +4,175 @@ title: Verber 101–125
 
 --- questions ---
 1. startede (datid) — начинать, запускать. Navneform?
+> navneform starte · nutid starter · datid startede · førnutid startet · bydeform start — начинать, запускать
 * starte
   startet
   starter
   start
 
 2. deltaget (førnutid) — участвовать. Nutid?
+> navneform deltage · nutid deltager · datid deltog · førnutid deltaget · bydeform deltag — участвовать
 * deltager
   deltog
   deltage
   deltag
 
 3. søg (bydeform) — искать. Nutid?
+> navneform søge · nutid søger · datid søgte · førnutid søgt · bydeform søg — искать; подавать заявку
 * søger
   søgte
   søgt
   søge
 
 4. virkede (datid) — работать (действовать). Navneform?
+> navneform virke · nutid virker · datid virkede · førnutid virket · bydeform virk — работать (действовать); казаться
 * virke
   virket
   virker
   virk
 
 5. løbe (navneform) — бежать. Datid?
+> navneform løbe · nutid løber · datid løb · førnutid løbet · bydeform løb — бежать
 * løb
   løbet
   løber
   løbte
 
 6. vokser (nutid) — расти. Navneform?
+> navneform vokse · nutid vokser · datid voksede · førnutid vokset · bydeform voks — расти
 * vokse
   voksede
   vokset
   voks
 
 7. føde (navneform) — рожать. Førnutid?
+> navneform føde · nutid føder · datid fødte · førnutid født · bydeform fød — рожать
 * født
   fødte
   føder
   fød
 
 8. bragt (førnutid) — приносить. Navneform?
+> navneform bringe · nutid bringer · datid bragte · førnutid bragt · bydeform bring — приносить
 * bringe
   bragte
   bringer
   bring
 
 9. håbede (datid) — надеяться. Bydeform?
+> navneform håbe · nutid håber · datid håbede · førnutid håbet · bydeform håb — надеяться
 * håb
   håbet
   håber
   håbe
 
 10. modtage (navneform) — получать. Nutid?
+> navneform modtage · nutid modtager · datid modtog · førnutid modtaget · bydeform modtag — получать
 * modtager
   modtog
   modtaget
   modtag
 
 11. lykkes (navneform) — удаваться. Førnutid?
+> navneform lykkes · nutid lykkes · datid lykkedes · førnutid lykkedes — удаваться
 * lykkedes
   lykkets
   lykts
   lykkesr
 
 12. vurderet (førnutid) — оценивать. Datid?
+> navneform vurdere · nutid vurderer · datid vurderede · førnutid vurderet · bydeform vurder — оценивать
 * vurderede
   vurderer
   vurdere
   vurder
 
 13. mist (bydeform) — терять. Datid?
+> navneform miste · nutid mister · datid mistede · førnutid mistet · bydeform mist — терять
 * mistede
   mistet
   mister
   miste
 
 14. består (nutid) — сдать (экзамен). Førnutid?
+> navneform bestå · nutid består · datid bestod · førnutid bestået · bydeform bestå — сдать (экзамен); (bestå af) состоять из
 * bestået
   bestod
   bestå
   beståt
 
 15. øge (navneform) — увеличивать. Datid?
+> navneform øge · nutid øger · datid øgede · førnutid øget · bydeform øg — увеличивать
 * øgede
   øget
   øger
   øg
 
 16. dø (navneform) — умирать. Datid?
+> navneform dø · nutid dør · datid døde · førnutid død · bydeform dø — умирать
 * døde
   død
   dør
   døte
 
 17. skylde (navneform) — быть должным (деньги). Nutid?
+> navneform skylde · nutid skylder · datid skyldte · førnutid skyldt · bydeform skyld — быть должным (деньги)
 * skylder
   skyldte
   skyldt
   skyld
 
 18. passet (førnutid) — подходить. Bydeform?
+> navneform passe · nutid passer · datid passede · førnutid passet · bydeform pas — подходить; присматривать (passe på — беречь, осторожно)
 * pas
   passede
   passer
   passe
 
 19. bryder (nutid) — ломать. Datid?
+> navneform bryde · nutid bryder · datid brød · førnutid brudt · bydeform bryd — ломать; нарушать; (bryde sig om) любить
 * brød
   brudt
   bryde
   bryd
 
 20. hængt (førnutid) — висеть. Bydeform?
+> navneform hænge · nutid hænger · datid hang/hængte · førnutid hængt · bydeform hæng — висеть; вешать
 * hæng
   hang
   hænger
   hænge
 
 21. beslut (bydeform) — решать. Navneform?
+> navneform beslutte · nutid beslutter · datid besluttede · førnutid besluttet · bydeform beslut — решать
 * beslutte
   besluttede
   besluttet
   beslutter
 
 22. husket (førnutid) — помнить. Bydeform?
+> navneform huske · nutid husker · datid huskede · førnutid husket · bydeform husk — помнить
 * husk
   huskede
   husker
   huske
 
 23. tabe (navneform) — ронять. Nutid?
+> navneform tabe · nutid taber · datid tabte · førnutid tabt · bydeform tab — ронять; проигрывать
 * taber
   tabte
   tabt
   tab
 
 24. foregår (nutid) — происходить. Datid?
+> navneform foregå · nutid foregår · datid foregik · førnutid foregået · bydeform foregå — происходить
 * foregik
   foregået
   foregå
   foregåte
 
 25. beder (nutid) — просить. Datid?
+> navneform bede · nutid beder · datid bad · førnutid bedt · bydeform bed — просить; молиться
 * bad
   bedt
   bede

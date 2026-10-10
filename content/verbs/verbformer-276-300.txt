@@ -4,150 +4,175 @@ title: Verber 276–300
 
 --- questions ---
 1. investerer (nutid) — инвестировать. Førnutid?
+> navneform investere · nutid investerer · datid investerede · førnutid investeret · bydeform invester — инвестировать
 * investeret
   investerede
   investere
   invester
 
 2. drikke (navneform) — пить. Datid?
+> navneform drikke · nutid drikker · datid drak · førnutid drukket · bydeform drik — пить
 * drak
   drukket
   drikker
   drik
 
 3. afslutter (nutid) — завершать. Førnutid?
+> navneform afslutte · nutid afslutter · datid afsluttede · førnutid afsluttet · bydeform afslut — завершать
 * afsluttet
   afsluttede
   afslutte
   afslut
 
 4. oprettet (førnutid) — создавать, учреждать. Navneform?
+> navneform oprette · nutid opretter · datid oprettede · førnutid oprettet · bydeform opret — создавать, учреждать
 * oprette
   oprettede
   opretter
   opret
 
 5. fremgå (bydeform) — следовать (из), явствовать. Datid?
+> navneform fremgå · nutid fremgår · datid fremgik · førnutid fremgået · bydeform fremgå — следовать (из), явствовать
 * fremgik
   fremgået
   fremgår
   fremgåte
 
 6. stjålet (førnutid) — красть. Datid?
+> navneform stjæle · nutid stjæler · datid stjal · førnutid stjålet · bydeform stjæl — красть
 * stjal
   stjæler
   stjæle
   stjæl
 
 7. påpeg (bydeform) — указывать (на). Datid?
+> navneform påpege · nutid påpeger · datid påpegede · førnutid påpeget · bydeform påpeg — указывать (на)
 * påpegede
   påpeget
   påpeger
   påpege
 
 8. rummede (datid) — вмещать. Navneform?
+> navneform rumme · nutid rummer · datid rummede · førnutid rummet · bydeform rum — вмещать
 * rumme
   rummet
   rummer
   rum
 
 9. stak (datid) — колоть. Bydeform?
+> navneform stikke · nutid stikker · datid stak · førnutid stukket · bydeform stik — колоть; совать
 * stik
   stukket
   stikker
   stikke
 
 10. brænder (nutid) — гореть. Bydeform?
+> navneform brænde · nutid brænder · datid brændte · førnutid brændt · bydeform brænd — гореть; жечь
 * brænd
   brændte
   brændt
   brænde
 
 11. tydet (førnutid) — (tyde på) указывать на. Navneform?
+> navneform tyde · nutid tyder · datid tydede · førnutid tydet · bydeform tyd — (tyde på) указывать на; расшифровывать
 * tyde
   tydede
   tyder
   tyd
 
 12. lytte (navneform) — слушать. Bydeform?
+> navneform lytte · nutid lytter · datid lyttede · førnutid lyttet · bydeform lyt — слушать
 * lyt
   lyttede
   lyttet
   lytter
 
 13. kritiserede (datid) — критиковать. Nutid?
+> navneform kritisere · nutid kritiserer · datid kritiserede · førnutid kritiseret · bydeform kritiser — критиковать
 * kritiserer
   kritiseret
   kritisere
   kritiser
 
 14. udnyttede (datid) — использовать (выгодно). Bydeform?
+> navneform udnytte · nutid udnytter · datid udnyttede · førnutid udnyttet · bydeform udnyt — использовать (выгодно)
 * udnyt
   udnyttet
   udnytter
   udnytte
 
 15. udkommer (nutid) — выходить (о книге). Førnutid?
+> navneform udkomme · nutid udkommer · datid udkom · førnutid udkommet · bydeform udkom — выходить (о книге)
 * udkommet
   udkom
   udkomme
   udkomt
 
 16. forbedr (bydeform) — улучшать. Datid?
+> navneform forbedre · nutid forbedrer · datid forbedrede · førnutid forbedret · bydeform forbedr — улучшать
 * forbedrede
   forbedret
   forbedrer
   forbedre
 
 17. løfte (navneform) — поднимать. Datid?
+> navneform løfte · nutid løfter · datid løftede · førnutid løftet · bydeform løft — поднимать
 * løftede
   løftet
   løfter
   løft
 
 18. forhindr (bydeform) — предотвращать, мешать. Datid?
+> navneform forhindre · nutid forhindrer · datid forhindrede · førnutid forhindret · bydeform forhindr — предотвращать, мешать
 * forhindrede
   forhindret
   forhindrer
   forhindre
 
 19. meddelte (datid) — сообщать. Førnutid?
+> navneform meddele · nutid meddeler · datid meddelte · førnutid meddelt · bydeform meddel — сообщать
 * meddelt
   meddeler
   meddele
   meddel
 
 20. medføre (navneform) — влечь за собой. Nutid?
+> navneform medføre · nutid medfører · datid medførte · førnutid medført · bydeform medfør — влечь за собой
 * medfører
   medførte
   medført
   medfør
 
 21. beskytte (navneform) — защищать. Datid?
+> navneform beskytte · nutid beskytter · datid beskyttede · førnutid beskyttet · bydeform beskyt — защищать
 * beskyttede
   beskyttet
   beskytter
   beskyt
 
 22. anerkendte (datid) — признавать. Førnutid?
+> navneform anerkende · nutid anerkender · datid anerkendte · førnutid anerkendt · bydeform anerkend — признавать
 * anerkendt
   anerkender
   anerkende
   anerkend
 
 23. måler (nutid) — измерять. Bydeform?
+> navneform måle · nutid måler · datid målte · førnutid målt · bydeform mål — измерять
 * mål
   målte
   målt
   måle
 
 24. henvise (navneform) — ссылаться, направлять. Førnutid?
+> navneform henvise · nutid henviser · datid henviste · førnutid henvist · bydeform henvis — ссылаться, направлять
 * henvist
   henviste
   henviser
   henvis
 
 25. bekymrer (nutid) — беспокоить. Navneform?
+> navneform bekymre · nutid bekymrer · datid bekymrede · førnutid bekymret · bydeform bekymr — беспокоить; (bekymre sig) волноваться
 * bekymre
   bekymrede
   bekymret

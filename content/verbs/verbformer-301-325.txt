@@ -4,150 +4,175 @@ title: Verber 301–325
 
 --- questions ---
 1. forholder (nutid) — (forholde sig til) относиться к. Bydeform?
+> navneform forholde · nutid forholder · datid forholdt · førnutid forholdt · bydeform forhold — (forholde sig til) относиться к
 * forhold
   forholdt
   forholde
   forholdede
 
 2. inspirerede (datid) — вдохновлять. Navneform?
+> navneform inspirere · nutid inspirerer · datid inspirerede · førnutid inspireret · bydeform inspirer — вдохновлять
 * inspirere
   inspireret
   inspirerer
   inspirer
 
 3. anbefalet (førnutid) — рекомендовать. Navneform?
+> navneform anbefale · nutid anbefaler · datid anbefalede · førnutid anbefalet · bydeform anbefal — рекомендовать
 * anbefale
   anbefalede
   anbefaler
   anbefal
 
 4. fejret (førnutid) — праздновать. Nutid?
+> navneform fejre · nutid fejrer · datid fejrede · førnutid fejret · bydeform fejr — праздновать
 * fejrer
   fejrede
   fejre
   fejr
 
 5. opfat (bydeform) — воспринимать. Datid?
+> navneform opfatte · nutid opfatter · datid opfattede · førnutid opfattet · bydeform opfat — воспринимать
 * opfattede
   opfattet
   opfatter
   opfatte
 
 6. hæv (bydeform) — поднимать. Førnutid?
+> navneform hæve · nutid hæver · datid hævede · førnutid hævet · bydeform hæv — поднимать; снимать (деньги)
 * hævet
   hævede
   hæver
   hæve
 
 7. udsende (navneform) — выпускать, транслировать. Datid?
+> navneform udsende · nutid udsender · datid udsendte · førnutid udsendt · bydeform udsend — выпускать, транслировать
 * udsendte
   udsendt
   udsender
   udsend
 
 8. overlev (bydeform) — выживать. Navneform?
+> navneform overleve · nutid overlever · datid overlevede · førnutid overlevet · bydeform overlev — выживать
 * overleve
   overlevede
   overlevet
   overlever
 
 9. undrer (nutid) — удивлять. Navneform?
+> navneform undre · nutid undrer · datid undrede · førnutid undret · bydeform undr — удивлять; (undre sig) удивляться
 * undre
   undrede
   undret
   undr
 
 10. dyrker (nutid) — выращивать. Førnutid?
+> navneform dyrke · nutid dyrker · datid dyrkede · førnutid dyrket · bydeform dyrk — выращивать; заниматься (спортом)
 * dyrket
   dyrkede
   dyrke
   dyrk
 
 11. hævder (nutid) — утверждать. Førnutid?
+> navneform hævde · nutid hævder · datid hævdede · førnutid hævdet · bydeform hævd — утверждать
 * hævdet
   hævdede
   hævde
   hævd
 
 12. afholde (navneform) — проводить (мероприятие). Datid?
+> navneform afholde · nutid afholder · datid afholdt · førnutid afholdt · bydeform afhold — проводить (мероприятие)
 * afholdt
   afholder
   afhold
   afholdede
 
 13. angrib (bydeform) — нападать. Navneform?
+> navneform angribe · nutid angriber · datid angreb · førnutid angrebet · bydeform angrib — нападать
 * angribe
   angreb
   angrebet
   angriber
 
 14. formåede (datid) — быть в состоянии. Førnutid?
+> navneform formå · nutid formår · datid formåede · førnutid formået · bydeform formå — быть в состоянии
 * formået
   formår
   formå
   formåt
 
 15. omtalte (datid) — упоминать, отзываться. Navneform?
+> navneform omtale · nutid omtaler · datid omtalte · førnutid omtalt · bydeform omtal — упоминать, отзываться
 * omtale
   omtalt
   omtaler
   omtal
 
 16. forbinder (nutid) — соединять, связывать. Førnutid?
+> navneform forbinde · nutid forbinder · datid forbandt · førnutid forbundet · bydeform forbind — соединять, связывать
 * forbundet
   forbandt
   forbinde
   forbind
 
 17. nægtet (førnutid) — отказываться. Navneform?
+> navneform nægte · nutid nægter · datid nægtede · førnutid nægtet · bydeform nægt — отказываться; отрицать
 * nægte
   nægtede
   nægter
   nægt
 
 18. sats (bydeform) — делать ставку. Navneform?
+> navneform satse · nutid satser · datid satsede · førnutid satset · bydeform sats — делать ставку
 * satse
   satsede
   satset
   satser
 
 19. fremstillede (datid) — производить. Navneform?
+> navneform fremstille · nutid fremstiller · datid fremstillede · førnutid fremstillet · bydeform fremstil — производить; изображать
 * fremstille
   fremstillet
   fremstiller
   fremstil
 
 20. offentliggør (bydeform) — публиковать, обнародовать. Navneform?
+> navneform offentliggøre · nutid offentliggør · datid offentliggjorde · førnutid offentliggjort · bydeform offentliggør — публиковать, обнародовать
 * offentliggøre
   offentliggjorde
   offentliggjort
   offentliggørede
 
 21. advare (navneform) — предупреждать. Førnutid?
+> navneform advare · nutid advarer · datid advarede · førnutid advaret · bydeform advar — предупреждать
 * advaret
   advarede
   advarer
   advar
 
 22. opgiver (nutid) — сдаваться, бросать. Navneform?
+> navneform opgive · nutid opgiver · datid opgav · førnutid opgivet · bydeform opgiv — сдаваться, бросать
 * opgive
   opgav
   opgivet
   opgiv
 
 23. fange (navneform) — ловить. Førnutid?
+> navneform fange · nutid fanger · datid fangede · førnutid fanget · bydeform fang — ловить
 * fanget
   fangede
   fanger
   fang
 
 24. gem (bydeform) — прятать. Nutid?
+> navneform gemme · nutid gemmer · datid gemte · førnutid gemt · bydeform gem — прятать; сохранять
 * gemmer
   gemte
   gemt
   gemme
 
 25. betegne (navneform) — обозначать. Datid?
+> navneform betegne · nutid betegner · datid betegnede · førnutid betegnet · bydeform betegn — обозначать
 * betegnede
   betegnet
   betegner

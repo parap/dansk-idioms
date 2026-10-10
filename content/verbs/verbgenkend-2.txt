@@ -4,132 +4,154 @@ title: Genkend verbet 2
 
 --- questions ---
 1. lå — datid af …?
+> navneform ligge · nutid ligger · datid lå · førnutid ligget · bydeform lig — лежать
 * ligge
   låne
   lægge
   ligne
 
 2. vidste — datid af …?
+> navneform vide · nutid ved · datid vidste · førnutid vidst · bydeform vid — знать (факт)
 * vide
   vinde
   vidne
   vise
 
 3. ved — nutid af …?
+> navneform vide · nutid ved · datid vidste · førnutid vidst · bydeform vid — знать (факт)
 * vide
   vende
   vinde
   vidne
 
 4. lagde — datid af …?
+> navneform lægge · nutid lægger · datid lagde · førnutid lagt · bydeform læg — класть
 * lægge
   ligge
   klage
   lade
 
 5. lod — datid af …?
+> navneform lade · nutid lader · datid lod · førnutid ladet/ladt · bydeform lad — позволять, оставлять; (lade som om) делать вид
 * lade
   lande
   lyde
   lide
 
 6. valgte — datid af …?
+> navneform vælge · nutid vælger · datid valgte · førnutid valgt · bydeform vælg — выбирать
 * vælge
   vælte
   sælge
   flygte
 
 7. sad — datid af …?
+> navneform sidde · nutid sidder · datid sad · førnutid siddet · bydeform sid — сидеть
 * sidde
   skade
   smide
   skride
 
 8. fulgte — datid af …?
+> navneform følge · nutid følger · datid fulgte · førnutid fulgt · bydeform følg — следовать; провожать
 * følge
   flygte
   føle
   forpligte
 
 9. slog — datid af …?
+> navneform slå · nutid slår · datid slog · førnutid slået · bydeform slå — бить, ударять
 * slå
   sælge
   stå
   samle
 
 10. vandt — datid af …?
+> navneform vinde · nutid vinder · datid vandt · førnutid vundet · bydeform vind — выигрывать, побеждать
 * vinde
   vandre
   vende
   vide
 
 11. faldt — datid af …?
+> navneform falde · nutid falder · datid faldt · førnutid faldet · bydeform fald — падать
 * falde
   kalde
   fylde
   flyde
 
 12. bør — nutid af …?
+> navneform burde · nutid bør · datid burde · førnutid burdet — следует, должен бы
 * burde
   bryde
   brede
   bære
 
 13. lød — datid af …?
+> navneform lyde · nutid lyder · datid lød · førnutid lydt · bydeform lyd — звучать
 * lyde
   flyde
   lade
   lide
 
 14. solgte — datid af …?
+> navneform sælge · nutid sælger · datid solgte · førnutid solgt · bydeform sælg — продавать
 * sælge
   vælge
   sigte
   stole
 
 15. steg — datid af …?
+> navneform stige · nutid stiger · datid steg · førnutid steget · bydeform stig — подниматься, расти
 * stige
   sigte
   sige
   stille
 
 16. gjaldt — datid af …?
+> navneform gælde · nutid gælder · datid gjaldt · førnutid gjaldt · bydeform gæld — касаться, действовать (о правиле)
 * gælde
   glæde
   glide
   hælde
 
 17. trak — datid af …?
+> navneform trække · nutid trækker · datid trak · førnutid trukket · bydeform træk — тянуть
 * trække
   strække
   trykke
   takke
 
 18. hjalp — datid af …?
+> navneform hjælpe · nutid hjælper · datid hjalp · førnutid hjulpet · bydeform hjælp — помогать
 * hjælpe
   hælde
   handle
   stjæle
 
 19. spurgte — datid af …?
+> navneform spørge · nutid spørger · datid spurgte · førnutid spurgt · bydeform spørg — спрашивать
 * spørge
   sørge
   springe
   spare
 
 20. hed — datid af …?
+> navneform hedde · nutid hedder · datid hed · førnutid heddet · bydeform hed — называться, зваться
 * hedde
   redde
   ende
   bede
 
 21. løb — datid af …?
+> navneform løbe · nutid løber · datid løb · førnutid løbet · bydeform løb — бежать
 * løbe
   købe
   løse
   løfte
 
 22. bragte — datid af …?
+> navneform bringe · nutid bringer · datid bragte · førnutid bragt · bydeform bring — приносить
 * bringe
   bruge
   ringe

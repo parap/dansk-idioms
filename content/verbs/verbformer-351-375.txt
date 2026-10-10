@@ -4,150 +4,175 @@ title: Verber 351–375
 
 --- questions ---
 1. ydet (førnutid) — оказывать (помощь), выдавать. Bydeform?
+> navneform yde · nutid yder · datid ydede · førnutid ydet · bydeform yd — оказывать (помощь), выдавать
 * yd
   ydede
   yder
   yde
 
 2. indstiller (nutid) — настраивать. Bydeform?
+> navneform indstille · nutid indstiller · datid indstillede · førnutid indstillet · bydeform indstil — настраивать; выдвигать (кандидата)
 * indstil
   indstillede
   indstillet
   indstille
 
 3. plejede (datid) — ухаживать. Førnutid?
+> navneform pleje · nutid plejer · datid plejede · førnutid plejet · bydeform plej — ухаживать; (plejer at) обычно делать
 * plejet
   plejer
   pleje
   plej
 
 4. modsatte (datid) — (modsætte sig) противиться. Navneform?
+> navneform modsætte · nutid modsætter · datid modsatte · førnutid modsat · bydeform modsæt — (modsætte sig) противиться
 * modsætte
   modsat
   modsætter
   modsæt
 
 5. bemærket (førnutid) — замечать. Bydeform?
+> navneform bemærke · nutid bemærker · datid bemærkede · førnutid bemærket · bydeform bemærk — замечать
 * bemærk
   bemærkede
   bemærker
   bemærke
 
 6. markerer (nutid) — отмечать. Bydeform?
+> navneform markere · nutid markerer · datid markerede · førnutid markeret · bydeform marker — отмечать
 * marker
   markerede
   markeret
   markere
 
 7. gentage (navneform) — повторять. Datid?
+> navneform gentage · nutid gentager · datid gentog · førnutid gentaget · bydeform gentag — повторять
 * gentog
   gentaget
   gentager
   gentag
 
 8. sejlet (førnutid) — плыть (на судне). Navneform?
+> navneform sejle · nutid sejler · datid sejlede · førnutid sejlet · bydeform sejl — плыть (на судне)
 * sejle
   sejlede
   sejler
   sejl
 
 9. servere (navneform) — подавать (еду). Bydeform?
+> navneform servere · nutid serverer · datid serverede · førnutid serveret · bydeform server — подавать (еду)
 * server
   serverede
   serveret
   serverer
 
 10. drømte (datid) — мечтать. Bydeform?
+> navneform drømme · nutid drømmer · datid drømte · førnutid drømt · bydeform drøm — мечтать; видеть сон
 * drøm
   drømt
   drømmer
   drømme
 
 11. dominere (navneform) — доминировать. Bydeform?
+> navneform dominere · nutid dominerer · datid dominerede · førnutid domineret · bydeform dominer — доминировать
 * dominer
   dominerede
   domineret
   dominerer
 
 12. indtog (datid) — принимать (пищу). Bydeform?
+> navneform indtage · nutid indtager · datid indtog · førnutid indtaget · bydeform indtag — принимать (пищу); захватывать
 * indtag
   indtaget
   indtager
   indtage
 
 13. savnede (datid) — скучать по. Navneform?
+> navneform savne · nutid savner · datid savnede · førnutid savnet · bydeform savn — скучать по; не хватать
 * savne
   savnet
   savner
   savn
 
 14. udløst (førnutid) — вызывать, запускать. Bydeform?
+> navneform udløse · nutid udløser · datid udløste · førnutid udløst · bydeform udløs — вызывать, запускать
 * udløs
   udløste
   udløser
   udløse
 
 15. skuffede (datid) — разочаровывать. Bydeform?
+> navneform skuffe · nutid skuffer · datid skuffede · førnutid skuffet · bydeform skuf — разочаровывать
 * skuf
   skuffet
   skuffer
   skuffe
 
 16. forbød (datid) — запрещать. Nutid?
+> navneform forbyde · nutid forbyder · datid forbød · førnutid forbudt · bydeform forbyd — запрещать
 * forbyder
   forbudt
   forbyde
   forbyd
 
 17. indrettede (datid) — обустраивать. Nutid?
+> navneform indrette · nutid indretter · datid indrettede · førnutid indrettet · bydeform indret — обустраивать
 * indretter
   indrettet
   indrette
   indret
 
 18. drog (datid) — отправляться. Førnutid?
+> navneform drage · nutid drager · datid drog · førnutid draget · bydeform drag — отправляться; тянуть; (drage omsorg) заботиться
 * draget
   drager
   drage
   drag
 
 19. flygtede (datid) — бежать, спасаться. Navneform?
+> navneform flygte · nutid flygter · datid flygtede · førnutid flygtet · bydeform flygt — бежать, спасаться
 * flygte
   flygtet
   flygter
   flygt
 
 20. efterlad (bydeform) — оставлять. Datid?
+> navneform efterlade · nutid efterlader · datid efterlod · førnutid efterladt · bydeform efterlad — оставлять
 * efterlod
   efterladt
   efterlader
   efterlade
 
 21. sigte (navneform) — целиться. Nutid?
+> navneform sigte · nutid sigter · datid sigtede · førnutid sigtet · bydeform sigt — целиться; подразумевать
 * sigter
   sigtede
   sigtet
   sigt
 
 22. opfyldte (datid) — выполнять, удовлетворять. Førnutid?
+> navneform opfylde · nutid opfylder · datid opfyldte · førnutid opfyldt · bydeform opfyld — выполнять, удовлетворять
 * opfyldt
   opfylder
   opfylde
   opfyld
 
 23. erstatter (nutid) — заменять. Førnutid?
+> navneform erstatte · nutid erstatter · datid erstattede · førnutid erstattet · bydeform erstat — заменять; возмещать
 * erstattet
   erstattede
   erstatte
   erstat
 
 24. spreder (nutid) — распространять. Navneform?
+> navneform sprede · nutid spreder · datid spredte · førnutid spredt · bydeform spred — распространять
 * sprede
   spredte
   spredt
   spred
 
 25. underviser (nutid) — преподавать. Førnutid?
+> navneform undervise · nutid underviser · datid underviste · førnutid undervist · bydeform undervis — преподавать
 * undervist
   underviste
   undervise

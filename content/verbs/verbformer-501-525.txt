@@ -4,150 +4,175 @@ title: Verber 501–525
 
 --- questions ---
 1. beklaget (førnutid) — сожалеть. Navneform?
+> navneform beklage · nutid beklager · datid beklagede · førnutid beklaget · bydeform beklag — сожалеть; (beklage sig) жаловаться
 * beklage
   beklagede
   beklager
   beklag
 
 2. anet (førnutid) — догадываться (ingen anelse). Navneform?
+> navneform ane · nutid aner · datid anede · førnutid anet · bydeform an — догадываться (ingen anelse)
 * ane
   anede
   aner
   an
 
 3. drøfte (navneform) — обсуждать. Førnutid?
+> navneform drøfte · nutid drøfter · datid drøftede · førnutid drøftet · bydeform drøft — обсуждать
 * drøftet
   drøftede
   drøfter
   drøft
 
 4. roser (nutid) — хвалить. Førnutid?
+> navneform rose · nutid roser · datid roste · førnutid rost · bydeform ros — хвалить
 * rost
   roste
   rose
   ros
 
 5. konkurrer (bydeform) — соревноваться. Nutid?
+> navneform konkurrere · nutid konkurrerer · datid konkurrerede · førnutid konkurreret · bydeform konkurrer — соревноваться
 * konkurrerer
   konkurrerede
   konkurreret
   konkurrere
 
 6. indlægge (navneform) — госпитализировать. Nutid?
+> navneform indlægge · nutid indlægger · datid indlagde · førnutid indlagt · bydeform indlæg — госпитализировать
 * indlægger
   indlagde
   indlagt
   indlæg
 
 7. hev (datid) — тянуть, тащить. Bydeform?
+> navneform hive · nutid hiver · datid hev · førnutid hevet · bydeform hiv — тянуть, тащить
 * hiv
   hevet
   hiver
   hive
 
 8. anfører (nutid) — указывать. Førnutid?
+> navneform anføre · nutid anfører · datid anførte · førnutid anført · bydeform anfør — указывать; возглавлять
 * anført
   anførte
   anføre
   anfør
 
 9. udlevere (navneform) — выдавать. Førnutid?
+> navneform udlevere · nutid udleverer · datid udleverede · førnutid udleveret · bydeform udlever — выдавать
 * udleveret
   udleverede
   udleverer
   udlever
 
 10. idømt (førnutid) — назначать (наказание). Navneform?
+> navneform idømme · nutid idømmer · datid idømte · førnutid idømt · bydeform idøm — назначать (наказание)
 * idømme
   idømte
   idømmer
   idøm
 
 11. besat (førnutid) — занимать, оккупировать. Navneform?
+> navneform besætte · nutid besætter · datid besatte · førnutid besat · bydeform besæt — занимать, оккупировать
 * besætte
   besatte
   besætter
   besæt
 
 12. afspejlet (førnutid) — отражать. Bydeform?
+> navneform afspejle · nutid afspejler · datid afspejlede · førnutid afspejlet · bydeform afspejl — отражать
 * afspejl
   afspejlede
   afspejler
   afspejle
 
 13. designet (førnutid) — проектировать, дизайнить. Datid?
+> navneform designe · nutid designer · datid designede · førnutid designet · bydeform design — проектировать, дизайнить
 * designede
   designer
   designe
   design
 
 14. instruere (navneform) — инструктировать. Nutid?
+> navneform instruere · nutid instruerer · datid instruerede · førnutid instrueret · bydeform instruer — инструктировать; режиссировать
 * instruerer
   instruerede
   instrueret
   instruer
 
 15. straffe (navneform) — наказывать. Bydeform?
+> navneform straffe · nutid straffer · datid straffede · førnutid straffet · bydeform straf — наказывать
 * straf
   straffede
   straffet
   straffer
 
 16. snød (datid) — обманывать. Førnutid?
+> navneform snyde · nutid snyder · datid snød · førnutid snydt · bydeform snyd — обманывать
 * snydt
   snyder
   snyde
   snyd
 
 17. strakt (førnutid) — растягивать. Datid?
+> navneform strække · nutid strækker · datid strakte · førnutid strakt · bydeform stræk — растягивать
 * strakte
   strækker
   strække
   stræk
 
 18. afskaffet (førnutid) — отменять. Navneform?
+> navneform afskaffe · nutid afskaffer · datid afskaffede · førnutid afskaffet · bydeform afskaf — отменять
 * afskaffe
   afskaffede
   afskaffer
   afskaf
 
 19. svigte (navneform) — подводить, предавать. Datid?
+> navneform svigte · nutid svigter · datid svigtede · førnutid svigtet · bydeform svigt — подводить, предавать
 * svigtede
   svigtet
   svigter
   svigt
 
 20. forvandlet (førnutid) — превращать. Datid?
+> navneform forvandle · nutid forvandler · datid forvandlede · førnutid forvandlet · bydeform forvandl — превращать
 * forvandlede
   forvandler
   forvandle
   forvandl
 
 21. genkendte (datid) — узнавать. Bydeform?
+> navneform genkende · nutid genkender · datid genkendte · førnutid genkendt · bydeform genkend — узнавать
 * genkend
   genkendt
   genkender
   genkende
 
 22. insister (bydeform) — настаивать. Førnutid?
+> navneform insistere · nutid insisterer · datid insisterede · førnutid insisteret · bydeform insister — настаивать
 * insisteret
   insisterede
   insisterer
   insistere
 
 23. blæst (førnutid) — дуть. Navneform?
+> navneform blæse · nutid blæser · datid blæste · førnutid blæst · bydeform blæs — дуть
 * blæse
   blæste
   blæser
   blæs
 
 24. udbetalt (førnutid) — выплачивать. Datid?
+> navneform udbetale · nutid udbetaler · datid udbetalte · førnutid udbetalt · bydeform udbetal — выплачивать
 * udbetalte
   udbetaler
   udbetale
   udbetal
 
 25. forudser (nutid) — предвидеть. Bydeform?
+> navneform forudse · nutid forudser · datid forudså · førnutid forudset · bydeform forudse — предвидеть
 * forudse
   forudså
   forudset

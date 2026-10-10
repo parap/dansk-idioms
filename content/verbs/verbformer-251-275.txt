@@ -4,150 +4,175 @@ title: Verber 251–275
 
 --- questions ---
 1. smed (datid) — бросать, выбрасывать. Navneform?
+> navneform smide · nutid smider · datid smed · førnutid smidt · bydeform smid — бросать, выбрасывать
 * smide
   smidt
   smider
   smid
 
 2. begå (navneform) — совершать (ошибку, преступление). Førnutid?
+> navneform begå · nutid begår · datid begik · førnutid begået · bydeform begå — совершать (ошибку, преступление)
 * begået
   begik
   begår
   begåt
 
 3. udvidede (datid) — расширять. Navneform?
+> navneform udvide · nutid udvider · datid udvidede · førnutid udvidet · bydeform udvid — расширять
 * udvide
   udvidet
   udvider
   udvid
 
 4. træf (bydeform) — встречать. Førnutid?
+> navneform træffe · nutid træffer · datid traf · førnutid truffet · bydeform træf — встречать; принимать (решение)
 * truffet
   traf
   træffer
   træffe
 
 5. bevaret (førnutid) — сохранять. Datid?
+> navneform bevare · nutid bevarer · datid bevarede · førnutid bevaret · bydeform bevar — сохранять
 * bevarede
   bevarer
   bevare
   bevar
 
 6. styrkede (datid) — укреплять. Bydeform?
+> navneform styrke · nutid styrker · datid styrkede · førnutid styrket · bydeform styrk — укреплять
 * styrk
   styrket
   styrker
   styrke
 
 7. risikerede (datid) — рисковать. Nutid?
+> navneform risikere · nutid risikerer · datid risikerede · førnutid risikeret · bydeform risiker — рисковать
 * risikerer
   risikeret
   risikere
   risiker
 
 8. mind (bydeform) — напоминать. Nutid?
+> navneform minde · nutid minder · datid mindede · førnutid mindet · bydeform mind — напоминать
 * minder
   mindede
   mindet
   minde
 
 9. sammenligner (nutid) — сравнивать. Førnutid?
+> navneform sammenligne · nutid sammenligner · datid sammenlignede · førnutid sammenlignet · bydeform sammenlign — сравнивать
 * sammenlignet
   sammenlignede
   sammenligne
   sammenlign
 
 10. skaffe (navneform) — доставать, раздобыть. Datid?
+> navneform skaffe · nutid skaffer · datid skaffede · førnutid skaffet · bydeform skaf — доставать, раздобыть
 * skaffede
   skaffet
   skaffer
   skaf
 
 11. præge (navneform) — накладывать отпечаток, определять. Bydeform?
+> navneform præge · nutid præger · datid prægede · førnutid præget · bydeform præg — накладывать отпечаток, определять
 * præg
   prægede
   præget
   præger
 
 12. reddede (datid) — спасать. Bydeform?
+> navneform redde · nutid redder · datid reddede · førnutid reddet · bydeform red — спасать
 * red
   reddet
   redder
   redde
 
 13. fasthold (bydeform) — удерживать, настаивать. Navneform?
+> navneform fastholde · nutid fastholder · datid fastholdt · førnutid fastholdt · bydeform fasthold — удерживать, настаивать
 * fastholde
   fastholdt
   fastholder
   fastholdede
 
 14. planlægger (nutid) — планировать. Førnutid?
+> navneform planlægge · nutid planlægger · datid planlagde · førnutid planlagt · bydeform planlæg — планировать
 * planlagt
   planlagde
   planlægge
   planlæg
 
 15. scoret (førnutid) — забивать (гол). Datid?
+> navneform score · nutid scorer · datid scorede · førnutid scoret · bydeform scor — забивать (гол)
 * scorede
   scorer
   score
   scor
 
 16. baser (bydeform) — основывать. Datid?
+> navneform basere · nutid baserer · datid baserede · førnutid baseret · bydeform baser — основывать
 * baserede
   baseret
   baserer
   basere
 
 17. repræsenterede (datid) — представлять (интересы). Bydeform?
+> navneform repræsentere · nutid repræsenterer · datid repræsenterede · førnutid repræsenteret · bydeform repræsenter — представлять (интересы)
 * repræsenter
   repræsenteret
   repræsenterer
   repræsentere
 
 18. befundet (førnutid) — (befinde sig) находиться. Datid?
+> navneform befinde · nutid befinder · datid befandt · førnutid befundet · bydeform befind — (befinde sig) находиться
 * befandt
   befinder
   befinde
   befind
 
 19. udtrykke (navneform) — выражать. Bydeform?
+> navneform udtrykke · nutid udtrykker · datid udtrykte · førnutid udtrykt · bydeform udtryk — выражать
 * udtryk
   udtrykte
   udtrykt
   udtrykker
 
 20. fløj (datid) — летать. Bydeform?
+> navneform flyve · nutid flyver · datid fløj · førnutid fløjet · bydeform flyv — летать
 * flyv
   fløjet
   flyver
   flyve
 
 21. snak (bydeform) — болтать, разговаривать. Datid?
+> navneform snakke · nutid snakker · datid snakkede · førnutid snakket · bydeform snak — болтать, разговаривать
 * snakkede
   snakket
   snakker
   snakke
 
 22. reducer (bydeform) — сокращать. Navneform?
+> navneform reducere · nutid reducerer · datid reducerede · førnutid reduceret · bydeform reducer — сокращать
 * reducere
   reducerede
   reduceret
   reducerer
 
 23. dukke (navneform) — (dukke op) появляться. Nutid?
+> navneform dukke · nutid dukker · datid dukkede · førnutid dukket · bydeform duk — (dukke op) появляться; нырять
 * dukker
   dukkede
   dukket
   duk
 
 24. erklære (navneform) — объявлять, заявлять. Førnutid?
+> navneform erklære · nutid erklærer · datid erklærede · førnutid erklæret · bydeform erklær — объявлять, заявлять
 * erklæret
   erklærede
   erklærer
   erklær
 
 25. forsvare (navneform) — защищать. Datid?
+> navneform forsvare · nutid forsvarer · datid forsvarede · førnutid forsvaret · bydeform forsvar — защищать
 * forsvarede
   forsvaret
   forsvarer

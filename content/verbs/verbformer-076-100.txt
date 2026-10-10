@@ -4,150 +4,175 @@ title: Verber 76–100
 
 --- questions ---
 1. hjælper (nutid) — помогать. Datid?
+> navneform hjælpe · nutid hjælper · datid hjalp · førnutid hjulpet · bydeform hjælp — помогать
 * hjalp
   hjulpet
   hjælpe
   hjælp
 
 2. forstået (førnutid) — понимать. Datid?
+> navneform forstå · nutid forstår · datid forstod · førnutid forstået · bydeform forstå — понимать
 * forstod
   forstår
   forstå
   forståte
 
 3. kræv (bydeform) — требовать. Datid?
+> navneform kræve · nutid kræver · datid krævede · førnutid krævet · bydeform kræv — требовать
 * krævede
   krævet
   kræver
   kræve
 
 4. spørge (navneform) — спрашивать. Bydeform?
+> navneform spørge · nutid spørger · datid spurgte · førnutid spurgt · bydeform spørg — спрашивать
 * spørg
   spurgte
   spurgt
   spørger
 
 5. svaret (førnutid) — отвечать. Bydeform?
+> navneform svare · nutid svarer · datid svarede · førnutid svaret · bydeform svar — отвечать
 * svar
   svarede
   svarer
   svare
 
 6. fortsatte (datid) — продолжать. Førnutid?
+> navneform fortsætte · nutid fortsætter · datid fortsatte · førnutid fortsat · bydeform fortsæt — продолжать
 * fortsat
   fortsætter
   fortsætte
   fortsæt
 
 7. flyttede (datid) — переезжать. Nutid?
+> navneform flytte · nutid flytter · datid flyttede · førnutid flyttet · bydeform flyt — переезжать; передвигать
 * flytter
   flyttet
   flytte
   flyt
 
 8. ændrede (datid) — изменять. Navneform?
+> navneform ændre · nutid ændrer · datid ændrede · førnutid ændret · bydeform ændr — изменять
 * ændre
   ændret
   ændrer
   ændr
 
 9. byggede (datid) — строить. Navneform?
+> navneform bygge · nutid bygger · datid byggede · førnutid bygget · bydeform byg — строить
 * bygge
   bygget
   bygger
   byg
 
 10. vende (navneform) — поворачивать. Nutid?
+> navneform vende · nutid vender · datid vendte · førnutid vendt · bydeform vend — поворачивать; (vende tilbage) возвращаться
 * vender
   vendte
   vendt
   vend
 
 11. ramme (navneform) — попадать, поражать. Førnutid?
+> navneform ramme · nutid rammer · datid ramte · førnutid ramt · bydeform ram — попадать, поражать
 * ramt
   ramte
   rammer
   ram
 
 12. udvikler (nutid) — развивать. Bydeform?
+> navneform udvikle · nutid udvikler · datid udviklede · førnutid udviklet · bydeform udvikl — развивать
 * udvikl
   udviklede
   udviklet
   udvikle
 
 13. fyld (bydeform) — наполнять. Navneform?
+> navneform fylde · nutid fylder · datid fyldte · førnutid fyldt · bydeform fyld — наполнять; (fylde år) исполняться (о возрасте)
 * fylde
   fyldte
   fyldt
   fylder
 
 14. åbne (navneform) — открывать. Nutid?
+> navneform åbne · nutid åbner · datid åbnede · førnutid åbnet · bydeform åbn — открывать
 * åbner
   åbnede
   åbnet
   åbn
 
 15. oplys (bydeform) — сообщать, информировать. Førnutid?
+> navneform oplyse · nutid oplyser · datid oplyste · førnutid oplyst · bydeform oplys — сообщать, информировать
 * oplyst
   oplyste
   oplyser
   oplyse
 
 16. lært (førnutid) — учить(ся). Navneform?
+> navneform lære · nutid lærer · datid lærte · førnutid lært · bydeform lær — учить(ся)
 * lære
   lærte
   lærer
   lær
 
 17. endt (førnutid) — заканчивать(ся). Navneform?
+> navneform ende · nutid ender · datid endte · førnutid endt · bydeform end — заканчивать(ся)
 * ende
   endte
   ender
   end
 
 18. rejse (navneform) — путешествовать. Nutid?
+> navneform rejse · nutid rejser · datid rejste · førnutid rejst · bydeform rejs — путешествовать; (rejse sig) вставать
 * rejser
   rejste
   rejst
   rejs
 
 19. kostede (datid) — стоить. Navneform?
+> navneform koste · nutid koster · datid kostede · førnutid kostet · bydeform kost — стоить
 * koste
   kostet
   koster
   kost
 
 20. ligne (navneform) — быть похожим. Nutid?
+> navneform ligne · nutid ligner · datid lignede · førnutid lignet · bydeform lign — быть похожим
 * ligner
   lignede
   lignet
   lign
 
 21. mangler (nutid) — не хватать. Datid?
+> navneform mangle · nutid mangler · datid manglede · førnutid manglet · bydeform mangl — не хватать
 * manglede
   manglet
   mangle
   mangl
 
 22. heddet (førnutid) — называться, зваться. Bydeform?
+> navneform hedde · nutid hedder · datid hed · førnutid heddet · bydeform hed — называться, зваться
 * hed
   hedder
   hedde
   hedte
 
 23. prøvede (datid) — пробовать. Nutid?
+> navneform prøve · nutid prøver · datid prøvede · førnutid prøvet · bydeform prøv — пробовать; примерять
 * prøver
   prøvet
   prøve
   prøv
 
 24. luk (bydeform) — закрывать. Førnutid?
+> navneform lukke · nutid lukker · datid lukkede · førnutid lukket · bydeform luk — закрывать
 * lukket
   lukkede
   lukker
   lukke
 
 25. forvent (bydeform) — ожидать (рассчитывать). Navneform?
+> navneform forvente · nutid forventer · datid forventede · førnutid forventet · bydeform forvent — ожидать (рассчитывать)
 * forvente
   forventede
   forventet
