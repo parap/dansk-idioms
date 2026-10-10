@@ -1,0 +1,83 @@
+kind: cloze
+slug: du3m4-v2-opg1-fodboldklubben
+title: Træner i fodboldklubben
+
+--- text ---
+Da Samir Haddad flyttede til Nørresundby {{1}} tre år siden, var hans søn Yusuf otte
+år. Yusuf savnede sine gamle venner og talte næsten ikke dansk. En lærer foreslog
+derfor, at han skulle prøve at spille fodbold i den lokale klub.
+
+Den første træning var svær. Yusuf forstod ikke, hvad træneren sagde, men han kunne se,
+hvad de andre gjorde. {{2}} et par uger havde han fået to nye venner, og efter en måned
+ville han ikke gå glip af en eneste træning.
+
+Samir stod hver gang ved siden af banen og så på. En dag kom klubbens formand hen til
+ham og spurgte, om han ville hjælpe til. "Jeg sagde nej. Jeg havde aldrig {{3}} fodbold
+selv, og mit dansk var ikke godt nok," fortæller han. Men formanden blev ved med at
+spørge, og til sidst sagde Samir ja {{4}} at være hjælpetræner for et af de yngste hold.
+
+I dag træner han holdet for de syvårige hver tirsdag og torsdag. Han har taget et kursus
+for nye trænere, som klubben betalte. "Den {{5}} ting, jeg har lært, handler slet ikke om
+fodbold," siger han. "Den handler om at få alle børnene med, også dem, der ikke er så
+gode."
+
+Klubben har brug for flere frivillige som Samir. Ifølge formanden, Lone Bech, er der
+kommet mange nye børn de seneste år, men der er ikke kommet flere trænere. "{{6}} vi ikke
+finder flere voksne inden sommer, bliver vi nødt til at lave en venteliste, og det vil
+vi helst undgå," siger hun.
+
+Samir har en klar besked til andre forældre: "Man behøver ikke at være ekspert. Man skal
+bare have lyst til at være sammen med børn, og så lærer man {{7}} undervejs."
+
+For Yusuf, som i dag er elleve, er det helt normalt, at hans far står på banen. "Det er
+lidt pinligt, når han råber," siger han og griner. "Men jeg er glad for, at han er
+{{8}}."
+
+--- questions ---
+1.
+* for
+  i
+  på
+  om
+
+2.
+* Efter
+  Om
+  Siden
+  Fra
+
+3.
+* spillet
+  spillede
+  spiller
+  spil
+
+4.
+* til
+  for
+  på
+  om
+
+5.
+* vigtigste
+  vigtig
+  vigtigt
+  vigtigere
+
+6.
+* Hvis
+  Fordi
+  Selvom
+  Når
+
+7.
+* resten
+  rest
+  resterne
+  resterende
+
+8.
+* med
+  ved
+  til
+  på

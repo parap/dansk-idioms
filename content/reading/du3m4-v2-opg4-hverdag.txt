@@ -1,0 +1,68 @@
+kind: mc
+slug: du3m4-v2-opg4-hverdag
+title: Seks korte tekster fra hverdagen 2
+
+--- text ---
+Tekst 1. Opslag i vaskeriet
+
+Vaskeriet er lukket på grund af rengøring onsdag den 6. november. Har du booket en tid
+den dag, er din tid flyttet til torsdag på samme tidspunkt. Du kan se din nye tid i
+bookingsystemet.
+
+Tekst 2. Fra lægehusets hjemmeside
+
+Telefontid: hverdage kl. 8–9. Du kan bestille fornyelse af recepter hele døgnet på vores
+hjemmeside. Bliver du akut syg uden for åbningstiden, skal du ringe til lægevagten.
+
+Tekst 3. Invitation
+
+Kære Maja! Oliver bliver 6 år, og det vil vi fejre lørdag den 9. november kl. 14–17 i
+Legeland. Giv os besked senest onsdag, om du kan komme. Hvis der er noget, du ikke må
+spise, så skriv det også. Hilsen Oliver og Sofie (Olivers mor)
+
+Tekst 4. Information fra busselskabet
+
+Fra mandag den 4. november kører linje 12 ikke ad Parkvej på grund af vejarbejde. Bussen
+kører i stedet ad Skolevej. Stoppestederne på Parkvej er lukket i fire uger.
+
+Tekst 5. Annonce
+
+Sælges: Rød børnecykel, 20 tommer. Brugt i to år, men i fin stand, og bremserne er nye.
+Pris 400 kr. Kan hentes efter kl. 17. Skriv en besked, hvis du er interesseret.
+
+Tekst 6. Mail fra arbejdet
+
+Hej alle. Husk, at vi holder personalemøde på torsdag kl. 14 i kantinen og ikke i
+mødelokalet, fordi vi bliver flere end normalt. Der er kaffe og kage. Hvis du ikke kan
+komme, så giv Hanne besked. Mvh. Peter
+
+--- questions ---
+1. Tekst 1: Hvad sker der med de tider, der er booket onsdag?
+  De bliver slettet.
+* De bliver flyttet til dagen efter.
+  De bliver flyttet til næste uge.
+
+2. Tekst 2: Hvordan kan man få fornyet en recept om aftenen?
+  Ved at ringe til lægehuset næste morgen kl. 8.
+  Ved at ringe til lægevagten.
+* Ved at bestille den på hjemmesiden.
+
+3. Tekst 3: Hvad skal Maja svare på senest onsdag?
+* Om hun kommer til festen.
+  Hvad hun ønsker sig i gave.
+  Om hun kan hente Oliver i Legeland.
+
+4. Tekst 4: Hvorfor kører bussen en anden vej?
+* Der er vejarbejde på Parkvej.
+  Stoppestederne er flyttet for altid.
+  Linje 12 er blevet nedlagt.
+
+5. Tekst 5: Hvad står der om cyklen?
+  Den er helt ny.
+* Den har nye bremser.
+  Den kan sendes med posten.
+
+6. Tekst 6: Hvorfor holder de mødet i kantinen?
+  Mødelokalet er i stykker.
+* Der kommer flere mennesker end normalt.
+  Der skal serveres kaffe og kage.

@@ -1,0 +1,44 @@
+kind: insert
+slug: du3m4-v1-opg2-loppemarked
+title: Loppemarkedet i Vestbyen
+
+--- text ---
+Hver søndag fra april til oktober bliver parkeringspladsen ved Vestbyens Skole til et
+loppemarked. Fra klokken otte står der lange rækker af borde med gamle bøger, legetøj,
+køkkenting og tøj. {{1}} Markedet startede for ti år siden som en idé fra skolens
+forældreforening, men i dag kommer der folk fra hele kommunen.
+
+Det koster 100 kroner at leje en plads for en hel dag. Pengene går til skolens
+lejrskole, så alle elever i 6. klasse kan komme med, også dem, hvis forældre ikke har
+råd. {{2}}
+
+Mange af sælgerne er faste. Inge Lund på 71 år har haft en bod hvert år, siden markedet
+begyndte. Hun sælger hjemmelavet syltetøj og gammelt porcelæn. {{3}} "Jeg tjener ikke
+ret meget, men jeg møder mennesker, og det er derfor, jeg kommer," siger hun.
+
+Køberne er også forskellige. Nogle kommer for at finde billigt tøj til deres børn, mens
+andre bare går en tur og kigger. {{4}} Mustafa Ali samler på gamle vinylplader og står
+ved indgangen hver søndag klokken syv, en time før markedet åbner.
+
+Kommunen er glad for markedet, fordi det passer godt ind i planen om at smide mindre
+ud. {{5}} Derfor overvejer man nu at starte et lignende marked i den anden ende af
+byen.
+
+--- parts ---
+A Når klokken bliver ti, er der så mange mennesker, at det kan være svært at komme frem
+  mellem bordene.
+B Sidste år kom der over 40.000 kroner ind, og det betød, at ingen familie skulle betale
+  for turen.
+C For hende er pengene ikke det vigtigste.
+D Der er også samlere, som gerne står tidligt op for at være de første ved bordene.
+E Ifølge kommunen bliver tusindvis af ting hvert år solgt videre i stedet for at ende på
+  genbrugspladsen.
+F Hun har aldrig været på et loppemarked før og ved ikke, hvad tingene skal koste.
+G Han har derfor bedt kommunen om at flytte markedet til en større plads.
+
+--- questions ---
+1. A
+2. B
+3. C
+4. D
+5. E
