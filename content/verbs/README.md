@@ -35,6 +35,8 @@ a verb that also has the shown form is never offered as a wrong answer.
 
 The list at `/verbs` is in load order, and the importer loads files in name order, so the
 names keep the form drills (`verbformer-`) ahead of the recognition sets (`verbgenkend-`).
+Each tile there shows a picture of one verb from its set, chosen by hand in `PICTURES` at
+the top of `public/verbs.html`; a set missing from it gets a plain book.
 
 ```bash
 python3 bin/verbs-source.py ~/Claude/danish-verbs/src   # only when the verb list itself changes
