@@ -627,6 +627,10 @@ FAULTS = [
   "        '/verbs'  => '/verbs.html',\n",
   "",
   "unit:testTheVerbPageHasItsOwnDocument"),
+ (198,"a literal gloss demotes the answer chosen in review","src/Domain/ReviewRepository.php",
+  "            if ($c['sense_type'] === 'literal' && !in_array(Normalizer::translation($c['text']), $chosen, true)) {",
+  "            if ($c['sense_type'] === 'literal') {",
+  "integration:testAnAnswerThatIsAlsoALiteralGlossStaysThePrimary"),
 ]
 def phpunit(*args, service="mutants"):
     return subprocess.run(
