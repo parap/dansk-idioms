@@ -439,6 +439,8 @@ docker-compose up -d
 | `php bin/idiom-import.php [file…]` | load the hand-added idioms in `content/idioms/` |
 | `php bin/indfoedsret-convert.php <dir>` | turn published exam PDFs into documents |
 | `php bin/reading-import.php [--publish] <file…>` | load reading and exam documents |
+| `python3 bin/verbs-source.py [dir]` | rebuild `content/verbs/source.json` from DSL's downloads |
+| `python3 bin/verbs-generate.py` | write the verb drills in `content/verbs/` from it |
 | `php bin/audit-shared-senses.php` | list idioms that can be served as each other's wrong answer |
 | `php bin/migrate.php [--status]` | apply pending migrations |
 | `php bin/reclassify.php [--dry-run]` | recompute derived shape after changing heuristics |
