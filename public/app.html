@@ -46,7 +46,6 @@
     padding:.85rem 1.1rem;border:1px solid var(--line);border-radius:10px;background:var(--chip);
     color:var(--ink);font-weight:600;text-decoration:none;transition:border-color .12s,background .12s}
   .cta:hover,.cta:focus-visible{border-color:var(--accent)}
-  .cta b{color:var(--accent);font-size:1.15rem}
   .stats{display:flex;gap:1.4rem;margin:0 0 1.5rem;flex-wrap:wrap}
   .stat b{display:block;font-size:1.5rem;line-height:1.1}
   .stat span{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
@@ -311,10 +310,10 @@ async function home() {
       <p class="tagline">${esc(t('tagline'))}</p>
       <p class="lede">${esc(t('intro'))}</p>
       <div class="ctas">
-        <a class="cta" href="/read"><span>${esc(t('readingLink'))}</span><b aria-hidden="true">→</b></a>
-        <a class="cta" href="/proeve"><span>${esc(t('proeveLink'))}</span><b aria-hidden="true">→</b></a>
-        <a class="cta" href="/listen"><span>${esc(t('listenLink'))}</span><b aria-hidden="true">→</b></a>
-        <a class="cta" href="/verbs"><span>${esc(t('verbsLink'))}</span><b aria-hidden="true">→</b></a>
+        <a class="cta" href="/read"><span>${esc(t('readingLink'))}</span></a>
+        <a class="cta" href="/proeve"><span>${esc(t('proeveLink'))}</span></a>
+        <a class="cta" href="/listen"><span>${esc(t('listenLink'))}</span></a>
+        <a class="cta" href="/verbs"><span>${esc(t('verbsLink'))}</span></a>
       </div>
       <div class="stats">
         <div class="stat"><b>${s.idioms_published ?? '—'}</b><span>${esc(t('statIdioms', s.idioms_published))}</span></div>
