@@ -725,7 +725,13 @@ if anchors_only:
     # inherited from a base class still counts.
     unknown = []
     for wanted_suite in sorted({s.partition(':')[0] for _, _, _, _, _, s in FAULTS if ':' in s}):
-        listed = phpunit("--testsuite", wanted_suite, "--list-tests", service="app").stdout
+        r = phpunit("--testsuite", wanted_suite, "--list-tests", service="app")
+        # A listing that failed is empty, and an empty listing reports every witness as gone.
+        if r.returncode != 0 or '::' not in r.stdout:
+            sys.exit(f"  could not list the {wanted_suite} tests, so no witness was checked"
+                     f" (run from the checkout the app container mounts):\n"
+                     f"  {(r.stderr.strip() or r.stdout.strip())[-400:]}")
+        listed = r.stdout
         # A data-provider test is listed once per data set, its name followed by "set".
         known = {line.rpartition('::')[2].strip().partition('"')[0]
                  for line in listed.splitlines() if '::' in line}
