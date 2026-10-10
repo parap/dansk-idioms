@@ -240,6 +240,18 @@ final class ReadingRepositoryTest extends IntegrationTestCase
         );
     }
 
+    public function testPublishedVideosAreListedInDanishAlphabeticalOrder(): void
+    {
+        foreach (['Tommelise', 'Æblet', 'Den grimme ælling', 'De røde sko'] as $i => $title) {
+            $this->repo->publish($this->repo->save($this->video(['slug' => "film-$i", 'title' => $title])));
+        }
+
+        self::assertSame(
+            ['De røde sko', 'Den grimme ælling', 'Tommelise', 'Æblet'],
+            array_column($this->repo->publishedVideos(), 'title')
+        );
+    }
+
     /** @return array<string,mixed> */
     private function verbs(array $overrides = []): array
     {

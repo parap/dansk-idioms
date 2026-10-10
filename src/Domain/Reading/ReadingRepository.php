@@ -99,7 +99,9 @@ final class ReadingRepository
      */
     public function publishedVideos(): array
     {
-        return $this->publishedSets('video');
+        // By title in the Danish alphabet (æ, ø, å after z), not by id: the id order is
+        // whatever order a database happened to import the files in.
+        return $this->publishedSets('video', 'p.title COLLATE utf8mb4_danish_ci');
     }
 
     /**
@@ -120,7 +122,7 @@ final class ReadingRepository
      *
      * @return list<array{slug:string,title:string,youtube:?string,questions:int}>
      */
-    private function publishedSets(string $kind): array
+    private function publishedSets(string $kind, string $orderBy = 'p.id'): array
     {
         $rows = Db::fetchAll(
             "SELECT p.slug, p.title, p.youtube_id AS youtube, COUNT(i.id) AS questions
@@ -128,7 +130,7 @@ final class ReadingRepository
                JOIN reading_items i ON i.passage_id = p.id AND i.is_active = 1 AND i.is_flagged = 0
               WHERE p.is_published = 1 AND p.kind = ?
               GROUP BY p.id, p.slug, p.title, p.youtube_id
-              ORDER BY p.id",
+              ORDER BY $orderBy",
             [$kind]
         );
 
