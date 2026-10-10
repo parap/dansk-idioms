@@ -1,0 +1,136 @@
+kind: verbs
+slug: verbgenkend-1
+title: Genkend verbet 1
+
+--- questions ---
+1. var — datid af …?
+* være
+  svare
+  varme
+  advare
+
+2. er — nutid af …?
+* være
+  levere
+  lære
+  bære
+
+3. har — nutid af …?
+* have
+  havne
+  hade
+  høre
+
+4. kan — nutid af …?
+* kunne
+  ane
+  danne
+  knuse
+
+5. blev — datid af …?
+* blive
+  leve
+  blæse
+  lave
+
+6. skal — nutid af …?
+* skulle
+  skille
+  skjule
+  skylde
+
+7. vil — nutid af …?
+* ville
+  hvile
+  tvivle
+  pille
+
+8. fik — datid af …?
+* få
+  afvikle
+  formå
+  finde
+
+9. sagde — datid af …?
+* sige
+  stige
+  sigte
+  smage
+
+10. kom — datid af …?
+* komme
+  koge
+  kommentere
+  koste
+
+11. gik — datid af …?
+* gå
+  give
+  gide
+  gribe
+
+12. gjorde — datid af …?
+* gøre
+  græde
+  gribe
+  grine
+
+13. gør — nutid af …?
+* gøre
+  køre
+  høre
+  føre
+
+14. så — datid af …?
+* se
+  såre
+  stå
+  ske
+
+15. tog — datid af …?
+* tage
+  stige
+  koge
+  tvinge
+
+16. gav — datid af …?
+* give
+  begrave
+  have
+  lave
+
+17. fandt — datid af …?
+* finde
+  forandre
+  vinde
+  minde
+
+18. må — nutid af …?
+* måtte
+  måle
+  smitte
+  formå
+
+19. stod — datid af …?
+* stå
+  støde
+  stole
+  stoppe
+
+20. satte — datid af …?
+* sætte
+  starte
+  støtte
+  slutte
+
+21. holdt — datid af …?
+* holde
+  hælde
+  hylde
+  lade
+
+22. skrev — datid af …?
+* skrive
+  skride
+  skrige
+  sikre

@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-451-475
+title: Verber 451–475
+
+--- questions ---
+1. dokumenteret (førnutid) — документировать. Datid?
+* dokumenterede
+  dokumenterer
+  dokumentere
+  dokumenter
+
+2. fremstod (datid) — выглядеть, представать. Bydeform?
+* fremstå
+  fremstået
+  fremstår
+  fremståte
+
+3. udelukkede (datid) — исключать. Nutid?
+* udelukker
+  udelukket
+  udelukke
+  udeluk
+
+4. kvalificerer (nutid) — (kvalificere sig) квалифицироваться. Navneform?
+* kvalificere
+  kvalificerede
+  kvalificeret
+  kvalificer
+
+5. angået (førnutid) — касаться. Navneform?
+* angå
+  angik
+  angår
+  angåte
+
+6. udvise (navneform) — проявлять. Bydeform?
+* udvis
+  udviste
+  udvist
+  udviser
+
+7. nærmede (datid) — (nærme sig) приближаться. Nutid?
+* nærmer
+  nærmet
+  nærme
+  nærm
+
+8. tiltal (bydeform) — привлекать к суду. Navneform?
+* tiltale
+  tiltalte
+  tiltalt
+  tiltaler
+
+9. drop (bydeform) — бросать, отказываться. Datid?
+* droppede
+  droppet
+  dropper
+  droppe
+
+10. lejet (førnutid) — снимать (в аренду), сдавать. Datid?
+* lejede
+  lejer
+  leje
+  lej
+
+11. beskylde (navneform) — обвинять. Nutid?
+* beskylder
+  beskyldte
+  beskyldt
+  beskyld
+
+12. organiserer (nutid) — организовывать. Bydeform?
+* organiser
+  organiserede
+  organiseret
+  organisere
+
+13. behold (bydeform) — сохранять, оставлять себе. Datid?
+* beholdt
+  beholder
+  beholde
+  beholdede
+
+14. kog (bydeform) — варить, кипятить. Nutid?
+* koger
+  kogte
+  kogt
+  koge
+
+15. formulere (navneform) — формулировать. Bydeform?
+* formuler
+  formulerede
+  formuleret
+  formulerer
+
+16. inddrage (navneform) — вовлекать. Bydeform?
+* inddrag
+  inddrog
+  inddraget
+  inddrager
+
+17. noterer (nutid) — записывать. Førnutid?
+* noteret
+  noterede
+  notere
+  noter
+
+18. vækkede (datid) — будить. Navneform?
+* vække
+  vækket
+  vækker
+  væk
+
+19. hilste (datid) — здороваться. Førnutid?
+* hilst
+  hilser
+  hilse
+  hils
+
+20. uddelte (datid) — раздавать. Bydeform?
+* uddel
+  uddelt
+  uddeler
+  uddele
+
+21. prioriteret (førnutid) — расставлять приоритеты. Navneform?
+* prioritere
+  prioriterede
+  prioriterer
+  prioriter
+
+22. adskilte (datid) — разделять. Bydeform?
+* adskil
+  adskilt
+  adskiller
+  adskille
+
+23. anlagt (førnutid) — строить, прокладывать. Nutid?
+* anlægger
+  anlagde
+  anlægge
+  anlæg
+
+24. opereret (førnutid) — оперировать. Bydeform?
+* operer
+  opererede
+  opererer
+  operere
+
+25. skub (bydeform) — толкать. Datid?
+* skubbede
+  skubbet
+  skubber
+  skubbe

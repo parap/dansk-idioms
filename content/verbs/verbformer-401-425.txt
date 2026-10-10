@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-401-425
+title: Verber 401–425
+
+--- questions ---
+1. sænk (bydeform) — опускать, снижать. Førnutid?
+* sænket
+  sænkede
+  sænker
+  sænke
+
+2. henvendte (datid) — (henvende sig) обращаться. Navneform?
+* henvende
+  henvendt
+  henvender
+  henvend
+
+3. bestille (navneform) — заказывать. Nutid?
+* bestiller
+  bestilte
+  bestilt
+  bestil
+
+4. udpege (navneform) — назначать, указывать. Nutid?
+* udpeger
+  udpegede
+  udpeget
+  udpeg
+
+5. knyttet (førnutid) — связывать. Navneform?
+* knytte
+  knyttede
+  knytter
+  knyt
+
+6. finansierer (nutid) — финансировать. Bydeform?
+* finansier
+  finansierede
+  finansieret
+  finansiere
+
+7. udstil (bydeform) — выставлять. Datid?
+* udstillede
+  udstillet
+  udstiller
+  udstille
+
+8. foretræk (bydeform) — предпочитать. Datid?
+* foretrak
+  foretrukket
+  foretrækker
+  foretrække
+
+9. påstået (førnutid) — утверждать. Nutid?
+* påstår
+  påstod
+  påstå
+  påståte
+
+10. konkludere (navneform) — делать вывод. Nutid?
+* konkluderer
+  konkluderede
+  konkluderet
+  konkluder
+
+11. skilt (førnutid) — разделять. Datid?
+* skilte
+  skiller
+  skille
+  skil
+
+12. afleverer (nutid) — сдавать, отдавать. Førnutid?
+* afleveret
+  afleverede
+  aflevere
+  aflever
+
+13. legede (datid) — играть (о детях). Nutid?
+* leger
+  leget
+  lege
+  leg
+
+14. kommenter (bydeform) — комментировать. Førnutid?
+* kommenteret
+  kommenterede
+  kommenterer
+  kommentere
+
+15. rul (bydeform) — катить(ся). Førnutid?
+* rullet
+  rullede
+  ruller
+  rulle
+
+16. udarbejd (bydeform) — разрабатывать, составлять. Navneform?
+* udarbejde
+  udarbejdede
+  udarbejdet
+  udarbejder
+
+17. række (navneform) — протягивать. Bydeform?
+* ræk
+  rakte
+  rakt
+  rækker
+
+18. stifte (navneform) — основывать. Bydeform?
+* stift
+  stiftede
+  stiftet
+  stifter
+
+19. smag (bydeform) — пробовать на вкус. Nutid?
+* smager
+  smagte
+  smagt
+  smage
+
+20. beviser (nutid) — доказывать. Bydeform?
+* bevis
+  beviste
+  bevist
+  bevise
+
+21. aftal (bydeform) — договариваться. Nutid?
+* aftaler
+  aftalte
+  aftalt
+  aftale
+
+22. tildele (navneform) — присуждать, выделять. Nutid?
+* tildeler
+  tildelte
+  tildelt
+  tildel
+
+23. afløs (bydeform) — сменять. Datid?
+* afløste
+  afløst
+  afløser
+  afløse
+
+24. opbyggede (datid) — выстраивать. Navneform?
+* opbygge
+  opbygget
+  opbygger
+  opbyg
+
+25. skruet (førnutid) — закручивать. Navneform?
+* skrue
+  skruede
+  skruer
+  skru

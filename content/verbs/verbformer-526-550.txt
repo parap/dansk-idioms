@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-526-550
+title: Verber 526–550
+
+--- questions ---
+1. beregnede (datid) — рассчитывать. Førnutid?
+* beregnet
+  beregner
+  beregne
+  beregn
+
+2. hersker (nutid) — господствовать. Navneform?
+* herske
+  herskede
+  hersket
+  hersk
+
+3. forske (navneform) — исследовать (научно). Datid?
+* forskede
+  forsket
+  forsker
+  forsk
+
+4. banke (navneform) — стучать. Datid?
+* bankede
+  banket
+  banker
+  bank
+
+5. tilknytte (navneform) — прикреплять, присоединять. Førnutid?
+* tilknyttet
+  tilknyttede
+  tilknytter
+  tilknyt
+
+6. rådgiver (nutid) — консультировать. Datid?
+* rådgav
+  rådgivet
+  rådgive
+  rådgiv
+
+7. havnet (førnutid) — оказываться (в итоге). Navneform?
+* havne
+  havnede
+  havner
+  havn
+
+8. overlad (bydeform) — оставлять, передавать. Nutid?
+* overlader
+  overlod
+  overladt
+  overlade
+
+9. forlangte (datid) — требовать. Navneform?
+* forlange
+  forlangt
+  forlanger
+  forlang
+
+10. underskrive (navneform) — подписывать. Datid?
+* underskrev
+  underskrevet
+  underskriver
+  underskriv
+
+11. mistænker (nutid) — подозревать. Datid?
+* mistænkte
+  mistænkt
+  mistænke
+  mistænk
+
+12. berører (nutid) — касаться, затрагивать. Bydeform?
+* berør
+  berørte
+  berørt
+  berøre
+
+13. ifør (bydeform) — (iføre sig) облачаться. Navneform?
+* iføre
+  iførte
+  iført
+  ifører
+
+14. orienter (bydeform) — информировать. Nutid?
+* orienterer
+  orienterede
+  orienteret
+  orientere
+
+15. opholder (nutid) — (opholde sig) находиться, пребывать. Førnutid?
+* opholdt
+  opholde
+  ophold
+  opholdet
+
+16. sårer (nutid) — ранить, обижать. Førnutid?
+* såret
+  sårede
+  såre
+  sår
+
+17. gifte (navneform) — (gifte sig) жениться, выходить замуж. Bydeform?
+* gift
+  giftede
+  giftet
+  gifter
+
+18. tjekke (navneform) — проверять. Nutid?
+* tjekker
+  tjekkede
+  tjekket
+  tjek
+
+19. isolerede (datid) — изолировать. Nutid?
+* isolerer
+  isoleret
+  isolere
+  isoler
+
+20. omgav (datid) — окружать. Nutid?
+* omgiver
+  omgivet
+  omgive
+  omgiv
+
+21. undlad (bydeform) — воздерживаться. Datid?
+* undlod
+  undladt
+  undlader
+  undlade
+
+22. irriterede (datid) — раздражать. Bydeform?
+* irriter
+  irriteret
+  irriterer
+  irritere
+
+23. antager (nutid) — предполагать. Datid?
+* antog
+  antaget
+  antage
+  antag
+
+24. variere (navneform) — варьироваться. Bydeform?
+* varier
+  varierede
+  varieret
+  varierer
+
+25. tilpasser (nutid) — приспосабливать. Bydeform?
+* tilpas
+  tilpassede
+  tilpasset
+  tilpasse

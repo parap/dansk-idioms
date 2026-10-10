@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-501-525
+title: Verber 501–525
+
+--- questions ---
+1. beklaget (førnutid) — сожалеть. Navneform?
+* beklage
+  beklagede
+  beklager
+  beklag
+
+2. anet (førnutid) — догадываться (ingen anelse). Navneform?
+* ane
+  anede
+  aner
+  an
+
+3. drøfte (navneform) — обсуждать. Førnutid?
+* drøftet
+  drøftede
+  drøfter
+  drøft
+
+4. roser (nutid) — хвалить. Førnutid?
+* rost
+  roste
+  rose
+  ros
+
+5. konkurrer (bydeform) — соревноваться. Nutid?
+* konkurrerer
+  konkurrerede
+  konkurreret
+  konkurrere
+
+6. indlægge (navneform) — госпитализировать. Nutid?
+* indlægger
+  indlagde
+  indlagt
+  indlæg
+
+7. hev (datid) — тянуть, тащить. Bydeform?
+* hiv
+  hevet
+  hiver
+  hive
+
+8. anfører (nutid) — указывать. Førnutid?
+* anført
+  anførte
+  anføre
+  anfør
+
+9. udlevere (navneform) — выдавать. Førnutid?
+* udleveret
+  udleverede
+  udleverer
+  udlever
+
+10. idømt (førnutid) — назначать (наказание). Navneform?
+* idømme
+  idømte
+  idømmer
+  idøm
+
+11. besat (førnutid) — занимать, оккупировать. Navneform?
+* besætte
+  besatte
+  besætter
+  besæt
+
+12. afspejlet (førnutid) — отражать. Bydeform?
+* afspejl
+  afspejlede
+  afspejler
+  afspejle
+
+13. designet (førnutid) — проектировать, дизайнить. Datid?
+* designede
+  designer
+  designe
+  design
+
+14. instruere (navneform) — инструктировать. Nutid?
+* instruerer
+  instruerede
+  instrueret
+  instruer
+
+15. straffe (navneform) — наказывать. Bydeform?
+* straf
+  straffede
+  straffet
+  straffer
+
+16. snød (datid) — обманывать. Førnutid?
+* snydt
+  snyder
+  snyde
+  snyd
+
+17. strakt (førnutid) — растягивать. Datid?
+* strakte
+  strækker
+  strække
+  stræk
+
+18. afskaffet (førnutid) — отменять. Navneform?
+* afskaffe
+  afskaffede
+  afskaffer
+  afskaf
+
+19. svigte (navneform) — подводить, предавать. Datid?
+* svigtede
+  svigtet
+  svigter
+  svigt
+
+20. forvandlet (førnutid) — превращать. Datid?
+* forvandlede
+  forvandler
+  forvandle
+  forvandl
+
+21. genkendte (datid) — узнавать. Bydeform?
+* genkend
+  genkendt
+  genkender
+  genkende
+
+22. insister (bydeform) — настаивать. Førnutid?
+* insisteret
+  insisterede
+  insisterer
+  insistere
+
+23. blæst (førnutid) — дуть. Navneform?
+* blæse
+  blæste
+  blæser
+  blæs
+
+24. udbetalt (førnutid) — выплачивать. Datid?
+* udbetalte
+  udbetaler
+  udbetale
+  udbetal
+
+25. forudser (nutid) — предвидеть. Bydeform?
+* forudse
+  forudså
+  forudset
+  forudsede

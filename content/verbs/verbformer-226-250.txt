@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-226-250
+title: Verber 226–250
+
+--- questions ---
+1. frygtede (datid) — бояться. Førnutid?
+* frygtet
+  frygter
+  frygte
+  frygt
+
+2. behøver (nutid) — нуждаться. Førnutid?
+* behøvet
+  behøvede
+  behøve
+  behøv
+
+3. grib (bydeform) — хватать, ловить. Nutid?
+* griber
+  greb
+  grebet
+  gribe
+
+4. land (bydeform) — приземляться. Førnutid?
+* landet
+  landede
+  lander
+  lande
+
+5. styrede (datid) — управлять. Førnutid?
+* styret
+  styrer
+  styre
+  styr
+
+6. forestillet (førnutid) — представлять (себе — forestille sig). Datid?
+* forestillede
+  forestiller
+  forestille
+  forestil
+
+7. udført (førnutid) — выполнять. Nutid?
+* udfører
+  udførte
+  udføre
+  udfør
+
+8. medvirke (navneform) — участвовать, способствовать. Førnutid?
+* medvirket
+  medvirkede
+  medvirker
+  medvirk
+
+9. redet (førnutid) — ездить верхом. Nutid?
+* rider
+  red
+  ride
+  rid
+
+10. bevæger (nutid) — двигать(ся). Førnutid?
+* bevæget
+  bevægede
+  bevæge
+  bevæg
+
+11. begræns (bydeform) — ограничивать. Datid?
+* begrænsede
+  begrænset
+  begrænser
+  begrænse
+
+12. blandet (førnutid) — смешивать. Datid?
+* blandede
+  blander
+  blande
+  bland
+
+13. omfattet (førnutid) — охватывать, включать. Nutid?
+* omfatter
+  omfattede
+  omfatte
+  omfat
+
+14. påvirker (nutid) — влиять. Førnutid?
+* påvirket
+  påvirkede
+  påvirke
+  påvirk
+
+15. glemmer (nutid) — забывать. Bydeform?
+* glem
+  glemte
+  glemt
+  glemme
+
+16. acceptere (navneform) — принимать, соглашаться. Nutid?
+* accepterer
+  accepterede
+  accepteret
+  accepter
+
+17. bekræftede (datid) — подтверждать. Førnutid?
+* bekræftet
+  bekræfter
+  bekræfte
+  bekræft
+
+18. fastslår (nutid) — установить, констатировать. Navneform?
+* fastslå
+  fastslog
+  fastslået
+  fastslåte
+
+19. turdet (førnutid) — сметь, осмелиться. Navneform?
+* turde
+  tør
+  turdte
+  turder
+
+20. overbevis (bydeform) — убеждать. Førnutid?
+* overbevist
+  overbeviste
+  overbeviser
+  overbevise
+
+21. inviter (bydeform) — приглашать. Nutid?
+* inviterer
+  inviterede
+  inviteret
+  invitere
+
+22. afgjorde (datid) — решать (окончательно). Navneform?
+* afgøre
+  afgjort
+  afgør
+  afgørede
+
+23. ødelægger (nutid) — разрушать, портить. Førnutid?
+* ødelagt
+  ødelagde
+  ødelægge
+  ødelæg
+
+24. vedtager (nutid) — принимать (закон, решение). Førnutid?
+* vedtaget
+  vedtog
+  vedtage
+  vedtag
+
+25. tilladt (førnutid) — разрешать. Datid?
+* tillod
+  tillader
+  tillade
+  tillad

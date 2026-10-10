@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-426-450
+title: Verber 426–450
+
+--- questions ---
+1. tændte (datid) — зажигать, включать. Nutid?
+* tænder
+  tændt
+  tænde
+  tænd
+
+2. afsætter (nutid) — выделять (средства). Førnutid?
+* afsat
+  afsatte
+  afsætte
+  afsæt
+
+3. kontaktede (datid) — связываться. Navneform?
+* kontakte
+  kontaktet
+  kontakter
+  kontakt
+
+4. skræmte (datid) — пугать. Bydeform?
+* skræm
+  skræmt
+  skræmmer
+  skræmme
+
+5. skjul (bydeform) — скрывать, прятать. Nutid?
+* skjuler
+  skjulte
+  skjult
+  skjule
+
+6. kontrollerer (nutid) — контролировать, проверять. Førnutid?
+* kontrolleret
+  kontrollerede
+  kontrollere
+  kontroller
+
+7. bider (nutid) — кусать. Førnutid?
+* bidt
+  bed
+  bide
+  bid
+
+8. lancere (navneform) — запускать (продукт). Førnutid?
+* lanceret
+  lancerede
+  lancerer
+  lancer
+
+9. dans (bydeform) — танцевать. Førnutid?
+* danset
+  dansede
+  danser
+  danse
+
+10. teste (navneform) — тестировать. Bydeform?
+* test
+  testede
+  testet
+  tester
+
+11. engagerer (nutid) — вовлекать. Førnutid?
+* engageret
+  engagerede
+  engagere
+  engager
+
+12. forblive (navneform) — оставаться. Bydeform?
+* forbliv
+  forblev
+  forblevet
+  forbliver
+
+13. stødt (førnutid) — толкать. Nutid?
+* støder
+  stødte
+  støde
+  stød
+
+14. gider (nutid) — хотеть (иметь охоту). Navneform?
+* gide
+  gad
+  gidet
+  gid
+
+15. anklag (bydeform) — обвинять. Datid?
+* anklagede
+  anklaget
+  anklager
+  anklage
+
+16. fortjen (bydeform) — заслуживать. Navneform?
+* fortjene
+  fortjente
+  fortjent
+  fortjener
+
+17. rive (navneform) — рвать. Bydeform?
+* riv
+  rev
+  revet
+  river
+
+18. supplerer (nutid) — дополнять. Datid?
+* supplerede
+  suppleret
+  supplere
+  suppler
+
+19. smitter (nutid) — заражать. Datid?
+* smittede
+  smittet
+  smitte
+  smit
+
+20. forlængede (datid) — продлевать. Bydeform?
+* forlæng
+  forlænget
+  forlænger
+  forlænge
+
+21. forekommet (førnutid) — встречаться. Datid?
+* forekom
+  forekommer
+  forekomme
+  forekommede
+
+22. overholde (navneform) — соблюдать. Nutid?
+* overholder
+  overholdt
+  overhold
+  overholdede
+
+23. afvikle (navneform) — проводить. Bydeform?
+* afvikl
+  afviklede
+  afviklet
+  afvikler
+
+24. anmeldt (førnutid) — заявлять (в полицию). Navneform?
+* anmelde
+  anmeldte
+  anmelder
+  anmeld
+
+25. kombiner (bydeform) — сочетать. Førnutid?
+* kombineret
+  kombinerede
+  kombinerer
+  kombinere

@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-576-600
+title: Verber 576–600
+
+--- questions ---
+1. afbrød (datid) — прерывать. Nutid?
+* afbryder
+  afbrudt
+  afbryde
+  afbryd
+
+2. strammede (datid) — затягивать. Navneform?
+* stramme
+  strammet
+  strammer
+  stram
+
+3. indset (førnutid) — осознавать. Datid?
+* indså
+  indser
+  indse
+  indsede
+
+4. myrde (navneform) — убивать (умышленно). Bydeform?
+* myrd
+  myrdede
+  myrdet
+  myrder
+
+5. udstyret (førnutid) — оснащать. Nutid?
+* udstyrer
+  udstyrede
+  udstyre
+  udstyr
+
+6. fascinerede (datid) — очаровывать. Nutid?
+* fascinerer
+  fascineret
+  fascinere
+  fasciner
+
+7. formidl (bydeform) — передавать, посредничать. Førnutid?
+* formidlet
+  formidlede
+  formidler
+  formidle
+
+8. forstærkede (datid) — усиливать. Nutid?
+* forstærker
+  forstærket
+  forstærke
+  forstærk
+
+9. opfandt (datid) — изобретать. Navneform?
+* opfinde
+  opfundet
+  opfinder
+  opfind
+
+10. illustrerer (nutid) — иллюстрировать. Bydeform?
+* illustrer
+  illustrerede
+  illustreret
+  illustrere
+
+11. sparkede (datid) — пинать. Bydeform?
+* spark
+  sparket
+  sparker
+  sparke
+
+12. anbringe (navneform) — помещать. Datid?
+* anbragte
+  anbragt
+  anbringer
+  anbring
+
+13. renset (førnutid) — чистить. Datid?
+* rensede
+  renser
+  rense
+  rens
+
+14. varetager (nutid) — отвечать за, вести. Førnutid?
+* varetaget
+  varetog
+  varetage
+  varetag
+
+15. knuser (nutid) — разбивать, раздавливать. Bydeform?
+* knus
+  knuste
+  knust
+  knuse
+
+16. angiv (bydeform) — указывать. Nutid?
+* angiver
+  angav
+  angivet
+  angive
+
+17. begravet (førnutid) — хоронить. Navneform?
+* begrave
+  begravede
+  begraver
+  begrav
+
+18. beretter (nutid) — сообщать, рассказывать. Datid?
+* berettede
+  berettet
+  berette
+  beret
+
+19. hyld (bydeform) — чествовать. Førnutid?
+* hyldet
+  hyldede
+  hylder
+  hylde
+
+20. tiltræde (navneform) — вступать (в должность). Bydeform?
+* tiltræd
+  tiltrådte
+  tiltrådt
+  tiltræder
+
+21. forsikr (bydeform) — уверять. Nutid?
+* forsikrer
+  forsikrede
+  forsikret
+  forsikre
+
+22. understøtter (nutid) — поддерживать. Navneform?
+* understøtte
+  understøttede
+  understøttet
+  understøt
+
+23. begejstre (navneform) — восхищать. Nutid?
+* begejstrer
+  begejstrede
+  begejstret
+  begejstr
+
+24. identificeret (førnutid) — идентифицировать. Bydeform?
+* identificer
+  identificerede
+  identificerer
+  identificere
+
+25. flød (datid) — течь. Førnutid?
+* flydt
+  flyder
+  flyde
+  flyd

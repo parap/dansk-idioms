@@ -8,13 +8,14 @@ bin/verbs-source.py) and the hand-written content/verbs/translations.json.
 The files it writes are the source of truth for bin/reading-import.php; change this script
 and regenerate rather than editing them.
 """
-import json, sys
+import hashlib, json, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "content/verbs"
 SET_SIZE = 25
-LABEL = {"pret": "Datid", "perf": "Førnutid"}
+# Danish course names for the forms a question shows or asks for.
+LABEL = {"inf": "navneform", "pres": "nutid", "pret": "datid", "perf": "førnutid", "imp": "bydeform"}
 
 rows = json.load(open(ROOT / "content/verbs/source.json", encoding="utf-8"))
 tr = json.load(open(ROOT / "content/verbs/translations.json", encoding="utf-8"))
@@ -31,29 +32,51 @@ def fakes(lemma, slot):
     out = [stem + "ede", *joined, inf + "de"] if slot == "pret" else [stem + "et", *joined, inf + "t"]
     return [f + "s" for f in out] if dep else out
 
-def question(row, slot):
+def pairs(row):
+    """Every (shown, asked) pair whose forms share no spelling: kunne's datid is its infinitive."""
+    slots = [k for k in LABEL if row[k]]
+    return [(a, b) for a in slots for b in slots if a != b and not set(row[a]) & set(row[b])]
+
+def candidates(row, shown, slot):
+    """The answer and the wrong options when `shown` is given and `slot` is asked."""
     answer = row[slot][0]
-    other = "perf" if slot == "pret" else "pret"
-    taken = set(row[slot]) | {answer}
-    pool = row[other][:1] + row["pres"][:1] + [f for f in fakes(row["lemma"], slot) if f not in valid[row["lemma"]]] + row["inf"][:1]
+    taken = set(row[slot]) | set(row[shown])
+    # The verb's own other forms first: telling them apart is the point. Then made-up
+    # regular forms, never one DDO lists for this verb.
+    others = [row[k][0] for k in ("pret", "perf", "pres", "inf", "imp") if k not in (slot, shown) and row[k]]
+    # infinitive + r is the nutid a learner builds for a modal (måtter, kunner)
+    made_up = [f for f in fakes(row["lemma"], slot if slot in ("pret", "perf") else "pret") + [row["inf"][0] + "r"]
+               if f not in valid[row["lemma"]]]
     wrong = []
-    for f in pool:
+    for f in others + made_up:
         if f not in taken and f not in wrong:
             wrong.append(f)
-    if len(wrong) < 2:  # the site needs three options at least
-        raise SystemExit(f"{row['lemma']}: only {wrong} as wrong options")
-    meaning = tr[row["lemma"]].split(";")[0].strip()
-    return f"{row['inf'][0]} — {meaning}. {LABEL[slot]}?", answer, wrong[:3]
+    return answer, wrong[:3]
+
+def question(row):
+    # md5, not hash(): Python's string hash changes between runs, and the drills must not.
+    options = pairs(row)
+    start = int(hashlib.md5(row["lemma"].encode()).hexdigest(), 16) % len(options)
+    ordered = options[start:] + options[:start]
+    # Three wrong options where the verb has them; two (the site's minimum) otherwise.
+    for need in (3, 2):
+        for shown, slot in ordered:
+            answer, wrong = candidates(row, shown, slot)
+            if len(wrong) >= need:
+                meaning = tr[row["lemma"]].split(";")[0].strip()
+                return f"{row[shown][0]} ({LABEL[shown]}) — {meaning}. {LABEL[slot].capitalize()}?", answer, wrong
+    raise SystemExit(f"{row['lemma']}: no pair of forms leaves two wrong options")
 
 OUT.mkdir(parents=True, exist_ok=True)
 for start in range(0, len(rows), SET_SIZE):
     chunk = rows[start:start + SET_SIZE]
     lo, hi = chunk[0]["rank"], chunk[-1]["rank"]
-    lines = ["kind: verbs", f"slug: verber-{lo:03d}-{hi:03d}", f"title: Verber {lo}–{hi}", "", "--- questions ---"]
+    slug = f"verbformer-{lo:03d}-{hi:03d}"
+    lines = ["kind: verbs", f"slug: {slug}", f"title: Verber {lo}–{hi}", "", "--- questions ---"]
     for n, row in enumerate(chunk, 1):
-        prompt, answer, wrong = question(row, "pret" if row["rank"] % 2 else "perf")
+        prompt, answer, wrong = question(row)
         lines += [f"{n}. {prompt}", f"* {answer}", *[f"  {w}" for w in wrong], ""]
-    (OUT / f"verber-{lo:03d}-{hi:03d}.txt").write_text("\n".join(lines), encoding="utf-8")
+    (OUT / f"{slug}.txt").write_text("\n".join(lines), encoding="utf-8")
 print(f"  {len(rows)} verbs in {len(range(0, len(rows), SET_SIZE))} sets -> {OUT}")
 
 
@@ -106,8 +129,8 @@ sets = -(-len(genkend) // GENKEND_MAX)
 size = -(-len(genkend) // sets)  # even sets rather than a short last one
 for k, start in enumerate(range(0, len(genkend), size), 1):
     chunk = genkend[start:start + size]
-    lines = ["kind: verbs", f"slug: genkend-verbet-{k}", f"title: Genkend verbet {k}", "", "--- questions ---"]
+    lines = ["kind: verbs", f"slug: verbgenkend-{k}", f"title: Genkend verbet {k}", "", "--- questions ---"]
     for n, (prompt, answer, wrong) in enumerate(chunk, 1):
         lines += [f"{n}. {prompt}", f"* {answer}", *[f"  {w}" for w in wrong], ""]
-    (OUT / f"genkend-verbet-{k}.txt").write_text("\n".join(lines), encoding="utf-8")
+    (OUT / f"verbgenkend-{k}.txt").write_text("\n".join(lines), encoding="utf-8")
 print(f"  {len(genkend)} recognition questions in {k} sets")

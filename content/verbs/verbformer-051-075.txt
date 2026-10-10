@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-051-075
+title: Verber 51–75
+
+--- questions ---
+1. faldet (førnutid) — падать. Navneform?
+* falde
+  faldt
+  falder
+  fald
+
+2. kald (bydeform) — звать, называть. Navneform?
+* kalde
+  kaldte
+  kaldt
+  kalder
+
+3. burdet (førnutid) — следует, должен бы. Nutid?
+* bør
+  burde
+  burdte
+  burder
+
+4. handle (navneform) — делать покупки. Datid?
+* handlede
+  handlet
+  handler
+  handl
+
+5. købt (førnutid) — покупать. Datid?
+* købte
+  køber
+  købe
+  køb
+
+6. lev (bydeform) — жить (существовать). Navneform?
+* leve
+  levede
+  levet
+  lever
+
+7. når (nutid) — успеть, достичь. Førnutid?
+* nået
+  nåede
+  nå
+  nåt
+
+8. lyder (nutid) — звучать. Førnutid?
+* lydt
+  lød
+  lyde
+  lyd
+
+9. ønsket (førnutid) — желать. Navneform?
+* ønske
+  ønskede
+  ønsker
+  ønsk
+
+10. sælg (bydeform) — продавать. Førnutid?
+* solgt
+  solgte
+  sælger
+  sælge
+
+11. stiger (nutid) — подниматься, расти. Førnutid?
+* steget
+  steg
+  stige
+  stig
+
+12. betalt (førnutid) — платить. Bydeform?
+* betal
+  betalte
+  betaler
+  betale
+
+13. forsøgt (førnutid) — пытаться. Navneform?
+* forsøge
+  forsøgte
+  forsøger
+  forsøg
+
+14. vente (navneform) — ждать. Nutid?
+* venter
+  ventede
+  ventet
+  vent
+
+15. føre (navneform) — вести. Bydeform?
+* før
+  førte
+  ført
+  fører
+
+16. stiller (nutid) — ставить. Navneform?
+* stille
+  stillede
+  stillet
+  stil
+
+17. læser (nutid) — читать. Navneform?
+* læse
+  læste
+  læst
+  læs
+
+18. gjaldt (førnutid) — касаться, действовать (о правиле). Navneform?
+* gælde
+  gælder
+  gæld
+  gældede
+
+19. trukket (førnutid) — тянуть. Navneform?
+* trække
+  trak
+  trækker
+  træk
+
+20. forklarede (datid) — объяснять. Bydeform?
+* forklar
+  forklaret
+  forklarer
+  forklare
+
+21. sikrer (nutid) — обеспечивать, гарантировать. Førnutid?
+* sikret
+  sikrede
+  sikre
+  sikr
+
+22. oplever (nutid) — переживать, испытывать. Datid?
+* oplevede
+  oplevet
+  opleve
+  oplev
+
+23. følt (førnutid) — чувствовать. Datid?
+* følte
+  føler
+  føle
+  føl
+
+24. bor (nutid) — жить (проживать). Bydeform?
+* bo
+  boede
+  boet
+  bote
+
+25. ansæt (bydeform) — нанимать на работу. Datid?
+* ansatte
+  ansat
+  ansætter
+  ansætte

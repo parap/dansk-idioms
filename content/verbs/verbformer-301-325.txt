@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-301-325
+title: Verber 301–325
+
+--- questions ---
+1. forholder (nutid) — (forholde sig til) относиться к. Bydeform?
+* forhold
+  forholdt
+  forholde
+  forholdede
+
+2. inspirerede (datid) — вдохновлять. Navneform?
+* inspirere
+  inspireret
+  inspirerer
+  inspirer
+
+3. anbefalet (førnutid) — рекомендовать. Navneform?
+* anbefale
+  anbefalede
+  anbefaler
+  anbefal
+
+4. fejret (førnutid) — праздновать. Nutid?
+* fejrer
+  fejrede
+  fejre
+  fejr
+
+5. opfat (bydeform) — воспринимать. Datid?
+* opfattede
+  opfattet
+  opfatter
+  opfatte
+
+6. hæv (bydeform) — поднимать. Førnutid?
+* hævet
+  hævede
+  hæver
+  hæve
+
+7. udsende (navneform) — выпускать, транслировать. Datid?
+* udsendte
+  udsendt
+  udsender
+  udsend
+
+8. overlev (bydeform) — выживать. Navneform?
+* overleve
+  overlevede
+  overlevet
+  overlever
+
+9. undrer (nutid) — удивлять. Navneform?
+* undre
+  undrede
+  undret
+  undr
+
+10. dyrker (nutid) — выращивать. Førnutid?
+* dyrket
+  dyrkede
+  dyrke
+  dyrk
+
+11. hævder (nutid) — утверждать. Førnutid?
+* hævdet
+  hævdede
+  hævde
+  hævd
+
+12. afholde (navneform) — проводить (мероприятие). Datid?
+* afholdt
+  afholder
+  afhold
+  afholdede
+
+13. angrib (bydeform) — нападать. Navneform?
+* angribe
+  angreb
+  angrebet
+  angriber
+
+14. formåede (datid) — быть в состоянии. Førnutid?
+* formået
+  formår
+  formå
+  formåt
+
+15. omtalte (datid) — упоминать, отзываться. Navneform?
+* omtale
+  omtalt
+  omtaler
+  omtal
+
+16. forbinder (nutid) — соединять, связывать. Førnutid?
+* forbundet
+  forbandt
+  forbinde
+  forbind
+
+17. nægtet (førnutid) — отказываться. Navneform?
+* nægte
+  nægtede
+  nægter
+  nægt
+
+18. sats (bydeform) — делать ставку. Navneform?
+* satse
+  satsede
+  satset
+  satser
+
+19. fremstillede (datid) — производить. Navneform?
+* fremstille
+  fremstillet
+  fremstiller
+  fremstil
+
+20. offentliggør (bydeform) — публиковать, обнародовать. Navneform?
+* offentliggøre
+  offentliggjorde
+  offentliggjort
+  offentliggørede
+
+21. advare (navneform) — предупреждать. Førnutid?
+* advaret
+  advarede
+  advarer
+  advar
+
+22. opgiver (nutid) — сдаваться, бросать. Navneform?
+* opgive
+  opgav
+  opgivet
+  opgiv
+
+23. fange (navneform) — ловить. Førnutid?
+* fanget
+  fangede
+  fanger
+  fang
+
+24. gem (bydeform) — прятать. Nutid?
+* gemmer
+  gemte
+  gemt
+  gemme
+
+25. betegne (navneform) — обозначать. Datid?
+* betegnede
+  betegnet
+  betegner
+  betegn
