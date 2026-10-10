@@ -4,150 +4,175 @@ title: Verber 601–625
 
 --- questions ---
 1. krydset (førnutid) — пересекать. Nutid?
+> navneform krydse · nutid krydser · datid krydsede · førnutid krydset · bydeform kryds — пересекать
 * krydser
   krydsede
   krydse
   kryds
 
 2. forebyggede (datid) — предотвращать. Førnutid?
+> navneform forebygge · nutid forebygger · datid forebyggede · førnutid forebygget · bydeform forebyg — предотвращать
 * forebygget
   forebygger
   forebygge
   forebyg
 
 3. hvilede (datid) — отдыхать. Nutid?
+> navneform hvile · nutid hviler · datid hvilede · førnutid hvilet · bydeform hvil — отдыхать
 * hviler
   hvilet
   hvile
   hvil
 
 4. besejrede (datid) — побеждать. Navneform?
+> navneform besejre · nutid besejrer · datid besejrede · førnutid besejret · bydeform besejr — побеждать
 * besejre
   besejret
   besejrer
   besejr
 
 5. omsætte (navneform) — превращать, воплощать. Bydeform?
+> navneform omsætte · nutid omsætter · datid omsatte · førnutid omsat · bydeform omsæt — превращать, воплощать; продавать
 * omsæt
   omsatte
   omsat
   omsætter
 
 6. realiseret (førnutid) — осуществлять. Datid?
+> navneform realisere · nutid realiserer · datid realiserede · førnutid realiseret · bydeform realiser — осуществлять
 * realiserede
   realiserer
   realisere
   realiser
 
 7. anslået (førnutid) — оценивать (примерно). Navneform?
+> navneform anslå · nutid anslår · datid anslog · førnutid anslået · bydeform anslå — оценивать (примерно)
 * anslå
   anslog
   anslår
   anslåte
 
 8. iværksat (førnutid) — начинать, запускать. Bydeform?
+> navneform iværksætte · nutid iværksætter · datid iværksatte · førnutid iværksat · bydeform iværksæt — начинать, запускать
 * iværksæt
   iværksatte
   iværksætter
   iværksætte
 
 9. tilfredsstiller (nutid) — удовлетворять. Datid?
+> navneform tilfredsstille · nutid tilfredsstiller · datid tilfredsstillede · førnutid tilfredsstillet · bydeform tilfredsstil — удовлетворять
 * tilfredsstillede
   tilfredsstillet
   tilfredsstille
   tilfredsstil
 
 10. analyseret (førnutid) — анализировать. Navneform?
+> navneform analysere · nutid analyserer · datid analyserede · førnutid analyseret · bydeform analyser — анализировать
 * analysere
   analyserede
   analyserer
   analyser
 
 11. forfølg (bydeform) — преследовать. Førnutid?
+> navneform forfølge · nutid forfølger · datid forfulgte · førnutid forfulgt · bydeform forfølg — преследовать
 * forfulgt
   forfulgte
   forfølger
   forfølge
 
 12. imponeret (førnutid) — впечатлять. Bydeform?
+> navneform imponere · nutid imponerer · datid imponerede · førnutid imponeret · bydeform imponer — впечатлять
 * imponer
   imponerede
   imponerer
   imponere
 
 13. forløbe (navneform) — проходить (о событии). Førnutid?
+> navneform forløbe · nutid forløber · datid forløb · førnutid forløbet · bydeform forløb — проходить (о событии)
 * forløbet
   forløb
   forløber
   forløbt
 
 14. skildr (bydeform) — описывать, изображать. Førnutid?
+> navneform skildre · nutid skildrer · datid skildrede · førnutid skildret · bydeform skildr — описывать, изображать
 * skildret
   skildrede
   skildrer
   skildre
 
 15. forelsket (førnutid) — (forelske sig) влюбляться. Datid?
+> navneform forelske · nutid forelsker · datid forelskede · førnutid forelsket · bydeform forelsk — (forelske sig) влюбляться
 * forelskede
   forelsker
   forelske
   forelsk
 
 16. klipper (nutid) — стричь, резать. Førnutid?
+> navneform klippe · nutid klipper · datid klippede · førnutid klippet · bydeform klip — стричь, резать
 * klippet
   klippede
   klippe
   klip
 
 17. allier (bydeform) — (alliere sig) объединяться. Nutid?
+> navneform alliere · nutid allierer · datid allierede · førnutid allieret · bydeform allier — (alliere sig) объединяться
 * allierer
   allierede
   allieret
   alliere
 
 18. inkluderet (førnutid) — включать. Nutid?
+> navneform inkludere · nutid inkluderer · datid inkluderede · førnutid inkluderet · bydeform inkluder — включать
 * inkluderer
   inkluderede
   inkludere
   inkluder
 
 19. vidnet (førnutid) — свидетельствовать. Datid?
+> navneform vidne · nutid vidner · datid vidnede · førnutid vidnet · bydeform vidn — свидетельствовать
 * vidnede
   vidner
   vidne
   vidn
 
 20. udskyde (navneform) — откладывать. Førnutid?
+> navneform udskyde · nutid udskyder · datid udskød · førnutid udskudt · bydeform udskyd — откладывать
 * udskudt
   udskød
   udskyder
   udskyd
 
 21. introducerer (nutid) — вводить, знакомить. Bydeform?
+> navneform introducere · nutid introducerer · datid introducerede · førnutid introduceret · bydeform introducer — вводить, знакомить
 * introducer
   introducerede
   introduceret
   introducere
 
 22. mindske (navneform) — уменьшать. Nutid?
+> navneform mindske · nutid mindsker · datid mindskede · førnutid mindsket · bydeform mindsk — уменьшать
 * mindsker
   mindskede
   mindsket
   mindsk
 
 23. frister (nutid) — соблазнять. Navneform?
+> navneform friste · nutid frister · datid fristede · førnutid fristet · bydeform frist — соблазнять
 * friste
   fristede
   fristet
   frist
 
 24. bremsede (datid) — тормозить. Førnutid?
+> navneform bremse · nutid bremser · datid bremsede · førnutid bremset · bydeform brems — тормозить
 * bremset
   bremser
   bremse
   brems
 
 25. kårede (datid) — избирать (лучшим). Navneform?
+> navneform kåre · nutid kårer · datid kårede · førnutid kåret · bydeform kår — избирать (лучшим)
 * kåre
   kåret
   kårer

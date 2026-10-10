@@ -4,150 +4,175 @@ title: Verber 151–175
 
 --- questions ---
 1. bestem (bydeform) — решать, определять. Datid?
+> navneform bestemme · nutid bestemmer · datid bestemte · førnutid bestemt · bydeform bestem — решать, определять
 * bestemte
   bestemt
   bestemmer
   bestemme
 
 2. dræbe (navneform) — убивать. Bydeform?
+> navneform dræbe · nutid dræber · datid dræbte · førnutid dræbt · bydeform dræb — убивать
 * dræb
   dræbte
   dræbt
   dræber
 
 3. løste (datid) — решать (задачу). Bydeform?
+> navneform løse · nutid løser · datid løste · førnutid løst · bydeform løs — решать (задачу)
 * løs
   løst
   løser
   løse
 
 4. forsvundet (førnutid) — исчезать. Navneform?
+> navneform forsvinde · nutid forsvinder · datid forsvandt · førnutid forsvundet · bydeform forsvind — исчезать
 * forsvinde
   forsvandt
   forsvinder
   forsvind
 
 5. besøgte (datid) — навещать, посещать. Nutid?
+> navneform besøge · nutid besøger · datid besøgte · førnutid besøgt · bydeform besøg — навещать, посещать
 * besøger
   besøgt
   besøge
   besøg
 
 6. tilbyde (navneform) — предлагать. Bydeform?
+> navneform tilbyde · nutid tilbyder · datid tilbød · førnutid tilbudt · bydeform tilbyd — предлагать
 * tilbyd
   tilbød
   tilbudt
   tilbyder
 
 7. spis (bydeform) — есть. Datid?
+> navneform spise · nutid spiser · datid spiste · førnutid spist · bydeform spis — есть
 * spiste
   spist
   spiser
   spise
 
 8. tjente (datid) — зарабатывать. Førnutid?
+> navneform tjene · nutid tjener · datid tjente · førnutid tjent · bydeform tjen — зарабатывать; служить
 * tjent
   tjener
   tjene
   tjen
 
 9. konstater (bydeform) — констатировать. Førnutid?
+> navneform konstatere · nutid konstaterer · datid konstaterede · førnutid konstateret · bydeform konstater — констатировать
 * konstateret
   konstaterede
   konstaterer
   konstatere
 
 10. ledt (førnutid) — искать. Navneform?
+> navneform lede · nutid leder · datid ledte · førnutid ledt · bydeform led — искать; руководить
 * lede
   ledte
   leder
   led
 
 11. træder (nutid) — ступать, шагать. Førnutid?
+> navneform træde · nutid træder · datid trådte · førnutid trådt · bydeform træd — ступать, шагать
 * trådt
   trådte
   træde
   træd
 
 12. undersøg (bydeform) — исследовать, проверять. Navneform?
+> navneform undersøge · nutid undersøger · datid undersøgte · førnutid undersøgt · bydeform undersøg — исследовать, проверять
 * undersøge
   undersøgte
   undersøgt
   undersøger
 
 13. kæmpe (navneform) — бороться. Datid?
+> navneform kæmpe · nutid kæmper · datid kæmpede · førnutid kæmpet · bydeform kæmp — бороться
 * kæmpede
   kæmpet
   kæmper
   kæmp
 
 14. byd (bydeform) — предлагать. Datid?
+> navneform byde · nutid byder · datid bød · førnutid budt · bydeform byd — предлагать; приглашать (byde velkommen)
 * bød
   budt
   byder
   byde
 
 15. drejet (førnutid) — поворачивать. Bydeform?
+> navneform dreje · nutid drejer · datid drejede · førnutid drejet · bydeform drej — поворачивать
 * drej
   drejede
   drejer
   dreje
 
 16. foretag (bydeform) — предпринимать, производить. Førnutid?
+> navneform foretage · nutid foretager · datid foretog · førnutid foretaget · bydeform foretag — предпринимать, производить
 * foretaget
   foretog
   foretager
   foretage
 
 17. kaste (navneform) — бросать. Førnutid?
+> navneform kaste · nutid kaster · datid kastede · førnutid kastet · bydeform kast — бросать
 * kastet
   kastede
   kaster
   kast
 
 18. opstå (bydeform) — возникать. Datid?
+> navneform opstå · nutid opstår · datid opstod · førnutid opstået · bydeform opstå — возникать
 * opstod
   opstået
   opstår
   opståte
 
 19. opnåede (datid) — достигать. Nutid?
+> navneform opnå · nutid opnår · datid opnåede · førnutid opnået · bydeform opnå — достигать
 * opnår
   opnået
   opnå
   opnåte
 
 20. tilføjede (datid) — добавлять. Førnutid?
+> navneform tilføje · nutid tilføjer · datid tilføjede · førnutid tilføjet · bydeform tilføj — добавлять
 * tilføjet
   tilføjer
   tilføje
   tilføj
 
 21. sluttede (datid) — заканчивать. Bydeform?
+> navneform slutte · nutid slutter · datid sluttede · førnutid sluttet · bydeform slut — заканчивать
 * slut
   sluttet
   slutter
   slutte
 
 22. stemt (førnutid) — голосовать. Bydeform?
+> navneform stemme · nutid stemmer · datid stemte · førnutid stemt · bydeform stem — голосовать; совпадать
 * stem
   stemte
   stemmer
   stemme
 
 23. slippe (navneform) — отпускать. Nutid?
+> navneform slippe · nutid slipper · datid slap · førnutid sluppet · bydeform slip — отпускать; избежать
 * slipper
   slap
   sluppet
   slip
 
 24. glædet (førnutid) — радовать. Nutid?
+> navneform glæde · nutid glæder · datid glædede · førnutid glædet · bydeform glæd — радовать; (glæde sig til) ждать с радостью
 * glæder
   glædede
   glæde
   glæd
 
 25. rette (navneform) — исправлять. Førnutid?
+> navneform rette · nutid retter · datid rettede · førnutid rettet · bydeform ret — исправлять; направлять
 * rettet
   rettede
   retter

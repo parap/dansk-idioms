@@ -4,150 +4,175 @@ title: Verber 651–675
 
 --- questions ---
 1. planter (nutid) — сажать (растения). Førnutid?
+> navneform plante · nutid planter · datid plantede · førnutid plantet · bydeform plant — сажать (растения)
 * plantet
   plantede
   plante
   plant
 
 2. tålte (datid) — терпеть, выносить. Førnutid?
+> navneform tåle · nutid tåler · datid tålte · førnutid tålt · bydeform tål — терпеть, выносить
 * tålt
   tåler
   tåle
   tål
 
 3. annoncerer (nutid) — объявлять. Navneform?
+> navneform annoncere · nutid annoncerer · datid annoncerede · førnutid annonceret · bydeform annoncer — объявлять
 * annoncere
   annoncerede
   annonceret
   annoncer
 
 4. forsyner (nutid) — снабжать. Førnutid?
+> navneform forsyne · nutid forsyner · datid forsynede · førnutid forsynet · bydeform forsyn — снабжать
 * forsynet
   forsynede
   forsyne
   forsyn
 
 5. tilsætte (navneform) — добавлять (в смесь). Datid?
+> navneform tilsætte · nutid tilsætter · datid tilsatte · førnutid tilsat · bydeform tilsæt — добавлять (в смесь)
 * tilsatte
   tilsat
   tilsætter
   tilsæt
 
 6. blokerede (datid) — блокировать. Førnutid?
+> navneform blokere · nutid blokerer · datid blokerede · førnutid blokeret · bydeform bloker — блокировать
 * blokeret
   blokerer
   blokere
   bloker
 
 7. formodede (datid) — предполагать. Navneform?
+> navneform formode · nutid formoder · datid formodede · førnutid formodet · bydeform formod — предполагать
 * formode
   formodet
   formoder
   formod
 
 8. splittede (datid) — раскалывать. Nutid?
+> navneform splitte · nutid splitter · datid splittede · førnutid splittet · bydeform split — раскалывать
 * splitter
   splittet
   splitte
   split
 
 9. uddybe (navneform) — углублять, уточнять. Bydeform?
+> navneform uddybe · nutid uddyber · datid uddybede · førnutid uddybet · bydeform uddyb — углублять, уточнять
 * uddyb
   uddybede
   uddybet
   uddyber
 
 10. tvivl (bydeform) — сомневаться. Navneform?
+> navneform tvivle · nutid tvivler · datid tvivlede · førnutid tvivlet · bydeform tvivl — сомневаться
 * tvivle
   tvivlede
   tvivlet
   tvivler
 
 11. provokere (navneform) — провоцировать. Datid?
+> navneform provokere · nutid provokerer · datid provokerede · førnutid provokeret · bydeform provoker — провоцировать
 * provokerede
   provokeret
   provokerer
   provoker
 
 12. øv (bydeform) — (øve sig) упражняться. Førnutid?
+> navneform øve · nutid øver · datid øvede · førnutid øvet · bydeform øv — (øve sig) упражняться
 * øvet
   øvede
   øver
   øve
 
 13. løslod (datid) — освобождать. Nutid?
+> navneform løslade · nutid løslader · datid løslod · førnutid løsladt · bydeform løslad — освобождать
 * løslader
   løsladt
   løslade
   løslad
 
 14. resterede (datid) — оставаться (недостающее). Navneform?
+> navneform restere · nutid resterer · datid resterede · førnutid resteret · bydeform rester — оставаться (недостающее)
 * restere
   resteret
   resterer
   rester
 
 15. regerede (datid) — править. Navneform?
+> navneform regere · nutid regerer · datid regerede · førnutid regeret · bydeform reger — править
 * regere
   regeret
   regerer
   reger
 
 16. udstedt (førnutid) — выдавать (документ). Navneform?
+> navneform udstede · nutid udsteder · datid udstedte · førnutid udstedt · bydeform udsted — выдавать (документ)
 * udstede
   udstedte
   udsteder
   udsted
 
 17. besvarer (nutid) — отвечать (на). Bydeform?
+> navneform besvare · nutid besvarer · datid besvarede · førnutid besvaret · bydeform besvar — отвечать (на)
 * besvar
   besvarede
   besvaret
   besvare
 
 18. bager (nutid) — печь. Førnutid?
+> navneform bage · nutid bager · datid bagte · førnutid bagt · bydeform bag — печь
 * bagt
   bagte
   bage
   bag
 
 19. bøjet (førnutid) — сгибать. Navneform?
+> navneform bøje · nutid bøjer · datid bøjede · førnutid bøjet · bydeform bøj — сгибать; спрягать
 * bøje
   bøjede
   bøjer
   bøj
 
 20. blomstr (bydeform) — цвести. Nutid?
+> navneform blomstre · nutid blomstrer · datid blomstrede · førnutid blomstret · bydeform blomstr — цвести
 * blomstrer
   blomstrede
   blomstret
   blomstre
 
 21. protesterer (nutid) — протестовать. Førnutid?
+> navneform protestere · nutid protesterer · datid protesterede · førnutid protesteret · bydeform protester — протестовать
 * protesteret
   protesterede
   protestere
   protester
 
 22. udbygger (nutid) — расширять, достраивать. Datid?
+> navneform udbygge · nutid udbygger · datid udbyggede · førnutid udbygget · bydeform udbyg — расширять, достраивать
 * udbyggede
   udbygget
   udbygge
   udbyg
 
 23. generede (datid) — мешать, беспокоить. Bydeform?
+> navneform genere · nutid generer · datid generede · førnutid generet · bydeform gener — мешать, беспокоить
 * gener
   generet
   generer
   genere
 
 24. omdan (bydeform) — преобразовывать. Datid?
+> navneform omdanne · nutid omdanner · datid omdannede · førnutid omdannet · bydeform omdan — преобразовывать
 * omdannede
   omdannet
   omdanner
   omdanne
 
 25. vandr (bydeform) — бродить, ходить в поход. Nutid?
+> navneform vandre · nutid vandrer · datid vandrede · førnutid vandret · bydeform vandr — бродить, ходить в поход
 * vandrer
   vandrede
   vandret

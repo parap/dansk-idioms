@@ -4,150 +4,175 @@ title: Verber 126–150
 
 --- questions ---
 1. afviste (datid) — отклонять, отказывать. Bydeform?
+> navneform afvise · nutid afviser · datid afviste · førnutid afvist · bydeform afvis — отклонять, отказывать
 * afvis
   afvist
   afviser
   afvise
 
 2. delte (datid) — делить(ся). Nutid?
+> navneform dele · nutid deler · datid delte · førnutid delt · bydeform del — делить(ся)
 * deler
   delt
   dele
   del
 
 3. skiftede (datid) — менять, сменять. Førnutid?
+> navneform skifte · nutid skifter · datid skiftede · førnutid skiftet · bydeform skift — менять, сменять
 * skiftet
   skifter
   skifte
   skift
 
 4. støttede (datid) — поддерживать. Førnutid?
+> navneform støtte · nutid støtter · datid støttede · førnutid støttet · bydeform støt — поддерживать
 * støttet
   støtter
   støtte
   støt
 
 5. regne (navneform) — считать (вычислять). Nutid?
+> navneform regne · nutid regner · datid regnede · førnutid regnet · bydeform regn — считать (вычислять); идти (о дожде)
 * regner
   regnede
   regnet
   regn
 
 6. gennemført (førnutid) — проводить, осуществлять. Nutid?
+> navneform gennemføre · nutid gennemfører · datid gennemførte · førnutid gennemført · bydeform gennemfør — проводить, осуществлять
 * gennemfører
   gennemførte
   gennemføre
   gennemfør
 
 7. forlad (bydeform) — покидать. Navneform?
+> navneform forlade · nutid forlader · datid forlod · førnutid forladt · bydeform forlad — покидать
 * forlade
   forlod
   forladt
   forlader
 
 8. nævne (navneform) — упоминать. Bydeform?
+> navneform nævne · nutid nævner · datid nævnte · førnutid nævnt · bydeform nævn — упоминать
 * nævn
   nævnte
   nævnt
   nævner
 
 9. understrege (navneform) — подчёркивать. Nutid?
+> navneform understrege · nutid understreger · datid understregede · førnutid understreget · bydeform understreg — подчёркивать
 * understreger
   understregede
   understreget
   understreg
 
 10. indgået (førnutid) — заключать (договор). Bydeform?
+> navneform indgå · nutid indgår · datid indgik · førnutid indgået · bydeform indgå — заключать (договор); входить в
 * indgå
   indgik
   indgår
   indgåte
 
 11. klar (bydeform) — справляться. Navneform?
+> navneform klare · nutid klarer · datid klarede · førnutid klaret · bydeform klar — справляться
 * klare
   klarede
   klaret
   klarer
 
 12. kigger (nutid) — смотреть, глядеть. Datid?
+> navneform kigge · nutid kigger · datid kiggede · førnutid kigget · bydeform kig — смотреть, глядеть
 * kiggede
   kigget
   kigge
   kig
 
 13. fungerede (datid) — функционировать, работать. Navneform?
+> navneform fungere · nutid fungerer · datid fungerede · førnutid fungeret · bydeform funger — функционировать, работать
 * fungere
   fungeret
   fungerer
   funger
 
 14. mærker (nutid) — замечать, ощущать. Bydeform?
+> navneform mærke · nutid mærker · datid mærkede · førnutid mærket · bydeform mærk — замечать, ощущать
 * mærk
   mærkede
   mærket
   mærke
 
 15. hentet (førnutid) — забирать, приносить. Nutid?
+> navneform hente · nutid henter · datid hentede · førnutid hentet · bydeform hent — забирать, приносить
 * henter
   hentede
   hente
   hent
 
 16. stoppe (navneform) — останавливать(ся). Førnutid?
+> navneform stoppe · nutid stopper · datid stoppede · førnutid stoppet · bydeform stop — останавливать(ся)
 * stoppet
   stoppede
   stopper
   stop
 
 17. melder (nutid) — сообщать. Bydeform?
+> navneform melde · nutid melder · datid meldte · førnutid meldt · bydeform meld — сообщать; (melde sig) записываться
 * meld
   meldte
   meldt
   melde
 
 18. levere (navneform) — поставлять, доставлять. Datid?
+> navneform levere · nutid leverer · datid leverede · førnutid leveret · bydeform lever — поставлять, доставлять
 * leverede
   leveret
   leverer
   lever
 
 19. pege (navneform) — указывать. Førnutid?
+> navneform pege · nutid peger · datid pegede · førnutid peget · bydeform peg — указывать
 * peget
   pegede
   peger
   peg
 
 20. drev (datid) — вести (дело). Førnutid?
+> navneform drive · nutid driver · datid drev · førnutid drevet · bydeform driv — вести (дело); бездельничать
 * drevet
   driver
   drive
   driv
 
 21. beskrev (datid) — описывать. Nutid?
+> navneform beskrive · nutid beskriver · datid beskrev · førnutid beskrevet · bydeform beskriv — описывать
 * beskriver
   beskrevet
   beskrive
   beskriv
 
 22. bar (datid) — нести, носить. Førnutid?
+> navneform bære · nutid bærer · datid bar · førnutid båret · bydeform bær — нести, носить
 * båret
   bærer
   bære
   bær
 
 23. undgå (navneform) — избегать. Datid?
+> navneform undgå · nutid undgår · datid undgik · førnutid undgået · bydeform undgå — избегать
 * undgik
   undgået
   undgår
   undgåte
 
 24. overtaget (førnutid) — перенимать, брать на себя. Datid?
+> navneform overtage · nutid overtager · datid overtog · førnutid overtaget · bydeform overtag — перенимать, брать на себя
 * overtog
   overtager
   overtage
   overtag
 
 25. lider (nutid) — страдать. Bydeform?
+> navneform lide · nutid lider · datid led · førnutid lidt · bydeform lid — страдать; (kunne lide) нравиться
 * lid
   led
   lidt

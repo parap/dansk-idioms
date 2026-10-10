@@ -20,6 +20,7 @@ final class VerbDrillTest extends IntegrationTestCase
 
         --- questions ---
         1. gå (идти) — præteritum
+        > navneform gå · datid gik — идти
         * gik
           gået
           går
@@ -120,5 +121,46 @@ final class VerbDrillTest extends IntegrationTestCase
         $this->expectException(RuntimeException::class);
 
         $this->sessions->startVerbs(null, 'anon-1', 'verber-001-025');
+    }
+
+    /** The whole verb is shown once a question is answered, and not a moment before. */
+    public function testTheNoteArrivesWithTheAnswerAndNotBefore(): void
+    {
+        $this->publish();
+        $sid = $this->sessions->startVerbs(null, 'anon-1', 'verber-001-025');
+
+        self::assertArrayNotHasKey('note', $this->sessions->session($sid['session_id'])['items'][0]);
+        self::assertSame('navneform gå · datid gik — идти', $this->sessions->answer($sid['session_id'], 1, 0)['note']);
+        self::assertNull($this->sessions->answer($sid['session_id'], 2, 0)['note']);
+
+        $this->sessions->submit($sid['session_id']);
+        self::assertSame('navneform gå · datid gik — идти', $this->sessions->result($sid['session_id'])['items'][0]['note']);
+    }
+
+    /** Notes reach a set that has already been sat, without disturbing a single answer. */
+    public function testNotesAreRefreshedInPlaceOnASetAlreadyServed(): void
+    {
+        $plain = str_replace("> navneform gå · datid gik — идти\n", '', self::DOC);
+        $this->publish($plain);
+        $sid = $this->sessions->startVerbs(null, 'anon-1', 'verber-001-025')['session_id'];
+        $this->sessions->answer($sid, 1, 0);
+
+        $doc = (new PassageDocument())->parse(self::DOC);
+        $changed = (new ReadingRepository())->refreshNotes($doc);
+
+        self::assertSame(1, $changed);
+        self::assertNull($this->sessions->answer($sid, 2, 0)['note']);
+        $fresh = $this->sessions->startVerbs(null, 'anon-2', 'verber-001-025')['session_id'];
+        self::assertSame('navneform gå · datid gik — идти', $this->sessions->answer($fresh, 1, 0)['note']);
+    }
+
+    /** A note is matched to its question by the question, so a reworded set keeps its old notes. */
+    public function testARefreshLeavesAQuestionThatNoLongerMatches(): void
+    {
+        $this->publish(str_replace("> navneform gå · datid gik — идти\n", '', self::DOC));
+
+        $doc = (new PassageDocument())->parse(str_replace('gå (идти) — præteritum', 'gå (идти) — datid', self::DOC));
+
+        self::assertSame(0, (new ReadingRepository())->refreshNotes($doc));
     }
 }

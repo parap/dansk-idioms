@@ -10,6 +10,7 @@ title: Verber 1–25
 
 --- questions ---
 1. er (nutid) — быть. Navneform?
+> navneform være · nutid er · datid var · førnutid været · bydeform vær — быть
 * være
   var
   været
@@ -25,7 +26,8 @@ and asks for another -- navneform, nutid, datid, førnutid or bydeform, as Danis
 name them -- never two forms spelled alike (kunne is both navneform and datid). The pair
 is chosen per verb from an md5 of the verb, so regenerating changes nothing. The wrong
 options are the verb's other forms, then a regular-looking form of the wrong conjugation
-that DDO does not list as valid. Edit the generator and
+that DDO does not list as valid. Every question carries the whole verb with its meaning as
+a note, shown once it is answered. Edit the generator and
 regenerate rather than editing a file.
 
 The `verbgenkend-*` sets ask the other way round: an irregular form (`gik — datid af …?`,

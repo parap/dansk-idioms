@@ -4,150 +4,175 @@ title: Verber 626–650
 
 --- questions ---
 1. fornyede (datid) — обновлять. Bydeform?
+> navneform forny · nutid fornyer · datid fornyede · førnutid fornyet · bydeform forny — обновлять
 * forny
   fornyet
   fornyer
   fornyte
 
 2. overset (førnutid) — упускать из виду. Datid?
+> navneform overse · nutid overser · datid overså · førnutid overset · bydeform overse — упускать из виду
 * overså
   overser
   overse
   oversede
 
 3. fastsætter (nutid) — устанавливать. Navneform?
+> navneform fastsætte · nutid fastsætter · datid fastsatte · førnutid fastsat · bydeform fastsæt — устанавливать
 * fastsætte
   fastsatte
   fastsat
   fastsæt
 
 4. indsamlet (førnutid) — собирать. Datid?
+> navneform indsamle · nutid indsamler · datid indsamlede · førnutid indsamlet · bydeform indsaml — собирать
 * indsamlede
   indsamler
   indsamle
   indsaml
 
 5. skride (navneform) — скользить. Nutid?
+> navneform skride · nutid skrider · datid skred · førnutid skredet · bydeform skrid — скользить; (skrid!) убирайся
 * skrider
   skred
   skredet
   skrid
 
 6. vænnede (datid) — (vænne sig til) привыкать. Bydeform?
+> navneform vænne · nutid vænner · datid vænnede · førnutid vænnet · bydeform væn — (vænne sig til) привыкать
 * væn
   vænnet
   vænner
   vænne
 
 7. erobret (førnutid) — завоёвывать. Navneform?
+> navneform erobre · nutid erobrer · datid erobrede · førnutid erobret · bydeform erobr — завоёвывать
 * erobre
   erobrede
   erobrer
   erobr
 
 8. fængsle (navneform) — заключать в тюрьму. Førnutid?
+> navneform fængsle · nutid fængsler · datid fængslede · førnutid fængslet · bydeform fængsl — заключать в тюрьму; захватывать (внимание)
 * fængslet
   fængslede
   fængsler
   fængsl
 
 9. overgået (førnutid) — превосходить. Bydeform?
+> navneform overgå · nutid overgår · datid overgik · førnutid overgået · bydeform overgå — превосходить
 * overgå
   overgik
   overgår
   overgåte
 
 10. tilføre (navneform) — добавлять, подводить. Datid?
+> navneform tilføre · nutid tilfører · datid tilførte · førnutid tilført · bydeform tilfør — добавлять, подводить
 * tilførte
   tilført
   tilfører
   tilfør
 
 11. debutere (navneform) — дебютировать. Førnutid?
+> navneform debutere · nutid debuterer · datid debuterede · førnutid debuteret · bydeform debuter — дебютировать
 * debuteret
   debuterede
   debuterer
   debuter
 
 12. parkerer (nutid) — парковать. Datid?
+> navneform parkere · nutid parkerer · datid parkerede · førnutid parkeret · bydeform parker — парковать
 * parkerede
   parkeret
   parkere
   parker
 
 13. varme (navneform) — греть. Nutid?
+> navneform varme · nutid varmer · datid varmede · førnutid varmet · bydeform varm — греть
 * varmer
   varmede
   varmet
   varm
 
 14. præsteret (førnutid) — показывать (результат). Bydeform?
+> navneform præstere · nutid præsterer · datid præsterede · førnutid præsteret · bydeform præster — показывать (результат)
 * præster
   præsterede
   præsterer
   præstere
 
 15. opsøgte (datid) — разыскивать, обращаться к. Førnutid?
+> navneform opsøge · nutid opsøger · datid opsøgte · førnutid opsøgt · bydeform opsøg — разыскивать, обращаться к
 * opsøgt
   opsøger
   opsøge
   opsøg
 
 16. tørrede (datid) — сушить. Nutid?
+> navneform tørre · nutid tørrer · datid tørrede · førnutid tørret · bydeform tør — сушить; вытирать
 * tørrer
   tørret
   tørre
   tør
 
 17. agerede (datid) — действовать, играть роль. Nutid?
+> navneform agere · nutid agerer · datid agerede · førnutid ageret · bydeform ager — действовать, играть роль
 * agerer
   ageret
   agere
   ager
 
 18. hadet (førnutid) — ненавидеть. Bydeform?
+> navneform hade · nutid hader · datid hadede · førnutid hadet · bydeform had — ненавидеть
 * had
   hadede
   hader
   hade
 
 19. udmærket (førnutid) — (udmærke sig) отличаться. Datid?
+> navneform udmærke · nutid udmærker · datid udmærkede · førnutid udmærket · bydeform udmærk — (udmærke sig) отличаться
 * udmærkede
   udmærker
   udmærke
   udmærk
 
 20. ofr (bydeform) — жертвовать. Nutid?
+> navneform ofre · nutid ofrer · datid ofrede · førnutid ofret · bydeform ofr — жертвовать
 * ofrer
   ofrede
   ofret
   ofre
 
 21. eksplodere (navneform) — взрываться. Førnutid?
+> navneform eksplodere · nutid eksploderer · datid eksploderede · førnutid eksploderet · bydeform eksploder — взрываться
 * eksploderet
   eksploderede
   eksploderer
   eksploder
 
 22. ophævet (førnutid) — отменять. Navneform?
+> navneform ophæve · nutid ophæver · datid ophævede · førnutid ophævet · bydeform ophæv — отменять
 * ophæve
   ophævede
   ophæver
   ophæv
 
 23. pålagde (datid) — налагать, обязывать. Navneform?
+> navneform pålægge · nutid pålægger · datid pålagde · førnutid pålagt · bydeform pålæg — налагать, обязывать
 * pålægge
   pålagt
   pålægger
   pålæg
 
 24. udskriver (nutid) — выписывать. Navneform?
+> navneform udskrive · nutid udskriver · datid udskrev · førnutid udskrevet · bydeform udskriv — выписывать; распечатывать
 * udskrive
   udskrev
   udskrevet
   udskriv
 
 25. fornemmede (datid) — ощущать, чувствовать. Bydeform?
+> navneform fornemme · nutid fornemmer · datid fornemmede · førnutid fornemmet · bydeform fornem — ощущать, чувствовать
 * fornem
   fornemmet
   fornemmer

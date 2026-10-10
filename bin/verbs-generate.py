@@ -53,6 +53,11 @@ def candidates(row, shown, slot):
             wrong.append(f)
     return answer, wrong[:3]
 
+def note(row):
+    """The whole verb with its meaning, shown once a question about it is answered."""
+    forms = " · ".join(f"{LABEL[k]} {'/'.join(row[k])}" for k in LABEL if row[k])
+    return f"{forms} — {tr[row['lemma']]}"
+
 def question(row):
     # md5, not hash(): Python's string hash changes between runs, and the drills must not.
     options = pairs(row)
@@ -75,7 +80,7 @@ for start in range(0, len(rows), SET_SIZE):
     lines = ["kind: verbs", f"slug: {slug}", f"title: Verber {lo}–{hi}", "", "--- questions ---"]
     for n, row in enumerate(chunk, 1):
         prompt, answer, wrong = question(row)
-        lines += [f"{n}. {prompt}", f"* {answer}", *[f"  {w}" for w in wrong], ""]
+        lines += [f"{n}. {prompt}", f"> {note(row)}", f"* {answer}", *[f"  {w}" for w in wrong], ""]
     (OUT / f"{slug}.txt").write_text("\n".join(lines), encoding="utf-8")
 print(f"  {len(rows)} verbs in {len(range(0, len(rows), SET_SIZE))} sets -> {OUT}")
 
@@ -120,7 +125,7 @@ def recognition_questions():
                 if x["inf"][0] != answer and form not in valid[x["lemma"]] and not base_in_list(x["lemma"], lemmas)]
         wrong = sorted(pool, key=lambda w: -(difflib.SequenceMatcher(None, w, answer).ratio()
                                             + difflib.SequenceMatcher(None, w, form).ratio()))[:3]
-        questions.append((f"{form} — {label} af …?", answer, wrong))
+        questions.append((f"{form} — {label} af …?", note(r), answer, wrong))
     return questions
 
 GENKEND_MAX = 25
@@ -130,7 +135,7 @@ size = -(-len(genkend) // sets)  # even sets rather than a short last one
 for k, start in enumerate(range(0, len(genkend), size), 1):
     chunk = genkend[start:start + size]
     lines = ["kind: verbs", f"slug: verbgenkend-{k}", f"title: Genkend verbet {k}", "", "--- questions ---"]
-    for n, (prompt, answer, wrong) in enumerate(chunk, 1):
-        lines += [f"{n}. {prompt}", f"* {answer}", *[f"  {w}" for w in wrong], ""]
+    for n, (prompt, about, answer, wrong) in enumerate(chunk, 1):
+        lines += [f"{n}. {prompt}", f"> {about}", f"* {answer}", *[f"  {w}" for w in wrong], ""]
     (OUT / f"verbgenkend-{k}.txt").write_text("\n".join(lines), encoding="utf-8")
 print(f"  {len(genkend)} recognition questions in {k} sets")

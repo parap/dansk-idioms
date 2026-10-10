@@ -4,150 +4,175 @@ title: Verber 551–575
 
 --- questions ---
 1. vågn (bydeform) — просыпаться. Datid?
+> navneform vågne · nutid vågner · datid vågnede · førnutid vågnet · bydeform vågn — просыпаться
 * vågnede
   vågnet
   vågner
   vågne
 
 2. slukket (førnutid) — гасить, выключать. Datid?
+> navneform slukke · nutid slukker · datid slukkede · førnutid slukket · bydeform sluk — гасить, выключать
 * slukkede
   slukker
   slukke
   sluk
 
 3. græde (navneform) — плакать. Bydeform?
+> navneform græde · nutid græder · datid græd · førnutid grædt · bydeform græd — плакать
 * græd
   grædt
   græder
   grædede
 
 4. overstå (bydeform) — пережить, преодолеть. Datid?
+> navneform overstå · nutid overstår · datid overstod · førnutid overstået · bydeform overstå — пережить, преодолеть
 * overstod
   overstået
   overstår
   overståte
 
 5. efterlyse (navneform) — разыскивать (объявить в розыск). Bydeform?
+> navneform efterlyse · nutid efterlyser · datid efterlyste · førnutid efterlyst · bydeform efterlys — разыскивать (объявить в розыск)
 * efterlys
   efterlyste
   efterlyst
   efterlyser
 
 6. aflyst (førnutid) — отменять. Navneform?
+> navneform aflyse · nutid aflyser · datid aflyste · førnutid aflyst · bydeform aflys — отменять
 * aflyse
   aflyste
   aflyser
   aflys
 
 7. opretholder (nutid) — поддерживать, сохранять. Datid?
+> navneform opretholde · nutid opretholder · datid opretholdt · førnutid opretholdt · bydeform oprethold — поддерживать, сохранять
 * opretholdt
   opretholde
   oprethold
   opretholdede
 
 8. hoppet (førnutid) — прыгать. Datid?
+> navneform hoppe · nutid hopper · datid hoppede · førnutid hoppet · bydeform hop — прыгать
 * hoppede
   hopper
   hoppe
   hop
 
 9. veje (navneform) — весить. Datid?
+> navneform veje · nutid vejer · datid vejede · førnutid vejet · bydeform vej — весить; взвешивать
 * vejede
   vejet
   vejer
   vej
 
 10. afhang (datid) — зависеть. Nutid?
+> navneform afhænge · nutid afhænger · datid afhang · førnutid afhængt · bydeform afhæng — зависеть
 * afhænger
   afhængt
   afhænge
   afhæng
 
 11. cyklet (førnutid) — ездить на велосипеде. Bydeform?
+> navneform cykle · nutid cykler · datid cyklede · førnutid cyklet · bydeform cykl — ездить на велосипеде
 * cykl
   cyklede
   cykler
   cykle
 
 12. afgav (datid) — отдавать (голос), сдавать. Navneform?
+> navneform afgive · nutid afgiver · datid afgav · førnutid afgivet · bydeform afgiv — отдавать (голос), сдавать
 * afgive
   afgivet
   afgiver
   afgiv
 
 13. antydet (førnutid) — намекать. Bydeform?
+> navneform antyde · nutid antyder · datid antydede · førnutid antydet · bydeform antyd — намекать
 * antyd
   antydede
   antyder
   antyde
 
 14. citeret (førnutid) — цитировать. Nutid?
+> navneform citere · nutid citerer · datid citerede · førnutid citeret · bydeform citer — цитировать
 * citerer
   citerede
   citere
   citer
 
 15. påtog (datid) — (påtage sig) брать на себя. Bydeform?
+> navneform påtage · nutid påtager · datid påtog · førnutid påtaget · bydeform påtag — (påtage sig) брать на себя
 * påtag
   påtaget
   påtager
   påtage
 
 16. indkaldte (datid) — созывать, вызывать. Nutid?
+> navneform indkalde · nutid indkalder · datid indkaldte · førnutid indkaldt · bydeform indkald — созывать, вызывать
 * indkalder
   indkaldt
   indkalde
   indkald
 
 17. argumenteret (førnutid) — аргументировать. Nutid?
+> navneform argumentere · nutid argumenterer · datid argumenterede · førnutid argumenteret · bydeform argumenter — аргументировать
 * argumenterer
   argumenterede
   argumentere
   argumenter
 
 18. lys (bydeform) — светить. Nutid?
+> navneform lyse · nutid lyser · datid lyste · førnutid lyst · bydeform lys — светить
 * lyser
   lyste
   lyst
   lyse
 
 19. praktiseret (førnutid) — практиковать. Bydeform?
+> navneform praktisere · nutid praktiserer · datid praktiserede · førnutid praktiseret · bydeform praktiser — практиковать
 * praktiser
   praktiserede
   praktiserer
   praktisere
 
 20. forenet (førnutid) — объединять. Navneform?
+> navneform forene · nutid forener · datid forenede · førnutid forenet · bydeform foren — объединять
 * forene
   forenede
   forener
   foren
 
 21. formede (datid) — формировать, лепить. Nutid?
+> navneform forme · nutid former · datid formede · førnutid formet · bydeform form — формировать, лепить
 * former
   formet
   forme
   form
 
 22. forandre (navneform) — изменять. Bydeform?
+> navneform forandre · nutid forandrer · datid forandrede · førnutid forandret · bydeform forandr — изменять
 * forandr
   forandrede
   forandret
   forandrer
 
 23. grundlæg (bydeform) — основывать. Datid?
+> navneform grundlægge · nutid grundlægger · datid grundlagde · førnutid grundlagt · bydeform grundlæg — основывать
 * grundlagde
   grundlagt
   grundlægger
   grundlægge
 
 24. svækket (førnutid) — ослаблять. Bydeform?
+> navneform svække · nutid svækker · datid svækkede · førnutid svækket · bydeform svæk — ослаблять
 * svæk
   svækkede
   svækker
   svække
 
 25. integreret (førnutid) — интегрировать. Navneform?
+> navneform integrere · nutid integrerer · datid integrerede · førnutid integreret · bydeform integrer — интегрировать
 * integrere
   integrerede
   integrerer

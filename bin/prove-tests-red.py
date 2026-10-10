@@ -631,6 +631,22 @@ FAULTS = [
   "            if ($c['sense_type'] === 'literal' && !in_array(Normalizer::translation($c['text']), $chosen, true)) {",
   "            if ($c['sense_type'] === 'literal') {",
   "integration:testAnAnswerThatIsAlsoALiteralGlossStaysThePrimary"),
+ (199,"a note never reaches the learner","src/Domain/Reading/ReadingSessionService.php",
+  "            'note'          => $row['note'],\n",
+  "",
+  "integration:testTheNoteArrivesWithTheAnswerAndNotBefore"),
+ (200,"a note is matched to any question at its position","src/Domain/Reading/ReadingRepository.php",
+  "WHERE passage_id = ? AND position = ? AND prompt <=> ? AND NOT (note <=> ?)",
+  "WHERE passage_id = ? AND position = ? AND (prompt <=> ? OR 1) AND NOT (note <=> ?)",
+  "integration:testARefreshLeavesAQuestionThatNoLongerMatches"),
+ (201,"a note line is read as an option","src/Domain/Reading/PassageDocument.php",
+  "            if (preg_match('/^\\s*>\\s?(.*)$/', $line, $m)) {",
+  "            if (false) {",
+  "unit:testANoteLineIsKeptApartFromTheOptions"),
+ (202,"notes are only written for a fresh set","src/Domain/Reading/ReadingRepository.php",
+  "        foreach ($doc['items'] as $item) {\n            $changed += Db::execute(",
+  "        foreach ([] as $item) {\n            $changed += Db::execute(",
+  "integration:testNotesAreRefreshedInPlaceOnASetAlreadyServed"),
 ]
 def phpunit(*args, service="mutants"):
     return subprocess.run(

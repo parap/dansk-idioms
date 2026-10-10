@@ -4,150 +4,175 @@ title: Verber 676–700
 
 --- questions ---
 1. vasker (nutid) — мыть, стирать. Førnutid?
+> navneform vaske · nutid vasker · datid vaskede · førnutid vasket · bydeform vask — мыть, стирать
 * vasket
   vaskede
   vaske
   vask
 
 2. medbringer (nutid) — брать с собой. Datid?
+> navneform medbringe · nutid medbringer · datid medbragte · førnutid medbragt · bydeform medbring — брать с собой
 * medbragte
   medbragt
   medbringe
   medbring
 
 3. chokerede (datid) — шокировать. Navneform?
+> navneform chokere · nutid chokerer · datid chokerede · førnutid chokeret · bydeform choker — шокировать
 * chokere
   chokeret
   chokerer
   choker
 
 4. misbrugt (førnutid) — злоупотреблять. Nutid?
+> navneform misbruge · nutid misbruger · datid misbrugte · førnutid misbrugt · bydeform misbrug — злоупотреблять
 * misbruger
   misbrugte
   misbruge
   misbrug
 
 5. krænket (førnutid) — оскорблять, нарушать. Datid?
+> navneform krænke · nutid krænker · datid krænkede · førnutid krænket · bydeform krænk — оскорблять, нарушать
 * krænkede
   krænker
   krænke
   krænk
 
 6. regulerer (nutid) — регулировать. Datid?
+> navneform regulere · nutid regulerer · datid regulerede · førnutid reguleret · bydeform reguler — регулировать
 * regulerede
   reguleret
   regulere
   reguler
 
 7. styrte (navneform) — падать. Førnutid?
+> navneform styrte · nutid styrter · datid styrtede · førnutid styrtet · bydeform styrt — падать; мчаться
 * styrtet
   styrtede
   styrter
   styrt
 
 8. appellerer (nutid) — обжаловать. Førnutid?
+> navneform appellere · nutid appellerer · datid appellerede · førnutid appelleret · bydeform appeller — обжаловать; взывать
 * appelleret
   appellerede
   appellere
   appeller
 
 9. indspiller (nutid) — записывать (альбом). Navneform?
+> navneform indspille · nutid indspiller · datid indspillede · førnutid indspillet · bydeform indspil — записывать (альбом)
 * indspille
   indspillede
   indspillet
   indspil
 
 10. fremlagt (førnutid) — представлять, излагать. Navneform?
+> navneform fremlægge · nutid fremlægger · datid fremlagde · førnutid fremlagt · bydeform fremlæg — представлять, излагать
 * fremlægge
   fremlagde
   fremlægger
   fremlæg
 
 11. indsatte (datid) — вставлять. Bydeform?
+> navneform indsætte · nutid indsætter · datid indsatte · førnutid indsat · bydeform indsæt — вставлять; назначать
 * indsæt
   indsat
   indsætter
   indsætte
 
 12. bosætter (nutid) — (bosætte sig) поселяться. Bydeform?
+> navneform bosætte · nutid bosætter · datid bosatte · førnutid bosat · bydeform bosæt — (bosætte sig) поселяться
 * bosæt
   bosatte
   bosat
   bosætte
 
 13. pil (bydeform) — ковырять. Datid?
+> navneform pille · nutid piller · datid pillede · førnutid pillet · bydeform pil — ковырять; чистить
 * pillede
   pillet
   piller
   pille
 
 14. kendetegnet (førnutid) — характеризовать. Datid?
+> navneform kendetegne · nutid kendetegner · datid kendetegnede · førnutid kendetegnet · bydeform kendetegn — характеризовать
 * kendetegnede
   kendetegner
   kendetegne
   kendetegn
 
 15. efterfulgt (førnutid) — следовать за. Datid?
+> navneform efterfølge · nutid efterfølger · datid efterfulgte · førnutid efterfulgt · bydeform efterfølg — следовать за
 * efterfulgte
   efterfølger
   efterfølge
   efterfølg
 
 16. tilslut (bydeform) — подключать. Navneform?
+> navneform tilslutte · nutid tilslutter · datid tilsluttede · førnutid tilsluttet · bydeform tilslut — подключать; (tilslutte sig) присоединяться
 * tilslutte
   tilsluttede
   tilsluttet
   tilslutter
 
 17. interview (bydeform) — брать интервью. Nutid?
+> navneform interviewe · nutid interviewer · datid interviewede · førnutid interviewet · bydeform interview — брать интервью
 * interviewer
   interviewede
   interviewet
   interviewe
 
 18. udskiftet (førnutid) — заменять. Bydeform?
+> navneform udskifte · nutid udskifter · datid udskiftede · førnutid udskiftet · bydeform udskift — заменять
 * udskift
   udskiftede
   udskifter
   udskifte
 
 19. kommunikerer (nutid) — общаться. Navneform?
+> navneform kommunikere · nutid kommunikerer · datid kommunikerede · førnutid kommunikeret · bydeform kommuniker — общаться
 * kommunikere
   kommunikerede
   kommunikeret
   kommuniker
 
 20. stolet (førnutid) — (stole på) доверять. Datid?
+> navneform stole · nutid stoler · datid stolede · førnutid stolet · bydeform stol — (stole på) доверять
 * stolede
   stoler
   stole
   stol
 
 21. udspillede (datid) — (udspille sig) разыгрываться. Førnutid?
+> navneform udspille · nutid udspiller · datid udspillede · førnutid udspillet · bydeform udspil — (udspille sig) разыгрываться
 * udspillet
   udspiller
   udspille
   udspil
 
 22. tøvede (datid) — колебаться. Nutid?
+> navneform tøve · nutid tøver · datid tøvede · førnutid tøvet · bydeform tøv — колебаться
 * tøver
   tøvet
   tøve
   tøv
 
 23. skrige (navneform) — кричать, визжать. Nutid?
+> navneform skrige · nutid skriger · datid skreg · førnutid skreget · bydeform skrig — кричать, визжать
 * skriger
   skreg
   skreget
   skrig
 
 24. fatter (nutid) — понимать, постигать. Datid?
+> navneform fatte · nutid fatter · datid fattede · førnutid fattet · bydeform fat — понимать, постигать
 * fattede
   fattet
   fatte
   fat
 
 25. strømmede (datid) — струиться, стекаться. Førnutid?
+> navneform strømme · nutid strømmer · datid strømmede · førnutid strømmet · bydeform strøm — струиться, стекаться
 * strømmet
   strømmer
   strømme

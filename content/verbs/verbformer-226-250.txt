@@ -4,150 +4,175 @@ title: Verber 226–250
 
 --- questions ---
 1. frygtede (datid) — бояться. Førnutid?
+> navneform frygte · nutid frygter · datid frygtede · førnutid frygtet · bydeform frygt — бояться
 * frygtet
   frygter
   frygte
   frygt
 
 2. behøver (nutid) — нуждаться. Førnutid?
+> navneform behøve · nutid behøver · datid behøvede · førnutid behøvet · bydeform behøv — нуждаться; (ikke behøve) не обязательно
 * behøvet
   behøvede
   behøve
   behøv
 
 3. grib (bydeform) — хватать, ловить. Nutid?
+> navneform gribe · nutid griber · datid greb · førnutid grebet · bydeform grib — хватать, ловить
 * griber
   greb
   grebet
   gribe
 
 4. land (bydeform) — приземляться. Førnutid?
+> navneform lande · nutid lander · datid landede · førnutid landet · bydeform land — приземляться
 * landet
   landede
   lander
   lande
 
 5. styrede (datid) — управлять. Førnutid?
+> navneform styre · nutid styrer · datid styrede · førnutid styret · bydeform styr — управлять
 * styret
   styrer
   styre
   styr
 
 6. forestillet (førnutid) — представлять (себе — forestille sig). Datid?
+> navneform forestille · nutid forestiller · datid forestillede · førnutid forestillet · bydeform forestil — представлять (себе — forestille sig)
 * forestillede
   forestiller
   forestille
   forestil
 
 7. udført (førnutid) — выполнять. Nutid?
+> navneform udføre · nutid udfører · datid udførte · førnutid udført · bydeform udfør — выполнять
 * udfører
   udførte
   udføre
   udfør
 
 8. medvirke (navneform) — участвовать, способствовать. Førnutid?
+> navneform medvirke · nutid medvirker · datid medvirkede · førnutid medvirket · bydeform medvirk — участвовать, способствовать
 * medvirket
   medvirkede
   medvirker
   medvirk
 
 9. redet (førnutid) — ездить верхом. Nutid?
+> navneform ride · nutid rider · datid red · førnutid redet · bydeform rid — ездить верхом
 * rider
   red
   ride
   rid
 
 10. bevæger (nutid) — двигать(ся). Førnutid?
+> navneform bevæge · nutid bevæger · datid bevægede · førnutid bevæget · bydeform bevæg — двигать(ся)
 * bevæget
   bevægede
   bevæge
   bevæg
 
 11. begræns (bydeform) — ограничивать. Datid?
+> navneform begrænse · nutid begrænser · datid begrænsede · førnutid begrænset · bydeform begræns — ограничивать
 * begrænsede
   begrænset
   begrænser
   begrænse
 
 12. blandet (førnutid) — смешивать. Datid?
+> navneform blande · nutid blander · datid blandede · førnutid blandet · bydeform bland — смешивать; (blande sig) вмешиваться
 * blandede
   blander
   blande
   bland
 
 13. omfattet (førnutid) — охватывать, включать. Nutid?
+> navneform omfatte · nutid omfatter · datid omfattede · førnutid omfattet · bydeform omfat — охватывать, включать
 * omfatter
   omfattede
   omfatte
   omfat
 
 14. påvirker (nutid) — влиять. Førnutid?
+> navneform påvirke · nutid påvirker · datid påvirkede · førnutid påvirket · bydeform påvirk — влиять
 * påvirket
   påvirkede
   påvirke
   påvirk
 
 15. glemmer (nutid) — забывать. Bydeform?
+> navneform glemme · nutid glemmer · datid glemte · førnutid glemt · bydeform glem — забывать
 * glem
   glemte
   glemt
   glemme
 
 16. acceptere (navneform) — принимать, соглашаться. Nutid?
+> navneform acceptere · nutid accepterer · datid accepterede · førnutid accepteret · bydeform accepter — принимать, соглашаться
 * accepterer
   accepterede
   accepteret
   accepter
 
 17. bekræftede (datid) — подтверждать. Førnutid?
+> navneform bekræfte · nutid bekræfter · datid bekræftede · førnutid bekræftet · bydeform bekræft — подтверждать
 * bekræftet
   bekræfter
   bekræfte
   bekræft
 
 18. fastslår (nutid) — установить, констатировать. Navneform?
+> navneform fastslå · nutid fastslår · datid fastslog · førnutid fastslået · bydeform fastslå — установить, констатировать
 * fastslå
   fastslog
   fastslået
   fastslåte
 
 19. turdet (førnutid) — сметь, осмелиться. Navneform?
+> navneform turde · nutid tør · datid turde · førnutid turdet — сметь, осмелиться
 * turde
   tør
   turdte
   turder
 
 20. overbevis (bydeform) — убеждать. Førnutid?
+> navneform overbevise · nutid overbeviser · datid overbeviste · førnutid overbevist · bydeform overbevis — убеждать
 * overbevist
   overbeviste
   overbeviser
   overbevise
 
 21. inviter (bydeform) — приглашать. Nutid?
+> navneform invitere · nutid inviterer · datid inviterede · førnutid inviteret · bydeform inviter — приглашать
 * inviterer
   inviterede
   inviteret
   invitere
 
 22. afgjorde (datid) — решать (окончательно). Navneform?
+> navneform afgøre · nutid afgør · datid afgjorde · førnutid afgjort · bydeform afgør — решать (окончательно)
 * afgøre
   afgjort
   afgør
   afgørede
 
 23. ødelægger (nutid) — разрушать, портить. Førnutid?
+> navneform ødelægge · nutid ødelægger · datid ødelagde · førnutid ødelagt · bydeform ødelæg — разрушать, портить
 * ødelagt
   ødelagde
   ødelægge
   ødelæg
 
 24. vedtager (nutid) — принимать (закон, решение). Førnutid?
+> navneform vedtage · nutid vedtager · datid vedtog · førnutid vedtaget · bydeform vedtag — принимать (закон, решение)
 * vedtaget
   vedtog
   vedtage
   vedtag
 
 25. tilladt (førnutid) — разрешать. Datid?
+> navneform tillade · nutid tillader · datid tillod · førnutid tilladt · bydeform tillad — разрешать
 * tillod
   tillader
   tillade

@@ -489,4 +489,26 @@ final class PassageDocumentTest extends TestCase
 
         (new PassageDocument())->parse(self::VERBS . "\n--- text ---\nDer er ingen tekst.\n");
     }
+
+    /** What is shown once a question is answered: written under the number, never an option. */
+    public function testANoteLineIsKeptApartFromTheOptions(): void
+    {
+        $doc = (new PassageDocument())->parse(str_replace(
+            "1. gå (идти) — præteritum\n",
+            "1. gå (идти) — præteritum\n> navneform gå · datid gik\n> — идти\n",
+            self::VERBS
+        ));
+
+        self::assertSame('navneform gå · datid gik — идти', $doc['items'][0]['note']);
+        self::assertSame(['gik', 'gået', 'går', 'gåede'], array_column($doc['items'][0]['options'], 'text'));
+        self::assertArrayNotHasKey('note', $doc['items'][1] ?? []);
+    }
+
+    public function testRefusesANoteThatBelongsToNoQuestion(): void
+    {
+        $this->expectException(InvalidPassage::class);
+        $this->expectExceptionMessageMatches('/note/');
+
+        (new PassageDocument())->parse(str_replace("--- questions ---\n", "--- questions ---\n> ingen\n", self::VERBS));
+    }
 }

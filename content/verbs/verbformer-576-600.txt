@@ -4,150 +4,175 @@ title: Verber 576–600
 
 --- questions ---
 1. afbrød (datid) — прерывать. Nutid?
+> navneform afbryde · nutid afbryder · datid afbrød · førnutid afbrudt · bydeform afbryd — прерывать
 * afbryder
   afbrudt
   afbryde
   afbryd
 
 2. strammede (datid) — затягивать. Navneform?
+> navneform stramme · nutid strammer · datid strammede · førnutid strammet · bydeform stram — затягивать; (stramme op) ужесточать
 * stramme
   strammet
   strammer
   stram
 
 3. indset (førnutid) — осознавать. Datid?
+> navneform indse · nutid indser · datid indså · førnutid indset · bydeform indse — осознавать
 * indså
   indser
   indse
   indsede
 
 4. myrde (navneform) — убивать (умышленно). Bydeform?
+> navneform myrde · nutid myrder · datid myrdede · førnutid myrdet · bydeform myrd — убивать (умышленно)
 * myrd
   myrdede
   myrdet
   myrder
 
 5. udstyret (førnutid) — оснащать. Nutid?
+> navneform udstyre · nutid udstyrer · datid udstyrede · førnutid udstyret · bydeform udstyr — оснащать
 * udstyrer
   udstyrede
   udstyre
   udstyr
 
 6. fascinerede (datid) — очаровывать. Nutid?
+> navneform fascinere · nutid fascinerer · datid fascinerede · førnutid fascineret · bydeform fasciner — очаровывать
 * fascinerer
   fascineret
   fascinere
   fasciner
 
 7. formidl (bydeform) — передавать, посредничать. Førnutid?
+> navneform formidle · nutid formidler · datid formidlede · førnutid formidlet · bydeform formidl — передавать, посредничать
 * formidlet
   formidlede
   formidler
   formidle
 
 8. forstærkede (datid) — усиливать. Nutid?
+> navneform forstærke · nutid forstærker · datid forstærkede · førnutid forstærket · bydeform forstærk — усиливать
 * forstærker
   forstærket
   forstærke
   forstærk
 
 9. opfandt (datid) — изобретать. Navneform?
+> navneform opfinde · nutid opfinder · datid opfandt · førnutid opfundet · bydeform opfind — изобретать
 * opfinde
   opfundet
   opfinder
   opfind
 
 10. illustrerer (nutid) — иллюстрировать. Bydeform?
+> navneform illustrere · nutid illustrerer · datid illustrerede · førnutid illustreret · bydeform illustrer — иллюстрировать
 * illustrer
   illustrerede
   illustreret
   illustrere
 
 11. sparkede (datid) — пинать. Bydeform?
+> navneform sparke · nutid sparker · datid sparkede · førnutid sparket · bydeform spark — пинать
 * spark
   sparket
   sparker
   sparke
 
 12. anbringe (navneform) — помещать. Datid?
+> navneform anbringe · nutid anbringer · datid anbragte · førnutid anbragt · bydeform anbring — помещать
 * anbragte
   anbragt
   anbringer
   anbring
 
 13. renset (førnutid) — чистить. Datid?
+> navneform rense · nutid renser · datid rensede · førnutid renset · bydeform rens — чистить
 * rensede
   renser
   rense
   rens
 
 14. varetager (nutid) — отвечать за, вести. Førnutid?
+> navneform varetage · nutid varetager · datid varetog · førnutid varetaget · bydeform varetag — отвечать за, вести
 * varetaget
   varetog
   varetage
   varetag
 
 15. knuser (nutid) — разбивать, раздавливать. Bydeform?
+> navneform knuse · nutid knuser · datid knuste · førnutid knust · bydeform knus — разбивать, раздавливать
 * knus
   knuste
   knust
   knuse
 
 16. angiv (bydeform) — указывать. Nutid?
+> navneform angive · nutid angiver · datid angav · førnutid angivet · bydeform angiv — указывать
 * angiver
   angav
   angivet
   angive
 
 17. begravet (førnutid) — хоронить. Navneform?
+> navneform begrave · nutid begraver · datid begravede · førnutid begravet · bydeform begrav — хоронить
 * begrave
   begravede
   begraver
   begrav
 
 18. beretter (nutid) — сообщать, рассказывать. Datid?
+> navneform berette · nutid beretter · datid berettede · førnutid berettet · bydeform beret — сообщать, рассказывать
 * berettede
   berettet
   berette
   beret
 
 19. hyld (bydeform) — чествовать. Førnutid?
+> navneform hylde · nutid hylder · datid hyldede · førnutid hyldet · bydeform hyld — чествовать
 * hyldet
   hyldede
   hylder
   hylde
 
 20. tiltræde (navneform) — вступать (в должность). Bydeform?
+> navneform tiltræde · nutid tiltræder · datid tiltrådte · førnutid tiltrådt · bydeform tiltræd — вступать (в должность); присоединяться
 * tiltræd
   tiltrådte
   tiltrådt
   tiltræder
 
 21. forsikr (bydeform) — уверять. Nutid?
+> navneform forsikre · nutid forsikrer · datid forsikrede · førnutid forsikret · bydeform forsikr — уверять; страховать
 * forsikrer
   forsikrede
   forsikret
   forsikre
 
 22. understøtter (nutid) — поддерживать. Navneform?
+> navneform understøtte · nutid understøtter · datid understøttede · førnutid understøttet · bydeform understøt — поддерживать
 * understøtte
   understøttede
   understøttet
   understøt
 
 23. begejstre (navneform) — восхищать. Nutid?
+> navneform begejstre · nutid begejstrer · datid begejstrede · førnutid begejstret · bydeform begejstr — восхищать
 * begejstrer
   begejstrede
   begejstret
   begejstr
 
 24. identificeret (førnutid) — идентифицировать. Bydeform?
+> navneform identificere · nutid identificerer · datid identificerede · førnutid identificeret · bydeform identificer — идентифицировать
 * identificer
   identificerede
   identificerer
   identificere
 
 25. flød (datid) — течь. Førnutid?
+> navneform flyde · nutid flyder · datid flød · førnutid flydt · bydeform flyd — течь
 * flydt
   flyder
   flyde

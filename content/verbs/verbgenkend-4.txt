@@ -4,120 +4,140 @@ title: Genkend verbet 4
 
 --- questions ---
 1. drak — datid af …?
+> navneform drikke · nutid drikker · datid drak · førnutid drukket · bydeform drik — пить
 * drikke
   dyrke
   drage
   drive
 
 2. stjal — datid af …?
+> navneform stjæle · nutid stjæler · datid stjal · førnutid stjålet · bydeform stjæl — красть
 * stjæle
   sejle
   stole
   tale
 
 3. stak — datid af …?
+> navneform stikke · nutid stikker · datid stak · førnutid stukket · bydeform stik — колоть; совать
 * stikke
   takke
   strække
   styrke
 
 4. sprang — datid af …?
+> navneform springe · nutid springer · datid sprang · førnutid sprunget · bydeform spring — прыгать
 * springe
   spørge
   ringe
   bringe
 
 5. sov — datid af …?
+> navneform sove · nutid sover · datid sov · førnutid sovet · bydeform sov — спать
 * sove
   love
   svare
   score
 
 6. bandt — datid af …?
+> navneform binde · nutid binder · datid bandt · førnutid bundet · bydeform bind — связывать
 * binde
   blande
   bide
   brænde
 
 7. drog — datid af …?
+> navneform drage · nutid drager · datid drog · førnutid draget · bydeform drag — отправляться; тянуть; (drage omsorg) заботиться
 * drage
   ryge
   droppe
   opdage
 
 8. talte — datid af …?
+> navneform tælle · nutid tæller · datid talte · førnutid talt · bydeform tæl — считать (количество)
 * tælle
   tåle
   stille
   stjæle
 
 9. rakte — datid af …?
+> navneform række · nutid rækker · datid rakte · førnutid rakt · bydeform ræk — протягивать; хватать (быть достаточным)
 * række
   rykke
   trække
   drikke
 
 10. bed — datid af …?
+> navneform bide · nutid bider · datid bed · førnutid bidt · bydeform bid — кусать
 * bide
   brede
   binde
   byde
 
 11. gad — datid af …?
+> navneform gide · nutid gider · datid gad · førnutid gidet · bydeform gid — хотеть (иметь охоту)
 * gide
   glide
   gælde
   glæde
 
 12. rev — datid af …?
+> navneform rive · nutid river · datid rev · førnutid revet · bydeform riv — рвать; (rive ned) сносить
 * rive
   drive
   ride
   skrive
 
 13. gled — datid af …?
+> navneform glide · nutid glider · datid gled · førnutid gledet · bydeform glid — скользить
 * glide
   gælde
   glæde
   lede
 
 14. hev — datid af …?
+> navneform hive · nutid hiver · datid hev · førnutid hevet · bydeform hiv — тянуть, тащить
 * hive
   have
   hæve
   hævde
 
 15. snød — datid af …?
+> navneform snyde · nutid snyder · datid snød · førnutid snydt · bydeform snyd — обманывать
 * snyde
   sende
   nyde
   spænde
 
 16. strakte — datid af …?
+> navneform strække · nutid strækker · datid strakte · førnutid strakt · bydeform stræk — растягивать
 * strække
   trække
   styrke
   starte
 
 17. græd — datid af …?
+> navneform græde · nutid græder · datid græd · førnutid grædt · bydeform græd — плакать
 * græde
   gælde
   træde
   glæde
 
 18. flød — datid af …?
+> navneform flyde · nutid flyder · datid flød · førnutid flydt · bydeform flyd — течь
 * flyde
   falde
   fylde
   føde
 
 19. skred — datid af …?
+> navneform skride · nutid skrider · datid skred · førnutid skredet · bydeform skrid — скользить; (skrid!) убирайся
 * skride
   skrive
   skrige
   sikre
 
 20. skreg — datid af …?
+> navneform skrige · nutid skriger · datid skreg · førnutid skreget · bydeform skrig — кричать, визжать
 * skrige
   skrive
   skride

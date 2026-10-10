@@ -4,150 +4,175 @@ title: Verber 51–75
 
 --- questions ---
 1. faldet (førnutid) — падать. Navneform?
+> navneform falde · nutid falder · datid faldt · førnutid faldet · bydeform fald — падать
 * falde
   faldt
   falder
   fald
 
 2. kald (bydeform) — звать, называть. Navneform?
+> navneform kalde · nutid kalder · datid kaldte · førnutid kaldt/kaldet · bydeform kald — звать, называть
 * kalde
   kaldte
   kaldt
   kalder
 
 3. burdet (førnutid) — следует, должен бы. Nutid?
+> navneform burde · nutid bør · datid burde · førnutid burdet — следует, должен бы
 * bør
   burde
   burdte
   burder
 
 4. handle (navneform) — делать покупки. Datid?
+> navneform handle · nutid handler · datid handlede · førnutid handlet · bydeform handl — делать покупки; действовать; (handle om) быть о
 * handlede
   handlet
   handler
   handl
 
 5. købt (førnutid) — покупать. Datid?
+> navneform købe · nutid køber · datid købte · førnutid købt · bydeform køb — покупать
 * købte
   køber
   købe
   køb
 
 6. lev (bydeform) — жить (существовать). Navneform?
+> navneform leve · nutid lever · datid levede · førnutid levet · bydeform lev — жить (существовать)
 * leve
   levede
   levet
   lever
 
 7. når (nutid) — успеть, достичь. Førnutid?
+> navneform nå · nutid når · datid nåede · førnutid nået · bydeform nå — успеть, достичь
 * nået
   nåede
   nå
   nåt
 
 8. lyder (nutid) — звучать. Førnutid?
+> navneform lyde · nutid lyder · datid lød · førnutid lydt · bydeform lyd — звучать
 * lydt
   lød
   lyde
   lyd
 
 9. ønsket (førnutid) — желать. Navneform?
+> navneform ønske · nutid ønsker · datid ønskede · førnutid ønsket · bydeform ønsk — желать
 * ønske
   ønskede
   ønsker
   ønsk
 
 10. sælg (bydeform) — продавать. Førnutid?
+> navneform sælge · nutid sælger · datid solgte · førnutid solgt · bydeform sælg — продавать
 * solgt
   solgte
   sælger
   sælge
 
 11. stiger (nutid) — подниматься, расти. Førnutid?
+> navneform stige · nutid stiger · datid steg · førnutid steget · bydeform stig — подниматься, расти
 * steget
   steg
   stige
   stig
 
 12. betalt (førnutid) — платить. Bydeform?
+> navneform betale · nutid betaler · datid betalte · førnutid betalt · bydeform betal — платить
 * betal
   betalte
   betaler
   betale
 
 13. forsøgt (førnutid) — пытаться. Navneform?
+> navneform forsøge · nutid forsøger · datid forsøgte · førnutid forsøgt · bydeform forsøg — пытаться
 * forsøge
   forsøgte
   forsøger
   forsøg
 
 14. vente (navneform) — ждать. Nutid?
+> navneform vente · nutid venter · datid ventede · førnutid ventet · bydeform vent — ждать
 * venter
   ventede
   ventet
   vent
 
 15. føre (navneform) — вести. Bydeform?
+> navneform føre · nutid fører · datid førte · førnutid ført · bydeform før — вести
 * før
   førte
   ført
   fører
 
 16. stiller (nutid) — ставить. Navneform?
+> navneform stille · nutid stiller · datid stillede · førnutid stillet · bydeform stil — ставить; (stille et spørgsmål) задавать вопрос
 * stille
   stillede
   stillet
   stil
 
 17. læser (nutid) — читать. Navneform?
+> navneform læse · nutid læser · datid læste · førnutid læst · bydeform læs — читать; учиться (в вузе)
 * læse
   læste
   læst
   læs
 
 18. gjaldt (førnutid) — касаться, действовать (о правиле). Navneform?
+> navneform gælde · nutid gælder · datid gjaldt · førnutid gjaldt · bydeform gæld — касаться, действовать (о правиле)
 * gælde
   gælder
   gæld
   gældede
 
 19. trukket (førnutid) — тянуть. Navneform?
+> navneform trække · nutid trækker · datid trak · førnutid trukket · bydeform træk — тянуть
 * trække
   trak
   trækker
   træk
 
 20. forklarede (datid) — объяснять. Bydeform?
+> navneform forklare · nutid forklarer · datid forklarede · førnutid forklaret · bydeform forklar — объяснять
 * forklar
   forklaret
   forklarer
   forklare
 
 21. sikrer (nutid) — обеспечивать, гарантировать. Førnutid?
+> navneform sikre · nutid sikrer · datid sikrede · førnutid sikret · bydeform sikr — обеспечивать, гарантировать
 * sikret
   sikrede
   sikre
   sikr
 
 22. oplever (nutid) — переживать, испытывать. Datid?
+> navneform opleve · nutid oplever · datid oplevede · førnutid oplevet · bydeform oplev — переживать, испытывать
 * oplevede
   oplevet
   opleve
   oplev
 
 23. følt (førnutid) — чувствовать. Datid?
+> navneform føle · nutid føler · datid følte · førnutid følt · bydeform føl — чувствовать
 * følte
   føler
   føle
   føl
 
 24. bor (nutid) — жить (проживать). Bydeform?
+> navneform bo · nutid bor · datid boede · førnutid boet · bydeform bo — жить (проживать)
 * bo
   boede
   boet
   bote
 
 25. ansæt (bydeform) — нанимать на работу. Datid?
+> navneform ansætte · nutid ansætter · datid ansatte · førnutid ansat · bydeform ansæt — нанимать на работу
 * ansatte
   ansat
   ansætter

@@ -135,7 +135,8 @@ SEED_PHP = r"""
         $repo->save([
             'slug' => 'ui-fixture-verbs', 'kind' => 'verbs', 'title' => 'UI fixture verbs', 'body' => null,
             'items' => [
-                ['position' => 1, 'prompt' => 'er (nutid) — быть. Navneform?', 'options' => [
+                ['position' => 1, 'prompt' => 'er (nutid) — быть. Navneform?',
+                 'note' => 'navneform være · nutid er · datid var · førnutid været · bydeform vær — быть', 'options' => [
                     ['label' => 'A', 'text' => 'være', 'correct' => true],
                     ['label' => 'B', 'text' => 'var'],
                     ['label' => 'C', 'text' => 'været'],
@@ -1110,6 +1111,17 @@ def a_verb_answer_is_marked_at_once(b):
     b.until('!!document.querySelector(\'.q[data-pos="2"] .opt.wrong\')', what='the answer marked wrong')
     assert b.js('!!document.querySelector(\'.q[data-pos="2"] .opt.right\')'), 'the right answer is not revealed'
     b.until('/1\\s*\\/\\s*2/.test(document.querySelector("#score").textContent)', what='the score 1 / 2')
+
+
+@check
+def a_verb_answer_shows_the_whole_verb(b):
+    open_verb_set(b)
+    assert not b.js('!!document.querySelector(".note")'), 'the verb is shown before the answer'
+    b.js('document.querySelector(\'.q[data-pos="1"] .opt\').click()')
+    b.until('!!document.querySelector(\'.q[data-pos="1"] .note\')', what='the whole verb after the answer')
+    da = b.js('document.querySelector(\'.q[data-pos="1"] .note [lang="da"]\').textContent')
+    assert 'datid var' in da and 'быть' not in da, da
+    assert 'быть' in b.js('document.querySelector(\'.q[data-pos="1"] .note\').textContent')
 
 
 def tip_text(b, pos, n):

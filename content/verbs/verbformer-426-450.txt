@@ -4,150 +4,175 @@ title: Verber 426–450
 
 --- questions ---
 1. tændte (datid) — зажигать, включать. Nutid?
+> navneform tænde · nutid tænder · datid tændte · førnutid tændt · bydeform tænd — зажигать, включать
 * tænder
   tændt
   tænde
   tænd
 
 2. afsætter (nutid) — выделять (средства). Førnutid?
+> navneform afsætte · nutid afsætter · datid afsatte · førnutid afsat · bydeform afsæt — выделять (средства); сбывать
 * afsat
   afsatte
   afsætte
   afsæt
 
 3. kontaktede (datid) — связываться. Navneform?
+> navneform kontakte · nutid kontakter · datid kontaktede · førnutid kontaktet · bydeform kontakt — связываться
 * kontakte
   kontaktet
   kontakter
   kontakt
 
 4. skræmte (datid) — пугать. Bydeform?
+> navneform skræmme · nutid skræmmer · datid skræmte · førnutid skræmt · bydeform skræm — пугать
 * skræm
   skræmt
   skræmmer
   skræmme
 
 5. skjul (bydeform) — скрывать, прятать. Nutid?
+> navneform skjule · nutid skjuler · datid skjulte · førnutid skjult · bydeform skjul — скрывать, прятать
 * skjuler
   skjulte
   skjult
   skjule
 
 6. kontrollerer (nutid) — контролировать, проверять. Førnutid?
+> navneform kontrollere · nutid kontrollerer · datid kontrollerede · førnutid kontrolleret · bydeform kontroller — контролировать, проверять
 * kontrolleret
   kontrollerede
   kontrollere
   kontroller
 
 7. bider (nutid) — кусать. Førnutid?
+> navneform bide · nutid bider · datid bed · førnutid bidt · bydeform bid — кусать
 * bidt
   bed
   bide
   bid
 
 8. lancere (navneform) — запускать (продукт). Førnutid?
+> navneform lancere · nutid lancerer · datid lancerede · førnutid lanceret · bydeform lancer — запускать (продукт)
 * lanceret
   lancerede
   lancerer
   lancer
 
 9. dans (bydeform) — танцевать. Førnutid?
+> navneform danse · nutid danser · datid dansede · førnutid danset · bydeform dans — танцевать
 * danset
   dansede
   danser
   danse
 
 10. teste (navneform) — тестировать. Bydeform?
+> navneform teste · nutid tester · datid testede · førnutid testet · bydeform test — тестировать
 * test
   testede
   testet
   tester
 
 11. engagerer (nutid) — вовлекать. Førnutid?
+> navneform engagere · nutid engagerer · datid engagerede · førnutid engageret · bydeform engager — вовлекать; (engagere sig) участвовать
 * engageret
   engagerede
   engagere
   engager
 
 12. forblive (navneform) — оставаться. Bydeform?
+> navneform forblive · nutid forbliver · datid forblev · førnutid forblevet · bydeform forbliv — оставаться
 * forbliv
   forblev
   forblevet
   forbliver
 
 13. stødt (førnutid) — толкать. Nutid?
+> navneform støde · nutid støder · datid stødte · førnutid stødt · bydeform stød — толкать; (støde på) наткнуться
 * støder
   stødte
   støde
   stød
 
 14. gider (nutid) — хотеть (иметь охоту). Navneform?
+> navneform gide · nutid gider · datid gad · førnutid gidet · bydeform gid — хотеть (иметь охоту)
 * gide
   gad
   gidet
   gid
 
 15. anklag (bydeform) — обвинять. Datid?
+> navneform anklage · nutid anklager · datid anklagede · førnutid anklaget · bydeform anklag — обвинять
 * anklagede
   anklaget
   anklager
   anklage
 
 16. fortjen (bydeform) — заслуживать. Navneform?
+> navneform fortjene · nutid fortjener · datid fortjente · førnutid fortjent · bydeform fortjen — заслуживать
 * fortjene
   fortjente
   fortjent
   fortjener
 
 17. rive (navneform) — рвать. Bydeform?
+> navneform rive · nutid river · datid rev · førnutid revet · bydeform riv — рвать; (rive ned) сносить
 * riv
   rev
   revet
   river
 
 18. supplerer (nutid) — дополнять. Datid?
+> navneform supplere · nutid supplerer · datid supplerede · førnutid suppleret · bydeform suppler — дополнять
 * supplerede
   suppleret
   supplere
   suppler
 
 19. smitter (nutid) — заражать. Datid?
+> navneform smitte · nutid smitter · datid smittede · førnutid smittet · bydeform smit — заражать
 * smittede
   smittet
   smitte
   smit
 
 20. forlængede (datid) — продлевать. Bydeform?
+> navneform forlænge · nutid forlænger · datid forlængede · førnutid forlænget · bydeform forlæng — продлевать
 * forlæng
   forlænget
   forlænger
   forlænge
 
 21. forekommet (førnutid) — встречаться. Datid?
+> navneform forekomme · nutid forekommer · datid forekom · førnutid forekommet · bydeform forekom — встречаться; казаться
 * forekom
   forekommer
   forekomme
   forekommede
 
 22. overholde (navneform) — соблюдать. Nutid?
+> navneform overholde · nutid overholder · datid overholdt · førnutid overholdt · bydeform overhold — соблюдать
 * overholder
   overholdt
   overhold
   overholdede
 
 23. afvikle (navneform) — проводить. Bydeform?
+> navneform afvikle · nutid afvikler · datid afviklede · førnutid afviklet · bydeform afvikl — проводить; ликвидировать
 * afvikl
   afviklede
   afviklet
   afvikler
 
 24. anmeldt (førnutid) — заявлять (в полицию). Navneform?
+> navneform anmelde · nutid anmelder · datid anmeldte · førnutid anmeldt · bydeform anmeld — заявлять (в полицию); рецензировать
 * anmelde
   anmeldte
   anmelder
   anmeld
 
 25. kombiner (bydeform) — сочетать. Førnutid?
+> navneform kombinere · nutid kombinerer · datid kombinerede · førnutid kombineret · bydeform kombiner — сочетать
 * kombineret
   kombinerede
   kombinerer

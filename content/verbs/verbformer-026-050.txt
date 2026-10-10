@@ -4,150 +4,175 @@ title: Verber 26–50
 
 --- questions ---
 1. ske (navneform) — происходить, случаться. Førnutid?
+> navneform ske · nutid sker · datid skete · førnutid sket · bydeform ske — происходить, случаться
 * sket
   skete
   sker
   skeet
 
 2. spil (bydeform) — играть. Førnutid?
+> navneform spille · nutid spiller · datid spillede · førnutid spillet · bydeform spil — играть
 * spillet
   spillede
   spiller
   spille
 
 3. talte (datid) — говорить, разговаривать. Nutid?
+> navneform tale · nutid taler · datid talte · førnutid talt · bydeform tal — говорить, разговаривать
 * taler
   talt
   tale
   tal
 
 4. lave (navneform) — делать. Førnutid?
+> navneform lave · nutid laver · datid lavede · førnutid lavet · bydeform lav — делать; готовить (еду)
 * lavet
   lavede
   laver
   lav
 
 5. ved (nutid) — знать (факт). Førnutid?
+> navneform vide · nutid ved · datid vidste · førnutid vidst · bydeform vid — знать (факт)
 * vidst
   vidste
   vide
   vid
 
 6. tror (nutid) — верить. Navneform?
+> navneform tro · nutid tror · datid troede · førnutid troet · bydeform tro — верить; думать, полагать
 * tro
   troede
   troet
   trote
 
 7. arbejdede (datid) — работать. Bydeform?
+> navneform arbejde · nutid arbejder · datid arbejdede · førnutid arbejdet · bydeform arbejd — работать
 * arbejd
   arbejdet
   arbejder
   arbejde
 
 8. læg (bydeform) — класть. Navneform?
+> navneform lægge · nutid lægger · datid lagde · førnutid lagt · bydeform læg — класть
 * lægge
   lagde
   lagt
   lægger
 
 9. begyndt (førnutid) — начинать(ся). Nutid?
+> navneform begynde · nutid begynder · datid begyndte · førnutid begyndt · bydeform begynd — начинать(ся)
 * begynder
   begyndte
   begynde
   begynd
 
 10. lad (bydeform) — позволять, оставлять. Datid?
+> navneform lade · nutid lader · datid lod · førnutid ladet/ladt · bydeform lad — позволять, оставлять; (lade som om) делать вид
 * lod
   ladet
   lader
   lade
 
 11. skabte (datid) — создавать. Førnutid?
+> navneform skabe · nutid skaber · datid skabte · førnutid skabt · bydeform skab — создавать
 * skabt
   skaber
   skabe
   skab
 
 12. vælge (navneform) — выбирать. Datid?
+> navneform vælge · nutid vælger · datid valgte · førnutid valgt · bydeform vælg — выбирать
 * valgte
   valgt
   vælger
   vælg
 
 13. kør (bydeform) — ехать, водить (машину). Nutid?
+> navneform køre · nutid kører · datid kørte · førnutid kørt · bydeform kør — ехать, водить (машину)
 * kører
   kørte
   kørt
   køre
 
 14. sidde (navneform) — сидеть. Datid?
+> navneform sidde · nutid sidder · datid sad · førnutid siddet · bydeform sid — сидеть
 * sad
   siddet
   sidder
   sid
 
 15. fulgt (førnutid) — следовать. Nutid?
+> navneform følge · nutid følger · datid fulgte · førnutid fulgt · bydeform følg — следовать; провожать
 * følger
   fulgte
   følge
   følg
 
 16. synes (navneform) — считать, находить (мнение). Førnutid?
+> navneform synes · nutid synes · datid syntes · førnutid syntes — считать, находить (мнение); казаться
 * syntes
   synets
   synts
   synesr
 
 17. betyd (bydeform) — значить, означать. Datid?
+> navneform betyde · nutid betyder · datid betød · førnutid betydet · bydeform betyd — значить, означать
 * betød
   betydet
   betyder
   betyde
 
 18. kendte (datid) — знать (быть знакомым). Navneform?
+> navneform kende · nutid kender · datid kendte · førnutid kendt · bydeform kend — знать (быть знакомым)
 * kende
   kendt
   kender
   kend
 
 19. hørte (datid) — слышать. Førnutid?
+> navneform høre · nutid hører · datid hørte · førnutid hørt · bydeform hør — слышать; слушать
 * hørt
   hører
   høre
   hør
 
 20. slå (navneform) — бить, ударять. Førnutid?
+> navneform slå · nutid slår · datid slog · førnutid slået · bydeform slå — бить, ударять
 * slået
   slog
   slår
   slåt
 
 21. tænk (bydeform) — думать. Datid?
+> navneform tænke · nutid tænker · datid tænkte · førnutid tænkt · bydeform tænk — думать
 * tænkte
   tænkt
   tænker
   tænke
 
 22. mødte (datid) — встречать. Førnutid?
+> navneform møde · nutid møder · datid mødte · førnutid mødt · bydeform mød — встречать; (mødes) встречаться
 * mødt
   møder
   møde
   mød
 
 23. sender (nutid) — посылать, отправлять. Datid?
+> navneform sende · nutid sender · datid sendte · førnutid sendt · bydeform send — посылать, отправлять
 * sendte
   sendt
   sende
   send
 
 24. vundet (førnutid) — выигрывать, побеждать. Bydeform?
+> navneform vinde · nutid vinder · datid vandt · førnutid vundet · bydeform vind — выигрывать, побеждать
 * vind
   vandt
   vinder
   vinde
 
 25. samle (navneform) — собирать. Nutid?
+> navneform samle · nutid samler · datid samlede · førnutid samlet · bydeform saml — собирать
 * samler
   samlede
   samlet

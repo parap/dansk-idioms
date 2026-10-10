@@ -25,7 +25,8 @@ namespace Dansk\Domain\Reading;
  *       Dernæst
  *
  * A star marks the correct option. Multiple choice puts its question on the numbered
- * line; insertion names a lettered part from a `--- parts ---` section instead.
+ * line; insertion names a lettered part from a `--- parts ---` section instead. A line
+ * opening with `>` is a note, shown only once the question is answered.
  *
  * Parsing is pure: it never touches the database, so a draft can be checked as it is
  * typed.
@@ -301,6 +302,14 @@ final class PassageDocument
                 } elseif ($tail !== '') {
                     $current['prompt'] = $tail;
                 }
+                continue;
+            }
+
+            if (preg_match('/^\s*>\s?(.*)$/', $line, $m)) {
+                if ($current === null) {
+                    throw new InvalidPassage("A note on line {$no} belongs to no question.");
+                }
+                $current['note'] = trim(($current['note'] ?? '') . ' ' . trim($m[1]));
                 continue;
             }
 

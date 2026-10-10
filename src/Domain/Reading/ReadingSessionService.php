@@ -412,8 +412,10 @@ final class ReadingSessionService
         }
 
         $row = Db::fetchOne(
-            'SELECT id, item_id, options, correct_index, points, chosen_index
-             FROM reading_session_items WHERE session_id = ? AND position = ?',
+            'SELECT si.id, si.item_id, si.options, si.correct_index, si.points, si.chosen_index, i.note
+             FROM reading_session_items si
+             JOIN reading_items i ON i.id = si.item_id
+             WHERE si.session_id = ? AND si.position = ?',
             [(int) $session['id'], $position]
         );
         if ($row === null) {
@@ -463,6 +465,7 @@ final class ReadingSessionService
             'is_correct'    => $isCorrect,
             'correct_index' => (int) $row['correct_index'],
             'points_scored' => $points,
+            'note'          => $row['note'],
         ];
     }
 
@@ -583,7 +586,7 @@ final class ReadingSessionService
 
         $rows = Db::fetchAll(
             'SELECT si.position, si.options, si.correct_index, si.chosen_index, si.is_correct,
-                    si.points, si.points_scored, i.prompt, i.section
+                    si.points, si.points_scored, i.prompt, i.section, i.note
              FROM reading_session_items si
              JOIN reading_items i ON i.id = si.item_id
              WHERE si.session_id = ? ORDER BY si.position',
@@ -606,6 +609,7 @@ final class ReadingSessionService
                     'position'      => (int) $r['position'],
                     'prompt'        => $r['prompt'],
                     'section'       => $r['section'],
+                    'note'          => $r['note'],
                     'options'       => $this->publicOptions((string) $r['options']),
                     'correct_index' => (int) $r['correct_index'],
                     'chosen_index'  => $r['chosen_index'] === null ? null : (int) $r['chosen_index'],
