@@ -52,6 +52,17 @@
   .opt.right{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
   .opt.wrong{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
   #score{font-weight:600}
+  .tip{position:relative;display:inline-block;vertical-align:middle}
+  .info{width:24px;height:24px;margin:0 .1rem 0 .15rem;padding:0;border:none;background:none;
+    cursor:pointer;color:var(--muted);font:italic 700 .75rem/1 Georgia,serif}
+  .info::before{content:"i";display:inline-grid;place-items:center;width:16px;height:16px;
+    border:1px solid currentColor;border-radius:50%}
+  .info:hover,.info:focus-visible,.tip.open .info{color:var(--accent)}
+  .tipbox{display:none;position:absolute;left:0;top:26px;z-index:5;width:max-content;
+    max-width:min(17rem,70vw);padding:.45rem .6rem;border:1px solid var(--line);border-radius:8px;
+    background:var(--card);color:var(--ink);box-shadow:0 4px 14px rgba(20,23,28,.12);
+    font:400 .85rem/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  .tip:hover .tipbox,.tip.open .tipbox{display:block}
   .cta{display:flex;align-items:center;justify-content:space-between;gap:.8rem;
     padding:.85rem 1.1rem;border:1px solid var(--line);border-radius:10px;background:var(--chip);
     color:var(--ink);font-weight:600;text-decoration:none;transition:border-color .12s,background .12s}
@@ -88,6 +99,13 @@ const STRINGS = {
     score: 'Верно',
     done: 'Все вопросы отвечены.',
     error: 'Не удалось загрузить. Попробуйте обновить страницу.',
+    info: 'Пояснение',
+    of: '{form} ({label}) глагола «{meaning}»',
+    form_navneform: 'инфинитив, начальная форма глагола',
+    form_nutid: 'настоящее время',
+    form_datid: 'прошедшее время',
+    form_førnutid: 'причастие для перфекта: har или er + эта форма',
+    form_bydeform: 'повелительное наклонение',
   },
   en: {
     title: 'Verbs',
@@ -99,6 +117,13 @@ const STRINGS = {
     score: 'Correct',
     done: 'Every question is answered.',
     error: 'Could not load. Try reloading the page.',
+    info: 'Explanation',
+    of: '{form} ({label}) of the verb “{meaning}”',
+    form_navneform: 'the infinitive, the verb’s base form',
+    form_nutid: 'the present tense',
+    form_datid: 'the past tense',
+    form_førnutid: 'the participle of the perfect: har or er + this form',
+    form_bydeform: 'the imperative',
   },
   uk: {
     title: 'Дієслова',
@@ -110,6 +135,13 @@ const STRINGS = {
     score: 'Правильно',
     done: 'На всі питання дано відповідь.',
     error: 'Не вдалося завантажити. Спробуйте оновити сторінку.',
+    info: 'Пояснення',
+    of: '{form} ({label}) дієслова «{meaning}»',
+    form_navneform: 'інфінітив, початкова форма дієслова',
+    form_nutid: 'теперішній час',
+    form_datid: 'минулий час',
+    form_førnutid: 'дієприкметник для перфекта: har або er + ця форма',
+    form_bydeform: 'наказовий спосіб',
   },
   da: {
     title: 'Verber',
@@ -121,6 +153,13 @@ const STRINGS = {
     score: 'Rigtige',
     done: 'Alle spørgsmål er besvaret.',
     error: 'Kunne ikke hente siden. Prøv at genindlæse den.',
+    info: 'Forklaring',
+    of: '{form} ({label}) af verbet «{meaning}»',
+    form_navneform: 'verbets grundform (infinitiv)',
+    form_nutid: 'præsens',
+    form_datid: 'præteritum',
+    form_førnutid: 'tillægsformen til førnutid: har eller er + denne form',
+    form_bydeform: 'imperativ',
   },
 };
 registerStrings(STRINGS);
@@ -153,6 +192,74 @@ function listView() {
     </div>`;
 }
 
+// The two prompt shapes bin/verbs-generate.py writes; anything else is shown as it is.
+const FORMS = 'navneform|nutid|datid|førnutid|bydeform';
+const SHOWN_ASKED = new RegExp(`^(\\S+) \\((${FORMS})\\) — (.+)\\. (\\S+)\\?$`, 'u');
+const RECOGNISE = new RegExp(`^(\\S+) — (${FORMS}) af …\\?$`, 'u');
+
+function tip(id, text) {
+  return `<span class="tip"><button type="button" class="info" aria-expanded="false" aria-controls="${id}"
+    aria-label="${esc(t('info'))}"></button><span class="tipbox" role="tooltip" id="${id}">${esc(text)}</span></span>`;
+}
+
+// What a form is called, in the reader's language: "datid" is a term, not yet a word they know.
+function formName(label) {
+  return t('form_' + label.toLowerCase());
+}
+
+function promptHtml(item) {
+  const da = s => `<span lang="da">${esc(s)}</span>`;
+  const id = n => `tip-${item.position}-${n}`;
+  let m = item.prompt.match(SHOWN_ASKED);
+  if (m) {
+    const [, form, label, meaning, asked] = m;
+    const shown = t('of').replace('{form}', formName(label)).replace('{label}', label).replace('{meaning}', meaning);
+    return `${da(form)}${tip(id(1), shown)} (${da(label)}) — ${esc(meaning)}. ${da(asked)}${tip(id(2), formName(asked))}?`;
+  }
+  m = item.prompt.match(RECOGNISE);
+  if (m) {
+    const [, form, label] = m;
+    return `${da(form)} — ${da(label)}${tip(id(1), formName(label))} ${da('af …?')}`;
+  }
+  return esc(item.prompt);
+}
+
+function closeTips(except) {
+  document.querySelectorAll('.tip.open').forEach(box => {
+    if (box === except) return;
+    box.classList.remove('open');
+    box.querySelector('.info').setAttribute('aria-expanded', 'false');
+  });
+}
+
+// A tip anchored near the right edge would run off a phone screen: shift it back inside.
+function place(box) {
+  const tipbox = box.querySelector('.tipbox');
+  tipbox.style.left = '0';
+  const overflow = tipbox.getBoundingClientRect().right - (document.documentElement.clientWidth - 8);
+  if (overflow > 0) tipbox.style.left = `${-overflow}px`;
+}
+
+function wireTips(view) {
+  view.querySelectorAll('.info').forEach(button => {
+    const box = button.closest('.tip');
+    box.onmouseenter = () => place(box);
+    button.onclick = e => {
+      e.stopPropagation();
+      closeTips(box);
+      const open = box.classList.toggle('open');
+      button.setAttribute('aria-expanded', String(open));
+      if (open) place(box);
+      button.focus();
+    };
+    button.onkeydown = e => {
+      if (e.key !== 'Escape') return;
+      closeTips();
+    };
+  });
+}
+document.addEventListener('click', () => closeTips());
+
 function setView() {
   const set = round.passages[0];
   const right = Object.values(marks).filter(m => m.chosen === m.correct).length;
@@ -163,7 +270,7 @@ function setView() {
       ${round.items.map(item => {
         const m = marks[item.position];
         return `<div class="q" data-pos="${item.position}">
-          <p>${item.position}. ${esc(item.prompt)}</p>
+          <p>${item.position}. ${promptHtml(item)}</p>
           <div class="opts" lang="da">${item.options.map(o => {
             const cls = !m ? '' : o.index === m.correct ? 'right' : o.index === m.chosen ? 'wrong' : '';
             return `<button class="opt ${cls}" data-i="${o.index}" ${m ? 'disabled' : ''}>${esc(o.text)}</button>`;
@@ -202,6 +309,7 @@ function render() {
   if (slug === null && sets) { view.innerHTML = listView(); return; }
   if (slug !== null && round) {
     view.innerHTML = setView();
+    wireTips(view);
     view.querySelectorAll('.opt:not([disabled])').forEach(b => b.onclick = () =>
       answer(Number(b.closest('.q').dataset.pos), Number(b.dataset.i)).catch(() => { failed = true; render(); }));
   }
