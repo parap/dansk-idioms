@@ -1172,6 +1172,15 @@ def an_unknown_verb_set_says_it_does_not_exist(b):
 
 
 @check
+def the_buttons_carry_no_forward_arrow(b):
+    for path in ('/', '/listen'):
+        b.goto(path)
+        b.until('!!document.querySelector("a.cta")', what='the buttons on ' + path)
+        arrows = b.js('[...document.querySelectorAll("a.cta")].filter(a => a.textContent.includes("→")).length')
+        assert arrows == 0, f'{arrows} buttons on {path} still end in an arrow'
+
+
+@check
 def every_page_carries_the_way_home(b):
     """The mark is the way back, so it is the same mark everywhere and it sits where a
     reader looks for it: first in the header, top left."""
