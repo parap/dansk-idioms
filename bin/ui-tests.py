@@ -125,19 +125,25 @@ SEED_PHP = r"""
             ],
         ]);
     }
+    // The verb fixture is rebuilt each run, so its prompts follow the drills' current format;
+    // its rounds go with it, being the interface checks' own.
+    Db::execute("DELETE s FROM reading_sessions s WHERE EXISTS (
+                     SELECT 1 FROM reading_session_items si JOIN reading_passages p ON p.id = si.passage_id
+                      WHERE si.session_id = s.id AND p.slug = 'ui-fixture-verbs')");
+    Db::execute("DELETE FROM reading_passages WHERE slug = 'ui-fixture-verbs'");
     if (!Db::fetchValue("SELECT id FROM reading_passages WHERE slug = 'ui-fixture-verbs'")) {
         $repo->save([
             'slug' => 'ui-fixture-verbs', 'kind' => 'verbs', 'title' => 'UI fixture verbs', 'body' => null,
             'items' => [
-                ['position' => 1, 'prompt' => 'gå — идти. Præteritum?', 'options' => [
-                    ['label' => 'A', 'text' => 'gik', 'correct' => true],
-                    ['label' => 'B', 'text' => 'gået'],
-                    ['label' => 'C', 'text' => 'går'],
+                ['position' => 1, 'prompt' => 'er (nutid) — быть. Navneform?', 'options' => [
+                    ['label' => 'A', 'text' => 'være', 'correct' => true],
+                    ['label' => 'B', 'text' => 'var'],
+                    ['label' => 'C', 'text' => 'været'],
                 ]],
-                ['position' => 2, 'prompt' => 'se — видеть. Perfektum participium?', 'options' => [
-                    ['label' => 'A', 'text' => 'set', 'correct' => true],
-                    ['label' => 'B', 'text' => 'så'],
-                    ['label' => 'C', 'text' => 'ser'],
+                ['position' => 2, 'prompt' => 'gik — datid af …?', 'options' => [
+                    ['label' => 'A', 'text' => 'gå', 'correct' => true],
+                    ['label' => 'B', 'text' => 'give'],
+                    ['label' => 'C', 'text' => 'gide'],
                 ]],
             ],
         ]);
@@ -1074,7 +1080,7 @@ def open_verb_set(b):
 @check
 def a_verb_set_asks_every_question(b):
     open_verb_set(b)
-    assert 'gå — идти. Præteritum?' in b.js('document.querySelector(".q").textContent')
+    assert 'быть' in b.js('document.querySelector(".q").textContent')
     assert b.js('document.querySelectorAll(".q .opt").length') == 6
 
 
@@ -1089,6 +1095,57 @@ def a_verb_answer_is_marked_at_once(b):
     b.until('!!document.querySelector(\'.q[data-pos="2"] .opt.wrong\')', what='the answer marked wrong')
     assert b.js('!!document.querySelector(\'.q[data-pos="2"] .opt.right\')'), 'the right answer is not revealed'
     b.until('/1\\s*\\/\\s*2/.test(document.querySelector("#score").textContent)', what='the score 1 / 2')
+
+
+def tip_text(b, pos, n):
+    """Opens the n-th info button of a question and returns what its tip says."""
+    b.js(f'document.querySelectorAll(\'.q[data-pos="{pos}"] .info\')[{n}].click()')
+    b.until(f'document.querySelectorAll(\'.q[data-pos="{pos}"] .info\')[{n}].getAttribute("aria-expanded") === "true"',
+            what='the tip opened')
+    return b.js(f'document.getElementById(document.querySelectorAll(\'.q[data-pos="{pos}"] .info\')[{n}]'
+                f'.getAttribute("aria-controls")).textContent')
+
+
+@check
+def a_verb_question_explains_the_shown_form_and_the_asked_one(b):
+    open_verb_set(b)
+    assert b.js('document.querySelectorAll(\'.q[data-pos="1"] .info\').length') == 2, 'not two info buttons'
+    shown = tip_text(b, 1, 0)
+    assert 'настоящее время' in shown and 'быть' in shown, shown
+    assert 'være' not in shown, f'the tip gives the answer away: {shown}'
+    assert 'инфинитив' in tip_text(b, 1, 1)
+
+
+@check
+def a_recognition_question_explains_its_form(b):
+    open_verb_set(b)
+    assert b.js('document.querySelectorAll(\'.q[data-pos="2"] .info\').length') == 1, 'not one info button'
+    assert 'прошедшее время' in tip_text(b, 2, 0)
+
+
+@check
+def an_info_tip_stays_on_a_phone_screen(b):
+    """The asked form's button sits near the right edge; its tip must not run off it."""
+    b.send('Emulation.setDeviceMetricsOverride', width=390, height=760, deviceScaleFactor=1, mobile=True)
+    try:
+        open_verb_set(b)
+        tip_text(b, 1, 1)
+        right = b.js('document.querySelector(".tip.open .tipbox").getBoundingClientRect().right')
+        width = b.js('document.documentElement.clientWidth')
+        assert right <= width, f'the tip ends at {right}px on a {width}px screen'
+    finally:
+        b.send('Emulation.clearDeviceMetricsOverride')
+
+
+@check
+def an_info_tip_closes_on_escape_and_answers_nothing(b):
+    open_verb_set(b)
+    tip_text(b, 1, 0)
+    assert b.js('document.activeElement.classList.contains("info")'), 'the info button does not take focus'
+    b.js('document.activeElement.dispatchEvent(new KeyboardEvent("keydown", {key: "Escape", bubbles: true}))')
+    b.until('document.querySelector(\'.q[data-pos="1"] .info\').getAttribute("aria-expanded") === "false"',
+            what='the tip closed')
+    assert not b.js('!!document.querySelector(\'.q[data-pos="1"] .opt[disabled]\')'), 'opening a tip answered the question'
 
 
 @check
