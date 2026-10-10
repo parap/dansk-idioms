@@ -105,6 +105,30 @@ final class ReviewTest extends IntegrationTestCase
         self::assertSame('стараться изо всех сил', $primaries[0]['text']);
     }
 
+    /** The parser's literal glosses are kept, but never at the cost of the answer chosen. */
+    public function testAnAnswerThatIsAlsoALiteralGlossStaysThePrimary(): void
+    {
+        $entryId = $this->queuedEntryId();
+        Db::execute('UPDATE raw_entries SET raw_text = ? WHERE id = ?', [
+            'Hvad fanden... — усилительный ругательный оборот. Дословно означает '
+            . '«Какого чёрта...» (fanden — чёрт, дьявол).',
+            $entryId,
+        ]);
+
+        $result = $this->review->accept($entryId, 'hvad fanden', 'Какого чёрта');
+
+        $primary = Db::fetchOne(
+            "SELECT * FROM idiom_translations WHERE idiom_id = ? AND is_primary = 1",
+            [$result['idiom_id']]
+        );
+        self::assertNotNull($primary, 'a published idiom needs an answer');
+        self::assertSame('Какого чёрта', $primary['text']);
+        self::assertSame(1, (int) $primary['quiz_usable']);
+        self::assertSame('idiomatic', $primary['sense_type']);
+
+        $this->assertCorpusInvariants();
+    }
+
     public function testTheQueueIsOrderedByLeastConfidentFirst(): void
     {
         Db::execute("UPDATE raw_entries SET status = 'needs_review'");

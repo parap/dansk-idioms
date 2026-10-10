@@ -91,16 +91,19 @@ final class ReviewRepository
         $idiomId = $this->upsertIdiom($term, $parsed, (int) $entry['message_id']);
 
         $this->writeTranslation($idiomId, $primary, 'idiomatic', true);
+        $chosen = [Normalizer::translation($primary)];
         foreach ($extraTranslations as $extra) {
             $extra = Text::collapseWhitespace($extra);
             if ($extra !== '' && $extra !== $primary) {
                 $this->writeTranslation($idiomId, $extra, 'idiomatic', false);
+                $chosen[] = Normalizer::translation($extra);
             }
         }
 
-        // Keep the literal glosses the parser found: they are the distractor pool.
+        // Keep the literal glosses the parser found: they are the distractor pool. A gloss
+        // the reviewer chose as a meaning is skipped, or its upsert would demote that row.
         foreach ($this->extractor->extract($parsed) as $c) {
-            if ($c['sense_type'] === 'literal') {
+            if ($c['sense_type'] === 'literal' && !in_array(Normalizer::translation($c['text']), $chosen, true)) {
                 $this->writeTranslation($idiomId, $c['text'], 'literal', false);
             }
         }
