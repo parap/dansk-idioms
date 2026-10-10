@@ -3,151 +3,151 @@ slug: verber-426-450
 title: Verber 426–450
 
 --- questions ---
-1. tænde — зажигать, включать. Perfektum participium?
+1. tænde — зажигать, включать. Førnutid?
 * tændt
   tændte
   tænder
   tændet
 
-2. afsætte — выделять (средства). Præteritum?
+2. afsætte — выделять (средства). Datid?
 * afsatte
   afsat
   afsætter
   afsættede
 
-3. kontakte — связываться. Perfektum participium?
+3. kontakte — связываться. Førnutid?
 * kontaktet
   kontaktede
   kontakter
   kontakte
 
-4. skræmme — пугать. Præteritum?
+4. skræmme — пугать. Datid?
 * skræmte
   skræmt
   skræmmer
   skræmmede
 
-5. skjule — скрывать, прятать. Perfektum participium?
+5. skjule — скрывать, прятать. Førnutid?
 * skjult
   skjulte
   skjuler
   skjulet
 
-6. kontrollere — контролировать, проверять. Præteritum?
+6. kontrollere — контролировать, проверять. Datid?
 * kontrollerede
   kontrolleret
   kontrollerer
   kontrollerte
 
-7. bide — кусать. Perfektum participium?
+7. bide — кусать. Førnutid?
 * bidt
   bed
   bider
   bidet
 
-8. lancere — запускать (продукт). Præteritum?
+8. lancere — запускать (продукт). Datid?
 * lancerede
   lanceret
   lancerer
   lancerte
 
-9. danse — танцевать. Perfektum participium?
+9. danse — танцевать. Førnutid?
 * danset
   dansede
   danser
   danst
 
-10. teste — тестировать. Præteritum?
+10. teste — тестировать. Datid?
 * testede
   testet
   tester
   teste
 
-11. engagere — вовлекать. Perfektum participium?
+11. engagere — вовлекать. Førnutid?
 * engageret
   engagerede
   engagerer
   engagert
 
-12. forblive — оставаться. Præteritum?
+12. forblive — оставаться. Datid?
 * forblev
   forblevet
   forbliver
   forblivede
 
-13. støde — толкать. Perfektum participium?
+13. støde — толкать. Førnutid?
 * stødt
   stødte
   støder
   stødet
 
-14. gide — хотеть (иметь охоту). Præteritum?
+14. gide — хотеть (иметь охоту). Datid?
 * gad
   gidet
   gider
   gidte
 
-15. anklage — обвинять. Perfektum participium?
+15. anklage — обвинять. Førnutid?
 * anklaget
   anklagede
   anklager
   anklagt
 
-16. fortjene — заслуживать. Præteritum?
+16. fortjene — заслуживать. Datid?
 * fortjente
   fortjent
   fortjener
   fortjenede
 
-17. rive — рвать. Perfektum participium?
+17. rive — рвать. Førnutid?
 * revet
   rev
   river
   rivet
 
-18. supplere — дополнять. Præteritum?
+18. supplere — дополнять. Datid?
 * supplerede
   suppleret
   supplerer
   supplerte
 
-19. smitte — заражать. Perfektum participium?
+19. smitte — заражать. Førnutid?
 * smittet
   smittede
   smitter
   smitte
 
-20. forlænge — продлевать. Præteritum?
+20. forlænge — продлевать. Datid?
 * forlængede
   forlænget
   forlænger
   forlængte
 
-21. forekomme — встречаться. Perfektum participium?
+21. forekomme — встречаться. Førnutid?
 * forekommet
   forekom
   forekommer
   forekomt
 
-22. overholde — соблюдать. Præteritum?
+22. overholde — соблюдать. Datid?
 * overholdt
   overholder
   overholdede
   overholde
 
-23. afvikle — проводить. Perfektum participium?
+23. afvikle — проводить. Førnutid?
 * afviklet
   afviklede
   afvikler
   afviklt
 
-24. anmelde — заявлять (в полицию). Præteritum?
+24. anmelde — заявлять (в полицию). Datid?
 * anmeldte
   anmeldt
   anmelder
   anmeldede
 
-25. kombinere — сочетать. Perfektum participium?
+25. kombinere — сочетать. Førnutid?
 * kombineret
   kombinerede
   kombinerer

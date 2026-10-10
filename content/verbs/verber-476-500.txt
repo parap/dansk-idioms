@@ -3,151 +3,151 @@ slug: verber-476-500
 title: Verber 476–500
 
 --- questions ---
-1. forpligte — обязывать. Perfektum participium?
+1. forpligte — обязывать. Førnutid?
 * forpligtet
   forpligtede
   forpligter
   forpligte
 
-2. råde — (råde over) располагать. Præteritum?
+2. råde — (råde over) располагать. Datid?
 * rådede
   rådet
   råder
   rådte
 
-3. indebære — подразумевать, влечь. Perfektum participium?
+3. indebære — подразумевать, влечь. Førnutid?
 * indebåret
   indebar
   indebærer
   indebæret
 
-4. klage — жаловаться. Præteritum?
+4. klage — жаловаться. Datid?
 * klagede
   klaget
   klager
   klagte
 
-5. bekæmpe — бороться с. Perfektum participium?
+5. bekæmpe — бороться с. Førnutid?
 * bekæmpet
   bekæmpede
   bekæmper
   bekæmpt
 
-6. overføre — переводить (деньги), передавать. Præteritum?
+6. overføre — переводить (деньги), передавать. Datid?
 * overførte
   overført
   overfører
   overførede
 
-7. resultere — приводить (к). Perfektum participium?
+7. resultere — приводить (к). Førnutid?
 * resulteret
   resulterede
   resulterer
   resultert
 
-8. spænde — натягивать. Præteritum?
+8. spænde — натягивать. Datid?
 * spændte
   spændt
   spænder
   spændede
 
-9. definere — определять. Perfektum participium?
+9. definere — определять. Førnutid?
 * defineret
   definerede
   definerer
   definert
 
-10. opstille — выставлять (кандидатуру), расставлять. Præteritum?
+10. opstille — выставлять (кандидатуру), расставлять. Datid?
 * opstillede
   opstillet
   opstiller
   opstilte
 
-11. skærpe — ужесточать, обострять. Perfektum participium?
+11. skærpe — ужесточать, обострять. Førnutid?
 * skærpet
   skærpede
   skærper
   skærpt
 
-12. lokke — заманивать. Præteritum?
+12. lokke — заманивать. Datid?
 * lokkede
   lokket
   lokker
   lokte
 
-13. tilbringe — проводить (время). Perfektum participium?
+13. tilbringe — проводить (время). Førnutid?
 * tilbragt
   tilbragte
   tilbringer
   tilbringet
 
-14. gennemgå — просматривать. Præteritum?
+14. gennemgå — просматривать. Datid?
 * gennemgik
   gennemgået
   gennemgår
   gennemgåte
 
-15. passere — проходить мимо. Perfektum participium?
+15. passere — проходить мимо. Førnutid?
 * passeret
   passerede
   passerer
   passert
 
-16. standse — останавливать(ся). Præteritum?
+16. standse — останавливать(ся). Datid?
 * standsede
   standset
   standser
   standste
 
-17. rydde — убирать (rydde op). Perfektum participium?
+17. rydde — убирать (rydde op). Førnutid?
 * ryddet
   ryddede
   rydder
   rydt
 
-18. respektere — уважать. Præteritum?
+18. respektere — уважать. Datid?
 * respekterede
   respekteret
   respekterer
   respekterte
 
-19. glide — скользить. Perfektum participium?
+19. glide — скользить. Førnutid?
 * gledet
   gled
   glider
   glidet
 
-20. svinge — качать(ся). Præteritum?
+20. svinge — качать(ся). Datid?
 * svingede
   svinget
   svinger
   svingte
 
-21. demonstrere — демонстрировать. Perfektum participium?
+21. demonstrere — демонстрировать. Førnutid?
 * demonstreret
   demonstrerede
   demonstrerer
   demonstrert
 
-22. hælde — наливать. Præteritum?
+22. hælde — наливать. Datid?
 * hældte
   hældt
   hælder
   hælde
 
-23. underholde — развлекать. Perfektum participium?
+23. underholde — развлекать. Førnutid?
 * underholdt
   underholder
   underholdet
   underholde
 
-24. pakke — паковать. Præteritum?
+24. pakke — паковать. Datid?
 * pakkede
   pakket
   pakker
   pakte
 
-25. klæde — (klæde sig på) одеваться. Perfektum participium?
+25. klæde — (klæde sig på) одеваться. Førnutid?
 * klædt
   klædte
   klæder

@@ -3,151 +3,151 @@ slug: verber-401-425
 title: Verber 401–425
 
 --- questions ---
-1. sænke — опускать, снижать. Præteritum?
+1. sænke — опускать, снижать. Datid?
 * sænkede
   sænket
   sænker
   sænkte
 
-2. henvende — (henvende sig) обращаться. Perfektum participium?
+2. henvende — (henvende sig) обращаться. Førnutid?
 * henvendt
   henvendte
   henvender
   henvendet
 
-3. bestille — заказывать. Præteritum?
+3. bestille — заказывать. Datid?
 * bestilte
   bestilt
   bestiller
   bestillede
 
-4. udpege — назначать, указывать. Perfektum participium?
+4. udpege — назначать, указывать. Førnutid?
 * udpeget
   udpegede
   udpeger
   udpegt
 
-5. knytte — связывать. Præteritum?
+5. knytte — связывать. Datid?
 * knyttede
   knyttet
   knytter
   knytte
 
-6. finansiere — финансировать. Perfektum participium?
+6. finansiere — финансировать. Førnutid?
 * finansieret
   finansierede
   finansierer
   finansiert
 
-7. udstille — выставлять. Præteritum?
+7. udstille — выставлять. Datid?
 * udstillede
   udstillet
   udstiller
   udstilte
 
-8. foretrække — предпочитать. Perfektum participium?
+8. foretrække — предпочитать. Førnutid?
 * foretrukket
   foretrak
   foretrækker
   foretrækket
 
-9. påstå — утверждать. Præteritum?
+9. påstå — утверждать. Datid?
 * påstod
   påstået
   påstår
   påståte
 
-10. konkludere — делать вывод. Perfektum participium?
+10. konkludere — делать вывод. Førnutid?
 * konkluderet
   konkluderede
   konkluderer
   konkludert
 
-11. skille — разделять. Præteritum?
+11. skille — разделять. Datid?
 * skilte
   skilt
   skiller
   skillede
 
-12. aflevere — сдавать, отдавать. Perfektum participium?
+12. aflevere — сдавать, отдавать. Førnutid?
 * afleveret
   afleverede
   afleverer
   aflevert
 
-13. lege — играть (о детях). Præteritum?
+13. lege — играть (о детях). Datid?
 * legede
   leget
   leger
   legte
 
-14. kommentere — комментировать. Perfektum participium?
+14. kommentere — комментировать. Førnutid?
 * kommenteret
   kommenterede
   kommenterer
   kommentert
 
-15. rulle — катить(ся). Præteritum?
+15. rulle — катить(ся). Datid?
 * rullede
   rullet
   ruller
   rulte
 
-16. udarbejde — разрабатывать, составлять. Perfektum participium?
+16. udarbejde — разрабатывать, составлять. Førnutid?
 * udarbejdet
   udarbejdede
   udarbejder
   udarbejdt
 
-17. række — протягивать. Præteritum?
+17. række — протягивать. Datid?
 * rakte
   rakt
   rækker
   rækkede
 
-18. stifte — основывать. Perfektum participium?
+18. stifte — основывать. Førnutid?
 * stiftet
   stiftede
   stifter
   stifte
 
-19. smage — пробовать на вкус. Præteritum?
+19. smage — пробовать на вкус. Datid?
 * smagte
   smagt
   smager
   smagede
 
-20. bevise — доказывать. Perfektum participium?
+20. bevise — доказывать. Førnutid?
 * bevist
   beviste
   beviser
   beviset
 
-21. aftale — договариваться. Præteritum?
+21. aftale — договариваться. Datid?
 * aftalte
   aftalt
   aftaler
   aftalede
 
-22. tildele — присуждать, выделять. Perfektum participium?
+22. tildele — присуждать, выделять. Førnutid?
 * tildelt
   tildelte
   tildeler
   tildelet
 
-23. afløse — сменять. Præteritum?
+23. afløse — сменять. Datid?
 * afløste
   afløst
   afløser
   afløsede
 
-24. opbygge — выстраивать. Perfektum participium?
+24. opbygge — выстраивать. Førnutid?
 * opbygget
   opbyggede
   opbygger
   opbygt
 
-25. skrue — закручивать. Præteritum?
+25. skrue — закручивать. Datid?
 * skruede
   skruet
   skruer

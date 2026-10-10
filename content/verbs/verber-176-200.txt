@@ -3,151 +3,151 @@ slug: verber-176-200
 title: Verber 176–200
 
 --- questions ---
-1. elske — любить. Perfektum participium?
+1. elske — любить. Førnutid?
 * elsket
   elskede
   elsker
   elskt
 
-2. skyde — стрелять. Præteritum?
+2. skyde — стрелять. Datid?
 * skød
   skudt
   skyder
   skydede
 
-3. synge — петь. Perfektum participium?
+3. synge — петь. Førnutid?
 * sunget
   sang
   synger
   synget
 
-4. danne — образовывать, формировать. Præteritum?
+4. danne — образовывать, формировать. Datid?
 * dannede
   dannet
   danner
   dante
 
-5. udgøre — составлять. Perfektum participium?
+5. udgøre — составлять. Førnutid?
 * udgjort
   udgjorde
   udgør
   udgøret
 
-6. overraske — удивлять. Præteritum?
+6. overraske — удивлять. Datid?
 * overraskede
   overrasket
   overrasker
   overraskte
 
-7. udgive — издавать, выпускать. Perfektum participium?
+7. udgive — издавать, выпускать. Førnutid?
 * udgivet
   udgav
   udgiver
   udgivt
 
-8. indføre — вводить. Præteritum?
+8. indføre — вводить. Datid?
 * indførte
   indført
   indfører
   indførede
 
-9. placere — размещать. Perfektum participium?
+9. placere — размещать. Førnutid?
 * placeret
   placerede
   placerer
   placert
 
-10. eje — владеть. Præteritum?
+10. eje — владеть. Datid?
 * ejede
   ejet
   ejer
   ejeede
 
-11. behandle — обращаться с. Perfektum participium?
+11. behandle — обращаться с. Førnutid?
 * behandlet
   behandlede
   behandler
   behandlt
 
-12. uddanne — обучать. Præteritum?
+12. uddanne — обучать. Datid?
 * uddannede
   uddannet
   uddanner
   uddante
 
-13. etablere — устанавливать, основывать. Perfektum participium?
+13. etablere — устанавливать, основывать. Førnutid?
 * etableret
   etablerede
   etablerer
   etablert
 
-14. præsentere — представлять. Præteritum?
+14. præsentere — представлять. Datid?
 * præsenterede
   præsenteret
   præsenterer
   præsenterte
 
-15. benytte — использовать. Perfektum participium?
+15. benytte — использовать. Førnutid?
 * benyttet
   benyttede
   benytter
   benytte
 
-16. interessere — интересовать. Præteritum?
+16. interessere — интересовать. Datid?
 * interesserede
   interesseret
   interesserer
   interesserte
 
-17. fjerne — удалять, убирать. Perfektum participium?
+17. fjerne — удалять, убирать. Førnutid?
 * fjernet
   fjernede
   fjerner
   fjernt
 
-18. udsætte — откладывать. Præteritum?
+18. udsætte — откладывать. Datid?
 * udsatte
   udsat
   udsætter
   udsættede
 
-19. optage — записывать. Perfektum participium?
+19. optage — записывать. Førnutid?
 * optaget
   optog
   optager
   optagt
 
-20. anvende — применять. Præteritum?
+20. anvende — применять. Datid?
 * anvendte
   anvendt
   anvender
   anvendede
 
-21. dække — покрывать. Perfektum participium?
+21. dække — покрывать. Førnutid?
 * dækket
   dækkede
   dækker
   dækt
 
-22. ringe — звонить. Præteritum?
+22. ringe — звонить. Datid?
 * ringede
   ringet
   ringer
   ringte
 
-23. skære — резать. Perfektum participium?
+23. skære — резать. Førnutid?
 * skåret
   skar
   skærer
   skæret
 
-24. true — угрожать. Præteritum?
+24. true — угрожать. Datid?
 * truede
   truet
   truer
   trute
 
-25. træne — тренировать(ся). Perfektum participium?
+25. træne — тренировать(ся). Førnutid?
 * trænet
   trænede
   træner

@@ -3,151 +3,151 @@ slug: verber-526-550
 title: Verber 526–550
 
 --- questions ---
-1. beregne — рассчитывать. Perfektum participium?
+1. beregne — рассчитывать. Førnutid?
 * beregnet
   beregnede
   beregner
   beregnt
 
-2. herske — господствовать. Præteritum?
+2. herske — господствовать. Datid?
 * herskede
   hersket
   hersker
   herskte
 
-3. forske — исследовать (научно). Perfektum participium?
+3. forske — исследовать (научно). Førnutid?
 * forsket
   forskede
   forsker
   forskt
 
-4. banke — стучать. Præteritum?
+4. banke — стучать. Datid?
 * bankede
   banket
   banker
   bankte
 
-5. tilknytte — прикреплять, присоединять. Perfektum participium?
+5. tilknytte — прикреплять, присоединять. Førnutid?
 * tilknyttet
   tilknyttede
   tilknytter
   tilknytte
 
-6. rådgive — консультировать. Præteritum?
+6. rådgive — консультировать. Datid?
 * rådgav
   rådgivet
   rådgiver
   rådgivte
 
-7. havne — оказываться (в итоге). Perfektum participium?
+7. havne — оказываться (в итоге). Førnutid?
 * havnet
   havnede
   havner
   havnt
 
-8. overlade — оставлять, передавать. Præteritum?
+8. overlade — оставлять, передавать. Datid?
 * overlod
   overladt
   overlader
   overladede
 
-9. forlange — требовать. Perfektum participium?
+9. forlange — требовать. Førnutid?
 * forlangt
   forlangte
   forlanger
   forlanget
 
-10. underskrive — подписывать. Præteritum?
+10. underskrive — подписывать. Datid?
 * underskrev
   underskrevet
   underskriver
   underskrivede
 
-11. mistænke — подозревать. Perfektum participium?
+11. mistænke — подозревать. Førnutid?
 * mistænkt
   mistænkte
   mistænker
   mistænket
 
-12. berøre — касаться, затрагивать. Præteritum?
+12. berøre — касаться, затрагивать. Datid?
 * berørte
   berørt
   berører
   berørede
 
-13. iføre — (iføre sig) облачаться. Perfektum participium?
+13. iføre — (iføre sig) облачаться. Førnutid?
 * iført
   iførte
   ifører
   iføret
 
-14. orientere — информировать. Præteritum?
+14. orientere — информировать. Datid?
 * orienterede
   orienteret
   orienterer
   orienterte
 
-15. opholde — (opholde sig) находиться, пребывать. Perfektum participium?
+15. opholde — (opholde sig) находиться, пребывать. Førnutid?
 * opholdt
   opholder
   opholdet
   opholde
 
-16. såre — ранить, обижать. Præteritum?
+16. såre — ранить, обижать. Datid?
 * sårede
   såret
   sårer
   sårte
 
-17. gifte — (gifte sig) жениться, выходить замуж. Perfektum participium?
+17. gifte — (gifte sig) жениться, выходить замуж. Førnutid?
 * giftet
   giftede
   gifter
   gifte
 
-18. tjekke — проверять. Præteritum?
+18. tjekke — проверять. Datid?
 * tjekkede
   tjekket
   tjekker
   tjekte
 
-19. isolere — изолировать. Perfektum participium?
+19. isolere — изолировать. Førnutid?
 * isoleret
   isolerede
   isolerer
   isolert
 
-20. omgive — окружать. Præteritum?
+20. omgive — окружать. Datid?
 * omgav
   omgivet
   omgiver
   omgivte
 
-21. undlade — воздерживаться. Perfektum participium?
+21. undlade — воздерживаться. Førnutid?
 * undladt
   undlod
   undlader
   undladet
 
-22. irritere — раздражать. Præteritum?
+22. irritere — раздражать. Datid?
 * irriterede
   irriteret
   irriterer
   irriterte
 
-23. antage — предполагать. Perfektum participium?
+23. antage — предполагать. Førnutid?
 * antaget
   antog
   antager
   antagt
 
-24. variere — варьироваться. Præteritum?
+24. variere — варьироваться. Datid?
 * varierede
   varieret
   varierer
   varierte
 
-25. tilpasse — приспосабливать. Perfektum participium?
+25. tilpasse — приспосабливать. Førnutid?
 * tilpasset
   tilpassede
   tilpasser

@@ -3,151 +3,151 @@ slug: verber-676-700
 title: Verber 676–700
 
 --- questions ---
-1. vaske — мыть, стирать. Perfektum participium?
+1. vaske — мыть, стирать. Førnutid?
 * vasket
   vaskede
   vasker
   vaskt
 
-2. medbringe — брать с собой. Præteritum?
+2. medbringe — брать с собой. Datid?
 * medbragte
   medbragt
   medbringer
   medbringede
 
-3. chokere — шокировать. Perfektum participium?
+3. chokere — шокировать. Førnutid?
 * chokeret
   chokerede
   chokerer
   chokert
 
-4. misbruge — злоупотреблять. Præteritum?
+4. misbruge — злоупотреблять. Datid?
 * misbrugte
   misbrugt
   misbruger
   misbrugede
 
-5. krænke — оскорблять, нарушать. Perfektum participium?
+5. krænke — оскорблять, нарушать. Førnutid?
 * krænket
   krænkede
   krænker
   krænkt
 
-6. regulere — регулировать. Præteritum?
+6. regulere — регулировать. Datid?
 * regulerede
   reguleret
   regulerer
   regulerte
 
-7. styrte — падать. Perfektum participium?
+7. styrte — падать. Førnutid?
 * styrtet
   styrtede
   styrter
   styrte
 
-8. appellere — обжаловать. Præteritum?
+8. appellere — обжаловать. Datid?
 * appellerede
   appelleret
   appellerer
   appellerte
 
-9. indspille — записывать (альбом). Perfektum participium?
+9. indspille — записывать (альбом). Førnutid?
 * indspillet
   indspillede
   indspiller
   indspilt
 
-10. fremlægge — представлять, излагать. Præteritum?
+10. fremlægge — представлять, излагать. Datid?
 * fremlagde
   fremlagt
   fremlægger
   fremlæggede
 
-11. indsætte — вставлять. Perfektum participium?
+11. indsætte — вставлять. Førnutid?
 * indsat
   indsatte
   indsætter
   indsættet
 
-12. bosætte — (bosætte sig) поселяться. Præteritum?
+12. bosætte — (bosætte sig) поселяться. Datid?
 * bosatte
   bosat
   bosætter
   bosættede
 
-13. pille — ковырять. Perfektum participium?
+13. pille — ковырять. Førnutid?
 * pillet
   pillede
   piller
   pilt
 
-14. kendetegne — характеризовать. Præteritum?
+14. kendetegne — характеризовать. Datid?
 * kendetegnede
   kendetegnet
   kendetegner
   kendetegnte
 
-15. efterfølge — следовать за. Perfektum participium?
+15. efterfølge — следовать за. Førnutid?
 * efterfulgt
   efterfulgte
   efterfølger
   efterfølget
 
-16. tilslutte — подключать. Præteritum?
+16. tilslutte — подключать. Datid?
 * tilsluttede
   tilsluttet
   tilslutter
   tilslutte
 
-17. interviewe — брать интервью. Perfektum participium?
+17. interviewe — брать интервью. Førnutid?
 * interviewet
   interviewede
   interviewer
   interviewt
 
-18. udskifte — заменять. Præteritum?
+18. udskifte — заменять. Datid?
 * udskiftede
   udskiftet
   udskifter
   udskifte
 
-19. kommunikere — общаться. Perfektum participium?
+19. kommunikere — общаться. Førnutid?
 * kommunikeret
   kommunikerede
   kommunikerer
   kommunikert
 
-20. stole — (stole på) доверять. Præteritum?
+20. stole — (stole på) доверять. Datid?
 * stolede
   stolet
   stoler
   stolte
 
-21. udspille — (udspille sig) разыгрываться. Perfektum participium?
+21. udspille — (udspille sig) разыгрываться. Førnutid?
 * udspillet
   udspillede
   udspiller
   udspilt
 
-22. tøve — колебаться. Præteritum?
+22. tøve — колебаться. Datid?
 * tøvede
   tøvet
   tøver
   tøvte
 
-23. skrige — кричать, визжать. Perfektum participium?
+23. skrige — кричать, визжать. Førnutid?
 * skreget
   skreg
   skriger
   skriget
 
-24. fatte — понимать, постигать. Præteritum?
+24. fatte — понимать, постигать. Datid?
 * fattede
   fattet
   fatter
   fatte
 
-25. strømme — струиться, стекаться. Perfektum participium?
+25. strømme — струиться, стекаться. Førnutid?
 * strømmet
   strømmede
   strømmer

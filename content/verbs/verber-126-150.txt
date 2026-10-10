@@ -3,151 +3,151 @@ slug: verber-126-150
 title: Verber 126–150
 
 --- questions ---
-1. afvise — отклонять, отказывать. Perfektum participium?
+1. afvise — отклонять, отказывать. Førnutid?
 * afvist
   afviste
   afviser
   afviset
 
-2. dele — делить(ся). Præteritum?
+2. dele — делить(ся). Datid?
 * delte
   delt
   deler
   delede
 
-3. skifte — менять, сменять. Perfektum participium?
+3. skifte — менять, сменять. Førnutid?
 * skiftet
   skiftede
   skifter
   skifte
 
-4. støtte — поддерживать. Præteritum?
+4. støtte — поддерживать. Datid?
 * støttede
   støttet
   støtter
   støtte
 
-5. regne — считать (вычислять). Perfektum participium?
+5. regne — считать (вычислять). Førnutid?
 * regnet
   regnede
   regner
   regnt
 
-6. gennemføre — проводить, осуществлять. Præteritum?
+6. gennemføre — проводить, осуществлять. Datid?
 * gennemførte
   gennemført
   gennemfører
   gennemførede
 
-7. forlade — покидать. Perfektum participium?
+7. forlade — покидать. Førnutid?
 * forladt
   forlod
   forlader
   forladet
 
-8. nævne — упоминать. Præteritum?
+8. nævne — упоминать. Datid?
 * nævnte
   nævnt
   nævner
   nævne
 
-9. understrege — подчёркивать. Perfektum participium?
+9. understrege — подчёркивать. Førnutid?
 * understreget
   understregede
   understreger
   understregt
 
-10. indgå — заключать (договор). Præteritum?
+10. indgå — заключать (договор). Datid?
 * indgik
   indgået
   indgår
   indgåte
 
-11. klare — справляться. Perfektum participium?
+11. klare — справляться. Førnutid?
 * klaret
   klarede
   klarer
   klart
 
-12. kigge — смотреть, глядеть. Præteritum?
+12. kigge — смотреть, глядеть. Datid?
 * kiggede
   kigget
   kigger
   kigte
 
-13. fungere — функционировать, работать. Perfektum participium?
+13. fungere — функционировать, работать. Førnutid?
 * fungeret
   fungerede
   fungerer
   fungert
 
-14. mærke — замечать, ощущать. Præteritum?
+14. mærke — замечать, ощущать. Datid?
 * mærkede
   mærket
   mærker
   mærkte
 
-15. hente — забирать, приносить. Perfektum participium?
+15. hente — забирать, приносить. Førnutid?
 * hentet
   hentede
   henter
   hente
 
-16. stoppe — останавливать(ся). Præteritum?
+16. stoppe — останавливать(ся). Datid?
 * stoppede
   stoppet
   stopper
   stopte
 
-17. melde — сообщать. Perfektum participium?
+17. melde — сообщать. Førnutid?
 * meldt
   meldte
   melder
   meldet
 
-18. levere — поставлять, доставлять. Præteritum?
+18. levere — поставлять, доставлять. Datid?
 * leverede
   leveret
   leverer
   leverte
 
-19. pege — указывать. Perfektum participium?
+19. pege — указывать. Førnutid?
 * peget
   pegede
   peger
   pegt
 
-20. drive — вести (дело). Præteritum?
+20. drive — вести (дело). Datid?
 * drev
   drevet
   driver
   drivede
 
-21. beskrive — описывать. Perfektum participium?
+21. beskrive — описывать. Førnutid?
 * beskrevet
   beskrev
   beskriver
   beskrivet
 
-22. bære — нести, носить. Præteritum?
+22. bære — нести, носить. Datid?
 * bar
   båret
   bærer
   bærede
 
-23. undgå — избегать. Perfektum participium?
+23. undgå — избегать. Førnutid?
 * undgået
   undgik
   undgår
   undgåt
 
-24. overtage — перенимать, брать на себя. Præteritum?
+24. overtage — перенимать, брать на себя. Datid?
 * overtog
   overtaget
   overtager
   overtagte
 
-25. lide — страдать. Perfektum participium?
+25. lide — страдать. Førnutid?
 * lidt
   led
   lider

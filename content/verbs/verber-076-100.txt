@@ -3,151 +3,151 @@ slug: verber-076-100
 title: Verber 76–100
 
 --- questions ---
-1. hjælpe — помогать. Perfektum participium?
+1. hjælpe — помогать. Førnutid?
 * hjulpet
   hjalp
   hjælper
   hjælpet
 
-2. forstå — понимать. Præteritum?
+2. forstå — понимать. Datid?
 * forstod
   forstået
   forstår
   forståte
 
-3. kræve — требовать. Perfektum participium?
+3. kræve — требовать. Førnutid?
 * krævet
   krævede
   kræver
   krævt
 
-4. spørge — спрашивать. Præteritum?
+4. spørge — спрашивать. Datid?
 * spurgte
   spurgt
   spørger
   spørgede
 
-5. svare — отвечать. Perfektum participium?
+5. svare — отвечать. Førnutid?
 * svaret
   svarede
   svarer
   svart
 
-6. fortsætte — продолжать. Præteritum?
+6. fortsætte — продолжать. Datid?
 * fortsatte
   fortsat
   fortsætter
   fortsættede
 
-7. flytte — переезжать. Perfektum participium?
+7. flytte — переезжать. Førnutid?
 * flyttet
   flyttede
   flytter
   flytte
 
-8. ændre — изменять. Præteritum?
+8. ændre — изменять. Datid?
 * ændrede
   ændret
   ændrer
   ændrte
 
-9. bygge — строить. Perfektum participium?
+9. bygge — строить. Førnutid?
 * bygget
   byggede
   bygger
   bygt
 
-10. vende — поворачивать. Præteritum?
+10. vende — поворачивать. Datid?
 * vendte
   vendt
   vender
   vendede
 
-11. ramme — попадать, поражать. Perfektum participium?
+11. ramme — попадать, поражать. Førnutid?
 * ramt
   ramte
   rammer
   ramme
 
-12. udvikle — развивать. Præteritum?
+12. udvikle — развивать. Datid?
 * udviklede
   udviklet
   udvikler
   udviklte
 
-13. fylde — наполнять. Perfektum participium?
+13. fylde — наполнять. Førnutid?
 * fyldt
   fyldte
   fylder
   fyldet
 
-14. åbne — открывать. Præteritum?
+14. åbne — открывать. Datid?
 * åbnede
   åbnet
   åbner
   åbnte
 
-15. oplyse — сообщать, информировать. Perfektum participium?
+15. oplyse — сообщать, информировать. Førnutid?
 * oplyst
   oplyste
   oplyser
   oplyset
 
-16. lære — учить(ся). Præteritum?
+16. lære — учить(ся). Datid?
 * lærte
   lært
   lærer
   lærede
 
-17. ende — заканчивать(ся). Perfektum participium?
+17. ende — заканчивать(ся). Førnutid?
 * endt
   endte
   ender
   endet
 
-18. rejse — путешествовать. Præteritum?
+18. rejse — путешествовать. Datid?
 * rejste
   rejst
   rejser
   rejsede
 
-19. koste — стоить. Perfektum participium?
+19. koste — стоить. Førnutid?
 * kostet
   kostede
   koster
   koste
 
-20. ligne — быть похожим. Præteritum?
+20. ligne — быть похожим. Datid?
 * lignede
   lignet
   ligner
   lignte
 
-21. mangle — не хватать. Perfektum participium?
+21. mangle — не хватать. Førnutid?
 * manglet
   manglede
   mangler
   manglt
 
-22. hedde — называться, зваться. Præteritum?
+22. hedde — называться, зваться. Datid?
 * hed
   heddet
   hedder
   hedte
 
-23. prøve — пробовать. Perfektum participium?
+23. prøve — пробовать. Førnutid?
 * prøvet
   prøvede
   prøver
   prøvt
 
-24. lukke — закрывать. Præteritum?
+24. lukke — закрывать. Datid?
 * lukkede
   lukket
   lukker
   lukte
 
-25. forvente — ожидать (рассчитывать). Perfektum participium?
+25. forvente — ожидать (рассчитывать). Førnutid?
 * forventet
   forventede
   forventer

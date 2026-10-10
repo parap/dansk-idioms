@@ -3,151 +3,151 @@ slug: verber-626-650
 title: Verber 626–650
 
 --- questions ---
-1. forny — обновлять. Perfektum participium?
+1. forny — обновлять. Førnutid?
 * fornyet
   fornyede
   fornyer
   fornyt
 
-2. overse — упускать из виду. Præteritum?
+2. overse — упускать из виду. Datid?
 * overså
   overset
   overser
   oversede
 
-3. fastsætte — устанавливать. Perfektum participium?
+3. fastsætte — устанавливать. Førnutid?
 * fastsat
   fastsatte
   fastsætter
   fastsættet
 
-4. indsamle — собирать. Præteritum?
+4. indsamle — собирать. Datid?
 * indsamlede
   indsamlet
   indsamler
   indsamlte
 
-5. skride — скользить. Perfektum participium?
+5. skride — скользить. Førnutid?
 * skredet
   skred
   skrider
   skridet
 
-6. vænne — (vænne sig til) привыкать. Præteritum?
+6. vænne — (vænne sig til) привыкать. Datid?
 * vænnede
   vænnet
   vænner
   vænte
 
-7. erobre — завоёвывать. Perfektum participium?
+7. erobre — завоёвывать. Førnutid?
 * erobret
   erobrede
   erobrer
   erobrt
 
-8. fængsle — заключать в тюрьму. Præteritum?
+8. fængsle — заключать в тюрьму. Datid?
 * fængslede
   fængslet
   fængsler
   fængslte
 
-9. overgå — превосходить. Perfektum participium?
+9. overgå — превосходить. Førnutid?
 * overgået
   overgik
   overgår
   overgåt
 
-10. tilføre — добавлять, подводить. Præteritum?
+10. tilføre — добавлять, подводить. Datid?
 * tilførte
   tilført
   tilfører
   tilførede
 
-11. debutere — дебютировать. Perfektum participium?
+11. debutere — дебютировать. Førnutid?
 * debuteret
   debuterede
   debuterer
   debutert
 
-12. parkere — парковать. Præteritum?
+12. parkere — парковать. Datid?
 * parkerede
   parkeret
   parkerer
   parkerte
 
-13. varme — греть. Perfektum participium?
+13. varme — греть. Førnutid?
 * varmet
   varmede
   varmer
   varmt
 
-14. præstere — показывать (результат). Præteritum?
+14. præstere — показывать (результат). Datid?
 * præsterede
   præsteret
   præsterer
   præsterte
 
-15. opsøge — разыскивать, обращаться к. Perfektum participium?
+15. opsøge — разыскивать, обращаться к. Førnutid?
 * opsøgt
   opsøgte
   opsøger
   opsøget
 
-16. tørre — сушить. Præteritum?
+16. tørre — сушить. Datid?
 * tørrede
   tørret
   tørrer
   tørte
 
-17. agere — действовать, играть роль. Perfektum participium?
+17. agere — действовать, играть роль. Førnutid?
 * ageret
   agerede
   agerer
   agert
 
-18. hade — ненавидеть. Præteritum?
+18. hade — ненавидеть. Datid?
 * hadede
   hadet
   hader
   hadte
 
-19. udmærke — (udmærke sig) отличаться. Perfektum participium?
+19. udmærke — (udmærke sig) отличаться. Førnutid?
 * udmærket
   udmærkede
   udmærker
   udmærkt
 
-20. ofre — жертвовать. Præteritum?
+20. ofre — жертвовать. Datid?
 * ofrede
   ofret
   ofrer
   ofrte
 
-21. eksplodere — взрываться. Perfektum participium?
+21. eksplodere — взрываться. Førnutid?
 * eksploderet
   eksploderede
   eksploderer
   eksplodert
 
-22. ophæve — отменять. Præteritum?
+22. ophæve — отменять. Datid?
 * ophævede
   ophævet
   ophæver
   ophævte
 
-23. pålægge — налагать, обязывать. Perfektum participium?
+23. pålægge — налагать, обязывать. Førnutid?
 * pålagt
   pålagde
   pålægger
   pålægget
 
-24. udskrive — выписывать. Præteritum?
+24. udskrive — выписывать. Datid?
 * udskrev
   udskrevet
   udskriver
   udskrivede
 
-25. fornemme — ощущать, чувствовать. Perfektum participium?
+25. fornemme — ощущать, чувствовать. Førnutid?
 * fornemmet
   fornemmede
   fornemmer

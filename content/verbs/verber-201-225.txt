@@ -3,151 +3,151 @@ slug: verber-201-225
 title: Verber 201–225
 
 --- questions ---
-1. sørge — заботиться (sørge for). Præteritum?
+1. sørge — заботиться (sørge for). Datid?
 * sørgede
   sørget
   sørger
   sørgte
 
-2. optræde — выступать. Perfektum participium?
+2. optræde — выступать. Førnutid?
 * optrådt
   optrådte
   optræder
   optrædet
 
-3. dømme — судить. Præteritum?
+3. dømme — судить. Datid?
 * dømte
   dømt
   dømmer
   dømmede
 
-4. udtale — произносить. Perfektum participium?
+4. udtale — произносить. Førnutid?
 * udtalt
   udtalte
   udtaler
   udtalet
 
-5. overveje — обдумывать. Præteritum?
+5. overveje — обдумывать. Datid?
 * overvejede
   overvejet
   overvejer
   overvejte
 
-6. tvinge — заставлять. Perfektum participium?
+6. tvinge — заставлять. Førnutid?
 * tvunget
   tvang
   tvinger
   tvinget
 
-7. love — обещать. Præteritum?
+7. love — обещать. Datid?
 * lovede
   lovet
   lover
   lovte
 
-8. presse — давить, прессовать. Perfektum participium?
+8. presse — давить, прессовать. Førnutid?
 * presset
   pressede
   presser
   prest
 
-9. tegne — рисовать. Præteritum?
+9. tegne — рисовать. Datid?
 * tegnede
   tegnet
   tegner
   tegnte
 
-10. producere — производить. Perfektum participium?
+10. producere — производить. Førnutid?
 * produceret
   producerede
   producerer
   producert
 
-11. erkende — признавать. Præteritum?
+11. erkende — признавать. Datid?
 * erkendte
   erkendt
   erkender
   erkendede
 
-12. nyde — наслаждаться. Perfektum participium?
+12. nyde — наслаждаться. Førnutid?
 * nydt
   nød
   nyder
   nydet
 
-13. indeholde — содержать. Præteritum?
+13. indeholde — содержать. Datid?
 * indeholdt
   indeholder
   indeholdede
   indeholde
 
-14. spare — экономить, копить. Perfektum participium?
+14. spare — экономить, копить. Førnutid?
 * sparet
   sparede
   sparer
   spart
 
-15. afsløre — разоблачать, раскрывать. Præteritum?
+15. afsløre — разоблачать, раскрывать. Datid?
 * afslørede
   afsløret
   afslører
   afslørte
 
-16. ryge — курить. Perfektum participium?
+16. ryge — курить. Førnutid?
 * røget
   røg
   ryger
   ryget
 
-17. indlede — начинать. Præteritum?
+17. indlede — начинать. Datid?
 * indledte
   indledt
   indleder
   indlede
 
-18. bidrage — вносить вклад. Perfektum participium?
+18. bidrage — вносить вклад. Førnutid?
 * bidraget
   bidrog
   bidrager
   bidragt
 
-19. foreslå — предлагать. Præteritum?
+19. foreslå — предлагать. Datid?
 * foreslog
   foreslået
   foreslår
   foreslåte
 
-20. opføre — возводить. Perfektum participium?
+20. opføre — возводить. Førnutid?
 * opført
   opførte
   opfører
   opføret
 
-21. diskutere — обсуждать, спорить. Præteritum?
+21. diskutere — обсуждать, спорить. Datid?
 * diskuterede
   diskuteret
   diskuterer
   diskuterte
 
-22. rykke — двигать(ся). Perfektum participium?
+22. rykke — двигать(ся). Førnutid?
 * rykket
   rykkede
   rykker
   rykt
 
-23. opfordre — призывать. Præteritum?
+23. opfordre — призывать. Datid?
 * opfordrede
   opfordret
   opfordrer
   opfordrte
 
-24. opdage — обнаруживать. Perfektum participium?
+24. opdage — обнаруживать. Førnutid?
 * opdaget
   opdagede
   opdager
   opdagt
 
-25. betragte — рассматривать, считать. Præteritum?
+25. betragte — рассматривать, считать. Datid?
 * betragtede
   betragtet
   betragter

@@ -3,151 +3,151 @@ slug: verber-651-675
 title: Verber 651–675
 
 --- questions ---
-1. plante — сажать (растения). Præteritum?
+1. plante — сажать (растения). Datid?
 * plantede
   plantet
   planter
   plante
 
-2. tåle — терпеть, выносить. Perfektum participium?
+2. tåle — терпеть, выносить. Førnutid?
 * tålt
   tålte
   tåler
   tålet
 
-3. annoncere — объявлять. Præteritum?
+3. annoncere — объявлять. Datid?
 * annoncerede
   annonceret
   annoncerer
   annoncerte
 
-4. forsyne — снабжать. Perfektum participium?
+4. forsyne — снабжать. Førnutid?
 * forsynet
   forsynede
   forsyner
   forsynt
 
-5. tilsætte — добавлять (в смесь). Præteritum?
+5. tilsætte — добавлять (в смесь). Datid?
 * tilsatte
   tilsat
   tilsætter
   tilsættede
 
-6. blokere — блокировать. Perfektum participium?
+6. blokere — блокировать. Førnutid?
 * blokeret
   blokerede
   blokerer
   blokert
 
-7. formode — предполагать. Præteritum?
+7. formode — предполагать. Datid?
 * formodede
   formodet
   formoder
   formodte
 
-8. splitte — раскалывать. Perfektum participium?
+8. splitte — раскалывать. Førnutid?
 * splittet
   splittede
   splitter
   splitte
 
-9. uddybe — углублять, уточнять. Præteritum?
+9. uddybe — углублять, уточнять. Datid?
 * uddybede
   uddybet
   uddyber
   uddybte
 
-10. tvivle — сомневаться. Perfektum participium?
+10. tvivle — сомневаться. Førnutid?
 * tvivlet
   tvivlede
   tvivler
   tvivlt
 
-11. provokere — провоцировать. Præteritum?
+11. provokere — провоцировать. Datid?
 * provokerede
   provokeret
   provokerer
   provokerte
 
-12. øve — (øve sig) упражняться. Perfektum participium?
+12. øve — (øve sig) упражняться. Førnutid?
 * øvet
   øvede
   øver
   øveet
 
-13. løslade — освобождать. Præteritum?
+13. løslade — освобождать. Datid?
 * løslod
   løsladt
   løslader
   løsladede
 
-14. restere — оставаться (недостающее). Perfektum participium?
+14. restere — оставаться (недостающее). Førnutid?
 * resteret
   resterede
   resterer
   restert
 
-15. regere — править. Præteritum?
+15. regere — править. Datid?
 * regerede
   regeret
   regerer
   regerte
 
-16. udstede — выдавать (документ). Perfektum participium?
+16. udstede — выдавать (документ). Førnutid?
 * udstedt
   udstedte
   udsteder
   udstedet
 
-17. besvare — отвечать (на). Præteritum?
+17. besvare — отвечать (на). Datid?
 * besvarede
   besvaret
   besvarer
   besvarte
 
-18. bage — печь. Perfektum participium?
+18. bage — печь. Førnutid?
 * bagt
   bagte
   bager
   bage
 
-19. bøje — сгибать. Præteritum?
+19. bøje — сгибать. Datid?
 * bøjede
   bøjet
   bøjer
   bøjte
 
-20. blomstre — цвести. Perfektum participium?
+20. blomstre — цвести. Førnutid?
 * blomstret
   blomstrede
   blomstrer
   blomstrt
 
-21. protestere — протестовать. Præteritum?
+21. protestere — протестовать. Datid?
 * protesterede
   protesteret
   protesterer
   protesterte
 
-22. udbygge — расширять, достраивать. Perfektum participium?
+22. udbygge — расширять, достраивать. Førnutid?
 * udbygget
   udbyggede
   udbygger
   udbygt
 
-23. genere — мешать, беспокоить. Præteritum?
+23. genere — мешать, беспокоить. Datid?
 * generede
   generet
   generer
   generte
 
-24. omdanne — преобразовывать. Perfektum participium?
+24. omdanne — преобразовывать. Førnutid?
 * omdannet
   omdannede
   omdanner
   omdant
 
-25. vandre — бродить, ходить в поход. Præteritum?
+25. vandre — бродить, ходить в поход. Datid?
 * vandrede
   vandret
   vandrer

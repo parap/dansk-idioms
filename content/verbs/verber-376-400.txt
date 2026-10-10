@@ -3,151 +3,151 @@ slug: verber-376-400
 title: Verber 376–400
 
 --- questions ---
-1. tælle — считать (количество). Perfektum participium?
+1. tælle — считать (количество). Førnutid?
 * talt
   talte
   tæller
   tællet
 
-2. udvælge — отбирать. Præteritum?
+2. udvælge — отбирать. Datid?
 * udvalgte
   udvalgt
   udvælger
   udvælgede
 
-3. samarbejde — сотрудничать. Perfektum participium?
+3. samarbejde — сотрудничать. Førnutid?
 * samarbejdet
   samarbejdede
   samarbejder
   samarbejdt
 
-4. trykke — нажимать. Præteritum?
+4. trykke — нажимать. Datid?
 * trykkede
   trykket
   trykker
   trykke
 
-5. registrere — регистрировать. Perfektum participium?
+5. registrere — регистрировать. Førnutid?
 * registreret
   registrerede
   registrerer
   registrert
 
-6. udbrede — распространять. Præteritum?
+6. udbrede — распространять. Datid?
 * udbredte
   udbredt
   udbreder
   udbredede
 
-7. stamme — (stamme fra) происходить из. Perfektum participium?
+7. stamme — (stamme fra) происходить из. Førnutid?
 * stammet
   stammede
   stammer
   stamt
 
-8. håndtere — обращаться с, справляться. Præteritum?
+8. håndtere — обращаться с, справляться. Datid?
 * håndterede
   håndteret
   håndterer
   håndterte
 
-9. nedsætte — снижать. Perfektum participium?
+9. nedsætte — снижать. Førnutid?
 * nedsat
   nedsatte
   nedsætter
   nedsættet
 
-10. udfordre — бросать вызов. Præteritum?
+10. udfordre — бросать вызов. Datid?
 * udfordrede
   udfordret
   udfordrer
   udfordrte
 
-11. smile — улыбаться. Perfektum participium?
+11. smile — улыбаться. Førnutid?
 * smilet
   smilede
   smiler
   smile
 
-12. låne — одалживать, брать взаймы. Præteritum?
+12. låne — одалживать, брать взаймы. Datid?
 * lånte
   lånt
   låner
   lånede
 
-13. udnævne — назначать. Perfektum participium?
+13. udnævne — назначать. Førnutid?
 * udnævnt
   udnævnte
   udnævner
   udnævnet
 
-14. røre — трогать. Præteritum?
+14. røre — трогать. Datid?
 * rørte
   rørt
   rører
   rørede
 
-15. vælte — опрокидывать(ся). Perfektum participium?
+15. vælte — опрокидывать(ся). Førnutid?
 * væltet
   væltede
   vælter
   vælte
 
-16. oversætte — переводить. Præteritum?
+16. oversætte — переводить. Datid?
 * oversatte
   oversat
   oversætter
   oversættede
 
-17. ankomme — прибывать. Perfektum participium?
+17. ankomme — прибывать. Førnutid?
 * ankommet
   ankom
   ankommer
   ankomt
 
-18. ryste — трясти(сь). Præteritum?
+18. ryste — трясти(сь). Datid?
 * rystede
   rystet
   ryster
   ryste
 
-19. fyre — увольнять. Perfektum participium?
+19. fyre — увольнять. Førnutid?
 * fyret
   fyrede
   fyrer
   fyrt
 
-20. nedlægge — закрывать, упразднять. Præteritum?
+20. nedlægge — закрывать, упразднять. Datid?
 * nedlagde
   nedlagt
   nedlægger
   nedlæggede
 
-21. indrømme — признаваться. Perfektum participium?
+21. indrømme — признаваться. Førnutid?
 * indrømmet
   indrømmede
   indrømmer
   indrømt
 
-22. skade — вредить. Præteritum?
+22. skade — вредить. Datid?
 * skadede
   skadet
   skader
   skadte
 
-23. koncentrere — сосредоточивать(ся). Perfektum participium?
+23. koncentrere — сосредоточивать(ся). Førnutid?
 * koncentreret
   koncentrerede
   koncentrerer
   koncentrert
 
-24. tiltrække — привлекать. Præteritum?
+24. tiltrække — привлекать. Datid?
 * tiltrak
   tiltrukket
   tiltrækker
   tiltrækkede
 
-25. grine — смеяться. Perfektum participium?
+25. grine — смеяться. Førnutid?
 * grinet
   grinede
   griner
