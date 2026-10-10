@@ -3,151 +3,151 @@ slug: verber-301-325
 title: Verber 301–325
 
 --- questions ---
-1. forholde — (forholde sig til) относиться к. Præteritum?
+1. forholde — (forholde sig til) относиться к. Datid?
 * forholdt
   forholder
   forholdede
   forholde
 
-2. inspirere — вдохновлять. Perfektum participium?
+2. inspirere — вдохновлять. Førnutid?
 * inspireret
   inspirerede
   inspirerer
   inspirert
 
-3. anbefale — рекомендовать. Præteritum?
+3. anbefale — рекомендовать. Datid?
 * anbefalede
   anbefalet
   anbefaler
   anbefalte
 
-4. fejre — праздновать. Perfektum participium?
+4. fejre — праздновать. Førnutid?
 * fejret
   fejrede
   fejrer
   fejrt
 
-5. opfatte — воспринимать. Præteritum?
+5. opfatte — воспринимать. Datid?
 * opfattede
   opfattet
   opfatter
   opfatte
 
-6. hæve — поднимать. Perfektum participium?
+6. hæve — поднимать. Førnutid?
 * hævet
   hævede
   hæver
   hævt
 
-7. udsende — выпускать, транслировать. Præteritum?
+7. udsende — выпускать, транслировать. Datid?
 * udsendte
   udsendt
   udsender
   udsendede
 
-8. overleve — выживать. Perfektum participium?
+8. overleve — выживать. Førnutid?
 * overlevet
   overlevede
   overlever
   overlevt
 
-9. undre — удивлять. Præteritum?
+9. undre — удивлять. Datid?
 * undrede
   undret
   undrer
   undrte
 
-10. dyrke — выращивать. Perfektum participium?
+10. dyrke — выращивать. Førnutid?
 * dyrket
   dyrkede
   dyrker
   dyrkt
 
-11. hævde — утверждать. Præteritum?
+11. hævde — утверждать. Datid?
 * hævdede
   hævdet
   hævder
   hævdte
 
-12. afholde — проводить (мероприятие). Perfektum participium?
+12. afholde — проводить (мероприятие). Førnutid?
 * afholdt
   afholder
   afholdet
   afholde
 
-13. angribe — нападать. Præteritum?
+13. angribe — нападать. Datid?
 * angreb
   angrebet
   angriber
   angribede
 
-14. formå — быть в состоянии. Perfektum participium?
+14. formå — быть в состоянии. Førnutid?
 * formået
   formåede
   formår
   formåt
 
-15. omtale — упоминать, отзываться. Præteritum?
+15. omtale — упоминать, отзываться. Datid?
 * omtalte
   omtalt
   omtaler
   omtalede
 
-16. forbinde — соединять, связывать. Perfektum participium?
+16. forbinde — соединять, связывать. Førnutid?
 * forbundet
   forbandt
   forbinder
   forbindet
 
-17. nægte — отказываться. Præteritum?
+17. nægte — отказываться. Datid?
 * nægtede
   nægtet
   nægter
   nægte
 
-18. satse — делать ставку. Perfektum participium?
+18. satse — делать ставку. Førnutid?
 * satset
   satsede
   satser
   satst
 
-19. fremstille — производить. Præteritum?
+19. fremstille — производить. Datid?
 * fremstillede
   fremstillet
   fremstiller
   fremstilte
 
-20. offentliggøre — публиковать, обнародовать. Perfektum participium?
+20. offentliggøre — публиковать, обнародовать. Førnutid?
 * offentliggjort
   offentliggjorde
   offentliggør
   offentliggøret
 
-21. advare — предупреждать. Præteritum?
+21. advare — предупреждать. Datid?
 * advarede
   advaret
   advarer
   advarte
 
-22. opgive — сдаваться, бросать. Perfektum participium?
+22. opgive — сдаваться, бросать. Førnutid?
 * opgivet
   opgav
   opgiver
   opgivt
 
-23. fange — ловить. Præteritum?
+23. fange — ловить. Datid?
 * fangede
   fanget
   fanger
   fangte
 
-24. gemme — прятать. Perfektum participium?
+24. gemme — прятать. Førnutid?
 * gemt
   gemte
   gemmer
   gemmet
 
-25. betegne — обозначать. Præteritum?
+25. betegne — обозначать. Datid?
 * betegnede
   betegnet
   betegner

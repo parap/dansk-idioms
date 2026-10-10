@@ -3,151 +3,151 @@ slug: verber-276-300
 title: Verber 276–300
 
 --- questions ---
-1. investere — инвестировать. Perfektum participium?
+1. investere — инвестировать. Førnutid?
 * investeret
   investerede
   investerer
   investert
 
-2. drikke — пить. Præteritum?
+2. drikke — пить. Datid?
 * drak
   drukket
   drikker
   drikkede
 
-3. afslutte — завершать. Perfektum participium?
+3. afslutte — завершать. Førnutid?
 * afsluttet
   afsluttede
   afslutter
   afslutte
 
-4. oprette — создавать, учреждать. Præteritum?
+4. oprette — создавать, учреждать. Datid?
 * oprettede
   oprettet
   opretter
   oprette
 
-5. fremgå — следовать (из), явствовать. Perfektum participium?
+5. fremgå — следовать (из), явствовать. Førnutid?
 * fremgået
   fremgik
   fremgår
   fremgåt
 
-6. stjæle — красть. Præteritum?
+6. stjæle — красть. Datid?
 * stjal
   stjålet
   stjæler
   stjælede
 
-7. påpege — указывать (на). Perfektum participium?
+7. påpege — указывать (на). Førnutid?
 * påpeget
   påpegede
   påpeger
   påpegt
 
-8. rumme — вмещать. Præteritum?
+8. rumme — вмещать. Datid?
 * rummede
   rummet
   rummer
   rumte
 
-9. stikke — колоть. Perfektum participium?
+9. stikke — колоть. Førnutid?
 * stukket
   stak
   stikker
   stikket
 
-10. brænde — гореть. Præteritum?
+10. brænde — гореть. Datid?
 * brændte
   brændt
   brænder
   brændede
 
-11. tyde — (tyde på) указывать на. Perfektum participium?
+11. tyde — (tyde på) указывать на. Førnutid?
 * tydet
   tydede
   tyder
   tydt
 
-12. lytte — слушать. Præteritum?
+12. lytte — слушать. Datid?
 * lyttede
   lyttet
   lytter
   lytte
 
-13. kritisere — критиковать. Perfektum participium?
+13. kritisere — критиковать. Førnutid?
 * kritiseret
   kritiserede
   kritiserer
   kritisert
 
-14. udnytte — использовать (выгодно). Præteritum?
+14. udnytte — использовать (выгодно). Datid?
 * udnyttede
   udnyttet
   udnytter
   udnytte
 
-15. udkomme — выходить (о книге). Perfektum participium?
+15. udkomme — выходить (о книге). Førnutid?
 * udkommet
   udkom
   udkommer
   udkomt
 
-16. forbedre — улучшать. Præteritum?
+16. forbedre — улучшать. Datid?
 * forbedrede
   forbedret
   forbedrer
   forbedrte
 
-17. løfte — поднимать. Perfektum participium?
+17. løfte — поднимать. Førnutid?
 * løftet
   løftede
   løfter
   løfte
 
-18. forhindre — предотвращать, мешать. Præteritum?
+18. forhindre — предотвращать, мешать. Datid?
 * forhindrede
   forhindret
   forhindrer
   forhindrte
 
-19. meddele — сообщать. Perfektum participium?
+19. meddele — сообщать. Førnutid?
 * meddelt
   meddelte
   meddeler
   meddelet
 
-20. medføre — влечь за собой. Præteritum?
+20. medføre — влечь за собой. Datid?
 * medførte
   medført
   medfører
   medførede
 
-21. beskytte — защищать. Perfektum participium?
+21. beskytte — защищать. Førnutid?
 * beskyttet
   beskyttede
   beskytter
   beskytte
 
-22. anerkende — признавать. Præteritum?
+22. anerkende — признавать. Datid?
 * anerkendte
   anerkendt
   anerkender
   anerkendede
 
-23. måle — измерять. Perfektum participium?
+23. måle — измерять. Førnutid?
 * målt
   målte
   måler
   målet
 
-24. henvise — ссылаться, направлять. Præteritum?
+24. henvise — ссылаться, направлять. Datid?
 * henviste
   henvist
   henviser
   henvisede
 
-25. bekymre — беспокоить. Perfektum participium?
+25. bekymre — беспокоить. Førnutid?
 * bekymret
   bekymrede
   bekymrer

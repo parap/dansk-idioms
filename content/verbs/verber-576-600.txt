@@ -3,151 +3,151 @@ slug: verber-576-600
 title: Verber 576–600
 
 --- questions ---
-1. afbryde — прерывать. Perfektum participium?
+1. afbryde — прерывать. Førnutid?
 * afbrudt
   afbrød
   afbryder
   afbrydet
 
-2. stramme — затягивать. Præteritum?
+2. stramme — затягивать. Datid?
 * strammede
   strammet
   strammer
   stramte
 
-3. indse — осознавать. Perfektum participium?
+3. indse — осознавать. Førnutid?
 * indset
   indså
   indser
   indst
 
-4. myrde — убивать (умышленно). Præteritum?
+4. myrde — убивать (умышленно). Datid?
 * myrdede
   myrdet
   myrder
   myrdte
 
-5. udstyre — оснащать. Perfektum participium?
+5. udstyre — оснащать. Førnutid?
 * udstyret
   udstyrede
   udstyrer
   udstyrt
 
-6. fascinere — очаровывать. Præteritum?
+6. fascinere — очаровывать. Datid?
 * fascinerede
   fascineret
   fascinerer
   fascinerte
 
-7. formidle — передавать, посредничать. Perfektum participium?
+7. formidle — передавать, посредничать. Førnutid?
 * formidlet
   formidlede
   formidler
   formidlt
 
-8. forstærke — усиливать. Præteritum?
+8. forstærke — усиливать. Datid?
 * forstærkede
   forstærket
   forstærker
   forstærkte
 
-9. opfinde — изобретать. Perfektum participium?
+9. opfinde — изобретать. Førnutid?
 * opfundet
   opfandt
   opfinder
   opfindet
 
-10. illustrere — иллюстрировать. Præteritum?
+10. illustrere — иллюстрировать. Datid?
 * illustrerede
   illustreret
   illustrerer
   illustrerte
 
-11. sparke — пинать. Perfektum participium?
+11. sparke — пинать. Førnutid?
 * sparket
   sparkede
   sparker
   sparkt
 
-12. anbringe — помещать. Præteritum?
+12. anbringe — помещать. Datid?
 * anbragte
   anbragt
   anbringer
   anbringede
 
-13. rense — чистить. Perfektum participium?
+13. rense — чистить. Førnutid?
 * renset
   rensede
   renser
   renst
 
-14. varetage — отвечать за, вести. Præteritum?
+14. varetage — отвечать за, вести. Datid?
 * varetog
   varetaget
   varetager
   varetagede
 
-15. knuse — разбивать, раздавливать. Perfektum participium?
+15. knuse — разбивать, раздавливать. Førnutid?
 * knust
   knuste
   knuser
   knuset
 
-16. angive — указывать. Præteritum?
+16. angive — указывать. Datid?
 * angav
   angivet
   angiver
   angivede
 
-17. begrave — хоронить. Perfektum participium?
+17. begrave — хоронить. Førnutid?
 * begravet
   begravede
   begraver
   begravt
 
-18. berette — сообщать, рассказывать. Præteritum?
+18. berette — сообщать, рассказывать. Datid?
 * berettede
   berettet
   beretter
   berette
 
-19. hylde — чествовать. Perfektum participium?
+19. hylde — чествовать. Førnutid?
 * hyldet
   hyldede
   hylder
   hyldt
 
-20. tiltræde — вступать (в должность). Præteritum?
+20. tiltræde — вступать (в должность). Datid?
 * tiltrådte
   tiltrådt
   tiltræder
   tiltrædede
 
-21. forsikre — уверять. Perfektum participium?
+21. forsikre — уверять. Førnutid?
 * forsikret
   forsikrede
   forsikrer
   forsikrt
 
-22. understøtte — поддерживать. Præteritum?
+22. understøtte — поддерживать. Datid?
 * understøttede
   understøttet
   understøtter
   understøtte
 
-23. begejstre — восхищать. Perfektum participium?
+23. begejstre — восхищать. Førnutid?
 * begejstret
   begejstrede
   begejstrer
   begejstrt
 
-24. identificere — идентифицировать. Præteritum?
+24. identificere — идентифицировать. Datid?
 * identificerede
   identificeret
   identificerer
   identificerte
 
-25. flyde — течь. Perfektum participium?
+25. flyde — течь. Førnutid?
 * flydt
   flød
   flyder
