@@ -1,0 +1,40 @@
+kind: insert
+slug: du3m4-v2-opg2-madpakken
+title: Danskernes madpakke
+
+--- text ---
+Rugbrød med leverpostej, et stykke ost og en gulerod i en plastikboks. Sådan ser
+frokosten ud for de fleste danske skolebørn. {{1}} I mange andre lande spiser børnene et
+varmt måltid i skolen, men i Danmark har madpakken været det normale i over hundrede år.
+
+Madpakken har dog et dårligt ry. Mange børn klager over, at den er kedelig, og at brødet
+er blevet blødt, når de skal spise det. {{2}} Nogle forældre bruger derfor tid om aftenen
+på at lave flotte madpakker med små sandwich og frugt, der er skåret i figurer.
+
+De seneste år har flere kommuner prøvet at tilbyde skolemad. {{3}} Eleverne kan bestille
+maden i en app dagen før, og den koster mellem 25 og 35 kroner. Ikke alle forældre har
+dog råd til at betale for den hver dag.
+
+På tre skoler i en jysk kommune har man prøvet noget andet. Her laver eleverne i 7.
+klasse selv maden til hele skolen én gang om ugen. {{4}} "Det er hårdt arbejde, men det
+er sjovt at se, at de andre kan lide det," siger Sara på 13 år.
+
+Om madpakken forsvinder, er der ingen, der ved. Politikerne diskuterer stadig, hvem der
+skal betale for skolemaden. {{5}}
+
+--- parts ---
+A Mange voksne tager også en madpakke med, når de går på arbejde.
+B Undersøgelser viser også, at mange madpakker kommer uspiste med hjem igen.
+C Maden bliver lavet i et fælles køkken og kørt ud til skolerne om formiddagen.
+D De planlægger menuen, køber ind og står i skolekøkkenet fra klokken otte om morgenen.
+E Indtil de bliver enige, vil de fleste danske børn nok fortsat åbne en madpakke hver
+  dag ved halvtolvtiden.
+F Han synes, at maden i kantinen er alt for dyr.
+G Det var første gang, hun havde prøvet at bage brød.
+
+--- questions ---
+1. A
+2. B
+3. C
+4. D
+5. E

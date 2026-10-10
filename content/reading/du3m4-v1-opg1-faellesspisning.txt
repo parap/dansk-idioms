@@ -1,0 +1,88 @@
+kind: cloze
+slug: du3m4-v1-opg1-faellesspisning
+title: Fællesspisning i opgang C
+
+--- text ---
+Hver anden torsdag dufter der af mad i kælderen under opgang C. Her mødes beboerne til
+fællesspisning, og det har de gjort, {{1}} Birthe Holm flyttede ind for fire år siden.
+"Jeg kendte ingen, da jeg kom," fortæller hun. "Folk hilste pænt på trappen, men
+længere kom vi ikke. Så jeg satte en seddel op og spurgte, om nogen havde lyst til at
+spise sammen."
+
+Den første aften kom der seks personer. I dag er de typisk mellem tyve og tredive, og
+der står altid en lang række sko {{2}} døren til fælleslokalet. Det koster 30 kroner for
+en voksen og 15 kroner for et barn, og prisen dækker kun selve maden. Alt arbejdet er
+frivilligt.
+
+Hver gang er der to eller tre beboere, der laver maden. De skriver sig på en liste, som
+hænger på opslagstavlen, og de bestemmer selv, hvad de vil servere. "Det er det bedste
+ved det," siger Ahmad Karimi, der bor på tredje sal. "Vi har fået syriske, polske og
+helt almindelige danske retter. Sidste gang lavede jeg min mors linsesuppe, og {{3}}
+blev der ikke en dråbe tilbage."
+
+Børnene har også en opgave. De dækker bord, og når maden er spist, {{4}} de med at
+rydde op. Mange af dem kender hinanden fra skolen, så de forsvinder hurtigt ud på
+legepladsen, mens de voksne drikker kaffe.
+
+For Birthe handler fællesspisningen om mere end mad. "Før vidste jeg ikke, hvem der
+boede over mig. Nu ved jeg, at det er en ældre mand, der hedder Poul, og at han
+har {{5}} ved at bære sine indkøb op ad trappen. Så nu hjælper drengene fra anden sal
+ham om lørdagen."
+
+Det er ikke altid nemt at få det hele til at hænge sammen. Nogle gange er der {{6}}
+mange tilmeldte, at maden næsten ikke rækker, og andre gange skal der findes nye
+frivillige, fordi nogen flytter. Boligforeningen har dog været glad for initiativet og
+har betalt for nye gryder og et ekstra køleskab.
+
+Næste skridt er en sommerfest i gården. "Vi har {{7}} til alle i hele afdelingen, ikke
+kun opgang C," siger Birthe. "Hvis bare halvdelen kommer, bliver det den største fest,
+vi {{8}} har haft."
+
+--- questions ---
+1.
+* siden
+  mens
+  før
+  indtil
+
+2.
+  ud af
+* uden for
+  udenpå
+  ude
+
+3.
+  sidst
+  selvom
+* bagefter
+  tidligere
+
+4.
+  hjælp
+  hjælpe
+  hjulpet
+* hjælper
+
+5.
+* svært
+  let
+  travlt
+  ondt
+
+6.
+  for
+  meget
+* så
+  så meget
+
+7.
+  inviteret
+* sendt invitationer
+  inviterer
+  inviteringer
+
+8.
+  altid
+  aldrig
+* nogensinde
+  engang

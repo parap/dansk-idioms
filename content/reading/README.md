@@ -83,3 +83,11 @@ Measured from past papers, as guidance rather than a rule the importer enforces:
 a Læseforståelse 2 text runs 500–760 words; a multiple-choice question is around 17 words
 and its options around 13; cloze options are one or two words; an inserted part is 25–35.
 A real paper is 3 questions, 5 insertion gaps and 8 cloze gaps.
+
+## Modultest DU3, module 4
+
+Files named `du3m4-v<variant>-opg<task>-…` are modelled on that test: task 1 is a cloze of
+about 330 words with eight gaps, task 2 an insertion with five gaps and two spare parts,
+task 4 six short everyday texts with one question each. They are not Prøve i Dansk 3
+material, and the reading exam draws one passage of each kind at random, so they stay
+unpublished until a variant can be sat as a whole on a page of its own.

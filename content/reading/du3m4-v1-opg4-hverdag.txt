@@ -1,0 +1,71 @@
+kind: mc
+slug: du3m4-v1-opg4-hverdag
+title: Seks korte tekster fra hverdagen
+
+--- text ---
+Tekst 1. Opslag i opgangen
+
+Kære beboere. Mandag den 14. oktober bliver der lukket for vandet fra klokken 9 til
+cirka klokken 13, fordi vi skal skifte rør i kælderen. Husk at tappe vand i god tid,
+hvis du skal bruge det om formiddagen. Venlig hilsen Kim, vicevært
+
+Tekst 2. Sms fra tandlægen
+
+Påmindelse: Du har tid hos tandlæge Rasmussen torsdag den 17/10 kl. 8.30. Hvis du ikke
+kan komme, skal du melde afbud senest dagen før kl. 12. Ellers koster det 300 kr. Svar
+JA for at bekræfte.
+
+Tekst 3. Opslag på biblioteket
+
+Sprogcafé! Øv dit dansk over en kop kaffe sammen med vores frivillige. Hver tirsdag kl.
+16–18 i læsesalen. Alle niveauer er velkomne. Det er gratis, og du behøver ikke at
+tilmelde dig. Tag gerne en ven med!
+
+Tekst 4. Besked fra skolen
+
+Kære forældre i 3.B. På fredag skal klassen på tur i skoven. Vi går fra skolen kl. 8.15
+og er tilbage kl. 13. Husk madpakke, drikkedunk og tøj, der må blive beskidt. Der er
+ingen undervisning om eftermiddagen, men SFO'en har åbent som normalt. Hilsen Lotte og
+Jens
+
+Tekst 5. Tilbud i supermarkedet
+
+Weekendtilbud fra fredag til søndag: Kaffe, 500 g. 2 pakker for 60 kr. Højst 4 pakker
+pr. kunde. Tilbuddet gælder kun for kunder med medlemskort.
+
+Tekst 6. Brev fra kommunen
+
+Dit barn har fået en plads i børnehaven Solsikken fra den 1. december. Hvis du vil have
+pladsen, skal du takke ja på kommunens hjemmeside senest den 15. november. Hvis vi ikke
+hører fra dig, går pladsen videre til et andet barn.
+
+--- questions ---
+1. Tekst 1: Hvad skal beboerne gøre?
+* Tappe vand, før de lukker for vandet.
+  Ringe til viceværten inden mandag.
+  Holde sig væk fra kælderen hele dagen.
+
+2. Tekst 2: Hvornår skal man senest melde afbud for ikke at betale?
+  Torsdag kl. 8.30.
+* Onsdag kl. 12.
+  Tirsdag kl. 12.
+
+3. Tekst 3: Hvad står der om sprogcaféen?
+  Man skal tilmelde sig på biblioteket.
+  Den er kun for begyndere.
+* Man kan bare møde op.
+
+4. Tekst 4: Hvad kan børnene gøre, når de kommer tilbage fra turen?
+  De skal have dansk om eftermiddagen.
+* De kan gå i SFO.
+  De skal spise deres madpakke i klassen.
+
+5. Tekst 5: Hvad skal man have for at få tilbuddet?
+* Et medlemskort.
+  Mindst fire pakker kaffe.
+  En kupon fra avisen.
+
+6. Tekst 6: Hvad sker der, hvis man ikke svarer kommunen?
+  Barnet starter alligevel den 1. december.
+  Kommunen ringer efter den 15. november.
+* Et andet barn får pladsen.
