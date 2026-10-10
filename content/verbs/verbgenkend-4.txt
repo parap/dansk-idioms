@@ -1,0 +1,124 @@
+kind: verbs
+slug: verbgenkend-4
+title: Genkend verbet 4
+
+--- questions ---
+1. drak — datid af …?
+* drikke
+  dyrke
+  drage
+  drive
+
+2. stjal — datid af …?
+* stjæle
+  sejle
+  stole
+  tale
+
+3. stak — datid af …?
+* stikke
+  takke
+  strække
+  styrke
+
+4. sprang — datid af …?
+* springe
+  spørge
+  ringe
+  bringe
+
+5. sov — datid af …?
+* sove
+  love
+  svare
+  score
+
+6. bandt — datid af …?
+* binde
+  blande
+  bide
+  brænde
+
+7. drog — datid af …?
+* drage
+  ryge
+  droppe
+  opdage
+
+8. talte — datid af …?
+* tælle
+  tåle
+  stille
+  stjæle
+
+9. rakte — datid af …?
+* række
+  rykke
+  trække
+  drikke
+
+10. bed — datid af …?
+* bide
+  brede
+  binde
+  byde
+
+11. gad — datid af …?
+* gide
+  glide
+  gælde
+  glæde
+
+12. rev — datid af …?
+* rive
+  drive
+  ride
+  skrive
+
+13. gled — datid af …?
+* glide
+  gælde
+  glæde
+  lede
+
+14. hev — datid af …?
+* hive
+  have
+  hæve
+  hævde
+
+15. snød — datid af …?
+* snyde
+  sende
+  nyde
+  spænde
+
+16. strakte — datid af …?
+* strække
+  trække
+  styrke
+  starte
+
+17. græd — datid af …?
+* græde
+  gælde
+  træde
+  glæde
+
+18. flød — datid af …?
+* flyde
+  falde
+  fylde
+  føde
+
+19. skred — datid af …?
+* skride
+  skrive
+  skrige
+  sikre
+
+20. skreg — datid af …?
+* skrige
+  skrive
+  skride
+  sikre

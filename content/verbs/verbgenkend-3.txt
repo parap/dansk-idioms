@@ -1,0 +1,136 @@
+kind: verbs
+slug: verbgenkend-3
+title: Genkend verbet 3
+
+--- questions ---
+1. brød — datid af …?
+* bryde
+  burde
+  brede
+  byde
+
+2. hang — datid af …?
+* hænge
+  fange
+  havne
+  handle
+
+3. bad — datid af …?
+* bede
+  brede
+  byde
+  bide
+
+4. drev — datid af …?
+* drive
+  rive
+  drikke
+  ændre
+
+5. bar — datid af …?
+* bære
+  basere
+  bruge
+  burde
+
+6. led — datid af …?
+* lide
+  glide
+  lade
+  lyde
+
+7. forsvandt — datid af …?
+* forsvinde
+  forvandle
+  forandre
+  forsyne
+
+8. trådte — datid af …?
+* træde
+  turde
+  råde
+  træne
+
+9. bød — datid af …?
+* byde
+  bryde
+  bede
+  bide
+
+10. slap — datid af …?
+* slippe
+  klippe
+  stoppe
+  slå
+
+11. skød — datid af …?
+* skyde
+  skylde
+  skade
+  skride
+
+12. sang — datid af …?
+* synge
+  svinge
+  fange
+  savne
+
+13. skar — datid af …?
+* skære
+  skærpe
+  sikre
+  skrue
+
+14. tvang — datid af …?
+* tvinge
+  svinge
+  tage
+  trænge
+
+15. nød — datid af …?
+* nyde
+  snyde
+  ende
+  yde
+
+16. røg — datid af …?
+* ryge
+  frygte
+  øge
+  bruge
+
+17. greb — datid af …?
+* gribe
+  grine
+  gøre
+  græde
+
+18. red — datid af …?
+* ride
+  brede
+  rive
+  råde
+
+19. tør — nutid af …?
+* turde
+  træde
+  true
+  tro
+
+20. smed — datid af …?
+* smide
+  smile
+  smitte
+  sende
+
+21. traf — datid af …?
+* træffe
+  straffe
+  træde
+  træne
+
+22. fløj — datid af …?
+* flyve
+  flyde
+  føle
+  flytte

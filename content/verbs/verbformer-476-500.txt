@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-476-500
+title: Verber 476–500
+
+--- questions ---
+1. forpligtede (datid) — обязывать. Bydeform?
+* forpligt
+  forpligtet
+  forpligter
+  forpligte
+
+2. råd (bydeform) — (råde over) располагать. Førnutid?
+* rådet
+  rådede
+  råder
+  råde
+
+3. indebærer (nutid) — подразумевать, влечь. Navneform?
+* indebære
+  indebar
+  indebåret
+  indebær
+
+4. klage (navneform) — жаловаться. Nutid?
+* klager
+  klagede
+  klaget
+  klag
+
+5. bekæmper (nutid) — бороться с. Bydeform?
+* bekæmp
+  bekæmpede
+  bekæmpet
+  bekæmpe
+
+6. overføre (navneform) — переводить (деньги), передавать. Datid?
+* overførte
+  overført
+  overfører
+  overfør
+
+7. resulter (bydeform) — приводить (к). Førnutid?
+* resulteret
+  resulterede
+  resulterer
+  resultere
+
+8. spænde (navneform) — натягивать. Datid?
+* spændte
+  spændt
+  spænder
+  spænd
+
+9. definere (navneform) — определять. Førnutid?
+* defineret
+  definerede
+  definerer
+  definer
+
+10. opstille (navneform) — выставлять (кандидатуру), расставлять. Førnutid?
+* opstillet
+  opstillede
+  opstiller
+  opstil
+
+11. skærper (nutid) — ужесточать, обострять. Datid?
+* skærpede
+  skærpet
+  skærpe
+  skærp
+
+12. lok (bydeform) — заманивать. Datid?
+* lokkede
+  lokket
+  lokker
+  lokke
+
+13. tilbringer (nutid) — проводить (время). Datid?
+* tilbragte
+  tilbragt
+  tilbringe
+  tilbring
+
+14. gennemgår (nutid) — просматривать. Bydeform?
+* gennemgå
+  gennemgik
+  gennemgået
+  gennemgåte
+
+15. passer (bydeform) — проходить мимо. Nutid?
+* passerer
+  passerede
+  passeret
+  passere
+
+16. standser (nutid) — останавливать(ся). Datid?
+* standsede
+  standset
+  standse
+  stands
+
+17. ryd (bydeform) — убирать (rydde op). Førnutid?
+* ryddet
+  ryddede
+  rydder
+  rydde
+
+18. respekterede (datid) — уважать. Førnutid?
+* respekteret
+  respekterer
+  respektere
+  respekter
+
+19. glide (navneform) — скользить. Datid?
+* gled
+  gledet
+  glider
+  glid
+
+20. svinger (nutid) — качать(ся). Datid?
+* svingede
+  svinget
+  svinge
+  sving
+
+21. demonstrere (navneform) — демонстрировать. Datid?
+* demonstrerede
+  demonstreret
+  demonstrerer
+  demonstrer
+
+22. hældt (førnutid) — наливать. Navneform?
+* hælde
+  hældte
+  hælder
+  hæld
+
+23. underhold (bydeform) — развлекать. Datid?
+* underholdt
+  underholder
+  underholde
+  underholdede
+
+24. pakkede (datid) — паковать. Navneform?
+* pakke
+  pakket
+  pakker
+  pak
+
+25. klæde (navneform) — (klæde sig på) одеваться. Førnutid?
+* klædt
+  klædte
+  klæder
+  klæd

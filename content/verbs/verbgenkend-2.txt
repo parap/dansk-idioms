@@ -1,0 +1,136 @@
+kind: verbs
+slug: verbgenkend-2
+title: Genkend verbet 2
+
+--- questions ---
+1. lå — datid af …?
+* ligge
+  låne
+  lægge
+  ligne
+
+2. vidste — datid af …?
+* vide
+  vinde
+  vidne
+  vise
+
+3. ved — nutid af …?
+* vide
+  vende
+  vinde
+  vidne
+
+4. lagde — datid af …?
+* lægge
+  ligge
+  klage
+  lade
+
+5. lod — datid af …?
+* lade
+  lande
+  lyde
+  lide
+
+6. valgte — datid af …?
+* vælge
+  vælte
+  sælge
+  flygte
+
+7. sad — datid af …?
+* sidde
+  skade
+  smide
+  skride
+
+8. fulgte — datid af …?
+* følge
+  flygte
+  føle
+  forpligte
+
+9. slog — datid af …?
+* slå
+  sælge
+  stå
+  samle
+
+10. vandt — datid af …?
+* vinde
+  vandre
+  vende
+  vide
+
+11. faldt — datid af …?
+* falde
+  kalde
+  fylde
+  flyde
+
+12. bør — nutid af …?
+* burde
+  bryde
+  brede
+  bære
+
+13. lød — datid af …?
+* lyde
+  flyde
+  lade
+  lide
+
+14. solgte — datid af …?
+* sælge
+  vælge
+  sigte
+  stole
+
+15. steg — datid af …?
+* stige
+  sigte
+  sige
+  stille
+
+16. gjaldt — datid af …?
+* gælde
+  glæde
+  glide
+  hælde
+
+17. trak — datid af …?
+* trække
+  strække
+  trykke
+  takke
+
+18. hjalp — datid af …?
+* hjælpe
+  hælde
+  handle
+  stjæle
+
+19. spurgte — datid af …?
+* spørge
+  sørge
+  springe
+  spare
+
+20. hed — datid af …?
+* hedde
+  redde
+  ende
+  bede
+
+21. løb — datid af …?
+* løbe
+  købe
+  løse
+  løfte
+
+22. bragte — datid af …?
+* bringe
+  bruge
+  ringe
+  bage

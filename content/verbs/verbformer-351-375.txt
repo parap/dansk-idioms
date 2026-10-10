@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-351-375
+title: Verber 351–375
+
+--- questions ---
+1. ydet (førnutid) — оказывать (помощь), выдавать. Bydeform?
+* yd
+  ydede
+  yder
+  yde
+
+2. indstiller (nutid) — настраивать. Bydeform?
+* indstil
+  indstillede
+  indstillet
+  indstille
+
+3. plejede (datid) — ухаживать. Førnutid?
+* plejet
+  plejer
+  pleje
+  plej
+
+4. modsatte (datid) — (modsætte sig) противиться. Navneform?
+* modsætte
+  modsat
+  modsætter
+  modsæt
+
+5. bemærket (førnutid) — замечать. Bydeform?
+* bemærk
+  bemærkede
+  bemærker
+  bemærke
+
+6. markerer (nutid) — отмечать. Bydeform?
+* marker
+  markerede
+  markeret
+  markere
+
+7. gentage (navneform) — повторять. Datid?
+* gentog
+  gentaget
+  gentager
+  gentag
+
+8. sejlet (førnutid) — плыть (на судне). Navneform?
+* sejle
+  sejlede
+  sejler
+  sejl
+
+9. servere (navneform) — подавать (еду). Bydeform?
+* server
+  serverede
+  serveret
+  serverer
+
+10. drømte (datid) — мечтать. Bydeform?
+* drøm
+  drømt
+  drømmer
+  drømme
+
+11. dominere (navneform) — доминировать. Bydeform?
+* dominer
+  dominerede
+  domineret
+  dominerer
+
+12. indtog (datid) — принимать (пищу). Bydeform?
+* indtag
+  indtaget
+  indtager
+  indtage
+
+13. savnede (datid) — скучать по. Navneform?
+* savne
+  savnet
+  savner
+  savn
+
+14. udløst (førnutid) — вызывать, запускать. Bydeform?
+* udløs
+  udløste
+  udløser
+  udløse
+
+15. skuffede (datid) — разочаровывать. Bydeform?
+* skuf
+  skuffet
+  skuffer
+  skuffe
+
+16. forbød (datid) — запрещать. Nutid?
+* forbyder
+  forbudt
+  forbyde
+  forbyd
+
+17. indrettede (datid) — обустраивать. Nutid?
+* indretter
+  indrettet
+  indrette
+  indret
+
+18. drog (datid) — отправляться. Førnutid?
+* draget
+  drager
+  drage
+  drag
+
+19. flygtede (datid) — бежать, спасаться. Navneform?
+* flygte
+  flygtet
+  flygter
+  flygt
+
+20. efterlad (bydeform) — оставлять. Datid?
+* efterlod
+  efterladt
+  efterlader
+  efterlade
+
+21. sigte (navneform) — целиться. Nutid?
+* sigter
+  sigtede
+  sigtet
+  sigt
+
+22. opfyldte (datid) — выполнять, удовлетворять. Førnutid?
+* opfyldt
+  opfylder
+  opfylde
+  opfyld
+
+23. erstatter (nutid) — заменять. Førnutid?
+* erstattet
+  erstattede
+  erstatte
+  erstat
+
+24. spreder (nutid) — распространять. Navneform?
+* sprede
+  spredte
+  spredt
+  spred
+
+25. underviser (nutid) — преподавать. Førnutid?
+* undervist
+  underviste
+  undervise
+  undervis

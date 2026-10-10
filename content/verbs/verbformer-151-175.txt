@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-151-175
+title: Verber 151–175
+
+--- questions ---
+1. bestem (bydeform) — решать, определять. Datid?
+* bestemte
+  bestemt
+  bestemmer
+  bestemme
+
+2. dræbe (navneform) — убивать. Bydeform?
+* dræb
+  dræbte
+  dræbt
+  dræber
+
+3. løste (datid) — решать (задачу). Bydeform?
+* løs
+  løst
+  løser
+  løse
+
+4. forsvundet (førnutid) — исчезать. Navneform?
+* forsvinde
+  forsvandt
+  forsvinder
+  forsvind
+
+5. besøgte (datid) — навещать, посещать. Nutid?
+* besøger
+  besøgt
+  besøge
+  besøg
+
+6. tilbyde (navneform) — предлагать. Bydeform?
+* tilbyd
+  tilbød
+  tilbudt
+  tilbyder
+
+7. spis (bydeform) — есть. Datid?
+* spiste
+  spist
+  spiser
+  spise
+
+8. tjente (datid) — зарабатывать. Førnutid?
+* tjent
+  tjener
+  tjene
+  tjen
+
+9. konstater (bydeform) — констатировать. Førnutid?
+* konstateret
+  konstaterede
+  konstaterer
+  konstatere
+
+10. ledt (førnutid) — искать. Navneform?
+* lede
+  ledte
+  leder
+  led
+
+11. træder (nutid) — ступать, шагать. Førnutid?
+* trådt
+  trådte
+  træde
+  træd
+
+12. undersøg (bydeform) — исследовать, проверять. Navneform?
+* undersøge
+  undersøgte
+  undersøgt
+  undersøger
+
+13. kæmpe (navneform) — бороться. Datid?
+* kæmpede
+  kæmpet
+  kæmper
+  kæmp
+
+14. byd (bydeform) — предлагать. Datid?
+* bød
+  budt
+  byder
+  byde
+
+15. drejet (førnutid) — поворачивать. Bydeform?
+* drej
+  drejede
+  drejer
+  dreje
+
+16. foretag (bydeform) — предпринимать, производить. Førnutid?
+* foretaget
+  foretog
+  foretager
+  foretage
+
+17. kaste (navneform) — бросать. Førnutid?
+* kastet
+  kastede
+  kaster
+  kast
+
+18. opstå (bydeform) — возникать. Datid?
+* opstod
+  opstået
+  opstår
+  opståte
+
+19. opnåede (datid) — достигать. Nutid?
+* opnår
+  opnået
+  opnå
+  opnåte
+
+20. tilføjede (datid) — добавлять. Førnutid?
+* tilføjet
+  tilføjer
+  tilføje
+  tilføj
+
+21. sluttede (datid) — заканчивать. Bydeform?
+* slut
+  sluttet
+  slutter
+  slutte
+
+22. stemt (førnutid) — голосовать. Bydeform?
+* stem
+  stemte
+  stemmer
+  stemme
+
+23. slippe (navneform) — отпускать. Nutid?
+* slipper
+  slap
+  sluppet
+  slip
+
+24. glædet (førnutid) — радовать. Nutid?
+* glæder
+  glædede
+  glæde
+  glæd
+
+25. rette (navneform) — исправлять. Førnutid?
+* rettet
+  rettede
+  retter
+  ret

@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-101-125
+title: Verber 101–125
+
+--- questions ---
+1. startede (datid) — начинать, запускать. Navneform?
+* starte
+  startet
+  starter
+  start
+
+2. deltaget (førnutid) — участвовать. Nutid?
+* deltager
+  deltog
+  deltage
+  deltag
+
+3. søg (bydeform) — искать. Nutid?
+* søger
+  søgte
+  søgt
+  søge
+
+4. virkede (datid) — работать (действовать). Navneform?
+* virke
+  virket
+  virker
+  virk
+
+5. løbe (navneform) — бежать. Datid?
+* løb
+  løbet
+  løber
+  løbte
+
+6. vokser (nutid) — расти. Navneform?
+* vokse
+  voksede
+  vokset
+  voks
+
+7. føde (navneform) — рожать. Førnutid?
+* født
+  fødte
+  føder
+  fød
+
+8. bragt (førnutid) — приносить. Navneform?
+* bringe
+  bragte
+  bringer
+  bring
+
+9. håbede (datid) — надеяться. Bydeform?
+* håb
+  håbet
+  håber
+  håbe
+
+10. modtage (navneform) — получать. Nutid?
+* modtager
+  modtog
+  modtaget
+  modtag
+
+11. lykkes (navneform) — удаваться. Førnutid?
+* lykkedes
+  lykkets
+  lykts
+  lykkesr
+
+12. vurderet (førnutid) — оценивать. Datid?
+* vurderede
+  vurderer
+  vurdere
+  vurder
+
+13. mist (bydeform) — терять. Datid?
+* mistede
+  mistet
+  mister
+  miste
+
+14. består (nutid) — сдать (экзамен). Førnutid?
+* bestået
+  bestod
+  bestå
+  beståt
+
+15. øge (navneform) — увеличивать. Datid?
+* øgede
+  øget
+  øger
+  øg
+
+16. dø (navneform) — умирать. Datid?
+* døde
+  død
+  dør
+  døte
+
+17. skylde (navneform) — быть должным (деньги). Nutid?
+* skylder
+  skyldte
+  skyldt
+  skyld
+
+18. passet (førnutid) — подходить. Bydeform?
+* pas
+  passede
+  passer
+  passe
+
+19. bryder (nutid) — ломать. Datid?
+* brød
+  brudt
+  bryde
+  bryd
+
+20. hængt (førnutid) — висеть. Bydeform?
+* hæng
+  hang
+  hænger
+  hænge
+
+21. beslut (bydeform) — решать. Navneform?
+* beslutte
+  besluttede
+  besluttet
+  beslutter
+
+22. husket (førnutid) — помнить. Bydeform?
+* husk
+  huskede
+  husker
+  huske
+
+23. tabe (navneform) — ронять. Nutid?
+* taber
+  tabte
+  tabt
+  tab
+
+24. foregår (nutid) — происходить. Datid?
+* foregik
+  foregået
+  foregå
+  foregåte
+
+25. beder (nutid) — просить. Datid?
+* bad
+  bedt
+  bede
+  bed

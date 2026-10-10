@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-276-300
+title: Verber 276–300
+
+--- questions ---
+1. investerer (nutid) — инвестировать. Førnutid?
+* investeret
+  investerede
+  investere
+  invester
+
+2. drikke (navneform) — пить. Datid?
+* drak
+  drukket
+  drikker
+  drik
+
+3. afslutter (nutid) — завершать. Førnutid?
+* afsluttet
+  afsluttede
+  afslutte
+  afslut
+
+4. oprettet (førnutid) — создавать, учреждать. Navneform?
+* oprette
+  oprettede
+  opretter
+  opret
+
+5. fremgå (bydeform) — следовать (из), явствовать. Datid?
+* fremgik
+  fremgået
+  fremgår
+  fremgåte
+
+6. stjålet (førnutid) — красть. Datid?
+* stjal
+  stjæler
+  stjæle
+  stjæl
+
+7. påpeg (bydeform) — указывать (на). Datid?
+* påpegede
+  påpeget
+  påpeger
+  påpege
+
+8. rummede (datid) — вмещать. Navneform?
+* rumme
+  rummet
+  rummer
+  rum
+
+9. stak (datid) — колоть. Bydeform?
+* stik
+  stukket
+  stikker
+  stikke
+
+10. brænder (nutid) — гореть. Bydeform?
+* brænd
+  brændte
+  brændt
+  brænde
+
+11. tydet (førnutid) — (tyde på) указывать на. Navneform?
+* tyde
+  tydede
+  tyder
+  tyd
+
+12. lytte (navneform) — слушать. Bydeform?
+* lyt
+  lyttede
+  lyttet
+  lytter
+
+13. kritiserede (datid) — критиковать. Nutid?
+* kritiserer
+  kritiseret
+  kritisere
+  kritiser
+
+14. udnyttede (datid) — использовать (выгодно). Bydeform?
+* udnyt
+  udnyttet
+  udnytter
+  udnytte
+
+15. udkommer (nutid) — выходить (о книге). Førnutid?
+* udkommet
+  udkom
+  udkomme
+  udkomt
+
+16. forbedr (bydeform) — улучшать. Datid?
+* forbedrede
+  forbedret
+  forbedrer
+  forbedre
+
+17. løfte (navneform) — поднимать. Datid?
+* løftede
+  løftet
+  løfter
+  løft
+
+18. forhindr (bydeform) — предотвращать, мешать. Datid?
+* forhindrede
+  forhindret
+  forhindrer
+  forhindre
+
+19. meddelte (datid) — сообщать. Førnutid?
+* meddelt
+  meddeler
+  meddele
+  meddel
+
+20. medføre (navneform) — влечь за собой. Nutid?
+* medfører
+  medførte
+  medført
+  medfør
+
+21. beskytte (navneform) — защищать. Datid?
+* beskyttede
+  beskyttet
+  beskytter
+  beskyt
+
+22. anerkendte (datid) — признавать. Førnutid?
+* anerkendt
+  anerkender
+  anerkende
+  anerkend
+
+23. måler (nutid) — измерять. Bydeform?
+* mål
+  målte
+  målt
+  måle
+
+24. henvise (navneform) — ссылаться, направлять. Førnutid?
+* henvist
+  henviste
+  henviser
+  henvis
+
+25. bekymrer (nutid) — беспокоить. Navneform?
+* bekymre
+  bekymrede
+  bekymret
+  bekymr

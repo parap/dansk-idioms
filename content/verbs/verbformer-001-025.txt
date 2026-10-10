@@ -1,0 +1,153 @@
+kind: verbs
+slug: verbformer-001-025
+title: Verber 1–25
+
+--- questions ---
+1. er (nutid) — быть. Navneform?
+* være
+  var
+  været
+  vær
+
+2. haft (førnutid) — иметь. Bydeform?
+* hav
+  havde
+  har
+  have
+
+3. kan (nutid) — мочь, уметь. Navneform?
+* kunne
+  kunnet
+  kunte
+  kunner
+
+4. blevet (førnutid) — становиться. Bydeform?
+* bliv
+  blev
+  bliver
+  blive
+
+5. skulle (navneform) — быть должным. Førnutid?
+* skullet
+  skal
+  skult
+  skuller
+
+6. vil (nutid) — хотеть. Datid?
+* ville
+  villet
+  vilte
+  viller
+
+7. få (bydeform) — получать. Datid?
+* fik
+  fået
+  får
+  fåte
+
+8. sagde (datid) — сказать, говорить. Førnutid?
+* sagt
+  siger
+  sige
+  sig
+
+9. kom (datid) — приходить, приезжать. Førnutid?
+* kommet
+  kommer
+  komme
+  komt
+
+10. gå (navneform) — идти (пешком). Nutid?
+* går
+  gik
+  gået
+  gåte
+
+11. gør (bydeform) — делать. Førnutid?
+* gjort
+  gjorde
+  gøre
+  gøret
+
+12. se (bydeform) — видеть. Nutid?
+* ser
+  så
+  set
+  seede
+
+13. taget (førnutid) — брать. Nutid?
+* tager
+  tog
+  tage
+  tag
+
+14. giv (bydeform) — давать. Nutid?
+* giver
+  gav
+  givet
+  give
+
+15. fundet (førnutid) — находить. Bydeform?
+* find
+  fandt
+  finder
+  finde
+
+16. må (nutid) — можно. Datid?
+* måtte
+  måttet
+  måtter
+
+17. står (nutid) — стоять. Navneform?
+* stå
+  stod
+  stået
+  ståte
+
+18. bruger (nutid) — использовать. Bydeform?
+* brug
+  brugte
+  brugt
+  bruge
+
+19. vist (førnutid) — показывать. Datid?
+* viste
+  viser
+  vise
+  vis
+
+20. satte (datid) — ставить, сажать. Navneform?
+* sætte
+  sat
+  sætter
+  sæt
+
+21. holdt (førnutid) — держать. Navneform?
+* holde
+  holder
+  hold
+  holdede
+
+22. mente (datid) — считать, полагать. Navneform?
+* mene
+  ment
+  mener
+  men
+
+23. skriv (bydeform) — писать. Nutid?
+* skriver
+  skrev
+  skrevet
+  skrive
+
+24. fortalt (førnutid) — рассказывать. Navneform?
+* fortælle
+  fortalte
+  fortæller
+  fortæl
+
+25. lå (datid) — лежать. Nutid?
+* ligger
+  ligget
+  ligge
+  lig

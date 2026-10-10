@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-651-675
+title: Verber 651–675
+
+--- questions ---
+1. planter (nutid) — сажать (растения). Førnutid?
+* plantet
+  plantede
+  plante
+  plant
+
+2. tålte (datid) — терпеть, выносить. Førnutid?
+* tålt
+  tåler
+  tåle
+  tål
+
+3. annoncerer (nutid) — объявлять. Navneform?
+* annoncere
+  annoncerede
+  annonceret
+  annoncer
+
+4. forsyner (nutid) — снабжать. Førnutid?
+* forsynet
+  forsynede
+  forsyne
+  forsyn
+
+5. tilsætte (navneform) — добавлять (в смесь). Datid?
+* tilsatte
+  tilsat
+  tilsætter
+  tilsæt
+
+6. blokerede (datid) — блокировать. Førnutid?
+* blokeret
+  blokerer
+  blokere
+  bloker
+
+7. formodede (datid) — предполагать. Navneform?
+* formode
+  formodet
+  formoder
+  formod
+
+8. splittede (datid) — раскалывать. Nutid?
+* splitter
+  splittet
+  splitte
+  split
+
+9. uddybe (navneform) — углублять, уточнять. Bydeform?
+* uddyb
+  uddybede
+  uddybet
+  uddyber
+
+10. tvivl (bydeform) — сомневаться. Navneform?
+* tvivle
+  tvivlede
+  tvivlet
+  tvivler
+
+11. provokere (navneform) — провоцировать. Datid?
+* provokerede
+  provokeret
+  provokerer
+  provoker
+
+12. øv (bydeform) — (øve sig) упражняться. Førnutid?
+* øvet
+  øvede
+  øver
+  øve
+
+13. løslod (datid) — освобождать. Nutid?
+* løslader
+  løsladt
+  løslade
+  løslad
+
+14. resterede (datid) — оставаться (недостающее). Navneform?
+* restere
+  resteret
+  resterer
+  rester
+
+15. regerede (datid) — править. Navneform?
+* regere
+  regeret
+  regerer
+  reger
+
+16. udstedt (førnutid) — выдавать (документ). Navneform?
+* udstede
+  udstedte
+  udsteder
+  udsted
+
+17. besvarer (nutid) — отвечать (на). Bydeform?
+* besvar
+  besvarede
+  besvaret
+  besvare
+
+18. bager (nutid) — печь. Førnutid?
+* bagt
+  bagte
+  bage
+  bag
+
+19. bøjet (førnutid) — сгибать. Navneform?
+* bøje
+  bøjede
+  bøjer
+  bøj
+
+20. blomstr (bydeform) — цвести. Nutid?
+* blomstrer
+  blomstrede
+  blomstret
+  blomstre
+
+21. protesterer (nutid) — протестовать. Førnutid?
+* protesteret
+  protesterede
+  protestere
+  protester
+
+22. udbygger (nutid) — расширять, достраивать. Datid?
+* udbyggede
+  udbygget
+  udbygge
+  udbyg
+
+23. generede (datid) — мешать, беспокоить. Bydeform?
+* gener
+  generet
+  generer
+  genere
+
+24. omdan (bydeform) — преобразовывать. Datid?
+* omdannede
+  omdannet
+  omdanner
+  omdanne
+
+25. vandr (bydeform) — бродить, ходить в поход. Nutid?
+* vandrer
+  vandrede
+  vandret
+  vandre
