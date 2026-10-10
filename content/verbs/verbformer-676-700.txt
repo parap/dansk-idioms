@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-676-700
+title: Verber 676–700
+
+--- questions ---
+1. vasker (nutid) — мыть, стирать. Førnutid?
+* vasket
+  vaskede
+  vaske
+  vask
+
+2. medbringer (nutid) — брать с собой. Datid?
+* medbragte
+  medbragt
+  medbringe
+  medbring
+
+3. chokerede (datid) — шокировать. Navneform?
+* chokere
+  chokeret
+  chokerer
+  choker
+
+4. misbrugt (førnutid) — злоупотреблять. Nutid?
+* misbruger
+  misbrugte
+  misbruge
+  misbrug
+
+5. krænket (førnutid) — оскорблять, нарушать. Datid?
+* krænkede
+  krænker
+  krænke
+  krænk
+
+6. regulerer (nutid) — регулировать. Datid?
+* regulerede
+  reguleret
+  regulere
+  reguler
+
+7. styrte (navneform) — падать. Førnutid?
+* styrtet
+  styrtede
+  styrter
+  styrt
+
+8. appellerer (nutid) — обжаловать. Førnutid?
+* appelleret
+  appellerede
+  appellere
+  appeller
+
+9. indspiller (nutid) — записывать (альбом). Navneform?
+* indspille
+  indspillede
+  indspillet
+  indspil
+
+10. fremlagt (førnutid) — представлять, излагать. Navneform?
+* fremlægge
+  fremlagde
+  fremlægger
+  fremlæg
+
+11. indsatte (datid) — вставлять. Bydeform?
+* indsæt
+  indsat
+  indsætter
+  indsætte
+
+12. bosætter (nutid) — (bosætte sig) поселяться. Bydeform?
+* bosæt
+  bosatte
+  bosat
+  bosætte
+
+13. pil (bydeform) — ковырять. Datid?
+* pillede
+  pillet
+  piller
+  pille
+
+14. kendetegnet (førnutid) — характеризовать. Datid?
+* kendetegnede
+  kendetegner
+  kendetegne
+  kendetegn
+
+15. efterfulgt (førnutid) — следовать за. Datid?
+* efterfulgte
+  efterfølger
+  efterfølge
+  efterfølg
+
+16. tilslut (bydeform) — подключать. Navneform?
+* tilslutte
+  tilsluttede
+  tilsluttet
+  tilslutter
+
+17. interview (bydeform) — брать интервью. Nutid?
+* interviewer
+  interviewede
+  interviewet
+  interviewe
+
+18. udskiftet (førnutid) — заменять. Bydeform?
+* udskift
+  udskiftede
+  udskifter
+  udskifte
+
+19. kommunikerer (nutid) — общаться. Navneform?
+* kommunikere
+  kommunikerede
+  kommunikeret
+  kommuniker
+
+20. stolet (førnutid) — (stole på) доверять. Datid?
+* stolede
+  stoler
+  stole
+  stol
+
+21. udspillede (datid) — (udspille sig) разыгрываться. Førnutid?
+* udspillet
+  udspiller
+  udspille
+  udspil
+
+22. tøvede (datid) — колебаться. Nutid?
+* tøver
+  tøvet
+  tøve
+  tøv
+
+23. skrige (navneform) — кричать, визжать. Nutid?
+* skriger
+  skreg
+  skreget
+  skrig
+
+24. fatter (nutid) — понимать, постигать. Datid?
+* fattede
+  fattet
+  fatte
+  fat
+
+25. strømmede (datid) — струиться, стекаться. Førnutid?
+* strømmet
+  strømmer
+  strømme
+  strøm

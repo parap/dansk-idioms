@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-176-200
+title: Verber 176–200
+
+--- questions ---
+1. elske (navneform) — любить. Bydeform?
+* elsk
+  elskede
+  elsket
+  elsker
+
+2. skyd (bydeform) — стрелять. Navneform?
+* skyde
+  skød
+  skudt
+  skyder
+
+3. synge (navneform) — петь. Datid?
+* sang
+  sunget
+  synger
+  syng
+
+4. danner (nutid) — образовывать, формировать. Datid?
+* dannede
+  dannet
+  danne
+  dan
+
+5. udgør (nutid) — составлять. Navneform?
+* udgøre
+  udgjorde
+  udgjort
+  udgørede
+
+6. overrask (bydeform) — удивлять. Datid?
+* overraskede
+  overrasket
+  overrasker
+  overraske
+
+7. udgiv (bydeform) — издавать, выпускать. Navneform?
+* udgive
+  udgav
+  udgivet
+  udgiver
+
+8. indfør (bydeform) — вводить. Datid?
+* indførte
+  indført
+  indfører
+  indføre
+
+9. placeret (førnutid) — размещать. Bydeform?
+* placer
+  placerede
+  placerer
+  placere
+
+10. ej (bydeform) — владеть. Navneform?
+* eje
+  ejede
+  ejet
+  ejer
+
+11. behandlede (datid) — обращаться с. Førnutid?
+* behandlet
+  behandler
+  behandle
+  behandl
+
+12. uddanner (nutid) — обучать. Førnutid?
+* uddannet
+  uddannede
+  uddanne
+  uddan
+
+13. etabler (bydeform) — устанавливать, основывать. Navneform?
+* etablere
+  etablerede
+  etableret
+  etablerer
+
+14. præsenteret (førnutid) — представлять. Datid?
+* præsenterede
+  præsenterer
+  præsentere
+  præsenter
+
+15. benyt (bydeform) — использовать. Navneform?
+* benytte
+  benyttede
+  benyttet
+  benytter
+
+16. interesser (bydeform) — интересовать. Navneform?
+* interessere
+  interesserede
+  interesseret
+  interesserer
+
+17. fjerne (navneform) — удалять, убирать. Bydeform?
+* fjern
+  fjernede
+  fjernet
+  fjerner
+
+18. udsæt (bydeform) — откладывать. Navneform?
+* udsætte
+  udsatte
+  udsat
+  udsætter
+
+19. optage (navneform) — записывать. Nutid?
+* optager
+  optog
+  optaget
+  optag
+
+20. anvendt (førnutid) — применять. Datid?
+* anvendte
+  anvender
+  anvende
+  anvend
+
+21. dække (navneform) — покрывать. Førnutid?
+* dækket
+  dækkede
+  dækker
+  dæk
+
+22. ringer (nutid) — звонить. Førnutid?
+* ringet
+  ringede
+  ringe
+  ring
+
+23. skær (bydeform) — резать. Førnutid?
+* skåret
+  skar
+  skærer
+  skære
+
+24. true (navneform) — угрожать. Datid?
+* truede
+  truet
+  truer
+  tru
+
+25. træner (nutid) — тренировать(ся). Bydeform?
+* træn
+  trænede
+  trænet
+  træne

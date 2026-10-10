@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-551-575
+title: Verber 551–575
+
+--- questions ---
+1. vågn (bydeform) — просыпаться. Datid?
+* vågnede
+  vågnet
+  vågner
+  vågne
+
+2. slukket (førnutid) — гасить, выключать. Datid?
+* slukkede
+  slukker
+  slukke
+  sluk
+
+3. græde (navneform) — плакать. Bydeform?
+* græd
+  grædt
+  græder
+  grædede
+
+4. overstå (bydeform) — пережить, преодолеть. Datid?
+* overstod
+  overstået
+  overstår
+  overståte
+
+5. efterlyse (navneform) — разыскивать (объявить в розыск). Bydeform?
+* efterlys
+  efterlyste
+  efterlyst
+  efterlyser
+
+6. aflyst (førnutid) — отменять. Navneform?
+* aflyse
+  aflyste
+  aflyser
+  aflys
+
+7. opretholder (nutid) — поддерживать, сохранять. Datid?
+* opretholdt
+  opretholde
+  oprethold
+  opretholdede
+
+8. hoppet (førnutid) — прыгать. Datid?
+* hoppede
+  hopper
+  hoppe
+  hop
+
+9. veje (navneform) — весить. Datid?
+* vejede
+  vejet
+  vejer
+  vej
+
+10. afhang (datid) — зависеть. Nutid?
+* afhænger
+  afhængt
+  afhænge
+  afhæng
+
+11. cyklet (førnutid) — ездить на велосипеде. Bydeform?
+* cykl
+  cyklede
+  cykler
+  cykle
+
+12. afgav (datid) — отдавать (голос), сдавать. Navneform?
+* afgive
+  afgivet
+  afgiver
+  afgiv
+
+13. antydet (førnutid) — намекать. Bydeform?
+* antyd
+  antydede
+  antyder
+  antyde
+
+14. citeret (førnutid) — цитировать. Nutid?
+* citerer
+  citerede
+  citere
+  citer
+
+15. påtog (datid) — (påtage sig) брать на себя. Bydeform?
+* påtag
+  påtaget
+  påtager
+  påtage
+
+16. indkaldte (datid) — созывать, вызывать. Nutid?
+* indkalder
+  indkaldt
+  indkalde
+  indkald
+
+17. argumenteret (førnutid) — аргументировать. Nutid?
+* argumenterer
+  argumenterede
+  argumentere
+  argumenter
+
+18. lys (bydeform) — светить. Nutid?
+* lyser
+  lyste
+  lyst
+  lyse
+
+19. praktiseret (førnutid) — практиковать. Bydeform?
+* praktiser
+  praktiserede
+  praktiserer
+  praktisere
+
+20. forenet (førnutid) — объединять. Navneform?
+* forene
+  forenede
+  forener
+  foren
+
+21. formede (datid) — формировать, лепить. Nutid?
+* former
+  formet
+  forme
+  form
+
+22. forandre (navneform) — изменять. Bydeform?
+* forandr
+  forandrede
+  forandret
+  forandrer
+
+23. grundlæg (bydeform) — основывать. Datid?
+* grundlagde
+  grundlagt
+  grundlægger
+  grundlægge
+
+24. svækket (førnutid) — ослаблять. Bydeform?
+* svæk
+  svækkede
+  svækker
+  svække
+
+25. integreret (førnutid) — интегрировать. Navneform?
+* integrere
+  integrerede
+  integrerer
+  integrer

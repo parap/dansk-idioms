@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-251-275
+title: Verber 251–275
+
+--- questions ---
+1. smed (datid) — бросать, выбрасывать. Navneform?
+* smide
+  smidt
+  smider
+  smid
+
+2. begå (navneform) — совершать (ошибку, преступление). Førnutid?
+* begået
+  begik
+  begår
+  begåt
+
+3. udvidede (datid) — расширять. Navneform?
+* udvide
+  udvidet
+  udvider
+  udvid
+
+4. træf (bydeform) — встречать. Førnutid?
+* truffet
+  traf
+  træffer
+  træffe
+
+5. bevaret (førnutid) — сохранять. Datid?
+* bevarede
+  bevarer
+  bevare
+  bevar
+
+6. styrkede (datid) — укреплять. Bydeform?
+* styrk
+  styrket
+  styrker
+  styrke
+
+7. risikerede (datid) — рисковать. Nutid?
+* risikerer
+  risikeret
+  risikere
+  risiker
+
+8. mind (bydeform) — напоминать. Nutid?
+* minder
+  mindede
+  mindet
+  minde
+
+9. sammenligner (nutid) — сравнивать. Førnutid?
+* sammenlignet
+  sammenlignede
+  sammenligne
+  sammenlign
+
+10. skaffe (navneform) — доставать, раздобыть. Datid?
+* skaffede
+  skaffet
+  skaffer
+  skaf
+
+11. præge (navneform) — накладывать отпечаток, определять. Bydeform?
+* præg
+  prægede
+  præget
+  præger
+
+12. reddede (datid) — спасать. Bydeform?
+* red
+  reddet
+  redder
+  redde
+
+13. fasthold (bydeform) — удерживать, настаивать. Navneform?
+* fastholde
+  fastholdt
+  fastholder
+  fastholdede
+
+14. planlægger (nutid) — планировать. Førnutid?
+* planlagt
+  planlagde
+  planlægge
+  planlæg
+
+15. scoret (førnutid) — забивать (гол). Datid?
+* scorede
+  scorer
+  score
+  scor
+
+16. baser (bydeform) — основывать. Datid?
+* baserede
+  baseret
+  baserer
+  basere
+
+17. repræsenterede (datid) — представлять (интересы). Bydeform?
+* repræsenter
+  repræsenteret
+  repræsenterer
+  repræsentere
+
+18. befundet (førnutid) — (befinde sig) находиться. Datid?
+* befandt
+  befinder
+  befinde
+  befind
+
+19. udtrykke (navneform) — выражать. Bydeform?
+* udtryk
+  udtrykte
+  udtrykt
+  udtrykker
+
+20. fløj (datid) — летать. Bydeform?
+* flyv
+  fløjet
+  flyver
+  flyve
+
+21. snak (bydeform) — болтать, разговаривать. Datid?
+* snakkede
+  snakket
+  snakker
+  snakke
+
+22. reducer (bydeform) — сокращать. Navneform?
+* reducere
+  reducerede
+  reduceret
+  reducerer
+
+23. dukke (navneform) — (dukke op) появляться. Nutid?
+* dukker
+  dukkede
+  dukket
+  duk
+
+24. erklære (navneform) — объявлять, заявлять. Førnutid?
+* erklæret
+  erklærede
+  erklærer
+  erklær
+
+25. forsvare (navneform) — защищать. Datid?
+* forsvarede
+  forsvaret
+  forsvarer
+  forsvar

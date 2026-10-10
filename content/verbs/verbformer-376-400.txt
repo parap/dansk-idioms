@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-376-400
+title: Verber 376–400
+
+--- questions ---
+1. talte (datid) — считать (количество). Bydeform?
+* tæl
+  talt
+  tæller
+  tælle
+
+2. udvælge (navneform) — отбирать. Førnutid?
+* udvalgt
+  udvalgte
+  udvælger
+  udvælg
+
+3. samarbejdet (førnutid) — сотрудничать. Nutid?
+* samarbejder
+  samarbejdede
+  samarbejde
+  samarbejd
+
+4. tryk (bydeform) — нажимать. Nutid?
+* trykker
+  trykkede
+  trykket
+  trykke
+
+5. registrerede (datid) — регистрировать. Navneform?
+* registrere
+  registreret
+  registrerer
+  registrer
+
+6. udbreder (nutid) — распространять. Datid?
+* udbredte
+  udbredt
+  udbrede
+  udbred
+
+7. stammede (datid) — (stamme fra) происходить из. Navneform?
+* stamme
+  stammet
+  stammer
+  stam
+
+8. håndterede (datid) — обращаться с, справляться. Bydeform?
+* håndter
+  håndteret
+  håndterer
+  håndtere
+
+9. nedsæt (bydeform) — снижать. Nutid?
+* nedsætter
+  nedsatte
+  nedsat
+  nedsætte
+
+10. udfordret (førnutid) — бросать вызов. Datid?
+* udfordrede
+  udfordrer
+  udfordre
+  udfordr
+
+11. smilet (førnutid) — улыбаться. Bydeform?
+* smil
+  smilede
+  smiler
+  smile
+
+12. låne (navneform) — одалживать, брать взаймы. Nutid?
+* låner
+  lånte
+  lånt
+  lån
+
+13. udnævne (navneform) — назначать. Bydeform?
+* udnævn
+  udnævnte
+  udnævnt
+  udnævner
+
+14. rører (nutid) — трогать. Navneform?
+* røre
+  rørte
+  rørt
+  rør
+
+15. vælter (nutid) — опрокидывать(ся). Datid?
+* væltede
+  væltet
+  vælte
+  vælt
+
+16. oversæt (bydeform) — переводить. Navneform?
+* oversætte
+  oversatte
+  oversat
+  oversætter
+
+17. ankom (bydeform) — прибывать. Nutid?
+* ankommer
+  ankommet
+  ankomme
+  ankommede
+
+18. rystede (datid) — трясти(сь). Nutid?
+* ryster
+  rystet
+  ryste
+  ryst
+
+19. fyrede (datid) — увольнять. Bydeform?
+* fyr
+  fyret
+  fyrer
+  fyre
+
+20. nedlagt (førnutid) — закрывать, упразднять. Bydeform?
+* nedlæg
+  nedlagde
+  nedlægger
+  nedlægge
+
+21. indrøm (bydeform) — признаваться. Førnutid?
+* indrømmet
+  indrømmede
+  indrømmer
+  indrømme
+
+22. skadede (datid) — вредить. Bydeform?
+* skad
+  skadet
+  skader
+  skade
+
+23. koncentrerede (datid) — сосредоточивать(ся). Bydeform?
+* koncentrer
+  koncentreret
+  koncentrerer
+  koncentrere
+
+24. tiltrække (navneform) — привлекать. Nutid?
+* tiltrækker
+  tiltrak
+  tiltrukket
+  tiltræk
+
+25. grin (bydeform) — смеяться. Datid?
+* grinede
+  grinet
+  griner
+  grine

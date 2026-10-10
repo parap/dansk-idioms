@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-126-150
+title: Verber 126–150
+
+--- questions ---
+1. afviste (datid) — отклонять, отказывать. Bydeform?
+* afvis
+  afvist
+  afviser
+  afvise
+
+2. delte (datid) — делить(ся). Nutid?
+* deler
+  delt
+  dele
+  del
+
+3. skiftede (datid) — менять, сменять. Førnutid?
+* skiftet
+  skifter
+  skifte
+  skift
+
+4. støttede (datid) — поддерживать. Førnutid?
+* støttet
+  støtter
+  støtte
+  støt
+
+5. regne (navneform) — считать (вычислять). Nutid?
+* regner
+  regnede
+  regnet
+  regn
+
+6. gennemført (førnutid) — проводить, осуществлять. Nutid?
+* gennemfører
+  gennemførte
+  gennemføre
+  gennemfør
+
+7. forlad (bydeform) — покидать. Navneform?
+* forlade
+  forlod
+  forladt
+  forlader
+
+8. nævne (navneform) — упоминать. Bydeform?
+* nævn
+  nævnte
+  nævnt
+  nævner
+
+9. understrege (navneform) — подчёркивать. Nutid?
+* understreger
+  understregede
+  understreget
+  understreg
+
+10. indgået (førnutid) — заключать (договор). Bydeform?
+* indgå
+  indgik
+  indgår
+  indgåte
+
+11. klar (bydeform) — справляться. Navneform?
+* klare
+  klarede
+  klaret
+  klarer
+
+12. kigger (nutid) — смотреть, глядеть. Datid?
+* kiggede
+  kigget
+  kigge
+  kig
+
+13. fungerede (datid) — функционировать, работать. Navneform?
+* fungere
+  fungeret
+  fungerer
+  funger
+
+14. mærker (nutid) — замечать, ощущать. Bydeform?
+* mærk
+  mærkede
+  mærket
+  mærke
+
+15. hentet (førnutid) — забирать, приносить. Nutid?
+* henter
+  hentede
+  hente
+  hent
+
+16. stoppe (navneform) — останавливать(ся). Førnutid?
+* stoppet
+  stoppede
+  stopper
+  stop
+
+17. melder (nutid) — сообщать. Bydeform?
+* meld
+  meldte
+  meldt
+  melde
+
+18. levere (navneform) — поставлять, доставлять. Datid?
+* leverede
+  leveret
+  leverer
+  lever
+
+19. pege (navneform) — указывать. Førnutid?
+* peget
+  pegede
+  peger
+  peg
+
+20. drev (datid) — вести (дело). Førnutid?
+* drevet
+  driver
+  drive
+  driv
+
+21. beskrev (datid) — описывать. Nutid?
+* beskriver
+  beskrevet
+  beskrive
+  beskriv
+
+22. bar (datid) — нести, носить. Førnutid?
+* båret
+  bærer
+  bære
+  bær
+
+23. undgå (navneform) — избегать. Datid?
+* undgik
+  undgået
+  undgår
+  undgåte
+
+24. overtaget (førnutid) — перенимать, брать на себя. Datid?
+* overtog
+  overtager
+  overtage
+  overtag
+
+25. lider (nutid) — страдать. Bydeform?
+* lid
+  led
+  lidt
+  lide

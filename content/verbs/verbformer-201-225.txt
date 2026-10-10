@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-201-225
+title: Verber 201–225
+
+--- questions ---
+1. sørget (førnutid) — заботиться (sørge for). Datid?
+* sørgede
+  sørger
+  sørge
+  sørg
+
+2. optræder (nutid) — выступать. Datid?
+* optrådte
+  optrådt
+  optræde
+  optræd
+
+3. dømte (datid) — судить. Førnutid?
+* dømt
+  dømmer
+  dømme
+  døm
+
+4. udtal (bydeform) — произносить. Navneform?
+* udtale
+  udtalte
+  udtalt
+  udtaler
+
+5. overvej (bydeform) — обдумывать. Datid?
+* overvejede
+  overvejet
+  overvejer
+  overveje
+
+6. tvunget (førnutid) — заставлять. Nutid?
+* tvinger
+  tvang
+  tvinge
+  tving
+
+7. lov (bydeform) — обещать. Datid?
+* lovede
+  lovet
+  lover
+  love
+
+8. presset (førnutid) — давить, прессовать. Nutid?
+* presser
+  pressede
+  presse
+  pres
+
+9. tegn (bydeform) — рисовать. Førnutid?
+* tegnet
+  tegnede
+  tegner
+  tegne
+
+10. produceret (førnutid) — производить. Navneform?
+* producere
+  producerede
+  producerer
+  producer
+
+11. erkendte (datid) — признавать. Bydeform?
+* erkend
+  erkendt
+  erkender
+  erkende
+
+12. nød (datid) — наслаждаться. Bydeform?
+* nyd
+  nydt
+  nyder
+  nyde
+
+13. indeholde (navneform) — содержать. Bydeform?
+* indehold
+  indeholdt
+  indeholder
+  indeholdede
+
+14. sparede (datid) — экономить, копить. Nutid?
+* sparer
+  sparet
+  spare
+  spar
+
+15. afsløre (navneform) — разоблачать, раскрывать. Førnutid?
+* afsløret
+  afslørede
+  afslører
+  afslør
+
+16. røget (førnutid) — курить. Nutid?
+* ryger
+  røg
+  ryge
+  ryg
+
+17. indlede (navneform) — начинать. Datid?
+* indledte
+  indledt
+  indleder
+  indled
+
+18. bidrager (nutid) — вносить вклад. Datid?
+* bidrog
+  bidraget
+  bidrage
+  bidrag
+
+19. foreslog (datid) — предлагать. Navneform?
+* foreslå
+  foreslået
+  foreslår
+  foreslåte
+
+20. opfører (nutid) — возводить. Datid?
+* opførte
+  opført
+  opføre
+  opfør
+
+21. diskuterer (nutid) — обсуждать, спорить. Datid?
+* diskuterede
+  diskuteret
+  diskutere
+  diskuter
+
+22. ryk (bydeform) — двигать(ся). Førnutid?
+* rykket
+  rykkede
+  rykker
+  rykke
+
+23. opfordre (navneform) — призывать. Bydeform?
+* opfordr
+  opfordrede
+  opfordret
+  opfordrer
+
+24. opdaget (førnutid) — обнаруживать. Bydeform?
+* opdag
+  opdagede
+  opdager
+  opdage
+
+25. betragt (bydeform) — рассматривать, считать. Datid?
+* betragtede
+  betragtet
+  betragter
+  betragte

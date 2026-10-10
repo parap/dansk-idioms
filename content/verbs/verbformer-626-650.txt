@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-626-650
+title: Verber 626–650
+
+--- questions ---
+1. fornyede (datid) — обновлять. Bydeform?
+* forny
+  fornyet
+  fornyer
+  fornyte
+
+2. overset (førnutid) — упускать из виду. Datid?
+* overså
+  overser
+  overse
+  oversede
+
+3. fastsætter (nutid) — устанавливать. Navneform?
+* fastsætte
+  fastsatte
+  fastsat
+  fastsæt
+
+4. indsamlet (førnutid) — собирать. Datid?
+* indsamlede
+  indsamler
+  indsamle
+  indsaml
+
+5. skride (navneform) — скользить. Nutid?
+* skrider
+  skred
+  skredet
+  skrid
+
+6. vænnede (datid) — (vænne sig til) привыкать. Bydeform?
+* væn
+  vænnet
+  vænner
+  vænne
+
+7. erobret (førnutid) — завоёвывать. Navneform?
+* erobre
+  erobrede
+  erobrer
+  erobr
+
+8. fængsle (navneform) — заключать в тюрьму. Førnutid?
+* fængslet
+  fængslede
+  fængsler
+  fængsl
+
+9. overgået (førnutid) — превосходить. Bydeform?
+* overgå
+  overgik
+  overgår
+  overgåte
+
+10. tilføre (navneform) — добавлять, подводить. Datid?
+* tilførte
+  tilført
+  tilfører
+  tilfør
+
+11. debutere (navneform) — дебютировать. Førnutid?
+* debuteret
+  debuterede
+  debuterer
+  debuter
+
+12. parkerer (nutid) — парковать. Datid?
+* parkerede
+  parkeret
+  parkere
+  parker
+
+13. varme (navneform) — греть. Nutid?
+* varmer
+  varmede
+  varmet
+  varm
+
+14. præsteret (førnutid) — показывать (результат). Bydeform?
+* præster
+  præsterede
+  præsterer
+  præstere
+
+15. opsøgte (datid) — разыскивать, обращаться к. Førnutid?
+* opsøgt
+  opsøger
+  opsøge
+  opsøg
+
+16. tørrede (datid) — сушить. Nutid?
+* tørrer
+  tørret
+  tørre
+  tør
+
+17. agerede (datid) — действовать, играть роль. Nutid?
+* agerer
+  ageret
+  agere
+  ager
+
+18. hadet (førnutid) — ненавидеть. Bydeform?
+* had
+  hadede
+  hader
+  hade
+
+19. udmærket (førnutid) — (udmærke sig) отличаться. Datid?
+* udmærkede
+  udmærker
+  udmærke
+  udmærk
+
+20. ofr (bydeform) — жертвовать. Nutid?
+* ofrer
+  ofrede
+  ofret
+  ofre
+
+21. eksplodere (navneform) — взрываться. Førnutid?
+* eksploderet
+  eksploderede
+  eksploderer
+  eksploder
+
+22. ophævet (førnutid) — отменять. Navneform?
+* ophæve
+  ophævede
+  ophæver
+  ophæv
+
+23. pålagde (datid) — налагать, обязывать. Navneform?
+* pålægge
+  pålagt
+  pålægger
+  pålæg
+
+24. udskriver (nutid) — выписывать. Navneform?
+* udskrive
+  udskrev
+  udskrevet
+  udskriv
+
+25. fornemmede (datid) — ощущать, чувствовать. Bydeform?
+* fornem
+  fornemmet
+  fornemmer
+  fornemme

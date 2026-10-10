@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-601-625
+title: Verber 601–625
+
+--- questions ---
+1. krydset (førnutid) — пересекать. Nutid?
+* krydser
+  krydsede
+  krydse
+  kryds
+
+2. forebyggede (datid) — предотвращать. Førnutid?
+* forebygget
+  forebygger
+  forebygge
+  forebyg
+
+3. hvilede (datid) — отдыхать. Nutid?
+* hviler
+  hvilet
+  hvile
+  hvil
+
+4. besejrede (datid) — побеждать. Navneform?
+* besejre
+  besejret
+  besejrer
+  besejr
+
+5. omsætte (navneform) — превращать, воплощать. Bydeform?
+* omsæt
+  omsatte
+  omsat
+  omsætter
+
+6. realiseret (førnutid) — осуществлять. Datid?
+* realiserede
+  realiserer
+  realisere
+  realiser
+
+7. anslået (førnutid) — оценивать (примерно). Navneform?
+* anslå
+  anslog
+  anslår
+  anslåte
+
+8. iværksat (førnutid) — начинать, запускать. Bydeform?
+* iværksæt
+  iværksatte
+  iværksætter
+  iværksætte
+
+9. tilfredsstiller (nutid) — удовлетворять. Datid?
+* tilfredsstillede
+  tilfredsstillet
+  tilfredsstille
+  tilfredsstil
+
+10. analyseret (førnutid) — анализировать. Navneform?
+* analysere
+  analyserede
+  analyserer
+  analyser
+
+11. forfølg (bydeform) — преследовать. Førnutid?
+* forfulgt
+  forfulgte
+  forfølger
+  forfølge
+
+12. imponeret (førnutid) — впечатлять. Bydeform?
+* imponer
+  imponerede
+  imponerer
+  imponere
+
+13. forløbe (navneform) — проходить (о событии). Førnutid?
+* forløbet
+  forløb
+  forløber
+  forløbt
+
+14. skildr (bydeform) — описывать, изображать. Førnutid?
+* skildret
+  skildrede
+  skildrer
+  skildre
+
+15. forelsket (førnutid) — (forelske sig) влюбляться. Datid?
+* forelskede
+  forelsker
+  forelske
+  forelsk
+
+16. klipper (nutid) — стричь, резать. Førnutid?
+* klippet
+  klippede
+  klippe
+  klip
+
+17. allier (bydeform) — (alliere sig) объединяться. Nutid?
+* allierer
+  allierede
+  allieret
+  alliere
+
+18. inkluderet (førnutid) — включать. Nutid?
+* inkluderer
+  inkluderede
+  inkludere
+  inkluder
+
+19. vidnet (førnutid) — свидетельствовать. Datid?
+* vidnede
+  vidner
+  vidne
+  vidn
+
+20. udskyde (navneform) — откладывать. Førnutid?
+* udskudt
+  udskød
+  udskyder
+  udskyd
+
+21. introducerer (nutid) — вводить, знакомить. Bydeform?
+* introducer
+  introducerede
+  introduceret
+  introducere
+
+22. mindske (navneform) — уменьшать. Nutid?
+* mindsker
+  mindskede
+  mindsket
+  mindsk
+
+23. frister (nutid) — соблазнять. Navneform?
+* friste
+  fristede
+  fristet
+  frist
+
+24. bremsede (datid) — тормозить. Førnutid?
+* bremset
+  bremser
+  bremse
+  brems
+
+25. kårede (datid) — избирать (лучшим). Navneform?
+* kåre
+  kåret
+  kårer
+  kår

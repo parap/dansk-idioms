@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-326-350
+title: Verber 326–350
+
+--- questions ---
+1. råbt (førnutid) — кричать. Navneform?
+* råbe
+  råbte
+  råber
+  råb
+
+2. godkende (navneform) — одобрять, утверждать. Førnutid?
+* godkendt
+  godkendte
+  godkender
+  godkend
+
+3. fokuserer (nutid) — сосредоточиваться. Førnutid?
+* fokuseret
+  fokuserede
+  fokusere
+  fokuser
+
+4. involveret (førnutid) — вовлекать. Nutid?
+* involverer
+  involverede
+  involvere
+  involver
+
+5. arranger (bydeform) — устраивать, организовывать. Datid?
+* arrangerede
+  arrangeret
+  arrangerer
+  arrangere
+
+6. beskæftige (navneform) — занимать, давать работу. Nutid?
+* beskæftiger
+  beskæftigede
+  beskæftiget
+  beskæftig
+
+7. anholdt (førnutid) — арестовывать, задерживать. Bydeform?
+* anhold
+  anholder
+  anholde
+  anholdede
+
+8. reagerede (datid) — реагировать. Navneform?
+* reagere
+  reageret
+  reagerer
+  reager
+
+9. eksistere (navneform) — существовать. Datid?
+* eksisterede
+  eksisteret
+  eksisterer
+  eksister
+
+10. springe (navneform) — прыгать. Nutid?
+* springer
+  sprang
+  sprunget
+  spring
+
+11. studerer (nutid) — учиться (в вузе), изучать. Navneform?
+* studere
+  studerede
+  studeret
+  studer
+
+12. bredte (datid) — расстилать. Førnutid?
+* bredt
+  breder
+  brede
+  bred
+
+13. tilhører (nutid) — принадлежать. Bydeform?
+* tilhør
+  tilhørte
+  tilhørt
+  tilhøre
+
+14. trænger (nutid) — проникать. Bydeform?
+* træng
+  trængte
+  trængt
+  trænge
+
+15. sov (datid) — спать. Navneform?
+* sove
+  sovet
+  sover
+  sovte
+
+16. malede (datid) — красить. Nutid?
+* maler
+  malet
+  male
+  mal
+
+17. forhandlet (førnutid) — вести переговоры. Bydeform?
+* forhandl
+  forhandlede
+  forhandler
+  forhandle
+
+18. tak (bydeform) — благодарить. Navneform?
+* takke
+  takkede
+  takket
+  takker
+
+19. fordelte (datid) — распределять. Bydeform?
+* fordel
+  fordelt
+  fordeler
+  fordele
+
+20. anså (datid) — считать (кем-то). Førnutid?
+* anset
+  anser
+  anse
+  anst
+
+21. vare (navneform) — длиться. Nutid?
+* varer
+  varede
+  varet
+  var
+
+22. administrerer (nutid) — управлять, администрировать. Bydeform?
+* administrer
+  administrerede
+  administreret
+  administrere
+
+23. forberedt (førnutid) — готовить(ся). Nutid?
+* forbereder
+  forberedte
+  forberede
+  forbered
+
+24. fremhævede (datid) — выделять, подчёркивать. Navneform?
+* fremhæve
+  fremhævet
+  fremhæver
+  fremhæv
+
+25. binde (navneform) — связывать. Datid?
+* bandt
+  bundet
+  binder
+  bind

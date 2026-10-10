@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-026-050
+title: Verber 26–50
+
+--- questions ---
+1. ske (navneform) — происходить, случаться. Førnutid?
+* sket
+  skete
+  sker
+  skeet
+
+2. spil (bydeform) — играть. Førnutid?
+* spillet
+  spillede
+  spiller
+  spille
+
+3. talte (datid) — говорить, разговаривать. Nutid?
+* taler
+  talt
+  tale
+  tal
+
+4. lave (navneform) — делать. Førnutid?
+* lavet
+  lavede
+  laver
+  lav
+
+5. ved (nutid) — знать (факт). Førnutid?
+* vidst
+  vidste
+  vide
+  vid
+
+6. tror (nutid) — верить. Navneform?
+* tro
+  troede
+  troet
+  trote
+
+7. arbejdede (datid) — работать. Bydeform?
+* arbejd
+  arbejdet
+  arbejder
+  arbejde
+
+8. læg (bydeform) — класть. Navneform?
+* lægge
+  lagde
+  lagt
+  lægger
+
+9. begyndt (førnutid) — начинать(ся). Nutid?
+* begynder
+  begyndte
+  begynde
+  begynd
+
+10. lad (bydeform) — позволять, оставлять. Datid?
+* lod
+  ladet
+  lader
+  lade
+
+11. skabte (datid) — создавать. Førnutid?
+* skabt
+  skaber
+  skabe
+  skab
+
+12. vælge (navneform) — выбирать. Datid?
+* valgte
+  valgt
+  vælger
+  vælg
+
+13. kør (bydeform) — ехать, водить (машину). Nutid?
+* kører
+  kørte
+  kørt
+  køre
+
+14. sidde (navneform) — сидеть. Datid?
+* sad
+  siddet
+  sidder
+  sid
+
+15. fulgt (førnutid) — следовать. Nutid?
+* følger
+  fulgte
+  følge
+  følg
+
+16. synes (navneform) — считать, находить (мнение). Førnutid?
+* syntes
+  synets
+  synts
+  synesr
+
+17. betyd (bydeform) — значить, означать. Datid?
+* betød
+  betydet
+  betyder
+  betyde
+
+18. kendte (datid) — знать (быть знакомым). Navneform?
+* kende
+  kendt
+  kender
+  kend
+
+19. hørte (datid) — слышать. Førnutid?
+* hørt
+  hører
+  høre
+  hør
+
+20. slå (navneform) — бить, ударять. Førnutid?
+* slået
+  slog
+  slår
+  slåt
+
+21. tænk (bydeform) — думать. Datid?
+* tænkte
+  tænkt
+  tænker
+  tænke
+
+22. mødte (datid) — встречать. Førnutid?
+* mødt
+  møder
+  møde
+  mød
+
+23. sender (nutid) — посылать, отправлять. Datid?
+* sendte
+  sendt
+  sende
+  send
+
+24. vundet (førnutid) — выигрывать, побеждать. Bydeform?
+* vind
+  vandt
+  vinder
+  vinde
+
+25. samle (navneform) — собирать. Nutid?
+* samler
+  samlede
+  samlet
+  saml

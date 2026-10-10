@@ -1,0 +1,154 @@
+kind: verbs
+slug: verbformer-076-100
+title: Verber 76–100
+
+--- questions ---
+1. hjælper (nutid) — помогать. Datid?
+* hjalp
+  hjulpet
+  hjælpe
+  hjælp
+
+2. forstået (førnutid) — понимать. Datid?
+* forstod
+  forstår
+  forstå
+  forståte
+
+3. kræv (bydeform) — требовать. Datid?
+* krævede
+  krævet
+  kræver
+  kræve
+
+4. spørge (navneform) — спрашивать. Bydeform?
+* spørg
+  spurgte
+  spurgt
+  spørger
+
+5. svaret (førnutid) — отвечать. Bydeform?
+* svar
+  svarede
+  svarer
+  svare
+
+6. fortsatte (datid) — продолжать. Førnutid?
+* fortsat
+  fortsætter
+  fortsætte
+  fortsæt
+
+7. flyttede (datid) — переезжать. Nutid?
+* flytter
+  flyttet
+  flytte
+  flyt
+
+8. ændrede (datid) — изменять. Navneform?
+* ændre
+  ændret
+  ændrer
+  ændr
+
+9. byggede (datid) — строить. Navneform?
+* bygge
+  bygget
+  bygger
+  byg
+
+10. vende (navneform) — поворачивать. Nutid?
+* vender
+  vendte
+  vendt
+  vend
+
+11. ramme (navneform) — попадать, поражать. Førnutid?
+* ramt
+  ramte
+  rammer
+  ram
+
+12. udvikler (nutid) — развивать. Bydeform?
+* udvikl
+  udviklede
+  udviklet
+  udvikle
+
+13. fyld (bydeform) — наполнять. Navneform?
+* fylde
+  fyldte
+  fyldt
+  fylder
+
+14. åbne (navneform) — открывать. Nutid?
+* åbner
+  åbnede
+  åbnet
+  åbn
+
+15. oplys (bydeform) — сообщать, информировать. Førnutid?
+* oplyst
+  oplyste
+  oplyser
+  oplyse
+
+16. lært (førnutid) — учить(ся). Navneform?
+* lære
+  lærte
+  lærer
+  lær
+
+17. endt (førnutid) — заканчивать(ся). Navneform?
+* ende
+  endte
+  ender
+  end
+
+18. rejse (navneform) — путешествовать. Nutid?
+* rejser
+  rejste
+  rejst
+  rejs
+
+19. kostede (datid) — стоить. Navneform?
+* koste
+  kostet
+  koster
+  kost
+
+20. ligne (navneform) — быть похожим. Nutid?
+* ligner
+  lignede
+  lignet
+  lign
+
+21. mangler (nutid) — не хватать. Datid?
+* manglede
+  manglet
+  mangle
+  mangl
+
+22. heddet (førnutid) — называться, зваться. Bydeform?
+* hed
+  hedder
+  hedde
+  hedte
+
+23. prøvede (datid) — пробовать. Nutid?
+* prøver
+  prøvet
+  prøve
+  prøv
+
+24. luk (bydeform) — закрывать. Førnutid?
+* lukket
+  lukkede
+  lukker
+  lukke
+
+25. forvent (bydeform) — ожидать (рассчитывать). Navneform?
+* forvente
+  forventede
+  forventet
+  forventer
