@@ -1071,6 +1071,21 @@ def the_verb_list_links_every_published_set(b):
         'the fixture set is not listed'
 
 
+@check
+def every_verb_set_has_a_picture_and_a_colour(b):
+    only(['verbs'])
+    b.goto('/verbs')
+    b.until('!!document.querySelector("#sets a")', what='the verb set list')
+    tiles = b.js('[...document.querySelectorAll("#sets a")].map(a => [a.querySelector(".pic")?.textContent.trim() || "",'
+                 ' a.style.getPropertyValue("--h"), a.querySelector(".pic")?.getAttribute("aria-hidden"),'
+                 ' a.textContent.includes("UI fixture verbs")])')
+    for pic, hue, hidden, named in tiles:
+        assert pic, 'a set has no picture'
+        assert hue != '', 'a set has no colour of its own'
+        assert hidden == 'true', 'the picture is read out to a screen reader'
+        assert named, 'the link no longer carries the set title'
+
+
 def open_verb_set(b):
     only(['verbs'])
     b.goto('/verbs?s=ui-fixture-verbs')

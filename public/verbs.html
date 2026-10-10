@@ -37,9 +37,21 @@
   .card h2{font-size:1.05rem;margin:0 0 .6rem}
   .muted{color:var(--muted)}
   #sets{list-style:none;margin:0;padding:0;display:grid;gap:10px;
-    grid-template-columns:repeat(auto-fill,minmax(10rem,1fr))}
-  #sets a{font-weight:600}
-  #sets .n{display:block;color:var(--muted);font-size:.85rem}
+    grid-template-columns:repeat(auto-fill,minmax(8.5rem,1fr))}
+  #sets a{display:grid;justify-items:center;gap:.1rem;height:100%;padding:.75rem .5rem;border-radius:12px;
+    text-align:center;text-decoration:none;color:var(--ink);font-weight:600;
+    background:hsl(var(--h) 85% 95%);border:1px solid hsl(var(--h) 55% 82%);transition:border-color .12s}
+  #sets a:hover,#sets a:focus-visible{border-color:hsl(var(--h) 60% 45%)}
+  /* A colour emoji font named outright: left to fallback, Linux draws some as black glyphs */
+  #sets .pic{font:2.1rem/1.15 "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+  #sets .title{font-size:.95rem;white-space:nowrap}
+  #sets .verb{font-size:.8rem;font-weight:500;font-style:italic;color:hsl(var(--h) 45% 30%)}
+  #sets .n{display:block;color:var(--muted);font-size:.85rem;font-weight:400}
+  @media (prefers-color-scheme:dark){
+    #sets a{background:hsl(var(--h) 30% 19%);border-color:hsl(var(--h) 30% 32%)}
+    #sets a:hover,#sets a:focus-visible{border-color:hsl(var(--h) 60% 60%)}
+    #sets .verb{color:hsl(var(--h) 60% 78%)}
+  }
   .q{margin:0 0 18px}
   .q:last-child{margin:0}
   .q p{margin:0 0 .45rem;font-weight:600}
@@ -179,15 +191,45 @@ function paintLanguages() {
   box.querySelectorAll('.lang').forEach(b => b.onclick = () => { applyLang(b.dataset.lang); render(); });
 }
 
+// A picture of one verb from each set, and that verb under it.
+const PICTURES = {
+  'verbformer-001-025': ['✍️', 'skrive'], 'verbformer-026-050': ['🚗', 'køre'],
+  'verbformer-051-075': ['📖', 'læse'], 'verbformer-076-100': ['🏗️', 'bygge'],
+  'verbformer-101-125': ['🏃', 'løbe'], 'verbformer-126-150': ['🌧️', 'regne'],
+  'verbformer-151-175': ['🍽️', 'spise'], 'verbformer-176-200': ['🎤', 'synge'],
+  'verbformer-201-225': ['✏️', 'tegne'], 'verbformer-226-250': ['🐎', 'ride'],
+  'verbformer-251-275': ['✈️', 'flyve'], 'verbformer-276-300': ['☕', 'drikke'],
+  'verbformer-301-325': ['🎉', 'fejre'], 'verbformer-326-350': ['😴', 'sove'],
+  'verbformer-351-375': ['⛵', 'sejle'], 'verbformer-376-400': ['😊', 'smile'],
+  'verbformer-401-425': ['😋', 'smage'], 'verbformer-426-450': ['💃', 'danse'],
+  'verbformer-451-475': ['🍳', 'koge'], 'verbformer-476-500': ['📦', 'pakke'],
+  'verbformer-501-525': ['🌬️', 'blæse'], 'verbformer-526-550': ['💍', 'gifte'],
+  'verbformer-551-575': ['🚲', 'cykle'], 'verbformer-576-600': ['⚽', 'sparke'],
+  'verbformer-601-625': ['✂️', 'klippe'], 'verbformer-626-650': ['🅿️', 'parkere'],
+  'verbformer-651-675': ['🌱', 'plante'], 'verbformer-676-700': ['🧼', 'vaske'],
+};
+
+function picture(slug) {
+  if (PICTURES[slug]) return PICTURES[slug];
+  return slug.startsWith('verbgenkend-') ? ['🔍', ''] : ['📘', ''];
+}
+
 function listView() {
   if (sets.length === 0) return `<div class="card"><p class="muted" style="margin:0">${esc(t('empty'))}</p></div>`;
   return `<div class="card">
       <p class="muted" style="margin:0 0 .9rem">${esc(t('intro'))}</p>
       <ul id="sets">
-        ${sets.map(f => `<li>
-          <a href="/verbs?s=${encodeURIComponent(f.slug)}">${esc(f.title)}</a>
-          <span class="n">${esc(t('questions', f.questions).replace('{n}', f.questions))}</span>
-        </li>`).join('')}
+        ${sets.map((f, i) => {
+          const [pic, verb] = picture(f.slug);
+          // The golden angle keeps neighbouring sets far apart on the colour wheel.
+          const hue = Math.round((i * 137.508) % 360);
+          return `<li><a href="/verbs?s=${encodeURIComponent(f.slug)}" style="--h:${hue}">
+            <span class="pic" aria-hidden="true">${pic}</span>
+            <span class="title">${esc(f.title)}</span>
+            ${verb ? `<span class="verb" lang="da">${esc(verb)}</span>` : ''}
+            <span class="n">${esc(t('questions', f.questions).replace('{n}', f.questions))}</span>
+          </a></li>`;
+        }).join('')}
       </ul>
     </div>`;
 }
