@@ -35,6 +35,7 @@ final class ReadingSessionService
     private const VIDEO_KIND = 'video';
 
     private const VERBS_KIND = 'verbs';
+    private const GRAMMAR_KIND = 'grammar';
 
     /**
      * The task types a reading round may serve. A knowledge paper lives in the same
@@ -156,6 +157,16 @@ final class ReadingSessionService
     public function startVerbs(?int $userId, ?string $anonKey, string $slug): array
     {
         return $this->startNamedDrill(self::VERBS_KIND, $userId, $anonKey, $slug);
+    }
+
+    /**
+     * Sits one set of questions on a grammar rule as a drill, each answer explained at once.
+     *
+     * @return array{session_id: string, mode: string, points_max: int}
+     */
+    public function startGrammar(?int $userId, ?string $anonKey, string $slug): array
+    {
+        return $this->startNamedDrill(self::GRAMMAR_KIND, $userId, $anonKey, $slug);
     }
 
     /**

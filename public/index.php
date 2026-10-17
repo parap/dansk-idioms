@@ -2,6 +2,7 @@
 
 use Dansk\Controller\AdminController;
 use Dansk\Controller\AuthController;
+use Dansk\Controller\GrammarController;
 use Dansk\Controller\IndfoedsretController;
 use Dansk\Controller\QuizController;
 use Dansk\Controller\ReadingAdminController;
@@ -57,6 +58,10 @@ $dispatcher = FastRoute\simpleDispatcher(static function (RouteCollector $r): vo
     // A verb drill likewise: its own list and start, the session routes for the rest.
     $r->addRoute('GET',  '/api/v1/verbs',          'verbs.list');
     $r->addRoute('POST', '/api/v1/verbs/sessions', 'verbs.start');
+
+    // A grammar drill the same way.
+    $r->addRoute('GET',  '/api/v1/grammar',          'grammar.list');
+    $r->addRoute('POST', '/api/v1/grammar/sessions', 'grammar.start');
 
     $r->addRoute('POST', '/api/v1/reading/sessions', 'reading.start');
     $r->addRoute('GET',  '/api/v1/reading/sessions', 'reading.history');
@@ -140,6 +145,7 @@ try {
     $indfoedsret = new IndfoedsretController();
     $videos = new VideoController();
     $verbs = new VerbController();
+    $grammar = new GrammarController();
     $readingAdmin = new ReadingAdminController();
 
     match ($handler) {
@@ -237,6 +243,9 @@ try {
 
         'verbs.list'  => $verbs->list(),
         'verbs.start' => $verbs->start($body),
+
+        'grammar.list'  => $grammar->list(),
+        'grammar.start' => $grammar->start($body),
 
         'reading.start'   => $reading->start($body),
         'reading.history' => $reading->history(),

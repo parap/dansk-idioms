@@ -1,0 +1,144 @@
+kind: grammar
+slug: ordstilling-1
+title: Ordstilling og inversion
+
+--- questions ---
+1. I morgen ___ til København.
+> Глагол в главном предложении всегда стоит на втором месте. Первое место заняло «I morgen», поэтому подлежащее идёт после глагола: tager jeg. Завтра я еду в Копенгаген.
+* tager jeg
+  jeg tager
+  tager
+  jeg tage
+
+2. Hvis det regner, ___ hjemme.
+> Придаточное «Hvis det regner» занимает первое место целиком, и глагол главного предложения идёт сразу за ним, перед подлежащим: bliver vi. Если пойдёт дождь, мы останемся дома.
+* bliver vi
+  vi bliver
+  vi blive
+  blive vi
+
+3. Vælg den rigtige sætning.
+> В главном предложении ikke стоит сразу после глагола: Han kommer ikke. Он сегодня не придёт.
+* Han kommer ikke i dag.
+  Han ikke kommer i dag.
+  Ikke han kommer i dag.
+  Han i dag kommer ikke.
+
+4. Jeg ved, at han ___ i dag.
+> В придаточном (at, hvis, når, fordi, om, som) ikke и другие короткие наречия стоят перед глаголом: at han ikke kommer. Я знаю, что он сегодня не придёт.
+* ikke kommer
+  kommer ikke
+  kommer han ikke
+  ikke han kommer
+
+5. Hun siger, at hun ___ kaffe.
+> Придаточное с at: наречие aldrig перед глаголом. Она говорит, что никогда не пьёт кофе.
+* aldrig drikker
+  drikker aldrig
+  aldrig drikke
+  drikker hun aldrig
+
+6. Derfor ___ dansk hver dag.
+> «Derfor» на первом месте → глагол второй, подлежащее за ним: øver jeg. Поэтому я занимаюсь датским каждый день.
+* øver jeg
+  jeg øver
+  øver
+  jeg øve
+
+7. Hvornår ___?
+> Вопросительное слово на первом месте, глагол на втором, подлежащее после него: Hvornår kører toget? Когда отходит поезд?
+* kører toget
+  toget kører
+  kører det toget
+  toget kør
+
+8. Vælg det rigtige spørgsmål.
+> Вопрос без вопросительного слова начинается с глагола: Drikker du kaffe? Ты пьёшь кофе?
+* Drikker du kaffe?
+  Kaffe du drikker?
+  Drik du kaffe?
+  Du kaffe drikker?
+
+9. Efter skole ___ fodbold med mine venner.
+> «Efter skole» на первом месте → инверсия: spiller jeg. После школы я играю в футбол с друзьями.
+* spiller jeg
+  jeg spiller
+  spille jeg
+  jeg spille
+
+10. Vælg den rigtige sætning.
+> og, men, eller, for соединяют два главных предложения и сами ничьего места не занимают. После men порядок прямой: men jeg spiser kylling. Я не люблю рыбу, но ем курицу.
+* Jeg kan ikke lide fisk, men jeg spiser kylling.
+  Jeg kan ikke lide fisk, men spiser jeg kylling.
+  Jeg kan ikke lide fisk, men jeg kylling spiser.
+  Jeg kan ikke lide fisk, men kylling jeg spiser.
+
+11. Jeg spørger, om hun ___ med.
+> Придаточное с om: наречие også перед глаголом. Я спрашиваю, пойдёт ли она тоже.
+* også vil
+  vil også
+  vil hun også
+  også hun vil
+
+12. Den bog ___ allerede.
+> Дополнение «Den bog» вынесено вперёд, глагол-связка har остаётся вторым, подлежащее за ним: har jeg læst. Эту книгу я уже прочитал.
+* har jeg læst
+  jeg har læst
+  har læst jeg
+  jeg læst har
+
+13. Vælg den rigtige sætning.
+> В придаточном с når прямой порядок: når jeg kommer hjem. Потом главное предложение: глагол сразу после запятой — laver jeg. Когда я прихожу домой, я готовлю еду.
+* Når jeg kommer hjem, laver jeg mad.
+  Når jeg kommer hjem, jeg laver mad.
+  Når kommer jeg hjem, laver jeg mad.
+  Når jeg hjem kommer, laver jeg mad.
+
+14. Klokken syv ___ op hver morgen.
+> Время на первом месте → инверсия: står hun. В семь часов она встаёт каждое утро.
+* står hun
+  hun står
+  står
+  hun stå
+
+15. Vælg det rigtige spørgsmål.
+> Вопросительное слово, затем глагол, затем подлежащее, затем ikke: Hvorfor kommer du ikke? Почему ты не приходишь?
+* Hvorfor kommer du ikke?
+  Hvorfor du kommer ikke?
+  Hvorfor du ikke kommer?
+  Hvorfor ikke du kommer?
+
+16. Han sagde, at han ___ i Odense.
+> Придаточное с at: наречие altid перед всей глагольной группой: at han altid havde boet. Он сказал, что всегда жил в Оденсе.
+* altid havde boet
+  havde altid boet
+  havde han altid boet
+  altid boet havde
+
+17. Heldigvis ___ ikke.
+> «Heldigvis» на первом месте → инверсия: regnede det, затем ikke. К счастью, дождя не было.
+* regnede det
+  det regnede
+  regnede
+  det regne
+
+18. Vælg den rigtige sætning.
+> Главное предложение идёт первым с прямым порядком, придаточное с når — тоже с прямым: når solen skinner. Я радуюсь, когда светит солнце.
+* Jeg bliver glad, når solen skinner.
+  Jeg bliver glad, når skinner solen.
+  Jeg glad bliver, når solen skinner.
+  Glad jeg bliver, når solen skinner.
+
+19. Kan du sige mig, hvor ___?
+> Косвенный вопрос — это придаточное: подлежащее перед глаголом, без инверсии: hvor stationen ligger. Сравните прямой вопрос: Hvor ligger stationen? Не подскажете, где находится вокзал?
+* stationen ligger
+  ligger stationen
+  stationen ligge
+  ligger den stationen
+
+20. Vælg den rigtige sætning.
+> И «Først», и «så» («потом») занимают первое место в своих главных предложениях, поэтому инверсия в обоих: spiser jeg, tager jeg. Сначала я завтракаю, потом еду на работу.
+* Først spiser jeg morgenmad, og så tager jeg på arbejde.
+  Først jeg spiser morgenmad, og så jeg tager på arbejde.
+  Først spiser jeg morgenmad, og så jeg tager på arbejde.
+  Først jeg spiser morgenmad, og så tager jeg på arbejde.
