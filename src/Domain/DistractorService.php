@@ -21,6 +21,7 @@ final class DistractorService
     private const WORD_TOLERANCE = 3;
     private const JACCARD_LIMIT  = 0.34;
     private const LITERAL_SLOT_P = 40;   // percent of questions that get a literal gloss
+    private const DECOY_SLOTS    = 1;    // two would both echo the answer and single it out
 
     /** Russian function words carry no meaning for overlap comparison. */
     private const STOPWORDS = [
@@ -131,6 +132,49 @@ final class DistractorService
      */
     public function pick(array $correct, array $excludeIdioms, string $lang = 'ru', int $count = 3): array
     {
+        $decoys = array_slice($this->decoys($correct, $lang), 0, min(self::DECOY_SLOTS, $count));
+        $others = $this->pickFromPool($correct, $excludeIdioms, $lang, $count - count($decoys));
+
+        return count($others) + count($decoys) >= $count ? array_merge($decoys, $others) : [];
+    }
+
+    /**
+     * The asked idiom's own decoys, shuffled, minus any that could pass for one of its
+     * senses and any that break verb parity or the length window.
+     *
+     * @return list<array<string,mixed>>
+     */
+    private function decoys(array $correct, string $lang): array
+    {
+        $verbal = ($correct['shape'] ?? '') === 'verbal';
+        $rows = Db::fetchAll(
+            "SELECT d.id AS decoy_id, d.idiom_id, d.text, d.text_norm, d.shape
+             FROM idiom_decoys d
+             WHERE d.idiom_id = ? AND d.lang_code = ? AND d.is_active = 1
+               AND ABS(CAST(d.word_count AS SIGNED) - ?) <= " . self::WORD_TOLERANCE
+            . ($verbal ? " AND d.shape = 'verbal'" : " AND d.shape <> 'verbal'"),
+            [(int) $correct['idiom_id'], $lang, (int) $correct['word_count']]
+        );
+
+        $senses = Db::fetchAll(
+            "SELECT text FROM idiom_translations
+             WHERE idiom_id = ? AND lang_code = ? AND sense_type <> 'literal'",
+            [(int) $correct['idiom_id'], $lang]
+        );
+        foreach ($senses as $sense) {
+            $rows = $this->rejectNearDuplicates($rows, (string) $sense['text']);
+        }
+
+        shuffle($rows);
+        return $rows;
+    }
+
+    /** @return list<array<string,mixed>> */
+    private function pickFromPool(array $correct, array $excludeIdioms, string $lang, int $count): array
+    {
+        if ($count === 0) {
+            return [];
+        }
         $pool = $this->candidatePool($correct, $excludeIdioms, $lang);
         $pool = $this->rejectNearDuplicates($pool, (string) $correct['text']);
 

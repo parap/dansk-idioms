@@ -74,7 +74,7 @@ final class QuizService
                     json_encode(array_map(
                         static fn(array $o, int $i): array => [
                             'i' => $i, 'ref' => $o['ref'], 'text' => $o['text'],
-                        ],
+                        ] + (isset($o['decoy']) ? ['decoy' => $o['decoy']] : []),
                         $options, array_keys($options)
                     ), JSON_UNESCAPED_UNICODE),
                     $correctIndex,
@@ -104,7 +104,9 @@ final class QuizService
 
         $options = [['ref' => (int) $correct['id'], 'text' => (string) $correct['text'], 'correct' => true]];
         foreach ($distractors as $d) {
-            $options[] = ['ref' => (int) $d['id'], 'text' => (string) $d['text'], 'correct' => false];
+            $options[] = isset($d['decoy_id'])
+                ? ['ref' => null, 'decoy' => (int) $d['decoy_id'], 'text' => (string) $d['text'], 'correct' => false]
+                : ['ref' => (int) $d['id'], 'text' => (string) $d['text'], 'correct' => false];
         }
         return $options;
     }
@@ -238,6 +240,66 @@ final class QuizService
             ],
             'next_position' => $answered ? null : $position + 1,
         ];
+    }
+
+    /**
+     * Records a report against a question; false when there is no such question.
+     * An "also correct" report on a distractor counts towards blocking it.
+     */
+    public function report(string $publicId, int $position, string $reason): bool
+    {
+        $row = Db::fetchOne(
+            'SELECT q.id, q.correct_tr_id, q.chosen_index, q.options, s.direction
+             FROM quiz_questions q JOIN quiz_sessions s ON s.id = q.session_id
+             WHERE s.public_id = ? AND q.position = ?',
+            [$publicId, $position]
+        );
+        if ($row === null) {
+            return false;
+        }
+
+        Db::execute('UPDATE quiz_questions SET reported = 1 WHERE id = ?', [(int) $row['id']]);
+
+        if ($reason === 'also_correct' && $row['chosen_index'] !== null) {
+            $options = json_decode((string) $row['options'], true) ?: [];
+            $blocked = null;
+            foreach ($options as $o) {
+                if ((int) $o['i'] !== (int) $row['chosen_index']) {
+                    continue;
+                }
+                if (isset($o['decoy'])) {
+                    // report_count on the right of the IF is already incremented.
+                    Db::execute(
+                        'UPDATE idiom_decoys SET report_count = report_count + 1,
+                                is_active = IF(report_count >= 2, 0, is_active) WHERE id = ?',
+                        [(int) $o['decoy']]
+                    );
+                    break;
+                }
+                // Blocks are recorded between translations. Going forward the option
+                // already is one; going back it is an idiom, so resolve its primary.
+                $blocked = $row['direction'] === self::REVERSE
+                    ? (int) Db::fetchValue(
+                        'SELECT id FROM idiom_translations
+                         WHERE idiom_id = ? AND is_primary = 1 LIMIT 1',
+                        [(int) $o['ref']]
+                    )
+                    : (int) $o['ref'];
+                break;
+            }
+            if ($blocked !== null && $blocked !== (int) $row['correct_tr_id']) {
+                // Two independent reports activate the block automatically.
+                Db::execute(
+                    "INSERT INTO distractor_blocks (correct_tr_id, blocked_tr_id, reason, report_count, is_active)
+                     VALUES (?,?, 'reported', 1, 0)
+                     ON DUPLICATE KEY UPDATE
+                        report_count = report_count + 1,
+                        is_active = IF(report_count + 1 >= 2, 1, is_active)",
+                    [(int) $row['correct_tr_id'], $blocked]
+                );
+            }
+        }
+        return true;
     }
 
     public function result(string $publicId): ?array

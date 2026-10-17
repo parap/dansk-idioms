@@ -54,6 +54,30 @@ It is separate from the entry files because it describes relationships over the 
 corpus, which this repository cannot reproduce. A group naming an idiom that is not
 present is skipped rather than fatal, so a fresh database still loads.
 
+## `decoys.json`
+
+Wrong answers written for one idiom out of its own words, keyed by term:
+
+```json
+{"Tredje alder": ["третий лишний", "переходный возраст", "трудный возраст"]}
+```
+
+Distractors drawn from other idioms share no words with the prompt, so a learner who knows
+`tredje` picks «третий возраст» without knowing the idiom. A question gets one of the idiom's
+decoys, at random. Two would give the answer away: it is then the one option sharing a word with
+both.
+
+- **Built from the literal words of the term**, as a phrase a Russian reader knows or finds
+  plausible. For an idiom whose meaning has nothing to do with its words (`at gå agurk`), the
+  decoy is the literal reading's trap — «идти за огурцами».
+- **Same shape as the answer**: a verb phrase for a verbal answer, otherwise not, and within
+  three words of its length. A decoy that breaks either is never offered.
+- **Clearly wrong.** A decoy matching one of the idiom's own senses is dropped by the picker,
+  but a near-synonym is not, and a learner is then marked down for being right. Two "also
+  correct" reports retire a decoy, and a reload never revives it.
+- The file is the whole truth: a decoy removed from it is deleted. A term not in the corpus is
+  skipped, as in `synonyms.json`.
+
 ## Why the audit matters
 
 The distractor picker excludes options belonging to the idiom being asked about — but not

@@ -47,6 +47,16 @@ if (is_file($synonymFile) && !in_array($synonymFile, $files, true)) {
     }
 }
 
+$decoyFile = IdiomFile::decoyFile(__DIR__ . '/../content/idioms');
+if (is_file($decoyFile) && !in_array($decoyFile, $files, true)) {
+    try {
+        printf("  %-32s ok  %d decoy(s)\n", basename($decoyFile), $loader->loadDecoys($decoyFile));
+    } catch (InvalidArgumentException $e) {
+        printf("  %-32s rejected: %s\n", basename($decoyFile), $e->getMessage());
+        $failed++;
+    }
+}
+
 printf(
     "\n  corpus: %d published idioms, %d quiz-usable translations\n",
     (int) Db::fetchValue('SELECT COUNT(*) FROM idioms WHERE is_published = 1'),
