@@ -240,6 +240,57 @@ final class QuizService
         ];
     }
 
+    /**
+     * Records a report against a question; false when there is no such question.
+     * An "also correct" report on a distractor counts towards blocking it.
+     */
+    public function report(string $publicId, int $position, string $reason): bool
+    {
+        $row = Db::fetchOne(
+            'SELECT q.id, q.correct_tr_id, q.chosen_index, q.options, s.direction
+             FROM quiz_questions q JOIN quiz_sessions s ON s.id = q.session_id
+             WHERE s.public_id = ? AND q.position = ?',
+            [$publicId, $position]
+        );
+        if ($row === null) {
+            return false;
+        }
+
+        Db::execute('UPDATE quiz_questions SET reported = 1 WHERE id = ?', [(int) $row['id']]);
+
+        if ($reason === 'also_correct' && $row['chosen_index'] !== null) {
+            $options = json_decode((string) $row['options'], true) ?: [];
+            $blocked = null;
+            foreach ($options as $o) {
+                if ((int) $o['i'] !== (int) $row['chosen_index']) {
+                    continue;
+                }
+                // Blocks are recorded between translations. Going forward the option
+                // already is one; going back it is an idiom, so resolve its primary.
+                $blocked = $row['direction'] === self::REVERSE
+                    ? (int) Db::fetchValue(
+                        'SELECT id FROM idiom_translations
+                         WHERE idiom_id = ? AND is_primary = 1 LIMIT 1',
+                        [(int) $o['ref']]
+                    )
+                    : (int) $o['ref'];
+                break;
+            }
+            if ($blocked !== null && $blocked !== (int) $row['correct_tr_id']) {
+                // Two independent reports activate the block automatically.
+                Db::execute(
+                    "INSERT INTO distractor_blocks (correct_tr_id, blocked_tr_id, reason, report_count, is_active)
+                     VALUES (?,?, 'reported', 1, 0)
+                     ON DUPLICATE KEY UPDATE
+                        report_count = report_count + 1,
+                        is_active = IF(report_count + 1 >= 2, 1, is_active)",
+                    [(int) $row['correct_tr_id'], $blocked]
+                );
+            }
+        }
+        return true;
+    }
+
     public function result(string $publicId): ?array
     {
         $session = Db::fetchOne(
