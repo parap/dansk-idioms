@@ -17,7 +17,9 @@ docker-compose exec app vendor/bin/phpunit
 python3 bin/prove-tests-red.py --changed     # the gate before a commit
 ```
 
-The full `prove-tests-red.py` run, about half an hour, goes before a deploy.
+The full `prove-tests-red.py` run, over an hour, never blocks a deploy: it judges the tests, not
+the code. Deploy once `--changed` is green, start the full run in the background, and fix a
+surviving fault in a follow-up commit.
 
 ## The dev stack mounts this checkout, not a worktree
 

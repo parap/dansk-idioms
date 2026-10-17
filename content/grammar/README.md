@@ -37,4 +37,5 @@ docker-compose exec app php bin/reading-import.php --publish content/grammar/*.t
 ```
 
 The deploy loads the directory without `--publish`, so a new set reaches the server
-unpublished and is published there by hand, the same as a verb set.
+unpublished. `--publish` skips a set already loaded, so on the server a set no round has served
+yet is published with `--replace --publish`.
