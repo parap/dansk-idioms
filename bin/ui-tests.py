@@ -42,6 +42,13 @@ SEED_PHP = r"""
     Db::execute("UPDATE reading_passages SET is_published = 0");
     $repo = new ReadingRepository();
 
+    // Every fixture is rebuilt each run, with the rounds sat on it: one left over from an
+    // older run -- or carried in by a copy of another database -- would be checked instead.
+    Db::execute("DELETE s FROM reading_sessions s WHERE EXISTS (
+                     SELECT 1 FROM reading_session_items si JOIN reading_passages p ON p.id = si.passage_id
+                      WHERE si.session_id = s.id AND p.slug LIKE 'ui-fixture%')");
+    Db::execute("DELETE FROM reading_passages WHERE slug LIKE 'ui-fixture%'");
+
     // Db::fetchValue hands back PDO's false for a missing row, never null.
     if (!Db::fetchValue("SELECT id FROM reading_passages WHERE slug = 'ui-fixture'")) {
         $repo->save([
@@ -125,12 +132,6 @@ SEED_PHP = r"""
             ],
         ]);
     }
-    // The verb fixture is rebuilt each run, so its prompts follow the drills' current format;
-    // its rounds go with it, being the interface checks' own.
-    Db::execute("DELETE s FROM reading_sessions s WHERE EXISTS (
-                     SELECT 1 FROM reading_session_items si JOIN reading_passages p ON p.id = si.passage_id
-                      WHERE si.session_id = s.id AND p.slug = 'ui-fixture-verbs')");
-    Db::execute("DELETE FROM reading_passages WHERE slug = 'ui-fixture-verbs'");
     if (!Db::fetchValue("SELECT id FROM reading_passages WHERE slug = 'ui-fixture-verbs'")) {
         $repo->save([
             'slug' => 'ui-fixture-verbs', 'kind' => 'verbs', 'title' => 'UI fixture verbs', 'body' => null,
@@ -149,6 +150,22 @@ SEED_PHP = r"""
             ],
         ]);
     }
+    $repo->save([
+        'slug' => 'ui-fixture-grammar', 'kind' => 'grammar', 'title' => 'UI fixture grammar', 'body' => null,
+        'items' => [
+            ['position' => 1, 'prompt' => 'I går ___ jeg en ny jakke. (købe)',
+             'note' => '«I går» — законченный момент в прошлом → datid.', 'options' => [
+                ['label' => 'A', 'text' => 'købte', 'correct' => true],
+                ['label' => 'B', 'text' => 'har købt'],
+                ['label' => 'C', 'text' => 'køber'],
+            ]],
+            ['position' => 2, 'prompt' => 'Vælg den rigtige sætning.', 'note' => 'ikke после глагола.', 'options' => [
+                ['label' => 'A', 'text' => 'Han kommer ikke.', 'correct' => true],
+                ['label' => 'B', 'text' => 'Han ikke kommer.'],
+                ['label' => 'C', 'text' => 'Ikke han kommer.'],
+            ]],
+        ],
+    ]);
     echo json_encode(array_column($hidden, "id"));
 """
 
@@ -1184,6 +1201,57 @@ def an_unknown_verb_set_says_it_does_not_exist(b):
 
 
 @check
+def the_start_page_offers_the_grammar_drills(b):
+    b.goto('/')
+    b.until('!!document.querySelector(".cta")', what='the start page')
+    assert b.js('!!document.querySelector("a.cta[href=\'/grammar\']")'), 'no way to reach /grammar'
+
+
+@check
+def the_grammar_list_links_every_published_set(b):
+    only(['grammar'])
+    b.goto('/grammar')
+    b.until('!!document.querySelector("#sets")', what='the grammar set list')
+    assert b.js('!!document.querySelector("#sets a[href=\'/grammar?s=ui-fixture-grammar\'] .pic")'), \
+        'the fixture set is not listed with a picture'
+
+
+def open_grammar_set(b):
+    only(['grammar'])
+    b.goto('/grammar?s=ui-fixture-grammar')
+    b.until('document.querySelectorAll(".q").length === 2', what='the grammar questions')
+
+
+@check
+def a_grammar_question_draws_its_gap(b):
+    open_grammar_set(b)
+    first = b.js('document.querySelector(\'.q[data-pos="1"] p\').textContent')
+    assert '___' not in first, 'the gap is printed as underscores'
+    assert b.js('!!document.querySelector(\'.q[data-pos="1"] p .gap\')'), 'the gap is not drawn'
+
+
+@check
+def a_grammar_answer_is_marked_and_explained(b):
+    open_grammar_set(b)
+    assert not b.js('!!document.querySelector(".note")'), 'the explanation is shown before the answer'
+    wrong = (correct_indexes()[0] + 1) % 3
+    b.js(f'document.querySelector(\'.q[data-pos="1"] .opt[data-i="{wrong}"]\').click()')
+    b.until('!!document.querySelector(\'.q[data-pos="1"] .note\')', what='the explanation after the answer')
+    assert b.js('!!document.querySelector(\'.q[data-pos="1"] .opt.wrong\')'), 'the wrong answer is not marked'
+    assert b.js('!!document.querySelector(\'.q[data-pos="1"] .opt.right\')'), 'the right answer is not revealed'
+    assert 'datid' in b.js('document.querySelector(\'.q[data-pos="1"] .note\').textContent')
+    b.until('/0\\s*\\/\\s*2/.test(document.querySelector("#score").textContent)', what='the score 0 / 2')
+
+
+@check
+def an_unknown_grammar_set_says_it_does_not_exist(b):
+    only(['grammar'])
+    b.goto('/grammar?s=ingen-saadan')
+    b.until('!!document.querySelector("#missing")', what='the missing-set notice')
+    assert b.js('!!document.querySelector("#missing a.cta[href=\'/grammar\']")'), 'the notice has no back button'
+
+
+@check
 def the_buttons_carry_no_forward_arrow(b):
     for path in ('/', '/listen'):
         b.goto(path)
@@ -1196,7 +1264,7 @@ def the_buttons_carry_no_forward_arrow(b):
 def every_page_carries_the_way_home(b):
     """The mark is the way back, so it is the same mark everywhere and it sits where a
     reader looks for it: first in the header, top left."""
-    for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs'):
+    for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs', '/grammar'):
         b.goto(path)
         b.until('!!document.querySelector(".brand")', what='the brand on ' + path)
         assert b.js('document.querySelector(".brand").getAttribute("href")') == '/', path
@@ -1221,7 +1289,7 @@ def every_page_offers_the_same_languages(b):
     """A language offered on one page and missing on the next drops the reader back into
     Russian halfway through the site, and the fallback is silent."""
     try:
-        for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs'):
+        for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs', '/grammar'):
             b.goto(path)
             b.until('!!document.querySelector(".lang")', what='the language switch on ' + path)
             assert offered_languages(b) == LANGUAGES, f'{path} offers {offered_languages(b)}'
@@ -1382,7 +1450,7 @@ def the_public_listener_does_not_serve_the_admin_surface(b):
 # belongs on <html> and every run of Danish needs lang="da" of its own; otherwise Danish is
 # read aloud with a Russian voice. WCAG 3.1.1, 3.1.2, 1.4.3 and 2.4.1.
 
-PAGES = ['/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs']
+PAGES = ['/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs', '/grammar']
 
 
 def open_in(b, path, ui_lang='ru'):
@@ -1477,6 +1545,13 @@ def the_options_of_a_verb_drill_are_marked_danish(b):
     open_in(b, '/verbs')
     open_verb_set(b)
     assert_danish_marked(b, ['.q .opt'], ['#title'])
+
+
+@check
+def a_grammar_drill_marks_its_danish(b):
+    open_in(b, '/grammar')
+    open_grammar_set(b)
+    assert_danish_marked(b, ['.q p [lang="da"]', '.q .opt'], ['#title'])
 
 
 @check

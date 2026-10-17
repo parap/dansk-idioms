@@ -33,12 +33,12 @@ namespace Dansk\Domain\Reading;
  */
 final class PassageDocument
 {
-    private const KINDS = ['mc', 'insert', 'cloze', 'quiz', 'video', 'verbs'];
+    private const KINDS = ['mc', 'insert', 'cloze', 'quiz', 'video', 'verbs', 'grammar'];
 
     private const GAP_KINDS = ['insert', 'cloze'];
 
-    /** A knowledge paper, a film and a verb drill are questions alone: there is nothing to read before answering. */
-    private const TEXTLESS_KINDS = ['quiz', 'video', 'verbs'];
+    /** A knowledge paper, a film and a verb or grammar drill are questions alone: there is nothing to read before answering. */
+    private const TEXTLESS_KINDS = ['quiz', 'video', 'verbs', 'grammar'];
 
     /** Only the knowledge paper divides its questions into the exam's blocks. */
     private const BLOCK_KINDS = ['quiz'];
