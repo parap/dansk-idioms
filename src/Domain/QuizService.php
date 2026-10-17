@@ -74,7 +74,7 @@ final class QuizService
                     json_encode(array_map(
                         static fn(array $o, int $i): array => [
                             'i' => $i, 'ref' => $o['ref'], 'text' => $o['text'],
-                        ],
+                        ] + (isset($o['decoy']) ? ['decoy' => $o['decoy']] : []),
                         $options, array_keys($options)
                     ), JSON_UNESCAPED_UNICODE),
                     $correctIndex,
@@ -104,7 +104,9 @@ final class QuizService
 
         $options = [['ref' => (int) $correct['id'], 'text' => (string) $correct['text'], 'correct' => true]];
         foreach ($distractors as $d) {
-            $options[] = ['ref' => (int) $d['id'], 'text' => (string) $d['text'], 'correct' => false];
+            $options[] = isset($d['decoy_id'])
+                ? ['ref' => null, 'decoy' => (int) $d['decoy_id'], 'text' => (string) $d['text'], 'correct' => false]
+                : ['ref' => (int) $d['id'], 'text' => (string) $d['text'], 'correct' => false];
         }
         return $options;
     }
@@ -264,6 +266,15 @@ final class QuizService
             foreach ($options as $o) {
                 if ((int) $o['i'] !== (int) $row['chosen_index']) {
                     continue;
+                }
+                if (isset($o['decoy'])) {
+                    // report_count on the right of the IF is already incremented.
+                    Db::execute(
+                        'UPDATE idiom_decoys SET report_count = report_count + 1,
+                                is_active = IF(report_count >= 2, 0, is_active) WHERE id = ?',
+                        [(int) $o['decoy']]
+                    );
+                    break;
                 }
                 // Blocks are recorded between translations. Going forward the option
                 // already is one; going back it is an idiom, so resolve its primary.

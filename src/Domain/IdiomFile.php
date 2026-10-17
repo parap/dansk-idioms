@@ -2,6 +2,7 @@
 
 namespace Dansk\Domain;
 
+use Dansk\Import\Classifier;
 use Dansk\Import\Normalizer;
 use Dansk\Import\Text;
 use Dansk\Support\Db;
@@ -37,6 +38,9 @@ final class IdiomFile
      */
     public const GROUP_FILE = 'synonyms.json';
 
+    /** Wrong answers keyed by term, read by loadDecoys() and never by load(). */
+    public const DECOY_FILE = 'decoys.json';
+
     /**
      * The entry files of a content directory.
      *
@@ -46,13 +50,18 @@ final class IdiomFile
     {
         return array_values(array_filter(
             glob(rtrim($dir, '/') . '/*.json') ?: [],
-            static fn(string $f): bool => basename($f) !== self::GROUP_FILE
+            static fn(string $f): bool => !in_array(basename($f), [self::GROUP_FILE, self::DECOY_FILE], true)
         ));
     }
 
     public static function groupFile(string $dir): string
     {
         return rtrim($dir, '/') . '/' . self::GROUP_FILE;
+    }
+
+    public static function decoyFile(string $dir): string
+    {
+        return rtrim($dir, '/') . '/' . self::DECOY_FILE;
     }
 
     public function __construct(private ReviewRepository $idioms = new ReviewRepository()) {}
@@ -149,14 +158,80 @@ final class IdiomFile
         return $declared;
     }
 
+    /**
+     * Loads Russian decoys from a JSON object of term => list of wrong answers.
+     *
+     *     {"Tredje alder": ["третий лишний", "переходный возраст"]}
+     *
+     * The file is the whole truth: a decoy missing from it is deleted. A term not in the
+     * corpus is skipped, as in the synonym file. A retired decoy stays retired.
+     *
+     * @return int the number of decoys stored
+     */
+    public function loadDecoys(string $path): int
+    {
+        if (!is_file($path)) {
+            throw new InvalidArgumentException("No such decoy file: {$path}");
+        }
+
+        $byTerm = json_decode((string) file_get_contents($path), true);
+        if (!is_array($byTerm) || ($byTerm !== [] && array_is_list($byTerm))) {
+            throw new InvalidArgumentException(
+                basename($path) . ' must contain a JSON object of term => list of decoys.'
+            );
+        }
+
+        $classifier = new Classifier();
+        $kept = [];
+        foreach ($byTerm as $term => $decoys) {
+            $idiomId = $this->idOf((string) $term);
+            if ($idiomId === null) {
+                continue;
+            }
+            foreach ($this->strings($decoys) as $decoy) {
+                $decoy = Text::collapseWhitespace($decoy);
+                if (!Text::hasCyrillic($decoy)) {
+                    throw new InvalidArgumentException(basename($path) . ": '{$term}' — decoy '{$decoy}' is not Russian.");
+                }
+                $norm = Normalizer::translation($decoy);
+                Db::execute(
+                    "INSERT INTO idiom_decoys (idiom_id, lang_code, text, text_norm, shape, word_count, char_count)
+                     VALUES (?, 'ru', ?, ?, ?, ?, ?)
+                     ON DUPLICATE KEY UPDATE text = VALUES(text), shape = VALUES(shape),
+                        word_count = VALUES(word_count), char_count = VALUES(char_count)",
+                    [$idiomId, $decoy, $norm, $classifier->translationShape($decoy),
+                     Text::wordCount($decoy), mb_strlen($decoy, 'UTF-8')]
+                );
+                $kept[] = (int) Db::fetchValue(
+                    "SELECT id FROM idiom_decoys WHERE idiom_id = ? AND lang_code = 'ru' AND text_norm = ?",
+                    [$idiomId, $norm]
+                );
+            }
+        }
+
+        $kept = array_values(array_unique($kept));
+        Db::execute(
+            "DELETE FROM idiom_decoys WHERE lang_code = 'ru'"
+            . ($kept === [] ? '' : ' AND id NOT IN (' . implode(',', array_fill(0, count($kept), '?')) . ')'),
+            $kept
+        );
+
+        return count($kept);
+    }
+
     private function known(string $term): bool
+    {
+        return $this->idOf($term) !== null;
+    }
+
+    private function idOf(string $term): ?int
     {
         $id = Db::fetchValue(
             "SELECT id FROM idioms WHERE lang_code = 'da' AND term_norm = ?",
             [Normalizer::term(Text::collapseWhitespace($term))]
         );
 
-        return $id !== false && $id !== null;
+        return $id === false || $id === null ? null : (int) $id;
     }
 
     /**
