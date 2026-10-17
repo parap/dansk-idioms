@@ -42,6 +42,13 @@ SEED_PHP = r"""
     Db::execute("UPDATE reading_passages SET is_published = 0");
     $repo = new ReadingRepository();
 
+    // Every fixture is rebuilt each run, with the rounds sat on it: one left over from an
+    // older run -- or carried in by a copy of another database -- would be checked instead.
+    Db::execute("DELETE s FROM reading_sessions s WHERE EXISTS (
+                     SELECT 1 FROM reading_session_items si JOIN reading_passages p ON p.id = si.passage_id
+                      WHERE si.session_id = s.id AND p.slug LIKE 'ui-fixture%')");
+    Db::execute("DELETE FROM reading_passages WHERE slug LIKE 'ui-fixture%'");
+
     // Db::fetchValue hands back PDO's false for a missing row, never null.
     if (!Db::fetchValue("SELECT id FROM reading_passages WHERE slug = 'ui-fixture'")) {
         $repo->save([
@@ -125,12 +132,6 @@ SEED_PHP = r"""
             ],
         ]);
     }
-    // The verb fixture is rebuilt each run, so its prompts follow the drills' current format;
-    // its rounds go with it, being the interface checks' own.
-    Db::execute("DELETE s FROM reading_sessions s WHERE EXISTS (
-                     SELECT 1 FROM reading_session_items si JOIN reading_passages p ON p.id = si.passage_id
-                      WHERE si.session_id = s.id AND p.slug = 'ui-fixture-verbs')");
-    Db::execute("DELETE FROM reading_passages WHERE slug = 'ui-fixture-verbs'");
     if (!Db::fetchValue("SELECT id FROM reading_passages WHERE slug = 'ui-fixture-verbs'")) {
         $repo->save([
             'slug' => 'ui-fixture-verbs', 'kind' => 'verbs', 'title' => 'UI fixture verbs', 'body' => null,
