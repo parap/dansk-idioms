@@ -188,6 +188,13 @@ final class DecoyTest extends IntegrationTestCase
         self::assertSame([], $this->offered($id));
     }
 
+    public function testTheShippedDecoyFileLoads(): void
+    {
+        $this->repo->addByHand('Tredje alder', 'третий возраст');
+
+        self::assertGreaterThan(0, $this->loader->loadDecoys(IdiomFile::decoyFile(dirname(__DIR__, 2) . '/content/idioms')));
+    }
+
     public function testTheDecoyFileIsNotAnEntryFile(): void
     {
         $dir = sys_get_temp_dir() . '/decoy-entry-' . getmypid();
