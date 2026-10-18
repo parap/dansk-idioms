@@ -1,0 +1,70 @@
+kind: mc
+slug: du3m4-v3-opg4-hverdag
+paper: du3m4-v3
+title: Seks korte tekster fra hverdagen 3
+
+--- text ---
+Tekst 1. Fra bibliotekets hjemmeside
+
+Du kan låne op til 50 bøger ad gangen. Lånetiden er 30 dage, og du kan forny dine lån på
+nettet, hvis ingen andre har reserveret bogen. Afleverer du for sent, sender vi en
+påmindelse. Efter 14 dage koster det 20 kroner pr. bog.
+
+Tekst 2. Besked fra en kollega
+
+Hej Sara. Jeg er desværre blevet syg og kommer ikke i morgen. Kan du tage mødet med
+kunden klokken 10? Alle papirerne ligger i den blå mappe på mit skrivebord. Tak! Kh Mads
+
+Tekst 3. Opslag om affald
+
+Fra den 1. marts skal madaffald sorteres for sig. Brug den grønne pose, og læg den i den
+brune spand. Poserne er gratis og kan hentes på genbrugsstationen eller i Netto. Den
+almindelige skraldespand bliver nu kun tømt hver anden uge.
+
+Tekst 4. Fra lægevagtens hjemmeside
+
+Ring altid til lægevagten, før du kommer. Vi har ikke åbent for patienter uden en aftale.
+Hvis det er livstruende, skal du ringe 112. Lægevagten har åbent på hverdage fra kl. 16 til
+kl. 8 og hele døgnet i weekender og på helligdage.
+
+Tekst 5. Sms fra en veninde
+
+Hej Nadia! Tak for i går, det var en dejlig aften. Jeg tror, jeg glemte mit tørklæde hos
+dig. Det er det røde. Kan du tage det med på arbejde på mandag? Knus Lise
+
+Tekst 6. Fra banken
+
+Fra den 1. oktober kan du ikke længere hæve kontanter i filialen på Torvet. Du kan stadig
+hæve penge i automaten uden for filialen døgnet rundt. Har du brug for at tale med en
+rådgiver, kan du bestille tid i appen.
+
+--- questions ---
+1. Tekst 1: Hvornår skal man betale for en bog?
+  Når man fornyer et lån på nettet.
+* Når bogen er 14 dage for sent.
+  Når man låner mere end 50 bøger.
+
+2. Tekst 2: Hvad beder Mads Sara om?
+* At holde mødet i stedet for ham.
+  At ringe til kunden og aflyse mødet.
+  At komme med papirerne til ham.
+
+3. Tekst 3: Hvad står der i opslaget?
+  Den almindelige skraldespand bliver tømt oftere.
+  Man skal købe de grønne poser i Netto.
+* Madaffaldet skal i en særlig pose.
+
+4. Tekst 4: Hvad skal man gøre, før man tager til lægevagten?
+* Ringe til lægevagten.
+  Ringe 112.
+  Bestille tid på nettet.
+
+5. Tekst 5: Hvorfor skriver Lise til Nadia?
+  Hun vil invitere Nadia på mandag.
+* Hun har glemt noget hos Nadia.
+  Hun har fundet Nadias tørklæde.
+
+6. Tekst 6: Hvad ændrer sig fra den 1. oktober?
+  Automaten uden for filialen lukker.
+  Man kan ikke længere tale med en rådgiver.
+* Man kan ikke hæve kontanter inde i filialen.

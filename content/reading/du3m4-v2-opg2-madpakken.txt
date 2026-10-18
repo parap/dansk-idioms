@@ -1,5 +1,6 @@
 kind: insert
 slug: du3m4-v2-opg2-madpakken
+paper: du3m4-v2
 title: Danskernes madpakke
 
 --- text ---

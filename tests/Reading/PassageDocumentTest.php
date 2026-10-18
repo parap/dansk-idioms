@@ -511,4 +511,70 @@ final class PassageDocumentTest extends TestCase
 
         (new PassageDocument())->parse(str_replace("--- questions ---\n", "--- questions ---\n> ingen\n", self::VERBS));
     }
+    private const WRITE = <<<'DOC'
+        kind: write
+        slug: du3m4-v1-opg3-gartner
+        paper: du3m4-v1
+        title: Thomas er gartner
+
+        --- text ---
+        Jeg har ingen ansatte, {{1}} jeg har mange kunder. Han har en kollega, {{2}} hjælper ham.
+
+        --- questions ---
+        1.
+        men
+        > men соединяет два главных предложения.
+
+        2.
+        der
+        som
+        DOC;
+
+    /** Every line under a written gap is an answer it accepts; the first is the one a review shows. */
+    public function testAWrittenGapAcceptsEveryAnswerListedUnderIt(): void
+    {
+        $doc = (new PassageDocument())->parse(self::WRITE);
+
+        self::assertSame('write', $doc['kind']);
+        self::assertSame(['der', 'som'], array_column($doc['items'][1]['options'], 'text'));
+        self::assertTrue($doc['items'][1]['options'][0]['correct'] ?? false);
+        self::assertArrayNotHasKey('correct', $doc['items'][1]['options'][1]);
+        self::assertSame('men соединяет два главных предложения.', $doc['items'][0]['note']);
+    }
+
+    public function testAWrittenGapTakesNoStar(): void
+    {
+        $this->expectException(InvalidPassage::class);
+        $this->expectExceptionMessageMatches('/star/');
+
+        (new PassageDocument())->parse(str_replace("2.\nder\n", "2.\n* der\n", self::WRITE));
+    }
+
+    public function testAWrittenGapNeedsAnAnswer(): void
+    {
+        $this->expectException(InvalidPassage::class);
+
+        (new PassageDocument())->parse(str_replace("1.\nmen\n", "1.\n", self::WRITE));
+    }
+
+    public function testAWrittenTaskNeedsItsGapsInTheText(): void
+    {
+        $this->expectException(InvalidPassage::class);
+
+        (new PassageDocument())->parse(str_replace('{{2}}', '', self::WRITE));
+    }
+
+    /** The paper header groups a variant's tasks; a passage without one belongs to none. */
+    public function testThePaperHeaderNamesTheVariantATaskBelongsTo(): void
+    {
+        self::assertSame('du3m4-v1', (new PassageDocument())->parse(self::WRITE)['paper']);
+        self::assertNull((new PassageDocument())->parse(self::CLOZE)['paper']);
+    }
+
+    public function testRefusesAPaperNameThatIsNotASlug(): void
+    {
+        $this->expectException(InvalidPassage::class);
+
+        (new PassageDocument())->parse(str_replace('paper: du3m4-v1', 'paper: Variant 1', self::WRITE));
+    }
 }

@@ -1,0 +1,90 @@
+kind: cloze
+slug: du3m4-v4-opg1-jul
+paper: du3m4-v4
+title: Jul på dansk
+
+--- text ---
+For mange udlændinge er den danske jul en overraskelse. Den varer nemlig ikke kun et par
+dage, men næsten hele december. Allerede i november begynder byerne at {{1}} julelys op,
+og i supermarkederne kan man købe julesmåkager, længe før det bliver december.
+
+Den vigtigste aften er juleaften den 24. december. Her samles familien og spiser
+flæskesteg eller and med brune kartofler og rødkål. Til dessert får man risalamande, og
+{{2}} der finder den hele mandel i skålen, vinder en lille gave. Mange familier gemmer
+mandlen så længe, at alle andre har spist {{3}} portion.
+
+Efter maden danser familien rundt om juletræet og synger julesalmer. Det kan virke
+mærkeligt for gæster, {{4}} de fleste synes, det er hyggeligt, når de først har prøvet
+det. Bagefter åbner man gaverne, og det kan godt tage flere timer, især i familier med
+mange børn.
+
+I december holder næsten alle arbejdspladser også julefrokost. Det er en fest, hvor
+kollegerne spiser sild, frikadeller og andre traditionelle retter, og der bliver {{5}}
+drukket både øl og snaps. Julefrokosten er kendt for at være en aften, hvor man lærer
+sine kolleger at kende på en ny {{6}}.
+
+Børnene har deres egne traditioner. Mange får en julekalender med en lille gave hver
+dag fra den 1. til den 24. december, og i fjernsynet er der en julekalender for børn,
+{{7}} hele familien ser sammen.
+
+Selvom julen er en hyggelig tid, kan den også være stressende. Mange bruger mange
+penge på gaver, og nogle føler sig {{8}}, fordi de ikke har nogen familie at holde jul
+med. Derfor holder flere foreninger og kirker et gratis julemåltid for alle, der har
+lyst.
+
+--- questions ---
+1.
+* hænge
+  sætte sig
+  stå
+  ligge
+> hænge julelys op — развешивать рождественские гирлянды. Уже в ноябре города начинают развешивать гирлянды.
+
+2.
+* den
+  det
+  hvad
+  hvis
+> den, der… — тот, кто… Тот, кто найдёт целый миндаль, выигрывает маленький подарок.
+
+3.
+* deres
+  dens
+  sit
+  hans
+> Все остальные съели свою порцию: подлежащее alle andre — множественное, поэтому deres (sin/sit здесь не подходят: они относятся к подлежащему в единственном числе). Многие прячут миндаль, пока все остальные не съедят свою порцию.
+
+4.
+* men
+  fordi
+  så
+  hvis
+> Противопоставление — men. Это может показаться гостям странным, но большинство считает это уютным, когда попробует.
+
+5.
+* også
+  aldrig
+  ikke
+  heller ikke
+> Пьют и пиво, и шнапс — også. На корпоративе пьют и пиво, и шнапс.
+
+6.
+* måde
+  maner
+  vis måde
+  mode
+> på en ny måde — по-новому. Узнать коллег с новой стороны.
+
+7.
+* som
+  hvor
+  hvad
+  hvis
+> Календарь — дополнение (вся семья смотрит его) → som. Рождественский календарь для детей, который смотрит вся семья.
+
+8.
+* ensomme
+  ensom
+  alene om
+  ensomhed
+> føle sig + прилагательное во мн. числе (nogle) → ensomme. Некоторые чувствуют себя одинокими.

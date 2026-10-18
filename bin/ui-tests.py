@@ -166,6 +166,24 @@ SEED_PHP = r"""
             ]],
         ],
     ]);
+    // A Modultest paper of two tasks: a cloze and a written gap.
+    $repo->save([
+        'slug' => 'ui-fixture-mt-opg1', 'paper' => 'ui-fixture-paper', 'kind' => 'cloze', 'title' => 'UI fixture mt cloze',
+        'body' => 'Vi spiser {{1}} klokken seks.',
+        'items' => [['position' => 1, 'options' => [
+            ['label' => 'A', 'text' => 'aftensmad', 'correct' => true],
+            ['label' => 'B', 'text' => 'aftensmaden'],
+            ['label' => 'C', 'text' => 'aftener'],
+        ]]],
+    ]);
+    $repo->save([
+        'slug' => 'ui-fixture-mt-opg3', 'paper' => 'ui-fixture-paper', 'kind' => 'write', 'title' => 'UI fixture mt write',
+        'body' => 'Jeg har ingen ansatte, {{1}} jeg har mange kunder. Han har en kollega, {{2}} hjælper ham.',
+        'items' => [
+            ['position' => 1, 'note' => 'men forbinder to hovedsætninger.', 'options' => [['label' => 'A', 'text' => 'men', 'correct' => true]]],
+            ['position' => 2, 'options' => [['label' => 'A', 'text' => 'der', 'correct' => true], ['label' => 'B', 'text' => 'som']]],
+        ],
+    ]);
     echo json_encode(array_column($hidden, "id"));
 """
 
@@ -1286,6 +1304,65 @@ def an_unknown_grammar_set_says_it_does_not_exist(b):
 
 
 @check
+def the_start_page_offers_the_modultest(b):
+    b.goto('/')
+    b.until('!!document.querySelector(".cta")', what='the start page')
+    assert b.js('!!document.querySelector("a.cta[href=\'/modultest\']")'), 'no way to reach /modultest'
+
+
+def open_modultest(b):
+    only(['cloze', 'write'])
+    b.goto('/modultest')
+    b.until('!!document.querySelector(".paper[data-paper=\'ui-fixture-paper\']")', what='the fixture paper')
+    b.js('document.querySelector(".paper[data-paper=\'ui-fixture-paper\']").click()')
+    b.until('!!document.querySelector("#tasks")', what='the sitting')
+
+
+@check
+def a_modultest_sits_its_tasks_under_the_clock(b):
+    open_modultest(b)
+    assert b.js('document.querySelectorAll(".task").length') == 2, 'not every task of the paper is offered'
+    assert '50:00' in b.js('document.querySelector("#clock").textContent') or \
+        '49:5' in b.js('document.querySelector("#clock").textContent'), 'the clock is not the test\'s 50 minutes'
+    assert b.js('!!document.querySelector(".text .gap")'), 'the cloze gap is not drawn in the text'
+
+
+@check
+def a_written_gap_is_typed_into_the_text_and_reviewed_after_the_hand_in(b):
+    open_modultest(b)
+    right = correct_indexes()[0]
+    b.js(f'document.querySelector(\'.opt[data-pos="1"][data-i="{right}"]\').click()')
+    b.until('!!document.querySelector(".opt.chosen")', what='the cloze answer kept')
+    b.js('document.querySelectorAll(".task")[1].click()')
+    b.until('document.querySelectorAll(".text .wgap").length === 2', what='two inputs in the written text')
+    assert not b.js('!!document.querySelector(".opts")'), 'a written gap offers options'
+    b.js("""(() => { const [a, c] = document.querySelectorAll('.wgap');
+        a.value = 'Men '; a.dispatchEvent(new Event('change'));
+        c.value = 'hvem'; c.dispatchEvent(new Event('change')); })()""")
+    b.until('/3 \\/ 3/.test(document.querySelector("#count").textContent)', what='three of three answered')
+    b.js('window.confirm = () => true; document.querySelector("#hand").click()')
+    b.until('!!document.querySelector("#result")', what='the result')
+    assert b.js('document.querySelector("#final").textContent').replace(' ', '') == '2/3', \
+        b.js('document.querySelector("#final").textContent')
+    review = b.js('document.body.innerText')
+    assert 'der / som' in review, 'the accepted answers are not shown for a wrong word'
+    assert 'hvem' in review, 'the word typed is not shown'
+
+
+@check
+def a_modultest_sitting_is_listed_on_its_page_and_not_with_the_reading_rounds(b):
+    a_written_gap_is_typed_into_the_text_and_reviewed_after_the_hand_in(b)
+    b.goto('/modultest')
+    b.until('!!document.querySelector("#history .sitting")', what='the sitting in the Modultest history')
+    only(['cloze'])
+    b.goto('/read')
+    b.until('!!document.querySelector("#go")', what='the reading start screen')
+    b.until('document.readyState === "complete"', what='the page to settle')
+    names = b.js('[...document.querySelectorAll("#history .sitting .name")].map(e => e.textContent)')
+    assert not any('UI fixture mt' in n for n in names), f'a Modultest sitting is listed with the reading rounds: {names}'
+
+
+@check
 def the_buttons_carry_no_forward_arrow(b):
     for path in ('/', '/listen'):
         b.goto(path)
@@ -1298,7 +1375,7 @@ def the_buttons_carry_no_forward_arrow(b):
 def every_page_carries_the_way_home(b):
     """The mark is the way back, so it is the same mark everywhere and it sits where a
     reader looks for it: first in the header, top left."""
-    for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs', '/grammar'):
+    for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs', '/grammar', '/modultest'):
         b.goto(path)
         b.until('!!document.querySelector(".brand")', what='the brand on ' + path)
         assert b.js('document.querySelector(".brand").getAttribute("href")') == '/', path
@@ -1323,7 +1400,7 @@ def every_page_offers_the_same_languages(b):
     """A language offered on one page and missing on the next drops the reader back into
     Russian halfway through the site, and the fallback is silent."""
     try:
-        for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs', '/grammar'):
+        for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs', '/grammar', '/modultest'):
             b.goto(path)
             b.until('!!document.querySelector(".lang")', what='the language switch on ' + path)
             assert offered_languages(b) == LANGUAGES, f'{path} offers {offered_languages(b)}'
@@ -1484,7 +1561,7 @@ def the_public_listener_does_not_serve_the_admin_surface(b):
 # belongs on <html> and every run of Danish needs lang="da" of its own; otherwise Danish is
 # read aloud with a Russian voice. WCAG 3.1.1, 3.1.2, 1.4.3 and 2.4.1.
 
-PAGES = ['/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs', '/grammar']
+PAGES = ['/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs', '/grammar', '/modultest']
 
 
 def open_in(b, path, ui_lang='ru'):

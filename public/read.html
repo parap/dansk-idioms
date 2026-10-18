@@ -238,7 +238,8 @@ async function paintHistory(kinds, markup, mistakesKind) {
   let sessions = [], mistakes = {};
   try { ({sessions, mistakes} = await api('/reading/sessions')); } catch (e) { return; }
 
-  const mine = sessions.filter(s => kinds.includes(s.kind));
+  // A Modultest sitting starts with a cloze too, but it is listed on its own page.
+  const mine = sessions.filter(s => kinds.includes(s.kind) && !s.paper);
   const waiting = mistakes?.[mistakesKind] ?? 0;
   if (!mine.length && !waiting) return;
 

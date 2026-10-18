@@ -590,6 +590,10 @@ negative (error 1690). Cast to `SIGNED` first.
 (idiom, language) is enforced by `UNIQUE (idiom_id, lang_code, is_primary)` relying on
 MySQL ignoring NULLs.
 
+**`self::fail()` inside `try { } catch (RuntimeException)` never fails.** PHPUnit 10's
+assertion failure extends `RuntimeException`, so the catch swallows it and the test passes
+whatever the code does. Give each expected exception its own test with `expectException`.
+
 **Migrations do not run in a transaction.** MySQL commits implicitly on DDL, so a
 wrapper cannot roll one back and only makes `commit()` throw, masking the real error.
 

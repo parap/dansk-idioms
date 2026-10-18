@@ -30,6 +30,7 @@ final class Shell
         '/video'  => '/video.html',
         '/verbs'  => '/verbs.html',
         '/grammar' => '/grammar.html',
+        '/modultest' => '/modultest.html',
     ];
 
     public const ADMIN = '/admin.html';

@@ -33,9 +33,15 @@ namespace Dansk\Domain\Reading;
  */
 final class PassageDocument
 {
-    private const KINDS = ['mc', 'insert', 'cloze', 'quiz', 'video', 'verbs', 'grammar'];
+    private const KINDS = ['mc', 'insert', 'cloze', 'quiz', 'video', 'verbs', 'grammar', 'write'];
 
-    private const GAP_KINDS = ['insert', 'cloze'];
+    private const GAP_KINDS = ['insert', 'cloze', 'write'];
+
+    /** A gap the learner fills by typing: every line under it is an answer it accepts. */
+    private const WRITE_KIND = 'write';
+
+    /** A paper groups the tasks of one Modultest variant, so its name is a slug of its own. */
+    private const PAPER = '/^[a-z0-9]+(?:-[a-z0-9]+)*$/';
 
     /** A knowledge paper, a film and a verb or grammar drill are questions alone: there is nothing to read before answering. */
     private const TEXTLESS_KINDS = ['quiz', 'video', 'verbs', 'grammar'];
@@ -113,10 +119,16 @@ final class PassageDocument
             $this->checkMarkers($body, $kind, $items);
         }
 
+        $paper = $headers['paper'] ?? null;
+        if ($paper !== null && !preg_match(self::PAPER, $paper)) {
+            throw new InvalidPassage("The 'paper' header must be a slug such as du3m4-v1, not '{$paper}'.");
+        }
+
         $doc = [
             'slug'  => $headers['slug'],
             'kind'  => $kind,
             'title' => $headers['title'],
+            'paper' => $paper,
             'body'  => $body,
             'items' => $items,
         ];
@@ -253,7 +265,10 @@ final class PassageDocument
             if ($current === null) {
                 return;
             }
-            if ($kind !== 'insert') {
+            if ($kind === self::WRITE_KIND) {
+                $this->checkAccepted($current);
+                $current['options'][0]['correct'] = true;
+            } elseif ($kind !== 'insert') {
                 $this->checkOptions($current, $kind);
             }
             unset($current['line']);
@@ -321,6 +336,9 @@ final class PassageDocument
             }
 
             $correct = str_starts_with(ltrim($line), '*');
+            if ($correct && $kind === self::WRITE_KIND) {
+                throw new InvalidPassage("A written gap accepts every answer listed under it, so line {$no} takes no star.");
+            }
             $text    = trim(ltrim(ltrim($line), '*'));
             if ($text === '') {
                 throw new InvalidPassage("An option on line {$no} is empty.");
@@ -360,6 +378,14 @@ final class PassageDocument
                 "Question {$item['position']} on line {$item['line']} marks " . count($correct)
                 . ' options with a star, and needs exactly one.'
             );
+        }
+    }
+
+    /** @param array<string,mixed> $item */
+    private function checkAccepted(array $item): void
+    {
+        if ($item['options'] === []) {
+            throw new InvalidPassage("Gap {$item['position']} on line {$item['line']} lists no answer it accepts.");
         }
     }
 

@@ -1,0 +1,41 @@
+kind: insert
+slug: du3m4-v4-opg2-hoejskole
+paper: du3m4-v4
+title: Et halvt år på højskole
+
+--- text ---
+Da Sofie Larsen blev student, vidste hun ikke, hvad hun ville læse. Hendes forældre foreslog,
+at hun tog på højskole, og i januar flyttede hun ind på en højskole på Fyn. {{1}} I dag siger
+hun, at det var den bedste beslutning, hun har taget.
+
+På en højskole bor eleverne sammen og spiser alle måltider i fællesskab. Der er ingen
+eksamener og ingen karakterer. {{2}} Sofie valgte musik og friluftsliv, og hun lærte både at
+spille guitar og at sejle i kajak.
+
+En almindelig dag begynder med morgensang klokken otte. Bagefter er der undervisning til
+frokost, og om eftermiddagen er der valgfag. {{3}} Om aftenen er der ofte foredrag, koncerter
+eller fester, og det er sjældent, at eleverne går tidligt i seng.
+
+Det koster penge at gå på højskole, men staten giver tilskud, så prisen bliver lavere. Sofie
+betalte omkring 2.000 kroner om ugen for undervisning, mad og værelse. {{4}} Hun arbejdede
+derfor i et supermarked i et halvt år, før hun tog af sted.
+
+Det vigtigste for Sofie var menneskene. Hun fik venner fra hele landet og fra flere andre
+lande. {{5}} Efter højskolen har hun fundet ud af, at hun vil være lærer, og hun er nu i gang
+med uddannelsen.
+
+--- parts ---
+A Hun var nervøs de første dage, fordi hun ikke kendte nogen.
+B I stedet vælger man selv de fag, man har lyst til at lære mere om.
+C Det kan for eksempel være drama, fotografi eller fodbold.
+D Det var mange penge for hende, som ikke havde et fast job.
+E De ses stadig flere gange om året, selvom de bor langt fra hinanden.
+F Hun syntes, at maden på højskolen var for dyr, og lavede derfor selv mad.
+G Undervisningen slutter hver dag med en eksamen, som eleverne skal bestå.
+
+--- questions ---
+1. A
+2. B
+3. C
+4. D
+5. E

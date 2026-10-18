@@ -145,6 +145,7 @@ const STRINGS = {
     listenLink: 'Аудирование',
     verbsLink: 'Глаголы',
     grammarLink: 'Грамматика',
+    modultestLink: 'Модульный тест DU3.4',
   },
   en: {
     tagline: 'Danish idiom trainer',
@@ -172,6 +173,7 @@ const STRINGS = {
     listenLink: 'Listening',
     verbsLink: 'Verbs',
     grammarLink: 'Grammar',
+    modultestLink: 'Module test DU3.4',
   },
   uk: {
     tagline: 'Тренажер данських ідіом',
@@ -205,6 +207,7 @@ const STRINGS = {
     listenLink: 'Аудіювання',
     verbsLink: 'Дієслова',
     grammarLink: 'Граматика',
+    modultestLink: 'Модульний тест DU3.4',
   },
   da: {
     tagline: 'Træning i danske idiomer',
@@ -238,6 +241,7 @@ const STRINGS = {
     listenLink: 'Lytning',
     verbsLink: 'Verber',
     grammarLink: 'Grammatik',
+    modultestLink: 'Modultest DU3.4',
   },
 };
 
@@ -319,6 +323,7 @@ async function home() {
         <a class="cta" href="/listen"><span>${esc(t('listenLink'))}</span></a>
         <a class="cta" href="/verbs"><span>${esc(t('verbsLink'))}</span></a>
         <a class="cta" href="/grammar"><span>${esc(t('grammarLink'))}</span></a>
+        <a class="cta" href="/modultest"><span>${esc(t('modultestLink'))}</span></a>
       </div>
       <div class="stats">
         <div class="stat"><b>${s.idioms_published ?? '—'}</b><span>${esc(t('statIdioms', s.idioms_published))}</span></div>
