@@ -1,0 +1,704 @@
+kind: grammar
+slug: praepositioner-1
+title: Verber og præpositioner
+
+--- questions ---
+1. Freja er meget interesseret ___ computere.
+> interesseret i noget — интересоваться чем-то. Фрея очень интересуется компьютерами.
+* i
+  på
+  for
+  om
+
+2. Jeg venter ___ bussen.
+> vente på — ждать кого-то/что-то. Я жду автобус.
+* på
+  for
+  til
+  efter
+
+3. Hun er bange ___ hunde.
+> bange for — бояться чего-то. Она боится собак.
+* for
+  af
+  på
+  over
+
+4. Det er snart juni. Vi glæder os ___ sommerferien.
+> glæde sig til — радоваться чему-то предстоящему, ждать с нетерпением. Скоро июнь. Мы с нетерпением ждём летних каникул.
+* til
+  på
+  af
+  for
+
+5. Han er god ___ matematik.
+> god til noget — хорош в чём-то, хорошо умеет. Он хорошо знает математику.
+* til
+  for
+  på
+  med
+
+6. Jeg tænker tit ___ min familie i Ukraine.
+> tænke på — думать о ком-то/чём-то. Я часто думаю о своей семье в Украине.
+* på
+  om
+  til
+  for
+
+7. Hun er gift ___ en dansker.
+> gift med — замужем за, женат на. Она замужем за датчанином.
+* med
+  til
+  på
+  af
+
+8. Jeg er træt ___ at vente.
+> træt af — устать от чего-то (надоело). Мне надоело ждать.
+* af
+  på
+  for
+  over
+
+9. Hvad drømmer du ___?
+> drømme om — мечтать о чём-то. О чём ты мечтаешь?
+* om
+  på
+  til
+  af
+
+10. Hun søgte ind ___ uddannelsen som sygeplejerske.
+> søge ind på en uddannelse — подать документы на обучение. Она подала документы на обучение медсестрой.
+* på
+  i
+  til
+  om
+
+11. Jeg har søgt ___ orlov fra arbejdet.
+> søge om — подать заявление на что-то (разрешение, отпуск, пособие). Я подал заявление на отпуск с работы.
+* om
+  på
+  til
+  efter
+
+12. Kan du passe ___ min hund i weekenden?
+> passe på — присматривать за кем-то. Можешь присмотреть за моей собакой на выходных?
+* på
+  for
+  til
+  om
+
+13. Vi skal deltage ___ et møde i morgen.
+> deltage i — участвовать в чём-то. Завтра мы должны участвовать во встрече.
+* i
+  på
+  til
+  med
+
+14. Jeg er ked ___ det, der skete.
+> ked af det — сожалеть, расстраиваться из-за чего-то. Мне жаль, что так случилось.
+* af
+  for
+  over
+  på
+
+15. Han er stolt ___ sine børn.
+> stolt af — гордиться кем-то. Он гордится своими детьми.
+* af
+  for
+  på
+  med
+
+16. Hvad tror du ___?
+> tro på — верить во что-то. Во что ты веришь?
+* på
+  i
+  om
+  til
+
+17. Jeg har ikke råd ___ en ny bil.
+> have råd til — иметь средства на что-то. Я не могу позволить себе новую машину.
+* til
+  for
+  på
+  med
+
+18. Hun er forelsket ___ sin nabo.
+> forelsket i — влюблён в кого-то. Она влюблена в своего соседа.
+* i
+  på
+  med
+  til
+
+19. Vi snakkede ___ vejret.
+> snakke om — говорить о чём-то. Мы говорили о погоде.
+* om
+  på
+  til
+  for
+
+20. Jeg har brug ___ hjælp.
+> have brug for — нуждаться в чём-то. Мне нужна помощь.
+* for
+  til
+  på
+  af
+
+21. Må jeg låne din telefon? Jeg skal ringe ___ min mor.
+> ringe til — звонить кому-то. Можно взять твой телефон? Мне нужно позвонить маме.
+* til
+  på
+  for
+  med
+
+22. Hun er vred ___ sin bror.
+> vred på nogen — сердиться на кого-то. Она сердится на брата.
+* på
+  over
+  for
+  til
+
+23. Han holdt op ___ at ryge for to år siden.
+> holde op med — прекратить что-то. Он бросил курить два года назад.
+* med
+  at
+  på
+  for
+
+24. Jeg er færdig ___ mine lektier.
+> færdig med — закончить что-то. Я закончил уроки.
+* med
+  af
+  på
+  til
+
+25. Kan du hjælpe mig ___ flytningen?
+> hjælpe med — помогать с чем-то. Можешь помочь мне с переездом?
+* med
+  til
+  på
+  for
+
+26. Jeg har lyst ___ en is.
+> have lyst til — хотеть чего-то. Мне хочется мороженого.
+* til
+  af
+  for
+  efter
+
+27. Hun ligner ___ sin mor.
+> ligne — похожа на; глагол берёт прямое дополнение без предлога. Она похожа на маму.
+* —
+  på
+  til
+  med
+
+28. Børnene leger ___ hinanden i haven.
+> lege med — играть с кем-то. Дети играют друг с другом в саду.
+* med
+  til
+  for
+  på
+
+29. Jeg lytter ___ musik, når jeg løber.
+> lytte til — слушать что-то. Я слушаю музыку, когда бегаю.
+* til
+  for
+  om
+  af
+
+30. Han er afhængig ___ kaffe om morgenen.
+> afhængig af — зависимый от чего-то. Он не может без кофе по утрам.
+* af
+  på
+  for
+  til
+
+31. Jeg leder ___ mine briller.
+> lede efter — искать что-то. Я ищу свои очки.
+* efter
+  på
+  for
+  til
+
+32. Hun takkede ___ hjælpen.
+> takke for — благодарить за что-то. Она поблагодарила за помощь.
+* for
+  på
+  til
+  om
+
+33. Vi har besluttet os ___ at flytte.
+> beslutte sig for — решить (сделать что-то). Мы решили переехать.
+* for
+  af
+  om
+  på
+
+34. Er du enig ___ mig?
+> enig med nogen — согласен с кем-то. Ты со мной согласен?
+* med
+  i
+  på
+  til
+
+35. Er du enig ___ det, han siger?
+> enig i noget — согласен с чем-то (с мнением). Ты согласен с тем, что он говорит?
+* i
+  til
+  på
+  for
+
+36. Jeg er vant ___ at stå tidligt op.
+> vant til — привыкший к чему-то. Я привык рано вставать.
+* til
+  af
+  på
+  ved
+
+37. Hun er tilfreds ___ sit nye job.
+> tilfreds med — доволен чем-то. Она довольна своей новой работой.
+* med
+  af
+  for
+  over
+
+38. Jeg blev overrasket ___ prisen.
+> overrasket over — удивлён чем-то. Меня удивила цена.
+* over
+  på
+  for
+  til
+
+39. Han spurgte ___ vej til stationen.
+> spørge om vej — спросить дорогу. Он спросил дорогу к вокзалу.
+* om
+  af
+  på
+  til
+
+40. Det afhænger ___ vejret.
+> afhænge af — зависеть от чего-то. Это зависит от погоды.
+* af
+  på
+  om
+  til
+
+41. Hun har ansvaret ___ projektet.
+> ansvar for — ответственность за что-то. Она отвечает за проект.
+* for
+  til
+  af
+  på
+
+42. Han var jaloux ___ sin bror.
+> jaloux på — ревнивый, завидует кому-то. Он завидовал брату.
+* på
+  over
+  for
+  til
+
+43. Kaffen består ___ vand og kaffebønner.
+> bestå af — состоять из чего-то. Кофе состоит из воды и кофейных зёрен.
+* af
+  i
+  på
+  med
+
+44. Jeg kan ikke vænne mig ___ mørket om vinteren.
+> vænne sig til — привыкать к чему-то. Я не могу привыкнуть к темноте зимой.
+* til
+  ved
+  med
+  på
+
+45. Det er november, og børnene glæder sig ___ julen.
+> glæde sig til — ждать с нетерпением то, что ещё впереди. Сейчас ноябрь, и дети с нетерпением ждут Рождества.
+* til
+  af
+  på
+  for
+
+46. Vi er glade ___ vores nye lejlighed.
+> glad for — довольный, радоваться тому, что есть. Мы очень довольны нашей новой квартирой.
+* for
+  til
+  af
+  på
+
+47. Jeg skal til tandlæge. Jeg har fået en tid ___ torsdag.
+> på torsdag — в этот (ближайший) четверг. Мне к зубному. Меня записали на четверг.
+* på
+  i
+  om
+  ved
+
+48. Hvad synes du ___ filmen?
+> synes om — мнение о чём-то: Hvad synes du om…? Что ты думаешь о фильме?
+* om
+  på
+  til
+  af
+
+49. Kan du lide ___ at bo i Danmark?
+> kunne lide — нравиться; глагол без предлога. Тебе нравится жить в Дании?
+* —
+  om
+  på
+  for
+
+50. Hun griner altid ___ mine vittigheder.
+> grine af — смеяться над чем-то. Она всегда смеётся над моими шутками.
+* af
+  på
+  for
+  til
+
+51. Han er flyttet ___ Aarhus.
+> flytte til — переехать куда-то. Он переехал в Орхус.
+* til
+  i
+  på
+  ved
+
+52. Jeg bor ___ Aalborg.
+> Город — i: bo i Aalborg. Я живу в Ольборге.
+* i
+  på
+  til
+  ved
+
+53. Vi bor ___ Bornholm.
+> Остров — på: bo på Bornholm, på Fyn, på Sjælland. Мы живём на Борнхольме.
+* på
+  i
+  til
+  ved
+
+54. Jeg arbejder ___ et hospital.
+> Учреждение — på: arbejde på et hospital, på en skole. Я работаю в больнице.
+* på
+  hos
+  ved
+  til
+
+55. Hun går ___ skole.
+> gå i skole — учиться в школе (ходить в школу). Она ходит в школу.
+* i
+  på
+  til
+  ved
+
+56. Han læser ___ universitetet.
+> Высшее учебное заведение — på: læse på universitetet. Он учится в университете.
+* på
+  i
+  til
+  ved
+
+57. Vi tager ___ ferie i juli.
+> tage på ferie — поехать в отпуск. Мы едем в отпуск в июле.
+* på
+  i
+  til
+  om
+
+58. Jeg skal ___ lægen i morgen.
+> skal til lægen — идти к врачу. Завтра мне к врачу.
+* til
+  på
+  ved
+  i
+
+59. Jeg var ___ lægen i går.
+> Где были — hos lægen (у врача). Вчера я был у врача.
+* hos
+  til
+  på
+  af
+
+60. Vi spiser ___ min mormor på søndag.
+> hos nogen — у кого-то (дома). В воскресенье мы обедаем у бабушки.
+* hos
+  af
+  til
+  på
+
+61. Hun sidder ___ computeren hele dagen.
+> sidde ved computeren — сидеть за компьютером. Она весь день сидит за компьютером.
+* ved
+  hos
+  i
+  over
+
+62. Bogen ligger ___ bordet.
+> На поверхности — på bordet. Книга лежит на столе.
+* på
+  i
+  ved
+  over
+
+63. Mælken står ___ køleskabet.
+> Внутри — i køleskabet. Молоко стоит в холодильнике.
+* i
+  på
+  ved
+  hos
+
+64. Jeg kommer ___ Ukraine.
+> komme fra — быть родом откуда-то. Я из Украины.
+* fra
+  af
+  i
+  til
+
+65. Toget kører fra København ___ Aarhus.
+> fra … til — от … до: fra København til Aarhus. Поезд идёт из Копенгагена в Орхус.
+* til
+  på
+  i
+  ad
+
+66. Det er en gave ___ dig.
+> til dig — для тебя (адресат подарка). Это подарок для тебя.
+* til
+  for
+  på
+  af
+
+67. Tak ___ i går!
+> Tak for… — спасибо за… Tak for i går — спасибо за вчерашний вечер. Спасибо за вчера!
+* for
+  til
+  på
+  om
+
+68. Jeg har boet her ___ fem år.
+> i fem år — в течение пяти лет. Я живу здесь пять лет.
+* i
+  på
+  for
+  om
+
+69. Vi ses ___ en uge.
+> om en uge — через неделю (в будущем). Увидимся через неделю.
+* om
+  i
+  på
+  efter
+
+70. Jeg kom til Danmark ___ tre år siden.
+> for … siden — … назад. Я приехал в Данию три года назад.
+* for
+  i
+  om
+  på
+
+71. Butikken lukker ___ mandag.
+> på mandag — в этот (ближайший) понедельник. Магазин закрывается в понедельник.
+* på
+  i
+  om
+  til
+
+72. Vi holder fri ___ jul.
+> til jul — на Рождество. На Рождество у нас выходные.
+* til
+  på
+  for
+  om
+
+73. Jeg drikker kaffe ___ morgenen.
+> om morgenen — по утрам (регулярно). Я пью кофе по утрам.
+* om
+  på
+  i
+  til
+
+74. Hun er født ___ 1990.
+> Год — i: i 1990. Она родилась в 1990 году.
+* i
+  på
+  om
+  til
+
+75. Mødet er ___ den 3. maj.
+> Дата — den 3. maj, без предлога. Встреча третьего мая.
+* —
+  på
+  i
+  til
+
+76. Han er sur ___ mig, fordi jeg glemte hans fødselsdag.
+> sur på nogen — обижен, зол на кого-то. Он на меня обиделся, потому что я забыл про его день рождения.
+* på
+  over
+  for
+  til
+
+77. Jeg er nysgerrig ___ at vide, hvad der sker.
+> nysgerrig efter — любопытно (узнать что-то). Мне любопытно узнать, что происходит.
+* efter
+  af
+  om
+  til
+
+78. Han bad ___ en kop kaffe.
+> bede om — попросить что-то. Он попросил чашку кофе.
+* om
+  efter
+  til
+  for
+
+79. Hun inviterede os ___ middag.
+> invitere til — пригласить на что-то. Она пригласила нас на ужин.
+* til
+  af
+  for
+  om
+
+80. Pas ___ trafikken!
+> passe på — быть осторожным, беречься. Осторожно, машины!
+* på
+  for
+  til
+  med
+
+81. Jeg savner ___ min familie.
+> savne — скучать по; глагол без предлога. Я скучаю по своей семье.
+* —
+  på
+  for
+  efter
+
+82. Han glemte ___ at købe mælk.
+> glemme at — забыть сделать; без предлога. Он забыл купить молоко.
+* —
+  om
+  på
+  for
+
+83. Jeg kan ikke huske ___ hans navn.
+> huske — помнить; без предлога. Я не помню, как его зовут.
+* —
+  for
+  om
+  af
+
+84. Hun var meget sød ___ mig.
+> sød ved nogen — милый, добрый по отношению к кому-то. Она была очень мила со мной.
+* ved
+  for
+  til
+  af
+
+85. Han sagde ikke noget ___ mig.
+> sige noget til nogen — сказать кому-то. Он ничего мне не сказал.
+* til
+  for
+  på
+  med
+
+86. Vi talte ___ hinanden i telefonen i en time.
+> tale med nogen — разговаривать с кем-то. Мы проговорили по телефону целый час.
+* med
+  af
+  på
+  for
+
+87. Jeg kigger ___ billederne fra ferien.
+> kigge på — смотреть на что-то. Я смотрю фотографии из отпуска.
+* på
+  af
+  til
+  for
+
+88. Han har lov ___ at gå ud efter klokken ti.
+> have lov til — иметь разрешение. Ему разрешено гулять после десяти.
+* til
+  for
+  på
+  af
+
+89. Jeg er nødt ___ at gå nu.
+> være nødt til — быть вынужденным. Мне нужно идти.
+* til
+  for
+  på
+  at
+
+90. Han er ikke i stand ___ at arbejde lige nu.
+> være i stand til — быть в состоянии. Сейчас он не в состоянии работать.
+* til
+  for
+  på
+  at
+
+91. Hun begyndte ___ at lære dansk sidste år.
+> begynde at — начать делать; без предлога. Она начала учить датский в прошлом году.
+* —
+  for
+  på
+  til
+
+92. Jeg har mange problemer ___ min computer.
+> problemer med — проблемы с чем-то. У меня много проблем с компьютером.
+* med
+  af
+  på
+  til
+
+93. Vi er medlem ___ en fodboldklub.
+> medlem af — член чего-то. Мы члены футбольного клуба.
+* af
+  for
+  på
+  til
+
+94. Han er ved at skrive en bog ___ vikingerne.
+> en bog om — книга о чём-то. Он пишет книгу о викингах.
+* om
+  af
+  på
+  til
+
+95. Hvad er forskellen ___ de to ord?
+> forskel på — разница между: forskellen på de to ord. Какая разница между этими двумя словами?
+* på
+  af
+  til
+  om
+
+96. Jeg har ikke tid ___ at se fjernsyn.
+> tid til — время на что-то. У меня нет времени смотреть телевизор.
+* til
+  for
+  på
+  om
+
+97. Hun har travlt ___ sine eksamener.
+> have travlt med — быть занятым чем-то. Она занята своими экзаменами.
+* med
+  af
+  til
+  for
+
+98. Kan du sende brevet ___ mig?
+> sende til — отправить кому-то. Можешь отправить мне письмо?
+* til
+  for
+  på
+  af
+
+99. Han er god ___ børn.
+> god ved nogen — хорошо, ласково относиться к кому-то. Он хорошо ладит с детьми (добр к детям).
+* ved
+  på
+  for
+  af
+
+100. Jeg er rigtig glad ___ at bo i Danmark.
+> glad for — рад тому, что есть сейчас. Я очень рад, что живу в Дании.
+* for
+  til
+  af
+  på

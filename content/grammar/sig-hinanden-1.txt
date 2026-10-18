@@ -1,0 +1,704 @@
+kind: grammar
+slug: sig-hinanden-1
+title: Sig, selv og hinanden
+
+--- questions ---
+1. Jeg glæder ___ til weekenden.
+> Возвратное местоимение меняется по лицу: jeg glæder mig, du glæder dig, han glæder sig. Я жду не дождусь выходных.
+* mig
+  sig
+  jeg
+  dig
+
+2. Han skynder ___, fordi han er sent på den.
+> han → sig: han skynder sig. Он торопится, потому что опаздывает.
+* sig
+  ham
+  hans
+  hinanden
+
+3. Vi sætter ___ ved bordet.
+> vi → os: vi sætter os. Мы садимся за стол.
+* os
+  sig
+  vi
+  jer
+
+4. Sæt ___ ned, Peter!
+> Повелительное, обращение к одному (du) → dig: Sæt dig ned! Садись, Петер!
+* dig
+  sig
+  du
+  jer
+
+5. Mette og Jens ser på ___ og smiler.
+> Друг на друга — hinanden. Метте и Йенс смотрят друг на друга и улыбаются.
+* hinanden
+  sig
+  de
+  deres
+
+6. Tvillingerne ligner ___ meget.
+> Похожи друг на друга — ligner hinanden. Близнецы очень похожи друг на друга.
+* hinanden
+  sig
+  de
+  sig selv
+
+7. Vælg den rigtige sætning.
+> vågne — «просыпаться», но в датском без возвратного местоимения. Я просыпаюсь в шесть каждое утро.
+* Jeg vågner klokken seks hver morgen.
+  Jeg vågner mig klokken seks hver morgen.
+  Jeg vågner sig klokken seks hver morgen.
+  Jeg vågner op mig klokken seks hver morgen.
+
+8. Hun føler ___ ikke godt i dag.
+> hun → sig: hun føler sig. Она сегодня плохо себя чувствует.
+* sig
+  hende
+  hun
+  hinanden
+
+9. Børnene keder ___.
+> de (børnene) → sig: Børnene keder sig. Детям скучно.
+* sig
+  de
+  deres selv
+  deres
+
+10. I skal skynde ___!
+> I → jer: I skal skynde jer. Вам нужно поторопиться!
+* jer
+  sig
+  os
+  dig
+
+11. Han barberer ___ hver morgen.
+> han → sig: han barberer sig. Он бреется каждое утро.
+* sig
+  hans
+  han
+  hinanden
+
+12. De har kendt ___ i mange år.
+> Знают друг друга — kender hinanden. Они знают друг друга много лет.
+* hinanden
+  sig
+  de
+  deres
+
+13. Jeg interesserer ___ for historie.
+> interessere sig for — интересоваться: jeg interesserer mig. Я интересуюсь историей.
+* mig
+  sig
+  jeg
+  min
+
+14. Vi mødes klokken otte. Husk at klæde ___ varmt på!
+> Совет тебе (du) → dig: klæd dig varmt på. Встречаемся в восемь. Не забудь тепло одеться!
+* dig
+  sig
+  du
+  dit
+
+15. Vælg den rigtige sætning.
+> slappe af — «расслабляться, отдыхать», в датском без возвратного местоимения. На выходных я отдыхаю.
+* Jeg slapper af i weekenden.
+  Jeg slapper mig af i weekenden.
+  Jeg slapper sig af i weekenden.
+  Jeg slapper af mig i weekenden.
+
+16. Han slog ___ på bordet.
+> han → sig: han slog sig — ударился. Он ударился о стол.
+* sig
+  hans
+  hinanden
+  han
+
+17. Pigerne hjælper ___ med lektierne.
+> Помогают друг другу — hjælper hinanden. Девочки помогают друг другу с уроками.
+* hinanden
+  sig
+  de
+  deres
+
+18. Jeg har forkølet ___.
+> jeg → mig: jeg har forkølet mig. Я простудился.
+* mig
+  sig
+  jeg
+  dig
+
+19. Kan du tage ___ af børnene i aften?
+> tage sig af — заботиться, позаботиться: du → dig. Можешь позаботиться о детях сегодня вечером?
+* dig
+  sig
+  du
+  dem
+
+20. Opfør ___ ordentligt, børn!
+> Обращение к нескольким (I) → jer: opfør jer. Ведите себя прилично, дети!
+* jer
+  sig
+  dig
+  dem
+
+21. Han tænker kun på ___ selv.
+> Только о себе — han tænker på sig selv. Он думает только о себе.
+* sig
+  ham
+  hans
+  hinanden
+
+22. Hun gav ham en gave, og han takkede ___.
+> Поблагодарил её — takkede hende. Здесь не возвратное: благодарят другого человека. Она дала ему подарок, и он её поблагодарил.
+* hende
+  sig
+  hun
+  hinanden
+
+23. Vi skal gifte ___ til sommer.
+> vi → os: vi skal gifte os. Мы поженимся летом.
+* os
+  sig
+  vi
+  hinanden
+
+24. Jeg keder ___ aldrig, når du er her.
+> kede sig — скучать: jeg → mig. Мне никогда не скучно, когда ты здесь.
+* mig
+  sig
+  jeg
+  min
+
+25. Han satte ___ i sofaen og tændte for fjernsynet.
+> han → sig: han satte sig. Он сел на диван и включил телевизор.
+* sig
+  hans
+  ham selv
+  han
+
+26. Jeg skar ___ i fingeren.
+> jeg → mig: jeg skar mig. Я порезал палец.
+* mig
+  sig
+  min
+  jeg
+
+27. Lærerne og eleverne kender ___ godt.
+> Знают друг друга — kender hinanden. Учителя и ученики хорошо знают друг друга.
+* hinanden
+  sig
+  de
+  deres
+
+28. Hun kiggede på ___ i spejlet.
+> Смотрит на саму себя — kiggede på sig selv. Она посмотрела на себя в зеркало.
+* sig selv
+  hende selv
+  hinanden
+  hun selv
+
+29. Vi har det sjovt. Vi morer ___ rigtig godt.
+> vi → os: vi morer os. Нам весело. Мы отлично развлекаемся.
+* os
+  sig
+  vi
+  jer
+
+30. Hvorfor skynder du ___ ikke?
+> du → dig. Почему ты не торопишься?
+* dig
+  sig
+  du
+  mig
+
+31. Han smilede til ___.
+> Улыбнулся ей — smilede til hende. Он улыбнулся ей.
+* hende
+  sig
+  hun
+  hinanden
+
+32. Vælg den rigtige sætning.
+> smile — «улыбаться», без местоимения. Она улыбается мне.
+* Hun smiler til mig.
+  Hun smiler sig til mig.
+  Hun smiler hende til mig.
+  Hun smiler sig selv til mig.
+
+33. Vælg den rigtige sætning.
+> mødes — «встречаться (друг с другом)», глагол на -s без местоимения. Мы встречаемся у вокзала в восемь.
+* Vi mødes ved stationen klokken otte.
+  Vi møder os ved stationen klokken otte.
+  Vi mødes os ved stationen klokken otte.
+  Vi møder sig ved stationen klokken otte.
+
+34. Jeg vil gerne melde ___ til kurset.
+> melde sig til — записаться: jeg → mig. Я бы хотел записаться на курс.
+* mig
+  sig
+  jeg
+  dig
+
+35. Barnet gemte ___ under sengen.
+> barnet (det) → sig: gemte sig. Ребёнок спрятался под кровать.
+* sig
+  dets
+  den
+  hinanden
+
+36. De sendte breve til ___ i mange år.
+> Друг другу — til hinanden. Они много лет писали друг другу письма.
+* hinanden
+  sig
+  dem selv
+  deres
+
+37. Han rejste ___ og gik.
+> rejse sig — встать: han rejste sig. Он встал и ушёл.
+* sig
+  ham
+  han
+  hinanden
+
+38. Vælg den rigtige sætning.
+> begynde — «начинать(ся)», без местоимения: Filmen begynder. Фильм начинается в восемь.
+* Filmen begynder klokken otte.
+  Filmen begynder sig klokken otte.
+  Filmen begynder den klokken otte.
+  Filmen begynder sig selv klokken otte.
+
+39. Hun købte en kjole til ___ selv.
+> Для самой себя — til sig selv. Она купила платье для себя.
+* sig
+  hende
+  hun
+  hinanden
+
+40. Hun købte en kjole til ___, fordi det var hendes datters fødselsdag.
+> Платье для дочери — для другого человека: til hende. Она купила платье для неё (дочери), потому что у той был день рождения.
+* hende
+  sig selv
+  sig
+  hinanden
+
+41. Vi bekymrer ___ for vores børn.
+> vi → os: vi bekymrer os. Мы беспокоимся за своих детей.
+* os
+  sig
+  vi
+  jer
+
+42. Koncentrér ___, det er vigtigt!
+> Обращение к одному → dig: koncentrér dig. Сосредоточься, это важно!
+* dig
+  sig
+  du
+  jer
+
+43. Lise og jeg skriver sms'er til ___ hver dag.
+> Друг другу — til hinanden. Мы с Лисе каждый день пишем друг другу сообщения.
+* hinanden
+  os
+  sig
+  vores
+
+44. Han vendte ___ om og så på mig.
+> vende sig om — обернуться: han → sig. Он обернулся и посмотрел на меня.
+* sig
+  hans
+  han
+  hinanden
+
+45. Har I tilmeldt ___ festen?
+> I → jer: har I tilmeldt jer. Вы записались на праздник?
+* jer
+  sig
+  os
+  dig
+
+46. Jeg skammer ___ over det, jeg sagde.
+> jeg → mig: jeg skammer mig. Мне стыдно за то, что я сказал.
+* mig
+  sig
+  min
+  jeg
+
+47. De forelskede ___ i hinanden på ferien.
+> de → sig: de forelskede sig. Они влюбились друг в друга в отпуске.
+* sig
+  dem
+  hinanden
+  deres
+
+48. Vi hjælper altid ___, når der er problemer.
+> Помогаем друг другу — hjælper hinanden. Мы всегда помогаем друг другу, когда есть проблемы.
+* hinanden
+  sig
+  vi
+  vores
+
+49. Han har brændt ___ på komfuret.
+> han → sig: han har brændt sig. Он обжёгся о плиту.
+* sig
+  hans selv
+  hans
+  han
+
+50. Hun er ved at klæde ___ om til festen.
+> klæde sig om — переодеться: hun → sig. Она переодевается к празднику.
+* sig
+  hendes
+  hun
+  hinanden
+
+51. Du må hvile ___ lidt.
+> du → dig: du må hvile dig. Тебе нужно немного отдохнуть.
+* dig
+  sig
+  du
+  dit
+
+52. Jeg øver ___ på at udtale ordene rigtigt.
+> øve sig — упражняться: jeg → mig. Я тренируюсь правильно произносить слова.
+* mig
+  sig
+  min
+  jeg
+
+53. De to hunde leger med ___.
+> Друг с другом — med hinanden. Две собаки играют друг с другом.
+* hinanden
+  sig
+  de
+  deres
+
+54. Hun undrede ___ over, at ingen svarede.
+> undre sig — удивляться: hun → sig. Она удивилась, что никто не ответил.
+* sig
+  hende
+  hun
+  hinanden
+
+55. Han tog en kop kaffe til ___ og en til mig.
+> Себе — til sig selv (или til sig). Здесь среди вариантов sig selv. Он взял одну чашку кофе себе и одну мне.
+* sig selv
+  han
+  hans
+  hinanden
+
+56. Hans kone har fødselsdag. Han har købt blomster til ___.
+> Цветы для жены — для другого человека: til hende. У его жены день рождения. Он купил ей цветы.
+* hende
+  hun
+  hendes
+  hinanden
+
+57. Hold ___ fra komfuret, børn!
+> holde sig fra — держаться подальше: обращение к нескольким → jer. Дети, держитесь подальше от плиты!
+* jer
+  sig
+  dig
+  dem
+
+58. Jeg vasker ___ i ansigtet.
+> jeg → mig: jeg vasker mig. Я умываюсь.
+* mig
+  sig
+  min
+  jeg
+
+59. Først vasker hun ___, og så vasker hun sin datter.
+> Сначала моется сама — vasker sig; дочь она моет — это уже не возвратное. Сначала она моется сама, а потом моет дочку.
+* sig
+  hende
+  hun
+  hendes
+
+60. Vi har det rart sammen. Vi hygger ___.
+> hygge sig — уютно проводить время: vi → os. Нам хорошо вместе. Мы уютно проводим время.
+* os
+  sig
+  vi
+  vores
+
+61. De lagde ___ på stranden.
+> lægge sig — лечь: de → sig. Они легли на пляже.
+* sig
+  de
+  deres
+  hinanden sig
+
+62. Vi kan ikke forstå ___.
+> Не можем понять друг друга — forstå hinanden. Мы не понимаем друг друга.
+* hinanden
+  os
+  sig
+  vores
+
+63. Pas godt på ___ selv!
+> Береги себя — pas godt på dig selv. Береги себя!
+* dig
+  sig
+  du
+  dit
+
+64. Hun forberedte ___ til eksamen.
+> forberede sig — готовиться: hun → sig. Она готовилась к экзамену.
+* sig
+  hendes
+  hun
+  hinanden
+
+65. Mine forældre har altid elsket ___.
+> Любили друг друга — elsket hinanden. Мои родители всегда любили друг друга.
+* hinanden
+  sig
+  de
+  deres
+
+66. Jeg kan ikke bestemme ___.
+> bestemme sig — решиться, определиться: jeg → mig. Я не могу решиться (определиться).
+* mig
+  sig
+  jeg
+  min
+
+67. Han skrev en besked til ___ selv for ikke at glemme det.
+> Себе самому — til sig selv. Он написал себе записку, чтобы не забыть.
+* sig
+  ham
+  hans
+  hinanden
+
+68. Bevæg ___ lidt mere, så får du det bedre.
+> bevæge sig — двигаться: обращение к одному → dig. Двигайся побольше, и тебе станет лучше.
+* dig
+  sig
+  du
+  jer
+
+69. Vi har lovet ___ at være ærlige.
+> Друг другу — lovet hinanden. Мы пообещали друг другу быть честными.
+* hinanden
+  sig
+  vi
+  vores
+
+70. Vælg den rigtige sætning.
+> bade — «купаться», без местоимения. Летом мы купаемся в море.
+* Om sommeren bader vi i havet.
+  Om sommeren bader vi os i havet.
+  Om sommeren bader os vi i havet.
+  Om sommeren bader vi sig i havet.
+
+71. Kan I huske ___ fra skolen?
+> Помните друг друга — huske hinanden. Вы помните друг друга со школы?
+* hinanden
+  jer
+  sig
+  jeres
+
+72. Jeg føler ___ hjemme i Danmark nu.
+> føle sig — чувствовать себя: jeg → mig. Теперь я чувствую себя в Дании как дома.
+* mig
+  sig
+  jeg
+  min
+
+73. De har sat ___ et mål: at tale flydende dansk.
+> sætte sig et mål — поставить себе цель: de → sig. Они поставили себе цель: свободно говорить по-датски.
+* sig
+  dem
+  hinanden
+  deres
+
+74. Han lagde ___ tidligt i går.
+> lægge sig — лечь (спать): han → sig. Вчера он рано лёг.
+* sig
+  hans
+  han
+  hinanden
+
+75. Jeg kom til at tænke på ___ selv som barn.
+> На себя самого — mig selv. Я невольно вспомнил себя в детстве.
+* mig
+  sig
+  jeg
+  min
+
+76. Pigerne sad og snakkede med ___ hele aftenen.
+> Друг с другом — med hinanden. Девочки весь вечер сидели и разговаривали друг с другом.
+* hinanden
+  sig
+  de
+  deres
+
+77. Det er vigtigt at tage ___ tid.
+> «Не спешить» — tage sig tid. В инфинитиве без подлежащего — sig. Важно не торопиться.
+* sig
+  ham
+  hinanden
+  den
+
+78. Har du slået ___?
+> du → dig: har du slået dig? Ты ушибся?
+* dig
+  sig
+  du
+  dit
+
+79. Vi skal vænne ___ til det danske vejr.
+> vænne sig til — привыкнуть: vi → os. Нам нужно привыкнуть к датской погоде.
+* os
+  sig
+  vi
+  jer
+
+80. De gav ___ hånden.
+> Пожали друг другу руки — gav hinanden hånden. Они пожали друг другу руки.
+* hinanden
+  sig
+  de
+  deres
+
+81. Han klarer ___ godt i skolen.
+> klare sig — справляться: han → sig. Он хорошо справляется в школе.
+* sig
+  han selv
+  hans
+  han
+
+82. Du skal ikke sammenligne ___ med andre.
+> sammenligne sig — сравнивать себя: du → dig. Не сравнивай себя с другими.
+* dig
+  sig
+  du
+  dit
+
+83. Jeg har bestemt ___ for at blive i Danmark.
+> beslutte/bestemme sig for — решить: jeg → mig. Я решил остаться в Дании.
+* mig
+  sig
+  jeg
+  min
+
+84. Katten vasker ___.
+> katten (den) → sig. Кошка умывается.
+* sig
+  dens
+  hinanden
+  den selv
+
+85. De bor tæt på ___ og ses tit.
+> Близко друг к другу — tæt på hinanden. Они живут рядом друг с другом и часто видятся.
+* hinanden
+  sig
+  de
+  deres
+
+86. Hun lavede maden ___. Ingen hjalp hende.
+> selv в конце — «сама, без чужой помощи». Она приготовила еду сама. Никто ей не помогал.
+* selv
+  sig
+  sig selv
+  hende
+
+87. Han tog ___ en lur efter frokost.
+> «Вздремнуть» — tage sig en lur. Он вздремнул после обеда.
+* sig
+  ham
+  hans
+  hinanden
+
+88. Vi kan godt lide ___ og er blevet gode venner.
+> Нравимся друг другу — kan lide hinanden. Мы нравимся друг другу и стали хорошими друзьями.
+* hinanden
+  sig
+  vi
+  vores
+
+89. Vælg den rigtige sætning.
+> hedde — «называться, зваться», без местоимения. Как тебя зовут?
+* Hvad hedder du?
+  Hvad hedder du dig?
+  Hvad hedder dig?
+  Hvad hedder du sig?
+
+90. Hun klædte ___ hurtigt på og løb ud.
+> klæde sig på — одеться: hun → sig. Она быстро оделась и выбежала.
+* sig
+  hendes
+  hun
+  hinanden
+
+91. Vælg den rigtige sætning.
+> stå op — «вставать (с постели)», без местоимения. Я встаю в семь.
+* Jeg står op klokken syv.
+  Jeg står mig op klokken syv.
+  Jeg står op mig klokken syv.
+  Jeg står sig op klokken syv.
+
+92. De undskyldte over for ___.
+> Извинились друг перед другом — over for hinanden. Они извинились друг перед другом.
+* hinanden
+  sig
+  dem
+  deres
+
+93. Skynd ___, filmen begynder nu!
+> Обращение к одному → dig: Skynd dig! Поторопись, фильм начинается!
+* dig
+  sig
+  du
+  dit
+
+94. Han kan ikke tage ___ sammen til at gøre rent.
+> tage sig sammen — собраться (с силами): han → sig. Он не может собраться и убраться.
+* sig
+  ham
+  hans
+  hinanden
+
+95. Vi skrev til ___ i hele sommerferien.
+> Друг другу — til hinanden. Мы переписывались всё лето.
+* hinanden
+  vi
+  sig
+  vores
+
+96. I må gerne sætte ___.
+> I → jer: sætte jer. Можете садиться.
+* jer
+  sig
+  jeres
+  dig
+
+97. Vælg den rigtige sætning.
+> gå i seng — «ложиться спать», без местоимения. Он рано ложится спать.
+* Han går tidligt i seng.
+  Han går sig tidligt i seng.
+  Han går ham tidligt i seng.
+  Han går sig selv tidligt i seng.
+
+98. Jeg varmer ___ ved bålet.
+> varme sig — греться: jeg → mig. Я греюсь у костра.
+* mig
+  sig
+  min
+  jeg
+
+99. Brødrene kom op at slås, men nu har de lovet at hjælpe ___.
+> Друг другу — hjælpe hinanden. Братья подрались, но теперь пообещали помогать друг другу.
+* hinanden
+  sig
+  de
+  deres
+
+100. Hun er ikke helt sig ___ i dag.
+> «Она сегодня не в себе» — устойчивое: ikke helt sig selv. Она сегодня сама не своя.
+* selv
+  sig
+  hende
+  hun
