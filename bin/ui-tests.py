@@ -1042,6 +1042,14 @@ def a_film_answer_is_marked_at_once(b):
 
 
 @check
+def a_finished_film_offers_the_way_back(b):
+    open_film(b)
+    assert not b.js('!!document.querySelector("#finish")'), 'the way out is offered before the last answer'
+    answer_every_question(b)
+    b.until('!!document.querySelector("#finish a.cta[href=\'/video\']")', what='the way back after the last answer')
+
+
+@check
 def an_unknown_film_says_it_does_not_exist(b):
     only(['video'])
     b.goto('/video?v=ingen-saadan-film')
@@ -1193,6 +1201,14 @@ def an_info_tip_closes_on_escape_and_answers_nothing(b):
 
 
 @check
+def a_finished_verb_set_offers_the_way_back(b):
+    open_verb_set(b)
+    assert not b.js('!!document.querySelector("#finish")'), 'the way out is offered before the last answer'
+    answer_every_question(b)
+    b.until('!!document.querySelector("#finish a.cta[href=\'/verbs\']")', what='the way back after the last answer')
+
+
+@check
 def an_unknown_verb_set_says_it_does_not_exist(b):
     only(['verbs'])
     b.goto('/verbs?s=ingen-saadan')
@@ -1241,6 +1257,24 @@ def a_grammar_answer_is_marked_and_explained(b):
     assert b.js('!!document.querySelector(\'.q[data-pos="1"] .opt.right\')'), 'the right answer is not revealed'
     assert 'datid' in b.js('document.querySelector(\'.q[data-pos="1"] .note\').textContent')
     b.until('/0\\s*\\/\\s*2/.test(document.querySelector("#score").textContent)', what='the score 0 / 2')
+
+
+def answer_every_question(b):
+    """Answer each question on the page in turn, waiting for each to be marked."""
+    for pos in range(1, b.js('document.querySelectorAll(".q").length') + 1):
+        b.js(f'document.querySelector(\'.q[data-pos="{pos}"] .opt\').click()')
+        b.until(f'!!document.querySelector(\'.q[data-pos="{pos}"] .opt[disabled]\')', what=f'question {pos} marked')
+
+
+@check
+def a_finished_grammar_set_offers_another_round_and_the_way_back(b):
+    open_grammar_set(b)
+    assert not b.js('!!document.querySelector("#finish")'), 'the way out is offered before the last answer'
+    answer_every_question(b)
+    b.until('!!document.querySelector("#finish")', what='the buttons after the last answer')
+    assert b.js('!!document.querySelector("#finish a.cta[href=\'/grammar\']")'), 'no way back to the sets'
+    assert b.js('!!document.querySelector("#finish a.cta[href=\'/grammar?s=ui-fixture-grammar\']")'), \
+        'no way to another round of the same set'
 
 
 @check

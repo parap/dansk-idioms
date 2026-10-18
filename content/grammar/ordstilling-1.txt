@@ -142,3 +142,563 @@ title: Ordstilling og inversion
   Først jeg spiser morgenmad, og så jeg tager på arbejde.
   Først spiser jeg morgenmad, og så jeg tager på arbejde.
   Først jeg spiser morgenmad, og så tager jeg på arbejde.
+
+21. Om lørdagen ___ til marked.
+> «Om lørdagen» на первом месте → глагол второй, подлежащее за ним: går vi. По субботам мы ходим на рынок.
+* går vi
+  vi går
+  vi gå
+  gå vi
+
+22. Vælg den rigtige sætning.
+> С модальным глаголом ikke стоит после него, а инфинитив — в конце: Jeg kan ikke komme i morgen. Я не могу прийти завтра.
+* Jeg kan ikke komme i morgen.
+  Jeg ikke kan komme i morgen.
+  Jeg kan komme ikke i morgen.
+  Ikke kan jeg komme i morgen.
+
+23. I dag ___ ikke på arbejde.
+> «I dag» на первом месте → инверсия: глагол, потом подлежащее, потом ikke: skal jeg ikke. Сегодня я не иду на работу.
+* skal jeg
+  jeg skal
+  skal
+  jeg
+
+24. Jeg ved ikke, hvor ___.
+> Косвенный вопрос (hvor, hvad, hvornår…) — это придаточное: прямой порядок, подлежащее перед глаголом: hvor hun bor. Я не знаю, где она живёт.
+* hun bor
+  bor hun
+  bor
+  hun boer
+
+25. Kan du fortælle mig, hvornår ___?
+> Косвенный вопрос: подлежащее перед глаголом: hvornår bussen kører. Можешь сказать мне, когда отходит автобус?
+* bussen kører
+  kører bussen
+  kører den bussen
+  bussen køre
+
+26. Vælg det rigtige spørgsmål.
+> Вопрос без вопросительного слова начинается с глагола; ikke — после подлежащего: Kommer du ikke i aften? Ты не придёшь сегодня вечером?
+* Kommer du ikke i aften?
+  Kommer ikke du i aften?
+  Kommer du i aften ikke?
+  Ikke kommer du i aften?
+
+27. Hvis du ___, kan du ikke komme ind.
+> В придаточном с hvis короткое наречие (ikke) стоит перед глаголом: hvis du ikke har. Если у тебя нет билета, тебя не пустят.
+* ikke har en billet
+  har ikke en billet
+  har en billet ikke
+  ikke en billet har
+
+28. Hvad ___ i weekenden?
+> Вопросительное слово первое, глагол второй, потом подлежащее, инфинитив в конце: Hvad skal du lave. Что ты будешь делать в выходные?
+* skal du lave
+  du skal lave
+  skal lave du
+  du lave skal
+
+29. Vælg den rigtige sætning.
+> Перед глаголом стоит дополнение «Den film», значит глагол второй, подлежащее за ним: Den film har jeg set. Этот фильм я уже видел.
+* Den film har jeg set.
+  Den film jeg har set.
+  Den film har set jeg.
+  Den film jeg set har.
+
+30. Når jeg er træt, ___ tidligt i seng.
+> Придаточное с når на первом месте → в главном инверсия: går jeg. Когда я устаю, я рано ложусь спать.
+* går jeg
+  jeg går
+  jeg gå
+  går
+
+31. Jeg spørger ham, om han ___ i morgen.
+> om-придаточное: ikke перед глаголом: om han ikke kan komme. Я спрошу его, не сможет ли он прийти завтра.
+* ikke kan komme
+  kan ikke komme
+  kan komme ikke
+  ikke komme kan
+
+32. Det er en mand, som ___.
+> Относительное придаточное с som: наречие перед глаголом: som aldrig lyver. Это человек, который никогда не лжёт.
+* aldrig lyver
+  lyver aldrig
+  lyver han aldrig
+  aldrig han lyver
+
+33. »Kom ind«, ___.
+> После прямой речи глагол идёт перед подлежащим: sagde hun. «Входи», — сказала она.
+* sagde hun
+  hun sagde
+  sagde
+  hun siger
+
+34. Bagefter ___ en kop kaffe.
+> «Bagefter» на первом месте → инверсия: drak vi. Потом мы выпили по чашке кофе.
+* drak vi
+  vi drak
+  drak
+  vi drikker
+
+35. Vælg den rigtige sætning.
+> Повелительное наклонение стоит первым, ikke после него: Glem ikke din nøgle! Не забудь ключ!
+* Glem ikke din nøgle!
+  Ikke glem din nøgle!
+  Glem din nøgle ikke!
+  Du glem ikke din nøgle!
+
+36. Jeg ved ikke, hvem ___ i aften.
+> В косвенном вопросе, где hvem — подлежащее, нужно der: hvem der kommer. Я не знаю, кто придёт сегодня вечером.
+* der kommer
+  kommer
+  kommer der
+  han kommer
+
+37. Hvem ___ til festen i går?
+> В прямом вопросе hvem — подлежащее, поэтому der не нужен и глагол идёт сразу: Hvem kom. Кто пришёл на вечеринку вчера?
+* kom
+  der kom
+  kom der han
+  han kom
+
+38. Vælg den rigtige sætning.
+> В косвенном вопросе с hvad, где hvad — подлежащее, нужно der: hvad der skete. Я не понимаю, что случилось.
+* Jeg forstår ikke, hvad der skete.
+  Jeg forstår ikke, hvad skete.
+  Jeg forstår ikke, hvad skete der.
+  Jeg forstår ikke, hvad der skete det.
+
+39. Hvorfor ___ dansk?
+> Вопросительное слово, глагол, подлежащее: Hvorfor lærer du. Почему ты учишь датский?
+* lærer du
+  du lærer
+  lærer
+  du lære
+
+40. Jeg vil gerne vide, hvorfor ___ dansk.
+> Косвенный вопрос — прямой порядок: hvorfor du lærer. Я хотел бы знать, почему ты учишь датский.
+* du lærer
+  lærer du
+  lærer
+  du lære
+
+41. Heldigvis ___ min tegnebog igen.
+> «Heldigvis» на первом месте → инверсия: fandt jeg. К счастью, я снова нашёл свой кошелёк.
+* fandt jeg
+  jeg fandt
+  fandt
+  jeg finder
+
+42. Vælg den rigtige sætning.
+> В главном предложении наречие (altid) стоит после глагола: Hun drikker altid te om morgenen. Она всегда пьёт чай по утрам.
+* Hun drikker altid te om morgenen.
+  Hun altid drikker te om morgenen.
+  Altid hun drikker te om morgenen.
+  Hun drikker te altid om morgenen.
+
+43. Jeg kender en pige, der ___ fransk.
+> Относительное придаточное с der: også перед глаголом: der også taler. Я знаю девочку, которая тоже говорит по-французски.
+* også taler
+  taler også
+  taler hun også
+  også hun taler
+
+44. Vælg den rigtige sætning.
+> Местоимение-дополнение стоит перед ikke: Jeg kender ham ikke. Я его не знаю.
+* Jeg kender ham ikke.
+  Jeg ham kender ikke.
+  Jeg ikke kender ham.
+  Ikke jeg kender ham.
+
+45. Hvor er din hue? ___, det er koldt!
+> Местоимение-дополнение стоит между глаголом и частицей фразового глагола: Tag den på. Где твоя шапка? Надень её, холодно!
+* Tag den på
+  Tag på den
+  Den tag på
+  På tag den
+
+46. Om sommeren ___ ofte ved stranden.
+> «Om sommeren» на первом месте → инверсия, ofte — после подлежащего: er vi ofte. Летом мы часто бываем на пляже.
+* er vi
+  vi er
+  er
+  vi være
+
+47. Vælg den rigtige sætning.
+> Придаточное «Selv om det regner» на первом месте → в главном инверсия: tager vi. Хоть и идёт дождь, мы едем на пляж.
+* Selv om det regner, tager vi til stranden.
+  Selv om det regner, vi tager til stranden.
+  Selv om regner det, tager vi til stranden.
+  Selv om det regner, til stranden vi tager.
+
+48. Da jeg var lille, ___ i Kyiv.
+> Придаточное с da на первом месте → инверсия в главном: boede vi. Когда я был маленьким, мы жили в Киеве.
+* boede vi
+  vi boede
+  boede
+  vi bo
+
+49. Vælg det rigtige spørgsmål.
+> Вопрос с модальным глаголом: модальный глагол первый, потом подлежащее, инфинитив и дополнение: Kan du hjælpe mig? Можешь мне помочь?
+* Kan du hjælpe mig?
+  Kan du mig hjælpe?
+  Kan hjælpe du mig?
+  Hjælpe du kan mig?
+
+50. Hun spurgte, hvad ___.
+> Косвенный вопрос — прямой порядок, подлежащее перед глаголом: hvad jeg hed. Она спросила, как меня зовут.
+* jeg hed
+  hed jeg
+  hed
+  hedder jeg
+
+51. Klokken fem ___ fri.
+> «Klokken fem» на первом месте → инверсия: får jeg. В пять часов я заканчиваю работу.
+* får jeg
+  jeg får
+  får
+  jeg få
+
+52. Vælg den rigtige sætning.
+> В предложении со вспомогательным глаголом ikke стоит после него, причастие — после ikke: Jeg har ikke set filmen. Я не видел этот фильм.
+* Jeg har ikke set filmen.
+  Jeg ikke har set filmen.
+  Jeg har set ikke filmen.
+  Jeg har set filmen ikke.
+
+53. Desværre ___ ikke tid i dag.
+> «Desværre» на первом месте → инверсия, ikke после подлежащего: har jeg ikke tid. К сожалению, у меня сегодня нет времени.
+* har jeg
+  jeg har
+  har
+  jeg
+
+54. Hvis du ___ dansk, kan du få et bedre job.
+> В hvis-придаточном наречие перед глаголом: hvis du også lærer. Если ты ещё и выучишь датский, сможешь найти работу получше.
+* også lærer
+  lærer også
+  lærer du også
+  også du lærer
+
+55. Vælg den rigtige sætning.
+> og соединяет два главных предложения и места не занимает: после og прямой порядок. Jeg står op, og jeg tager et bad. Я встаю и принимаю душ.
+* Jeg står op, og jeg tager et bad.
+  Jeg står op, og tager jeg et bad.
+  Jeg står op, og jeg et bad tager.
+  Jeg står op, og et bad jeg tager.
+
+56. På arbejdet ___ dansk med mine kolleger.
+> Обстоятельство места «På arbejdet» на первом месте → инверсия: taler jeg. На работе я говорю по-датски с коллегами.
+* taler jeg
+  jeg taler
+  taler
+  jeg tale
+
+57. Vælg det rigtige spørgsmål.
+> В вопросе с вопросительным словом и вспомогательным глаголом причастие идёт после подлежащего: Hvor har du lagt nøglerne? Куда ты положил ключи?
+* Hvor har du lagt nøglerne?
+  Hvor du har lagt nøglerne?
+  Hvor har lagt du nøglerne?
+  Hvor lagt du har nøglerne?
+
+58. Jeg blev glad, da hun ___.
+> В придаточном с da наречие перед глаголом: da hun endelig ringede. Я обрадовался, когда она наконец позвонила.
+* endelig ringede
+  ringede endelig
+  ringede hun endelig
+  endelig hun ringede
+
+59. Nu ___ dansk ret godt.
+> «Nu» на первом месте → инверсия: forstår jeg. Теперь я довольно хорошо понимаю датский.
+* forstår jeg
+  jeg forstår
+  forstår
+  jeg forstå
+
+60. Vælg den rigtige sætning.
+> Придаточное (hvis) после главного: в главном прямой порядок, в придаточном ikke перед глаголом. Jeg bliver hjemme, hvis det ikke holder op med at regne. Я останусь дома, если дождь не прекратится.
+* Jeg bliver hjemme, hvis det ikke holder op med at regne.
+  Jeg bliver hjemme, hvis det holder ikke op med at regne.
+  Bliver jeg hjemme, hvis det ikke holder op med at regne.
+  Jeg bliver hjemme, hvis holder det ikke op med at regne.
+
+61. Hvad ___ i går?
+> Глагол ske почти всегда идёт с формальным подлежащим der: der skete noget. В вопросе: Hvad skete der? Что случилось вчера?
+* skete der
+  der skete
+  skete det
+  der skete det
+
+62. Vælg den rigtige sætning.
+> Подлежащее, глагол, ikke: Min mand kan ikke lide kaffe. Мой муж не любит кофе.
+* Min mand kan ikke lide kaffe.
+  Min mand ikke kan lide kaffe.
+  Min mand kan lide ikke kaffe.
+  Ikke min mand kan lide kaffe.
+
+63. Kaffe ___ ikke.
+> Дополнение «Kaffe» вынесено на первое место для выделения → глагол второй, подлежащее за ним: drikker jeg. Кофе я не пью.
+* drikker jeg
+  jeg drikker
+  drikker
+  jeg drikke
+
+64. Jeg håber, ___ i morgen.
+> at можно опустить, но предложение остаётся придаточным: подлежащее перед глаголом, du kommer. Надеюсь, ты придёшь завтра.
+* du kommer
+  kommer du
+  du komme
+  komme du
+
+65. Vælg den rigtige sætning.
+> Придаточное с fordi стоит вторым: в главном прямой порядок, в придаточном подлежащее перед глаголом. Jeg kommer for sent, fordi bussen er forsinket. Я опоздаю, потому что автобус задерживается.
+* Jeg kommer for sent, fordi bussen er forsinket.
+  Jeg kommer for sent, fordi er bussen forsinket.
+  Kommer jeg for sent, fordi bussen er forsinket.
+  Jeg for sent kommer, fordi bussen er forsinket.
+
+66. Hvornår ___ hjem?
+> Вопрос: вопросительное слово, вспомогательный/модальный глагол, подлежащее, инфинитив: Hvornår skal vi gå. Когда нам идти домой?
+* skal vi gå
+  vi skal gå
+  skal gå vi
+  gå vi skal
+
+67. Vælg den rigtige sætning.
+> Придаточное с hvis в начале → в главном инверсия, ikke после подлежащего: Hvis du er syg, skal du ikke gå på arbejde. Если ты болен, не ходи на работу.
+* Hvis du er syg, skal du ikke gå på arbejde.
+  Hvis du er syg, du skal ikke gå på arbejde.
+  Hvis du er syg, skal ikke du gå på arbejde.
+  Hvis er du syg, skal du ikke gå på arbejde.
+
+68. Jeg vil gerne vide, om ___ parkering her.
+> om-придаточное — прямой порядок: формальное подлежащее der, потом глагол: om der er. Хотел бы узнать, есть ли здесь парковка.
+* der er
+  er der
+  det er der
+  er det
+
+69. Til sidst ___ døren.
+> «Til sidst» на первом месте → инверсия: lukkede han. Под конец он закрыл дверь.
+* lukkede han
+  han lukkede
+  lukkede
+  han lukke
+
+70. Vælg den rigtige sætning.
+> Порядок в главном: подлежащее, глагол, наречие (gerne), дополнение: Jeg vil gerne have en kop te. Я бы хотел чашку чая.
+* Jeg vil gerne have en kop te.
+  Jeg gerne vil have en kop te.
+  Jeg vil have gerne en kop te.
+  Gerne jeg vil have en kop te.
+
+71. Hvorfor ___ ikke i går?
+> Вопрос: вопросительное слово, глагол, подлежащее, ikke: Hvorfor kom du ikke. Почему ты не пришёл вчера?
+* kom du
+  du kom
+  kom
+  du komme
+
+72. Han sagde ikke, hvornår ___ tilbage.
+> Косвенный вопрос — прямой порядок: подлежащее, модальный глагол, инфинитив: hvornår han ville komme. Он не сказал, когда вернётся.
+* han ville komme
+  ville han komme
+  han komme ville
+  ville komme han
+
+73. Vælg det rigtige spørgsmål.
+> Вопрос о подлежащем: hvem стоит первым и сам является подлежащим, поэтому глагол сразу за ним: Hvem har taget min cykel? Кто взял мой велосипед?
+* Hvem har taget min cykel?
+  Hvem der har taget min cykel?
+  Hvem har min cykel taget?
+  Hvem min cykel har taget?
+
+74. I Danmark ___ man på højre side af vejen.
+> «I Danmark» на первом месте → инверсия: kører man. В Дании ездят по правой стороне дороги.
+* kører man
+  man kører
+  kører
+  man køre
+
+75. Vælg den rigtige sætning.
+> Придаточное с når в начале → инверсия в главном: Når det bliver mørkt, tænder vi lyset. Когда темнеет, мы включаем свет.
+* Når det bliver mørkt, tænder vi lyset.
+  Når det bliver mørkt, vi tænder lyset.
+  Når bliver det mørkt, tænder vi lyset.
+  Når det bliver mørkt, tænder lyset vi.
+
+76. De børn, som ___ i skole, får ikke lov at gå på tur.
+> Относительное придаточное: ikke перед глаголом: som ikke kommer. Дети, которые не приходят в школу, не идут на экскурсию.
+* ikke kommer
+  kommer ikke
+  kommer de ikke
+  ikke de kommer
+
+77. Ham ___ ikke lide.
+> Дополнение «Ham» на первом месте для выделения → инверсия: kan jeg ikke lide. Его я не люблю.
+* kan jeg
+  jeg kan
+  kan
+  jeg
+
+78. Vælg det rigtige spørgsmål.
+> В вопросе ikke стоит после подлежащего: Har du ikke fået min mail? Ты не получил моё письмо?
+* Har du ikke fået min mail?
+  Har ikke du fået min mail?
+  Du har ikke fået min mail?
+  Har du fået ikke min mail?
+
+79. Hvis vi skynder os, ___ toget.
+> hvis-придаточное на первом месте → в главном инверсия: når vi. Если поторопимся, успеем на поезд.
+* når vi
+  vi når
+  når
+  vi nå
+
+80. Vælg den rigtige sætning.
+> Главное предложение после придаточного «Fordi jeg var syg» → инверсия: blev jeg hjemme. Так как я был болен, я остался дома.
+* Fordi jeg var syg, blev jeg hjemme.
+  Fordi jeg var syg, jeg blev hjemme.
+  Fordi var jeg syg, blev jeg hjemme.
+  Fordi jeg var syg, blev hjemme jeg.
+
+81. Om aftenen ___ tv.
+> «Om aftenen» на первом месте → инверсия: ser vi. По вечерам мы смотрим телевизор.
+* ser vi
+  vi ser
+  ser
+  vi se
+
+82. Jeg kan ikke huske, hvor ___.
+> Косвенный вопрос: подлежащее, вспомогательный глагол, причастие: hvor jeg har parkeret. Я не помню, где припарковался.
+* jeg har parkeret
+  har jeg parkeret
+  jeg parkeret har
+  parkeret jeg har
+
+83. Vælg den rigtige sætning.
+> В утверждении подлежащее первое, наречие tit после глагола: Vi spiser tit fisk. Порядок «Spiser vi…» — это вопрос. Мы часто едим рыбу.
+* Vi spiser tit fisk.
+  Vi tit spiser fisk.
+  Tit vi spiser fisk.
+  Spiser vi tit fisk.
+
+84. I går aftes ___ sent hjem.
+> «I går aftes» на первом месте → инверсия: kom de. Вчера вечером они поздно пришли домой.
+* kom de
+  de kom
+  kom
+  de komme
+
+85. Vælg det rigtige spørgsmål.
+> Вопросительное слово с существительным (hvilken bus) занимает первое место целиком, затем глагол, затем подлежащее: Hvilken bus tager du? На каком автобусе ты едешь?
+* Hvilken bus tager du?
+  Hvilken tager du bus?
+  Hvilken bus du tager?
+  Tager hvilken bus du?
+
+86. Hun spurgte mig, om jeg ___ i Danmark.
+> om-придаточное: наречие перед глаголом: om jeg altid havde boet. Она спросила меня, всегда ли я жил в Дании.
+* altid havde boet
+  havde altid boet
+  havde jeg altid boet
+  altid jeg havde boet
+
+87. Så ___ til tandlægen.
+> «Så» (затем) занимает первое место → инверсия: gik jeg. Потом я пошёл к зубному.
+* gik jeg
+  jeg gik
+  gik
+  jeg gå
+
+88. Vælg den rigtige sætning.
+> Придаточное с da в начале, в нём прямой порядок, а в главном инверсия: Da filmen var slut, gik vi hjem. Когда фильм закончился, мы пошли домой.
+* Da filmen var slut, gik vi hjem.
+  Da var filmen slut, gik vi hjem.
+  Da filmen var slut, vi gik hjem.
+  Da filmen slut var, gik vi hjem.
+
+89. Hvordan ___?
+> Вопросительное слово, глагол, подлежащее: Hvordan går det? Как дела?
+* går det
+  det går
+  går
+  gå det
+
+90. Ved du, hvordan ___ det på dansk?
+> Косвенный вопрос — прямой порядок: hvordan man siger. Ты знаешь, как это сказать по-датски?
+* man siger
+  siger man
+  man sige
+  sige man
+
+91. Vælg den rigtige sætning.
+> Если первое место заняло придаточное «Hvis du vil», глагол главного идёт сразу за ним, перед подлежащим: kan vi. Если хочешь, можем встретиться завтра.
+* Hvis du vil, kan vi mødes i morgen.
+  Hvis du vil, vi kan mødes i morgen.
+  Hvis vil du, kan vi mødes i morgen.
+  Hvis du vil, kan mødes vi i morgen.
+
+92. Hver morgen ___ tur med hunden.
+> «Hver morgen» на первом месте → инверсия: går jeg. Каждое утро я гуляю с собакой.
+* går jeg
+  jeg går
+  går
+  jeg gå
+
+93. Vælg den rigtige sætning.
+> Длинное подлежащее не меняет правила: глагол второй. Min nye kollega fra Polen taler godt dansk. Мой новый коллега из Польши хорошо говорит по-датски.
+* Min nye kollega fra Polen taler godt dansk.
+  Min nye kollega fra Polen godt taler dansk.
+  Taler min nye kollega fra Polen godt dansk.
+  Min nye kollega taler fra Polen godt dansk.
+
+94. Jeg tror ikke, at hun ___ med.
+> Придаточное с at: наречие перед глаголом: at hun også kommer. Я не думаю, что она тоже придёт.
+* også kommer
+  kommer hun også
+  også hun kommer
+  kommer også hun
+
+95. Vælg det rigtige spørgsmål.
+> Вопрос с hvem в роли дополнения: Hvem venter du på? Предлог остаётся в конце. Кого ты ждёшь?
+* Hvem venter du på?
+  På hvem du venter?
+  Hvem du venter på?
+  Hvem venter på du?
+
+96. Efter middagen ___ opvasken.
+> «Efter middagen» на первом месте → инверсия: tog han. После ужина он помыл посуду.
+* tog han
+  han tog
+  tog
+  han tage
+
+97. Vælg den rigtige sætning.
+> Порядок с двумя глаголами в придаточном: подлежащее, наречие, вспомогательный глагол, причастие: Jeg er ked af, at jeg ikke har ringet. Мне жаль, что я не позвонил.
+* Jeg er ked af, at jeg ikke har ringet.
+  Jeg er ked af, at ikke jeg har ringet.
+  Jeg er ked af, at har jeg ikke ringet.
+  Jeg er ked af, at jeg har ringet ikke.
+
+98. Hvor længe ___ i Danmark?
+> Вопрос: вопросительное слово, вспомогательный глагол, подлежащее, причастие: Hvor længe har du boet. Как долго ты живёшь в Дании?
+* har du boet
+  du har boet
+  har boet du
+  boet du har
+
+99. Vælg den rigtige sætning.
+> В главном предложении с инверсией местоимение-дополнение ставится перед ikke: I går så jeg ham ikke. Вчера я его не видел.
+* I går så jeg ham ikke.
+  I går jeg så ham ikke.
+  I går så ikke jeg ham.
+  I går jeg ikke så ham.
+
+100. Sammen med min familie ___ til Danmark i 2022.
+> Длинное обстоятельство «Sammen med min familie» целиком занимает первое место → глагол второй, подлежащее за ним: kom jeg. Вместе с семьёй я приехал в Данию в 2022 году.
+* kom jeg
+  jeg kom
+  kom
+  jeg komme

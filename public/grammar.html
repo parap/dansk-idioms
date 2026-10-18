@@ -71,6 +71,8 @@
   .cta b{color:var(--accent);font-size:1.15rem}
   .cta.back{display:inline-flex;justify-content:flex-start;margin:0 0 14px}
   .done{margin:.8rem 0 0}
+  .finish{display:flex;flex-wrap:wrap;gap:10px;margin:.9rem 0 0}
+  .finish .cta{margin:0}
   a{color:var(--accent)}
   [hidden]{display:none!important}
 </style>
@@ -97,6 +99,8 @@ const STRINGS = {
     empty: 'Наборов пока нет.',
     missing: 'Такого набора нет.',
     back: 'Все наборы',
+    again: 'Ещё раунд',
+    pool: 'в наборе {n}',
     score: 'Верно',
     done: 'Все вопросы отвечены.',
     error: 'Не удалось загрузить. Попробуйте обновить страницу.',
@@ -108,6 +112,8 @@ const STRINGS = {
     empty: 'No sets yet.',
     missing: 'There is no such set.',
     back: 'All sets',
+    again: 'Another round',
+    pool: '{n} in the set',
     score: 'Correct',
     done: 'Every question is answered.',
     error: 'Could not load. Try reloading the page.',
@@ -119,6 +125,8 @@ const STRINGS = {
     empty: 'Наборів поки немає.',
     missing: 'Такого набору немає.',
     back: 'Усі набори',
+    again: 'Ще раунд',
+    pool: 'у наборі {n}',
     score: 'Правильно',
     done: 'На всі питання дано відповідь.',
     error: 'Не вдалося завантажити. Спробуйте оновити сторінку.',
@@ -130,6 +138,8 @@ const STRINGS = {
     empty: 'Der er ingen sæt endnu.',
     missing: 'Det sæt findes ikke.',
     back: 'Alle sæt',
+    again: 'En runde til',
+    pool: '{n} i sættet',
     score: 'Rigtige',
     done: 'Alle spørgsmål er besvaret.',
     error: 'Kunne ikke hente siden. Prøv at genindlæse den.',
@@ -153,7 +163,7 @@ function paintLanguages() {
 }
 
 // A picture for each rule, by the slug its sets share: datid-foernutid-1, -2 … all get the clock.
-const PICTURES = {'datid-foernutid': '⏳', 'ordstilling': '🔀', 'hvis-ville': '💭'};
+const PICTURES = {'datid-foernutid': '⏳', 'ordstilling': '🔀', 'hvis-ville': '💭', 'passiv': '🧽'};
 
 function picture(slug) {
   return PICTURES[slug.replace(/-\d+$/, '')] ?? '📘';
@@ -171,6 +181,7 @@ function listView() {
             <span class="pic" aria-hidden="true">${picture(f.slug)}</span>
             <span class="title" lang="da">${esc(f.title)}</span>
             <span class="n">${esc(t('questions', f.questions).replace('{n}', f.questions))}</span>
+            ${f.pool > f.questions ? `<span class="n">${esc(t('pool').replace('{n}', f.pool))}</span>` : ''}
           </a></li>`;
         }).join('')}
       </ul>
@@ -202,7 +213,11 @@ function setView() {
       }).join('')}
       <p class="done"><span class="muted">${esc(t('score'))}:</span>
         <span id="score">${right} / ${round.items.length}</span></p>
-      ${answered === round.items.length ? `<p class="muted" style="margin:.2rem 0 0">${esc(t('done'))}</p>` : ''}
+      ${answered === round.items.length ? `<p class="muted" style="margin:.2rem 0 0">${esc(t('done'))}</p>
+        <div class="finish" id="finish">
+          <a class="cta" id="again" href="/grammar?s=${encodeURIComponent(set.slug)}"><span>${esc(t('again'))}</span></a>
+          <a class="cta back" href="/grammar"><b aria-hidden="true">←</b><span>${esc(t('back'))}</span></a>
+        </div>` : ''}
     </div>`;
 }
 

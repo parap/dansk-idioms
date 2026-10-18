@@ -20,6 +20,10 @@ title: Datid eller førnutid
 - A set covers one rule. Its slug is the rule's stem and a number (`ordstilling-1`,
   `ordstilling-2`); the page picks the tile's picture by the stem, in `PICTURES` at the top of
   `public/grammar.html`.
+- A set holds up to a hundred questions, and a round asks twenty of them: the ones this
+  learner has been asked least, in the set's order. A new question goes at the end under the
+  next number. Loading a set already in the database adds the numbers it lacks and leaves
+  the stored questions as they are, so a question a round has served is changed only in its note.
 - A question is a sentence with a gap written `___`, the verb's infinitive in brackets when
   the form is asked, or `Vælg den rigtige sætning.` with whole sentences as options.
 - **Every question has a note**: the rule in one or two sentences, in Russian, then the
@@ -28,6 +32,9 @@ title: Datid eller førnutid
   form — `Hun gik hjem` beside `Hun er gået hjem`, `Måske han kommer` beside
   `Måske kommer han` — that form is left out of the options rather than marked wrong; a
   learner marked down for correct Danish learns to distrust the set.
+- **Passiv**: the s-form and blive + participle are both right in the present and after a
+  modal verb (`porten lukkes` / `porten bliver lukket kl. 22`, lex.dk «passiv»), and `er bygget`
+  stands beside `blev bygget`, so a question offers one of each pair, never both.
 - Wrong options are the mistakes learners make: the other tense, the other auxiliary,
   the other word order. A form that does not exist (`købede`, `har blevet`) is a fair
   distractor; a nonsense string is not.

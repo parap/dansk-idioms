@@ -1,0 +1,704 @@
+kind: grammar
+slug: passiv-1
+title: Passiv
+
+--- questions ---
+1. Brevet skal ___ i dag. (sende)
+> После модального глагола (skal, kan, må, bør) пассив обычно образуют окончанием -s: skal sendes. Письмо само не отправляет, его отправляют. Письмо нужно отправить сегодня.
+* sendes
+  sende
+  sendt
+  sendte
+
+2. Huset ___ i 1890. (bygge)
+> Прошедшее время пассива: blev + причастие: blev bygget. Дом построили в 1890 году.
+* blev bygget
+  byggede
+  bygges
+  blev bygge
+
+3. Min cykel ___. Nu må jeg gå. (stjæle)
+> Результат сейчас → førnutid пассива: er blevet + причастие. «har blevet» не бывает. У меня украли велосипед. Теперь придётся идти пешком.
+* er blevet stjålet
+  har blevet stjålet
+  har stjålet
+  er blevet stjæle
+
+4. «Den lille havfrue» er skrevet ___ H.C. Andersen.
+> Того, кто совершает действие, в пассиве называют через af. «Русалочка» написана Хансом Кристианом Андерсеном.
+* af
+  fra
+  med
+  ved
+
+5. Her må ikke ___. (ryge)
+> Безличный пассив: подлежащего нет, глагол на -s после må: Her må ikke ryges. Здесь не курят (курить запрещено).
+* ryges
+  ryge
+  røget
+  røg
+
+6. Vinduerne kan ikke ___. (åbne)
+> После kan — s-пассив: kan ikke åbnes. Окна не открываются.
+* åbnes
+  åbne
+  åbnet
+  åbnede
+
+7. Patienten ___ i går. (operere)
+> Прошедшее время пассива: blev + причастие. Пациент не оперировал сам — его оперировали. Пациента прооперировали вчера.
+* blev opereret
+  opererede
+  opereres
+  blev operere
+
+8. Hvordan ___ dit navn? (stave)
+> s-пассив в вопросе о том, как принято: Hvordan staves dit navn? Как пишется твоё имя?
+* staves
+  staver
+  stavet
+  stavede
+
+9. Regningen skal ___ inden den 1. (betale)
+> После skal — s-пассив: skal betales. Счёт нужно оплатить до первого числа.
+* betales
+  betale
+  betalt
+  betalte
+
+10. Amerika ___ af Columbus i 1492. (opdage)
+> Прошедшее время пассива: blev + причастие, а деятель — через af. Америка была открыта Колумбом в 1492 году.
+* blev opdaget
+  opdagede
+  opdages
+  blev opdage
+
+11. Bilen ___ af en mekaniker i går. (reparere)
+> Прошедшее время пассива: blev repareret. Машину вчера отремонтировал механик.
+* blev repareret
+  reparerede
+  repareres
+  har repareret
+
+12. Opgaven skal ___ senest fredag. (aflevere)
+> После skal — s-пассив: skal afleveres. Задание нужно сдать не позднее пятницы.
+* afleveres
+  aflevere
+  afleveret
+  afleverede
+
+13. Vores fly ___. Vi må vente til i morgen. (aflyse)
+> Результат сейчас → er blevet + причастие: er blevet aflyst. Наш рейс отменили. Придётся ждать до завтра.
+* er blevet aflyst
+  har blevet aflyst
+  har aflyst
+  er blevet aflyse
+
+14. Maden kan ___ i mikroovnen. (varme)
+> После kan — s-пассив: kan varmes. Еду можно разогреть в микроволновке.
+* varmes
+  varme
+  varmet
+  varmede
+
+15. Billetter kan ___ på stationen. (købe)
+> После kan — s-пассив: kan købes. Билеты можно купить на вокзале.
+* købes
+  købe
+  købt
+  købte
+
+16. Mødet ___ til næste uge. (udsætte)
+> Решение уже принято, результат сейчас → er blevet + причастие: er blevet udsat. Встречу перенесли на следующую неделю.
+* er blevet udsat
+  har blevet udsat
+  har udsat
+  er blevet udsætte
+
+17. Formularen skal ___ med kuglepen. (udfylde)
+> После skal — s-пассив: skal udfyldes. Анкету нужно заполнить ручкой.
+* udfyldes
+  udfylde
+  udfyldt
+  udfyldte
+
+18. Vinderen ___ ved en lodtrækning i går. (finde)
+> Прошедшее время пассива: blev fundet. Победителя определили вчера жеребьёвкой.
+* blev fundet
+  fandt
+  findes
+  blev finde
+
+19. Kartoflerne skal ___ i 20 minutter. (koge)
+> После skal — s-пассив: skal koges. Картошку нужно варить 20 минут.
+* koges
+  koge
+  kogt
+  kogte
+
+20. Jeg ___ til fest på lørdag. (invitere)
+> Приглашение уже пришло, результат сейчас → er blevet inviteret. Меня пригласили на вечеринку в субботу.
+* er blevet inviteret
+  har blevet inviteret
+  har inviteret
+  er blevet invitere
+
+21. Døren skal ___ lukket. (holde)
+> После skal — s-пассив: skal holdes. Дверь должна быть закрыта (дословно: её нужно держать закрытой).
+* holdes
+  holde
+  holdt
+  holdte
+
+22. Bogen ___ til 30 sprog. (oversætte)
+> Результат сейчас (переводы существуют) → er blevet oversat. Книга переведена на 30 языков.
+* er blevet oversat
+  har blevet oversat
+  har oversat
+  er blevet oversætte
+
+23. Vasketøjet skal ___ ved 40 grader. (vaske)
+> После skal — s-пассив: skal vaskes. Бельё нужно стирать при 40 градусах.
+* vaskes
+  vaske
+  vasket
+  vaskede
+
+24. Tyven ___ af politiet i nat. (anholde)
+> Прошедшее время пассива: blev anholdt, деятель через af. Вора задержала полиция этой ночью.
+* blev anholdt
+  anholdt
+  anholdes
+  blev anholde
+
+25. Varerne kan ___ til døren. (levere)
+> После kan — s-пассив: kan leveres. Товары могут доставить до двери.
+* leveres
+  levere
+  leveret
+  leverede
+
+26. Kirken er meget gammel. Hvornår ___ den bygget?
+> Вопрос о событии в прошлом: blev + причастие — Hvornår blev den bygget? Церковь очень старая. Когда её построили?
+* blev
+  har
+  har været
+  bliver
+
+27. Der ___ dansk her. (tale)
+> Безличный s-пассив с der: Der tales dansk her. Здесь говорят по-датски.
+* tales
+  taler
+  talt
+  talte
+
+28. Postkassen ___ hver dag kl. 17. (tømme)
+> Регулярное, «по правилам» действие — типичный случай s-пассива: tømmes. Почтовый ящик опустошают каждый день в 17:00.
+* tømmes
+  tømmer
+  tømt
+  tømte
+
+29. Telefonen ___ af Alexander Graham Bell. (opfinde)
+> Историческое событие → blev + причастие: blev opfundet. Телефон изобрёл Александр Грэм Белл.
+* blev opfundet
+  opfandt
+  opfindes
+  blev opfinde
+
+30. Vi ___ af en høj lyd midt om natten. (vække)
+> Прошедшее время пассива: blev vækket. Нас разбудил громкий звук посреди ночи.
+* blev vækket
+  vækkede
+  vækkes
+  har vækket
+
+31. Medicinen skal ___ efter maden. (tage)
+> После skal — s-пассив: skal tages. Лекарство нужно принимать после еды.
+* tages
+  tage
+  taget
+  tog
+
+32. Han ___ fyret fra sit job. (blive)
+> Результат сейчас: er blevet fyret. blive всегда берёт er. Его уволили с работы.
+* er blevet
+  har blevet
+  blevet
+  er bliver
+
+33. Plænen skal ___ en gang om ugen. (slå)
+> После skal — s-пассив: skal slås. Газон нужно косить раз в неделю.
+* slås
+  slå
+  slået
+  slog
+
+34. Vinduet ___ af en fodbold. (smadre)
+> Прошедшее время пассива, деятель через af: blev smadret. Окно разбил футбольный мяч.
+* blev smadret
+  smadrede
+  smadres
+  har smadret
+
+35. Brød ___ i Danmark med meget rug. (bage)
+> Общее утверждение о том, как принято, — s-пассив: bages. В Дании хлеб пекут с большим количеством ржи.
+* bages
+  bager
+  bagt
+  bagte
+
+36. Hvor ___ du født? (være)
+> «Родиться» по-датски обычно передают состоянием: er født. Hvor er du født? Где ты родился?
+* er
+  har
+  bliver
+  blevet
+
+37. Hele kagen ___ på ti minutter. (spise)
+> Прошедшее время пассива: blev spist. Весь торт съели за десять минут.
+* blev spist
+  spiste
+  spises
+  blev spiste
+
+38. Butikken ___ til en ny ejer. (sælge)
+> Результат сейчас: er blevet solgt. Магазин продали новому владельцу.
+* er blevet solgt
+  har blevet solgt
+  har solgt
+  er blevet sælge
+
+39. Ansøgningen skal ___ af begge forældre. (underskrive)
+> После skal — s-пассив, деятель через af: skal underskrives af. Заявление должны подписать оба родителя.
+* underskrives
+  underskrive
+  underskrevet
+  underskrev
+
+40. Mange huse ___ under stormen. (ødelægge)
+> Прошедшее время пассива: blev ødelagt. Многие дома были разрушены во время бури.
+* blev ødelagt
+  ødelagde
+  ødelægges
+  blev ødelægge
+
+41. Vandet bør ___ før brug. (koge)
+> После bør — s-пассив: bør koges. Воду следует прокипятить перед использованием.
+* koges
+  koge
+  kogt
+  kogte
+
+42. Pakken ___ i går. (levere)
+> Прошедшее время пассива: blev leveret. Посылку доставили вчера.
+* blev leveret
+  leverede
+  leveres
+  blev levere
+
+43. Sofaen kan ___ til en seng. (lave om)
+> После kan — s-пассив; у фразового глагола -s получает сам глагол, а частица идёт после: kan laves om. Диван можно превратить в кровать.
+* laves om
+  lave om
+  lavet om
+  lavede om
+
+44. Kan cyklen ___? (reparere)
+> После kan — s-пассив: kan repareres. Велосипед можно починить?
+* repareres
+  reparere
+  repareret
+  reparerede
+
+45. Prisen ___ til en ung forsker i går. (give)
+> Прошедшее время пассива: blev givet. Вчера премию вручили молодому учёному.
+* blev givet
+  gav
+  gives
+  blev give
+
+46. Vejen ___ på grund af sne. (lukke)
+> Результат сейчас: дорога закрыта → er blevet lukket. Дорогу закрыли из-за снега.
+* er blevet lukket
+  har blevet lukket
+  har lukket
+  er blevet lukke
+
+47. Ordet ___ ofte forkert. (udtale)
+> Общее утверждение о том, как бывает, — s-пассив: udtales. Это слово часто произносят неправильно.
+* udtales
+  udtaler
+  udtalt
+  udtalte
+
+48. Filmen ___ i Aalborg sidste sommer. (optage)
+> Прошедшее время пассива: blev optaget. Фильм сняли в Ольборге прошлым летом.
+* blev optaget
+  optog
+  optages
+  blev optage
+
+49. Æblerne skal ___, før de spises. (vaske)
+> После skal — s-пассив: skal vaskes. Яблоки нужно помыть, прежде чем есть.
+* vaskes
+  vaske
+  vasket
+  vaskede
+
+50. Han ___ af en hund, da han var lille. (bide)
+> Прошедшее время пассива: blev bidt. Его укусила собака, когда он был маленьким.
+* blev bidt
+  bed
+  bides
+  blev bide
+
+51. Mobiltelefoner må ikke ___ under prøven. (bruge)
+> После må — s-пассив: må ikke bruges. Мобильными телефонами нельзя пользоваться во время экзамена.
+* bruges
+  bruge
+  brugt
+  brugte
+
+52. Hvornår ___ resultaterne? (offentliggøre)
+> Вопрос о будущем: s-пассив в настоящем времени — offentliggøres. Когда будут опубликованы результаты?
+* offentliggøres
+  offentliggør
+  offentliggjort
+  offentliggjorde
+
+53. Træet ___ af lynet. (ramme)
+> Прошедшее время пассива: blev ramt. В дерево ударила молния.
+* blev ramt
+  ramte
+  rammes
+  blev ramme
+
+54. Opvasken skal ___ i aften. (tage)
+> После skal — s-пассив: skal tages. Посуду нужно помыть сегодня вечером.
+* tages
+  tage
+  taget
+  tog
+
+55. Vores lejlighed ___. Nu ser den helt ny ud. (male)
+> Результат сейчас → er blevet + причастие: er blevet malet. Нашу квартиру покрасили. Теперь она выглядит совсем новой.
+* er blevet malet
+  har blevet malet
+  har malet
+  er blevet male
+
+56. Hunden skal ___ ud tre gange om dagen. (lufte)
+> После skal — s-пассив: skal luftes. Собаку нужно выгуливать три раза в день.
+* luftes
+  lufte
+  luftet
+  luftede
+
+57. Mange mennesker ___ i ulykken. (såre)
+> Прошедшее время пассива: blev såret. Многие люди пострадали (были ранены) в аварии.
+* blev såret
+  sårede
+  såres
+  blev såre
+
+58. Skoleåret ___ i august. (begynde)
+> begynde — не пассив: школьный год сам начинается. Настоящее время: begynder. Учебный год начинается в августе.
+* begynder
+  begyndes
+  bliver begyndt
+  er begyndes
+
+59. Prøven kan ___ to gange om året. (tage)
+> После kan — s-пассив: kan tages. Экзамен можно сдавать два раза в год.
+* tages
+  tage
+  taget
+  tog
+
+60. Stolen ___ af min bedstefar. (lave)
+> О вещи, сделанной в прошлом: blev lavet. Этот стул сделал мой дедушка.
+* blev lavet
+  lavede
+  laves
+  blev lave
+
+61. Maleriet er malet ___ en ukendt kunstner.
+> Деятель в пассиве — через af. Картина написана неизвестным художником.
+* af
+  fra
+  med
+  ved
+
+62. Sangen er skrevet ___ en ung pige fra Aarhus.
+> Деятель в пассиве — af. Песню написала молодая девушка из Орхуса.
+* af
+  fra
+  med
+  for
+
+63. Vi blev hentet i lufthavnen ___ min onkel.
+> Деятель в пассиве — af. Нас встретил в аэропорту мой дядя.
+* af
+  med
+  fra
+  ved
+
+64. Kagen blev bagt ___ min mormor.
+> Деятель в пассиве — af. Торт испекла моя бабушка.
+* af
+  fra
+  hos
+  med
+
+65. Brevet blev sendt ___ min advokat.
+> Деятель в пассиве — af. Письмо отправил мой адвокат.
+* af
+  fra
+  med
+  hos
+
+66. Hun blev undersøgt ___ en læge.
+> Деятель в пассиве — af. Её осмотрел врач.
+* af
+  hos
+  fra
+  med
+
+67. Eleverne blev rost ___ læreren.
+> Деятель в пассиве — af. Учитель похвалил учеников.
+* af
+  fra
+  med
+  over
+
+68. Huset er tegnet ___ en kendt arkitekt.
+> Деятель в пассиве — af. Дом спроектировал известный архитектор.
+* af
+  fra
+  med
+  ved
+
+69. Byen blev grundlagt ___ vikingerne.
+> Деятель в пассиве — af. Город основали викинги.
+* af
+  fra
+  med
+  for
+
+70. Programmet er lavet ___ studerende.
+> Деятель в пассиве — af. Программу сделали студенты.
+* af
+  fra
+  med
+  til
+
+71. Der ___ mange penge på julegaver. (bruge)
+> Безличный s-пассив с der: Der bruges mange penge. На рождественские подарки тратят много денег.
+* bruges
+  bruger
+  brugt
+  brugte
+
+72. Her ___ kun kontanter. (modtage)
+> Правило на вывеске — s-пассив: modtages. Здесь принимают только наличные.
+* modtages
+  modtager
+  modtaget
+  modtog
+
+73. Der ___ et nyt hospital i byen. (bygge)
+> Безличный s-пассив о том, что происходит сейчас: Der bygges. В городе строят новую больницу.
+* bygges
+  bygger
+  bygget
+  byggede
+
+74. Cykler må ikke ___ her. (parkere)
+> После må — s-пассив: må ikke parkeres. Велосипеды здесь ставить нельзя.
+* parkeres
+  parkere
+  parkeret
+  parkerede
+
+75. Der ___ hele natten til festen. (danse)
+> Безличный s-пассив с der: Der danses. На празднике танцуют всю ночь.
+* danses
+  danser
+  danset
+  dansede
+
+76. Hunde skal ___ i snor. (føre)
+> После skal — s-пассив: skal føres. Собак нужно водить на поводке.
+* føres
+  føre
+  ført
+  førte
+
+77. Der ___ ikke nok om problemet. (tale)
+> Безличный s-пассив с der: Der tales ikke nok. Об этой проблеме говорят недостаточно.
+* tales
+  taler
+  talt
+  talte
+
+78. I Danmark ___ der juleaften den 24. december. (holde)
+> Безличный s-пассив после обстоятельства на первом месте: holdes der. В Дании Сочельник празднуют 24 декабря.
+* holdes
+  holder
+  holdt
+  holdte
+
+79. Der ___ meget kaffe i Danmark. (drikke)
+> Безличный s-пассив с der: Der drikkes. В Дании пьют много кофе.
+* drikkes
+  drikker
+  drukket
+  drak
+
+80. Indgangen må ikke ___. (spærre)
+> После må — s-пассив: må ikke spærres. Вход нельзя загораживать.
+* spærres
+  spærre
+  spærret
+  spærrede
+
+81. Vælg den rigtige sætning: «Politiet anholdt manden.»
+> Дополнение «manden» становится подлежащим: Manden blev anholdt af politiet. Мужчину задержала полиция.
+* Manden blev anholdt af politiet.
+  Manden blev anholdt fra politiet.
+  Manden anholdt af politiet.
+  Politiet blev anholdt af manden.
+
+82. Vælg den rigtige sætning: «Man taler dansk i Danmark.»
+> Предложение с man часто передают s-пассивом: Der tales dansk i Danmark. В Дании говорят по-датски.
+* Der tales dansk i Danmark.
+  Der taler dansk i Danmark.
+  Dansk taler i Danmark.
+  Der talt dansk i Danmark.
+
+83. Vælg den rigtige sætning: «Min mor har malet billedet.»
+> Førnutid в пассиве: er blevet + причастие, деятель через af. Billedet er blevet malet af min mor. Картину написала моя мама.
+* Billedet er blevet malet af min mor.
+  Billedet har blevet malet af min mor.
+  Billedet er blevet malet fra min mor.
+  Billedet har malet af min mor.
+
+84. Vælg den rigtige sætning: «Man skal vande blomsterne.»
+> man + skal → s-пассив после модального: Blomsterne skal vandes. Цветы нужно полить.
+* Blomsterne skal vandes.
+  Blomsterne skal vande.
+  Blomsterne skal vandet.
+  Blomsterne vandes skal.
+
+85. Vælg den rigtige sætning: «En bil kørte min kat ned.»
+> Прошедшее время пассива: blev kørt ned, деятель через af. Min kat blev kørt ned af en bil. Мою кошку сбила машина.
+* Min kat blev kørt ned af en bil.
+  Min kat kørte ned af en bil.
+  Min kat blev kørt ned fra en bil.
+  Min kat blev køre ned af en bil.
+
+86. Vælg den rigtige sætning: «Man kan se slottet fra vejen.»
+> man + kan → s-пассив: Slottet kan ses fra vejen. Замок виден с дороги.
+* Slottet kan ses fra vejen.
+  Slottet kan se fra vejen.
+  Slottet kan set fra vejen.
+  Slottet ses kan fra vejen.
+
+87. Vælg den rigtige sætning: «Lægen undersøgte barnet.»
+> Barnet blev undersøgt af lægen. Ребёнка осмотрел врач.
+* Barnet blev undersøgt af lægen.
+  Barnet undersøgte af lægen.
+  Barnet blev undersøgt hos lægen af.
+  Lægen blev undersøgt af barnet.
+
+88. Vælg den rigtige sætning: «Man har aflyst koncerten.»
+> Førnutid пассива: er blevet + причастие. Koncerten er blevet aflyst. Концерт отменили.
+* Koncerten er blevet aflyst.
+  Koncerten har blevet aflyst.
+  Koncerten har aflyst.
+  Koncerten er blevet aflyse.
+
+89. Vælg den rigtige sætning: «Man må ikke fotografere i museet.»
+> man + må ikke → безличный s-пассив: Der må ikke fotograferes i museet. В музее нельзя фотографировать.
+* Der må ikke fotograferes i museet.
+  Der må ikke fotografere i museet.
+  Der må ikke fotograferet i museet.
+  Der fotograferes må ikke i museet.
+
+90. Vælg den rigtige sætning: «Man har solgt alle billetterne.»
+> Førnutid пассива: er blevet + причастие. Alle billetterne er blevet solgt. Все билеты проданы.
+* Alle billetterne er blevet solgt.
+  Alle billetterne har blevet solgt.
+  Alle billetterne har solgt.
+  Alle billetterne er blevet sælge.
+
+91. Vi ___ i morgen! (ses)
+> ses («видеться») — глагол только с -s, у него нет активной формы с тем же значением. Увидимся завтра!
+* ses
+  ser
+  sås
+  set
+
+92. Hvad ___ du om filmen? (synes)
+> synes («считать, находить») всегда с -s, хотя это не пассив. Как тебе фильм?
+* synes
+  syner
+  synede
+  synet
+
+93. I går ___ det mig endelig at finde en lejlighed. (lykkes)
+> lykkes («удаваться») всегда с -s. Прошедшее время: lykkedes. Вчера мне наконец удалось найти квартиру.
+* lykkedes
+  lykkede
+  lykkes
+  blev lykket
+
+94. Der ___ over 400 øer i Danmark. (findes)
+> findes («существовать, иметься») — глагол с -s: Der findes. В Дании больше 400 островов.
+* findes
+  finder
+  fundet
+  fandt
+
+95. I morgen ___ vi kl. 10 foran biblioteket. (mødes)
+> mødes («встречаться друг с другом») — глагол с -s. Завтра — настоящее время: mødes. Завтра встречаемся в 10 у библиотеки.
+* mødes
+  mødtes
+  mødt
+  møde
+
+96. Det ___ mig at bestå prøven! (lykkes)
+> Результат сейчас → førnutid. lykkes берёт er: er lykkedes. «har lykkedes» не бывает. Мне удалось сдать экзамен!
+* er lykkedes
+  har lykkedes
+  er lykket
+  har lykket
+
+97. Hør! Naboerne ___ igen. (skændes)
+> skændes («ссориться») — глагол с -s. Сейчас (Hør!) → настоящее время: skændes. Слышишь? Соседи опять ругаются.
+* skændes
+  skændtes
+  skændt
+  skændede
+
+98. Drengene ___ i skolegården i går. (slås)
+> slås («драться») — глагол с -s. Прошедшее время: sloges. Мальчишки вчера дрались во дворе школы.
+* sloges
+  slog
+  slås
+  slået
+
+99. Jeg ___ ikke, at det er en god idé. (synes)
+> synes с -s и в отрицании: Jeg synes ikke. Я не думаю, что это хорошая идея.
+* synes
+  syner
+  synede
+  synet
+
+100. Der ___ ingen nem løsning på problemet. (findes)
+> findes — «существует»: Der findes ingen nem løsning. Простого решения этой проблемы не существует.
+* findes
+  finder
+  findet
+  fundet
