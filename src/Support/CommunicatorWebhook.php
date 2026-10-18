@@ -17,6 +17,9 @@ use Dansk\Import\Text;
  */
 final class CommunicatorWebhook
 {
+    /** Said at once, as a reply to the message, before any of the slow work. */
+    public const RECEIVED = 'Разбираю…';
+
     /**
      * @param ?\Closure $ingest    Given the message and the id it was published under,
      *                             puts it in the corpus and says where it stands on the
@@ -78,6 +81,8 @@ final class CommunicatorWebhook
         if ($group === null) {
             return 'misconfigured';
         }
+
+        $this->receipt($message);
 
         // Nothing goes to the group before the boundaries are settled. Publishing
         // first and skipping the corpus afterwards put a post nobody had decided
@@ -277,6 +282,19 @@ final class CommunicatorWebhook
         );
 
         return 'offered';
+    }
+
+    /**
+     * Tell the owner the message arrived. Several sent together are worked on one by
+     * one, and without this the wait after each reads the same as a lost message.
+     */
+    private function receipt(array $message): void
+    {
+        try {
+            $this->api->sendMessage((string) $this->owner(), self::RECEIVED, replyTo: (int) ($message['message_id'] ?? 0) ?: null);
+        } catch (\Throwable $e) {
+            error_log('communicator: could not acknowledge the message -- ' . $e->getMessage());
+        }
     }
 
     /**
