@@ -128,6 +128,7 @@ const STRINGS = {
     late: 'сдано после окончания времени',
     noMark: 'Порог «bestået» для этого теста не опубликован, поэтому вердикта нет — только баллы.',
     again: 'Пройти другой вариант', back: 'На главную',
+    skriv: 'Письмо и устная часть',
     history: 'Сданные варианты',
     error: 'Не удалось загрузить. Попробуйте обновить страницу.',
     missing: 'Такого варианта нет.',
@@ -151,6 +152,7 @@ const STRINGS = {
     late: 'handed in after time was up',
     noMark: 'No pass mark is published for this test, so there is no verdict — only points.',
     again: 'Try another variant', back: 'Home',
+    skriv: 'Writing and speaking',
     history: 'Variants handed in',
     error: 'Could not load. Try reloading the page.',
     missing: 'There is no such variant.',
@@ -174,6 +176,7 @@ const STRINGS = {
     late: 'здано після закінчення часу',
     noMark: 'Поріг «bestået» для цього тесту не опубліковано, тому вердикту немає — лише бали.',
     again: 'Пройти інший варіант', back: 'На головну',
+    skriv: 'Письмо та усна частина',
     history: 'Здані варіанти',
     error: 'Не вдалося завантажити. Спробуйте оновити сторінку.',
     missing: 'Такого варіанта немає.',
@@ -197,6 +200,7 @@ const STRINGS = {
     late: 'afleveret efter tiden',
     noMark: 'Der er ikke offentliggjort en grænse for bestået, så der er ingen afgørelse — kun point.',
     again: 'Tag et andet sæt', back: 'Forside',
+    skriv: 'Skrivning og mundtlig',
     history: 'Afleverede sæt',
     error: 'Kunne ikke hente siden. Prøv at genindlæse den.',
     missing: 'Det sæt findes ikke.',
@@ -257,6 +261,7 @@ async function home() {
           <span class="muted">${esc(fill(t('paperFacts'), {tasks: p.tasks, q: p.questions, p: p.points}))}</span>
         </button>`).join('')}</div>`
         : `<p class="muted">${esc(t('empty'))}</p>`}
+      <p style="margin:14px 0 0"><a class="cta" href="/modultest/skriv"><span>${esc(t('skriv'))}</span></a></p>
     </div>
     <div id="history"></div>`;
   view.querySelectorAll('.paper').forEach(b => b.onclick = () => start(b.dataset.paper));

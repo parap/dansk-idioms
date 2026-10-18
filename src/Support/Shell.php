@@ -31,6 +31,7 @@ final class Shell
         '/verbs'  => '/verbs.html',
         '/grammar' => '/grammar.html',
         '/modultest' => '/modultest.html',
+        '/modultest/skriv' => '/skriv.html',
     ];
 
     public const ADMIN = '/admin.html';
