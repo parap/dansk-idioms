@@ -36,6 +36,9 @@ final class BotApi
      * asterisk turns the post into a parse error. Bold carries meaning in this corpus --
      * a quarter of its entries are split on a bold span -- so losing it is not cosmetic.
      *
+     * `$replyTo` threads the message under another one in the same chat; if that one is
+     * gone, the message is still sent, just without the thread.
+     *
      * @param array<int,array<string,mixed>> $entities
      */
     public function sendMessage(
@@ -43,6 +46,7 @@ final class BotApi
         string $text,
         array $entities = [],
         ?array $markup = null,
+        ?int $replyTo = null,
     ): int {
         $params = ['chat_id' => $chatId, 'text' => $text];
         if ($entities !== []) {
@@ -50,6 +54,9 @@ final class BotApi
         }
         if ($markup !== null) {
             $params['reply_markup'] = json_encode($markup, JSON_UNESCAPED_UNICODE);
+        }
+        if ($replyTo !== null) {
+            $params['reply_parameters'] = json_encode(['message_id' => $replyTo, 'allow_sending_without_reply' => true]);
         }
         $answer = $this->call('sendMessage', $params);
 

@@ -703,6 +703,18 @@ FAULTS = [
   "        '/grammar' => '/grammar.html',\n",
   "",
   "unit:testTheGrammarPageHasItsOwnDocument"),
+ (217,"a message is worked on without a word","src/Support/CommunicatorWebhook.php",
+  "        $this->receipt($message);\n\n",
+  "",
+  "unit:testEveryMessageIsAnsweredBeforeItIsWorkedOn,testAProposalIsAlsoPrecededByTheReceipt"),
+ (218,"a failed receipt stops the publishing","src/Support/CommunicatorWebhook.php",
+  "            error_log('communicator: could not acknowledge the message -- ' . $e->getMessage());",
+  "            throw $e;",
+  "unit:testAReceiptThatFailsStopsNothing"),
+ (219,"the receipt does not say which message","src/Support/BotApi.php",
+  "            $params['reply_parameters'] = json_encode(",
+  "            $params['reply_to'] = json_encode(",
+  "unit:testAMessageCanAnswerAnother,testEveryMessageIsAnsweredBeforeItIsWorkedOn"),
 ]
 def phpunit(*args, service="mutants"):
     return subprocess.run(

@@ -90,17 +90,27 @@ final class CommunicatorWebhookTest extends TestCase
         return array_values(array_map(
             static fn(array $call): string => $call[1]['text'],
             array_filter(
-                $this->sent,
+                $this->afterTheReceipt(),
                 static fn(array $call): bool => $call[0] === 'sendMessage' && ($call[1]['chat_id'] ?? '') === '158493465'
             )
+        ));
+    }
+
+    /** Everything sent, less the receipt that opens every handled message. */
+    private function afterTheReceipt(): array
+    {
+        return array_values(array_filter(
+            $this->sent,
+            static fn(array $call): bool => ($call[1]['text'] ?? '') !== CommunicatorWebhook::RECEIVED
         ));
     }
 
     private static function update(string $text, int $chatId = 158493465): array
     {
         return ['message' => [
-            'text' => $text,
-            'chat' => ['id' => $chatId],
+            'message_id' => 7,
+            'text'       => $text,
+            'chat'       => ['id' => $chatId],
             'from' => ['id' => $chatId, 'first_name' => 'Alex'],
         ]];
     }
@@ -113,9 +123,50 @@ final class CommunicatorWebhookTest extends TestCase
 
         self::assertSame('published', $outcome);
         self::assertCount(1, $this->toTheGroup());
-        self::assertSame('sendMessage', $this->sent[0][0]);
-        self::assertSame('-5203885388', $this->sent[0][1]['chat_id']);
-        self::assertSame("at spille — играть\n\n#text", $this->sent[0][1]['text']);
+        [$method, $params] = $this->afterTheReceipt()[0];
+        self::assertSame('sendMessage', $method);
+        self::assertSame('-5203885388', $params['chat_id']);
+        self::assertSame("at spille — играть\n\n#text", $params['text']);
+    }
+
+    // --- the receipt ----------------------------------------------------------
+
+    public function testEveryMessageIsAnsweredBeforeItIsWorkedOn(): void
+    {
+        // Sent several at once, the messages are worked on one by one, and silence
+        // after one of them reads the same as a message that got lost.
+        $this->webhook()->handle(self::update('at spille — играть'), 's3cret');
+
+        [$method, $params] = $this->sent[0];
+        self::assertSame('sendMessage', $method);
+        self::assertSame('158493465', $params['chat_id']);
+        self::assertSame(CommunicatorWebhook::RECEIVED, $params['text']);
+        self::assertSame(7, json_decode($params['reply_parameters'], true)['message_id'], 'says which message');
+        self::assertCount(1, $this->toTheGroup());
+    }
+
+    public function testAProposalIsAlsoPrecededByTheReceipt(): void
+    {
+        $this->webhook()->handle(self::update("at gå agurk\nсойти с ума\nat slænge sig\nразвалиться"), 's3cret');
+
+        self::assertSame(CommunicatorWebhook::RECEIVED, $this->sent[0][1]['text']);
+    }
+
+    public function testAReceiptThatFailsStopsNothing(): void
+    {
+        $hook = new CommunicatorWebhook(
+            new BotApi('token', function (string $method, array $params): array {
+                $this->sent[] = [$method, $params];
+
+                return isset($params['reply_parameters'])
+                    ? ['ok' => false, 'description' => 'Bad Request: message to be replied not found']
+                    : ['ok' => true, 'result' => ['message_id' => 1]];
+            }),
+            ['secret' => 's3cret', 'owner' => '158493465', 'group' => '-5203885388'],
+        );
+
+        self::assertSame('published', $hook->handle(self::update('at spille — играть'), 's3cret'));
+        self::assertCount(1, $this->toTheGroup());
     }
 
     // --- what does not -------------------------------------------------------
@@ -323,7 +374,7 @@ final class CommunicatorWebhookTest extends TestCase
         $this->webhook()->handle(self::update(self::ONE_PER_LINE), 's3cret');
 
         $notes = array_values(array_filter(
-            $this->sent,
+            $this->afterTheReceipt(),
             static fn(array $call): bool => ($call[1]['chat_id'] ?? '') === '158493465'
         ));
         self::assertCount(1, $notes);
@@ -377,7 +428,7 @@ final class CommunicatorWebhookTest extends TestCase
             's3cret'
         );
 
-        [$method, $params] = $this->sent[0];
+        [$method, $params] = $this->afterTheReceipt()[0];
         self::assertSame('sendMessage', $method);
         self::assertSame('158493465', $params['chat_id'], 'asked in his own chat, not the group');
         self::assertStringContainsString('1. at gå agurk', $params['text']);
@@ -421,7 +472,7 @@ final class CommunicatorWebhookTest extends TestCase
 
         self::assertSame('not_published', $outcome);
         self::assertSame([], $this->toTheGroup());
-        self::assertSame('158493465', $this->sent[0][1]['chat_id']);
+        self::assertSame('158493465', $this->afterTheReceipt()[0][1]['chat_id']);
     }
 
     public function testTheNoteNeverReachesTheGroup(): void
@@ -531,7 +582,7 @@ final class CommunicatorWebhookTest extends TestCase
     private function boldInTheReport(): array
     {
         $call = array_values(array_filter(
-            $this->sent,
+            $this->afterTheReceipt(),
             static fn(array $c): bool => $c[0] === 'sendMessage' && ($c[1]['chat_id'] ?? '') === '158493465'
         ))[0][1];
         $units = mb_convert_encoding($call['text'], 'UTF-16LE', 'UTF-8');

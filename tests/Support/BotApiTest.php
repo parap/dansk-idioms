@@ -103,6 +103,20 @@ final class BotApiTest extends TestCase
         self::assertSame('{"inline_keyboard":[]}', $sent[1]['reply_markup']);
     }
 
+    public function testAMessageCanAnswerAnother(): void
+    {
+        $sent = [];
+        $api = new BotApi('токен', function (string $method, array $params) use (&$sent): array {
+            $sent = [$method, $params];
+
+            return ['ok' => true, 'result' => ['message_id' => 8]];
+        });
+
+        $api->sendMessage('158493465', 'Разбираю…', replyTo: 7);
+
+        self::assertSame(7, json_decode($sent[1]['reply_parameters'], true)['message_id']);
+    }
+
     public function testAMessageCanCarryButtons(): void
     {
         $sent = [];
