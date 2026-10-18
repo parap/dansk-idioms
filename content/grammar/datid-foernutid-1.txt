@@ -142,3 +142,563 @@ title: Datid eller førnutid
   har spist
   spiser
   spisede
+
+21. Sidste weekend ___ vi mine forældre. (besøge)
+> «Sidste weekend» — законченный период в прошлом → datid. В прошлые выходные мы навещали моих родителей.
+* besøgte
+  besøgt
+  besøger
+  besøgede
+
+22. ___ du nogensinde været i Grønland? (have)
+> «Nogensinde» спрашивает об опыте за всю жизнь до сих пор → førnutid: har + været. være образует førnutid с har. Ты когда-нибудь был в Гренландии?
+* Har
+  Er
+  Bliver
+  Have
+
+23. H.C. Andersen ___ i 1875. (dø)
+> Год назван, событие давно закончилось → datid: døde. Ханс Кристиан Андерсен умер в 1875 году.
+* døde
+  har død
+  dør
+  døede
+
+24. Vil du have noget at spise? — Nej tak, jeg ___. (spise)
+> Важен результат сейчас: я сыт → førnutid. spise — переходный глагол, поэтому har: har spist. Хочешь что-нибудь поесть? — Нет, спасибо, я уже поел.
+* har spist
+  er spist
+  har spiste
+  spist
+
+25. I 1989 ___ muren i Berlin. (falde)
+> Год назван → datid: faldt. Стена в Берлине пала в 1989 году.
+* faldt
+  har faldet
+  falder
+  faldte
+
+26. Hun ___ tre børn, og hun venter det fjerde. (få)
+> Итог к сегодняшнему дню, момент не назван, история продолжается → førnutid: har fået. У неё трое детей, и она ждёт четвёртого.
+* har fået
+  er fået
+  får
+  fået
+
+27. Jeg ___ avisen endnu. (læse)
+> «Endnu» с отрицанием — «до сих пор нет» → førnutid. В главном предложении ikke стоит после вспомогательного глагола: har ikke læst. Я ещё не прочитал газету.
+* har ikke læst
+  er ikke læst
+  ikke har læst
+  har ikke læste
+
+28. Hvad ___ du i går aftes? (lave)
+> «I går aftes» — вчера вечером, момент в прошлом → datid. Что ты делал вчера вечером?
+* lavede
+  har lavet
+  laver
+  lavet
+
+29. Min datter ___ i skole siden august. (gå)
+> «Siden august» — с августа и до сих пор → førnutid. Это длящееся занятие, а не движение с результатом, поэтому har: har gået i skole. По-русски — настоящее время: дочь ходит в школу с августа.
+* har gået
+  gik
+  er gået
+  går
+
+30. Hvor er Lars? — Han ___ hjem for en time siden. (gå)
+> «For en time siden» называет момент → datid: gik. Где Ларс? — Он ушёл домой час назад.
+* gik
+  går
+  gå
+  gåede
+
+31. Da vi ___ til stationen, var toget kørt. (komme)
+> Придаточное с da рассказывает о законченном прошлом → datid: kom. Когда мы пришли на вокзал, поезд уже ушёл.
+* kom
+  er kommet
+  har kommet
+  kommer
+
+32. Sneen ___. Nu kan vi kælke! (komme)
+> Результат сейчас: снег лежит → førnutid. komme — движение с результатом, поэтому er: er kommet. Выпал снег. Теперь можно кататься на санках!
+* er kommet
+  har kommet
+  kommet
+  er kom
+
+33. Jeg ___ mit pas. Kan du hjælpe mig med at lede? (miste)
+> Важен результат сейчас: паспорта нет, момент не назван → førnutid. miste — переходный глагол, поэтому har. Я потерял паспорт. Поможешь искать?
+* har mistet
+  er mistet
+  mister
+  mistet
+
+34. Sidste år ___ jeg 20 kilometer hver uge. (løbe)
+> «Sidste år» — законченный период → datid: løb. В прошлом году я пробегал 20 километров каждую неделю.
+* løb
+  har løbet
+  løber
+  løbede
+
+35. Børnene ___. Nu er der stille. (falde i søvn)
+> Результат сейчас: дети спят → førnutid. falde i søvn — перемена состояния, поэтому er: er faldet i søvn. Дети уснули. Теперь тихо.
+* er faldet i søvn
+  har faldet i søvn
+  er faldt i søvn
+  faldet i søvn
+
+36. I går ___ jeg min gamle lærer i Netto. (møde)
+> «I går» → datid: mødte. Вчера я встретил своего старого учителя в «Нетто».
+* mødte
+  har mødt
+  møder
+  mødt
+
+37. Vi ___ i det her hus i ti år nu. (bo)
+> «I ti år nu» — десять лет и до сих пор → førnutid. bo берёт har. По-русски настоящее время: мы живём в этом доме уже десять лет.
+* har boet
+  boede
+  er boet
+  bor
+
+38. Vi ___ i Odense i ti år, før vi flyttede til Aalborg. (bo)
+> Период закончился: потом переехали → datid: boede. Мы жили в Оденсе десять лет, прежде чем переехали в Ольборг.
+* boede
+  har boet
+  bor
+  er boet
+
+39. Jeg ___ så meget i mit liv! (grine)
+> «Aldrig … i mit liv» — опыт за всю жизнь до сих пор → førnutid: har aldrig grinet. Наречие aldrig стоит после вспомогательного глагола. Я никогда в жизни так не смеялся!
+* har aldrig grinet
+  er aldrig grinet
+  aldrig har grinet
+  har aldrig grinede
+
+40. Hvornår ___ I jeres hus? (købe)
+> «Hvornår» спрашивает о моменте в прошлом → datid: købte. Когда вы купили свой дом?
+* købte
+  har købt
+  køber
+  købede
+
+41. Vi ___ hinanden i fem år nu. (kende)
+> «I fem år nu» — пять лет и до сих пор → førnutid: har kendt. По-русски настоящее время: мы знаем друг друга уже пять лет.
+* har kendt
+  kendte
+  er kendt
+  kender
+
+42. Min mor ___ i Ukraine i 1965. (blive født)
+> Год рождения назван → datid: blev født. Так же правильно и короче «er født», но его здесь среди вариантов нет. Моя мама родилась в Украине в 1965 году.
+* blev født
+  er blevet født
+  har født
+  bliver født
+
+43. I sommerferien ___ vi i telt hver nat. (sove)
+> Речь о прошедших летних каникулах — законченный период → datid: sov. Во время летних каникул мы каждую ночь спали в палатке.
+* sov
+  har sovet
+  sover
+  sovede
+
+44. Har du set mine briller? Jeg ___ dem overalt. (lede efter)
+> Поиски шли до этой минуты и результата нет → førnutid: har ledt efter. Ты не видел мои очки? Я искал их везде.
+* har ledt efter
+  har ledte efter
+  er ledt efter
+  ledt efter
+
+45. Ole Kirk Christiansen ___ LEGO i 1932. (grundlægge)
+> Год назван → datid: grundlagde. Оле Кирк Кристиансен основал LEGO в 1932 году.
+* grundlagde
+  har grundlagt
+  grundlægger
+  grundlæggede
+
+46. Jeg ___ meget dårligt i nat. Jeg er træt. (sove)
+> Прошлой ночью → прошедшее время, datid: sov. Форма sovede не существует. Я очень плохо спал этой ночью. Я устал.
+* sov
+  sover
+  sovede
+  sovet
+
+47. Peter ___ sin arm. Han kan ikke spille i dag. (brække)
+> Результат сейчас: рука сломана, поэтому он не играет → førnutid. brække — переходный, har: har brækket. Петер сломал руку. Сегодня он играть не может.
+* har brækket
+  er brækket
+  brækker
+  brækket
+
+48. Hvem ___ Amerika? (opdage)
+> Историческое событие, давно закончившееся → datid: opdagede. Кто открыл Америку?
+* opdagede
+  har opdaget
+  opdager
+  er opdaget
+
+49. Tak for maden! Det ___ dejligt. (smage)
+> Обед закончился, и вы благодарите за него → прошедшее время: smagte. Форма smagede не существует. Спасибо за еду! Было очень вкусно.
+* smagte
+  smagede
+  smagt
+  smage
+
+50. Jeg ___ dig i lang tid. Hvordan går det? (se)
+> «I lang tid» до сегодняшней встречи → førnutid: har ikke set, ikke после вспомогательного глагола. Я тебя давно не видел. Как дела?
+* har ikke set
+  er ikke set
+  ikke har set
+  har ikke så
+
+51. Vi ___ for sent, fordi bussen var forsinket. (komme)
+> Рассказ о законченном случае → datid: kom. Форма kommede не существует. Мы опоздали, потому что автобус задержался.
+* kom
+  har kommet
+  kommer
+  kommede
+
+52. Solen ___ op. Det er morgen. (gå)
+> Результат сейчас: солнце уже встало → førnutid. gå op — движение с результатом, er: er gået op. Солнце взошло. Утро.
+* er gået
+  har gået
+  gået
+  er gik
+
+53. Jeg ___ et brev til kommunen i mandags. (sende)
+> «I mandags» — в прошлый понедельник → datid: sendte. Я отправил письмо в коммуну в понедельник.
+* sendte
+  har sendt
+  sender
+  sendede
+
+54. Hvor længe ___ hinanden nu? (kende)
+> Длительность до сих пор («nu») → førnutid; в вопросе вспомогательный глагол перед подлежащим: har I kendt. Как долго вы уже знакомы?
+* har I kendt
+  er I kendt
+  I har kendt
+  har I kendte
+
+55. Karen Blixen ___ «Den afrikanske farm». (skrive)
+> Автор давно умерла, книга — законченное прошлое → datid: skrev. Карен Бликсен написала «Из Африки».
+* skrev
+  har skrevet
+  skriver
+  skrivede
+
+56. Prisen på mælk ___ meget i år. (stige)
+> «I år» — год ещё идёт, рост продолжается → førnutid. stige — перемена, er: er steget. Цена на молоко в этом году сильно выросла.
+* er steget
+  har steget
+  steget
+  er steg
+
+57. Da jeg var ung, ___ jeg meget. (ryge)
+> «Da jeg var ung» — законченный период → datid: røg. В молодости я много курил.
+* røg
+  har røget
+  ryger
+  rygede
+
+58. Vi ___ hinanden, siden vi gik i skole. (se)
+> «Siden vi gik i skole» — с того времени до сих пор → førnutid: har ikke set. Мы не виделись со школы.
+* har ikke set
+  så ikke
+  er ikke set
+  ikke har set
+
+59. I går ___ det hele dagen. (sne)
+> «I går» → datid: sneede. Вчера весь день шёл снег.
+* sneede
+  sner
+  er sneet
+  sneet
+
+60. Hvad ___? Du ser ked ud. (ske)
+> Результат сейчас: ты выглядишь расстроенным → førnutid. ske берёт er: Hvad er der sket? В вопросе вспомогательный глагол перед der. Что случилось? Ты выглядишь расстроенным.
+* er der sket
+  har der sket
+  der er sket
+  er der ske
+
+61. Det ___ en fantastisk koncert i går. (være)
+> «I går» → datid: var. Вчера был потрясающий концерт.
+* var
+  har været
+  er
+  er været
+
+62. Jeg ___ min bil til mekanikeren tre gange i år. (køre)
+> «I år» — год ещё идёт, счёт открыт → førnutid. Здесь køre bilen — я вёз машину, у глагола есть дополнение, поэтому har: har kørt. В этом году я уже три раза возил машину к механику.
+* har kørt
+  er kørt
+  kører
+  kørt
+
+63. Min farfar, som døde sidste år, ___ som fisker hele sit liv. (arbejde)
+> Жизнь дедушки закончилась, значит и его работа — законченное прошлое → datid: arbejdede. Мой дедушка, умерший в прошлом году, всю жизнь работал рыбаком.
+* arbejdede
+  har arbejdet
+  arbejder
+  arbejdet
+
+64. Har du hørt det? Mette og Jens ___ sig! (gifte)
+> Новость, важная сейчас, момент не назван → førnutid: har giftet sig. Ты слышал? Метте и Йенс поженились!
+* har giftet
+  er giftet
+  har gift
+  giftet
+
+65. Mette og Jens ___ sig i Tønder i maj. (gifte)
+> «I maj» называет момент → datid: giftede. Метте и Йенс поженились в Тёндере в мае.
+* giftede
+  gifter
+  er giftet
+  giftet
+
+66. Hvor ___ så godt dansk? (lære)
+> Вопрос о пути к нынешнему результату, без момента → førnutid; вспомогательный глагол перед подлежащим: har du lært. Где ты так хорошо выучил датский?
+* har du lært
+  er du lært
+  du har lært
+  har du lærte
+
+67. Hun ___ tre gange til køreprøven, før hun bestod. (dumpe)
+> Вся история закончилась тем, что она сдала → datid: dumpede. Она три раза провалила экзамен по вождению, прежде чем сдала.
+* dumpede
+  er dumpet
+  dumper
+  har dumpede
+
+68. Jeg kan ikke komme ind. Nogen ___ døren. (låse)
+> Результат сейчас: дверь заперта → førnutid: har låst. Я не могу войти. Кто-то запер дверь.
+* har låst
+  er låst
+  låser
+  låst
+
+69. Klokken otte i morges ___ jeg bussen. (tage)
+> «I morges» — утро прошло, время названо → datid: tog. Сегодня в восемь утра я сел на автобус.
+* tog
+  har taget
+  er taget
+  tager
+
+70. Vi ___ billetterne. (bestille)
+> «Allerede» — результат есть сейчас → førnutid: har allerede bestilt, наречие после вспомогательного глагола. Мы уже заказали билеты.
+* har allerede bestilt
+  er allerede bestilt
+  allerede har bestilt
+  har allerede bestilte
+
+71. Hvornår ___ du til Danmark? (komme)
+> «Hvornår» спрашивает о моменте → datid: kom. Форма kommede не существует. Когда ты приехал в Данию?
+* kom
+  har kommet
+  kommer
+  kommede
+
+72. Hvor længe ___ i Danmark? (være)
+> Длительность до сих пор: человек всё ещё здесь → førnutid: har du været. Как долго ты уже в Дании?
+* har du været
+  er du været
+  du har været
+  har du var
+
+73. Vejret ___ meget bedre i dag end i går. (blive)
+> Перемена с результатом сейчас → er blevet. «Har blevet» в датском не бывает. Погода сегодня стала намного лучше, чем вчера.
+* er blevet
+  har blevet
+  blevet
+  er blev
+
+74. Under krigen ___ mange mennesker deres hjem. (miste)
+> «Under krigen» — законченный исторический период → datid: mistede. Во время войны многие люди потеряли свои дома.
+* mistede
+  har mistet
+  mister
+  er mistet
+
+75. Hun ___ på hospitalet siden i fredags. (ligge)
+> «Siden i fredags» — с пятницы и до сих пор → førnutid: har ligget. По-русски настоящее время: она лежит в больнице с пятницы.
+* har ligget
+  lå
+  er ligget
+  ligger
+
+76. Da jeg ___ hjem, lavede jeg aftensmad. (komme)
+> Последовательность событий в прошлом: lavede — datid, и da-придаточное тоже datid: kom. Когда я пришёл домой, я приготовил ужин.
+* kom
+  er kommet
+  har kommet
+  kommer
+
+77. Undskyld, jeg ___ dit navn. Hvad hedder du igen? (glemme)
+> Результат сейчас: я не помню → førnutid: har glemt. Извини, я забыл твоё имя. Как тебя зовут?
+* har glemt
+  er glemt
+  glemmer
+  glemt
+
+78. Hvem ___ telefonen? (opfinde)
+> Изобретение — завершённое историческое событие → datid: opfandt. Кто изобрёл телефон?
+* opfandt
+  har opfundet
+  opfinder
+  opfindede
+
+79. Hvad sagde lægen, da du ___ der i går? (være)
+> Весь рассказ в прошлом: «sagde», «i går» → datid: var. Что сказал врач, когда ты был у него вчера?
+* var
+  har været
+  er
+  er været
+
+80. Jeg ___ færdig med mit arbejde. Nu kan vi gå. (blive)
+> Результат сейчас: я закончил → førnutid: er blevet færdig. blive всегда берёт er. Я закончил работу. Теперь можем идти.
+* er blevet
+  har blevet
+  blevet
+  er blev
+
+81. Sidste år ___ vi jul hos min søster. (holde)
+> «Sidste år» → datid: holdt. В прошлом году мы праздновали Рождество у моей сестры.
+* holdt
+  har holdt
+  holder
+  holdte
+
+82. Jeg ___ noget i dag. Jeg er sulten. (spise)
+> День ещё идёт, и результат («я голоден») сейчас → førnutid: har ikke spist. Я сегодня ничего не ел. Я голоден.
+* har ikke spist
+  er ikke spist
+  ikke har spist
+  har ikke spiste
+
+83. Gæsterne ___. Skal vi rydde op? (gå)
+> Результат сейчас: гостей уже нет → førnutid. gå — движение с результатом, er: er gået. Гости ушли. Будем убирать?
+* er gået
+  har gået
+  gået
+  er gik
+
+84. Vi ___ 15 kilometer på vores tur i går. (gå)
+> «I går» → datid: gik. Вчера на прогулке мы прошли 15 километров.
+* gik
+  går
+  gået
+  gåede
+
+85. Hvad ___ du, da han fortalte dig det? (sige)
+> Момент в прошлом задан da-придаточным с datid (fortalte) → datid: sagde. Что ты сказал, когда он тебе это рассказал?
+* sagde
+  har sagt
+  siger
+  sigede
+
+86. Min søster ___ til Australien. Hun bor der nu. (flytte)
+> Результат сейчас: она там живёт, момент не назван → førnutid. flytte в значении «переехать» берёт er: er flyttet. Моя сестра переехала в Австралию. Теперь она живёт там.
+* er flyttet
+  har flyttet
+  flytter
+  flyttet
+
+87. Vi ___ på Skagen i tre dage sidste sommer. (være)
+> «Sidste sommer» — законченный период → datid: var. Прошлым летом мы три дня были в Скагене.
+* var
+  er været
+  er
+  bliver
+
+88. Jeg ___ her i en halv time. Hvor bliver du af? (vente)
+> Ожидание длится до сих пор → førnutid: har ventet. По-русски настоящее время: я жду здесь уже полчаса. Где ты?
+* har ventet
+  er ventet
+  venter
+  ventet
+
+89. I går ___ min telefon ud af lommen. (falde)
+> «I går» → datid: faldt. Вчера мой телефон выпал из кармана.
+* faldt
+  falder
+  faldte
+  faldet
+
+90. Han ___ sit job, og nu leder han efter et nyt. (miste)
+> Результат сейчас: он ищет новую работу, момент не назван → førnutid: har mistet. Он потерял работу и теперь ищет новую.
+* har mistet
+  er mistet
+  mister
+  mistet
+
+91. Hvad ___ I til middag i søndags? (få)
+> «I søndags» — в прошлое воскресенье → datid: fik. Что вы ели на ужин в воскресенье?
+* fik
+  får
+  er fået
+  fået
+
+92. Jeg ___ en elg. (se)
+> Опыт за всю жизнь до сих пор → førnutid: har aldrig set, aldrig после вспомогательного глагола. Я никогда не видел лося.
+* har aldrig set
+  er aldrig set
+  aldrig har set
+  har aldrig så
+
+93. Mens jeg ___ i bad, ringede telefonen. (være)
+> Фон в прошлом для другого события (ringede) → datid: var. Пока я был в душе, зазвонил телефон.
+* var
+  har været
+  er
+  er været
+
+94. Vi ___ på ferie. Hvad er der sket, mens vi var væk? (være)
+> Только что вернулись — опыт до этого момента → førnutid: har været. Мы были в отпуске. Что произошло, пока нас не было?
+* har været
+  er været
+  er
+  bliver været
+
+95. Danmark ___ medlem af EU i 1973. (blive)
+> Год назван → datid: blev. Дания стала членом ЕС в 1973 году.
+* blev
+  har blevet
+  bliver
+  blevede
+
+96. Jeg ___ alle mine eksamener! Nu holder jeg ferie. (bestå)
+> Результат сейчас: всё сдано, можно отдыхать → førnutid: har bestået. Я сдал все экзамены! Теперь у меня каникулы.
+* har bestået
+  er bestået
+  består
+  bestået
+
+97. For to uger siden ___ vi en ny sofa. (købe)
+> «For to uger siden» называет момент → datid: købte. Две недели назад мы купили новый диван.
+* købte
+  har købt
+  køber
+  købede
+
+98. Bussen ___ endnu. Vi venter stadig. (komme)
+> «Endnu ikke» — до сих пор нет → førnutid. komme — движение с результатом, er: er ikke kommet. Автобус ещё не пришёл. Мы всё ещё ждём.
+* er ikke kommet
+  har ikke kommet
+  ikke er kommet
+  er ikke kom
+
+99. Vikingerne ___ til England for over tusind år siden. (sejle)
+> «For over tusind år siden» → datid: sejlede. Викинги приплыли в Англию больше тысячи лет назад.
+* sejlede
+  har sejlet
+  sejler
+  sejlte
+
+100. Min bedstemor ___ 90 år, før hun døde. (blive)
+> Вся жизнь — законченное прошлое, «døde» → datid: blev. Моя бабушка дожила до 90 лет (дословно: стала 90-летней), прежде чем умерла.
+* blev
+  er blevet
+  har blevet
+  bliver

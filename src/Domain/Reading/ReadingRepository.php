@@ -118,14 +118,18 @@ final class ReadingRepository
     }
 
     /**
-     * The grammar drills on offer, each with the number of questions a learner will be asked.
+     * The grammar drills on offer, each with the number of questions a round asks and the
+     * number the set holds.
      *
-     * @return list<array{slug:string,title:string,questions:int}>
+     * @return list<array{slug:string,title:string,questions:int,pool:int}>
      */
     public function publishedGrammarSets(): array
     {
         return array_map(
-            static fn(array $r): array => ['slug' => $r['slug'], 'title' => $r['title'], 'questions' => $r['questions']],
+            static fn(array $r): array => [
+                'slug' => $r['slug'], 'title' => $r['title'],
+                'questions' => min($r['questions'], ReadingSessionService::GRAMMAR_ROUND), 'pool' => $r['questions'],
+            ],
             $this->publishedSets('grammar')
         );
     }
@@ -244,6 +248,45 @@ final class ReadingRepository
             );
         }
         return $changed;
+    }
+
+    /**
+     * Adds to the passage stored under a document's slug the questions it does not hold yet,
+     * matched by position. A stored question is left as it is, so a set already sat can grow
+     * where a replacement would be refused. An insertion task's gaps share one bank, and a
+     * passage of another kind is not this document's, so neither takes questions this way.
+     *
+     * @param  array<string,mixed> $doc
+     * @return int how many questions were added
+     */
+    public function appendItems(array $doc): int
+    {
+        $passageId = Db::fetchValue('SELECT id FROM reading_passages WHERE slug = ? AND kind = ?', [$doc['slug'], $doc['kind']]);
+        if ($passageId === false || $passageId === null || $doc['kind'] === 'insert') {
+            return 0;
+        }
+        $this->validate($doc);
+
+        $stored = array_map('intval', array_column(
+            Db::fetchAll('SELECT position FROM reading_items WHERE passage_id = ?', [(int) $passageId]),
+            'position'
+        ));
+        $new = array_filter($doc['items'], static fn(array $item): bool => !in_array((int) $item['position'], $stored, true));
+
+        $pdo = Db::pdo();
+        $pdo->beginTransaction();
+        try {
+            foreach ($new as $item) {
+                $itemId = $this->insertItem((int) $passageId, $doc['kind'], $item);
+                $this->attachAnswer((int) $passageId, $itemId, $doc['kind'], $item, []);
+            }
+            $pdo->commit();
+        } catch (Throwable $e) {
+            $pdo->rollBack();
+            throw $e;
+        }
+
+        return count($new);
     }
 
     /**

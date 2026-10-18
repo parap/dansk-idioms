@@ -37,6 +37,9 @@ final class ReadingSessionService
     private const VERBS_KIND = 'verbs';
     private const GRAMMAR_KIND = 'grammar';
 
+    /** A grammar set holds more questions than one sitting asks; a round draws this many. */
+    public const GRAMMAR_ROUND = 20;
+
     /**
      * The task types a reading round may serve. A knowledge paper lives in the same
      * tables and is graded the same way, but it has no text to read and its own pass
@@ -166,16 +169,16 @@ final class ReadingSessionService
      */
     public function startGrammar(?int $userId, ?string $anonKey, string $slug): array
     {
-        return $this->startNamedDrill(self::GRAMMAR_KIND, $userId, $anonKey, $slug);
+        return $this->startNamedDrill(self::GRAMMAR_KIND, $userId, $anonKey, $slug, self::GRAMMAR_ROUND);
     }
 
     /**
      * Sits one named set of a textless kind as a drill: untimed, ungraded, every answer
-     * checked at once.
+     * checked at once. Given a $draw, the round asks that many of the set's questions.
      *
      * @return array{session_id: string, mode: string, points_max: int}
      */
-    private function startNamedDrill(string $kind, ?int $userId, ?string $anonKey, string $slug): array
+    private function startNamedDrill(string $kind, ?int $userId, ?string $anonKey, string $slug, ?int $draw = null): array
     {
         $passage = $this->pickNamed($kind, $slug);
 
@@ -187,10 +190,35 @@ final class ReadingSessionService
         );
         $sessionId = (int) Db::pdo()->lastInsertId();
 
-        [$pointsMax] = $this->materialise($sessionId, (int) $passage['id'], $kind);
+        $pointsMax = $draw === null
+            ? $this->materialise($sessionId, (int) $passage['id'], $kind)[0]
+            : $this->materialiseItems($sessionId, $this->leastAsked((int) $passage['id'], $draw, $userId, $anonKey));
         Db::execute('UPDATE reading_sessions SET points_max = ? WHERE id = ?', [$pointsMax, $sessionId]);
 
         return ['session_id' => $publicId, 'mode' => self::DRILL, 'points_max' => $pointsMax];
+    }
+
+    /**
+     * The $count questions of a set this learner has been asked least, in the set's order.
+     * Ties fall at random, so rounds work through the whole set before any question returns.
+     *
+     * @return list<int>
+     */
+    private function leastAsked(int $passageId, int $count, ?int $userId, ?string $anonKey): array
+    {
+        $who  = $userId !== null ? 's.user_id = ?' : 's.user_id IS NULL AND s.anon_key = ?';
+        $rows = Db::fetchAll(
+            'SELECT i.id, i.position FROM reading_items i
+              WHERE i.passage_id = ? AND ' . self::SERVABLE . '
+              ORDER BY (SELECT COUNT(*) FROM reading_session_items si
+                          JOIN reading_sessions s ON s.id = si.session_id
+                         WHERE si.item_id = i.id AND ' . $who . '), RAND()
+              LIMIT ' . max(1, $count),
+            [$passageId, $userId ?? $anonKey]
+        );
+        usort($rows, static fn(array $a, array $b): int => (int) $a['position'] <=> (int) $b['position']);
+
+        return array_map(static fn(array $r): int => (int) $r['id'], $rows);
     }
 
     /**

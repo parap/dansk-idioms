@@ -36,6 +36,7 @@ $parser = new PassageDocument();
 $repo   = new ReadingRepository();
 $failed  = 0;
 $skipped = 0;
+$added   = 0;
 
 foreach ($files as $file) {
     $name = basename($file);
@@ -55,9 +56,13 @@ foreach ($files as $file) {
                 // Nothing to do is not a rejection. Conflating the two means a batch of
                 // the whole directory can never succeed twice, which is exactly how this
                 // is run from a deployment. Notes are display only, so they are kept current.
+                // New questions are appended for the same reason.
                 $notes = $repo->refreshNotes($doc);
-                printf("  %-40s slug '%s' already loaded -- pass --replace to overwrite%s\n",
-                    $name, $doc['slug'], $notes > 0 ? ", {$notes} note(s) refreshed" : '');
+                $new   = $repo->appendItems($doc);
+                $added += $new;
+                printf("  %-40s slug '%s' already loaded -- pass --replace to overwrite%s%s\n",
+                    $name, $doc['slug'], $notes > 0 ? ", {$notes} note(s) refreshed" : '',
+                    $new > 0 ? ", {$new} question(s) added" : '');
                 $skipped++;
                 continue;
             }
@@ -97,7 +102,7 @@ echo "\n";
 if ($failed > 0) {
     echo "  {$failed} document(s) rejected\n";
 } elseif ($skipped > 0) {
-    echo "  every document loaded or already present ({$skipped} unchanged)\n";
+    echo "  every document loaded or already present ({$skipped} already loaded" . ($added > 0 ? ", {$added} question(s) added to them" : '') . ")\n";
 } else {
     echo "  every document loaded\n";
 }

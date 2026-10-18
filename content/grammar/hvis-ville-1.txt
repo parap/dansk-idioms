@@ -142,3 +142,563 @@ title: Hvis … ville
   vil
   har
   skal
+
+21. Hvis vi ___ en bil, ville vi køre til Skagen.
+> Нереальное условие сейчас (машины нет): в главном ville + инфинитив, после hvis datid — havde. Если бы у нас была машина, мы бы съездили в Скаген.
+* havde
+  har
+  har haft
+  have
+
+22. Hvis du har tid i morgen, ___ vi gå i biografen.
+> Реальное условие: после hvis настоящее время (har), значит в главном тоже настоящее: kan. Если у тебя завтра будет время, мы можем сходить в кино.
+* kan
+  kunne have
+  havde kunnet
+  kunnet
+
+23. Hvis jeg ___ dansk bedre, ville jeg læse aviser hver dag.
+> В главном ville → условие нереальное, после hvis datid: forstod. Если бы я лучше понимал датский, я бы читал газеты каждый день.
+* forstod
+  forstår
+  har forstået
+  forstå
+
+24. Hvis du ser Peter, ___ hils fra mig.
+> Реальное условие и просьба: в главном повелительное наклонение — så hils. Если увидишь Петера, передай от меня привет.
+* så
+  ville
+  havde
+  var
+
+25. Hvis det ___ godt vejr i morgen, tager vi til stranden.
+> Реальное условие о будущем: в главном настоящее время (tager), значит и после hvis настоящее: bliver. Если завтра будет хорошая погода, поедем на пляж.
+* bliver
+  blev
+  ville blive
+  er blevet
+
+26. Hvis jeg var dig, ville jeg ___ undskyld.
+> После ville — инфинитив без at: sige. На твоём месте я бы извинился.
+* sige
+  sagt
+  sagde
+  siger
+
+27. Hvis han ikke var så doven, ___ et godt job.
+> Нереальное условие сейчас (он ленив): в главном ville + инфинитив. Придаточное первое → инверсия: ville han få. Если бы он не был таким ленивым, у него была бы хорошая работа.
+* ville han få
+  vil han få
+  han ville få
+  får han
+
+28. Hvis du ___ mig, havde jeg hjulpet dig.
+> Нереальное в прошлом: в главном havde hjulpet, значит после hvis havde + причастие: havde spurgt. Если бы ты меня спросил, я бы тебе помог.
+* havde spurgt
+  spurgte
+  har spurgt
+  ville spørge
+
+29. Hvis jeg havde vidst, at du var syg, ___ besøgt dig.
+> Нереальное в прошлом: ville + have + причастие. Придаточное первое → ville перед подлежащим: ville jeg have besøgt. Если бы я знал, что ты болен, я бы тебя навестил.
+* ville jeg have
+  jeg ville have
+  ville jeg
+  jeg har
+
+30. ___ jeg rig, ville jeg ikke arbejde.
+> Условие без hvis: глагол на первое место — Var jeg rig = Hvis jeg var rig. Будь я богат, я бы не работал.
+* Var
+  Er
+  Hvis
+  Ville
+
+31. Hvis bare jeg ___ lidt mere tid!
+> «Hvis bare…» — несбыточное желание, после него datid: havde. Если бы только у меня было чуть больше времени!
+* havde
+  har
+  ville have
+  have
+
+32. ___ du åbne vinduet? Det er meget varmt.
+> Вежливая просьба: Vil du…? или ещё вежливее Ville du…? Здесь из вариантов подходит только Ville: Не мог бы ты открыть окно? Очень жарко.
+* Ville
+  Hvis
+  Havde
+  Var
+
+33. Hvis jeg kunne vælge, ___ jeg bo i København.
+> hvis + datid kunne → нереальное условие, в главном ville + инфинитив. Если бы я мог выбирать, я бы жил в Копенгагене.
+* ville
+  vil
+  har
+  skal
+
+34. Jeg ville ønske, at det ___ sommer.
+> «Jeg ville ønske, at…» — после at datid: var. Как бы мне хотелось, чтобы было лето.
+* var
+  er
+  har været
+  være
+
+35. Du ___ have ringet til mig, før du kom.
+> skulle have + причастие — «надо было»: упрёк о прошлом. Тебе надо было мне позвонить, прежде чем прийти.
+* skulle
+  skal
+  har
+  havde
+
+36. Hvis jeg ikke havde taget bussen, ___ jeg kommet for sent.
+> В главном нереальное прошлое с глаголом движения: var + причастие (= ville være kommet). Если бы я не сел на автобус, я бы опоздал.
+* var
+  har
+  ville
+  er
+
+37. Hvis du ___ lyst, kan du komme med.
+> Реальное условие: в главном настоящее время kan, после hvis тоже настоящее: har. Если хочешь, можешь пойти с нами.
+* har
+  havde
+  ville have
+  havde haft
+
+38. Det ___ være dejligt, hvis du kunne komme.
+> Нереальное/вежливое пожелание: ville + инфинитив = «было бы». Было бы чудесно, если бы ты смог прийти.
+* ville
+  vil
+  har
+  skulle have
+
+39. Hvis jeg havde haft en paraply, ___ jeg ikke blevet våd.
+> В главном нереальное прошлое с blive: var blevet (= ville være blevet). Если бы у меня был зонт, я бы не промок.
+* var
+  havde
+  har
+  er
+
+40. Hvis han ___ kommet til tiden, havde vi nået toget.
+> komme образует førnutid с er, поэтому нереальное прошлое после hvis — var kommet. Если бы он пришёл вовремя, мы бы успели на поезд.
+* var
+  havde
+  er
+  ville
+
+41. Jeg ___ gerne have en kop kaffe, tak.
+> Вежливая просьба: Jeg vil gerne have… или мягче Jeg ville gerne have… Из вариантов подходит только ville. Я бы хотел чашку кофе, пожалуйста.
+* ville
+  havde
+  var
+  skulle have
+
+42. Hvis jeg ___ en hund, ville jeg gå tur hver dag.
+> Нереальное условие: hvis + datid — havde. Если бы у меня была собака, я бы гулял каждый день.
+* havde
+  har
+  have
+  har haft
+
+43. Hvis du ikke ___ op nu, kommer du for sent.
+> Реальное условие с реальным следствием (kommer): после hvis настоящее время — står. Если ты не встанешь сейчас, ты опоздаешь.
+* står
+  stod
+  ville stå
+  havde stået
+
+44. Hvis jeg havde været syg, ___ jeg ikke kommet.
+> Нереальное прошлое, глагол движения komme: var kommet. Придаточное первое → var перед подлежащим. Если бы я был болен, я бы не пришёл.
+* var
+  havde
+  er
+  har
+
+45. Vi ___ have taget toget. Bussen er alt for langsom.
+> skulle have + причастие — «надо было бы»: сожаление о прошлом выборе. Нам надо было ехать поездом. Автобус слишком медленный.
+* skulle
+  skal
+  har
+  vil
+
+46. Hvis jeg ___ dig, ville jeg tage imod jobbet.
+> «Hvis jeg var dig» — нереальное условие, после hvis datid: var. Местоимение в этом обороте — dig, а не du. На твоём месте я бы согласился на эту работу.
+* var
+  er
+  har været
+  være
+
+47. Hvis vi skynder os, ___ vi nå bussen.
+> Реальное условие: hvis + настоящее, в главном настоящее время модального kan. Если поторопимся, успеем на автобус.
+* kan
+  kunne have
+  havde kunnet
+  kunnet
+
+48. ___ jeg vidst, at det var din fødselsdag, havde jeg købt en gave.
+> Условие без hvis: Havde jeg vidst = Hvis jeg havde vidst. Знай я, что у тебя день рождения, я бы купил подарок.
+* Havde
+  Har
+  Hvis
+  Var
+
+49. Hvis jeg havde mere energi, ___ jeg dyrke mere sport.
+> hvis + datid → ville + инфинитив. Если бы у меня было больше сил, я бы больше занимался спортом.
+* ville
+  vil
+  har
+  havde
+
+50. Hvis hun havde læst brevet, ___ vidst det.
+> Нереальное прошлое: ville have + причастие. Придаточное первое → инверсия: ville hun have vidst. Если бы она прочитала письмо, она бы знала.
+* ville hun have
+  hun ville have
+  ville hun
+  har hun
+
+51. Hvis du kommer for sent, ___ du ikke komme ind.
+> Реальное условие → настоящее время в главном: kan du ikke. Если опоздаешь, тебя не впустят.
+* kan
+  kunne have
+  ville have
+  havde kunnet
+
+52. Hvad ville du gøre, hvis du ___ din pung?
+> В главном ville → нереальное условие, после hvis datid: tabte. Что бы ты сделал, если бы потерял кошелёк?
+* tabte
+  taber
+  har tabt
+  tabe
+
+53. Jeg ___ have købt den, hvis den ikke havde været så dyr.
+> Нереальное прошлое: ville have + причастие. Я бы купил это, если бы оно не было таким дорогим.
+* ville
+  vil
+  har
+  skal
+
+54. Hvis jeg ___ bedre, havde jeg bestået.
+> Нереальное прошлое: hvis + havde + причастие: havde forberedt mig. Если бы я лучше подготовился, я бы сдал.
+* havde forberedt mig
+  forberedte mig
+  har forberedt mig
+  ville forberede mig
+
+55. Kunne du ___ mig med mine lektier?
+> После модального kunne — инфинитив: hjælpe. Не мог бы ты помочь мне с уроками?
+* hjælpe
+  hjulpet
+  hjalp
+  hjælper
+
+56. Hvis det sner, ___ skolen lukket.
+> Реальное условие: после hvis настоящее (sner), в главном настоящее: er. Если пойдёт снег, школа будет закрыта.
+* er
+  var
+  havde været
+  ville have været
+
+57. Hvis du havde spurgt mig, ville jeg have ___ ja.
+> После ville have — причастие: sagt. Если бы ты меня спросил, я бы сказал «да».
+* sagt
+  sige
+  sagde
+  siger
+
+58. Hvis jeg ___ i Danmark som barn, ville jeg tale dansk perfekt nu.
+> Условие о прошлом (детство), следствие сейчас: hvis + havde + причастие, в главном ville + инфинитив. bo берёт har: havde boet. Если бы я жил в Дании в детстве, я бы сейчас говорил по-датски безупречно.
+* havde boet
+  boede
+  har boet
+  bor
+
+59. Vi ___ være glade, hvis I kom på besøg.
+> hvis + datid (kom) → ville + инфинитив. Мы были бы рады, если бы вы приехали в гости.
+* ville
+  vil
+  har
+  havde
+
+60. Hvis jeg havde set dig, ___ hilst.
+> Нереальное прошлое: ville have + причастие, придаточное первое → ville jeg have hilst. Если бы я тебя увидел, я бы поздоровался.
+* ville jeg have
+  jeg ville have
+  jeg havde
+  har jeg
+
+61. Hvis du ___, kan jeg hente dig på stationen.
+> Реальное условие → после hvis настоящее: vil (хочешь). Если хочешь, я могу забрать тебя на вокзале.
+* vil
+  ville have
+  havde villet
+  villet
+
+62. Du ___ ikke have spist så meget kage.
+> skulle ikke have + причастие — «не надо было». Не надо было тебе есть столько торта.
+* skulle
+  skal
+  har
+  var
+
+63. Hvis han ___ mere, ville han være i bedre form.
+> В главном ville → нереальное условие, после hvis datid: trænede. Если бы он больше тренировался, он был бы в лучшей форме.
+* trænede
+  træner
+  har trænet
+  træne
+
+64. ___ det ikke regnet, var vi gået en tur.
+> Условие без hvis: Havde det ikke regnet = Hvis det ikke havde regnet. Если бы не дождь, мы бы пошли гулять.
+* Havde
+  Hvis
+  Har
+  Var
+
+65. Hvis jeg vinder i Lotto, ___ jeg et hus.
+> Реальное условие (hvis + настоящее): в главном настоящее время — køber jeg. Если выиграю в лотерею, куплю дом.
+* køber
+  købte
+  havde købt
+  ville have købt
+
+66. Hvis jeg havde haft tid, ___ jeg have gjort det.
+> Нереальное прошлое: ville + have + причастие. Если бы у меня было время, я бы это сделал.
+* ville
+  vil
+  havde
+  har
+
+67. Hvis du ___ hurtigere, kunne du vinde løbet.
+> В главном kunne + инфинитив, нереальное условие → после hvis datid: løb. Если бы ты бегал быстрее, ты мог бы выиграть забег.
+* løb
+  løber
+  har løbet
+  løbe
+
+68. Hvis du ___ opgaven, så spørg læreren.
+> Реальное условие и совет в повелительном наклонении: после hvis настоящее время, ikke перед глаголом: hvis du ikke forstår. Если ты не понимаешь задание, спроси учителя.
+* ikke forstår
+  forstår ikke
+  ikke forstå
+  ikke forstået
+
+69. Det ___ være bedre, hvis vi mødtes i morgen.
+> hvis + datid (mødtes) → ville + инфинитив: «было бы лучше». Было бы лучше, если бы мы встретились завтра.
+* ville
+  vil
+  har
+  havde
+
+70. Hvis jeg ikke ___ så træt, ville jeg tage med til festen.
+> Нереальное условие сейчас (я устал): hvis + datid — var. Если бы я не был таким уставшим, я бы пошёл на вечеринку.
+* var
+  er
+  har været
+  være
+
+71. Hvis hun havde taget medicinen, ___ hun være rask nu.
+> Условие о прошлом, следствие сейчас («nu»): ville + инфинитив. Если бы она приняла лекарство, она была бы сейчас здорова.
+* ville
+  vil
+  havde
+  har
+
+72. Jeg ___ have hjulpet dig, men jeg var ikke hjemme.
+> Нереальное прошлое: «я бы помог» — ville have + причастие. Я бы тебе помог, но меня не было дома.
+* ville
+  vil
+  har
+  skal
+
+73. Hvis du ___ mig, ville jeg blive glad.
+> В главном ville → нереальное условие, после hvis datid: ringede. Если бы ты мне позвонил, я бы обрадовался.
+* ringede
+  ringer
+  har ringet
+  ringe
+
+74. Hvis jeg ___ tid, ringer jeg til dig i aften.
+> Реальное условие: в главном настоящее (ringer) → после hvis настоящее: får. Если найду время, позвоню тебе вечером.
+* får
+  fik
+  havde fået
+  ville få
+
+75. Hvis vi ikke havde mistet nøglen, ___ vi ikke have stået uden for døren.
+> Нереальное прошлое: ville + have + причастие. Если бы мы не потеряли ключ, нам бы не пришлось стоять за дверью.
+* ville
+  vil
+  havde
+  har
+
+76. Gad du ___ mig saltet?
+> Gad du…? — вежливая разговорная просьба, после неё инфинитив: række. Не передашь мне соль?
+* række
+  rakt
+  rakte
+  rækker
+
+77. Hvis det ikke ___ så koldt, ville vi bade.
+> Нереальное условие сейчас: hvis + datid — var. Если бы не было так холодно, мы бы искупались.
+* var
+  er
+  har været
+  være
+
+78. Hvis jeg havde vidst det, ville jeg ikke have ___.
+> После ville have — причастие: kommet. Если бы я знал, я бы не пришёл.
+* kommet
+  komme
+  kom
+  kommer
+
+79. Hvis du ___ mere frugt, ville du have mere energi.
+> В главном ville → нереальное условие, после hvis datid: spiste. Если бы ты ел больше фруктов, у тебя было бы больше энергии.
+* spiste
+  spiser
+  har spist
+  spise
+
+80. Han ___ have været her nu. Hvor bliver han af?
+> skulle have + причастие — «должен был бы»: ожидание, которое не сбылось. Он уже должен был бы быть здесь. Где он?
+* skulle
+  skal
+  har
+  er
+
+81. Hvis jeg var lærer, ___ jeg give mindre lektier for.
+> hvis + datid → ville + инфинитив. Если бы я был учителем, я бы задавал меньше домашних заданий.
+* ville
+  vil
+  har
+  havde
+
+82. Hvis vi ___ en større lejlighed, kunne mine forældre bo hos os.
+> Нереальное условие: hvis + datid — havde. Если бы у нас была квартира побольше, мои родители могли бы жить у нас.
+* havde
+  har
+  have
+  ville have haft
+
+83. Hvis du ___ tidligere, havde du set solopgangen.
+> Нереальное прошлое: hvis + var + причастие (stå op берёт er): var stået op. Если бы ты встал раньше, ты бы увидел восход.
+* var stået op
+  stod op
+  er stået op
+  ville stå op
+
+84. Hvis bare jeg ikke ___ det!
+> «Hvis bare…» о прошлом — сожаление: hvis bare + havde + причастие: havde sagt. Если бы только я этого не сказал!
+* havde sagt
+  har sagt
+  siger
+  ville sige
+
+85. Hvis det regner i morgen, ___ vi hjemme.
+> Реальное условие → настоящее время в главном с инверсией: bliver vi. Если завтра будет дождь, мы останемся дома.
+* bliver
+  blev
+  var blevet
+  ville være blevet
+
+86. Hvis jeg havde mødt dig før, ___ mit liv været anderledes.
+> Нереальное прошлое: havde + причастие в главном (= ville have været). Придаточное первое → havde перед подлежащим. Если бы я встретил тебя раньше, моя жизнь была бы другой.
+* havde
+  har
+  var
+  er
+
+87. Kunne du forestille dig at ___ i Grønland?
+> После at — инфинитив: bo. Мог бы ты представить себе, что живёшь в Гренландии?
+* bo
+  boede
+  boet
+  bor
+
+88. Hvis vi går nu, ___ vi hjemme klokken seks.
+> Реальное условие → настоящее время в главном: er vi. Если пойдём сейчас, будем дома в шесть.
+* er
+  var
+  havde været
+  ville have været
+
+89. Hvis jeg ___ fløjte, ville jeg spille i et orkester.
+> Нереальное условие: hvis + datid модального kunne: kunne spille. Если бы я умел играть на флейте, я бы играл в оркестре.
+* kunne spille
+  kan spille
+  har kunnet spille
+  kunne spillet
+
+90. Du ___ ikke have gjort det, hvis du ikke ville.
+> Нереальное прошлое с модальным: «тебе не нужно было бы» — behøvede ikke have. Из вариантов подходит только behøvede. Тебе не нужно было это делать, если ты не хотел.
+* behøvede
+  behøver
+  har behøvet
+  behøve
+
+91. Hvis jeg ikke havde arbejdet så meget, ___ jeg have haft mere tid med børnene.
+> Нереальное прошлое: ville + have + причастие. Если бы я столько не работал, у меня было бы больше времени с детьми.
+* ville
+  vil
+  har
+  havde
+
+92. Hvis du ___ til Aalborg, så ring til mig.
+> Реальное условие и просьба: после hvis настоящее — kommer. Если будешь в Ольборге, позвони мне.
+* kommer
+  kom
+  var kommet
+  ville komme
+
+93. Hvis han talte langsommere, ___ jeg forstå ham.
+> hvis + datid → kunne + инфинитив: kunne jeg forstå. Если бы он говорил медленнее, я бы мог его понять.
+* kunne
+  kan
+  har kunnet
+  kunnet
+
+94. ___ jeg tid, ville jeg læse flere bøger.
+> Условие без hvis: Havde jeg tid = Hvis jeg havde tid. Будь у меня время, я бы читал больше книг.
+* Havde
+  Har
+  Hvis
+  Ville
+
+95. Hvis du ___ mig om hjælp, havde jeg sagt ja.
+> Нереальное прошлое: в главном havde sagt → после hvis havde + причастие: havde bedt. Если бы ты попросил меня о помощи, я бы согласился.
+* havde bedt
+  bad
+  har bedt
+  beder
+
+96. Det ___ have været sjovt at være med.
+> Нереальное прошлое: «было бы весело» — ville have været. Было бы весело поучаствовать.
+* ville
+  vil
+  har
+  er
+
+97. Hvis jeg ___ en bedre løn, ville jeg spare op til et hus.
+> В главном ville → нереальное условие, после hvis datid: fik. Если бы я получал зарплату получше, я бы копил на дом.
+* fik
+  får
+  har fået
+  få
+
+98. Hvis toget er forsinket, ___ jeg en taxa.
+> Реальное условие → настоящее время в главном: tager jeg. Если поезд опоздает, я возьму такси.
+* tager
+  tog
+  havde taget
+  ville have taget
+
+99. Hvis vi havde haft en have, ___ vi have dyrket grøntsager.
+> Нереальное прошлое: ville + have + причастие. Если бы у нас был сад, мы бы выращивали овощи.
+* ville
+  vil
+  har
+  havde
+
+100. Hvis jeg kunne rejse i tiden, ___ jeg besøge vikingerne.
+> hvis + datid kunne → ville + инфинитив. Если бы я мог путешествовать во времени, я бы навестил викингов.
+* ville
+  vil
+  har
+  havde

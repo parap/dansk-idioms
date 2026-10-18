@@ -84,6 +84,8 @@
   .cta b{color:var(--accent);font-size:1.15rem}
   .cta.back{display:inline-flex;justify-content:flex-start;margin:0 0 14px}
   .done{margin:.8rem 0 0}
+  .finish{display:flex;flex-wrap:wrap;gap:10px;margin:.9rem 0 0}
+  .finish .cta{margin:0}
   a{color:var(--accent)}
   [hidden]{display:none!important}
 </style>
@@ -336,7 +338,10 @@ function setView() {
       }).join('')}
       <p class="done"><span class="muted">${esc(t('score'))}:</span>
         <span id="score">${right} / ${round.items.length}</span></p>
-      ${answered === round.items.length ? `<p class="muted" style="margin:.2rem 0 0">${esc(t('done'))}</p>` : ''}
+      ${answered === round.items.length ? `<p class="muted" style="margin:.2rem 0 0">${esc(t('done'))}</p>
+        <div class="finish" id="finish">
+          <a class="cta back" href="/verbs"><b aria-hidden="true">←</b><span>${esc(t('back'))}</span></a>
+        </div>` : ''}
     </div>`;
 }
 
