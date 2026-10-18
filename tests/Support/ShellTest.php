@@ -53,6 +53,11 @@ final class ShellTest extends TestCase
         self::assertSame('/modultest.html', Shell::forPath('/modultest', false));
     }
 
+    public function testTheWritingAndSpeakingPageHasItsOwnDocument(): void
+    {
+        self::assertSame('/skriv.html', Shell::forPath('/modultest/skriv', false));
+    }
+
     public function testATrailingSlashIsTheSameAddress(): void
     {
         self::assertSame('/read.html', Shell::forPath('/read/', false));

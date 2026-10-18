@@ -1,0 +1,328 @@
+{
+ "emails": [
+  {
+   "id": "e1",
+   "from": "Sune",
+   "subject": "Hvordan går det på landet?",
+   "mail": "Hej!\n\nHvordan går det? Er alt vel hos jer? Sidst vi snakkede, var du lidt nervøs for, at det ville blive kedeligt at bo så langt fra byen. Hvordan har I det med at bo på landet nu?\n\nJeg har lige fået tilbudt et kursus af min arbejdsplads. Jeg kan vælge mellem et kursus i AI og et kursus i projektledelse. Hvad synes du, jeg skal vælge?\n\nOg så tænker jeg på at købe en hund. Tror du, det er en god idé, når man arbejder fuld tid?\n\nKærlig hilsen\nSune",
+   "questions": [
+    "Hvordan er det at bo på landet?",
+    "Hvilket kursus skal Sune vælge?",
+    "Er det en god idé at købe en hund, når man arbejder fuld tid?"
+   ],
+   "model": "Hej Sune\n\nTak for din mail. Vi har det godt, og jeg er glad for, at vi flyttede. I starten var det lidt kedeligt, fordi vi ikke kendte nogen, men nu har vi fået gode naboer, og børnene leger i haven hver dag. Det er stille her, og luften er frisk. Det eneste problem er, at bussen kun kører én gang i timen.\n\nJeg synes, du skal vælge kurset i AI. Det bliver mere og mere vigtigt i alle job, og du kan lære noget, som du kan bruge i mange år. Projektledelse kan du lære senere.\n\nMed hunden er jeg lidt i tvivl. En hund har brug for at komme ud flere gange om dagen, og den må ikke være alene i otte timer. Hvis du kan finde en hundepasser eller tage den med på arbejde, kan det godt gå.\n\nKærlig hilsen\nNadia"
+  },
+  {
+   "id": "e2",
+   "from": "Trine",
+   "subject": "Sommerferie?",
+   "mail": "Hej\n\nJeg håber, du har det godt! Sidst vi talte sammen, sagde du, at du var startet på et nyt arbejde. Hvordan går det med det? Er dine kolleger søde?\n\nJeg er ved at planlægge min sommerferie. Jeg kan ikke bestemme mig for, om jeg skal rejse til Italien med en veninde eller blive i Danmark og spare penge. Hvad ville du gøre?\n\nOg så skal jeg til at lære at køre bil. Har du nogle gode råd?\n\nKh Trine",
+   "questions": [
+    "Hvordan går det med det nye arbejde?",
+    "Skal Trine rejse til Italien eller blive i Danmark?",
+    "Gode råd om at lære at køre bil"
+   ],
+   "model": "Hej Trine\n\nTak for din mail. Det går rigtig godt med mit nye arbejde. Jeg arbejder på et lager, og mine kolleger er meget hjælpsomme. I begyndelsen var det svært at forstå alt, hvad de sagde, men nu taler jeg mere dansk end før, og det er jeg glad for.\n\nHvis jeg var dig, ville jeg tage til Italien. Det er dejligt at rejse med en veninde, og man får gode minder for livet. Du kan spare penge ved at bo på et billigt hotel og lave noget af maden selv.\n\nMed hensyn til kørekortet er mit bedste råd, at du øver dig meget. Det er en god idé at køre med en voksen, der har kørekort, før du tager køretimer. Og så skal du ikke være nervøs, hvis det går lidt langsomt i starten.\n\nKærlig hilsen\nOlena"
+  },
+  {
+   "id": "e3",
+   "from": "Mikkel",
+   "subject": "Tillykke med lejligheden",
+   "mail": "Hej!\n\nJeg har hørt, at du har fået en ny lejlighed. Tillykke! Hvordan er den? Og hvordan er området, du bor i?\n\nMin søster har fået et job i Aalborg, og hun skal finde et sted at bo. Ved du, hvordan man finder en lejlighed i Aalborg?\n\nJeg holder fødselsdag den 12. maj og vil gerne invitere dig. Kan du komme?\n\nMange hilsner\nMikkel",
+   "questions": [
+    "Hvordan er den nye lejlighed og området?",
+    "Hvordan finder man en lejlighed i Aalborg?",
+    "Kan du komme til fødselsdagen?"
+   ],
+   "model": "Hej Mikkel\n\nTusind tak for din mail. Min nye lejlighed er på tre værelser og ligger på anden sal. Den har en lille altan, hvor jeg kan drikke kaffe om morgenen. Området er roligt, og der er både en skole, et supermarked og en park i nærheden. Om aftenen går jeg tit en tur ved fjorden.\n\nDin søster kan søge efter en lejlighed på nettet, for eksempel hos boligforeningerne. Hun skal skrive sig op på en venteliste, men det kan tage lang tid. Hun kan også kigge efter værelser til leje, mens hun venter. Det er billigere og hurtigere.\n\nTak for invitationen til din fødselsdag. Jeg vil meget gerne komme og fejre dig, men jeg arbejder til klokken fire den dag. Er det i orden, hvis jeg kommer lidt senere?\n\nMange hilsner\nAhmad"
+  },
+  {
+   "id": "e4",
+   "from": "Lise",
+   "subject": "Dansk og arbejde",
+   "mail": "Hej\n\nHvordan går det med dit dansk? Du sagde, at du skulle til en modultest. Hvordan gik det?\n\nMin kollega fra Polen vil også gerne lære dansk, men hun har kun tid om aftenen. Hvordan kan hun lære dansk, når hun arbejder?\n\nVi holder sommerfest på mit arbejde, og man må tage en ven med. Har du lyst til at komme med?\n\nKærlig hilsen\nLise",
+   "questions": [
+    "Hvordan gik modultesten?",
+    "Hvordan kan Lises kollega lære dansk ved siden af arbejdet?",
+    "Vil du med til sommerfesten?"
+   ],
+   "model": "Hej Lise\n\nTak for din mail. Modultesten gik heldigvis godt. Læsningen var lidt svær, fordi der ikke var så meget tid, men den mundtlige del gik fint. Jeg var nervøs, men testeren var meget venlig, og hun stillede spørgsmål, som jeg godt kunne svare på. Nu venter jeg spændt på resultatet.\n\nDin kollega kan gå på sprogskole om aftenen. Mange sprogskoler har hold to aftener om ugen. Hun kan også bruge en app, høre danske podcasts i bussen og tale dansk med kollegerne i frokostpausen. Det hjælper meget at bruge sproget hver dag, også selvom man laver fejl.\n\nJeg vil meget gerne med til sommerfesten. Hvornår er den, og skal jeg tage noget med? Jeg kan for eksempel bage en kage eller lave en salat. Jeg glæder mig til at møde dine kolleger.\n\nKærlig hilsen\nMaria"
+  },
+  {
+   "id": "e5",
+   "from": "Jonas",
+   "subject": "Lang tid siden",
+   "mail": "Hej!\n\nDet er længe siden, vi har set hinanden. Hvad laver du for tiden? Arbejder du stadig i børnehaven?\n\nJeg har fået lyst til at begynde at træne, men jeg ved ikke, om jeg skal melde mig ind i et fitnesscenter eller begynde at løbe. Hvad synes du?\n\nMin familie kommer på besøg fra Tyrkiet i juli. Har du en idé til, hvad vi kan lave sammen i Danmark?\n\nHilsen\nJonas",
+   "questions": [
+    "Hvad laver du for tiden?",
+    "Fitnesscenter eller løb?",
+    "Hvad kan Jonas' familie lave i Danmark?"
+   ],
+   "model": "Hej Jonas\n\nTak for din mail, det var dejligt at høre fra dig. Jeg arbejder ikke længere i børnehaven. Nu er jeg i gang med en uddannelse som pædagogisk assistent, og jeg er i praktik på en skole. Det er travlt, men jeg lærer meget, og børnene er søde.\n\nJeg synes, du skal begynde at løbe. Det er gratis, og du kan løbe, når du har tid. Hvis du løber sammen med en ven, er det også lettere at blive ved. Et fitnesscenter er godt om vinteren, når det er koldt og mørkt.\n\nNår din familie kommer, kan I tage til Legoland eller til stranden ved Skagen. I kan også tage en tur til København og se Nyhavn og Tivoli. Det kan alle aldre lide, og der er mange flotte steder at tage billeder.\n\nHilsen\nYusuf"
+  },
+  {
+   "id": "e6",
+   "from": "Hanne",
+   "subject": "Ny skole",
+   "mail": "Hej!\n\nHvordan har I det? Hvordan går det med din søn i den nye skole? Har han fået nogle venner?\n\nJeg skal holde et oplæg på mit arbejde, og jeg er meget nervøs. Hvad gør du, når du skal tale foran mange mennesker?\n\nVi har tænkt på at holde jul i et sommerhus i år. Hvad synes du om det?\n\nKh Hanne",
+   "questions": [
+    "Hvordan går det med sønnen i den nye skole?",
+    "Gode råd til at tale foran mange mennesker",
+    "Hvad synes du om at holde jul i et sommerhus?"
+   ],
+   "model": "Hej Hanne\n\nTak for din mail. Vi har det fint. Min søn var lidt ked af det de første uger, fordi han savnede sine gamle venner. Men nu spiller han fodbold med nogle drenge fra klassen, og han har allerede været til to fødselsdage. Det er jeg meget glad for.\n\nNår jeg skal tale foran mange mennesker, øver jeg mig flere gange derhjemme. Jeg skriver de vigtigste punkter på et lille kort, så jeg ikke glemmer noget. Det hjælper også at trække vejret roligt og se på en venlig person i salen.\n\nJeg synes, det lyder hyggeligt at holde jul i et sommerhus. Det er dejligt at gå ture ved vandet og spille spil om aftenen. Men husk at bestille i god tid, for mange vil gerne det samme.\n\nKærlig hilsen\nIrina"
+  }
+ ],
+ "blogs": [
+  {
+   "id": "b1",
+   "author": "Helle Christensen",
+   "title": "Forbyd rygning",
+   "post": "Er det ikke på tide at stoppe rygning i vores samfund en gang for alle? Alle ved, at rygning er dyrt, skadeligt og stærkt vanedannende. Alligevel ser man rygere overalt, også helt unge. Informationen om risikoen virker åbenbart ikke. Rygning er allerede forbudt mange steder. Lad os tage det sidste skridt og forbyde tobak ved lov.",
+   "model": "Jeg er ikke enig med Helle Christensen. Det er rigtigt, at rygning er farligt, og at mange unge begynder at ryge. Men jeg tror ikke, at et forbud er den bedste løsning.\n\nFor det første vil mange rygere bare købe tobak ulovligt, og så kan staten ikke kontrollere, hvad der bliver solgt. For det andet er voksne mennesker selv ansvarlige for deres liv, også når de træffer dårlige valg.\n\nI stedet synes jeg, at tobak skal være meget dyrere, og at det skal være sværere for unge at købe det. Skolerne kan også fortælle mere om, hvor farligt det er.\n\nDerfor mener jeg, at vi skal hjælpe folk med at holde op, men ikke forbyde rygning."
+  },
+  {
+   "id": "b2",
+   "author": "Peter Jensen",
+   "title": "Mobiltelefoner hører ikke hjemme i skolen",
+   "post": "Børn bruger alt for meget tid på deres mobiltelefoner. I frikvartererne sidder de med skærmen i stedet for at lege, og i timerne bliver de forstyrret af beskeder. Jeg mener, at mobiltelefoner skal forbydes på alle skoler, fra morgen til eftermiddag.",
+   "model": "Jeg er enig med Peter Jensen. Mobiltelefonen tager meget af børnenes opmærksomhed, og det går ud over både undervisningen og legen.\n\nFor det første er det svært at koncentrere sig, når telefonen hele tiden summer i lommen. For det andet er frikvarteret vigtigt, fordi børnene lærer at lege og løse konflikter sammen. Det sker ikke, når alle kigger på en skærm.\n\nNogle forældre siger, at de skal kunne ringe til deres børn. Men de kan jo ringe til skolen, hvis der er noget vigtigt.\n\nDerfor synes jeg, at børnene skal aflevere telefonen om morgenen og få den igen, når de går hjem."
+  },
+  {
+   "id": "b3",
+   "author": "Sara Holm",
+   "title": "Alle skal arbejde hjemme to dage om ugen",
+   "post": "Når man arbejder hjemme, sparer man tid på transport, og man kan koncentrere sig bedre uden larm fra kollegerne. Det er også godt for miljøet, når færre kører i bil. Derfor synes jeg, at alle arbejdspladser skal give medarbejderne ret til at arbejde hjemme to dage om ugen.",
+   "model": "Jeg er delvist enig med Sara Holm. På den ene side er der mange fordele ved at arbejde hjemme. Man sparer tid og penge på transport, og man kan bedre få familielivet til at hænge sammen.\n\nPå den anden side kan det ikke lade sig gøre i alle job. En sygeplejerske, en buschauffør eller en kok kan ikke arbejde hjemme. Desuden kan man føle sig ensom, hvis man ikke ser sine kolleger. Mange gode idéer opstår, når man snakker sammen ved kaffemaskinen.\n\nJeg synes derfor ikke, at det skal være en regel for alle. Det er bedre, at hver arbejdsplads selv finder ud af, hvad der passer til den."
+  },
+  {
+   "id": "b4",
+   "author": "Morten Lund",
+   "title": "Gratis offentlig transport",
+   "post": "Busser og tog er for dyre. Hvis offentlig transport var gratis, ville flere lade bilen stå, der ville være mindre trafik, og luften i byerne ville blive renere. Staten burde betale for det hele.",
+   "model": "Jeg er enig med Morten Lund i, at offentlig transport er for dyr, især for familier med børn. Men jeg tror ikke, at den skal være helt gratis.\n\nFor det første koster det mange penge at køre busser og tog, og pengene skal komme et sted fra. Hvis staten betaler, skal vi alle betale mere i skat. For det andet vil mange, der i dag cykler eller går, begynde at tage bussen, og så bliver busserne fulde.\n\nI stedet synes jeg, at billetterne skal være billigere for børn, studerende og pensionister, og at der skal køre flere busser på landet.\n\nPå den måde kan flere lade bilen stå, uden at det bliver for dyrt for samfundet."
+  },
+  {
+   "id": "b5",
+   "author": "Anja Poulsen",
+   "title": "Børn skal ikke have lektier for",
+   "post": "Børn går i skole mange timer om dagen. Når de kommer hjem, har de brug for at lege, være sammen med familien og dyrke sport. Lektier giver kun stress og konflikter derhjemme. Jeg synes, at lektier skal afskaffes i folkeskolen.",
+   "model": "Jeg er uenig med Anja Poulsen. Jeg forstår godt, at børn er trætte efter en lang skoledag, men lidt lektier er vigtigt.\n\nFor det første er det godt at øve det, man har lært i skolen, for eksempel at læse og regne. Man glemmer det hurtigt, hvis man ikke øver sig. For det andet kan forældrene se, hvad deres børn lærer, når de hjælper med lektierne. Det giver en god kontakt mellem hjem og skole.\n\nMen lektierne må ikke tage for lang tid. Jeg synes, at en halv time om dagen er nok for de mindste børn.\n\nDerfor skal lektier ikke afskaffes, men der skal være færre af dem."
+  },
+  {
+   "id": "b6",
+   "author": "Kasper Nielsen",
+   "title": "Kød skal være dyrere",
+   "post": "Produktionen af kød er dårlig for klimaet. Hvis vi skal nå klimamålene, skal vi spise mindre kød. Den nemmeste måde er at lægge en ekstra afgift på kød, så det bliver dyrere end grøntsager.",
+   "model": "Jeg er delvist enig med Kasper Nielsen. Det er rigtigt, at kød er dårligt for klimaet, og at mange af os spiser for meget af det.\n\nPå den ene side kan en afgift få folk til at købe mere grønt. Det er også sundere at spise flere grøntsager. På den anden side rammer en afgift især familier med få penge, fordi mad bliver dyrere for dem. Det er ikke retfærdigt.\n\nJeg tror, det er bedre at gøre grøntsager billigere og lære børn i skolen at lave lækker vegetarisk mad. Så vælger folk selv at spise mindre kød.\n\nDerfor er jeg enig i målet, men ikke i løsningen."
+  }
+ ],
+ "emailPhrases": [
+  "Hej …, / Kære …,",
+  "Tak for din mail.",
+  "Det var dejligt at høre fra dig.",
+  "Med hensyn til …",
+  "Hvis jeg var dig, ville jeg …",
+  "Jeg synes, du skal …",
+  "Jeg vil meget gerne …, men …",
+  "Kærlig hilsen / Mange hilsner / Kh"
+ ],
+ "blogPhrases": [
+  "Jeg er (ikke) enig med … / Jeg er delvist enig med …",
+  "Det er rigtigt, at …, men …",
+  "For det første … For det andet …",
+  "På den ene side … På den anden side …",
+  "Desuden … / Derudover …",
+  "Nogle siger, at … Men …",
+  "I stedet synes jeg, at …",
+  "Derfor mener jeg, at … / Kort sagt …"
+ ],
+ "oral1": [
+  {
+   "id": "t1",
+   "topic": "Arbejde",
+   "prepare": [
+    "Hvad laver du, eller hvad har du lavet?",
+    "Hvad er et godt arbejde for dig?",
+    "Hvordan er det at arbejde i Danmark i forhold til i dit hjemland?"
+   ],
+   "follow": [
+    "Vil du fortælle lidt mere om dit arbejde?",
+    "Hvad er fordelene og ulemperne ved at arbejde i Danmark? Hvorfor?",
+    "Hvad synes du om, at mange danskere arbejder 37 timer om ugen?",
+    "Kan du give et eksempel på en god kollega?"
+   ]
+  },
+  {
+   "id": "t2",
+   "topic": "Uddannelse",
+   "prepare": [
+    "Hvilken uddannelse har du?",
+    "Hvad vil du gerne lære i fremtiden?",
+    "Hvordan er skolen i Danmark i forhold til i dit hjemland?"
+   ],
+   "follow": [
+    "Vil du fortælle lidt mere om din uddannelse?",
+    "Hvad synes du om, at uddannelse er gratis i Danmark? Hvorfor?",
+    "Hvad er fordelene og ulemperne ved at tage en uddannelse som voksen?",
+    "Kan du give et eksempel på en god lærer?"
+   ]
+  },
+  {
+   "id": "t3",
+   "topic": "Sundhed",
+   "prepare": [
+    "Hvad gør du for at holde dig sund?",
+    "Hvordan er det danske sundhedssystem?",
+    "Hvad er sund mad for dig?"
+   ],
+   "follow": [
+    "Vil du fortælle lidt mere om, hvordan du motionerer?",
+    "Hvad er fordelene og ulemperne ved det danske sundhedssystem? Hvorfor?",
+    "Hvad synes du om, at man skal have en henvisning fra sin læge for at komme til en specialist?",
+    "Kan du give nogle eksempler på sunde vaner?"
+   ]
+  },
+  {
+   "id": "t4",
+   "topic": "Teknologi",
+   "prepare": [
+    "Hvilken teknologi bruger du hver dag?",
+    "Hvordan bruger man MitID og digital post i Danmark?",
+    "Hvordan har teknologien ændret dit liv?"
+   ],
+   "follow": [
+    "Vil du fortælle lidt mere om, hvordan du bruger din telefon?",
+    "Hvad er fordelene og ulemperne ved, at så meget i Danmark foregår digitalt? Hvorfor?",
+    "Hvad synes du om, at børn har mobiltelefon?",
+    "Kan du give et eksempel på en app, du ikke kan undvære?"
+   ]
+  },
+  {
+   "id": "t5",
+   "topic": "Bolig",
+   "prepare": [
+    "Hvordan bor du?",
+    "Hvordan er det at finde en bolig i Danmark?",
+    "Hvordan vil du gerne bo i fremtiden?"
+   ],
+   "follow": [
+    "Vil du fortælle lidt mere om dit kvarter?",
+    "Hvad er fordelene og ulemperne ved at bo i en lejlighed i forhold til et hus? Hvorfor?",
+    "Hvad synes du om at bo i en boligforening?",
+    "Kan du give et eksempel på en god nabo?"
+   ]
+  },
+  {
+   "id": "t6",
+   "topic": "Fritid",
+   "prepare": [
+    "Hvad laver du i din fritid?",
+    "Hvad laver danskerne i deres fritid?",
+    "Er du med i en forening eller klub?"
+   ],
+   "follow": [
+    "Vil du fortælle lidt mere om din yndlingshobby?",
+    "Hvad er fordelene og ulemperne ved at være med i en forening? Hvorfor?",
+    "Hvad synes du om, at mange danskere arbejder frivilligt?",
+    "Kan du give et eksempel på en god weekend?"
+   ]
+  }
+ ],
+ "oral2": [
+  {
+   "id": "p1",
+   "topic": "Sprog og integration",
+   "a": {
+    "picture": "Billedet viser en kvinde, der lærer dansk på sin computer derhjemme.",
+    "questions": [
+     "Der er nogle udlændinge, der lærer dansk online. Hvorfor tror du, de gør det?",
+     "Hvilke fordele kan der være ved det?",
+     "Mener du, der kan være nogen ulemper ved at lære dansk online? Hvorfor? / Hvorfor ikke?"
+    ]
+   },
+   "b": {
+    "picture": "Billedet viser nogle udenlandske kolleger, der taler engelsk sammen på arbejdspladsen.",
+    "questions": [
+     "Der er nogle udlændinge, der kun taler engelsk på deres arbejdsplads. Hvorfor tror du, det er sådan?",
+     "Hvilke fordele kan der være ved det?",
+     "Mener du, der kan være ulemper ved kun at tale engelsk på en arbejdsplads i Danmark? Hvorfor? / Hvorfor ikke?"
+    ]
+   },
+   "pair": "I Danmark er danskundervisning for udlændinge gratis. Hvad synes I om det? Diskutér fordele og ulemper for den enkelte og for samfundet. Stil spørgsmål til hinanden."
+  },
+  {
+   "id": "p2",
+   "topic": "Familieliv",
+   "a": {
+    "picture": "Billedet viser en far, der henter sine børn i børnehaven klokken tre.",
+    "questions": [
+     "Mange danske fædre tager barselsorlov og henter deres børn. Hvorfor tror du, det er sådan?",
+     "Hvilke fordele kan der være ved det?",
+     "Kan der være nogen ulemper? Hvorfor? / Hvorfor ikke?"
+    ]
+   },
+   "b": {
+    "picture": "Billedet viser tre generationer, der spiser søndagsmiddag sammen.",
+    "questions": [
+     "Nogle familier ses hver søndag. Hvorfor tror du, de gør det?",
+     "Hvilke fordele kan der være ved det?",
+     "Kan der være ulemper ved at se familien så tit? Hvorfor? / Hvorfor ikke?"
+    ]
+   },
+   "pair": "Mange danske børn er i institution fra de er et år gamle. Hvad synes I om det? Diskutér fordele og ulemper for børnene og for forældrene."
+  },
+  {
+   "id": "p3",
+   "topic": "Miljø og klima",
+   "a": {
+    "picture": "Billedet viser en mand, der cykler på arbejde i regnvejr.",
+    "questions": [
+     "Mange danskere cykler på arbejde hele året. Hvorfor tror du, de gør det?",
+     "Hvilke fordele kan der være ved det?",
+     "Kan der være ulemper? Hvorfor? / Hvorfor ikke?"
+    ]
+   },
+   "b": {
+    "picture": "Billedet viser en familie, der sorterer affald i køkkenet.",
+    "questions": [
+     "I Danmark skal man sortere sit affald. Hvorfor tror du, det er sådan?",
+     "Hvilke fordele kan der være ved det?",
+     "Kan der være ulemper ved at sortere affald? Hvorfor? / Hvorfor ikke?"
+    ]
+   },
+   "pair": "Nogle mener, at man skal flyve mindre for at hjælpe klimaet. Hvad synes I? Diskutér fordele og ulemper, og stil spørgsmål til hinanden."
+  },
+  {
+   "id": "p4",
+   "topic": "Teknologi i hverdagen",
+   "a": {
+    "picture": "Billedet viser en ældre kvinde, der betaler med sin telefon i et supermarked.",
+    "questions": [
+     "Mange betaler i dag med telefonen i stedet for kontanter. Hvorfor tror du, de gør det?",
+     "Hvilke fordele kan der være ved det?",
+     "Kan der være ulemper? Hvorfor? / Hvorfor ikke?"
+    ]
+   },
+   "b": {
+    "picture": "Billedet viser en læge, der taler med en patient over en videoforbindelse.",
+    "questions": [
+     "Nogle patienter taler med lægen over video. Hvorfor tror du, det er sådan?",
+     "Hvilke fordele kan der være ved det?",
+     "Kan der være ulemper ved at gå til lægen online? Hvorfor? / Hvorfor ikke?"
+    ]
+   },
+   "pair": "I Danmark foregår næsten al kontakt med kommunen og staten digitalt. Hvad synes I om det? Diskutér fordele og ulemper for unge og for ældre."
+  }
+ ],
+ "oralPhrases": [
+  "Jeg vil gerne fortælle om …",
+  "For det første … For det andet …",
+  "En fordel er, at … En ulempe er, at …",
+  "Jeg synes, at …, fordi …",
+  "Det kommer an på …",
+  "Hvad synes du? / Er du enig?",
+  "Det er et godt spørgsmål. Jeg tror, at …",
+  "Til sidst vil jeg sige, at …"
+ ]
+}

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#c8102e">
+<title>Skrivning og mundtlig</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#fff; --ink:#14171c; --muted:#676e7b; --line:#e0e4ea;
+    --accent:#c8102e; --accent-ink:#fff; --ok:#127a4a; --okbg:#e7f6ee;
+    --bad:#b3261e; --badbg:#fdecea; --chip:#eef1f5; --shadow:0 1px 2px rgba(20,23,28,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#121419;--card:#1b1e24;--ink:#e8ebf0;--muted:#98a1b0;--line:#2b3039;
+      --accent:#ff5a6e;--accent-ink:#1b1e24;--ok:#4cc38a;--okbg:#14301f;
+      --bad:#ff6b61;--badbg:#331b19;--chip:#232830;--shadow:none;}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  .wrap{max-width:900px;margin:0 auto;padding:20px 16px 64px}
+  header{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+  .brand{font-weight:700;letter-spacing:-.02em;font-size:1.05rem;color:inherit;text-decoration:none}
+  .brand:hover span{text-decoration:underline}
+  .brand span{color:var(--accent)}
+  header h1{font-size:1.2rem;margin:0}
+  .spacer{flex:1}
+  .lang{background:none;border:none;color:var(--muted);font:inherit;font-size:.85rem;
+    padding:.2rem .35rem;cursor:pointer;border-radius:5px}
+  .lang[aria-pressed=true]{color:var(--ink);font-weight:600;background:var(--chip)}
+  .langs{display:inline-flex;gap:.1rem}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:18px;box-shadow:var(--shadow);margin-bottom:16px}
+  .card h2{font-size:1.05rem;margin:0 0 .6rem}
+  .card h3{font-size:.95rem;margin:1rem 0 .4rem}
+  .muted{color:var(--muted)}
+  .tabs,.picks{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+  .tab,.pick{padding:7px 12px;border-radius:9px;font:inherit;font-weight:600;cursor:pointer;
+    border:1px solid var(--line);background:var(--card);color:var(--ink)}
+  .pick{font-weight:500}
+  .tab[aria-pressed=true],.pick[aria-pressed=true]{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+  .letter{white-space:pre-wrap;background:var(--chip);border-radius:10px;padding:12px 14px;margin:0 0 12px}
+  textarea{width:100%;min-height:15rem;font:inherit;line-height:1.55;padding:10px 12px;border-radius:10px;
+    border:1px solid var(--line);background:var(--card);color:var(--ink);resize:vertical}
+  textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+  .count{font-variant-numeric:tabular-nums;font-weight:600}
+  .count.short{color:var(--bad)} .count.enough{color:var(--ok)}
+  ul.checks{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+  ul.checks label{display:flex;gap:.5rem;align-items:baseline;cursor:pointer}
+  ul.phrases{margin:0;padding-left:1.2rem}
+  .model{white-space:pre-wrap;border-left:3px solid var(--ok);padding:6px 0 6px 12px;margin:10px 0 0}
+  .btn{padding:10px 16px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;
+    border:1px solid var(--line);background:var(--chip);color:var(--ink)}
+  .btn:hover:not(:disabled){border-color:var(--accent)}
+  .btn:disabled{opacity:.5;cursor:default}
+  .btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .clock{font-size:2rem;font-weight:700;font-variant-numeric:tabular-nums;margin:.2rem 0}
+  .clock.over{color:var(--bad)}
+  .question{font-size:1.1rem;font-weight:600;margin:.6rem 0}
+  .picture{font-style:italic;background:var(--chip);border-radius:10px;padding:10px 14px}
+  audio{width:100%;margin-top:8px}
+  a{color:var(--accent)}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/">Dansk <span>idiomer</span></a>
+    <h1 id="title"></h1>
+    <span class="spacer"></span>
+    <span id="langs" class="langs"></span>
+  </header>
+  <main id="view"></main>
+</div>
+
+<script type="module">
+import { $, esc, t, registerStrings, currentLang, setLang as applyLang } from '/shared.js';
+
+const STRINGS = {
+  ru: {
+    title: 'Письмо и устная часть',
+    intro: 'Тренажёр для письменной и устной части Modultest DU3, модуль 4. Ситуации и вопросы свои, по образцу официальных. Текст проверяете вы сами: счётчик слов, памятка и образец ответа. Черновик сохраняется в этом браузере.',
+    w1: 'Письмо · Opgave 1', w2: 'Письмо · Opgave 2', o1: 'Устно · Opgave 1', o2: 'Устно · Opgave 2',
+    situation: 'Ситуация {n}', words: 'слов', minimum: 'минимум {n}',
+    checkAnswered: 'Ответил на вопрос:', checkBlog: 'Есть в тексте:',
+    blogChecks: ['Сказал, согласен ли я', 'Привёл хотя бы два довода', 'Ответил на возможное возражение', 'Закончил выводом'],
+    phrases: 'Полезные фразы', showModel: 'Показать образец ответа', hideModel: 'Скрыть образец',
+    modelNote: 'Один из возможных ответов, не единственно верный.',
+    clear: 'Стереть черновик', confirmClear: 'Стереть текст?',
+    topic: 'Тема', prepare: 'Подготовьтесь рассказать (1–2 минуты):',
+    startTalk: 'Начать рассказ (2 мин)', startQuestions: 'Вопросы тестера (4 мин)', next: 'Следующий вопрос',
+    stop: 'Стоп', record: 'Записать себя', stopRecord: 'Остановить запись', listen: 'Ваша запись:',
+    noMic: 'Запись недоступна в этом браузере.', recordNote: 'Запись остаётся только в этом браузере и никуда не отправляется.',
+    part1: 'Часть 1 — индивидуально (около 3 минут)', part2: 'Часть 2 — разговор в паре (около 4 минут)',
+    person: 'Карточка {n}', startPart1: 'Начать (3 мин)', startPart2: 'Начать разговор (4 мин)',
+    pairNote: 'В паре говорят двое: задавайте вопросы друг другу. Можно тренироваться с другом или отвечать за обоих.',
+    timeUp: 'Время вышло',
+    error: 'Не удалось загрузить. Попробуйте обновить страницу.',
+  },
+  en: {
+    title: 'Writing and speaking',
+    intro: 'Practice for the writing and speaking parts of Modultest DU3, module 4. The situations and questions are our own, modelled on the official ones. You check your own text: a word counter, a checklist and a model answer. Your draft is kept in this browser.',
+    w1: 'Writing · Opgave 1', w2: 'Writing · Opgave 2', o1: 'Speaking · Opgave 1', o2: 'Speaking · Opgave 2',
+    situation: 'Situation {n}', words: 'words', minimum: 'at least {n}',
+    checkAnswered: 'I answered:', checkBlog: 'My text has:',
+    blogChecks: ['Whether I agree', 'At least two reasons', 'An answer to a likely objection', 'A conclusion'],
+    phrases: 'Useful phrases', showModel: 'Show a model answer', hideModel: 'Hide the model answer',
+    modelNote: 'One possible answer, not the only right one.',
+    clear: 'Clear the draft', confirmClear: 'Clear the text?',
+    topic: 'Topic', prepare: 'Prepare to talk about (1–2 minutes):',
+    startTalk: 'Start talking (2 min)', startQuestions: 'Examiner questions (4 min)', next: 'Next question',
+    stop: 'Stop', record: 'Record yourself', stopRecord: 'Stop recording', listen: 'Your recording:',
+    noMic: 'Recording is not available in this browser.', recordNote: 'The recording stays in this browser and is sent nowhere.',
+    part1: 'Part 1 — on your own (about 3 minutes)', part2: 'Part 2 — in pairs (about 4 minutes)',
+    person: 'Card {n}', startPart1: 'Start (3 min)', startPart2: 'Start the conversation (4 min)',
+    pairNote: 'Two people talk in pairs: ask each other questions. Practise with a friend, or answer for both.',
+    timeUp: 'Time is up',
+    error: 'Could not load. Try reloading the page.',
+  },
+  uk: {
+    title: 'Письмо та усна частина',
+    intro: 'Тренажер для письмової та усної частини Modultest DU3, модуль 4. Ситуації та питання власні, за зразком офіційних. Текст перевіряєте ви самі: лічильник слів, пам’ятка й зразок відповіді. Чернетка зберігається в цьому браузері.',
+    w1: 'Письмо · Opgave 1', w2: 'Письмо · Opgave 2', o1: 'Усно · Opgave 1', o2: 'Усно · Opgave 2',
+    situation: 'Ситуація {n}', words: 'слів', minimum: 'щонайменше {n}',
+    checkAnswered: 'Я відповів на питання:', checkBlog: 'У тексті є:',
+    blogChecks: ['Чи я згоден', 'Щонайменше два аргументи', 'Відповідь на можливе заперечення', 'Висновок'],
+    phrases: 'Корисні фрази', showModel: 'Показати зразок відповіді', hideModel: 'Сховати зразок',
+    modelNote: 'Одна з можливих відповідей, не єдина правильна.',
+    clear: 'Стерти чернетку', confirmClear: 'Стерти текст?',
+    topic: 'Тема', prepare: 'Підготуйтеся розповісти (1–2 хвилини):',
+    startTalk: 'Почати розповідь (2 хв)', startQuestions: 'Питання тестера (4 хв)', next: 'Наступне питання',
+    stop: 'Стоп', record: 'Записати себе', stopRecord: 'Зупинити запис', listen: 'Ваш запис:',
+    noMic: 'Запис недоступний у цьому браузері.', recordNote: 'Запис лишається тільки в цьому браузері й нікуди не надсилається.',
+    part1: 'Частина 1 — індивідуально (близько 3 хвилин)', part2: 'Частина 2 — розмова в парі (близько 4 хвилин)',
+    person: 'Картка {n}', startPart1: 'Почати (3 хв)', startPart2: 'Почати розмову (4 хв)',
+    pairNote: 'У парі говорять двоє: ставте питання одне одному. Можна тренуватися з другом або відповідати за обох.',
+    timeUp: 'Час вийшов',
+    error: 'Не вдалося завантажити. Спробуйте оновити сторінку.',
+  },
+  da: {
+    title: 'Skrivning og mundtlig',
+    intro: 'Øvelser til skrivning og mundtlig kommunikation i Modultest DU3, modul 4. Situationer og spørgsmål er vores egne, lavet efter forlægget. Du tjekker selv din tekst: ordtæller, tjekliste og et eksempel på et svar. Dit udkast gemmes i denne browser.',
+    w1: 'Skrivning · Opgave 1', w2: 'Skrivning · Opgave 2', o1: 'Mundtlig · Opgave 1', o2: 'Mundtlig · Opgave 2',
+    situation: 'Situation {n}', words: 'ord', minimum: 'mindst {n}',
+    checkAnswered: 'Jeg har svaret på:', checkBlog: 'Min tekst har:',
+    blogChecks: ['Om jeg er enig', 'Mindst to argumenter', 'Et svar på en mulig indvending', 'En konklusion'],
+    phrases: 'Nyttige udtryk', showModel: 'Vis et eksempel på et svar', hideModel: 'Skjul eksemplet',
+    modelNote: 'Ét muligt svar, ikke det eneste rigtige.',
+    clear: 'Slet udkastet', confirmClear: 'Slet teksten?',
+    topic: 'Emne', prepare: 'Forbered dig på at fortælle om (1–2 minutter):',
+    startTalk: 'Start fremlæggelsen (2 min)', startQuestions: 'Testerens spørgsmål (4 min)', next: 'Næste spørgsmål',
+    stop: 'Stop', record: 'Optag dig selv', stopRecord: 'Stop optagelsen', listen: 'Din optagelse:',
+    noMic: 'Optagelse virker ikke i denne browser.', recordNote: 'Optagelsen bliver i denne browser og sendes ingen steder hen.',
+    part1: 'Del 1 — individuelt (ca. 3 minutter)', part2: 'Del 2 — i par (ca. 4 minutter)',
+    person: 'Kort {n}', startPart1: 'Start (3 min)', startPart2: 'Start samtalen (4 min)',
+    pairNote: 'I par taler to personer sammen og stiller spørgsmål til hinanden. Øv med en ven, eller svar for begge.',
+    timeUp: 'Tiden er gået',
+    error: 'Kunne ikke hente siden. Prøv at genindlæse den.',
+  },
+};
+registerStrings(STRINGS);
+
+const fill = (text, values) => Object.entries(values).reduce((s, [k, v]) => s.replaceAll(`{${k}}`, v), text);
+// Danish genitive: Sunes, but Jonas' -- a name ending in s, x or z takes only the apostrophe.
+const genitive = name => /[sxz]$/i.test(name) ? `${name}'` : `${name}s`;
+const words = text => (text.trim().match(/[\p{L}\p{N}]+(?:[-'’][\p{L}\p{N}]+)*/gu) ?? []).length;
+const view = $('#view');
+let data = null, tab = 'w1', pick = 0, card = 'a', ticker = null, recorder = null;
+
+// A draft is a per-viewer convenience: it may be gone, and the page works without it.
+const store = {
+  get: key => { try { return localStorage.getItem(key) ?? ''; } catch { return ''; } },
+  set: (key, value) => { try { localStorage.setItem(key, value); } catch {} },
+};
+
+function paintLanguages() {
+  const box = $('#langs');
+  box.innerHTML = Object.keys(STRINGS).map(code =>
+    `<button class="lang" data-lang="${code}" aria-pressed="${code === currentLang()}">${code.toUpperCase()}</button>`).join('');
+  box.querySelectorAll('.lang').forEach(b => b.onclick = () => { applyLang(b.dataset.lang); render(); });
+}
+
+const list = () => ({w1: data.emails, w2: data.blogs, o1: data.oral1, o2: data.oral2})[tab];
+
+function render() {
+  stopClock();
+  stopRecording();
+  document.documentElement.lang = currentLang();
+  $('#title').textContent = t('title');
+  paintLanguages();
+  const items = list();
+  pick = Math.min(pick, items.length - 1);
+  view.innerHTML = `
+    <div class="card"><p class="muted" style="margin:0">${esc(t('intro'))}</p></div>
+    <nav class="tabs">${['w1', 'w2', 'o1', 'o2'].map(k =>
+      `<button class="tab" data-tab="${k}" aria-pressed="${k === tab}">${esc(t(k))}</button>`).join('')}</nav>
+    <nav class="picks">${items.map((it, i) =>
+      `<button class="pick" data-pick="${i}" aria-pressed="${i === pick}">${esc(it.topic ?? fill(t('situation'), {n: i + 1}))}</button>`).join('')}</nav>
+    <div id="task"></div>`;
+  view.querySelectorAll('.tab').forEach(b => b.onclick = () => { tab = b.dataset.tab; pick = 0; render(); });
+  view.querySelectorAll('.pick').forEach(b => b.onclick = () => { pick = Number(b.dataset.pick); render(); });
+  ({w1: writing, w2: writing, o1: talk, o2: pair})[tab](items[pick]);
+}
+
+// ---------- writing ----------
+function writing(task) {
+  const email = tab === 'w1';
+  const min = email ? 125 : 100;
+  const key = `skriv:${task.id}`;
+  const instruction = email
+    ? `Du har fået en e-mail fra din ven, ${task.from}. Læs e-mailen, og skriv et svar til ${task.from}. Du skal svare på ${genitive(task.from)} spørgsmål. Du skal skrive minimum ${min} ord.`
+    : `${task.author} har skrevet et blogindlæg. Skriv et blogindlæg, hvor du diskuterer ${genitive(task.author)} synspunkt. Er du enig? Hvorfor? / Hvorfor ikke? Du skal skrive minimum ${min} ord.`;
+  // A list, not a string: t() reads an object as plural forms, so the list is taken as it is.
+  const checks = email ? task.questions : (STRINGS[currentLang()]?.blogChecks ?? STRINGS.ru.blogChecks);
+  $('#task').innerHTML = `
+    <div class="card" lang="da">
+      <p style="margin:0 0 .8rem">${esc(instruction)}</p>
+      ${email ? '' : `<h2>${esc(task.title)}</h2>`}
+      <div class="letter">${esc(email ? task.mail : task.post)}</div>
+      <textarea id="draft" aria-label="${esc(t(tab))}" spellcheck="true">${esc(store.get(key))}</textarea>
+      <p class="row" style="margin:.5rem 0 0"><span class="count" id="count"></span>
+        <span class="spacer"></span><button class="btn" id="clear" lang="${currentLang()}">${esc(t('clear'))}</button></p>
+    </div>
+    <div class="card">
+      <h2>${esc(email ? t('checkAnswered') : t('checkBlog'))}</h2>
+      <ul class="checks">${checks.map((c, i) => `<li><label><input type="checkbox" data-check="${i}"
+        ${store.get(`${key}:${i}`) === '1' ? 'checked' : ''}> <span ${email ? 'lang="da"' : ''}>${esc(c)}</span></label></li>`).join('')}</ul>
+      <h3>${esc(t('phrases'))}</h3>
+      <ul class="phrases" lang="da">${(email ? data.emailPhrases : data.blogPhrases).map(p => `<li>${esc(p)}</li>`).join('')}</ul>
+      <p style="margin:1rem 0 0"><button class="btn" id="toggle">${esc(t('showModel'))}</button></p>
+      <div id="model" hidden><p class="muted" style="margin:.6rem 0 0;font-size:.9rem">${esc(t('modelNote'))}</p>
+        <div class="model" lang="da">${esc(task.model)}</div></div>
+    </div>`;
+  const draft = $('#draft');
+  const paint = () => {
+    const n = words(draft.value);
+    const el = $('#count');
+    el.textContent = `${n} ${t('words')} · ${fill(t('minimum'), {n: min})}`;
+    el.className = 'count ' + (n >= min ? 'enough' : 'short');
+  };
+  draft.oninput = () => { store.set(key, draft.value); paint(); };
+  paint();
+  $('#clear').onclick = () => { if (confirm(t('confirmClear'))) { draft.value = ''; store.set(key, ''); paint(); } };
+  view.querySelectorAll('[data-check]').forEach(c => c.onchange = () => store.set(`${key}:${c.dataset.check}`, c.checked ? '1' : ''));
+  $('#toggle').onclick = () => {
+    const m = $('#model');
+    m.hidden = !m.hidden;
+    $('#toggle').textContent = t(m.hidden ? 'showModel' : 'hideModel');
+  };
+}
+
+// ---------- speaking ----------
+function clockHtml() {
+  return `<p class="clock" id="clock" aria-live="polite"></p>`;
+}
+
+/** Counts down from `seconds`; at zero it keeps counting, in red, as a tester would let a sentence finish. */
+function runClock(seconds) {
+  stopClock();
+  let left = seconds;
+  const paint = () => {
+    const el = $('#clock');
+    if (!el) return;
+    const a = Math.abs(left);
+    el.textContent = `${left < 0 ? '+' : ''}${Math.floor(a / 60)}:${String(a % 60).padStart(2, '0')}${left <= 0 ? ' · ' + t('timeUp') : ''}`;
+    el.classList.toggle('over', left <= 0);
+  };
+  paint();
+  ticker = setInterval(() => { left -= 1; paint(); }, 1000);
+}
+
+function stopClock() {
+  if (ticker) { clearInterval(ticker); ticker = null; }
+}
+
+function recorderHtml() {
+  return `<p class="row" style="margin:1rem 0 0"><button class="btn" id="rec">${esc(t('record'))}</button>
+    <span class="muted" style="font-size:.85rem">${esc(t('recordNote'))}</span></p><div id="playback"></div>`;
+}
+
+function wireRecorder() {
+  const button = $('#rec');
+  if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === 'undefined') {
+    button.disabled = true;
+    button.textContent = t('noMic');
+    return;
+  }
+  button.onclick = async () => {
+    if (recorder) { stopRecording(); return; }
+    let stream;
+    try { stream = await navigator.mediaDevices.getUserMedia({audio: true}); } catch { button.textContent = t('noMic'); return; }
+    const chunks = [];
+    recorder = new MediaRecorder(stream);
+    recorder.ondataavailable = e => chunks.push(e.data);
+    recorder.onstop = () => {
+      stream.getTracks().forEach(tr => tr.stop());
+      const url = URL.createObjectURL(new Blob(chunks, {type: recorder?.mimeType || 'audio/webm'}));
+      const box = $('#playback');
+      if (box) box.innerHTML = `<p class="muted" style="margin:.6rem 0 0">${esc(t('listen'))}</p><audio controls src="${url}"></audio>`;
+      recorder = null;
+      if ($('#rec')) $('#rec').textContent = t('record');
+    };
+    recorder.start();
+    button.textContent = t('stopRecord');
+  };
+}
+
+function stopRecording() {
+  if (recorder && recorder.state !== 'inactive') recorder.stop();
+}
+
+function talk(task) {
+  $('#task').innerHTML = `
+    <div class="card">
+      <h2>${esc(t('topic'))}: <span lang="da">${esc(task.topic)}</span></h2>
+      <p style="margin:0 0 .4rem">${esc(t('prepare'))}</p>
+      <ul lang="da">${task.prepare.map(q => `<li>${esc(q)}</li>`).join('')}</ul>
+      ${clockHtml()}
+      <p class="row"><button class="btn primary" id="talk">${esc(t('startTalk'))}</button>
+        <button class="btn" id="ask">${esc(t('startQuestions'))}</button>
+        <button class="btn" id="stop">${esc(t('stop'))}</button></p>
+      <p class="question" id="question" lang="da" hidden></p>
+      <p><button class="btn" id="next" hidden>${esc(t('next'))}</button></p>
+      ${recorderHtml()}
+    </div>
+    <div class="card"><h2>${esc(t('phrases'))}</h2>
+      <ul class="phrases" lang="da">${data.oralPhrases.map(p => `<li>${esc(p)}</li>`).join('')}</ul></div>`;
+  let asked = 0;
+  const show = () => {
+    $('#question').hidden = false;
+    $('#question').textContent = task.follow[asked];
+    $('#next').hidden = asked >= task.follow.length - 1;
+  };
+  $('#talk').onclick = () => { $('#question').hidden = $('#next').hidden = true; runClock(120); };
+  $('#ask').onclick = () => { asked = 0; show(); runClock(240); };
+  $('#next').onclick = () => { asked += 1; show(); };
+  $('#stop').onclick = stopClock;
+  wireRecorder();
+}
+
+function pair(task) {
+  const side = task[card];
+  $('#task').innerHTML = `
+    <div class="card">
+      <h2>${esc(t('topic'))}: <span lang="da">${esc(task.topic)}</span></h2>
+      <h3>${esc(t('part1'))}</h3>
+      <nav class="picks">${['a', 'b'].map((k, i) =>
+        `<button class="pick" data-card="${k}" aria-pressed="${k === card}">${esc(fill(t('person'), {n: 'AB'[i]}))}</button>`).join('')}</nav>
+      <p class="picture" lang="da">${esc(side.picture)}</p>
+      <ol lang="da">${side.questions.map(q => `<li>${esc(q)}</li>`).join('')}</ol>
+      <p class="row"><button class="btn primary" id="part1">${esc(t('startPart1'))}</button>
+        <button class="btn" id="stop">${esc(t('stop'))}</button></p>
+      <h3>${esc(t('part2'))}</h3>
+      <p lang="da" style="margin:0 0 .4rem">${esc(task.pair)}</p>
+      <p class="muted" style="font-size:.9rem;margin:0 0 .6rem">${esc(t('pairNote'))}</p>
+      <p class="row"><button class="btn primary" id="part2">${esc(t('startPart2'))}</button></p>
+      ${clockHtml()}
+      ${recorderHtml()}
+    </div>
+    <div class="card"><h2>${esc(t('phrases'))}</h2>
+      <ul class="phrases" lang="da">${data.oralPhrases.map(p => `<li>${esc(p)}</li>`).join('')}</ul></div>`;
+  view.querySelectorAll('[data-card]').forEach(b => b.onclick = () => { card = b.dataset.card; render(); });
+  $('#part1').onclick = () => runClock(180);
+  $('#part2').onclick = () => runClock(240);
+  $('#stop').onclick = stopClock;
+  wireRecorder();
+}
+
+async function load() {
+  try {
+    data = await (await fetch('/skriv-tal.json')).json();
+  } catch {
+    view.innerHTML = `<div class="card"><p style="margin:0">${esc(t('error'))}</p></div>`;
+    return;
+  }
+  render();
+}
+
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
+load();
+</script>
+</body>
+</html>

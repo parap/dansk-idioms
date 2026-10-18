@@ -1363,6 +1363,75 @@ def a_modultest_sitting_is_listed_on_its_page_and_not_with_the_reading_rounds(b)
 
 
 @check
+def the_modultest_page_leads_to_writing_and_speaking(b):
+    b.goto('/modultest')
+    b.until('!!document.querySelector("a.cta[href=\'/modultest/skriv\']")', what='the way to writing and speaking')
+
+
+@check
+def a_writing_task_counts_words_against_its_minimum(b):
+    b.goto('/modultest/skriv')
+    b.until('!!document.querySelector("#draft")', what='the email task')
+    b.js("localStorage.removeItem('skriv:e1')")
+    b.goto('/modultest/skriv')
+    b.until('!!document.querySelector("#draft")', what='the email task')
+    assert 'Sune' in b.js('document.querySelector(".letter").textContent'), 'the email is not shown'
+    assert b.js('document.querySelector("#count").classList.contains("short")'), 'an empty answer is not marked short'
+    b.js("""(() => { const d = document.querySelector('#draft');
+        d.value = Array(130).fill('ord').join(' '); d.dispatchEvent(new Event('input')); })()""")
+    assert b.js('document.querySelector("#count").textContent').startswith('130'), b.js('document.querySelector("#count").textContent')
+    assert b.js('document.querySelector("#count").classList.contains("enough")'), '130 words are not enough for 125'
+    b.goto('/modultest/skriv')
+    b.until('!!document.querySelector("#draft")', what='the email task again')
+    assert b.js('document.querySelector("#draft").value.split(" ").length') == 130, 'the draft is not kept in the browser'
+    b.js("localStorage.removeItem('skriv:e1')")
+
+
+@check
+def a_model_answer_appears_only_when_asked_for(b):
+    b.goto('/modultest/skriv')
+    b.until('!!document.querySelector("#toggle")', what='the model button')
+    assert b.js('document.querySelector("#model").hidden'), 'the model answer is shown before it is asked for'
+    b.js('document.querySelector("#toggle").click()')
+    assert not b.js('document.querySelector("#model").hidden'), 'the model answer does not open'
+
+
+@check
+def a_blog_task_asks_for_a_hundred_words(b):
+    b.goto('/modultest/skriv')
+    b.until('!!document.querySelector(".tab[data-tab=\'w2\']")', what='the tabs')
+    b.js('document.querySelector(".tab[data-tab=\'w2\']").click()')
+    b.until('!!document.querySelector("#draft")', what='the blog task')
+    assert 'minimum 100 ord' in b.js('document.querySelector("#task").textContent'), 'the blog task does not ask for 100 words'
+
+
+@check
+def a_speaking_task_runs_the_clock_and_asks_the_questions(b):
+    b.goto('/modultest/skriv')
+    b.until('!!document.querySelector(".tab[data-tab=\'o1\']")', what='the tabs')
+    b.js('document.querySelector(".tab[data-tab=\'o1\']").click()')
+    b.until('!!document.querySelector("#talk")', what='the speaking task')
+    b.js('document.querySelector("#talk").click()')
+    b.until('/^[12]:\\d\\d/.test(document.querySelector("#clock").textContent)', what='a two-minute clock')
+    b.js('document.querySelector("#ask").click()')
+    b.until('!document.querySelector("#question").hidden', what='the first question')
+    first = b.js('document.querySelector("#question").textContent')
+    b.js('document.querySelector("#next").click()')
+    assert b.js('document.querySelector("#question").textContent') != first, 'the next question is the same one'
+
+
+@check
+def a_pair_task_shows_each_card(b):
+    b.goto('/modultest/skriv')
+    b.until('!!document.querySelector(".tab[data-tab=\'o2\']")', what='the tabs')
+    b.js('document.querySelector(".tab[data-tab=\'o2\']").click()')
+    b.until('!!document.querySelector(".picture")', what='the picture card')
+    a = b.js('document.querySelector(".picture").textContent')
+    b.js('document.querySelector("[data-card=\'b\']").click()')
+    b.until(f'document.querySelector(".picture").textContent !== {json.dumps(a)}', what='card B')
+
+
+@check
 def the_buttons_carry_no_forward_arrow(b):
     for path in ('/', '/listen'):
         b.goto(path)
@@ -1375,7 +1444,7 @@ def the_buttons_carry_no_forward_arrow(b):
 def every_page_carries_the_way_home(b):
     """The mark is the way back, so it is the same mark everywhere and it sits where a
     reader looks for it: first in the header, top left."""
-    for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs', '/grammar', '/modultest'):
+    for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs', '/grammar', '/modultest', '/modultest/skriv'):
         b.goto(path)
         b.until('!!document.querySelector(".brand")', what='the brand on ' + path)
         assert b.js('document.querySelector(".brand").getAttribute("href")') == '/', path
@@ -1400,7 +1469,7 @@ def every_page_offers_the_same_languages(b):
     """A language offered on one page and missing on the next drops the reader back into
     Russian halfway through the site, and the fallback is silent."""
     try:
-        for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs', '/grammar', '/modultest'):
+        for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs', '/grammar', '/modultest', '/modultest/skriv'):
             b.goto(path)
             b.until('!!document.querySelector(".lang")', what='the language switch on ' + path)
             assert offered_languages(b) == LANGUAGES, f'{path} offers {offered_languages(b)}'
@@ -1561,7 +1630,7 @@ def the_public_listener_does_not_serve_the_admin_surface(b):
 # belongs on <html> and every run of Danish needs lang="da" of its own; otherwise Danish is
 # read aloud with a Russian voice. WCAG 3.1.1, 3.1.2, 1.4.3 and 2.4.1.
 
-PAGES = ['/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs', '/grammar', '/modultest']
+PAGES = ['/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs', '/grammar', '/modultest', '/modultest/skriv']
 
 
 def open_in(b, path, ui_lang='ru'):
