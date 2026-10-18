@@ -1,0 +1,704 @@
+kind: grammar
+slug: der-som-1
+title: Der, som og hvor
+
+--- questions ---
+1. Bogen, ___ jeg læser, er meget spændende.
+> «Bogen» в придаточном — дополнение (я читаю книгу), а не подлежащее. Для дополнения годится только som; der бывает лишь подлежащим. Книга, которую я читаю, очень интересная.
+* som
+  der
+  hvad
+  hvem
+
+2. Manden, ___ bor ved siden af, er læge.
+> «Manden» — подлежащее придаточного (он живёт рядом), поэтому подходит der (или som, его здесь среди вариантов нет). Мужчина, который живёт по соседству, — врач.
+* der
+  hvad
+  hvem
+  hvor
+
+3. Byen, ___ jeg er født, ligger i Jylland.
+> Место — hvor: «byen, hvor jeg er født». Город, где я родился, находится в Ютландии.
+* hvor
+  der
+  hvad
+  hvem
+
+4. Jeg ved ikke, hvem ___ har taget min kop.
+> В косвенном вопросе, где hvem — подлежащее, нужно der: hvem der har taget. Я не знаю, кто взял мою чашку.
+* der
+  som
+  det
+  han
+
+5. ___ står en mand uden for døren.
+> Формальное подлежащее der вводит что-то новое: Der står en mand… — «стоит какой-то человек». За дверью стоит мужчина.
+* Der
+  Det
+  Den
+  Som
+
+6. ___ regner i dag.
+> Погода — всегда det: Det regner. Сегодня идёт дождь.
+* Det
+  Der
+  Den
+  Han
+
+7. Det er den pige, ___ jeg talte med i går.
+> Девочка — дополнение при предлоге (talte med hende), предлог остаётся в конце: som jeg talte med. Это та девочка, с которой я вчера разговаривал.
+* som
+  der
+  hvem
+  hvor
+
+8. Pigen, ___ mor er lærer, går i min klasse.
+> «Чья» — hvis: pigen, hvis mor er lærer. Девочка, чья мама учительница, учится в моём классе.
+* hvis
+  som
+  der
+  hvem
+
+9. Han kom for sent, ___ irriterede mig meget.
+> Когда относительное слово указывает на всё предложение («то, что он опоздал»), используют hvilket. Он опоздал, что меня очень раздражало.
+* hvilket
+  som
+  der
+  hvem
+
+10. Jeg forstår ikke, hvad ___ sker.
+> В косвенном вопросе, где hvad — подлежащее, нужно der: hvad der sker. Я не понимаю, что происходит.
+* der
+  som
+  det
+  den
+
+11. Den film, ___ vi så i går, var rigtig god.
+> Фильм — дополнение (мы смотрели фильм) → som. Фильм, который мы смотрели вчера, был очень хорошим.
+* som
+  der
+  hvad
+  hvem
+
+12. ___ er mange turister i København om sommeren.
+> Есть/имеется — der er. «Det er» здесь значило бы «это (есть)». Летом в Копенгагене много туристов.
+* Der
+  Det
+  De
+  Den
+
+13. Kvinden, ___ hjalp mig, var meget venlig.
+> Подлежащее придаточного (она помогла) → som или der; здесь среди вариантов som. Женщина, которая мне помогла, была очень любезной.
+* som
+  hvem
+  hvad
+  hvor
+
+14. Det var i 2020, ___ vi flyttede til Danmark.
+> Время в такой конструкции — da: Det var i 2020, da vi flyttede. Это было в 2020 году, когда мы переехали в Данию.
+* da
+  der
+  hvad
+  hvem
+
+15. Jeg har en ven, ___ taler fem sprog.
+> Друг — подлежащее (он говорит) → der. У меня есть друг, который говорит на пяти языках.
+* der
+  hvad
+  hvem
+  hvis
+
+16. Det hus, ___ vi bor i, er meget gammelt.
+> Дом — дополнение при предлоге (vi bor i huset) → som, предлог в конце. Дом, в котором мы живём, очень старый.
+* som
+  der
+  hvor
+  hvad
+
+17. Vælg den rigtige sætning.
+> der — только подлежащее придаточного. В «…som jeg mødte» мужчина — дополнение, поэтому som. Мужчина, которого я встретил, был датчанином.
+* Manden, som jeg mødte, var dansker.
+  Manden, der jeg mødte, var dansker.
+  Manden, hvem jeg mødte, var dansker.
+  Manden, hvad jeg mødte, var dansker.
+
+18. Vælg det rigtige spørgsmål.
+> В прямом вопросе, где hvem — подлежащее, der не нужен: Hvem vil have mere kaffe? Кто хочет ещё кофе?
+* Hvem vil have mere kaffe?
+  Hvem der vil have mere kaffe?
+  Hvem som vil have mere kaffe?
+  Der hvem vil have mere kaffe?
+
+19. Jeg vil gerne vide, hvem ___ vinder.
+> Косвенный вопрос, hvem — подлежащее → der: hvem der vinder. Хотел бы я знать, кто победит.
+* der
+  som
+  det
+  han
+
+20. ___ er koldt i dag.
+> Температура и погода — det: Det er koldt. Сегодня холодно.
+* Det
+  Den
+  Hun
+  Som
+
+21. Den restaurant, ___ vi spiste i går, var dyr.
+> Место без предлога в конце — hvor: restauranten, hvor vi spiste. Ресторан, где мы ели вчера, был дорогим.
+* hvor
+  som
+  der
+  hvad
+
+22. Den restaurant, ___ vi spiste på i går, var dyr.
+> Предлог в конце («spiste på») → som: restauranten, som vi spiste på. hvor + på было бы двойным указанием места. Ресторан, в котором мы ели вчера, был дорогим.
+* som
+  hvor
+  der
+  hvad
+
+23. Der er nogen, ___ banker på døren.
+> Подлежащее придаточного (кто-то стучит) → der. Кто-то стучит в дверь.
+* der
+  hvem
+  hvad
+  hvor
+
+24. Jeg kan ikke huske, hvad ___ hedder.
+> Косвенный вопрос, где hvad — не подлежащее: подлежащее han. Я не помню, как его зовут.
+* han
+  der
+  som
+  det der
+
+25. Det er min nabo, ___ hund altid gør.
+> «Чья» → hvis. Это мой сосед, чья собака всё время лает.
+* hvis
+  som
+  der
+  hans
+
+26. ___ ligger en pakke til dig på bordet.
+> Новое, неопределённое подлежащее (en pakke) → формальное der. Для тебя на столе лежит посылка.
+* Der
+  Det
+  Den
+  Som
+
+27. Den kollega, ___ jeg arbejder sammen med, er fra Polen.
+> Коллега — дополнение при предлоге (arbejder sammen med ham) → som. Коллега, с которым я работаю, из Польши.
+* som
+  der
+  hvem
+  hvor
+
+28. Det var en dag, ___ alt gik galt.
+> «Когда» после слова времени (en dag) — hvor или da; здесь среди вариантов hvor. Это был день, когда всё пошло не так.
+* hvor
+  som
+  der
+  hvad
+
+29. Vælg den rigtige sætning.
+> В косвенном вопросе с hvem в роли подлежащего нужен der. Я не знаю, кто звонил.
+* Jeg ved ikke, hvem der ringede.
+  Jeg ved ikke, hvem ringede.
+  Jeg ved ikke, hvem som ringede der.
+  Jeg ved ikke, der hvem ringede.
+
+30. Alle, ___ har lyst, kan komme med.
+> Подлежащее придаточного (у кого есть желание) → der. Все, кто хочет, могут пойти с нами.
+* der
+  hvem
+  hvad
+  hvis
+
+31. Det er den bedste kage, ___ jeg nogensinde har smagt.
+> Торт — дополнение (я пробовал торт) → som. Это лучший торт, какой я когда-либо пробовал.
+* som
+  der
+  hvad
+  hvem
+
+32. Hun fik job som sygeplejerske, ___ hun havde drømt om længe.
+> Относится ко всему, о чём она мечтала (получить работу) → hvilket. Она получила работу медсестрой, о чём давно мечтала.
+* hvilket
+  der
+  hvem
+  hvis
+
+33. Er ___ nogen, der kan hjælpe mig?
+> Есть ли кто-то — er der: формальное подлежащее после глагола в вопросе. Есть кто-нибудь, кто может мне помочь?
+* der
+  som
+  den
+  de
+
+34. De børn, ___ bor på vejen, leger sammen hver dag.
+> Подлежащее придаточного → som или der; здесь som. Дети, которые живут на нашей улице, играют вместе каждый день.
+* som
+  hvem
+  hvad
+  hvor
+
+35. Kan du sige mig, hvad ___ står på skiltet?
+> Косвенный вопрос, hvad — подлежащее → der: hvad der står. Можешь сказать, что написано на табличке?
+* der
+  som
+  det
+  den
+
+36. Det land, ___ min far kommer fra, er meget smukt.
+> Страна — дополнение при предлоге (kommer fra landet) → som. Страна, из которой родом мой отец, очень красивая.
+* som
+  der
+  hvor
+  hvad
+
+37. ___ er mit hus.
+> Указание «это» — Det er…: Det er mit hus. Это мой дом.
+* Det
+  Den
+  Som
+  Hvad
+
+38. Lægen, ___ jeg ringede til, havde travlt.
+> Врач — дополнение при предлоге (ringede til lægen) → som. Врач, которому я позвонил, был занят.
+* som
+  der
+  hvem
+  hvor
+
+39. Vi spiste på en café, ___ havde den bedste kaffe i byen.
+> Подлежащее придаточного (кафе имело) → der. Мы ели в кафе, где был лучший кофе в городе.
+* der
+  hvor
+  hvem
+  hvad
+
+40. ___ var engang en konge, der havde tre døtre.
+> Сказочный зачин: Der var engang… — формальное подлежащее. Жил-был король, у которого было три дочери.
+* Der
+  Det
+  Den
+  Han
+
+41. Han fortalte mig, hvem ___ havde ringet.
+> Косвенный вопрос, hvem — подлежащее → der. Он рассказал мне, кто звонил.
+* der
+  som
+  det
+  hun
+
+42. Den sommer, ___ vi var i Italien, var meget varm.
+> После слова времени — da или hvor; здесь da. Летом, когда мы были в Италии, было очень жарко.
+* da
+  der
+  som
+  hvad
+
+43. Jeg har mistet den nøgle, ___ du gav mig.
+> Ключ — дополнение (ты дал ключ) → som. Я потерял ключ, который ты мне дал.
+* som
+  der
+  hvad
+  hvem
+
+44. Vælg den rigtige sætning.
+> В прямом вопросе hvem как подлежащее не берёт der. Кто это сказал?
+* Hvem sagde det?
+  Hvem der sagde det?
+  Hvem som sagde det?
+  Der hvem sagde det?
+
+45. Det er Peter, ___ bil holder foran huset.
+> «Чья» → hvis. Это Петер, чья машина стоит перед домом.
+* hvis
+  hans
+  som
+  der
+
+46. ___ kommer en bus om fem minutter.
+> Новое неопределённое подлежащее (en bus) → Der kommer. Через пять минут придёт автобус.
+* Der
+  Det
+  Den
+  Som
+
+47. De mennesker, ___ jeg mødte på kurset, var søde.
+> Люди — дополнение (я встретил людей) → som. Люди, с которыми я познакомился на курсах, были милыми.
+* som
+  der
+  hvem
+  hvad
+
+48. Alt, ___ du siger, er rigtigt.
+> После alt, noget, det — som (так же верно и «alt, hvad du siger», но его среди вариантов нет). Всё, что ты говоришь, правильно.
+* som
+  der
+  hvem
+  hvis
+
+49. Alt, ___ skete, var min skyld.
+> После alt, если это подлежащее придаточного → der (или som). Всё, что случилось, было моей виной.
+* der
+  hvad
+  hvis
+  hvem
+
+50. Jeg spurgte, hvad ___ kostede.
+> Косвенный вопрос: hvad — дополнение, подлежащее det: hvad det kostede. Я спросил, сколько это стоит.
+* det
+  der
+  som
+  den der
+
+51. Hun er den eneste, ___ forstår mig.
+> Подлежащее придаточного (она понимает) → der. Она единственная, кто меня понимает.
+* der
+  hvem
+  hvad
+  hvis
+
+52. Skolen, ___ mine børn går, ligger tæt på.
+> Место без предлога в конце — hvor. Школа, где учатся мои дети, находится рядом.
+* hvor
+  som
+  der
+  hvad
+
+53. Skolen, ___ mine børn går på, ligger tæt på.
+> Предлог в конце (går på skolen) → som. Школа, в которую ходят мои дети, находится рядом.
+* som
+  hvor
+  der
+  hvad
+
+54. ___ er ingen mælk i køleskabet.
+> «Нет (не имеется)» — der er ingen. В холодильнике нет молока.
+* Der
+  Det
+  Den
+  Som
+
+55. Vælg den rigtige sætning.
+> Формальное подлежащее der вводит новое (en kat); det указывало бы на что-то уже известное. В саду кошка.
+* Der er en kat i haven.
+  Det er en kat i haven.
+  Den er en kat i haven.
+  En kat der er i haven.
+
+56. Jeg kender ikke den mand, ___ du taler om.
+> Мужчина — дополнение при предлоге (taler om ham) → som. Я не знаю мужчину, о котором ты говоришь.
+* som
+  der
+  hvem
+  hvad
+
+57. Hvad ___ der i fjernsynet i aften?
+> В прямом вопросе с hvad и формальным der: Hvad er der i fjernsynet? Глагол стоит на втором месте. Что сегодня по телевизору?
+* er
+  der er
+  som er
+  det
+
+58. Hun spurgte, om ___ var plads til hende.
+> «Есть ли место» — om der var plads. Она спросила, найдётся ли для неё место.
+* der
+  det
+  den
+  som
+
+59. Han har en datter, ___ studerer medicin.
+> Подлежащее придаточного → som или der; здесь som. У него есть дочь, которая учится на врача.
+* som
+  hvem
+  hvad
+  hvis
+
+60. Det er det, ___ jeg mener.
+> «То, что я имею в виду»: det, som — дополнение → som. Именно это я и имею в виду.
+* som
+  der
+  hvad
+  hvem
+
+61. Jeg ved ikke, hvordan ___ virker.
+> Косвенный вопрос с hvordan: подлежащее det. Я не знаю, как это работает.
+* det
+  der
+  som
+  den der
+
+62. Ham, ___ står derovre, er min chef.
+> Подлежащее придаточного → der. Тот, кто стоит вон там, — мой начальник.
+* der
+  hvem
+  hvad
+  hvor
+
+63. Vælg den rigtige sætning.
+> Косвенный вопрос с hvad в роли подлежащего: hvad der skete. Расскажи мне, что случилось.
+* Fortæl mig, hvad der skete.
+  Fortæl mig, hvad skete.
+  Fortæl mig, hvad som skete der.
+  Fortæl mig, der hvad skete.
+
+64. Den dag, ___ min søn blev født, glemmer jeg aldrig.
+> «День, когда…» в прошлом — da (или hvor). Здесь da. День, когда родился мой сын, я никогда не забуду.
+* da
+  der
+  som
+  hvad
+
+65. Jeg fik en gave, ___ jeg blev meget glad for.
+> Подарок — дополнение при предлоге (blev glad for gaven) → som. Я получил подарок, которому очень обрадовался.
+* som
+  der
+  hvem
+  hvor
+
+66. ___ sidder en fugl på taget.
+> Новое подлежащее (en fugl) → Der sidder. На крыше сидит птица.
+* Der
+  Det
+  Den
+  Hun
+
+67. Mine forældre, ___ bor i Kyiv, kommer på besøg.
+> Подлежащее придаточного → der (или som). Мои родители, которые живут в Киеве, приезжают в гости.
+* der
+  hvem
+  hvad
+  hvis
+
+68. Han siger altid, hvad ___ tænker.
+> Косвенный вопрос: hvad — дополнение, подлежащее han. Он всегда говорит, что думает.
+* han
+  der
+  som
+  der han
+
+69. Det er en sang, ___ alle kender.
+> Песня — дополнение (все знают песню) → som. Это песня, которую все знают.
+* som
+  der
+  hvad
+  hvem
+
+70. Jeg blev syg, ___ betød, at jeg ikke kunne komme.
+> Указывает на всё предложение («то, что я заболел») → hvilket. Я заболел, что означало, что я не смогу прийти.
+* hvilket
+  som
+  der
+  hvem
+
+71. Hvem er det, ___ synger så smukt?
+> Подлежащее придаточного → der. Кто это так красиво поёт?
+* der
+  hvad
+  hvem
+  hvor
+
+72. Den lejlighed, ___ vi så i går, var for lille.
+> Квартира — дополнение (мы видели квартиру) → som. Квартира, которую мы смотрели вчера, была слишком маленькой.
+* som
+  der
+  hvor
+  hvad
+
+73. ___ er vigtigt at sove godt.
+> «Важно (что-то делать)» — Det er vigtigt at… Важно хорошо спать.
+* Det
+  Der
+  Den
+  Som
+
+74. I Danmark er der mange, ___ cykler på arbejde.
+> Подлежащее придаточного → der (или som). В Дании много людей, которые ездят на работу на велосипеде.
+* der
+  hvem
+  hvad
+  hvor
+
+75. Vælg den rigtige sætning.
+> «Чья» — hvis, а не hvem eller som. Это мальчик, чей велосипед украли.
+* Det er drengen, hvis cykel blev stjålet.
+  Det er drengen, hvem cykel blev stjålet.
+  Det er drengen, som cykel blev stjålet.
+  Det er drengen, der cykel blev stjålet.
+
+76. Der er noget, ___ jeg gerne vil sige.
+> Noget — дополнение (я хочу сказать что-то) → som. Есть кое-что, что я хотел бы сказать.
+* som
+  der
+  hvad
+  hvis
+
+77. Der er noget, ___ lugter mærkeligt.
+> Noget — подлежащее придаточного (что-то пахнет) → der. Что-то странно пахнет.
+* der
+  hvad
+  hvis
+  hvem
+
+78. Jeg ved, hvor ___ bor.
+> Косвенный вопрос с hvor: подлежащее hun. Я знаю, где она живёт.
+* hun
+  der
+  som
+  der hun
+
+79. ___ er svært at lære dansk.
+> «Трудно (что-то делать)» — Det er svært at… Учить датский трудно.
+* Det
+  Der
+  Den
+  Som
+
+80. Firmaet, ___ jeg arbejder for, har 200 ansatte.
+> Фирма — дополнение при предлоге (arbejder for firmaet) → som. В фирме, на которую я работаю, 200 сотрудников.
+* som
+  der
+  hvor
+  hvem
+
+81. Vi har en hund, ___ hedder Bamse.
+> Подлежащее придаточного → som или der; здесь som. У нас есть собака, которую зовут Бамсе.
+* som
+  hvem
+  hvad
+  hvis
+
+82. Hvad ___ der sket med dit ben?
+> Прямой вопрос с hvad и формальным der: Hvad er der sket? Что случилось с твоей ногой?
+* er
+  har
+  som er
+  det er
+
+83. Det er ikke alle, ___ kan lide sild.
+> Подлежащее придаточного → der. Не все любят селёдку.
+* der
+  hvem
+  hvad
+  hvis
+
+84. Det er den by, ___ jeg helst vil bo.
+> Место без предлога — hvor. Это город, где я больше всего хочу жить.
+* hvor
+  som
+  der
+  hvad
+
+85. Jeg kender en, ___ kan reparere din cykel.
+> Подлежащее придаточного → der. Я знаю одного человека, который может починить твой велосипед.
+* der
+  hvem
+  hvad
+  hvor
+
+86. Han spurgte, hvem ___ ville med.
+> Косвенный вопрос, hvem — подлежащее → der. Он спросил, кто хочет пойти с ним.
+* der
+  som
+  det
+  han
+
+87. Det tøj, ___ du har på, er flot.
+> Одежда — дополнение (ты носишь одежду) → som. Одежда, которая на тебе, красивая.
+* som
+  der
+  hvad
+  hvem
+
+88. ___ er en god idé at tage en paraply med.
+> «Хорошая идея (что-то сделать)» — Det er en god idé at… Хорошая идея взять с собой зонт.
+* Det
+  Der
+  Den
+  Som
+
+89. Vælg den rigtige sætning.
+> В относительном придаточном наречие стоит перед глаголом, а der — подлежащее. Человек, который никогда не опаздывает.
+* En person, der aldrig kommer for sent.
+  En person, der kommer aldrig for sent.
+  En person, aldrig der kommer for sent.
+  En person, hvem aldrig kommer for sent.
+
+90. Jeg glemte at købe mælk, ___ min kone ikke var glad for.
+> Относится ко всему предложению (то, что я забыл) → hvilket. Я забыл купить молоко, чему моя жена не обрадовалась.
+* hvilket
+  som
+  der
+  hvem
+
+91. Hvem ___ du ringet til?
+> Прямой вопрос: Hvem har du ringet til? — hvem здесь дополнение, der не нужен. Кому ты звонил?
+* har
+  der har
+  som har
+  der
+
+92. Den bog, ___ ligger på bordet, er min.
+> Подлежащее придаточного (книга лежит) → der (или som). Книга, которая лежит на столе, моя.
+* der
+  hvad
+  hvem
+  hvor
+
+93. Der er sket noget, ___ jeg ikke forstår.
+> Noget — дополнение (я не понимаю что-то) → som. Случилось кое-что, чего я не понимаю.
+* som
+  der
+  hvad
+  hvem
+
+94. Vi skal finde ud af, hvad ___ er galt med bilen.
+> Косвенный вопрос, hvad — подлежащее → der. Нам нужно выяснить, что не так с машиной.
+* der
+  som
+  det
+  den
+
+95. Det var på stranden, ___ vi mødte hinanden første gang.
+> Выделение места: Det var på stranden, at/hvor… Из вариантов подходит hvor. Это было на пляже, где мы впервые встретились.
+* hvor
+  der
+  hvad
+  hvem
+
+96. Mit barnebarn, ___ er fem år, kan allerede læse.
+> Подлежащее придаточного → som или der; здесь som. Мой внук, которому пять лет, уже умеет читать.
+* som
+  hvem
+  hvad
+  hvis
+
+97. ___ bor mange studerende i Aalborg.
+> Новое подлежащее (mange studerende) → формальное der: Der bor… В Ольборге живёт много студентов.
+* Der
+  Det
+  De
+  Den
+
+98. Jeg har glemt, hvem ___ fortalte mig det.
+> Косвенный вопрос, hvem — подлежащее → der. Я забыл, кто мне это рассказал.
+* der
+  som
+  det
+  hun
+
+99. Det er en opgave, ___ tager lang tid.
+> Подлежащее придаточного (задача занимает время) → der. Это задача, которая занимает много времени.
+* der
+  hvad
+  hvem
+  hvor
+
+100. Vælg den rigtige sætning.
+> der бывает только подлежащим придаточного. В «…som jeg har lånt» книга — дополнение, поэтому som. Это книга, которую я взял в библиотеке.
+* Det er bogen, som jeg har lånt på biblioteket.
+  Det er bogen, der jeg har lånt på biblioteket.
+  Det er bogen, hvad jeg har lånt på biblioteket.
+  Det er bogen, hvem jeg har lånt på biblioteket.

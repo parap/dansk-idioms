@@ -1,0 +1,704 @@
+kind: grammar
+slug: faste-udtryk-1
+title: Faste udtryk
+
+--- questions ---
+1. En gang ___ tager vi på café.
+> en gang imellem — время от времени. Время от времени мы ходим в кафе.
+* imellem
+  sammen
+  tilbage
+  igennem
+
+2. Man skal koncentrere sig for ikke at ___ fejl.
+> lave fejl — делать ошибки (не gøre fejl). Нужно сосредоточиться, чтобы не делать ошибок.
+* lave
+  holde
+  sætte
+  give
+
+3. Vi snakker om alt ___.
+> alt muligt — всё что угодно, всякое. Мы говорим обо всём на свете.
+* muligt
+  mulig
+  muligheder
+  mulighed
+
+4. Jeg har ___ travlt i dag.
+> have travlt — быть занятым: jeg har travlt. Сегодня я очень занят.
+* meget
+  mange
+  megen
+  stort
+
+5. Du har ___. Jeg tog fejl.
+> have ret — быть правым. Ты прав. Я ошибся.
+* ret
+  rigtigt
+  retten
+  rigtig
+
+6. Jeg ___ fejl. Undskyld!
+> tage fejl — ошибаться (думать неверно). Я ошибся. Извините!
+* tog
+  holdt
+  gav
+  satte
+
+7. Hun gør altid sit ___.
+> gøre sit bedste — делать всё возможное. Она всегда старается изо всех сил.
+* bedste
+  bedre
+  godt
+  gode
+
+8. Jeg skal ___ rent i weekenden.
+> gøre rent — убираться. На выходных мне нужно убраться.
+* gøre
+  lave
+  tage
+  holde
+
+9. Hvem skal ___ mad i aften?
+> lave mad — готовить еду. Кто сегодня готовит ужин?
+* lave
+  gøre
+  tage
+  holde
+
+10. Kan du ___ øje med min taske et øjeblik?
+> holde øje med — присматривать за чем-то. Можешь минутку присмотреть за моей сумкой?
+* holde
+  tage
+  have
+  give
+
+11. Jeg er ___ gang med at lave lektier.
+> i gang med — заниматься чем-то прямо сейчас. Я сейчас делаю уроки.
+* i
+  på
+  ved
+  til
+
+12. Du skal tage ___ til de andre.
+> tage hensyn til — считаться с кем-то. Ты должен считаться с другими.
+* hensyn
+  hensigt
+  hensynet
+  hensyner
+
+13. Han kommer ___ regel for sent.
+> som regel — как правило. Он, как правило, опаздывает.
+* som
+  i
+  med
+  efter
+
+14. ___ grund af sneen var skolen lukket.
+> på grund af — из-за. Из-за снега школа была закрыта.
+* På
+  I
+  Af
+  For
+
+15. Jeg ringer til dig ___ løbet af dagen.
+> i løbet af — в течение. Я позвоню тебе в течение дня.
+* i
+  på
+  om
+  under
+
+16. Vi tager toget i ___ for bilen.
+> i stedet for — вместо. Мы поедем на поезде вместо машины.
+* stedet
+  sted
+  steder
+  stedets
+
+17. Han er ___ det meste hjemme om aftenen.
+> for det meste — в основном, чаще всего. По вечерам он в основном дома.
+* for
+  i
+  til
+  med
+
+18. Kom ___ det samme!
+> med det samme — сразу же, немедленно. Иди сюда сейчас же!
+* med
+  i
+  på
+  til
+
+19. Det er ___ hvert fald ikke min skyld.
+> i hvert fald — во всяком случае. Во всяком случае, это не моя вина.
+* i
+  på
+  for
+  til
+
+20. ___ sidst fandt vi vejen.
+> til sidst — в конце концов. В конце концов мы нашли дорогу.
+* Til
+  På
+  Ved
+  Om
+
+21. Det regner ___ tiden.
+> hele tiden — всё время, постоянно. Всё время идёт дождь.
+* hele
+  alle
+  al
+  hel
+
+22. Jeg forstår dansk bedre og ___.
+> bedre og bedre — всё лучше и лучше. Я понимаю датский всё лучше и лучше.
+* bedre
+  bedst
+  god
+  godt
+
+23. ___ vidt jeg ved, er butikken åben.
+> så vidt jeg ved — насколько я знаю. Насколько я знаю, магазин открыт.
+* Så
+  For
+  Som
+  Til
+
+24. Tak ___ forhånd!
+> på forhånd — заранее. Заранее спасибо!
+* på
+  i
+  for
+  til
+
+25. Hun har ___ lyst til at komme med.
+> have lyst til — хотеть; усиление — stor lyst. Ей очень хочется пойти с нами.
+* stor
+  store
+  mange
+  meget store
+
+26. Jeg har ikke ___ til en ny telefon.
+> have råd til — мочь себе позволить. Я не могу позволить себе новый телефон.
+* råd
+  råds
+  rådet
+  råde
+
+27. Han har ___ i dag, så han kan hente børnene.
+> have fri — не работать, иметь выходной: Han har fri. Сегодня у него выходной, так что он может забрать детей.
+* fri
+  frit
+  frihed
+  frie
+
+28. Vi ___ ferie i Sverige i år.
+> holde ferie — проводить отпуск. В этом году мы проводим отпуск в Швеции.
+* holder
+  laver
+  gør
+  sætter
+
+29. Han ___ en beslutning: Han flytter til Odense.
+> træffe en beslutning — принять решение (тоже: tage en beslutning). Из вариантов подходит traf. Он принял решение: переезжает в Оденсе.
+* traf
+  lavede
+  gjorde
+  satte
+
+30. Kan du ___ mig en tjeneste?
+> gøre nogen en tjeneste — оказать услугу. Можешь оказать мне услугу?
+* gøre
+  lave
+  give
+  tage
+
+31. Det ___ ingen rolle.
+> spille ingen rolle — не играть роли, не иметь значения. Это не имеет значения.
+* spiller
+  gør
+  tager
+  laver
+
+32. Hvad står der ___?
+> Hvad står der på? — Что случилось? Что происходит? Что тут происходит?
+* på
+  i
+  til
+  om
+
+33. Jeg har det ___, tak.
+> have det godt — хорошо себя чувствовать, у меня всё хорошо. У меня всё хорошо, спасибо.
+* godt
+  god
+  gode
+  bedst
+
+34. Hvordan ___ det?
+> Hvordan går det? — как дела? Как дела?
+* går
+  har
+  står
+  er det
+
+35. Det ___ mig ikke.
+> Det rager mig ikke — разговорное «мне до этого нет дела». Меня это не касается.
+* rager
+  laver
+  holder
+  sætter
+
+36. Jeg kunne ikke lade ___ med at grine.
+> lade være med (at) — удержаться от чего-то, не делать. Я не мог удержаться от смеха.
+* være
+  blive
+  gøre
+  have
+
+37. Skal vi ___ en tur i skoven?
+> gå en tur — прогуляться. Пойдём прогуляемся в лесу?
+* gå
+  lave
+  gøre
+  holde
+
+38. Jeg vil gerne ___ et bad.
+> tage et bad — принять душ/ванну. Я хотел бы принять душ.
+* tage
+  gøre
+  lave
+  holde
+
+39. Hun ___ sig god tid til morgenmaden.
+> tage sig god tid — не торопиться. Она не торопится за завтраком.
+* tager
+  laver
+  gør
+  holder
+
+40. Han ___ mig at hilse.
+> bede nogen hilse — передать привет: Han beder mig hilse. Он просил передать привет.
+* beder
+  siger
+  spørger
+  fortæller
+
+41. Hun ___ på mig, da jeg kom ind.
+> hilse på nogen — поздороваться с кем-то. Она поздоровалась со мной, когда я вошёл.
+* hilste
+  sagde
+  talte
+  smilede
+
+42. Jeg har ___ i ryggen.
+> have ondt i — болит что-то: jeg har ondt i ryggen. У меня болит спина.
+* ondt
+  ond
+  onde
+  ondskab
+
+43. Jeg har ondt ___ hovedet.
+> have ondt i — болит что-то. У меня болит голова.
+* i
+  på
+  af
+  med
+
+44. Det er ___ skyld.
+> Det er min skyld — это моя вина. Это моя вина.
+* min
+  mig
+  jeg
+  mit
+
+45. Tillykke ___ fødselsdagen!
+> Tillykke med — поздравляю с чем-то. С днём рождения!
+* med
+  for
+  på
+  til
+
+46. Du skal ikke tage det så ___.
+> tage det tungt — принимать близко к сердцу. Не принимай это так близко к сердцу.
+* tungt
+  tung
+  tungere
+  tunge
+
+47. Han ___ op med at arbejde, da han fyldte 67.
+> holde op med — прекратить. Он перестал работать, когда ему исполнилось 67.
+* holdt
+  tog
+  satte
+  gik
+
+48. Det ___ sig ikke at lyve.
+> Det kan ikke betale sig — не окупается, не стоит. Врать себе дороже (не окупается).
+* betaler
+  gør
+  giver
+  laver
+
+49. Vi må ___ det bedste ud af det.
+> få det bedste ud af det — извлечь лучшее из ситуации. Нам придётся извлечь из этого максимум.
+* få
+  holde
+  tage
+  lave
+
+50. Hold ___!
+> Hold op! — Прекрати! Перестань!
+* op
+  på
+  ud
+  af
+
+51. Pas ___ dig selv!
+> Pas på dig selv! — Береги себя!
+* på
+  op
+  ud
+  af
+
+52. Det ___ på tide at gå hjem.
+> Det er på tide — пора. Пора идти домой.
+* er
+  har
+  bliver
+  går
+
+53. Vi er ___ at spise. Kom og sæt dig!
+> være ved at — быть в процессе: Vi er ved at spise. Мы как раз едим. Садись!
+* ved
+  i
+  på
+  om
+
+54. Hun er ___ at blive syg.
+> være ved at blive — начинать заболевать. Она, кажется, заболевает.
+* ved
+  i
+  på
+  om
+
+55. Det er ___ lige meget.
+> Det er mig lige meget — мне всё равно. Мне всё равно.
+* mig
+  min
+  jeg
+  mit
+
+56. Jeg ___ om fødderne. Kan vi gå indenfor?
+> fryse — мёрзнуть: jeg fryser om fødderne. У меня мёрзнут ноги. Пойдём внутрь?
+* fryser
+  er kold
+  har koldt
+  koldes
+
+57. Jeg ___ meget, når det er koldt.
+> fryse — мёрзнуть: jeg fryser. Мне очень холодно, когда мороз.
+* fryser
+  er kold
+  bliver koldt
+  har koldt
+
+58. Har du ___ at komme med?
+> have lyst til — хотеть: Har du lyst til at komme med? Хочешь пойти с нами?
+* lyst til
+  lyst på at
+  lysten
+  lyster
+
+59. Vi ___ fødselsdag for min søn på lørdag.
+> holde fødselsdag — праздновать день рождения. В субботу мы празднуем день рождения сына.
+* holder
+  laver
+  gør
+  tager
+
+60. Hun ___ en eksamen i morgen.
+> gå op til eksamen / have eksamen. Здесь: Hun har en eksamen — у неё экзамен. Завтра у неё экзамен.
+* har
+  laver
+  gør
+  holder
+
+61. Han ___ eksamen i juni.
+> bestå eksamen — сдать экзамен. Он сдал экзамен в июне.
+* bestod
+  gjorde
+  tog op
+  lavede
+
+62. Hun ___ til eksamen.
+> dumpe til eksamen — провалиться на экзамене. Она провалилась на экзамене.
+* dumpede
+  faldt
+  tabte
+  mistede
+
+63. Kan du ___ mig et lift til stationen?
+> give nogen et lift — подвезти. Можешь подвезти меня до вокзала?
+* give
+  tage
+  lave
+  gøre
+
+64. Jeg ___ bussen hver dag.
+> tage bussen — ездить на автобусе. Я каждый день езжу на автобусе.
+* tager
+  rejser
+  går
+  rider
+
+65. Han ___ toget med et minut.
+> nå toget — успеть на поезд; miste toget — опоздать на поезд. Здесь «с минутой» — успел впритык: nåede. Он успел на поезд за минуту.
+* nåede
+  tog
+  fik
+  ramte
+
+66. Vi kom for ___ til toget og måtte vente en time.
+> komme for sent — опоздать. Мы опоздали на поезд и ждали час.
+* sent
+  sen
+  sene
+  senere
+
+67. Det ___ mig en time at gå derhen.
+> Det tager en time — занимает час. Мне идти туда час.
+* tager
+  gør
+  holder
+  sætter
+
+68. Hvor lang tid ___ det?
+> Hvor lang tid tager det? — Сколько времени это займёт?
+* tager
+  gør
+  har
+  laver
+
+69. Hvad ___ den?
+> Hvad koster den? — Сколько это стоит?
+* koster
+  tager
+  gør
+  gælder
+
+70. Jeg ___ en kop kaffe, tak.
+> Jeg vil gerne have… — я бы хотел… Здесь: Jeg tager en kop kaffe — я возьму чашку кофе. Я возьму чашку кофе, пожалуйста.
+* tager
+  laver
+  gør
+  holder
+
+71. Hun ___ sin kat meget.
+> holde af — любить, быть привязанным: holder meget af. Она очень любит свою кошку.
+* holder meget af
+  holder af meget
+  har meget af
+  gør meget af
+
+72. Hjælp mig ___ at huske det!
+> hjælpe med (at) — помочь (сделать что-то). Помоги мне не забыть это!
+* med
+  til
+  på
+  om
+
+73. Kan du ___ mig om at købe brød?
+> minde nogen om noget — напомнить. Можешь напомнить мне купить хлеб?
+* minde
+  huske
+  sige
+  hjælpe
+
+74. Han ___ sig ikke om, hvad andre siger.
+> bryde sig om — придавать значение, любить: Han bryder sig ikke om… Ему всё равно, что говорят другие.
+* bryder
+  holder
+  tager
+  sætter
+
+75. Han ___ sig syg i dag.
+> melde sig syg — сообщить, что болен (взять больничный). Он сегодня взял больничный.
+* meldte
+  sagde
+  gjorde
+  lavede
+
+76. Hun ___ sit arbejde op.
+> sige op — уволиться (по собственному желанию). Она уволилась.
+* sagde
+  gav
+  holdt
+  tog
+
+77. Han blev ___ fra sit arbejde.
+> blive fyret — быть уволенным. Его уволили.
+* fyret
+  sagt
+  holdt
+  taget
+
+78. Hun ___ ud i gråd.
+> bryde ud i gråd — разрыдаться. Она разрыдалась.
+* brød
+  gik
+  kom
+  faldt
+
+79. Det ___ mig vældig godt.
+> Det passer mig godt — мне это подходит. Мне это очень подходит.
+* passer
+  har
+  ligger
+  står
+
+80. Hvornår ___ det dig?
+> Hvornår passer det dig? — Когда тебе удобно?
+* passer
+  går
+  er
+  ligger
+
+81. Jeg ___ i tvivl om, hvad jeg skal vælge.
+> være i tvivl — сомневаться. Я сомневаюсь, что выбрать.
+* er
+  har
+  gør
+  tager
+
+82. Hun ___ sig sammen og ringede.
+> tage sig sammen — собраться (с силами). Она собралась и позвонила.
+* tog
+  gav
+  satte
+  holdt
+
+83. Det ___ ikke noget.
+> Det gør ikke noget — ничего страшного. Ничего страшного.
+* gør
+  laver
+  har
+  er
+
+84. Det ___ sig om penge.
+> Det drejer sig om — речь идёт о. Речь идёт о деньгах.
+* drejer
+  handler
+  taler
+  siger
+
+85. Filmen ___ om en lille pige.
+> handle om — быть о чём-то (о сюжете). Фильм о маленькой девочке.
+* handler
+  drejer
+  taler
+  siger
+
+86. Jeg ___ dig ret.
+> give nogen ret — согласиться с кем-то, признать правоту. Я с тобой согласен.
+* giver
+  har
+  gør
+  siger
+
+87. Han ___ mig et godt råd.
+> give et råd — дать совет. Он дал мне хороший совет.
+* gav
+  tog
+  lavede
+  gjorde
+
+88. Kan du ___ et øjeblik?
+> vente et øjeblik — подождать минутку. Можешь подождать минутку?
+* vente
+  holde
+  tage
+  give
+
+89. Hun ___ et godt indtryk.
+> gøre et godt indtryk — произвести хорошее впечатление. Она произвела хорошее впечатление.
+* gjorde
+  lavede
+  holdt
+  tog
+
+90. Det kan godt ___, at han kommer i morgen.
+> Det kan godt være — может быть, возможно. Возможно, он придёт завтра.
+* være
+  gøre
+  have
+  komme
+
+91. Det ___ sig at stå tidligt op.
+> Det lønner sig — окупается, стоит того. Вставать рано себя окупает.
+* lønner
+  gør
+  laver
+  har
+
+92. Hun ___ rigtig godt ud i dag.
+> se godt ud — хорошо выглядеть. Она сегодня очень хорошо выглядит.
+* ser
+  har
+  gør
+  er
+
+93. Det ___ ud til at regne.
+> Det ser ud til at… — похоже, что… Похоже, будет дождь.
+* ser
+  går
+  kommer
+  står
+
+94. Jeg ___ ikke at blive her.
+> gide — хотеть, иметь охоту: Jeg gider ikke. Мне неохота здесь оставаться.
+* gider
+  gør
+  har
+  laver
+
+95. Han ___ ikke ret meget dansk.
+> kunne dansk — знать, уметь говорить по-датски. Он не очень хорошо знает датский.
+* kan
+  ved
+  kender
+  forstår sig
+
+96. ___ du, hvor stationen er?
+> vide — знать (факт): Ved du…? Ты знаешь, где вокзал?
+* Ved
+  Kan
+  Kender
+  Forstår
+
+97. ___ du Peter?
+> kende — знать (человека, место). Ты знаешь Петера?
+* Kender
+  Ved
+  Kan
+  Forstår
+
+98. Jeg ___ gerne komme, men jeg har ikke tid.
+> ville gerne — хотел бы: Jeg ville gerne komme. Я бы с удовольствием пришёл, но у меня нет времени.
+* ville
+  kan
+  har
+  skal
+
+99. Det er ___ om at komme tidligt.
+> Det gælder om at… — главное (важно) — … Главное — прийти пораньше.
+* gælder
+  står
+  drejer
+  går
+
+100. Velkommen ___!
+> Velkommen hjem — с возвращением домой. Добро пожаловать домой!
+* hjem
+  hjemme
+  hjemad
+  hjemmet

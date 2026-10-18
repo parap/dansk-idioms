@@ -163,7 +163,8 @@ function paintLanguages() {
 }
 
 // A picture for each rule, by the slug its sets share: datid-foernutid-1, -2 … all get the clock.
-const PICTURES = {'datid-foernutid': '⏳', 'ordstilling': '🔀', 'hvis-ville': '💭', 'passiv': '🧽'};
+const PICTURES = {'datid-foernutid': '⏳', 'ordstilling': '🔀', 'hvis-ville': '💭', 'passiv': '🧽',
+  'der-som': '🔗', 'praepositioner': '📍', 'sig-hinanden': '🪞', 'faste-udtryk': '💬'};
 
 function picture(slug) {
   return PICTURES[slug.replace(/-\d+$/, '')] ?? '📘';
