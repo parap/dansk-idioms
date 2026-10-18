@@ -26,7 +26,7 @@ kommunen bygget nye stier, og det {{2}} at flere tør cykle til arbejde.
   betydet
 ```
 
-- `kind` is `cloze`, `mc` or `insert`.
+- `kind` is `cloze`, `mc`, `insert` or `write`.
 - Wrapped lines rejoin; a blank line stays a paragraph break.
 - `{{1}}`, `{{2}}` … are the gaps, and must match the question numbers exactly.
 - A star marks the correct option. Exactly one per question, at least three options.
@@ -65,6 +65,19 @@ C Der er dog udfordringer ved tilpassede forhold.
 2. C
 ```
 
+**Written gaps** (`write`, Opgave 3 of Modultest DU3.4) are typed, not chosen. Every line
+under a gap is an answer it accepts, with no star; the first is the one a review shows. A
+typed answer is compared without case, spaces or punctuation at its ends, so list every word
+the gap genuinely takes -- `der` and `som`, `selvom` and `selv om` -- and only those.
+
+```
+--- questions ---
+2.
+der
+som
+> Подлежащее относительного придаточного — der или som.
+```
+
 ## Loading
 
 ```bash
@@ -88,6 +101,8 @@ A real paper is 3 questions, 5 insertion gaps and 8 cloze gaps.
 
 Files named `du3m4-v<variant>-opg<task>-…` are modelled on that test: task 1 is a cloze of
 about 330 words with eight gaps, task 2 an insertion with five gaps and two spare parts,
-task 4 six short everyday texts with one question each. They are not Prøve i Dansk 3
-material, and the reading exam draws one passage of each kind at random, so they stay
-unpublished until a variant can be sat as a whole on a page of its own.
+task 3 a written gap task of ten words, task 4 six short everyday texts with one question
+each. A `paper: du3m4-v<variant>` header groups a variant: `/modultest` sits its four tasks
+together in 50 minutes, offers it once all four are published, and the reading rounds never
+draw a passage that has a paper. Loading the directory again writes a changed paper onto a
+passage already loaded.

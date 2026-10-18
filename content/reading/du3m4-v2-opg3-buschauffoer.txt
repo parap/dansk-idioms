@@ -1,0 +1,86 @@
+kind: write
+slug: du3m4-v2-opg3-buschauffoer
+paper: du3m4-v2
+title: Jonas er buschauffør
+
+--- text ---
+Jeg har kørt bus i Odense i otte år. Før det arbejdede jeg på et lager, men jeg ville
+gerne have et job, {{1}} jeg kunne møde flere mennesker. Derfor tog jeg et kørekort til
+bus, da jeg var 35.
+
+Min arbejdsdag begynder tidligt. Ofte møder jeg på arbejde klokken fem om morgenen, og
+så kører jeg den første bus ud i byen. Jeg kan godt {{2}} lide de tidlige morgener, fordi
+byen er stille, og passagererne er på vej på arbejde eller i skole.
+
+Mange af passagererne kender jeg efterhånden. Der er for eksempel en ældre dame, {{3}}
+tager bussen hver tirsdag for at besøge sin søster. Hun sidder altid lige bag mig og
+fortæller om sine børnebørn.
+
+Det er ikke altid let at være buschauffør. Når der er meget trafik, kan det være svært
+{{4}} holde køreplanen, og nogle passagerer bliver sure, hvis bussen er forsinket. Jeg
+prøver at blive rolig, {{5}} det er jo ikke min skyld, at der er kø.
+
+Om vinteren er vejene tit glatte, og så skal man køre {{6}} forsigtigt. Vi har kurser i
+glatførekørsel hvert andet år, og det har jeg lært {{7}} af.
+
+Det bedste ved jobbet er friheden. Jeg sidder ikke på et kontor hele dagen, og jeg har
+ikke en chef, der kigger mig over skulderen. Men jeg er selvfølgelig nødt {{8}} at følge
+reglerne og passe på passagererne.
+
+Om et par år går mine kolleger og jeg over til elbusser. Jeg glæder {{9}} til det, fordi
+de er meget mere stille end de gamle busser. Jeg håber, at jeg kan blive ved med at køre
+bus, {{10}} jeg går på pension.
+
+--- questions ---
+1.
+hvor
+så
+> «Где» — hvor (по смыслу подходит и så — «чтобы»): et job, hvor jeg kunne møde flere mennesker. Работа, где я мог бы встречать больше людей.
+
+2.
+godt
+virkelig
+> kunne godt lide — нравиться: Jeg kan godt lide (или virkelig lide). Мне нравятся ранние утра.
+
+3.
+der
+som
+> Подлежащее относительного придаточного — der или som. Пожилая дама, которая ездит на автобусе каждый вторник.
+
+4.
+at
+> svært at + инфинитив. Трудно соблюдать расписание.
+
+5.
+for
+fordi
+da
+> Причина — for (соединяет главные предложения), fordi или da. Я стараюсь сохранять спокойствие, ведь пробки — не моя вина.
+
+6.
+meget
+ekstra
+særligt
+særlig
+rigtig
+virkelig
+> Усиление: meget, ekstra, særlig(t), rigtig, virkelig forsigtigt. Тогда нужно ехать очень осторожно.
+
+7.
+meget
+noget
+lidt
+> lære meget (noget, lidt) af noget — научиться чему-то. Я многому на них научился.
+
+8.
+til
+> være nødt til at — быть вынужденным. Но я, конечно, обязан соблюдать правила.
+
+9.
+mig
+> glæde sig til: jeg glæder mig. Я этого жду с нетерпением.
+
+10.
+indtil
+til
+> «До тех пор, пока» — indtil (разговорно til). Я надеюсь водить автобус до самой пенсии.

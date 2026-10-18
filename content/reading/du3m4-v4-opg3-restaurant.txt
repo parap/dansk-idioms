@@ -1,0 +1,80 @@
+kind: write
+slug: du3m4-v4-opg3-restaurant
+paper: du3m4-v4
+title: Ali har sin egen restaurant
+
+--- text ---
+Jeg kom til Danmark fra Irak for 15 år siden. Det første job, jeg fik, var som opvasker på en
+restaurant i Aarhus. Jeg kunne næsten ikke tale dansk, {{1}} jeg lærte hurtigt, fordi
+kollegerne snakkede med mig hele tiden.
+
+Efter to år begyndte kokken at lære mig at lave mad. Jeg var meget interesseret {{2}} det
+danske køkken, og jeg syntes, det var spændende at lave retter, som jeg aldrig {{3}} smagt
+før. Senere tog jeg en uddannelse som kok.
+
+For tre år siden åbnede jeg min egen restaurant. Vi serverer både irakiske og danske retter,
+og mange gæster kommer, fordi de gerne vil prøve noget nyt. Det var svært i begyndelsen,
+fordi jeg ikke vidste {{4}} meget om regnskab og regler. Men min bror hjalp mig, og nu går
+det godt.
+
+Jeg har syv ansatte, og de fleste af {{5}} er unge, der arbejder ved siden af deres studier.
+Jeg prøver at være en god chef, og jeg husker, hvordan det var at være ny {{6}} Danmark.
+Derfor giver jeg tit et job til folk, {{7}} lige er kommet til landet.
+
+Det er hårdt at have en restaurant. Jeg arbejder næsten hver aften og i weekenderne, og jeg
+har ikke så meget tid {{8}} min familie. Men min kone og børnene kommer ofte og spiser hos
+mig om søndagen.
+
+Mit næste mål er at skrive en kogebog med opskrifter fra både Irak og Danmark. Jeg tror, at
+mad er en god måde at lære {{9}} at kende på. Når man spiser sammen, er det lettere {{10}}
+forstå hinanden.
+
+--- questions ---
+1.
+men
+> Противопоставление — men. Я почти не говорил по-датски, но быстро учился.
+
+2.
+i
+> interesseret i — интересоваться чем-то. Меня очень интересовала датская кухня.
+
+3.
+havde
+> Плюсквамперфект (до другого прошлого): som jeg aldrig havde smagt før. Блюда, которых я никогда раньше не пробовал.
+
+4.
+så
+særlig
+ret
+specielt
+> ikke … så meget — не так много (подходят также særlig, ret, specielt). Я не так много знал о бухгалтерии и правилах.
+
+5.
+dem
+> de fleste af dem — большинство из них. Большинство из них — молодые люди, которые работают параллельно с учёбой.
+
+6.
+i
+> ny i Danmark — новый (человек) в Дании. Я помню, каково было быть новичком в Дании.
+
+7.
+der
+som
+> Подлежащее относительного придаточного — der или som. Людям, которые только что приехали в страну.
+
+8.
+til
+med
+sammen med
+> tid til nogen / tid med nogen — время на кого-то. У меня не так много времени на семью.
+
+9.
+hinanden
+andre
+folk
+mennesker
+> lære hinanden at kende — узнать друг друга (или andre, folk, mennesker — других людей). Еда — хороший способ узнать друг друга.
+
+10.
+at
+> lettere at + инфинитив. Когда едят вместе, легче понять друг друга.

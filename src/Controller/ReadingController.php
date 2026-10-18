@@ -114,7 +114,10 @@ final class ReadingController
         $ms       = isset($body['response_ms']) ? (int) $body['response_ms'] : null;
 
         try {
-            Response::json($this->reading->answer($sid, $position, $chosen, $ms));
+            // A written gap sends the words typed; everything else sends the option chosen.
+            Response::json(isset($body['answer_text']) && is_string($body['answer_text'])
+                ? $this->reading->answerText($sid, $position, $body['answer_text'], $ms)
+                : $this->reading->answer($sid, $position, $chosen, $ms));
         } catch (RuntimeException $e) {
             Response::error('cannot_answer', $e->getMessage(), 409);
         }

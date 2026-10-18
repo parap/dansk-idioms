@@ -16,7 +16,7 @@ use Throwable;
 final class ReadingRepository
 {
     /** Points per correct answer, as the exam awards them for each task type. */
-    private const POINTS = ['mc' => 2, 'insert' => 2, 'cloze' => 1, 'quiz' => 1, 'video' => 1, 'verbs' => 1, 'grammar' => 1];
+    private const POINTS = ['mc' => 2, 'insert' => 2, 'cloze' => 1, 'quiz' => 1, 'video' => 1, 'verbs' => 1, 'grammar' => 1, 'write' => 1];
 
     /** Task types that are questions alone, with nothing to read before answering. */
     private const TEXTLESS_KINDS = ['quiz', 'video', 'verbs', 'grammar'];
@@ -28,7 +28,10 @@ final class ReadingRepository
     private const BLOCKS = ['laeremateriale', 'aktuelle', 'vaerdier'];
 
     /** Task types whose questions are holes in the text rather than separate prompts. */
-    private const GAP_KINDS = ['insert', 'cloze'];
+    private const GAP_KINDS = ['insert', 'cloze', 'write'];
+
+    /** A gap answered by typing: its options are the answers it accepts, the first one shown in a review. */
+    private const WRITE_KIND = 'write';
 
     private const MARKER = '/\{\{(\d+)\}\}/';
 
@@ -90,6 +93,30 @@ final class ReadingRepository
               GROUP BY p.id, p.slug, p.title, p.pass_points, p.vaerdier_min
               ORDER BY p.slug"
         );
+    }
+
+    /**
+     * The Modultest papers on offer: a paper is offered once every one of its tasks is
+     * published, since a sitting of three tasks out of four is not the test.
+     *
+     * @return list<array{paper:string,tasks:int,questions:int,points:int}>
+     */
+    public function publishedModultests(): array
+    {
+        $rows = Db::fetchAll(
+            'SELECT p.paper, COUNT(DISTINCT p.id) AS tasks, COUNT(i.id) AS questions, SUM(i.points) AS points
+               FROM reading_passages p
+               JOIN reading_items i ON i.passage_id = p.id AND i.is_active = 1 AND i.is_flagged = 0
+              WHERE p.paper IS NOT NULL
+              GROUP BY p.paper
+             HAVING MIN(p.is_published) = 1
+              ORDER BY p.paper'
+        );
+
+        return array_map(static fn(array $r): array => [
+            'paper' => (string) $r['paper'], 'tasks' => (int) $r['tasks'],
+            'questions' => (int) $r['questions'], 'points' => (int) $r['points'],
+        ], $rows);
     }
 
     /**
@@ -172,10 +199,10 @@ final class ReadingRepository
         $body = $doc['body'] ?? null;
 
         Db::execute(
-            'INSERT INTO reading_passages (slug, kind, title, body, youtube_id, word_count, pass_points, vaerdier_min)
-             VALUES (?,?,?,?,?,?,?,?)',
+            'INSERT INTO reading_passages (slug, paper, kind, title, body, youtube_id, word_count, pass_points, vaerdier_min)
+             VALUES (?,?,?,?,?,?,?,?,?)',
             [
-                $doc['slug'], $doc['kind'], $doc['title'], $body, $doc['youtube'] ?? null,
+                $doc['slug'], $doc['paper'] ?? null, $doc['kind'], $doc['title'], $body, $doc['youtube'] ?? null,
                 $body === null ? 0 : Text::wordCount(preg_replace(self::MARKER, ' ', $body) ?? $body),
                 $doc['pass'] ?? null,
                 $doc['vaerdier_min'] ?? null,
@@ -248,6 +275,21 @@ final class ReadingRepository
             );
         }
         return $changed;
+    }
+
+    /**
+     * Writes a document's paper onto the passage already stored under its slug. Which
+     * variant a task belongs to grades nothing, so a passage already sat can take it.
+     *
+     * @param  array<string,mixed> $doc
+     * @return int 1 when the paper changed, 0 when it already was the document's
+     */
+    public function refreshPaper(array $doc): int
+    {
+        return Db::execute(
+            'UPDATE reading_passages SET paper = ? WHERE slug = ? AND NOT (paper <=> ?)',
+            [$doc['paper'] ?? null, $doc['slug'], $doc['paper'] ?? null]
+        );
     }
 
     /**
@@ -346,7 +388,23 @@ final class ReadingRepository
             throw new InvalidPassage('A video task names no YouTube film.');
         }
 
+        if ($kind === self::WRITE_KIND) {
+            $this->validateAccepted($doc);
+            return;
+        }
+
         $this->validateOptions($doc, $kind);
+    }
+
+    /** @param array<string,mixed> $doc */
+    private function validateAccepted(array $doc): void
+    {
+        foreach ($doc['items'] as $item) {
+            $options = $item['options'] ?? [];
+            if ($options === [] || empty($options[0]['correct'])) {
+                throw new InvalidPassage("Gap {$item['position']} lists no answer it accepts.");
+            }
+        }
     }
 
     /**

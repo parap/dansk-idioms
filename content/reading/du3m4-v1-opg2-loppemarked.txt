@@ -1,5 +1,6 @@
 kind: insert
 slug: du3m4-v1-opg2-loppemarked
+paper: du3m4-v1
 title: Loppemarkedet i Vestbyen
 
 --- text ---

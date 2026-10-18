@@ -1,0 +1,80 @@
+kind: write
+slug: du3m4-v1-opg3-sygeplejerske
+paper: du3m4-v1
+title: Amira er sygeplejerske
+
+--- text ---
+Jeg hedder Amira, og jeg har arbejdet som sygeplejerske på Aalborg Universitetshospital i
+seks år. Jeg kom til Danmark fra Syrien, {{1}} jeg var 24 år, og det første år gik
+næsten kun med at lære dansk.
+
+Jeg arbejder på en afdeling for ældre patienter. Mange af dem er meget syge, og nogle
+{{2}} dem har ingen familie, der kommer på besøg. Derfor er det vigtigt for mig at tage
+mig tid til at snakke med dem, også selvom der er travlt.
+
+Jeg arbejder både om dagen, om aftenen og nogle gange om natten. Det kan være hårdt at
+skifte mellem vagterne, {{3}} jeg er glad for, at jeg kun har én nattevagt om ugen. Når
+jeg har nattevagt, sover jeg om formiddagen og står op ved middagstid.
+
+Mine kolleger er meget søde, og vi hjælper {{4}}, når der sker noget uventet. En gang
+{{5}} måneden spiser vi aftensmad sammen efter arbejde, og det er altid hyggeligt.
+
+Det sværeste ved arbejdet er, at man ikke altid kan hjælpe. Nogle patienter bliver
+{{6}} raske igen, og det er trist. Men jeg har lært, at man også kan gøre en stor
+forskel med små ting, {{7}} eksempel ved at holde en patient i hånden.
+
+Om to år vil jeg gerne tage en videreuddannelse, så jeg kan arbejde på en
+intensivafdeling. Jeg har allerede talt {{8}} min chef om det, og hun synes, det er en
+god idé. Det er dyrt at læse videre, men hospitalet betaler det meste, {{9}} jeg
+forpligter mig til at blive i mindst tre år.
+
+Jeg er glad for, at jeg valgte {{10}} blive sygeplejerske. Det er et job, hvor man hver
+dag føler, at man gør noget vigtigt.
+
+--- questions ---
+1.
+da
+> «Когда» об одном событии в прошлом — da. Я приехала в Данию из Сирии, когда мне было 24 года.
+
+2.
+af
+> nogle af dem — некоторые из них. Многие из них очень больны, и у некоторых из них нет семьи.
+
+3.
+men
+så
+og
+> Два главных предложения соединяет men (по смыслу подходят и så, og). Бывает тяжело менять смены, но я рада, что у меня только одна ночная смена в неделю.
+
+4.
+hinanden
+> Помогаем друг другу — hjælper hinanden. Мы помогаем друг другу, когда происходит что-то неожиданное.
+
+5.
+om
+i
+> Раз в месяц — en gang om måneden (или i måneden). Раз в месяц мы вместе ужинаем после работы.
+
+6.
+ikke
+aldrig
+> Смысл фразы — «не выздоравливают», и дальше «это грустно». Подходит ikke или aldrig. Некоторые пациенты так и не выздоравливают.
+
+7.
+for
+> for eksempel — например. Можно многое изменить мелочами, например держа пациента за руку.
+
+8.
+med
+> tale med nogen — поговорить с кем-то. Я уже поговорила об этом со своей начальницей.
+
+9.
+hvis
+når
+fordi
+da
+> Условие — hvis или når; по смыслу подходят и fordi, da. Больница оплачивает большую часть, если я обязуюсь остаться минимум на три года.
+
+10.
+at
+> vælge at + инфинитив. Я рада, что выбрала стать медсестрой.

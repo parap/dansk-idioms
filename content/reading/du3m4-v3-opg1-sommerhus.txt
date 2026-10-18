@@ -1,0 +1,90 @@
+kind: cloze
+slug: du3m4-v3-opg1-sommerhus
+paper: du3m4-v3
+title: Sommerhus ved Vesterhavet
+
+--- text ---
+Der findes over 220.000 sommerhuse i Danmark, og for mange danskere er en uge i
+sommerhus lige så vigtig som en rejse til udlandet. Familien Nielsen fra Herning har
+lejet det samme hus ved Vesterhavet hver sommer, {{1}} børnene var små.
+
+"Vi kunne godt tage til Spanien, men vi vil hellere være her," siger Lone Nielsen.
+"Børnene elsker at bade i havet, og vi voksne kan slappe af {{2}} at tænke på
+arbejdet. Der er ingen fjernsyn i huset, og internettet er så langsomt, at vi næsten
+ikke bruger det."
+
+Huset ligger i en klitplantage, kun 300 meter fra stranden. Det er ikke stort, men der
+er plads til seks personer, og der er en stor terrasse, {{3}} familien spiser de fleste
+måltider. Når det regner, spiller de kort eller går en tur i den nærmeste by, hvor der
+er et lille museum og en isbod.
+
+Det er blevet dyrere at leje sommerhus de seneste år. {{4}} pandemien fik mange danskere
+lyst til at holde ferie i Danmark, og samtidig kommer der flere og flere turister fra
+Tyskland og Norge. En uge i højsæsonen koster nu ofte over 10.000 kroner.
+
+For at spare penge laver familien selv al maden. "Vi køber fisk direkte {{5}} fiskerne
+på havnen, og det er både billigere og bedre end i supermarkedet," fortæller Lone.
+
+Sommerhusene er ikke kun til ferie. Mange ejere bruger deres hus i weekenderne {{6}}
+hele året, og nogle pensionister bor der næsten fast. Det er egentlig ikke lovligt at
+bo i et sommerhus hele året, men kommunerne har svært ved at {{7}} det.
+
+Om fem dage skal familien Nielsen hjem igen. "Det er altid lidt trist," siger Lone.
+"Men vi har allerede {{8}} huset til næste år."
+
+--- questions ---
+1.
+* siden
+  indtil
+  før
+  mens
+> «С тех пор как» — siden: hver sommer, siden børnene var små. Каждое лето с тех пор, как дети были маленькими.
+
+2.
+* uden
+  uden for
+  udover
+  mellem
+> uden at + инфинитив — «не делая чего-то». Мы, взрослые, можем отдохнуть, не думая о работе.
+
+3.
+* hvor
+  som
+  der
+  hvad
+> Место — hvor: en terrasse, hvor familien spiser. Терраса, где семья ест большую часть времени.
+
+4.
+* Under
+  Mellem
+  Om
+  Efter at
+> Under pandemien — во время пандемии. Во время пандемии многим датчанам захотелось отдыхать в Дании.
+
+5.
+* fra
+  hos
+  ved
+  til
+> købe noget fra nogen — покупать у кого-то (говорят и «af nogen», его среди вариантов нет). Мы покупаем рыбу прямо у рыбаков в порту.
+
+6.
+* i løbet af
+  på grund af
+  i stedet for
+  ved siden af
+> i løbet af hele året — в течение всего года. Многие владельцы используют дом по выходным круглый год.
+
+7.
+* kontrollere
+  kontrol
+  kontrolleret
+  kontrollerer
+> После svært ved at — инфинитив: kontrollere. Коммунам трудно это проверять.
+
+8.
+* bestilt
+  bestille
+  bestiller
+  bestilte
+> Førnutid: har allerede bestilt. Но мы уже забронировали дом на следующий год.

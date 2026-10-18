@@ -29,6 +29,15 @@ final class ReadingSessionService
     /** The indfoedsretsproeve runs 45 minutes for its 45 questions. */
     private const PAPER_SECONDS = 2700;
 
+    /** Modultest DU3.4 sits its four reading tasks together in 50 minutes (from 2026). */
+    private const MODULTEST_SECONDS = 3000;
+
+    /** A gap answered by typing a word. Its stored options are the answers it accepts. */
+    private const WRITE_KIND = 'write';
+
+    /** What a typed answer is kept to: one word, with room to spare for a learner's slip. */
+    private const ANSWER_TEXT_MAX = 100;
+
     /** A knowledge paper is sat under exam conditions: no feedback until it is handed in. */
     private const PAPER_KIND = 'quiz';
 
@@ -135,6 +144,42 @@ final class ReadingSessionService
             self::PAPER_KIND,
             onlySections: $currentAffairs ? null : ['laeremateriale', 'vaerdier'],
         );
+        Db::execute('UPDATE reading_sessions SET points_max = ? WHERE id = ?', [$pointsMax, $sessionId]);
+
+        return ['session_id' => $publicId, 'mode' => self::EXAM, 'points_max' => $pointsMax];
+    }
+
+    /**
+     * Sits one Modultest paper: every task of the variant, in the test's order, timed and
+     * silent until it is handed in. There is no published pass mark, so no scale is attached.
+     *
+     * @return array{session_id: string, mode: string, points_max: int}
+     */
+    public function startModultest(?int $userId, ?string $anonKey, string $paper): array
+    {
+        $passages = Db::fetchAll(
+            'SELECT p.id, p.kind, p.is_published FROM reading_passages p WHERE p.paper = ? ORDER BY p.slug',
+            [$paper]
+        );
+        if ($passages === [] || in_array(0, array_map('intval', array_column($passages, 'is_published')), true)) {
+            throw new RuntimeException("No published Modultest paper '{$paper}'.");
+        }
+
+        $publicId = Ulid::generate();
+        Db::execute(
+            'INSERT INTO reading_sessions (public_id, user_id, anon_key, mode, duration_s, scale_id)
+             VALUES (?,?,?,?,?,NULL)',
+            [$publicId, $userId, $anonKey, self::EXAM, self::MODULTEST_SECONDS]
+        );
+        $sessionId = (int) Db::pdo()->lastInsertId();
+
+        $pointsMax = 0;
+        $position  = 0;
+        foreach ($passages as $passage) {
+            [$pointsMax, $position] = $this->materialise(
+                $sessionId, (int) $passage['id'], $passage['kind'], $pointsMax, $position
+            );
+        }
         Db::execute('UPDATE reading_sessions SET points_max = ? WHERE id = ?', [$pointsMax, $sessionId]);
 
         return ['session_id' => $publicId, 'mode' => self::EXAM, 'points_max' => $pointsMax];
@@ -335,15 +380,15 @@ final class ReadingSessionService
             // An inserted-sentence text draws its options from the text's own bank, so
             // which options an item offers depends on the text it came from, not on the
             // round it is being served in.
-            $options = $item['kind'] === 'insert'
-                ? $this->bankOptions((int) $item['passage_id'])
-                : $this->itemOptions((int) $item['id']);
-
-            [$payload, $correctIndex] = self::layOutOptions(
-                $options,
-                (int) $item['correct_option_id'],
-                'Item ' . $itemId
-            );
+            [$payload, $correctIndex] = $item['kind'] === self::WRITE_KIND
+                ? self::writtenGap()
+                : self::layOutOptions(
+                    $item['kind'] === 'insert'
+                        ? $this->bankOptions((int) $item['passage_id'])
+                        : $this->itemOptions((int) $item['id']),
+                    (int) $item['correct_option_id'],
+                    'Item ' . $itemId
+                );
 
             $position++;
             Db::execute(
@@ -370,7 +415,7 @@ final class ReadingSessionService
         $session = $this->loadSession($publicId);
 
         $rows = Db::fetchAll(
-            'SELECT si.position, si.passage_id, si.options, si.points, si.chosen_index,
+            'SELECT si.position, si.passage_id, si.options, si.points, si.chosen_index, si.answer_text,
                     i.prompt, i.section
              FROM reading_session_items si
              JOIN reading_items i ON i.id = si.item_id
@@ -404,6 +449,8 @@ final class ReadingSessionService
                 'section'  => $row['section'],
                 'points'   => (int) $row['points'],
                 'answered' => $row['chosen_index'] !== null,
+                // The learner's own words, so a sitting reopened shows what they typed.
+                'answer_text' => $row['answer_text'],
                 'options'  => $this->publicOptions((string) $row['options']),
             ];
         }
@@ -445,15 +492,58 @@ final class ReadingSessionService
      */
     public function answer(string $publicId, int $position, int $chosenIndex, ?int $responseMs = null): array
     {
+        [$session, $row] = $this->openItem($publicId, $position);
+        if ($row['kind'] === self::WRITE_KIND) {
+            throw new RuntimeException('This gap takes a written answer.');
+        }
+
+        return $this->record($session, $row, $chosenIndex, ((int) $row['correct_index']) === $chosenIndex, null, $responseMs);
+    }
+
+    /**
+     * Grades a typed answer against every answer the gap accepts, ignoring case, the
+     * spaces around it and punctuation at its ends. A blank takes the answer back: the
+     * gap is left unanswered, as it would be on paper.
+     */
+    public function answerText(string $publicId, int $position, string $text, ?int $responseMs = null): array
+    {
+        [$session, $row] = $this->openItem($publicId, $position);
+        if ($row['kind'] !== self::WRITE_KIND) {
+            throw new RuntimeException('This question is answered by choosing an option.');
+        }
+
+        $text  = mb_substr($text, 0, self::ANSWER_TEXT_MAX);
+        $typed = self::normalise($text);
+        if ($typed === '') {
+            Db::execute(
+                'UPDATE reading_session_items
+                    SET chosen_index = NULL, answer_text = NULL, is_correct = NULL, points_scored = NULL, answered_at = NULL
+                  WHERE id = ?',
+                [(int) $row['id']]
+            );
+            $this->sumPoints((int) $session['id']);
+            return $session['mode'] === self::EXAM ? ['recorded' => true] : ['is_correct' => false, 'points_scored' => 0];
+        }
+
+        $accepted  = array_map(self::normalise(...), $this->accepted((int) $row['item_id']));
+        $isCorrect = in_array($typed, $accepted, true);
+
+        return $this->record($session, $row, $isCorrect ? 0 : 1, $isCorrect, $text, $responseMs);
+    }
+
+    /** @return array{0: array<string,mixed>, 1: array<string,mixed>} */
+    private function openItem(string $publicId, int $position): array
+    {
         $session = $this->loadSession($publicId);
         if ($session['status'] !== 'active') {
             throw new RuntimeException('This round is already finished.');
         }
 
         $row = Db::fetchOne(
-            'SELECT si.id, si.item_id, si.options, si.correct_index, si.points, si.chosen_index, i.note
+            'SELECT si.id, si.item_id, si.options, si.correct_index, si.points, si.chosen_index, i.note, p.kind
              FROM reading_session_items si
              JOIN reading_items i ON i.id = si.item_id
+             JOIN reading_passages p ON p.id = si.passage_id
              WHERE si.session_id = ? AND si.position = ?',
             [(int) $session['id'], $position]
         );
@@ -466,24 +556,28 @@ final class ReadingSessionService
             throw new RuntimeException('Already answered.');
         }
 
-        $isCorrect = ((int) $row['correct_index']) === $chosenIndex;
-        $points    = $isCorrect ? (int) $row['points'] : 0;
-        $ms        = $responseMs === null ? null : max(0, min(self::MAX_RESPONSE_MS, $responseMs));
+        return [$session, $row];
+    }
+
+    /**
+     * Stores an answer already graded. In drill the learner is told immediately; in exam
+     * nothing comes back but an acknowledgement.
+     *
+     * @param array<string,mixed> $session
+     * @param array<string,mixed> $row
+     */
+    private function record(array $session, array $row, int $chosenIndex, bool $isCorrect, ?string $text, ?int $responseMs): array
+    {
+        $points = $isCorrect ? (int) $row['points'] : 0;
+        $ms     = $responseMs === null ? null : max(0, min(self::MAX_RESPONSE_MS, $responseMs));
 
         Db::execute(
             'UPDATE reading_session_items
-                SET chosen_index = ?, is_correct = ?, points_scored = ?, response_ms = ?, answered_at = NOW()
+                SET chosen_index = ?, answer_text = ?, is_correct = ?, points_scored = ?, response_ms = ?, answered_at = NOW()
               WHERE id = ?',
-            [$chosenIndex, $isCorrect ? 1 : 0, $points, $ms, (int) $row['id']]
+            [$chosenIndex, $text, $isCorrect ? 1 : 0, $points, $ms, (int) $row['id']]
         );
-        // Summed rather than incremented: an exam answer can change, and a running total
-        // would count every revision.
-        Db::execute(
-            'UPDATE reading_sessions SET points_scored =
-                (SELECT COALESCE(SUM(points_scored), 0) FROM reading_session_items WHERE session_id = ?)
-              WHERE id = ?',
-            [(int) $session['id'], (int) $session['id']]
-        );
+        $this->sumPoints((int) $session['id']);
         if ($row['chosen_index'] === null) {
             Db::execute(
                 'UPDATE reading_items SET times_asked = times_asked + 1, times_correct = times_correct + ?
@@ -506,6 +600,33 @@ final class ReadingSessionService
             'points_scored' => $points,
             'note'          => $row['note'],
         ];
+    }
+
+    /** Summed rather than incremented: an exam answer can change, and a running total would count every revision. */
+    private function sumPoints(int $sessionId): void
+    {
+        Db::execute(
+            'UPDATE reading_sessions SET points_scored =
+                (SELECT COALESCE(SUM(points_scored), 0) FROM reading_session_items WHERE session_id = ?)
+              WHERE id = ?',
+            [$sessionId, $sessionId]
+        );
+    }
+
+    /** @return list<string> the answers a written gap accepts, the one a review shows first */
+    private function accepted(int $itemId): array
+    {
+        return array_map('strval', array_column(
+            Db::fetchAll('SELECT text FROM reading_options WHERE item_id = ? ORDER BY sort', [$itemId]),
+            'text'
+        ));
+    }
+
+    private static function normalise(string $text): string
+    {
+        $text = preg_replace('/^[\p{P}\s]+|[\p{P}\s]+$/u', '', $text) ?? $text;
+
+        return mb_strtolower(preg_replace('/\s+/u', ' ', $text) ?? $text);
     }
 
     /**
@@ -592,7 +713,10 @@ final class ReadingSessionService
                       WHERE si.session_id = s.id ORDER BY si.position LIMIT 1) AS title,
                     (SELECT p.kind FROM reading_session_items si
                        JOIN reading_passages p ON p.id = si.passage_id
-                      WHERE si.session_id = s.id ORDER BY si.position LIMIT 1) AS kind
+                      WHERE si.session_id = s.id ORDER BY si.position LIMIT 1) AS kind,
+                    (SELECT p.paper FROM reading_session_items si
+                       JOIN reading_passages p ON p.id = si.passage_id
+                      WHERE si.session_id = s.id ORDER BY si.position LIMIT 1) AS paper
                FROM reading_sessions s
               WHERE s.status = ? AND ' . $where[0] . '
               ORDER BY s.submitted_at DESC, s.id DESC
@@ -603,6 +727,8 @@ final class ReadingSessionService
         return array_map(static fn (array $r): array => [
             'session_id'    => (string) $r['public_id'],
             'kind'          => (string) $r['kind'],
+            // A Modultest sitting names its variant, so each page lists only its own papers.
+            'paper'         => $r['paper'] === null ? null : (string) $r['paper'],
             'mode'          => (string) $r['mode'],
             'title'         => (string) $r['title'],
             'texts'         => (int) $r['texts'],
@@ -624,10 +750,11 @@ final class ReadingSessionService
         }
 
         $rows = Db::fetchAll(
-            'SELECT si.position, si.options, si.correct_index, si.chosen_index, si.is_correct,
-                    si.points, si.points_scored, i.prompt, i.section, i.note
+            'SELECT si.position, si.item_id, si.options, si.correct_index, si.chosen_index, si.answer_text,
+                    si.is_correct, si.points, si.points_scored, i.prompt, i.section, i.note, p.kind
              FROM reading_session_items si
              JOIN reading_items i ON i.id = si.item_id
+             JOIN reading_passages p ON p.id = si.passage_id
              WHERE si.session_id = ? ORDER BY si.position',
             [(int) $session['id']]
         );
@@ -655,6 +782,8 @@ final class ReadingSessionService
                     'is_correct'    => $r['is_correct'] === null ? null : (bool) $r['is_correct'],
                     'points'        => (int) $r['points'],
                     'points_scored' => (int) $r['points_scored'],
+                    'answer_text'   => $r['answer_text'],
+                    'accepted'      => $r['kind'] === self::WRITE_KIND ? $this->accepted((int) $r['item_id']) : null,
                 ],
                 $rows
             ),
@@ -730,6 +859,7 @@ final class ReadingSessionService
             'SELECT p.id, p.kind FROM reading_passages p
              WHERE ' . self::PUBLISHED . '
                AND p.kind IN (' . $kinds . ')
+               AND p.paper IS NULL
                AND (? IS NULL OR p.kind = ?)
                AND EXISTS (SELECT 1 FROM reading_items i
                             WHERE i.passage_id = p.id AND ' . self::SERVABLE . ')
@@ -797,11 +927,13 @@ final class ReadingSessionService
         $bank = $kind === 'insert' ? $this->bankOptions($passageId) : null;
 
         foreach ($items as $item) {
-            [$payload, $correctIndex] = self::layOutOptions(
-                $bank ?? $this->itemOptions((int) $item['id']),
-                (int) $item['correct_option_id'],
-                'Item ' . $item['position']
-            );
+            [$payload, $correctIndex] = $kind === self::WRITE_KIND
+                ? self::writtenGap()
+                : self::layOutOptions(
+                    $bank ?? $this->itemOptions((int) $item['id']),
+                    (int) $item['correct_option_id'],
+                    'Item ' . $item['position']
+                );
 
             $position++;
             Db::execute(
@@ -847,6 +979,18 @@ final class ReadingSessionService
         }
 
         return [$payload, $correctIndex];
+    }
+
+    /**
+     * A written gap serves no options: what it accepts stays on the server. Its stored
+     * correct index is 0, and an answer records 0 when it matched and 1 when it did not,
+     * so a typed answer is graded by the same comparison as a chosen one.
+     *
+     * @return array{0: list<array<string,mixed>>, 1: int}
+     */
+    private static function writtenGap(): array
+    {
+        return [[], 0];
     }
 
     /** @return list<array<string,mixed>> */

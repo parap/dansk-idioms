@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#c8102e">
+<title>Modultest DU3.4</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#fff; --ink:#14171c; --muted:#676e7b; --line:#e0e4ea;
+    --accent:#c8102e; --accent-ink:#fff; --ok:#127a4a; --okbg:#e7f6ee;
+    --bad:#b3261e; --badbg:#fdecea; --chip:#eef1f5; --shadow:0 1px 2px rgba(20,23,28,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#121419;--card:#1b1e24;--ink:#e8ebf0;--muted:#98a1b0;--line:#2b3039;
+      --accent:#ff5a6e;--accent-ink:#1b1e24;--ok:#4cc38a;--okbg:#14301f;
+      --bad:#ff6b61;--badbg:#331b19;--chip:#232830;--shadow:none;}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  .wrap{max-width:1100px;margin:0 auto;padding:20px 16px 64px}
+  header{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+  .brand{font-weight:700;letter-spacing:-.02em;font-size:1.05rem;color:inherit;text-decoration:none}
+  .brand:hover span{text-decoration:underline}
+  .brand span{color:var(--accent)}
+  header h1{font-size:1.2rem;margin:0}
+  .spacer{flex:1}
+  .clock{font-variant-numeric:tabular-nums;font-weight:600}
+  .lang{background:none;border:none;color:var(--muted);font:inherit;font-size:.85rem;
+    padding:.2rem .35rem;cursor:pointer;border-radius:5px}
+  .lang[aria-pressed=true]{color:var(--ink);font-weight:600;background:var(--chip)}
+  .langs{display:inline-flex;gap:.1rem}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:18px;box-shadow:var(--shadow);margin-bottom:16px}
+  .card h2{font-size:1.05rem;margin:0 0 .6rem}
+  .muted{color:var(--muted)}
+  .papers{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));margin-top:12px}
+  .paper{display:grid;gap:.2rem;text-align:left;padding:14px;border-radius:12px;cursor:pointer;
+    border:1px solid var(--line);background:var(--chip);color:var(--ink);font:inherit}
+  .paper:hover,.paper:focus-visible{border-color:var(--accent)}
+  .paper b{font-size:1.05rem}
+  .tasks{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+  .task{padding:7px 12px;border-radius:9px;font:inherit;font-weight:600;cursor:pointer;
+    border:1px solid var(--line);background:var(--card);color:var(--ink)}
+  .task[aria-current=true]{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+  .task .n{font-weight:400;color:var(--muted);font-variant-numeric:tabular-nums}
+  .grid{display:grid;gap:16px;grid-template-columns:1fr}
+  @media (min-width:900px){ .grid{grid-template-columns:1.1fr .9fr;align-items:start}
+    .grid .text{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto} }
+  .text p{margin:0 0 .9rem;white-space:pre-wrap}
+  .instr{margin:0 0 .8rem;font-size:.95rem}
+  .gap{display:inline-block;min-width:2.6rem;padding:0 .4rem;margin:0 .1rem;border:1px dashed var(--accent);
+    border-radius:6px;background:var(--chip);color:var(--ink);font:inherit;font-size:.95rem;cursor:pointer}
+  .gap.filled{border-style:solid;background:var(--card)}
+  .wgap{font:inherit;width:9.5em;max-width:60vw;padding:1px 6px;margin:0 .15rem;border:none;
+    border-bottom:2px solid var(--muted);background:var(--chip);color:var(--ink);border-radius:4px 4px 0 0}
+  .wgap:focus{outline:2px solid var(--accent);outline-offset:1px}
+  .wgap.filled{border-bottom-color:var(--ok)}
+  .num{font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+  .q{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
+  .q:first-of-type{border-top:none;padding-top:0;margin-top:0}
+  .q > p{margin:0 0 .45rem;font-weight:600}
+  .opts{display:grid;gap:7px}
+  .opt{display:block;width:100%;text-align:left;padding:8px 11px;border-radius:9px;border:1px solid var(--line);
+    background:var(--card);color:var(--ink);font:inherit;cursor:pointer}
+  .opt:hover:not(:disabled){border-color:var(--accent)}
+  .opt.chosen{background:var(--chip);border-color:var(--ink);font-weight:600}
+  .opt.right{background:var(--okbg);border-color:var(--ok);color:var(--ok);font-weight:600}
+  .opt.wrong{background:var(--badbg);border-color:var(--bad);color:var(--bad)}
+  .letters{display:flex;flex-wrap:wrap;gap:6px}
+  .letters .opt{width:auto;min-width:2.6rem;text-align:center}
+  .bank{margin:0 0 12px;padding:0;list-style:none;display:grid;gap:6px;font-size:.95rem}
+  .bank b{display:inline-block;min-width:1.4rem}
+  .primary{background:var(--accent);color:var(--accent-ink);border:none;border-radius:10px;
+    padding:11px 18px;font:inherit;font-weight:600;cursor:pointer}
+  .primary:disabled{opacity:.5;cursor:default}
+  .cta{display:inline-flex;align-items:center;gap:.6rem;padding:.75rem 1.1rem;border:1px solid var(--line);
+    border-radius:10px;background:var(--chip);color:var(--ink);font-weight:600;text-decoration:none;font:inherit;cursor:pointer}
+  .cta:hover,.cta:focus-visible{border-color:var(--accent)}
+  .cta b{color:var(--accent)}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .ok{color:var(--ok)} .bad{color:var(--bad)}
+  .score{font-size:1.4rem;font-weight:700;font-variant-numeric:tabular-nums;margin:0}
+  .per{display:grid;gap:4px;margin:.6rem 0 0;padding:0;list-style:none}
+  .sitting{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;border-top:1px solid var(--line);padding:10px 0}
+  .sitting:first-of-type{border-top:none}
+  .sitting .name{flex:1;min-width:12ch}
+  .sitting .when{color:var(--muted);font-size:.85rem;font-variant-numeric:tabular-nums}
+  .note{margin:.45rem 0 0;font-size:.9rem}
+  a{color:var(--accent)}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/">Dansk <span>idiomer</span></a>
+    <h1 id="title"></h1>
+    <span class="spacer"></span>
+    <span id="clock" class="clock"></span>
+    <span id="langs" class="langs"></span>
+  </header>
+  <main id="view"></main>
+</div>
+
+<script type="module">
+import { $, esc, t, api, registerStrings, currentLang, setLang as applyLang } from '/shared.js';
+
+const STRINGS = {
+  ru: {
+    title: 'Модульный тест DU3.4',
+    intro: 'Пробный тест по чтению в формате Modultest DU3, модуль 4: четыре задания подряд, 50 минут, ' +
+           'как на настоящем тесте с 2026 года. Тексты и вопросы свои, составлены по образцу. ' +
+           'Результат — в баллах: официальный проходной порог не опубликован.',
+    variant: 'Вариант {n}',
+    paperFacts: '{tasks} задания · {q} вопросов · {p} баллов',
+    empty: 'Вариантов пока нет.',
+    task: 'Opgave {n}',
+    hand: 'Сдать работу', confirmHand: 'Сдать? Изменить ответы будет нельзя.',
+    left: 'осталось', answered: 'ответов',
+    writeHint: 'Впишите по одному слову прямо в пропуски текста. Ответ сохраняется сам.',
+    gapHint: 'Нажмите на пропуск в тексте, чтобы перейти к вопросу.',
+    gap: 'Пропуск {n}',
+    result: 'Результат', perTask: 'По заданиям', review: 'Разбор',
+    yours: 'Ваш ответ', accepted: 'Верно', blank: 'нет ответа',
+    late: 'сдано после окончания времени',
+    noMark: 'Порог «bestået» для этого теста не опубликован, поэтому вердикта нет — только баллы.',
+    again: 'Пройти другой вариант', back: 'На главную',
+    history: 'Сданные варианты',
+    error: 'Не удалось загрузить. Попробуйте обновить страницу.',
+    missing: 'Такого варианта нет.',
+  },
+  en: {
+    title: 'Module test DU3.4',
+    intro: 'A practice reading test in the format of Modultest DU3, module 4: four tasks in a row, 50 minutes, ' +
+           'as in the real test from 2026. The texts and questions are our own, modelled on it. ' +
+           'You get points: no official pass mark is published.',
+    variant: 'Variant {n}',
+    paperFacts: '{tasks} tasks · {q} questions · {p} points',
+    empty: 'No variants yet.',
+    task: 'Opgave {n}',
+    hand: 'Hand in', confirmHand: 'Hand in? You cannot change your answers afterwards.',
+    left: 'left', answered: 'answered',
+    writeHint: 'Type one word straight into each gap in the text. Your answer saves itself.',
+    gapHint: 'Tap a gap in the text to go to its question.',
+    gap: 'Gap {n}',
+    result: 'Result', perTask: 'By task', review: 'Review',
+    yours: 'Your answer', accepted: 'Correct', blank: 'no answer',
+    late: 'handed in after time was up',
+    noMark: 'No pass mark is published for this test, so there is no verdict — only points.',
+    again: 'Try another variant', back: 'Home',
+    history: 'Variants handed in',
+    error: 'Could not load. Try reloading the page.',
+    missing: 'There is no such variant.',
+  },
+  uk: {
+    title: 'Модульний тест DU3.4',
+    intro: 'Пробний тест із читання у форматі Modultest DU3, модуль 4: чотири завдання поспіль, 50 хвилин, ' +
+           'як на справжньому тесті з 2026 року. Тексти й питання власні, складені за зразком. ' +
+           'Результат — у балах: офіційний прохідний поріг не опубліковано.',
+    variant: 'Варіант {n}',
+    paperFacts: '{tasks} завдання · {q} питань · {p} балів',
+    empty: 'Варіантів поки немає.',
+    task: 'Opgave {n}',
+    hand: 'Здати роботу', confirmHand: 'Здати? Змінити відповіді вже не можна буде.',
+    left: 'лишилося', answered: 'відповідей',
+    writeHint: 'Впишіть по одному слову просто в пропуски тексту. Відповідь зберігається сама.',
+    gapHint: 'Натисніть на пропуск у тексті, щоб перейти до питання.',
+    gap: 'Пропуск {n}',
+    result: 'Результат', perTask: 'За завданнями', review: 'Розбір',
+    yours: 'Ваша відповідь', accepted: 'Правильно', blank: 'немає відповіді',
+    late: 'здано після закінчення часу',
+    noMark: 'Поріг «bestået» для цього тесту не опубліковано, тому вердикту немає — лише бали.',
+    again: 'Пройти інший варіант', back: 'На головну',
+    history: 'Здані варіанти',
+    error: 'Не вдалося завантажити. Спробуйте оновити сторінку.',
+    missing: 'Такого варіанта немає.',
+  },
+  da: {
+    title: 'Modultest DU3.4',
+    intro: 'En prøvetest i læsning i samme format som Modultest DU3, modul 4: fire opgaver i træk, 50 minutter, ' +
+           'som i den rigtige test fra 2026. Tekster og spørgsmål er vores egne, lavet efter forlægget. ' +
+           'Du får point: der er ikke offentliggjort en grænse for bestået.',
+    variant: 'Sæt {n}',
+    paperFacts: '{tasks} opgaver · {q} spørgsmål · {p} point',
+    empty: 'Der er ingen sæt endnu.',
+    task: 'Opgave {n}',
+    hand: 'Aflever', confirmHand: 'Aflever? Du kan ikke ændre dine svar bagefter.',
+    left: 'tilbage', answered: 'besvaret',
+    writeHint: 'Skriv ét ord direkte i hvert hul i teksten. Dit svar gemmes af sig selv.',
+    gapHint: 'Tryk på et hul i teksten for at gå til spørgsmålet.',
+    gap: 'Hul {n}',
+    result: 'Resultat', perTask: 'Pr. opgave', review: 'Gennemgang',
+    yours: 'Dit svar', accepted: 'Rigtigt', blank: 'intet svar',
+    late: 'afleveret efter tiden',
+    noMark: 'Der er ikke offentliggjort en grænse for bestået, så der er ingen afgørelse — kun point.',
+    again: 'Tag et andet sæt', back: 'Forside',
+    history: 'Afleverede sæt',
+    error: 'Kunne ikke hente siden. Prøv at genindlæse den.',
+    missing: 'Det sæt findes ikke.',
+  },
+};
+registerStrings(STRINGS);
+
+// The test's own instructions, in Danish as on the paper, by task type.
+const INSTRUCTIONS = {
+  cloze:  n => `Læs teksten. Der mangler ${n} ord eller udtryk. Vælg det ord eller udtryk, der passer i hvert hul.`,
+  insert: n => `Læs teksten. I hvert afsnit mangler der en sætning (1-${n}). Find den sætning på listen, der passer bedst. Der er to sætninger, du ikke skal bruge.`,
+  write:  n => `Læs teksten. Der mangler ${n} ord. Skriv ét ord, der passer, i hvert hul.`,
+  mc:     () => 'Læs de små tekster. Vælg det rigtige svar.',
+};
+
+const fill = (text, values) => Object.entries(values).reduce((s, [k, v]) => s.replaceAll(`{${k}}`, v), text);
+const view = $('#view');
+let papers = [];
+let sitting = null;   // the session being sat
+let shown = 0;        // the task on screen
+let ticker = null;
+const chosen = {};    // position -> option index
+const typed = {};     // position -> text
+const saving = {};    // position -> pending timer for a typed answer
+
+function paintLanguages(on) {
+  const box = $('#langs');
+  box.hidden = !on;
+  if (!on) return;
+  box.innerHTML = Object.keys(STRINGS).map(code =>
+    `<button class="lang" data-lang="${code}" aria-pressed="${code === currentLang()}">${code.toUpperCase()}</button>`).join('');
+  box.querySelectorAll('.lang').forEach(b => b.onclick = () => { applyLang(b.dataset.lang); home(); });
+}
+
+const variantName = paper => {
+  const i = papers.findIndex(p => p.paper === paper);
+  return i < 0 ? paper : fill(t('variant'), {n: i + 1});
+};
+
+// ---------- home ----------
+async function home() {
+  stopClock();
+  document.documentElement.lang = currentLang();
+  $('#title').textContent = t('title');
+  paintLanguages(true);
+  try {
+    papers = (await api('/modultest')).papers;
+  } catch (e) {
+    view.innerHTML = `<div class="card"><p style="margin:0">${esc(t('error'))}</p></div>`;
+    return;
+  }
+  view.innerHTML = `
+    <div class="card">
+      <p class="muted" style="margin:0">${esc(t('intro'))}</p>
+      ${papers.length ? `<div class="papers" id="papers">${papers.map((p, i) => `
+        <button class="paper" data-paper="${esc(p.paper)}">
+          <b>${esc(fill(t('variant'), {n: i + 1}))}</b>
+          <span class="muted">${esc(fill(t('paperFacts'), {tasks: p.tasks, q: p.questions, p: p.points}))}</span>
+        </button>`).join('')}</div>`
+        : `<p class="muted">${esc(t('empty'))}</p>`}
+    </div>
+    <div id="history"></div>`;
+  view.querySelectorAll('.paper').forEach(b => b.onclick = () => start(b.dataset.paper));
+  paintHistory();
+}
+
+async function paintHistory() {
+  let sessions = [];
+  try { ({sessions} = await api('/reading/sessions')); } catch (e) { return; }
+  const mine = sessions.filter(s => s.paper);
+  if (!mine.length || !$('#history')) return;
+  $('#history').innerHTML = `<div class="card"><h2>${esc(t('history'))}</h2>
+    ${mine.map(s => `<div class="sitting">
+      <span class="name">${esc(variantName(s.paper))}</span>
+      <b>${s.points_scored} / ${s.points_max}</b>
+      <span class="when">${esc(String(s.submitted_at).replace('T', ' ').slice(0, 16))}</span>
+    </div>`).join('')}</div>`;
+}
+
+async function start(paper) {
+  view.querySelectorAll('.paper').forEach(b => b.disabled = true);
+  try {
+    sitting = await api('/modultest/sessions', {method: 'POST', body: {paper}});
+  } catch (e) {
+    view.innerHTML = `<div class="card"><p style="margin:0">${esc(e.status === 404 ? t('missing') : t('error'))}</p></div>`;
+    return;
+  }
+  for (const k of [chosen, typed]) Object.keys(k).forEach(p => delete k[p]);
+  sitting.items.forEach(i => {
+    if (i.answer_text) typed[i.position] = i.answer_text;
+  });
+  shown = 0;
+  paintLanguages(false);
+  render();
+  startClock();
+}
+
+// ---------- sitting ----------
+const itemsOf = passage => sitting.items.filter(i => i.passage === passage);
+const isAnswered = item => item.position in chosen || (typed[item.position] ?? '').trim() !== '';
+
+/** Gap markers number the items of one task from 1, in the order the task asks them. */
+function textHtml(passage, index) {
+  const items = itemsOf(index);
+  return esc(passage.body).replace(/\{\{(\d+)\}\}/g, (_, n) => {
+    const item = items[Number(n) - 1];
+    if (!item) return '';
+    if (passage.kind === 'write') {
+      // The number and its field wrap as one, so a field never starts a line without its number.
+      return `<span style="white-space:nowrap"><span class="num">(${esc(n)})</span><input class="wgap ${isAnswered(item) ? 'filled' : ''}"
+        data-pos="${item.position}" aria-label="${esc(fill(t('gap'), {n}))}" maxlength="100"
+        autocomplete="off" autocapitalize="off" spellcheck="false" value="${esc(typed[item.position] ?? '')}"></span>`;
+    }
+    return `<button class="gap ${isAnswered(item) ? 'filled' : ''}" data-goto="${item.position}">${esc(gapLabel(passage, items, item, n))}</button>`;
+  });
+}
+
+const letter = i => String.fromCharCode(65 + i);
+
+/** A filled insertion gap shows the letter put in it, so the text reads as the learner has built it. */
+function gapLabel(passage, items, item, n) {
+  if (passage.kind !== 'insert' || !(item.position in chosen)) return n;
+  const text = item.options.find(o => o.index === chosen[item.position])?.text;
+  return `${n}: ${letter(bankOf(items).indexOf(text))}`;
+}
+
+/** An insertion task lists its parts once; every gap offers the same letters, matched by text. */
+function bankOf(items) {
+  return items[0]?.options.map(o => o.text) ?? [];
+}
+
+function questionsHtml(passage, index) {
+  const items = itemsOf(index);
+  if (passage.kind === 'write') {
+    return `<p class="muted" style="margin:0">${esc(t('writeHint'))}</p>`;
+  }
+  if (passage.kind === 'insert') {
+    const bank = bankOf(items);
+    return `<ul class="bank" lang="da">${bank.map((text, i) => `<li><b>${letter(i)}</b> ${esc(text)}</li>`).join('')}</ul>
+      <p class="muted" style="margin:0 0 .6rem;font-size:.9rem">${esc(t('gapHint'))}</p>` +
+      items.map((item, n) => `<div class="q" id="q-${item.position}">
+        <p>${esc(fill(t('gap'), {n: n + 1}))}</p>
+        <div class="letters">${bank.map((text, i) => {
+          const o = item.options.find(x => x.text === text);
+          return `<button class="opt ${chosen[item.position] === o.index ? 'chosen' : ''}" data-pos="${item.position}"
+            data-i="${o.index}" aria-label="${letter(i)}">${letter(i)}</button>`;
+        }).join('')}</div></div>`).join('');
+  }
+  return (passage.kind === 'cloze' ? `<p class="muted" style="margin:0 0 .6rem;font-size:.9rem">${esc(t('gapHint'))}</p>` : '') +
+    items.map((item, n) => `<div class="q" id="q-${item.position}">
+      <p lang="da">${n + 1}. ${item.prompt ? esc(item.prompt) : ''}</p>
+      <div class="opts" lang="da">${item.options.map(o => `
+        <button class="opt ${chosen[item.position] === o.index ? 'chosen' : ''}" data-pos="${item.position}" data-i="${o.index}">
+          <b>${letter(o.index)}.</b> ${esc(o.text)}</button>`).join('')}</div></div>`).join('');
+}
+
+function render() {
+  const passages = sitting.passages;
+  const p = passages[shown];
+  const done = sitting.items.filter(isAnswered).length;
+  view.innerHTML = `
+    <nav class="tasks" id="tasks">${passages.map((q, i) => {
+      const items = itemsOf(i);
+      return `<button class="task" data-task="${i}" aria-current="${i === shown}">${esc(fill(t('task'), {n: i + 1}))}
+        <span class="n">${items.filter(isAnswered).length}/${items.length}</span></button>`;
+    }).join('')}</nav>
+    <div class="grid">
+      <section class="card text" lang="da"><h2>${esc(p.title)}</h2>
+        <p class="instr muted">${esc(INSTRUCTIONS[p.kind](itemsOf(shown).length))}</p><div id="body"></div></section>
+      <section class="card">
+        <h2>${esc(fill(t('task'), {n: shown + 1}))}</h2>
+        <div id="qs">${questionsHtml(p, shown)}</div>
+        <p class="row" style="margin:18px 0 0">
+          <button class="primary" id="hand">${esc(t('hand'))}</button>
+          <span class="muted" id="count">${done} / ${sitting.items.length} ${esc(t('answered'))}</span>
+        </p>
+      </section>
+    </div>`;
+  $('#body').innerHTML = textHtml(p, shown).split('\n\n').map(par => `<p>${par}</p>`).join('');
+
+  view.querySelectorAll('.task').forEach(b => b.onclick = () => { shown = Number(b.dataset.task); render(); });
+  view.querySelectorAll('.gap').forEach(g => g.onclick = () =>
+    $(`#q-${g.dataset.goto}`)?.scrollIntoView({behavior: 'smooth', block: 'center'}));
+  view.querySelectorAll('.opt').forEach(b => b.onclick = () => choose(Number(b.dataset.pos), Number(b.dataset.i)));
+  view.querySelectorAll('.wgap').forEach(input => {
+    const pos = Number(input.dataset.pos);
+    const keep = () => {
+      typed[pos] = input.value;
+      input.classList.toggle('filled', input.value.trim() !== '');
+      paintCounts();
+    };
+    input.oninput = () => {
+      keep();
+      clearTimeout(saving[pos]);
+      saving[pos] = setTimeout(() => write(pos), 700);
+    };
+    // A value can arrive without typing -- pasted, autofilled -- and is kept all the same.
+    input.onchange = () => { keep(); clearTimeout(saving[pos]); write(pos); };
+  });
+  $('#hand').onclick = () => { if (confirm(t('confirmHand'))) hand(); };
+}
+
+function paintCounts() {
+  view.querySelectorAll('.task').forEach(b => {
+    const items = itemsOf(Number(b.dataset.task));
+    b.querySelector('.n').textContent = `${items.filter(isAnswered).length}/${items.length}`;
+  });
+  $('#count').textContent = `${sitting.items.filter(isAnswered).length} / ${sitting.items.length} ${t('answered')}`;
+}
+
+async function choose(position, index) {
+  const saved = await api(`/reading/sessions/${sitting.session_id}/answers`,
+    {method: 'POST', body: {position, chosen_index: index}}).catch(() => null);
+  if (!saved) return;
+  chosen[position] = index;
+  view.querySelectorAll(`.opt[data-pos="${position}"]`).forEach(b =>
+    b.classList.toggle('chosen', Number(b.dataset.i) === index));
+  const gap = view.querySelector(`.gap[data-goto="${position}"]`);
+  if (gap) {
+    const items = itemsOf(shown);
+    gap.classList.add('filled');
+    gap.textContent = gapLabel(sitting.passages[shown], items, items.find(i => i.position === position), items.findIndex(i => i.position === position) + 1);
+  }
+  paintCounts();
+}
+
+function write(position) {
+  delete saving[position];
+  return api(`/reading/sessions/${sitting.session_id}/answers`,
+    {method: 'POST', body: {position, answer_text: typed[position] ?? ''}}).catch(() => null);
+}
+
+async function hand() {
+  stopClock();
+  $('#hand') && ($('#hand').disabled = true);
+  // A word still being typed is saved before the paper goes in.
+  await Promise.all(Object.keys(saving).map(p => { clearTimeout(saving[p]); return write(Number(p)); }));
+  await api(`/reading/sessions/${sitting.session_id}/submit`, {method: 'POST'}).catch(() => null);
+  results(await api(`/reading/sessions/${sitting.session_id}/result`));
+}
+
+// ---------- results ----------
+function results(r) {
+  const byPos = Object.fromEntries(r.items.map(i => [i.position, i]));
+  const tasks = sitting.passages.map((p, i) => {
+    const items = itemsOf(i).map(it => byPos[it.position]);
+    return {p, items, scored: items.reduce((s, x) => s + x.points_scored, 0), max: items.reduce((s, x) => s + x.points, 0)};
+  });
+  const answerLine = (item, kind, n, bank) => {
+    if (kind === 'write') {
+      const ok = item.is_correct;
+      return `<p>${esc(fill(t('gap'), {n}))}: <span class="${ok ? 'ok' : 'bad'}" lang="da">${esc(item.answer_text ?? t('blank'))}</span>
+        ${ok ? '' : ` · ${esc(t('accepted'))}: <b class="ok" lang="da">${esc((item.accepted ?? []).join(' / '))}</b>`}</p>`;
+    }
+    if (kind === 'insert') {
+      const name = idx => idx == null ? t('blank') : letter(bank.indexOf(item.options.find(o => o.index === idx)?.text));
+      const ok = item.is_correct;
+      return `<p>${esc(fill(t('gap'), {n}))}: <span class="${ok ? 'ok' : 'bad'}">${esc(name(item.chosen_index))}</span>
+        ${ok ? '' : ` · ${esc(t('accepted'))}: <b class="ok">${esc(name(item.correct_index))}</b>`}</p>`;
+    }
+    return `<p lang="da">${n}. ${item.prompt ? esc(item.prompt) : ''}</p><div class="opts" lang="da">${item.options.map(o => `
+      <div class="opt ${o.index === item.correct_index ? 'right' : (o.index === item.chosen_index ? 'wrong' : '')}">
+        <b>${letter(o.index)}.</b> ${esc(o.text)}</div>`).join('')}</div>`;
+  };
+  view.innerHTML = `
+    <div class="card" id="result">
+      <h2>${esc(t('result'))}</h2>
+      <p class="score" id="final">${r.points_scored} / ${r.points_max}</p>
+      <ul class="per">${tasks.map((x, i) => `<li>${esc(fill(t('task'), {n: i + 1}))} — ${esc(x.p.title)}: <b>${x.scored} / ${x.max}</b></li>`).join('')}</ul>
+      ${r.is_late ? `<p class="muted">${esc(t('late'))}</p>` : ''}
+      <p class="muted" style="font-size:.9rem">${esc(t('noMark'))}</p>
+      <p class="row">
+        <button class="cta" id="again">${esc(t('again'))}</button>
+        <a class="cta" href="/"><b aria-hidden="true">←</b><span>${esc(t('back'))}</span></a>
+      </p>
+    </div>
+    ${tasks.map((x, i) => `<div class="card">
+      <h2>${esc(fill(t('task'), {n: i + 1}))} · ${esc(t('review'))}</h2>
+      ${x.p.kind === 'insert' ? `<ul class="bank" lang="da">${bankOf(x.items).map((text, j) => `<li><b>${letter(j)}</b> ${esc(text)}</li>`).join('')}</ul>` : ''}
+      ${x.items.map((item, n) => `<div class="q">${answerLine(item, x.p.kind, n + 1, bankOf(x.items))}
+        ${item.note ? `<p class="note">${esc(item.note)}</p>` : ''}</div>`).join('')}
+    </div>`).join('')}`;
+  $('#again').onclick = () => home();
+  window.scrollTo(0, 0);
+}
+
+// ---------- clock: decoration; the server decides what is late ----------
+function startClock() {
+  stopClock();
+  let left = sitting.remaining_s ?? 0;
+  const paint = () => {
+    $('#clock').textContent = `${String(Math.floor(left / 60)).padStart(2, '0')}:${String(left % 60).padStart(2, '0')} ${t('left')}`;
+    $('#clock').style.color = left <= 300 ? 'var(--bad)' : '';
+  };
+  paint();
+  ticker = setInterval(() => { left = Math.max(0, left - 1); paint(); if (left === 0) hand(); }, 1000);
+}
+
+function stopClock() {
+  if (ticker) { clearInterval(ticker); ticker = null; }
+  $('#clock').textContent = '';
+}
+
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
+home();
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+kind: insert
+slug: du3m4-v3-opg2-genbrug
+paper: du3m4-v3
+title: Frivillig i genbrugsbutikken
+
+--- text ---
+Hver onsdag og lørdag står 68-årige Kirsten Mortensen bag disken i Røde Kors' genbrugsbutik
+i Vejle. Hun har været frivillig i butikken i fem år, siden hun gik på pension fra sit job
+som bogholder. {{1}} "Jeg har brug for at have noget at stå op til," siger hun.
+
+Butikken sælger brugt tøj, bøger, legetøj og køkkenting, som folk har givet. Alle, der
+arbejder i butikken, er frivillige, og overskuddet går til Røde Kors' arbejde i Danmark og i
+udlandet. {{2}} Sidste år tjente butikken over en halv million kroner.
+
+Kirsten har mange forskellige opgaver. Hun sorterer de ting, der kommer ind, sætter priser på
+og hjælper kunderne. {{3}} "Man skal kunne se, om en kjole er fin nok til at blive solgt, eller
+om den skal sendes videre til genbrug," forklarer hun.
+
+Kunderne i butikken er meget forskellige. Der kommer studerende, der skal møblere deres første
+lejlighed, og børnefamilier, der skal have tøj til børnene. {{4}} Andre kommer, fordi de synes,
+det er bedre for miljøet at købe brugt end at købe nyt.
+
+For Kirsten er det sociale den vigtigste grund til at være frivillig. Hun har fået nye venner
+blandt de andre frivillige, og de holder både julefrokost og sommerfest sammen. {{5}} "Vi er
+som en lille familie," siger hun og smiler.
+
+--- parts ---
+A Hun syntes, at dagene blev lange, da hun ikke længere skulle på arbejde.
+B Det sværeste er sorteringen, for det kræver, at man ved noget om kvalitet.
+C Mange af kunderne har ikke så mange penge og er glade for de lave priser.
+D Pengene bliver blandt andet brugt til at hjælpe ensomme ældre og familier i krise.
+E En gang om måneden mødes de også for at drikke kaffe, selvom ingen af dem har vagt.
+F Butikken har kun åbent om lørdagen, fordi der ikke er nok frivillige.
+G Kirsten har aldrig været frivillig før, og hun ved ikke, om hun vil fortsætte.
+
+--- questions ---
+1. A
+2. D
+3. B
+4. C
+5. E

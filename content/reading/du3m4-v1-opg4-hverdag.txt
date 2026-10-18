@@ -1,5 +1,6 @@
 kind: mc
 slug: du3m4-v1-opg4-hverdag
+paper: du3m4-v1
 title: Seks korte tekster fra hverdagen
 
 --- text ---

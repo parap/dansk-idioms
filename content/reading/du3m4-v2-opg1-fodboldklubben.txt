@@ -1,5 +1,6 @@
 kind: cloze
 slug: du3m4-v2-opg1-fodboldklubben
+paper: du3m4-v2
 title: Træner i fodboldklubben
 
 --- text ---

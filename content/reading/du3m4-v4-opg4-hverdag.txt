@@ -1,0 +1,70 @@
+kind: mc
+slug: du3m4-v4-opg4-hverdag
+paper: du3m4-v4
+title: Seks korte tekster fra hverdagen 4
+
+--- text ---
+Tekst 1. Fra skat.dk
+
+Din årsopgørelse er klar i slutningen af marts. Hvis du har betalt for meget i skat, får du
+pengene tilbage på din NemKonto i april. Har du betalt for lidt, skal du betale resten. Er
+beløbet under 22.000 kroner, kan du betale over din forskudsopgørelse næste år.
+
+Tekst 2. Besked fra børnehaven
+
+Kære forældre. Fredag den 15. november holder børnehaven lukket på grund af personalemøde.
+Hvis I ikke kan finde pasning, så kontakt os senest den 1. november, så hjælper vi med at
+finde en plads i en anden børnehave den dag.
+
+Tekst 3. Sms fra en ven
+
+Hej Ahmad. Skal vi stadig spille badminton i aften? Jeg kan først kl. 19 i stedet for kl. 18,
+fordi jeg skal hente min datter. Passer det dig? Mvh Jesper
+
+Tekst 4. Fra Rejsekortets hjemmeside
+
+Husk at checke ind, når du stiger på, og checke ud, når du stiger af. Hvis du glemmer at
+checke ud, betaler du for en lang rejse. Du kan få pengene tilbage, hvis du kontakter os
+inden for 14 dage.
+
+Tekst 5. Opslag i fitnesscentret
+
+Fra næste uge er der yoga for begyndere hver mandag kl. 17.30. Holdet er gratis for
+medlemmer, men der er kun 15 pladser. Tilmelding i appen. Husk selv at tage måtte med.
+
+Tekst 6. Fra kommunens hjemmeside
+
+Hvis du flytter, skal du melde flytning senest fem dage efter, at du er flyttet. Det gør du
+på borger.dk med MitID. Din adresse bliver ændret hos alle offentlige myndigheder, men du
+skal selv give besked til fx din bank og dit forsikringsselskab.
+
+--- questions ---
+1. Tekst 1: Hvad sker der, hvis man har betalt for meget i skat?
+* Man får pengene tilbage i april.
+  Man betaler mindre næste år.
+  Man skal kontakte skat inden marts.
+
+2. Tekst 2: Hvad skal forældrene gøre, hvis de ikke kan passe deres barn den 15. november?
+  Ringe til personalet den 15. november.
+* Kontakte børnehaven senest den 1. november.
+  Selv finde en anden børnehave.
+
+3. Tekst 3: Hvad vil Jesper?
+  Han vil aflyse badminton.
+* Han vil spille en time senere.
+  Han vil have Ahmad til at hente hans datter.
+
+4. Tekst 4: Hvad sker der, hvis man glemmer at checke ud?
+* Man betaler for meget, men kan få penge tilbage.
+  Man får en bøde på 14 kroner.
+  Rejsekortet bliver spærret.
+
+5. Tekst 5: Hvad står der om yogaholdet?
+  Det koster penge for medlemmer.
+  Fitnesscentret giver alle en måtte.
+* Man skal tilmelde sig.
+
+6. Tekst 6: Hvad skal man selv gøre, når man flytter?
+  Give besked til alle offentlige myndigheder.
+* Fortælle sin bank om den nye adresse.
+  Melde flytning, før man flytter.

@@ -1,0 +1,80 @@
+kind: write
+slug: du3m4-v3-opg3-toemrer
+paper: du3m4-v3
+title: Mette er tømrer
+
+--- text ---
+Jeg er 29 år og har været tømrer i fire år. Allerede som barn kunne jeg godt lide at bygge
+ting, og jeg hjalp tit min far, {{1}} han reparerede noget i huset. Derfor var det ikke svært
+for mig at vælge uddannelse.
+
+Uddannelsen tog fire år. En stor del af tiden var jeg i lære {{2}} et lille firma i Silkeborg,
+og resten af tiden gik jeg på skole. Det var en god blanding, fordi jeg både lærte teorien
+og fik prøvet den {{3}} praksis.
+
+I dag arbejder jeg i et firma med 15 ansatte. Vi bygger mest nye huse, men vi laver også
+tilbygninger og renoverer gamle køkkener. Jeg er den eneste kvinde i firmaet, men det har
+aldrig været et problem. Mine kolleger behandler mig {{4}} alle andre.
+
+Arbejdet er fysisk hårdt, og man skal kunne tåle at arbejde udenfor i al slags vejr. Om
+vinteren er det koldt, og om sommeren kan det {{5}} meget varmt på et tag. Jeg passer godt
+på min ryg og bruger altid de hjælpemidler, {{6}} firmaet har købt til os.
+
+Det bedste ved mit job er, at jeg kan se, hvad jeg har lavet. Når et hus er {{7}} færdigt,
+og familien flytter ind, er jeg stolt. Det er en god følelse at vide, at man har været
+med {{8}} at bygge et hjem.
+
+Om nogle år vil jeg gerne starte mit eget firma. Jeg har allerede {{9}} lidt penge op, og
+jeg er ved at tage et kursus i regnskab. Men først vil jeg have mere erfaring, {{10}} jeg
+ved, at det er svært at være selvstændig.
+
+--- questions ---
+1.
+når
+hvis
+> Повторяющееся действие в прошлом — når (по смыслу подходит и hvis): jeg hjalp tit min far, når han reparerede noget. Я часто помогала отцу, когда он что-то чинил.
+
+2.
+hos
+i
+på
+> Учиться у работодателя — være i lære hos et firma (говорят и i, på). Большую часть времени я была на практике в маленькой фирме в Силькеборге.
+
+3.
+i
+> i praksis — на практике. Я и теорию учила, и пробовала её на практике.
+
+4.
+som
+ligesom
+> Как — som или ligesom: behandler mig som alle andre. Коллеги относятся ко мне так же, как ко всем.
+
+5.
+være
+blive
+> После модального kan — инфинитив: kan være (или blive) meget varmt. Летом на крыше бывает очень жарко.
+
+6.
+som
+> Hjælpemidlerne — дополнение (фирма купила их) → som. der здесь не подходит. Я всегда пользуюсь приспособлениями, которые фирма купила для нас.
+
+7.
+helt
+endelig
+blevet
+> helt færdigt — полностью готов (подходят и endelig, blevet). Когда дом полностью готов и семья въезжает, я горжусь.
+
+8.
+til
+> være med til at — участвовать в чём-то. Приятно знать, что ты помогала строить чей-то дом.
+
+9.
+sparet
+lagt
+> spare penge op / lægge penge op — откладывать деньги: har sparet (lagt) lidt penge op. Я уже немного отложила.
+
+10.
+fordi
+for
+da
+> Причина — fordi, for или da. Но сначала я хочу больше опыта, потому что знаю, как трудно быть самой себе хозяйкой.
