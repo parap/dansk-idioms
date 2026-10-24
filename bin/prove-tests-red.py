@@ -891,6 +891,16 @@ FAULTS = [
   "        unlink($file);\n","","unit:testReturnsTheReviewAndWhatItCostAndTidiesUp"),
  (282,"the guest is offered the check","public/skriv.html",
   "  if (!offer?.available || !$('#checkRow')) return;","  if (!$('#checkRow')) return;","ui"),
+ (283,"any model may be asked for","src/Domain/Writing/WritingCheckService.php",
+  "        if (!in_array($model, self::MODELS, true)) {","        if (false) {","integration:testRefusesAModelThePageDoesNotOffer"),
+ (286,"the review ignores the model chosen","src/Domain/Writing/WritingCheckService.php",
+  "        $review = $this->reviewer->review($task, $text, $lang, $model);","        $review = $this->reviewer->review($task, $text, $lang, 'haiku');","integration:testReviewsWithTheModelChosen"),
+ (287,"the job does not name its model","src/Domain/Writing/SubscriptionWritingReviewer.php",
+  "            'model'  => $model,\n","","unit:testHandsTheWorkerTheSystemPromptTheRequestAndTheSchema"),
+ (288,"the page sends no model","public/skriv.html",
+  "lang: currentLang(), model: $('#model').value}","lang: currentLang()}","ui"),
+ (289,"the dearest model is the default","public/skriv.html",
+  "store.get('skriv:model') : CHECK_MODELS[0];","store.get('skriv:model') : CHECK_MODELS[2];","ui"),
  (284,"the review's errors are not drawn","public/skriv.html",
   "${f.errors.length ? `<ul class=\"review\">","${false ? `<ul class=\"review\">","ui"),
  (285,"a switched-off check reads as a failure","public/skriv.html",
@@ -946,6 +956,13 @@ def run(suite):
 # test output, and is what deploy.sh calls.
 args = [a for a in sys.argv[1:] if a not in ('--anchors', '--changed')]
 anchors_only = '--anchors' in sys.argv[1:]
+
+# A number names one fault: two under one number run together when it is asked for, and
+# a report naming it cannot say which of them survived.
+numbers = [f[0] for f in FAULTS]
+repeated = sorted({n for n in numbers if numbers.count(n) > 1})
+if repeated:
+    sys.exit(f"  fault numbers used twice: {', '.join(str(n) for n in repeated)}")
 
 # A commit is gated by the faults in the files its branch changed, uncommitted edits
 # included; the whole list runs before a deploy, where a deleted test elsewhere shows up.

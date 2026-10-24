@@ -19,18 +19,22 @@ CLAUDE = os.environ.get('CLAUDE_BIN', str(pathlib.Path.home() / '.local/bin/clau
 SECONDS = 150
 # An answer the app gave up on waiting for is never read; it goes after this long.
 STALE_SECONDS = 600
+# The models WritingCheckService offers; a job naming another is refused before it runs.
+MODELS = ('haiku', 'sonnet', 'opus')
 
 
 def run_claude(job):
     with tempfile.TemporaryDirectory() as empty:
         return subprocess.run(
-            [CLAUDE, '-p', '--tools', '', '--no-session-persistence', '--setting-sources', '',
+            [CLAUDE, '-p', '--model', job['model'], '--tools', '', '--no-session-persistence', '--setting-sources', '',
              '--strict-mcp-config', '--output-format', 'json', '--effort', 'medium',
              '--system-prompt', job['system'], '--json-schema', json.dumps(job['schema'])],
             input=job['prompt'], capture_output=True, text=True, cwd=empty, timeout=SECONDS)
 
 
 def answer(job):
+    if job.get('model') not in MODELS:
+        return {'ok': False, 'error': f"no model {job.get('model')!r} is offered"}
     try:
         run = run_claude(job)
     except subprocess.TimeoutExpired:

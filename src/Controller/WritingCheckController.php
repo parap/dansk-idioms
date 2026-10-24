@@ -30,7 +30,10 @@ final class WritingCheckController
         set_time_limit(self::SECONDS);
 
         try {
-            Response::json($this->service()->check(Auth::userId(), $field('task'), $field('text'), $field('lang')));
+            Response::json($this->service()->check(
+                Auth::userId(), $field('task'), $field('text'), $field('lang'),
+                $field('model') ?: WritingCheckService::MODELS[0]
+            ));
         } catch (WritingCheckUnavailable $e) {
             Response::error('unavailable', $e->getMessage(), 403);
         } catch (WritingLimitReached $e) {

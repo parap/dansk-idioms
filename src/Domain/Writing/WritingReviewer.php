@@ -6,9 +6,10 @@ namespace Dansk\Domain\Writing;
 interface WritingReviewer
 {
     /**
-     * @param  array<string,mixed> $task a task as WritingTasks::find() returns it
+     * @param  array<string,mixed> $task  a task as WritingTasks::find() returns it
+     * @param  string              $model one of WritingCheckService::MODELS
      * @return array{feedback:array<string,mixed>,model:string,input_tokens:int,output_tokens:int}
      * @throws \RuntimeException when no review came back
      */
-    public function review(array $task, string $text, string $lang): array;
+    public function review(array $task, string $text, string $lang, string $model): array;
 }

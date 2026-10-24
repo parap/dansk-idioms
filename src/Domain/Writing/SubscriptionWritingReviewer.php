@@ -25,7 +25,7 @@ final class SubscriptionWritingReviewer implements WritingReviewer
         $this->wait = $wait ?? static fn() => usleep((int) (self::LOOK_EVERY_SECONDS * 1_000_000));
     }
 
-    public function review(array $task, string $text, string $lang): array
+    public function review(array $task, string $text, string $lang, string $model): array
     {
         foreach (['queue', 'done'] as $sub) {
             if (!is_dir("{$this->dir}/{$sub}")) {
@@ -41,6 +41,7 @@ final class SubscriptionWritingReviewer implements WritingReviewer
             'system' => $this->prompt->system(),
             'prompt' => $this->prompt->user($task, $text, $lang),
             'schema' => $this->prompt->schema(),
+            'model'  => $model,
         ], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
         rename("{$job}.part", $job);
 

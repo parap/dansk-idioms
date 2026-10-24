@@ -57,9 +57,10 @@ final class SubscriptionWritingReviewerTest extends TestCase
     public function testHandsTheWorkerTheSystemPromptTheRequestAndTheSchema(): void
     {
         (new SubscriptionWritingReviewer($this->dir, 10, $this->worker($this->answered())))
-            ->review((new WritingTasks())->find('e1'), 'Hej Sune, tak for din mail.', 'ru');
+            ->review((new WritingTasks())->find('e1'), 'Hej Sune, tak for din mail.', 'ru', 'sonnet');
 
         self::assertCount(1, $this->jobs);
+        self::assertSame('sonnet', $this->jobs[0]['model']);
         self::assertStringContainsString('Modultest DU3', $this->jobs[0]['system']);
         self::assertStringContainsString('Hej Sune, tak for din mail.', $this->jobs[0]['prompt']);
         self::assertSame(['summary', 'verdict', 'task', 'errors', 'strengths', 'corrected'], $this->jobs[0]['schema']['required']);
@@ -68,7 +69,7 @@ final class SubscriptionWritingReviewerTest extends TestCase
     public function testReturnsTheReviewAndWhatItCostAndTidiesUp(): void
     {
         $review = (new SubscriptionWritingReviewer($this->dir, 10, $this->worker($this->answered(), after: 3)))
-            ->review((new WritingTasks())->find('b1'), 'Jeg er enig med Helle.', 'uk');
+            ->review((new WritingTasks())->find('b1'), 'Jeg er enig med Helle.', 'uk', 'haiku');
 
         self::assertSame(self::FEEDBACK, $review['feedback']);
         self::assertSame('claude-opus-5-5', $review['model']);
@@ -82,7 +83,7 @@ final class SubscriptionWritingReviewerTest extends TestCase
         $this->expectExceptionMessage('usage limit');
 
         (new SubscriptionWritingReviewer($this->dir, 10, $this->worker(['ok' => false, 'error' => 'usage limit reached'])))
-            ->review((new WritingTasks())->find('e1'), 'Hej.', 'ru');
+            ->review((new WritingTasks())->find('e1'), 'Hej.', 'ru', 'haiku');
     }
 
     public function testAnAnswerThatIsNoReviewIsRefused(): void
@@ -90,7 +91,7 @@ final class SubscriptionWritingReviewerTest extends TestCase
         $this->expectException(UnexpectedValueException::class);
 
         (new SubscriptionWritingReviewer($this->dir, 10, $this->worker(['output' => ['summary' => 'Godt.']] + $this->answered())))
-            ->review((new WritingTasks())->find('e1'), 'Hej.', 'ru');
+            ->review((new WritingTasks())->find('e1'), 'Hej.', 'ru', 'haiku');
     }
 
     /** A job nobody answered in time is taken back, so the worker does not spend a review on it later. */
@@ -99,7 +100,7 @@ final class SubscriptionWritingReviewerTest extends TestCase
         $reviewer = new SubscriptionWritingReviewer($this->dir, 2, static function (): void {});
 
         try {
-            $reviewer->review((new WritingTasks())->find('e1'), 'Hej.', 'ru');
+            $reviewer->review((new WritingTasks())->find('e1'), 'Hej.', 'ru', 'haiku');
             self::fail('a review came back from nobody');
         } catch (RuntimeException $e) {
             self::assertStringContainsString('no answer', $e->getMessage());
@@ -116,7 +117,7 @@ final class SubscriptionWritingReviewerTest extends TestCase
         });
 
         try {
-            $reviewer->review((new WritingTasks())->find('e1'), 'Hej.', 'ru');
+            $reviewer->review((new WritingTasks())->find('e1'), 'Hej.', 'ru', 'haiku');
         } catch (RuntimeException) {
         }
         self::assertCount(1, $seen);
