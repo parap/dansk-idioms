@@ -4,14 +4,12 @@
     "type": "project",
     "require": {
         "php": ">=8.2",
+        "ext-pdo": "*",
+        "ext-mbstring": "*",
         "ext-intl": "*",
         "ext-json": "*",
-        "ext-mbstring": "*",
-        "ext-pdo": "*",
-        "anthropic-ai/sdk": "^1.3",
-        "guzzlehttp/guzzle": "^8.3",
-        "halaxa/json-machine": "^1.1",
-        "nikic/fast-route": "^1.3"
+        "nikic/fast-route": "^1.3",
+        "halaxa/json-machine": "^1.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.5"

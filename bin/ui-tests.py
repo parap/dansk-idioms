@@ -1409,26 +1409,32 @@ CHECK_REPLY = """{"feedback": {"summary": "Et godt svar.", "verdict": "borderlin
 
 
 def stand_in_for_the_check(b, status, body):
+    """Offers the check as to an admin, and answers a sent text with `status` and `body`."""
+    offer = '{"available": true, "left_today": 5}'
     b.js(f"""(() => {{ const real = window.fetch;
-        window.fetch = (url, opts) => String(url).endsWith('/modultest/skriv/check')
-          ? Promise.resolve(new Response({json.dumps(body)}, {{status: {status}, headers: {{'Content-Type': 'application/json'}}}}))
-          : real(url, opts); }})()""")
+        const reply = (body, status) => Promise.resolve(new Response(body, {{status, headers: {{'Content-Type': 'application/json'}}}}));
+        window.fetch = (url, opts) => !String(url).endsWith('/modultest/skriv/check') ? real(url, opts)
+          : (opts?.method === 'POST' ? reply({json.dumps(body)}, {status}) : reply({json.dumps(offer)}, 200)); }})()""")
 
 
-def open_the_email_task_with_a_draft(b):
+def open_the_email_task_with_a_draft(b, status, body):
     b.goto('/modultest/skriv')
     b.until('!!document.querySelector("#draft")', what='the email task')
     b.js("localStorage.removeItem('skriv:e1'); localStorage.removeItem('skriv:e1:review')")
     b.goto('/modultest/skriv')
     b.until('!!document.querySelector("#check")', what='the check button')
+    stand_in_for_the_check(b, status, body)
+    # Drawn again, so the page asks the stand-in whether the check is offered.
+    b.js('document.querySelector(".tab[data-tab=\'w1\']").click()')
+    b.until('!document.querySelector("#checkRow").hidden', what='the check offered')
     b.js("""(() => { const d = document.querySelector('#draft');
         d.value = Array(130).fill('ord').join(' '); d.dispatchEvent(new Event('input')); })()""")
 
 
 @check
 def a_checked_text_shows_its_review(b):
-    open_the_email_task_with_a_draft(b)
-    stand_in_for_the_check(b, 200, CHECK_REPLY)
+    open_the_email_task_with_a_draft(b, 200, CHECK_REPLY)
+    assert '5' in b.js('document.querySelector("#checkNote").textContent'), 'the checks left today are not offered'
     b.js('document.querySelector("#check").click()')
     b.until('!!document.querySelector("#reviewCard")', what='the review')
     card = b.js('document.querySelector("#reviewCard").innerText')
@@ -1438,17 +1444,26 @@ def a_checked_text_shows_its_review(b):
     assert 'Hvilket kursus skal Sune vælge?' in card and 'нет' in card, 'an unanswered question is not marked'
     assert 'Hej Sune, tak for din mail.' in card, 'the corrected text is not shown'
     assert '9' in b.js('document.querySelector("#reviewCard p:last-child").textContent'), 'the checks left today are not shown'
+    assert '9' in b.js('document.querySelector("#checkNote").textContent'), 'the offer still names the checks left before this one'
     b.goto('/modultest/skriv')
     b.until('!!document.querySelector("#reviewCard")', what='the review kept after a reload')
     b.js("localStorage.removeItem('skriv:e1'); localStorage.removeItem('skriv:e1:review')")
 
 
 @check
-def a_check_that_is_switched_off_says_so(b):
-    open_the_email_task_with_a_draft(b)
-    stand_in_for_the_check(b, 503, '{"error": {"code": "unavailable", "message": "Checking is not switched on."}}')
+def the_check_is_not_offered_to_a_guest(b):
+    b.goto('/modultest/skriv')
+    b.until('!!document.querySelector("#checkRow")', what='the email task')
+    b.until('document.readyState === "complete"', what='the page to settle')
+    time.sleep(1)
+    assert b.js('document.querySelector("#checkRow").hidden'), 'a guest is offered the check'
+
+
+@check
+def a_check_refused_says_so(b):
+    open_the_email_task_with_a_draft(b, 403, '{"error": {"code": "unavailable", "message": "Checking is not offered here."}}')
     b.js('document.querySelector("#check").click()')
-    b.until('document.querySelector("#checkState").textContent.includes("не подключена")', what='the switched-off notice')
+    b.until('document.querySelector("#checkState").textContent.includes("только владельцу")', what='the refusal')
     assert not b.js('!!document.querySelector("#reviewCard")'), 'a review is drawn without one'
     assert not b.js('document.querySelector("#check").disabled'), 'the button stays disabled'
     b.js("localStorage.removeItem('skriv:e1')")

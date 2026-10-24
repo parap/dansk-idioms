@@ -169,14 +169,17 @@ that answer again. It is the only feedback loop the quiz has.
 and a standalone window. Offline it will show the shell but cannot serve a scored
 round, by design: caching questions would mean shipping the answers to the browser.
 
-**Checking a Modultest letter or blog post.** On `/modultest/skriv` the learner can send a
-text to Claude, which says which of the task's questions it answers, lists the errors with
-corrections, and returns a corrected text and an estimate of passing. The server builds the
-request from the task in `public/skriv-tal.json`, so a page cannot ask about anything else.
-It needs `ANTHROPIC_API_KEY` in the server's `.env` (then `docker compose up -d app`); without
-it the button answers that checking is not switched on. Each review costs a few cents on
-`claude-opus-5-5`, so a learner gets ten a day and the site 150 (`writing` in
-`config/config.php`); every review is kept in `writing_checks` with its token counts.
+**Checking a Modultest letter or blog post.** On `/modultest/skriv` an admin can send a text
+to Claude, which says which of the task's questions it answers, lists the errors with
+corrections, and returns a corrected text and an estimate of passing. The review runs on the
+owner's own Claude subscription, through Claude Code on the server, so the button shows only
+for accounts with `users.role = 'admin'`, twenty checks a day (`writing` in
+`config/config.php`). The app runs in a container and Claude Code on the host: the app puts the
+job in `storage/writing/queue/`, the user unit `deploy/systemd/dansk-writing.path` starts
+`bin/writing-worker.py`, which runs `claude -p` without tools, settings or sessions and answers
+into `storage/writing/done/`. `bin/deploy.sh` installs and enables the unit; Claude Code must be
+logged in as the deploying account. The request is built from `public/skriv-tal.json`, so a
+page cannot ask about anything else, and every review is kept in `writing_checks`.
 
 ---
 
@@ -531,6 +534,9 @@ human correction severed by a re-parse, 18 idioms deleted by a wrong definition 
   row rather than the request
 - distractors never repeat, never come from the same idiom, and always match the answer
   on verb parity
+
+The writing worker, which runs on the host rather than in the container, has its own tests
+against a stand-in for Claude Code: `python3 -m unittest discover -s tests/worker`.
 
 **A suite that has only ever passed proves nothing.** `bin/prove-tests-red.py` injects
 faults one at a time — an inverted guard, a dropped filter, a column missing from an

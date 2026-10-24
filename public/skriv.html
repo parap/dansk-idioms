@@ -90,11 +90,11 @@ import { $, esc, t, api, registerStrings, currentLang, setLang as applyLang } fr
 const STRINGS = {
   ru: {
     title: 'Письмо и устная часть',
-    intro: 'Тренажёр для письменной и устной части Modultest DU3, модуль 4. Ситуации и вопросы свои, по образцу официальных. Письмо и пост можно отправить на проверку: она покажет, на что вы не ответили, ошибки с исправлениями и исправленный текст. Черновик сохраняется в этом браузере.',
+    intro: 'Тренажёр для письменной и устной части Modultest DU3, модуль 4. Ситуации и вопросы свои, по образцу официальных. Текст проверяете вы сами: счётчик слов, памятка и образец ответа. Черновик сохраняется в этом браузере.',
     check: 'Проверить текст',
     checking: 'Проверяю… обычно до минуты.',
-    checkNote: 'Текст уходит на проверку в Claude (Anthropic) и сохраняется на сайте. До {n} проверок в день.',
-    checkOff: 'Проверка пока не подключена.',
+    checkNote: 'Проверка идёт через Claude на подписке владельца сайта. Осталось сегодня: {n}.',
+    checkOff: 'Проверка доступна только владельцу сайта.',
     checkLimit: 'Проверки на сегодня закончились. Попробуйте завтра.',
     checkShort: 'Напишите хотя бы 10 слов.',
     checkFailed: 'Проверка не удалась. Попробуйте ещё раз через минуту.',
@@ -131,11 +131,11 @@ const STRINGS = {
   },
   en: {
     title: 'Writing and speaking',
-    intro: 'Practice for the writing and speaking parts of Modultest DU3, module 4. The situations and questions are our own, modelled on the official ones. Send a letter or blog post for a check: it shows what you left unanswered, your errors with corrections, and a corrected text. Your draft is kept in this browser.',
+    intro: 'Practice for the writing and speaking parts of Modultest DU3, module 4. The situations and questions are our own, modelled on the official ones. You check your own text: a word counter, a checklist and a model answer. Your draft is kept in this browser.',
     check: 'Check my text',
     checking: 'Checking… usually under a minute.',
-    checkNote: 'Your text is sent to Claude (Anthropic) for the check and kept on the site. Up to {n} checks a day.',
-    checkOff: 'Checking is not switched on yet.',
+    checkNote: 'Checked by Claude on the site owner\'s subscription. Left today: {n}.',
+    checkOff: 'Checking is open to the site\'s owner only.',
     checkLimit: 'Today\'s checks are used up. Try again tomorrow.',
     checkShort: 'Write at least 10 words.',
     checkFailed: 'The check did not work. Try again in a minute.',
@@ -172,11 +172,11 @@ const STRINGS = {
   },
   uk: {
     title: 'Письмо та усна частина',
-    intro: 'Тренажер для письмової та усної частини Modultest DU3, модуль 4. Ситуації та питання власні, за зразком офіційних. Лист і пост можна надіслати на перевірку: вона покаже, на що ви не відповіли, помилки з виправленнями та виправлений текст. Чернетка зберігається в цьому браузері.',
+    intro: 'Тренажер для письмової та усної частини Modultest DU3, модуль 4. Ситуації та питання власні, за зразком офіційних. Текст перевіряєте ви самі: лічильник слів, пам’ятка й зразок відповіді. Чернетка зберігається в цьому браузері.',
     check: 'Перевірити текст',
     checking: 'Перевіряю… зазвичай до хвилини.',
-    checkNote: 'Текст надсилається на перевірку в Claude (Anthropic) і зберігається на сайті. До {n} перевірок на день.',
-    checkOff: 'Перевірку ще не підключено.',
+    checkNote: 'Перевірка йде через Claude на підписці власника сайту. Лишилося сьогодні: {n}.',
+    checkOff: 'Перевірка доступна лише власнику сайту.',
     checkLimit: 'Перевірки на сьогодні закінчилися. Спробуйте завтра.',
     checkShort: 'Напишіть щонайменше 10 слів.',
     checkFailed: 'Перевірка не вдалася. Спробуйте ще раз за хвилину.',
@@ -213,11 +213,11 @@ const STRINGS = {
   },
   da: {
     title: 'Skrivning og mundtlig',
-    intro: 'Øvelser til skrivning og mundtlig kommunikation i Modultest DU3, modul 4. Situationer og spørgsmål er vores egne, lavet efter forlægget. Du kan sende en e-mail eller et blogindlæg til tjek: det viser, hvad du ikke har svaret på, dine fejl med rettelser og en rettet tekst. Dit udkast gemmes i denne browser.',
+    intro: 'Øvelser til skrivning og mundtlig kommunikation i Modultest DU3, modul 4. Situationer og spørgsmål er vores egne, lavet efter forlægget. Du tjekker selv din tekst: ordtæller, tjekliste og et eksempel på et svar. Dit udkast gemmes i denne browser.',
     check: 'Tjek min tekst',
     checking: 'Tjekker… som regel under et minut.',
-    checkNote: 'Teksten sendes til Claude (Anthropic) til tjek og gemmes på siden. Op til {n} tjek om dagen.',
-    checkOff: 'Tjek er ikke slået til endnu.',
+    checkNote: 'Tjekkes af Claude på sideejerens abonnement. Tilbage i dag: {n}.',
+    checkOff: 'Tjek er kun åbent for sidens ejer.',
     checkLimit: 'Dagens tjek er brugt. Prøv igen i morgen.',
     checkShort: 'Skriv mindst 10 ord.',
     checkFailed: 'Tjekket mislykkedes. Prøv igen om et minut.',
@@ -315,8 +315,8 @@ function writing(task) {
       <textarea id="draft" aria-label="${esc(t(tab))}" spellcheck="true">${esc(store.get(key))}</textarea>
       <p class="row" style="margin:.5rem 0 0"><span class="count" id="count"></span>
         <span class="spacer"></span><button class="btn" id="clear" lang="${currentLang()}">${esc(t('clear'))}</button></p>
-      <p class="row" style="margin:.8rem 0 0" lang="${currentLang()}"><button class="btn primary" id="check">${esc(t('check'))}</button>
-        <span class="muted" style="font-size:.85rem">${esc(fill(t('checkNote'), {n: DAILY_CHECKS}))}</span></p>
+      <p class="row" id="checkRow" style="margin:.8rem 0 0" lang="${currentLang()}" hidden><button class="btn primary" id="check">${esc(t('check'))}</button>
+        <span class="muted" style="font-size:.85rem" id="checkNote"></span></p>
       <p class="muted" id="checkState" role="status" lang="${currentLang()}" style="margin:.5rem 0 0"></p>
     </div>
     <div id="review"></div>
@@ -342,6 +342,7 @@ function writing(task) {
   $('#clear').onclick = () => { if (confirm(t('confirmClear'))) { draft.value = ''; store.set(key, ''); paint(); } };
   view.querySelectorAll('[data-check]').forEach(c => c.onchange = () => store.set(`${key}:${c.dataset.check}`, c.checked ? '1' : ''));
   $('#check').onclick = () => check(task, draft.value, key);
+  offerCheck();
   paintReview(store.get(`${key}:review`));
   $('#toggle').onclick = () => {
     const m = $('#model');
@@ -350,9 +351,15 @@ function writing(task) {
   };
 }
 
-// The server's own allowance; the page only names it.
-const DAILY_CHECKS = 10;
-const CHECK_ERRORS = {503: 'checkOff', 429: 'checkLimit', 422: 'checkShort'};
+const CHECK_ERRORS = {403: 'checkOff', 429: 'checkLimit', 422: 'checkShort'};
+
+/** The check runs on the owner's own subscription, so the button shows only for whom the server offers it. */
+async function offerCheck() {
+  const offer = await api('/modultest/skriv/check').catch(() => null);
+  if (!offer?.available || !$('#checkRow')) return;
+  $('#checkNote').textContent = fill(t('checkNote'), {n: offer.left_today});
+  $('#checkRow').hidden = false;
+}
 
 async function check(task, text, key) {
   const button = $('#check');
@@ -362,6 +369,7 @@ async function check(task, text, key) {
     const result = await api('/modultest/skriv/check', {method: 'POST', body: {task: task.id, text, lang: currentLang()}});
     store.set(`${key}:review`, JSON.stringify(result));
     $('#checkState').textContent = '';
+    $('#checkNote').textContent = fill(t('checkNote'), {n: result.left_today});
     paintReview(JSON.stringify(result));
     $('#review').scrollIntoView({behavior: 'smooth', block: 'start'});
   } catch (e) {

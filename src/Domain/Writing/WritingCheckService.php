@@ -2,17 +2,16 @@
 
 namespace Dansk\Domain\Writing;
 
-use Anthropic\Client;
 use Dansk\Support\Config;
 use Dansk\Support\Db;
 use InvalidArgumentException;
 
 /**
- * Sends a learner's letter or blog post for review and keeps what came back.
+ * Sends a letter or blog post for review and keeps what came back.
  *
- * Every review is paid for, so each learner has a daily allowance, and the site has a
- * ceiling of its own: an allowance per browser is no limit to someone who clears cookies.
- * A review that fails is not counted against either.
+ * The review runs on the site owner's own Claude subscription, which is for the owner's own
+ * use, so only admins are offered it, each with a daily allowance that keeps the
+ * subscription's limits for the owner's other work. A failed review is not counted.
  */
 final class WritingCheckService
 {
@@ -26,30 +25,37 @@ final class WritingCheckService
 
     public function __construct(
         private ?WritingReviewer $reviewer,
-        private int $perLearnerDaily,
-        private int $siteDaily,
+        private int $perUserDaily,
         private WritingTasks $tasks = new WritingTasks(),
     ) {}
 
-    /** No API key configured means no reviewer, and the check reports itself unavailable. */
+    /** Switched off unless the config names the directory the host worker reads. */
     public static function fromConfig(): self
     {
-        $key = Config::get('writing.api_key');
+        $dir = Config::get('writing.queue_dir');
 
         return new self(
-            $key ? new ClaudeWritingReviewer(
-                // Two tries of 80 seconds stay inside the 180 the controller allows the request.
-                new Client(apiKey: $key, requestOptions: ['timeout' => 80.0, 'maxRetries' => 1]),
-                (string) Config::get('writing.model')
-            ) : null,
-            (int) Config::get('writing.per_learner_daily'),
-            (int) Config::get('writing.site_daily'),
+            $dir ? new SubscriptionWritingReviewer((string) $dir) : null,
+            (int) Config::get('writing.per_user_daily'),
         );
     }
 
-    /** @return array{feedback:array<string,mixed>,words:int,minimum:int,left_today:int} */
-    public function check(?int $userId, string $anonKey, string $taskId, string $text, string $lang): array
+    /** @return array{available:bool,left_today:int} what the page offers this visitor */
+    public function availability(?int $userId): array
     {
+        if (!$this->offeredTo($userId)) {
+            return ['available' => false, 'left_today' => 0];
+        }
+
+        return ['available' => true, 'left_today' => max(0, $this->perUserDaily - $this->usedToday($userId))];
+    }
+
+    /** @return array{feedback:array<string,mixed>,words:int,minimum:int,left_today:int} */
+    public function check(?int $userId, string $taskId, string $text, string $lang): array
+    {
+        if (!$this->offeredTo($userId)) {
+            throw new WritingCheckUnavailable('Checking is not offered here.');
+        }
         $task = $this->tasks->find($taskId);
         if ($task === null) {
             throw new InvalidArgumentException("There is no writing task '{$taskId}'.");
@@ -61,27 +67,20 @@ final class WritingCheckService
         if ($words > self::MOST_WORDS || mb_strlen($text) > self::MOST_CHARACTERS) {
             throw new InvalidArgumentException('The text is far longer than the task asks for.');
         }
-        if ($this->reviewer === null) {
-            throw new WritingCheckUnavailable('Checking is not switched on.');
-        }
 
-        $used = $this->usedToday($userId, $anonKey);
-        if ($used >= $this->perLearnerDaily) {
-            throw new WritingLimitReached('learner');
-        }
-        if ((int) Db::fetchValue('SELECT COUNT(*) FROM writing_checks WHERE created_at > NOW() - INTERVAL 1 DAY') >= $this->siteDaily) {
-            throw new WritingLimitReached('site');
+        $used = $this->usedToday($userId);
+        if ($used >= $this->perUserDaily) {
+            throw new WritingLimitReached('Today\'s checks are used up.');
         }
 
         $review = $this->reviewer->review($task, $text, $lang);
 
         Db::execute(
-            'INSERT INTO writing_checks (user_id, anon_key, task_id, text, word_count, feedback, model, input_tokens, output_tokens)
-             VALUES (?,?,?,?,?,?,?,?,?)',
+            'INSERT INTO writing_checks (user_id, task_id, text, word_count, feedback, model, input_tokens, output_tokens)
+             VALUES (?,?,?,?,?,?,?,?)',
             [
-                $userId, $userId === null ? $anonKey : null, $taskId, $text, $words,
-                json_encode($review['feedback'], JSON_UNESCAPED_UNICODE), $review['model'],
-                $review['input_tokens'], $review['output_tokens'],
+                $userId, $taskId, $text, $words, json_encode($review['feedback'], JSON_UNESCAPED_UNICODE),
+                $review['model'], $review['input_tokens'], $review['output_tokens'],
             ]
         );
 
@@ -89,15 +88,21 @@ final class WritingCheckService
             'feedback'   => $review['feedback'],
             'words'      => $words,
             'minimum'    => $task['minimum'],
-            'left_today' => $this->perLearnerDaily - $used - 1,
+            'left_today' => $this->perUserDaily - $used - 1,
         ];
     }
 
-    /** A signed-in learner is counted by account, so a new browser brings no new allowance. */
-    private function usedToday(?int $userId, string $anonKey): int
+    private function offeredTo(?int $userId): bool
     {
-        return (int) ($userId === null
-            ? Db::fetchValue('SELECT COUNT(*) FROM writing_checks WHERE anon_key = ? AND created_at > NOW() - INTERVAL 1 DAY', [$anonKey])
-            : Db::fetchValue('SELECT COUNT(*) FROM writing_checks WHERE user_id = ? AND created_at > NOW() - INTERVAL 1 DAY', [$userId]));
+        return $this->reviewer !== null && $userId !== null
+            && Db::fetchValue('SELECT role FROM users WHERE id = ?', [$userId]) === 'admin';
+    }
+
+    private function usedToday(int $userId): int
+    {
+        return (int) Db::fetchValue(
+            'SELECT COUNT(*) FROM writing_checks WHERE user_id = ? AND created_at > NOW() - INTERVAL 1 DAY',
+            [$userId]
+        );
     }
 }

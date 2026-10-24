@@ -1,0 +1,10 @@
+# Starts bin/writing-worker.py whenever the app queues a writing check.
+# Installed and enabled by bin/deploy.sh as a user unit of the account Claude Code is logged in as.
+[Unit]
+Description=Writing checks queued by danskidioms.com
+
+[Path]
+PathExistsGlob=%h/dansk.div/storage/writing/queue/*.json
+
+[Install]
+WantedBy=default.target
