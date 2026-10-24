@@ -166,10 +166,11 @@ SEED_PHP = r"""
             ]],
         ],
     ]);
-    // A Modultest paper of two tasks: a cloze and a written gap.
+    // A Modultest paper of two tasks: a cloze opening with its worked example, and a written gap.
     $repo->save([
         'slug' => 'ui-fixture-mt-opg1', 'paper' => 'ui-fixture-paper', 'kind' => 'cloze', 'title' => 'UI fixture mt cloze',
-        'body' => 'Vi spiser {{1}} klokken seks.',
+        'body' => 'Vi {{0}} altid {{1}} klokken seks.',
+        'example' => ['options' => ['spiser', 'spise', 'spist'], 'answer' => 0],
         'items' => [['position' => 1, 'options' => [
             ['label' => 'A', 'text' => 'aftensmad', 'correct' => true],
             ['label' => 'B', 'text' => 'aftensmaden'],
@@ -1325,6 +1326,18 @@ def a_modultest_sits_its_tasks_under_the_clock(b):
     assert '50:00' in b.js('document.querySelector("#clock").textContent') or \
         '49:5' in b.js('document.querySelector("#clock").textContent'), 'the clock is not the test\'s 50 minutes'
     assert b.js('!!document.querySelector(".text .gap")'), 'the cloze gap is not drawn in the text'
+
+
+@check
+def a_modultest_task_shows_its_example_answered_and_does_not_count_it(b):
+    open_modultest(b)
+    shown = b.js('document.querySelector(".text .example")?.textContent ?? ""')
+    assert '(0)' in shown and 'spiser' in shown, f'the example is not filled into the text: {shown!r}'
+    assert b.js('document.querySelector("#qs .opt.right")?.textContent ?? ""').strip().endswith('spiser'), \
+        'the example question does not show its answer'
+    assert not b.js('!!document.querySelector("#qs button.opt[data-pos=\'0\']")'), 'the example can be answered'
+    assert 'Se eksemplet (0)' in b.js('document.querySelector(".instr").textContent'), 'the instruction does not point at the example'
+    assert '/ 3' in b.js('document.querySelector("#count").textContent'), 'the example is counted as a question'
 
 
 @check

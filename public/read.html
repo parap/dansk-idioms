@@ -38,6 +38,7 @@
     .grid .passage{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto} }
   .passage h2{font-size:1.05rem;margin:0 0 .6rem}
   .passage p{margin:0 0 .9rem;white-space:pre-wrap}
+  .example{font-weight:600;border-bottom:2px solid var(--ok);padding:0 .15rem}
   .gap{display:inline-block;min-width:3.2rem;padding:0 .4rem;margin:0 .1rem;
     border:1px dashed var(--accent);border-radius:6px;background:var(--chip);
     color:var(--ink);font:inherit;font-size:.95rem;cursor:pointer;vertical-align:baseline}
@@ -318,10 +319,14 @@ async function start(mode) {
  * The passage body is escaped BEFORE gap markers become buttons. Doing it the other way
  * round lets a passage author put markup on the page.
  */
-function passageHtml(body) {
-  return esc(body).replace(/\{\{(\d+)\}\}/g, (_, n) =>
-    `<button class="gap" data-gap="${esc(n)}" id="gap-${esc(n)}">${esc(n)}</button>`);
+function passageHtml(passage) {
+  return esc(passage.body).replace(/\{\{(\d+)\}\}/g, (_, n) => n === '0'
+    ? `<span class="example">(0) ${esc(exampleAnswer(passage))}</span>`
+    : `<button class="gap" data-gap="${esc(n)}" id="gap-${esc(n)}">${esc(n)}</button>`);
 }
+
+/** A Modultest task's worked example (0) is shown answered: a word, or the whole sentence. */
+const exampleAnswer = p => !p.example ? '' : (p.example.text ?? p.example.options[p.example.answer]);
 
 function render() {
   $('#langs').hidden = true;
@@ -352,7 +357,7 @@ function render() {
   $('#texts').innerHTML = paper.passages.map((p, i) => `
     <section class="card passage" data-passage="${i}">
       <h2>${esc(p.title)}</h2>
-      <p>${passageHtml(p.body)}</p>
+      <p>${passageHtml(p)}</p>
       ${p.kind === 'mc' ? '' : `<p class="muted" style="font-size:.85rem">${esc(t('gapHint'))}</p>`}
     </section>`).join('');
 

@@ -4,7 +4,7 @@ paper: du3m4-v1
 title: Fællesspisning i opgang C
 
 --- text ---
-Hver anden torsdag dufter der af mad i kælderen under opgang C. Her mødes beboerne til
+Hver anden torsdag dufter der af mad i kælderen {{0}} opgang C. Her mødes beboerne til
 fællesspisning, og det har de gjort, {{1}} Birthe Holm flyttede ind for fire år siden.
 "Jeg kendte ingen, da jeg kom," fortæller hun. "Folk hilste pænt på trappen, men
 længere kom vi ikke. Så jeg satte en seddel op og spurgte, om nogen havde lyst til at
@@ -40,6 +40,12 @@ kun opgang C," siger Birthe. "Hvis bare halvdelen kommer, bliver det den størst
 vi {{8}} har haft."
 
 --- questions ---
+0.
+  over
+* under
+  mellem
+  efter
+
 1.
 * siden
   mens

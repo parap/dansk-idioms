@@ -59,6 +59,7 @@
   .wgap:focus{outline:2px solid var(--accent);outline-offset:1px}
   .wgap.filled{border-bottom-color:var(--ok)}
   .num{font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+  .example{font-weight:600;border-bottom:2px solid var(--ok);padding:0 .15rem}
   .q{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
   .q:first-of-type{border-top:none;padding-top:0;margin-top:0}
   .q > p{margin:0 0 .45rem;font-weight:600}
@@ -122,7 +123,7 @@ const STRINGS = {
     left: 'осталось', answered: 'ответов',
     writeHint: 'Впишите по одному слову прямо в пропуски текста. Ответ сохраняется сам.',
     gapHint: 'Нажмите на пропуск в тексте, чтобы перейти к вопросу.',
-    gap: 'Пропуск {n}',
+    gap: 'Пропуск {n}', example: 'пример',
     result: 'Результат', perTask: 'По заданиям', review: 'Разбор',
     yours: 'Ваш ответ', accepted: 'Верно', blank: 'нет ответа',
     late: 'сдано после окончания времени',
@@ -146,7 +147,7 @@ const STRINGS = {
     left: 'left', answered: 'answered',
     writeHint: 'Type one word straight into each gap in the text. Your answer saves itself.',
     gapHint: 'Tap a gap in the text to go to its question.',
-    gap: 'Gap {n}',
+    gap: 'Gap {n}', example: 'example',
     result: 'Result', perTask: 'By task', review: 'Review',
     yours: 'Your answer', accepted: 'Correct', blank: 'no answer',
     late: 'handed in after time was up',
@@ -170,7 +171,7 @@ const STRINGS = {
     left: 'лишилося', answered: 'відповідей',
     writeHint: 'Впишіть по одному слову просто в пропуски тексту. Відповідь зберігається сама.',
     gapHint: 'Натисніть на пропуск у тексті, щоб перейти до питання.',
-    gap: 'Пропуск {n}',
+    gap: 'Пропуск {n}', example: 'приклад',
     result: 'Результат', perTask: 'За завданнями', review: 'Розбір',
     yours: 'Ваша відповідь', accepted: 'Правильно', blank: 'немає відповіді',
     late: 'здано після закінчення часу',
@@ -194,7 +195,7 @@ const STRINGS = {
     left: 'tilbage', answered: 'besvaret',
     writeHint: 'Skriv ét ord direkte i hvert hul i teksten. Dit svar gemmes af sig selv.',
     gapHint: 'Tryk på et hul i teksten for at gå til spørgsmålet.',
-    gap: 'Hul {n}',
+    gap: 'Hul {n}', example: 'eksempel',
     result: 'Resultat', perTask: 'Pr. opgave', review: 'Gennemgang',
     yours: 'Dit svar', accepted: 'Rigtigt', blank: 'intet svar',
     late: 'afleveret efter tiden',
@@ -215,6 +216,9 @@ const INSTRUCTIONS = {
   write:  n => `Læs teksten. Der mangler ${n} ord. Skriv ét ord, der passer, i hvert hul.`,
   mc:     () => 'Læs de små tekster. Vælg det rigtige svar.',
 };
+
+// The paper points at its worked example in the same words.
+const instructions = (passage, n) => INSTRUCTIONS[passage.kind](n) + (passage.example ? ' Se eksemplet (0).' : '');
 
 const fill = (text, values) => Object.entries(values).reduce((s, [k, v]) => s.replaceAll(`{${k}}`, v), text);
 const view = $('#view');
@@ -307,6 +311,7 @@ const isAnswered = item => item.position in chosen || (typed[item.position] ?? '
 function textHtml(passage, index) {
   const items = itemsOf(index);
   return esc(passage.body).replace(/\{\{(\d+)\}\}/g, (_, n) => {
+    if (n === '0') return exampleHtml(passage, items);
     const item = items[Number(n) - 1];
     if (!item) return '';
     if (passage.kind === 'write') {
@@ -320,6 +325,27 @@ function textHtml(passage, index) {
 }
 
 const letter = i => String.fromCharCode(65 + i);
+
+/** The worked example (0) stands in the text already answered, as the paper prints it. */
+function exampleHtml(passage, items) {
+  if (!passage.example) return '';
+  const answer = passage.kind === 'insert'
+    ? letter(bankOf(items).indexOf(passage.example.text))
+    : passage.example.options[passage.example.answer];
+  return `<span class="example"><span class="num">(0)</span> ${esc(answer)}</span>`;
+}
+
+/** The example's own row above the questions: answered, with nothing to press. */
+function exampleQuestionHtml(passage, items) {
+  const ex = passage.example;
+  if (!ex) return '';
+  const head = `<p>${passage.kind === 'insert' ? esc(fill(t('gap'), {n: 0})) : '0.'} <span class="muted">(${esc(t('example'))})</span></p>`;
+  if (passage.kind === 'insert') {
+    return `<div class="q">${head}<div class="letters"><span class="opt right">${letter(bankOf(items).indexOf(ex.text))}</span></div></div>`;
+  }
+  return `<div class="q">${head}<div class="opts" lang="da">${ex.options.map((o, i) => `
+    <div class="opt ${i === ex.answer ? 'right' : ''}"><b>${letter(i)}.</b> ${esc(o)}</div>`).join('')}</div></div>`;
+}
 
 /** A filled insertion gap shows the letter put in it, so the text reads as the learner has built it. */
 function gapLabel(passage, items, item, n) {
@@ -341,7 +367,7 @@ function questionsHtml(passage, index) {
   if (passage.kind === 'insert') {
     const bank = bankOf(items);
     return `<ul class="bank" lang="da">${bank.map((text, i) => `<li><b>${letter(i)}</b> ${esc(text)}</li>`).join('')}</ul>
-      <p class="muted" style="margin:0 0 .6rem;font-size:.9rem">${esc(t('gapHint'))}</p>` +
+      <p class="muted" style="margin:0 0 .6rem;font-size:.9rem">${esc(t('gapHint'))}</p>` + exampleQuestionHtml(passage, items) +
       items.map((item, n) => `<div class="q" id="q-${item.position}">
         <p>${esc(fill(t('gap'), {n: n + 1}))}</p>
         <div class="letters">${bank.map((text, i) => {
@@ -351,6 +377,7 @@ function questionsHtml(passage, index) {
         }).join('')}</div></div>`).join('');
   }
   return (passage.kind === 'cloze' ? `<p class="muted" style="margin:0 0 .6rem;font-size:.9rem">${esc(t('gapHint'))}</p>` : '') +
+    exampleQuestionHtml(passage, items) +
     items.map((item, n) => `<div class="q" id="q-${item.position}">
       <p lang="da">${n + 1}. ${item.prompt ? esc(item.prompt) : ''}</p>
       <div class="opts" lang="da">${item.options.map(o => `
@@ -370,7 +397,7 @@ function render() {
     }).join('')}</nav>
     <div class="grid">
       <section class="card text" lang="da"><h2>${esc(p.title)}</h2>
-        <p class="instr muted">${esc(INSTRUCTIONS[p.kind](itemsOf(shown).length))}</p><div id="body"></div></section>
+        <p class="instr muted">${esc(instructions(p, itemsOf(shown).length))}</p><div id="body"></div></section>
       <section class="card">
         <h2>${esc(fill(t('task'), {n: shown + 1}))}</h2>
         <div id="qs">${questionsHtml(p, shown)}</div>

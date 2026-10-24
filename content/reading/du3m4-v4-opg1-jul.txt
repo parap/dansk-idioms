@@ -4,7 +4,7 @@ paper: du3m4-v4
 title: Jul på dansk
 
 --- text ---
-For mange udlændinge er den danske jul en overraskelse. Den varer nemlig ikke kun et par
+For mange udlændinge er den danske jul en overraskelse. Den varer {{0}} ikke kun et par
 dage, men næsten hele december. Allerede i november begynder byerne at {{1}} julelys op,
 og i supermarkederne kan man købe julesmåkager, længe før det bliver december.
 
@@ -33,6 +33,12 @@ med. Derfor holder flere foreninger og kirker et gratis julemåltid for alle, de
 lyst.
 
 --- questions ---
+0.
+  derfor
+* nemlig
+  heller
+  først
+
 1.
 * hænge
   sætte sig

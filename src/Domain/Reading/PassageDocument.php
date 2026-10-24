@@ -26,7 +26,8 @@ namespace Dansk\Domain\Reading;
  *
  * A star marks the correct option. Multiple choice puts its question on the numbered
  * line; insertion names a lettered part from a `--- parts ---` section instead. A line
- * opening with `>` is a note, shown only once the question is answered.
+ * opening with `>` is a note, shown only once the question is answered. Question 0 and
+ * gap {{0}} are the worked example of a cloze or insertion task.
  *
  * Parsing is pure: it never touches the database, so a draft can be checked as it is
  * typed.
@@ -36,6 +37,9 @@ final class PassageDocument
     private const KINDS = ['mc', 'insert', 'cloze', 'quiz', 'video', 'verbs', 'grammar', 'write'];
 
     private const GAP_KINDS = ['insert', 'cloze', 'write'];
+
+    /** The tasks the test opens with a worked example (0), shown answered and worth nothing. */
+    private const EXAMPLE_KINDS = ['insert', 'cloze'];
 
     /** A gap the learner fills by typing: every line under it is an answer it accepts. */
     private const WRITE_KIND = 'write';
@@ -113,10 +117,10 @@ final class PassageDocument
 
         $body  = $textless ? null : $this->body($sections['text']);
         $bank  = $kind === 'insert' ? $this->bank($sections['parts']) : [];
-        $items = $this->items($sections['questions'], $kind, $bank);
+        [$items, $example] = $this->items($sections['questions'], $kind, $bank);
 
         if ($body !== null) {
-            $this->checkMarkers($body, $kind, $items);
+            $this->checkMarkers($body, $kind, $items, $example !== null);
         }
 
         $paper = $headers['paper'] ?? null;
@@ -129,8 +133,9 @@ final class PassageDocument
             'kind'  => $kind,
             'title' => $headers['title'],
             'paper' => $paper,
-            'body'  => $body,
-            'items' => $items,
+            'body'    => $body,
+            'items'   => $items,
+            'example' => $example,
         ];
         if ($kind === 'insert') {
             $doc['bank'] = $bank;
@@ -251,7 +256,7 @@ final class PassageDocument
     /**
      * @param  list<array{0:int,1:string}>          $lines
      * @param  list<array{label:string,text:string}> $bank
-     * @return list<array<string,mixed>>
+     * @return array{0: list<array<string,mixed>>, 1: ?array<string,mixed>} the items and the example
      */
     private function items(array $lines, string $kind, array $bank): array
     {
@@ -352,9 +357,39 @@ final class PassageDocument
         }
         $close();
 
-        $this->checkPositions($items, $kind, $bank);
+        $example = $this->example($items, $kind, $bank);
+        $this->checkPositions($items, $kind, $bank, $example);
 
-        return $items;
+        return [$items, $example];
+    }
+
+    /**
+     * Takes question 0 out of the items: the page shows it answered, and it scores nothing.
+     *
+     * @param  list<array<string,mixed>>             $items
+     * @param  list<array{label:string,text:string}> $bank
+     * @return ?array<string,mixed> a cloze's options and answer index, or an insertion's part
+     */
+    private function example(array &$items, string $kind, array $bank): ?array
+    {
+        $at = array_search(0, array_column($items, 'position'), true);
+        if ($at === false) {
+            return null;
+        }
+        if (!in_array($kind, self::EXAMPLE_KINDS, true)) {
+            throw new InvalidPassage("A {$kind} task takes no worked example, so it has no question 0.");
+        }
+
+        [$example] = array_splice($items, $at, 1);
+        if ($kind === 'insert') {
+            $part = $bank[array_search($example['correct_label'], array_column($bank, 'label'), true)];
+            return ['part' => $part['label'], 'text' => $part['text']];
+        }
+
+        return [
+            'options' => array_column($example['options'], 'text'),
+            'answer'  => array_search(true, array_map(static fn(array $o): bool => !empty($o['correct']), $example['options']), true),
+        ];
     }
 
     /**
@@ -392,8 +427,9 @@ final class PassageDocument
     /**
      * @param list<array<string,mixed>>              $items
      * @param list<array{label:string,text:string}>  $bank
+     * @param ?array<string,mixed>                    $example
      */
-    private function checkPositions(array $items, string $kind, array $bank): void
+    private function checkPositions(array $items, string $kind, array $bank, ?array $example): void
     {
         $positions = array_column($items, 'position');
         if (count($positions) !== count(array_unique($positions))) {
@@ -405,10 +441,13 @@ final class PassageDocument
         }
 
         $used = array_column($items, 'correct_label');
+        if ($example !== null) {
+            $used[] = $example['part'];
+        }
         if (count($used) !== count(array_unique($used))) {
             throw new InvalidPassage('A part fills more than one gap; each letter may be used once.');
         }
-        if (count($bank) <= count($items)) {
+        if (count($bank) <= count($used)) {
             throw new InvalidPassage(
                 'The parts section must offer more parts than there are gaps, so that some fit nowhere.'
             );
@@ -416,7 +455,7 @@ final class PassageDocument
     }
 
     /** @param list<array<string,mixed>> $items */
-    private function checkMarkers(string $body, string $kind, array $items): void
+    private function checkMarkers(string $body, string $kind, array $items, bool $example): void
     {
         preg_match_all(self::MARKER, $body, $m);
         $markers = array_map('intval', $m[1]);
@@ -429,6 +468,9 @@ final class PassageDocument
         }
 
         $positions = array_column($items, 'position');
+        if ($example) {
+            $positions[] = 0;
+        }
         sort($markers);
         sort($positions);
 

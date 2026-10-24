@@ -5,7 +5,7 @@ title: Loppemarkedet i Vestbyen
 
 --- text ---
 Hver søndag fra april til oktober bliver parkeringspladsen ved Vestbyens Skole til et
-loppemarked. Fra klokken otte står der lange rækker af borde med gamle bøger, legetøj,
+loppemarked. {{0}} Fra klokken otte står der lange rækker af borde med gamle bøger, legetøj,
 køkkenting og tøj. {{1}} Markedet startede for ti år siden som en idé fra skolens
 forældreforening, men i dag kommer der folk fra hele kommunen.
 
@@ -36,8 +36,10 @@ E Ifølge kommunen bliver tusindvis af ting hvert år solgt videre i stedet for 
   genbrugspladsen.
 F Hun har aldrig været på et loppemarked før og ved ikke, hvad tingene skal koste.
 G Han har derfor bedt kommunen om at flytte markedet til en større plads.
+H Resten af ugen er det lærernes biler, der holder på pladsen.
 
 --- questions ---
+0. H
 1. A
 2. B
 3. C

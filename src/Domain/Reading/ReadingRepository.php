@@ -199,10 +199,10 @@ final class ReadingRepository
         $body = $doc['body'] ?? null;
 
         Db::execute(
-            'INSERT INTO reading_passages (slug, paper, kind, title, body, youtube_id, word_count, pass_points, vaerdier_min)
-             VALUES (?,?,?,?,?,?,?,?,?)',
+            'INSERT INTO reading_passages (slug, paper, kind, title, body, example, youtube_id, word_count, pass_points, vaerdier_min)
+             VALUES (?,?,?,?,?,?,?,?,?,?)',
             [
-                $doc['slug'], $doc['paper'] ?? null, $doc['kind'], $doc['title'], $body, $doc['youtube'] ?? null,
+                $doc['slug'], $doc['paper'] ?? null, $doc['kind'], $doc['title'], $body, self::exampleJson($doc), $doc['youtube'] ?? null,
                 $body === null ? 0 : Text::wordCount(preg_replace(self::MARKER, ' ', $body) ?? $body),
                 $doc['pass'] ?? null,
                 $doc['vaerdier_min'] ?? null,
@@ -290,6 +290,63 @@ final class ReadingRepository
             'UPDATE reading_passages SET paper = ? WHERE slug = ? AND NOT (paper <=> ?)',
             [$doc['paper'] ?? null, $doc['slug'], $doc['paper'] ?? null]
         );
+    }
+
+    /**
+     * Writes a document's worked example onto the passage already stored under its slug,
+     * with the text that holds its gap and, for an insertion task, its part in the bank.
+     * The example grades nothing, so a passage already sat can take it.
+     *
+     * @param  array<string,mixed> $doc
+     * @return int 1 when the example changed, 0 when the passage already had it
+     */
+    public function refreshExample(array $doc): int
+    {
+        $passage = Db::fetchOne('SELECT id, example FROM reading_passages WHERE slug = ? AND kind = ?', [$doc['slug'], $doc['kind']]);
+        $example = self::exampleJson($doc);
+        // MySQL reorders a JSON document's keys, so the stored example is compared loosely.
+        if ($passage === null || $example === null || ($passage['example'] !== null && json_decode((string) $passage['example'], true) == $doc['example'])) {
+            return 0;
+        }
+        $this->validate($doc);
+
+        $pdo = Db::pdo();
+        $pdo->beginTransaction();
+        try {
+            Db::execute(
+                'UPDATE reading_passages SET body = ?, example = ?, word_count = ? WHERE id = ?',
+                [$doc['body'], $example, Text::wordCount(preg_replace(self::MARKER, ' ', $doc['body']) ?? $doc['body']), (int) $passage['id']]
+            );
+            if ($doc['kind'] === 'insert') {
+                $this->addExamplePart((int) $passage['id'], $doc);
+            }
+            $pdo->commit();
+        } catch (Throwable $e) {
+            $pdo->rollBack();
+            throw $e;
+        }
+
+        return 1;
+    }
+
+    /** The example's part joins the bank unless a part of the same wording is already there. */
+    private function addExamplePart(int $passageId, array $doc): void
+    {
+        $text = $doc['example']['text'];
+        if (Db::fetchValue('SELECT 1 FROM reading_options WHERE passage_id = ? AND item_id IS NULL AND text = ?', [$passageId, $text]) !== false) {
+            return;
+        }
+        $sort = (int) Db::fetchValue('SELECT COALESCE(MAX(sort) + 1, 0) FROM reading_options WHERE passage_id = ? AND item_id IS NULL', [$passageId]);
+        Db::execute(
+            'INSERT INTO reading_options (passage_id, item_id, label, text, sort) VALUES (?, NULL, ?, ?, ?)',
+            [$passageId, $doc['example']['part'], $text, $sort]
+        );
+    }
+
+    /** @param array<string,mixed> $doc */
+    private static function exampleJson(array $doc): ?string
+    {
+        return ($doc['example'] ?? null) === null ? null : json_encode($doc['example'], JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -459,6 +516,9 @@ final class ReadingRepository
         }
 
         $positions = array_map(static fn(array $i): int => (int) $i['position'], $doc['items']);
+        if (($doc['example'] ?? null) !== null) {
+            $positions[] = 0;
+        }
         sort($markers);
         sort($positions);
 
@@ -472,16 +532,20 @@ final class ReadingRepository
     /** @param array<string,mixed> $doc */
     private function validateBank(array $doc): void
     {
-        $labels = array_column($doc['bank'] ?? [], 'label');
+        $labels  = array_column($doc['bank'] ?? [], 'label');
+        $example = $doc['example']['part'] ?? null;
 
-        if (count($labels) <= count($doc['items'])) {
-            throw new InvalidPassage('An insertion bank must offer more parts than there are gaps.');
+        if (count($labels) <= count($doc['items']) + ($example === null ? 0 : 1)) {
+            throw new InvalidPassage('An insertion bank must offer more parts than its gaps and example use.');
         }
         if (count($labels) !== count(array_unique($labels))) {
             throw new InvalidPassage('An insertion bank repeats a label.');
         }
+        if ($example !== null && !in_array($example, $labels, true)) {
+            throw new InvalidPassage("The example names part '{$example}', which the bank does not offer.");
+        }
 
-        $claimed = [];
+        $claimed = $example === null ? [] : [$example => true];
         foreach ($doc['items'] as $item) {
             $label = $item['correct_label'] ?? null;
             if (!in_array($label, $labels, true)) {
