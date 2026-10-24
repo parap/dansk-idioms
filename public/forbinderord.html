@@ -61,6 +61,20 @@
   b.c{color:var(--accent)}
   ul.plain{margin:0 0 .7rem;padding-left:1.2rem}
   a{color:var(--accent)}
+  textarea{width:100%;min-height:9rem;font:inherit;line-height:1.55;padding:10px 12px;border-radius:10px;
+    border:1px solid var(--line);background:var(--card);color:var(--ink);resize:vertical}
+  select{font:inherit;padding:7px 10px;border-radius:9px;border:1px solid var(--line);background:var(--card);
+    color:var(--ink);width:100%;min-width:0;max-width:26rem}
+  label.field{display:grid;gap:.25rem;margin:0 0 .7rem;font-size:.9rem;color:var(--muted)}
+  .btn{padding:10px 16px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;border:1px solid var(--accent);
+    background:var(--accent);color:var(--accent-ink)}
+  .btn:disabled{opacity:.5;cursor:default}
+  ul.review{list-style:none;margin:.6rem 0 0;padding:0;display:grid;gap:12px}
+  ul.review li{border-top:1px solid var(--line);padding-top:10px}
+  .marks{display:flex;flex-wrap:wrap;gap:6px;margin:.3rem 0}
+  .mark{font-size:.8rem;padding:1px 8px;border-radius:999px;background:var(--okbg);color:var(--ok)}
+  .mark.no{background:var(--badbg);color:var(--bad)}
+  del{color:var(--bad)} ins{color:var(--ok);text-decoration:none;font-weight:600}
   [hidden]{display:none!important}
   /* On a phone each row becomes a block: three columns of a few words each break mid-word */
   @media (max-width:560px){ .table.stack thead{display:none}
@@ -80,6 +94,18 @@
   <main id="view">
     <div class="card"><p class="muted" id="intro" style="margin:0"></p></div>
     <div class="card"><h2 id="drillsTitle"></h2><div id="drillsBox"></div></div>
+    <div class="card" id="write" hidden>
+      <h2 id="writeTitle"></h2>
+      <p class="muted" id="writeIntro"></p>
+      <label class="field"><span id="groupLabel"></span><select id="writeGroup"></select></label>
+      <div id="writeHelp"></div>
+      <textarea id="writeText" lang="da" spellcheck="true"></textarea>
+      <label class="field" style="margin-top:.6rem"><span id="modelLabel"></span><select id="writeModel"></select></label>
+      <p style="margin:.2rem 0 0"><button class="btn" id="writeCheck"></button>
+        <span class="muted" id="writeLeft" style="font-size:.85rem;margin-left:.6rem"></span></p>
+      <p class="muted" id="writeState" role="status" style="margin:.5rem 0 0"></p>
+      <div id="writeReview"></div>
+    </div>
     <div class="card" id="rules" lang="ru">
       <h2>Справка: связующие слова</h2>
       <p class="muted">К тетради по forbinderord (задания 1–20) и Skriveguiden (с. 3–9 и 29). Объяснения и примеры — свои.</p>
@@ -144,6 +170,26 @@ const STRINGS = {
     questions: {one: '{n} вопрос', few: '{n} вопроса', many: '{n} вопросов', other: '{n} вопроса'},
     empty: 'Тренажёров пока нет.',
     error: 'Не удалось загрузить тренажёры. Попробуйте обновить страницу.',
+    write: 'Напиши сам',
+    writeIntro: 'Напишите по предложению в строке — по подсказкам или свои — со связками выбранной группы. Проверка через Claude на подписке владельца сайта; разбор по каждому предложению.',
+    group: 'Группа',
+    connectorsTitle: 'Связки группы',
+    hintsTitle: 'Подсказки',
+    check: 'Проверить',
+    checking: 'Проверяю… обычно до минуты.',
+    modelLabel: 'Модель',
+    haiku: 'Haiku — быстро, экономно',
+    sonnet: 'Sonnet — точнее',
+    opus: 'Opus — точнее всего, дороже',
+    checkOff: 'Проверка доступна только владельцу сайта.',
+    checkLimit: 'Проверки на сегодня закончились.',
+    checkShort: 'Напишите хотя бы одно предложение.',
+    checkFailed: 'Проверка не удалась. Попробуйте ещё раз через минуту.',
+    leftToday: 'Осталось проверок сегодня: {n}',
+    markGroup: 'связка из группы',
+    markOrder: 'порядок слов',
+    markMeaning: 'по смыслу',
+    noConnector: 'связки нет',
   },
   en: {
     title: 'Connectors',
@@ -153,6 +199,26 @@ const STRINGS = {
     questions: {one: '{n} question', other: '{n} questions'},
     empty: 'No drills yet.',
     error: 'Could not load the drills. Try reloading the page.',
+    write: 'Write your own',
+    writeIntro: 'Write one sentence per line, from the hints or your own, with the connectors of the group you chose. Checked by Claude on the site owner\'s subscription, sentence by sentence.',
+    group: 'Group',
+    connectorsTitle: 'The group\'s connectors',
+    hintsTitle: 'Hints',
+    check: 'Check',
+    checking: 'Checking… usually under a minute.',
+    modelLabel: 'Model',
+    haiku: 'Haiku — fast, economical',
+    sonnet: 'Sonnet — more accurate',
+    opus: 'Opus — most accurate, costliest',
+    checkOff: 'Checking is open to the site\'s owner only.',
+    checkLimit: 'Today\'s checks are used up.',
+    checkShort: 'Write at least one sentence.',
+    checkFailed: 'The check did not work. Try again in a minute.',
+    leftToday: 'Checks left today: {n}',
+    markGroup: 'connector of the group',
+    markOrder: 'word order',
+    markMeaning: 'meaning',
+    noConnector: 'no connector',
   },
   uk: {
     title: 'Сполучні слова',
@@ -162,6 +228,26 @@ const STRINGS = {
     questions: {one: '{n} питання', few: '{n} питання', many: '{n} питань', other: '{n} питання'},
     empty: 'Тренажерів поки немає.',
     error: 'Не вдалося завантажити тренажери. Спробуйте оновити сторінку.',
+    write: 'Напиши сам',
+    writeIntro: 'Напишіть по реченню в рядку — за підказками або власні — зі сполучниками обраної групи. Перевірка через Claude на підписці власника сайту; розбір кожного речення.',
+    group: 'Група',
+    connectorsTitle: 'Сполучники групи',
+    hintsTitle: 'Підказки',
+    check: 'Перевірити',
+    checking: 'Перевіряю… зазвичай до хвилини.',
+    modelLabel: 'Модель',
+    haiku: 'Haiku — швидко, економно',
+    sonnet: 'Sonnet — точніше',
+    opus: 'Opus — найточніше, дорожче',
+    checkOff: 'Перевірка доступна лише власнику сайту.',
+    checkLimit: 'Перевірки на сьогодні закінчилися.',
+    checkShort: 'Напишіть хоча б одне речення.',
+    checkFailed: 'Перевірка не вдалася. Спробуйте ще раз за хвилину.',
+    leftToday: 'Лишилося перевірок сьогодні: {n}',
+    markGroup: 'сполучник групи',
+    markOrder: 'порядок слів',
+    markMeaning: 'за змістом',
+    noConnector: 'сполучника немає',
   },
   da: {
     title: 'Forbinderord',
@@ -171,6 +257,26 @@ const STRINGS = {
     questions: {one: '{n} spørgsmål', other: '{n} spørgsmål'},
     empty: 'Der er ingen øvelser endnu.',
     error: 'Kunne ikke hente øvelserne. Prøv at genindlæse siden.',
+    write: 'Skriv selv',
+    writeIntro: 'Skriv én sætning pr. linje — efter hjælpen eller dine egne — med forbinderord fra den gruppe, du har valgt. Tjekkes af Claude på sideejerens abonnement, sætning for sætning.',
+    group: 'Gruppe',
+    connectorsTitle: 'Gruppens forbinderord',
+    hintsTitle: 'Hjælp',
+    check: 'Tjek',
+    checking: 'Tjekker… som regel under et minut.',
+    modelLabel: 'Model',
+    haiku: 'Haiku — hurtig, sparsom',
+    sonnet: 'Sonnet — mere præcis',
+    opus: 'Opus — mest præcis, dyrest',
+    checkOff: 'Tjek er kun åbent for sidens ejer.',
+    checkLimit: 'Dagens tjek er brugt.',
+    checkShort: 'Skriv mindst én sætning.',
+    checkFailed: 'Tjekket mislykkedes. Prøv igen om et minut.',
+    leftToday: 'Tjek tilbage i dag: {n}',
+    markGroup: 'forbinderord fra gruppen',
+    markOrder: 'ordstilling',
+    markMeaning: 'betydning',
+    noConnector: 'intet forbinderord',
   },
 };
 registerStrings(STRINGS);
@@ -231,6 +337,97 @@ function drillsHtml() {
   }).join('')}</ul>`;
 }
 
+// ---------- writing sentences: checked by Claude on the owner's subscription ----------
+// The server's WritingCheckService::MODELS, the one that spends least of the subscription first.
+const MODELS = ['haiku', 'sonnet', 'opus'];
+const CHECK_ERRORS = {403: 'checkOff', 429: 'checkLimit', 422: 'checkShort'};
+// A draft and the last review are per-viewer conveniences: they may be gone, and the page works without them.
+const store = {
+  get: key => { try { return localStorage.getItem(key) ?? ''; } catch { return ''; } },
+  set: (key, value) => { try { localStorage.setItem(key, value); } catch {} },
+};
+let groups = [];
+let offer = null;
+
+const chosenGroup = () => groups.find(g => g.id === $('#writeGroup').value) ?? groups[0];
+const chosenModel = () => MODELS.includes(store.get('skriv:model')) ? store.get('skriv:model') : MODELS[0];
+
+function paintWrite() {
+  if (!offer?.available || groups.length === 0) { $('#write').hidden = true; return; }
+  const group = chosenGroup();
+  $('#write').hidden = false;
+  $('#writeTitle').textContent = t('write');
+  $('#writeIntro').textContent = t('writeIntro');
+  $('#groupLabel').textContent = t('group');
+  $('#modelLabel').textContent = t('modelLabel');
+  $('#writeCheck').textContent = t('check');
+  $('#writeLeft').textContent = t('leftToday').replace('{n}', offer.left_today);
+  $('#writeGroup').innerHTML = groups.map(g =>
+    `<option value="${esc(g.id)}" ${g.id === group.id ? 'selected' : ''}>${esc(g.title)} — ${esc(g.ru)}</option>`).join('');
+  $('#writeModel').innerHTML = MODELS.map(m => `<option value="${m}" ${m === chosenModel() ? 'selected' : ''}>${esc(t(m))}</option>`).join('');
+  $('#writeHelp').innerHTML = `<p style="margin:0 0 .3rem"><b>${esc(t('connectorsTitle'))}:</b> <span lang="da">${esc(group.connectors.join(', '))}</span></p>
+    <p style="margin:0 0 .2rem"><b>${esc(t('hintsTitle'))}:</b></p>
+    <ul class="plain" lang="da">${group.hints.map(h => `<li>${esc(h)}</li>`).join('')}</ul>`;
+  $('#writeText').value = store.get(`fo-skriv:${group.id}`);
+  paintReview(store.get(`fo-skriv:${group.id}:review`));
+}
+
+/** The last review of this group, kept in the browser beside the draft it was made of. */
+function paintReview(saved) {
+  let r = null;
+  try { r = saved ? JSON.parse(saved) : null; } catch {}
+  if (!r?.feedback) { $('#writeReview').innerHTML = ''; return; }
+  const mark = (ok, label) => `<span class="mark ${ok ? '' : 'no'}">${ok ? '✓' : '✗'} ${esc(t(label))}</span>`;
+  $('#writeReview').innerHTML = `<div id="writeReviewCard">
+    <p style="margin:.8rem 0 0">${esc(r.feedback.summary)}</p>
+    <ul class="review">${r.feedback.sentences.map(x => `<li>
+      <span lang="da">${x.corrected && x.corrected !== x.original
+        ? `<del>${esc(x.original)}</del><br><ins>${esc(x.corrected)}</ins>` : esc(x.original)}</span>
+      <div class="marks">${x.connector ? `<span class="mark" lang="da">${esc(x.connector)}</span>` : `<span class="mark no">${esc(t('noConnector'))}</span>`}
+        ${mark(x.in_group, 'markGroup')}${mark(x.order_ok, 'markOrder')}${mark(x.meaning_ok, 'markMeaning')}</div>
+      <span class="muted">${esc(x.explanation)}</span></li>`).join('')}</ul></div>`;
+}
+
+async function checkSentences() {
+  const group = chosenGroup();
+  $('#writeCheck').disabled = true;
+  $('#writeState').textContent = t('checking');
+  try {
+    const result = await api('/modultest/skriv/check', {method: 'POST',
+      body: {task: group.id, text: $('#writeText').value, lang: currentLang(), model: $('#writeModel').value}});
+    store.set(`fo-skriv:${group.id}:review`, JSON.stringify(result));
+    offer.left_today = result.left_today;
+    $('#writeState').textContent = '';
+    $('#writeLeft').textContent = t('leftToday').replace('{n}', offer.left_today);
+    paintReview(JSON.stringify(result));
+  } catch (e) {
+    $('#writeState').textContent = t(CHECK_ERRORS[e.status] ?? 'checkFailed');
+  } finally {
+    $('#writeCheck').disabled = false;
+  }
+}
+
+$('#writeGroup').onchange = () => paintWrite();
+$('#writeModel').onchange = () => store.set('skriv:model', $('#writeModel').value);
+$('#writeText').oninput = () => store.set(`fo-skriv:${chosenGroup().id}`, $('#writeText').value);
+$('#writeCheck').onclick = () => checkSentences();
+
+/**
+ * The check runs on the owner's own subscription, so the card shows only for whom the server
+ * offers it. Every drawing of the page asks again; only the newest answer is drawn.
+ */
+let asked = 0;
+async function offerWrite() {
+  const mine = ++asked;
+  const [answer, list] = await Promise.all([
+    api('/modultest/skriv/check').catch(() => null),
+    groups.length ? groups : fetch('/forbinderord-skriv.json').then(r => r.json()).then(d => d.groups).catch(() => []),
+  ]);
+  if (mine !== asked) return;
+  [offer, groups] = [answer, list];
+  paintWrite();
+}
+
 function render() {
   document.documentElement.lang = currentLang();
   $('#title').textContent = t('title');
@@ -238,6 +435,7 @@ function render() {
   $('#drillsTitle').textContent = t('drills');
   $('#drillsBox').innerHTML = drillsHtml();
   paintLanguages();
+  offerWrite();
 }
 
 $('#groups').innerHTML = GROUPS.map(([name, ru, words, formal, example]) => {

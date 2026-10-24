@@ -66,6 +66,18 @@ final class SubscriptionWritingReviewerTest extends TestCase
         self::assertSame(['summary', 'verdict', 'task', 'errors', 'strengths', 'corrected'], $this->jobs[0]['schema']['required']);
     }
 
+    /** Each kind of task has its own prompt and schema: a connector task is not reviewed as a letter. */
+    public function testAConnectorTaskIsAskedWithTheConnectorPrompt(): void
+    {
+        $answer = ['output' => ['summary' => 'Godt.', 'sentences' => []]] + $this->answered();
+
+        $review = (new SubscriptionWritingReviewer($this->dir, 10, $this->worker($answer)))
+            ->review((new WritingTasks())->find('fo-tid'), 'Først spiste vi, derefter gik vi.', 'ru', 'haiku');
+
+        self::assertSame(['summary', 'sentences'], $this->jobs[0]['schema']['required']);
+        self::assertSame([], $review['feedback']['sentences']);
+    }
+
     public function testReturnsTheReviewAndWhatItCostAndTidiesUp(): void
     {
         $review = (new SubscriptionWritingReviewer($this->dir, 10, $this->worker($this->answered(), after: 3)))

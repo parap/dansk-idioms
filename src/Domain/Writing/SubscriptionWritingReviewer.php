@@ -20,7 +20,7 @@ final class SubscriptionWritingReviewer implements WritingReviewer
         private string $dir,
         private int $timeoutSeconds = 170,
         ?callable $wait = null,
-        private WritingPrompt $prompt = new WritingPrompt(),
+        private ?ReviewPrompt $prompt = null,
     ) {
         $this->wait = $wait ?? static fn() => usleep((int) (self::LOOK_EVERY_SECONDS * 1_000_000));
     }
@@ -36,11 +36,13 @@ final class SubscriptionWritingReviewer implements WritingReviewer
         $job    = "{$this->dir}/queue/{$id}.json";
         $answer = "{$this->dir}/done/{$id}.json";
 
+        $prompt = $this->prompt ?? ReviewPrompts::for($task);
+
         // Written aside and renamed in, so the worker never reads half a job.
         file_put_contents("{$job}.part", json_encode([
-            'system' => $this->prompt->system(),
-            'prompt' => $this->prompt->user($task, $text, $lang),
-            'schema' => $this->prompt->schema(),
+            'system' => $prompt->system(),
+            'prompt' => $prompt->user($task, $text, $lang),
+            'schema' => $prompt->schema(),
             'model'  => $model,
         ], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR));
         rename("{$job}.part", $job);
@@ -48,7 +50,7 @@ final class SubscriptionWritingReviewer implements WritingReviewer
         for ($look = 0; $look < $this->timeoutSeconds / self::LOOK_EVERY_SECONDS; $look++) {
             ($this->wait)();
             if (is_file($answer)) {
-                return $this->read($answer);
+                return $this->read($answer, $prompt);
             }
         }
 
@@ -57,7 +59,7 @@ final class SubscriptionWritingReviewer implements WritingReviewer
     }
 
     /** @return array{feedback:array<string,mixed>,model:string,input_tokens:int,output_tokens:int} */
-    private function read(string $file): array
+    private function read(string $file, ReviewPrompt $prompt): array
     {
         $answer = json_decode((string) file_get_contents($file), true);
         unlink($file);
@@ -66,7 +68,7 @@ final class SubscriptionWritingReviewer implements WritingReviewer
         }
 
         return [
-            'feedback'      => $this->prompt->parse(json_encode($answer['output'] ?? null)),
+            'feedback'      => $prompt->parse(json_encode($answer['output'] ?? null)),
             'model'         => (string) ($answer['model'] ?? ''),
             'input_tokens'  => (int) ($answer['input_tokens'] ?? 0),
             'output_tokens' => (int) ($answer['output_tokens'] ?? 0),
