@@ -5,7 +5,7 @@ title: Frivillig i genbrugsbutikken
 
 --- text ---
 Hver onsdag og lørdag står 68-årige Kirsten Mortensen bag disken i Røde Kors' genbrugsbutik
-i Vejle. Hun har været frivillig i butikken i fem år, siden hun gik på pension fra sit job
+i Vejle. {{0}} Hun har været frivillig i butikken i fem år, siden hun gik på pension fra sit job
 som bogholder. {{1}} "Jeg har brug for at have noget at stå op til," siger hun.
 
 Butikken sælger brugt tøj, bøger, legetøj og køkkenting, som folk har givet. Alle, der
@@ -32,8 +32,10 @@ D Pengene bliver blandt andet brugt til at hjælpe ensomme ældre og familier i 
 E En gang om måneden mødes de også for at drikke kaffe, selvom ingen af dem har vagt.
 F Butikken har kun åbent om lørdagen, fordi der ikke er nok frivillige.
 G Kirsten har aldrig været frivillig før, og hun ved ikke, om hun vil fortsætte.
+H Butikken ligger på gågaden, lige ved siden af en bager.
 
 --- questions ---
+0. H
 1. A
 2. D
 3. B

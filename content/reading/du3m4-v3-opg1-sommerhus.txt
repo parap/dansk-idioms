@@ -4,7 +4,7 @@ paper: du3m4-v3
 title: Sommerhus ved Vesterhavet
 
 --- text ---
-Der findes over 220.000 sommerhuse i Danmark, og for mange danskere er en uge i
+Der findes {{0}} 220.000 sommerhuse i Danmark, og for mange danskere er en uge i
 sommerhus lige så vigtig som en rejse til udlandet. Familien Nielsen fra Herning har
 lejet det samme hus ved Vesterhavet hver sommer, {{1}} børnene var små.
 
@@ -33,6 +33,12 @@ Om fem dage skal familien Nielsen hjem igen. "Det er altid lidt trist," siger Lo
 "Men vi har allerede {{8}} huset til næste år."
 
 --- questions ---
+0.
+  mellem
+  siden
+* over
+  efter
+
 1.
 * siden
   indtil

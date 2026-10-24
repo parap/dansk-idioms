@@ -4,7 +4,7 @@ paper: du3m4-v4
 title: Et halvt år på højskole
 
 --- text ---
-Da Sofie Larsen blev student, vidste hun ikke, hvad hun ville læse. Hendes forældre foreslog,
+Da Sofie Larsen blev student, vidste hun ikke, hvad hun ville læse. {{0}} Hendes forældre foreslog,
 at hun tog på højskole, og i januar flyttede hun ind på en højskole på Fyn. {{1}} I dag siger
 hun, at det var den bedste beslutning, hun har taget.
 
@@ -32,8 +32,10 @@ D Det var mange penge for hende, som ikke havde et fast job.
 E De ses stadig flere gange om året, selvom de bor langt fra hinanden.
 F Hun syntes, at maden på højskolen var for dyr, og lavede derfor selv mad.
 G Undervisningen slutter hver dag med en eksamen, som eleverne skal bestå.
+H Alle hendes venner skulle enten ud at rejse eller begynde på universitetet.
 
 --- questions ---
+0. H
 1. A
 2. B
 3. C

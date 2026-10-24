@@ -424,12 +424,12 @@ final class ReadingSessionService
         );
 
         $passages = Db::fetchAll(
-            'SELECT p.id, p.slug, p.kind, p.title, p.body, p.youtube_id, p.pass_points, p.vaerdier_min,
+            'SELECT p.id, p.slug, p.kind, p.title, p.body, p.example, p.youtube_id, p.pass_points, p.vaerdier_min,
                     MIN(si.position) AS first_position
              FROM reading_passages p
              JOIN reading_session_items si ON si.passage_id = p.id
              WHERE si.session_id = ?
-             GROUP BY p.id, p.slug, p.kind, p.title, p.body, p.youtube_id, p.pass_points, p.vaerdier_min
+             GROUP BY p.id, p.slug, p.kind, p.title, p.body, p.example, p.youtube_id, p.pass_points, p.vaerdier_min
              ORDER BY first_position',
             [(int) $session['id']]
         );
@@ -478,6 +478,8 @@ final class ReadingSessionService
                     'kind'  => $p['kind'],
                     'title'   => $p['title'],
                     'body'    => $p['body'],
+                    // Shown answered, so it gives nothing away.
+                    'example' => $p['example'] === null ? null : json_decode((string) $p['example'], true),
                     'youtube' => $p['youtube_id'],
                 ],
                 $passages

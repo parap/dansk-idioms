@@ -56,14 +56,16 @@ foreach ($files as $file) {
                 // Nothing to do is not a rejection. Conflating the two means a batch of
                 // the whole directory can never succeed twice, which is exactly how this
                 // is run from a deployment. Notes are display only, so they are kept current.
-                // The paper and new questions are written for the same reason.
-                $notes = $repo->refreshNotes($doc);
-                $paper = $repo->refreshPaper($doc);
+                // The paper, the worked example and new questions are written for the same reason.
+                $notes   = $repo->refreshNotes($doc);
+                $paper   = $repo->refreshPaper($doc);
+                $example = $repo->refreshExample($doc);
                 $new   = $repo->appendItems($doc);
                 $added += $new;
-                printf("  %-40s slug '%s' already loaded -- pass --replace to overwrite%s%s%s\n",
+                printf("  %-40s slug '%s' already loaded -- pass --replace to overwrite%s%s%s%s\n",
                     $name, $doc['slug'], $notes > 0 ? ", {$notes} note(s) refreshed" : '',
                     $paper > 0 ? ", paper set to " . ($doc['paper'] ?? 'none') : '',
+                    $example > 0 ? ', example (0) written' : '',
                     $new > 0 ? ", {$new} question(s) added" : '');
                 $skipped++;
                 continue;

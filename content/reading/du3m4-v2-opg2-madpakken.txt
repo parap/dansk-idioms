@@ -6,7 +6,7 @@ title: Danskernes madpakke
 --- text ---
 Rugbrød med leverpostej, et stykke ost og en gulerod i en plastikboks. Sådan ser
 frokosten ud for de fleste danske skolebørn. {{1}} I mange andre lande spiser børnene et
-varmt måltid i skolen, men i Danmark har madpakken været det normale i over hundrede år.
+varmt måltid i skolen, men i Danmark har madpakken været det normale i over hundrede år. {{0}}
 
 Madpakken har dog et dårligt ry. Mange børn klager over, at den er kedelig, og at brødet
 er blevet blødt, når de skal spise det. {{2}} Nogle forældre bruger derfor tid om aftenen
@@ -32,8 +32,10 @@ E Indtil de bliver enige, vil de fleste danske børn nok fortsat åbne en madpak
   dag ved halvtolvtiden.
 F Han synes, at maden i kantinen er alt for dyr.
 G Det var første gang, hun havde prøvet at bage brød.
+H Allerede omkring år 1900 fik mange børn rugbrød med hjemmefra i skole.
 
 --- questions ---
+0. H
 1. A
 2. B
 3. C

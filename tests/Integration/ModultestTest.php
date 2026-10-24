@@ -310,4 +310,123 @@ final class ModultestTest extends IntegrationTestCase
 
         return $sid;
     }
+
+    // ---- the worked example (0) --------------------------------------------
+
+    /** The cloze and insertion tasks as the paper prints them, each opening with an example. */
+    private static function withExample(string $doc): string
+    {
+        return str_replace(
+            [
+                'Der står kød på menuen,',
+                "--- questions ---\n1.\n* når",
+                'Astrid arbejder i en butik.',
+                "C Hun kan ikke lide kaffe.\n",
+                "--- questions ---\n1. A",
+            ],
+            [
+                'Der står {{0}} kød på menuen,',
+                "--- questions ---\n0.\n  aldrig\n* som regel\n  sjældent\n\n1.\n* når",
+                'Astrid arbejder i en butik. {{0}}',
+                "C Hun kan ikke lide kaffe.\nD Hun går i 9. klasse.\n",
+                "--- questions ---\n0. D\n1. A",
+            ],
+            $doc
+        );
+    }
+
+    private function publishPaperWithExamples(): void
+    {
+        $this->publish(self::MC, self::WRITE, self::withExample(self::CLOZE), self::withExample(self::INSERT));
+    }
+
+    public function testATaskServesItsExampleWithItsText(): void
+    {
+        $this->publishPaperWithExamples();
+
+        $passages = array_column($this->sit()['passages'], null, 'slug');
+
+        self::assertSame(['aldrig', 'som regel', 'sjældent'], $passages['du3m4-v9-opg1-mad']['example']['options']);
+        self::assertSame(1, $passages['du3m4-v9-opg1-mad']['example']['answer']);
+        self::assertSame('D', $passages['du3m4-v9-opg2-job']['example']['part']);
+        self::assertSame('Hun går i 9. klasse.', $passages['du3m4-v9-opg2-job']['example']['text']);
+        self::assertNull($passages['du3m4-v9-opg3-gartner']['example']);
+        self::assertStringContainsString('{{0}}', $passages['du3m4-v9-opg1-mad']['body']);
+    }
+
+    public function testAnExampleIsNoQuestionAndScoresNothing(): void
+    {
+        $this->publishPaperWithExamples();
+
+        $round = $this->sit();
+
+        self::assertCount(7, $round['items']);
+        self::assertSame(2 + 4 + 2 + 2, $round['points_max']);
+        self::assertSame(7, $this->repo->publishedModultests()[0]['questions']);
+    }
+
+    /** On the paper the example's part stays in the list, so a gap can still be given it wrongly. */
+    public function testAnInsertionExampleStaysAmongTheParts(): void
+    {
+        $this->publishPaperWithExamples();
+        $round = $this->sit();
+
+        $job   = array_search('du3m4-v9-opg2-job', array_column($round['passages'], 'slug'), true);
+        $parts = array_column(array_values(array_filter($round['items'], static fn(array $i): bool => $i['passage'] === $job))[0]['options'], 'text');
+
+        self::assertCount(4, $parts);
+        self::assertContains('Hun går i 9. klasse.', $parts);
+    }
+
+    /** The tasks already sat gain their example on the next load; nothing graded changes. */
+    public function testLoadingAgainGivesATaskAlreadySatItsExample(): void
+    {
+        $this->publishPaper();
+        $sat   = $this->sit('anon-early');
+        $first = $this->position($sat, 'du3m4-v9-opg1-mad', 1);
+        $this->sessions->answer($sat['session_id'], $first, $this->correctIndex($sat['session_id'], $first));
+        $this->submit($sat['session_id']);
+
+        foreach ([self::CLOZE, self::INSERT] as $doc) {
+            self::assertSame(1, $this->repo->refreshExample((new PassageDocument())->parse(self::withExample($doc))));
+            self::assertSame(0, $this->repo->refreshExample((new PassageDocument())->parse(self::withExample($doc))), 'a second load changed it again');
+        }
+
+        $passages = array_column($this->sit()['passages'], null, 'slug');
+        self::assertSame(1, $passages['du3m4-v9-opg1-mad']['example']['answer']);
+        self::assertStringContainsString('{{0}}', $passages['du3m4-v9-opg2-job']['body']);
+        self::assertSame(
+            4,
+            (int) Db::fetchValue("SELECT COUNT(*) FROM reading_options o JOIN reading_passages p ON p.id = o.passage_id
+                                   WHERE p.slug = 'du3m4-v9-opg2-job' AND o.item_id IS NULL")
+        );
+        self::assertSame(1, $this->sessions->result($sat['session_id'])['points_scored']);
+    }
+
+    public function testRefusesToStoreAnExampleTheTextHasNoPlaceFor(): void
+    {
+        $doc = (new PassageDocument())->parse(self::withExample(self::CLOZE));
+        $doc['body'] = str_replace('{{0}}', 'som regel', $doc['body']);
+
+        $this->expectException(\Dansk\Domain\Reading\InvalidPassage::class);
+        $this->repo->save($doc);
+    }
+
+    public function testRefusesToStoreAnExampleWhosePartIsNotInTheBank(): void
+    {
+        $doc = (new PassageDocument())->parse(self::withExample(self::INSERT));
+        $doc['example']['part'] = 'H';
+
+        $this->expectException(\Dansk\Domain\Reading\InvalidPassage::class);
+        $this->repo->save($doc);
+    }
+
+    private function correctIndex(string $sid, int $position): int
+    {
+        return (int) Db::fetchValue(
+            'SELECT si.correct_index FROM reading_session_items si JOIN reading_sessions s ON s.id = si.session_id
+              WHERE s.public_id = ? AND si.position = ?',
+            [$sid, $position]
+        );
+    }
 }

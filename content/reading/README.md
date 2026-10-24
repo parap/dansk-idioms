@@ -78,6 +78,23 @@ som
 > Подлежащее относительного придаточного — der или som.
 ```
 
+**A worked example** opens a cloze or insertion task the way the Modultest paper prints
+it: gap `{{0}}` in the text and question `0.` underneath, written like any other question
+of the task. The page shows it answered, and it scores nothing. An insertion example names
+a part of its own, so the bank then offers more parts than the gaps and the example use.
+
+```
+--- text ---
+Der står kød på menuen, {{0}} danskerne laver aftensmad.
+
+--- questions ---
+0.
+  da
+  selvom
+* når
+  men
+```
+
 ## Loading
 
 ```bash
@@ -100,9 +117,10 @@ A real paper is 3 questions, 5 insertion gaps and 8 cloze gaps.
 ## Modultest DU3, module 4
 
 Files named `du3m4-v<variant>-opg<task>-…` are modelled on that test: task 1 is a cloze of
-about 330 words with eight gaps, task 2 an insertion with five gaps and two spare parts,
-task 3 a written gap task of ten words, task 4 six short everyday texts with one question
-each. A `paper: du3m4-v<variant>` header groups a variant: `/modultest` sits its four tasks
-together in 50 minutes, offers it once all four are published, and the reading rounds never
-draw a passage that has a paper. Loading the directory again writes a changed paper onto a
-passage already loaded.
+about 330 words with eight gaps and an example, task 2 an insertion with five gaps, an
+example and two spare parts, task 3 a written gap task of ten words, task 4 six short
+everyday texts with one question each. A `paper: du3m4-v<variant>` header groups a variant:
+`/modultest` sits its four tasks together in 50 minutes, offers it once all four are
+published, and the reading rounds never draw a passage that has a paper. Loading the
+directory again writes a changed paper, and a changed example with its text and part, onto
+a passage already loaded.

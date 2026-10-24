@@ -5,7 +5,7 @@ title: Træner i fodboldklubben
 
 --- text ---
 Da Samir Haddad flyttede til Nørresundby {{1}} tre år siden, var hans søn Yusuf otte
-år. Yusuf savnede sine gamle venner og talte næsten ikke dansk. En lærer foreslog
+år. Yusuf savnede sine gamle venner og talte {{0}} ikke dansk. En lærer foreslog
 derfor, at han skulle prøve at spille fodbold i den lokale klub.
 
 Den første træning var svær. Yusuf forstod ikke, hvad træneren sagde, men han kunne se,
@@ -35,6 +35,12 @@ lidt pinligt, når han råber," siger han og griner. "Men jeg er glad for, at ha
 {{8}}."
 
 --- questions ---
+0.
+* næsten
+  meget
+  aldrig
+  kun
+
 1.
 * for
   i

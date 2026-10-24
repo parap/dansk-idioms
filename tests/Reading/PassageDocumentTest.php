@@ -577,4 +577,118 @@ final class PassageDocumentTest extends TestCase
 
         (new PassageDocument())->parse(str_replace('paper: du3m4-v1', 'paper: Variant 1', self::WRITE));
     }
+
+    // ---- the worked example (0) --------------------------------------------
+
+    private const CLOZE_EXAMPLE = <<<'DOC'
+        kind: cloze
+        slug: mad-om-aftenen
+        title: Mad om aftenen
+
+        --- text ---
+        Der står kød på menuen, {{0}} danskerne laver aftensmad. {{1}} spiser
+        mange også grøntsager.
+
+        --- questions ---
+        0.
+          da
+          selvom
+        * når
+          men
+
+        1.
+        * Desuden
+          Derfor
+          Dernæst
+        DOC;
+
+    private const INSERT_EXAMPLE = <<<'DOC'
+        kind: insert
+        slug: fritidsjob
+        title: Fritidsjob
+
+        --- text ---
+        Astrid arbejder i en butik. {{0}} Hun kan lide sine kolleger. {{1}}
+
+        --- parts ---
+        A Hun sparer det meste af lønnen op.
+        B Hun pakker varer ud og sætter priser på.
+        C Hun vil gerne rejse til Spanien.
+
+        --- questions ---
+        0. B
+        1. A
+        DOC;
+
+    /** The example is shown filled in and scores nothing, so it is kept apart from the items. */
+    public function testAClozeExampleIsKeptApartFromTheItems(): void
+    {
+        $doc = $this->parse(self::CLOZE_EXAMPLE);
+
+        self::assertSame(['da', 'selvom', 'når', 'men'], $doc['example']['options']);
+        self::assertSame(2, $doc['example']['answer']);
+        self::assertSame([1], array_column($doc['items'], 'position'));
+        self::assertStringContainsString('{{0}}', $doc['body']);
+    }
+
+    public function testAnInsertionExampleNamesItsPart(): void
+    {
+        $doc = $this->parse(self::INSERT_EXAMPLE);
+
+        self::assertSame(['part' => 'B', 'text' => 'Hun pakker varer ud og sætter priser på.'], $doc['example']);
+        self::assertSame([1], array_column($doc['items'], 'position'));
+        self::assertSame(['A', 'B', 'C'], array_column($doc['bank'], 'label'));
+    }
+
+    public function testADocumentWithoutAnExampleHasNone(): void
+    {
+        foreach ([self::CLOZE, self::INSERT] as $source) {
+            $doc = $this->parse($source);
+            self::assertArrayHasKey('example', $doc);
+            self::assertNull($doc['example']);
+        }
+    }
+
+    public function testRefusesAnExampleMarkerWithoutAnExample(): void
+    {
+        $this->expectException(InvalidPassage::class);
+        $this->parse(str_replace("0.\n  da\n  selvom\n* når\n  men\n", '', self::CLOZE_EXAMPLE));
+    }
+
+    public function testRefusesAnExampleTheTextHasNoPlaceFor(): void
+    {
+        $this->expectException(InvalidPassage::class);
+        $this->parse(str_replace('{{0}}', 'når', self::CLOZE_EXAMPLE));
+    }
+
+    public function testAClozeExampleNeedsItsAnswerStarred(): void
+    {
+        $this->expectException(InvalidPassage::class);
+        $this->parse(str_replace('* når', '  når', self::CLOZE_EXAMPLE));
+    }
+
+    public function testRefusesAnExampleInAWrittenTask(): void
+    {
+        $this->expectException(InvalidPassage::class);
+        $this->expectExceptionMessageMatches('/example/');
+
+        $this->parse(str_replace(
+            ["Jeg har ingen ansatte,", "1.\nmen\n"],
+            ["Jeg {{0}} ingen ansatte,", "0.\nhar\n\n1.\nmen\n"],
+            self::WRITE
+        ));
+    }
+
+    public function testRefusesAnExampleWhosePartAlsoFillsAGap(): void
+    {
+        $this->expectException(InvalidPassage::class);
+        $this->parse(str_replace('1. A', '1. B', self::INSERT_EXAMPLE));
+    }
+
+    /** The example's part is spent, so spare parts are counted beyond it and the gaps. */
+    public function testRefusesAnInsertionWhoseOnlySparePartIsTheExample(): void
+    {
+        $this->expectException(InvalidPassage::class);
+        $this->parse(str_replace("C Hun vil gerne rejse til Spanien.\n", '', self::INSERT_EXAMPLE));
+    }
 }
