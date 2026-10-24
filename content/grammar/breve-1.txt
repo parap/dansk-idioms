@@ -1,0 +1,88 @@
+kind: grammar
+slug: breve-1
+title: Breve: formelle breve
+
+--- questions ---
+1. Hvilken overskrift passer til en klage?
+> В официальном письме заголовок коротко называет дело и номер заказа или клиента. Обращения и прощания в заголовок не ставят.
+* Klage over vaskemaskine, ordrenummer 48213
+  Hej Hvidevarehuset
+  Med venlig hilsen
+
+2. Hvilken sætning passer som indledning i en opsigelse?
+> Вступление сразу называет цель письма. «Настоящим я расторгаю свой договор» — Jeg vil hermed opsige …
+* Jeg vil hermed opsige mit mobilabonnement.
+  Hvordan går det med jer?
+  Jeg ser frem til at høre fra jer.
+
+3. Hvor står datoen i et formelt brev?
+> По датской традиции дата стоит вверху справа, под ней или рядом — город.
+* Øverst til højre.
+  Nederst under hilsenen.
+  I overskriften.
+
+4. Hvilken hilsen passer i et brev til en virksomhed?
+> В официальном письме — Med venlig hilsen или Venlig hilsen. Knus и kram — для друзей и родных.
+* Med venlig hilsen
+  Knus
+  Kram og kys
+
+5. Hvilken sætning passer i afslutningen af en jobansøgning?
+> В конце заявления о работе выражают надежду на ответ и собеседование. Я с нетерпением жду вашего ответа.
+* Jeg ser frem til at høre fra jer.
+  Jeg forventer, at I refunderer beløbet.
+  Jeg vil hermed opsige stillingen.
+
+6. Hvilken sætning hører til i hovedafsnittet i en klage?
+> В основной части жалобы описывают, что именно пошло не так. Товар был сломан, когда его доставили.
+* Varen var i stykker, da den blev leveret.
+  Tak for en dejlig oplevelse.
+  Jeg søger hermed stillingen som kok.
+
+7. Jeg skriver ___ at klage over min ferierejse.
+> for at + инфинитив — «чтобы». Я пишу, чтобы пожаловаться на свою поездку.
+* for
+  til
+  om
+
+8. Jeg ser frem ___ at høre fra jer.
+> Устойчивое выражение: se frem til — «с нетерпением ждать». Жду вашего ответа.
+* til
+  på
+  efter
+
+9. Jeg søger ___ stillingen som pædagogmedhjælper.
+> hermed — «настоящим»: официальное слово в заявлениях и расторжениях. Настоящим я подаю заявление на должность помощника воспитателя.
+* hermed
+  heller
+  selvom
+
+10. Jeg er vant ___ at arbejde om aftenen.
+> være vant til — «привыкнуть к». Я привык работать по вечерам.
+* til
+  med
+  på
+
+11. Jeg vil gerne bede ___ en skriftlig bekræftelse.
+> bede om — «просить о». Прошу письменного подтверждения.
+* om
+  for
+  på
+
+12. Hvilken rækkefølge har et formelt brev?
+> Порядок частей: вступление (зачем пишу), основная часть (подробности), завершение (чего жду, прощание).
+* Indledning, hovedafsnit, afslutning
+  Afslutning, indledning, hovedafsnit
+  Hovedafsnit, afslutning, indledning
+
+13. Jeg har med stor interesse læst ___ annonce på Jobnet.
+> В письме компании к ней обращаются на «вы» во множественном числе: I, jer, jeres. Я с большим интересом прочитал ваше объявление на Jobnet.
+* jeres
+  dine
+  hans
+
+14. Hvilken sætning passer i en opsigelse?
+> В отказе от договора называют дату окончания: «Договор заканчивается 31 декабря».
+* Abonnementet slutter den 31. december.
+  Jeg glæder mig til at begynde.
+  Varen blev leveret for sent.

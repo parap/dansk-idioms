@@ -99,8 +99,8 @@ const STRINGS = {
     empty: 'Наборов пока нет.',
     missing: 'Такого набора нет.',
     back: 'Все наборы',
-    connectors: 'Связующие слова', connectorSets: {one: '{n} набор', few: '{n} набора', many: '{n} наборов', other: '{n} набора'},
-    backConnectors: 'Связующие слова',
+    connectors: 'Связующие слова', letters: 'Письма по шаблону',
+    setCount: {one: '{n} набор', few: '{n} набора', many: '{n} наборов', other: '{n} набора'},
     again: 'Ещё раунд',
     pool: 'в наборе {n}',
     score: 'Верно',
@@ -114,8 +114,8 @@ const STRINGS = {
     empty: 'No sets yet.',
     missing: 'There is no such set.',
     back: 'All sets',
-    connectors: 'Connectors', connectorSets: {one: '{n} set', other: '{n} sets'},
-    backConnectors: 'Connectors',
+    connectors: 'Connectors', letters: 'Letter templates',
+    setCount: {one: '{n} set', other: '{n} sets'},
     again: 'Another round',
     pool: '{n} in the set',
     score: 'Correct',
@@ -129,8 +129,8 @@ const STRINGS = {
     empty: 'Наборів поки немає.',
     missing: 'Такого набору немає.',
     back: 'Усі набори',
-    connectors: 'Сполучні слова', connectorSets: {one: '{n} набір', few: '{n} набори', many: '{n} наборів', other: '{n} набору'},
-    backConnectors: 'Сполучні слова',
+    connectors: 'Сполучні слова', letters: 'Листи за шаблоном',
+    setCount: {one: '{n} набір', few: '{n} набори', many: '{n} наборів', other: '{n} набору'},
     again: 'Ще раунд',
     pool: 'у наборі {n}',
     score: 'Правильно',
@@ -144,8 +144,8 @@ const STRINGS = {
     empty: 'Der er ingen sæt endnu.',
     missing: 'Det sæt findes ikke.',
     back: 'Alle sæt',
-    connectors: 'Forbinderord', connectorSets: {one: '{n} sæt', other: '{n} sæt'},
-    backConnectors: 'Forbinderord',
+    connectors: 'Forbinderord', letters: 'Breve',
+    setCount: {one: '{n} sæt', other: '{n} sæt'},
     again: 'En runde til',
     pool: '{n} i sættet',
     score: 'Rigtige',
@@ -174,9 +174,13 @@ function paintLanguages() {
 const PICTURES = {'datid-foernutid': '⏳', 'ordstilling': '🔀', 'hvis-ville': '💭', 'passiv': '🧽',
   'der-som': '🔗', 'praepositioner': '📍', 'sig-hinanden': '🪞', 'faste-udtryk': '💬'};
 
-// A connector drill -- a slug with the segment forbinderord- -- is offered on /forbinderord,
-// beside the rules it drills, and the list here shows one tile for all of them.
-const isConnector = slug => /(^|-)forbinderord-/.test(slug);
+// A drill whose slug has a topic's segment -- forbinderord-tid-1, breve-1 -- is offered on the
+// topic's own page, beside what it drills, and the list here shows one tile for the topic.
+const TOPICS = [
+  {segment: 'forbinderord', href: '/forbinderord', pic: '🧩', name: 'connectors', hue: 200},
+  {segment: 'breve', href: '/breve', pic: '✉️', name: 'letters', hue: 30},
+];
+const topicOf = slug => TOPICS.find(topic => new RegExp(`(^|-)${topic.segment}-`).test(slug));
 
 function picture(slug) {
   return PICTURES[slug.replace(/-\d+$/, '')] ?? '📘';
@@ -184,16 +188,17 @@ function picture(slug) {
 
 function listView() {
   if (sets.length === 0) return `<div class="card"><p class="muted" style="margin:0">${esc(t('empty'))}</p></div>`;
-  const own = sets.filter(f => !isConnector(f.slug));
-  const connectors = sets.filter(f => isConnector(f.slug)).length;
+  const own = sets.filter(f => !topicOf(f.slug));
+  const topics = TOPICS.map(topic => ({...topic, sets: sets.filter(f => topicOf(f.slug) === topic).length}))
+    .filter(topic => topic.sets > 0);
   return `<div class="card">
       <p class="muted" style="margin:0 0 .9rem">${esc(t('intro'))}</p>
       <ul id="sets">
-        ${connectors ? `<li><a href="/forbinderord" style="--h:200">
-            <span class="pic" aria-hidden="true">🧩</span>
-            <span class="title">${esc(t('connectors'))}</span>
-            <span class="n">${esc(t('connectorSets', connectors).replace('{n}', connectors))}</span>
-          </a></li>` : ''}
+        ${topics.map(topic => `<li><a href="${topic.href}" style="--h:${topic.hue}">
+            <span class="pic" aria-hidden="true">${topic.pic}</span>
+            <span class="title">${esc(t(topic.name))}</span>
+            <span class="n">${esc(t('setCount', topic.sets).replace('{n}', topic.sets))}</span>
+          </a></li>`).join('')}
         ${own.map((f, i) => {
           // The golden angle keeps neighbouring sets far apart on the colour wheel.
           const hue = Math.round((i * 137.508) % 360);
@@ -215,8 +220,9 @@ function promptHtml(item) {
 
 function setView() {
   const set = round.passages[0];
-  const back = isConnector(set.slug)
-    ? `<a class="cta back" href="/forbinderord"><b aria-hidden="true">←</b><span>${esc(t('backConnectors'))}</span></a>`
+  const topic = topicOf(set.slug);
+  const back = topic
+    ? `<a class="cta back" href="${topic.href}"><b aria-hidden="true">←</b><span>${esc(t(topic.name))}</span></a>`
     : `<a class="cta back" href="/grammar"><b aria-hidden="true">←</b><span>${esc(t('back'))}</span></a>`;
   const right = Object.values(marks).filter(m => m.chosen === m.correct).length;
   const answered = Object.keys(marks).length;

@@ -31,6 +31,7 @@ final class Shell
         '/verbs'  => '/verbs.html',
         '/grammar' => '/grammar.html',
         '/forbinderord' => '/forbinderord.html',
+        '/breve' => '/breve.html',
         '/modultest' => '/modultest.html',
         '/modultest/skriv' => '/skriv.html',
     ];

@@ -175,6 +175,15 @@ SEED_PHP = r"""
             ['label' => 'C', 'text' => 'selvom'],
         ]]],
     ]);
+    // A letter-writing drill, which the grammar list gathers onto the letter page.
+    $repo->save([
+        'slug' => 'ui-fixture-breve-1', 'kind' => 'grammar', 'title' => 'UI fixture breve', 'body' => null,
+        'items' => [['position' => 1, 'prompt' => 'Jeg ser frem ___ at høre fra jer.', 'note' => 'se frem til.', 'options' => [
+            ['label' => 'A', 'text' => 'til', 'correct' => true],
+            ['label' => 'B', 'text' => 'på'],
+            ['label' => 'C', 'text' => 'efter'],
+        ]]],
+    ]);
     // A Modultest paper of two tasks: a cloze opening with its worked example, and a written gap.
     $repo->save([
         'slug' => 'ui-fixture-mt-opg1', 'paper' => 'ui-fixture-paper', 'kind' => 'cloze', 'title' => 'UI fixture mt cloze',
@@ -1334,6 +1343,48 @@ def connector_sentences_are_checked_one_by_one(b):
     b.js("Object.keys(localStorage).filter(k => k.startsWith('fo-skriv:')).forEach(k => localStorage.removeItem(k))")
 
 
+@check
+def the_letter_page_marks_the_parts_of_each_letter(b):
+    b.goto('/breve')
+    b.until('!!document.querySelector("#letter .part")', what='the letter')
+    parts = b.js('[...document.querySelectorAll("#letter .part")].map(p => p.dataset.part)')
+    for part in ('modtager', 'dato', 'overskrift', 'indledning', 'hovedafsnit', 'afslutning', 'hilsen'):
+        assert part in parts, f'the complaint has no {part}: {parts}'
+    assert b.js('document.querySelectorAll("#tabs .tab").length') == 3, 'not three letters to choose from'
+    b.js('document.querySelector(".tab[data-letter=\'ansoegning\']").click()')
+    b.until('document.querySelector("#letter").textContent.includes("køkkenmedhjælper")', what='the job application')
+    assert 'afsender' in b.js('[...document.querySelectorAll("#letter .part")].map(p => p.dataset.part)'), \
+        'the job application has no sender at the top'
+    assert b.js('!!document.querySelector("#letter b.c")'), 'the connectors in the letter are not marked'
+    assert b.js('document.querySelectorAll("#phrases li").length') >= 4, 'the phrases for each part are missing'
+
+
+@check
+def the_letter_drills_are_gathered_onto_their_page(b):
+    only(['grammar'])
+    b.goto('/grammar')
+    b.until('!!document.querySelector("#sets")', what='the grammar set list')
+    assert b.js('!!document.querySelector("#sets a[href=\'/breve\']")'), 'the list has no way to the letter page'
+    assert not b.js('!!document.querySelector("#sets a[href=\'/grammar?s=ui-fixture-breve-1\']")'), \
+        'a letter drill is listed among the grammar sets'
+    b.goto('/breve')
+    b.until('!!document.querySelector("#exercises a")', what='the letter drills')
+    assert b.js('!!document.querySelector("#exercises a[href=\'/grammar?s=ui-fixture-breve-1\']")'), 'the letter drill is not offered'
+    assert not b.js('!!document.querySelector("#exercises a[href=\'/grammar?s=ui-fixture-forbinderord-1\']")'), \
+        'a connector drill is offered as a letter drill'
+    b.goto('/grammar?s=ui-fixture-breve-1')
+    b.until('document.querySelectorAll(".q").length === 1', what='the letter question')
+    assert b.js('document.querySelector("a.cta.back").getAttribute("href")') == '/breve', 'the drill does not lead back to the letters'
+
+
+@check
+def the_writing_and_connector_pages_lead_to_the_letters(b):
+    for path, ready in (('/modultest/skriv', '#draft'), ('/forbinderord', '#rules')):
+        b.goto(path)
+        b.until(f'!!document.querySelector("{ready}")', what=path)
+        assert b.js('!!document.querySelector("a[href=\'/breve\']")'), f'{path} has no way to the letter templates'
+
+
 def open_grammar_set(b):
     only(['grammar'])
     b.goto('/grammar?s=ui-fixture-grammar')
@@ -1558,7 +1609,7 @@ def the_check_is_sent_with_the_model_chosen_the_cheapest_by_default(b):
 def no_page_repeats_an_id(b):
     """Two elements under one id leave $('#x') reaching the first, and the other's button silently works the wrong one."""
     for path, ready in [('/', '.cta'), ('/modultest', '#view .card'), ('/modultest/skriv', '#draft'), ('/read', '#go'),
-                        ('/grammar', 'body'), ('/forbinderord', '#rules'), ('/proeve', 'body')]:
+                        ('/grammar', 'body'), ('/forbinderord', '#rules'), ('/breve', '#letter .part'), ('/proeve', 'body')]:
         b.goto(path)
         b.until(f'!!document.querySelector("{ready}")', what=path)
         twice = b.js("""(() => { const ids = [...document.querySelectorAll('[id]')].map(e => e.id);
@@ -1668,7 +1719,7 @@ def every_page_offers_the_same_languages(b):
     """A language offered on one page and missing on the next drops the reader back into
     Russian halfway through the site, and the fallback is silent."""
     try:
-        for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs', '/grammar', '/forbinderord', '/modultest', '/modultest/skriv'):
+        for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs', '/grammar', '/forbinderord', '/breve', '/modultest', '/modultest/skriv'):
             b.goto(path)
             b.until('!!document.querySelector(".lang")', what='the language switch on ' + path)
             assert offered_languages(b) == LANGUAGES, f'{path} offers {offered_languages(b)}'

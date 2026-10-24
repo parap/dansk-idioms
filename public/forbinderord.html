@@ -92,7 +92,7 @@
     <span id="langs" class="langs"></span>
   </header>
   <main id="view">
-    <div class="card"><p class="muted" id="intro" style="margin:0"></p></div>
+    <div class="card"><p class="muted" id="intro" style="margin:0 0 .5rem"></p><a href="/breve" id="toLetters"></a></div>
     <div class="card"><h2 id="drillsTitle"></h2><div id="drillsBox"></div></div>
     <div class="card" id="write" hidden>
       <h2 id="writeTitle"></h2>
@@ -164,6 +164,7 @@ import { $, esc, t, api, registerStrings, currentLang, setLang as applyLang } fr
 const STRINGS = {
   ru: {
     title: 'Связующие слова',
+    toLetters: 'Шаблоны официальных писем',
     intro: 'Связующие слова (forbinderord) — к рабочей тетради и Skriveguiden. Сначала тренажёры по группам, ниже справка: виды связок, порядок слов после них и таблица по смыслу.',
     drills: 'Тренажёры',
     book: 'тетрадь: {n}',
@@ -193,6 +194,7 @@ const STRINGS = {
   },
   en: {
     title: 'Connectors',
+    toLetters: 'Formal letter templates',
     intro: 'Danish connectors (forbinderord), to go with the workbook and Skriveguiden. Drills by group first; below them the rules, in Russian like the notes in the drills: the kinds of connectors, word order after them, and a table by meaning.',
     drills: 'Drills',
     book: 'workbook: {n}',
@@ -222,6 +224,7 @@ const STRINGS = {
   },
   uk: {
     title: 'Сполучні слова',
+    toLetters: 'Шаблони офіційних листів',
     intro: 'Сполучні слова (forbinderord) — до робочого зошита й Skriveguiden. Спершу тренажери за групами, нижче довідка російською, як і пояснення в тренажерах: види сполучників, порядок слів після них і таблиця за значенням.',
     drills: 'Тренажери',
     book: 'зошит: {n}',
@@ -251,6 +254,7 @@ const STRINGS = {
   },
   da: {
     title: 'Forbinderord',
+    toLetters: 'Skabeloner til formelle breve',
     intro: 'Forbinderord til arbejdshæftet og Skriveguiden. Først øvelser for hver gruppe; nedenunder reglerne, på russisk som forklaringerne i øvelserne: slags forbinderord, ordstilling efter dem og en tabel efter betydning.',
     drills: 'Øvelser',
     book: 'hæfte: {n}',
@@ -432,6 +436,7 @@ function render() {
   document.documentElement.lang = currentLang();
   $('#title').textContent = t('title');
   $('#intro').textContent = t('intro');
+  $('#toLetters').textContent = t('toLetters');
   $('#drillsTitle').textContent = t('drills');
   $('#drillsBox').innerHTML = drillsHtml();
   paintLanguages();

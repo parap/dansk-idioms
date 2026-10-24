@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#c8102e">
+<title>Breve</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#fff; --ink:#14171c; --muted:#676e7b; --line:#e0e4ea;
+    --accent:#c8102e; --accent-ink:#fff; --ok:#127a4a; --okbg:#e7f6ee;
+    --bad:#b3261e; --badbg:#fdecea; --chip:#eef1f5; --shadow:0 1px 2px rgba(20,23,28,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#121419;--card:#1b1e24;--ink:#e8ebf0;--muted:#98a1b0;--line:#2b3039;
+      --accent:#ff5a6e;--accent-ink:#1b1e24;--ok:#4cc38a;--okbg:#14301f;
+      --bad:#ff6b61;--badbg:#331b19;--chip:#232830;--shadow:none;}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  .wrap{max-width:820px;margin:0 auto;padding:20px 16px 64px}
+  header{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+  .brand{font-weight:700;letter-spacing:-.02em;font-size:1.05rem;color:inherit;text-decoration:none}
+  .brand:hover span{text-decoration:underline}
+  .brand span{color:var(--accent)}
+  header h1{font-size:1.2rem;margin:0}
+  .spacer{flex:1}
+  .lang{background:none;border:none;color:var(--muted);font:inherit;font-size:.85rem;
+    padding:.2rem .35rem;cursor:pointer;border-radius:5px}
+  .lang[aria-pressed=true]{color:var(--ink);font-weight:600;background:var(--chip)}
+  .langs{display:inline-flex;gap:.1rem}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:18px;box-shadow:var(--shadow);margin-bottom:16px}
+  .card h2{font-size:1.1rem;margin:0 0 .3rem}
+  .card h3{font-size:1rem;margin:1.1rem 0 .4rem}
+  .muted{color:var(--muted)}
+  p{margin:0 0 .7rem}
+  .tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+  .tab{padding:7px 12px;border-radius:9px;font:inherit;font-weight:600;cursor:pointer;
+    border:1px solid var(--line);background:var(--card);color:var(--ink)}
+  .tab[aria-pressed=true]{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+  .letter{display:grid;grid-template-columns:9.5rem 1fr;gap:.2rem 1rem;margin:.6rem 0 0}
+  .letter .part{font-size:.8rem;font-weight:600;color:var(--accent);text-align:right;padding-top:.15rem}
+  .letter .part span{display:block;font-weight:400;color:var(--muted)}
+  .letter .text{white-space:pre-line;padding:0 0 .7rem}
+  .letter .text.right{text-align:right}
+  b.c{color:var(--accent)}
+  ul.plain{margin:0 0 .4rem;padding-left:1.2rem}
+  #exercises{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+  .cta{display:inline-flex;align-items:center;gap:.6rem;padding:.75rem 1.1rem;border:1px solid var(--line);
+    border-radius:10px;background:var(--chip);color:var(--ink);font-weight:600;text-decoration:none}
+  .cta:hover,.cta:focus-visible{border-color:var(--accent)}
+  .cta b{color:var(--accent)}
+  .links{display:flex;flex-wrap:wrap;gap:10px}
+  a{color:var(--accent)}
+  [hidden]{display:none!important}
+  /* On a phone the part names sit above their text, not beside it */
+  @media (max-width:560px){ .letter{grid-template-columns:1fr} .letter .part{text-align:left;padding-top:.4rem}
+    .letter .part span{display:inline;margin-left:.4rem} .letter .text.right{text-align:left} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/">Dansk <span>idiomer</span></a>
+    <h1 id="title"></h1>
+    <span class="spacer"></span>
+    <span id="langs" class="langs"></span>
+  </header>
+  <main id="view">
+    <div class="card"><p class="muted" id="intro" style="margin:0"></p></div>
+    <div class="card">
+      <nav class="tabs" id="tabs"></nav>
+      <h2 id="letterTitle" lang="da"></h2>
+      <p class="muted" id="letterNote" lang="ru"></p>
+      <div class="letter" id="letter" lang="da"></div>
+      <h3 id="phrasesTitle"></h3>
+      <div id="phrases"></div>
+    </div>
+    <div class="card"><h2 id="practiceTitle"></h2><p class="muted" id="practiceIntro"></p>
+      <ul id="exercises"></ul>
+      <div class="links" style="margin-top:12px">
+        <a class="cta" href="/modultest/skriv" id="toSkriv"></a>
+        <a class="cta" href="/forbinderord" id="toConnectors"></a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+import { $, esc, t, api, registerStrings, currentLang, setLang as applyLang } from '/shared.js';
+
+const STRINGS = {
+  ru: {
+    title: 'Письма по шаблону',
+    intro: 'Три официальных письма — жалоба, отказ от договора и заявление о работе — с разметкой частей и фразами для каждой части. Такой же формат нужен в Skrivning Opgave 1 и в жизни. Письма свои, имена и фирмы вымышленные.',
+    letters: {klage: 'Жалоба', opsigelse: 'Отказ от договора', ansoegning: 'Заявление о работе'},
+    phrases: 'Фразы для каждой части',
+    practice: 'Потренироваться',
+    practiceIntro: 'Упражнения на части письма и устойчивые фразы, потом — своё письмо в задании на письмо.',
+    toSkriv: 'Письмо · Modultest',
+    toConnectors: 'Связующие слова',
+    questions: {one: '{n} вопрос', few: '{n} вопроса', many: '{n} вопросов', other: '{n} вопроса'},
+  },
+  en: {
+    title: 'Letter templates',
+    intro: 'Three formal letters — a complaint, a cancellation and a job application — with their parts marked and phrases for each part. Skrivning Opgave 1 asks for the same format, and so does life. The letters are our own; names and firms are made up.',
+    letters: {klage: 'Complaint', opsigelse: 'Cancellation', ansoegning: 'Job application'},
+    phrases: 'Phrases for each part',
+    practice: 'Practise',
+    practiceIntro: 'Exercises on the parts of a letter and set phrases, then a letter of your own in the writing task.',
+    toSkriv: 'Writing · Modultest',
+    toConnectors: 'Connectors',
+    questions: {one: '{n} question', other: '{n} questions'},
+  },
+  uk: {
+    title: 'Листи за шаблоном',
+    intro: 'Три офіційні листи — скарга, відмова від договору та заява про роботу — з розміткою частин і фразами для кожної частини. Такий самий формат потрібен у Skrivning Opgave 1 і в житті. Листи власні, імена та фірми вигадані.',
+    letters: {klage: 'Скарга', opsigelse: 'Відмова від договору', ansoegning: 'Заява про роботу'},
+    phrases: 'Фрази для кожної частини',
+    practice: 'Потренуватися',
+    practiceIntro: 'Вправи на частини листа й сталі фрази, потім — власний лист у завданні на письмо.',
+    toSkriv: 'Письмо · Modultest',
+    toConnectors: 'Сполучні слова',
+    questions: {one: '{n} питання', few: '{n} питання', many: '{n} питань', other: '{n} питання'},
+  },
+  da: {
+    title: 'Breve',
+    intro: 'Tre formelle breve — en klage, en opsigelse og en jobansøgning — med delene markeret og udtryk til hver del. Skrivning Opgave 1 beder om samme form, og det gør livet også. Brevene er vores egne; navne og firmaer er opdigtede.',
+    letters: {klage: 'Klage', opsigelse: 'Opsigelse', ansoegning: 'Jobansøgning'},
+    phrases: 'Udtryk til hver del',
+    practice: 'Øv dig',
+    practiceIntro: 'Øvelser i brevets dele og faste udtryk, og bagefter dit eget brev i skriveopgaven.',
+    toSkriv: 'Skrivning · Modultest',
+    toConnectors: 'Forbinderord',
+    questions: {one: '{n} spørgsmål', other: '{n} spørgsmål'},
+  },
+};
+registerStrings(STRINGS);
+
+// The parts of a formal letter, in Danish as a teacher names them, with what each holds.
+const PARTS = {
+  afsender: ['Afsender', 'отправитель'], modtager: ['Modtager', 'получатель'], dato: ['Dato', 'дата'],
+  overskrift: ['Overskrift', 'заголовок'], indledning: ['Indledning', 'вступление'],
+  hovedafsnit: ['Hovedafsnit', 'основная часть'], afslutning: ['Afslutning', 'завершение'], hilsen: ['Hilsen', 'прощание'],
+};
+
+// The letters, our own. Connectors are marked with *…* and drawn in red.
+const LETTERS = {
+  klage: {
+    note: 'Жалоба: что купили, что не так, что вы уже сделали и чего ждёте — с конкретным сроком.',
+    parts: [
+      ['modtager', 'Hvidevarehuset ApS\nKundeservice\nIndustrivej 12\n7100 Vejle'],
+      ['dato', 'Aalborg, 3. november 2026', 'right'],
+      ['overskrift', '**Klage over vaskemaskine, ordrenummer 48213**'],
+      ['indledning', 'Jeg skriver for at klage over en vaskemaskine, som jeg købte i jeres webshop den 12. oktober.'],
+      ['hovedafsnit', '*For det første* blev maskinen leveret fem dage senere end lovet. *Desuden* var døren ridset, og efter tre vaske begyndte den at lække vand. Jeg har ringet til jeres kundeservice to gange, *men* ingen har ringet tilbage. *Derfor* skriver jeg nu.'],
+      ['afslutning', 'Jeg forventer, at I enten reparerer maskinen eller leverer en ny inden for 14 dage. Jeg ser frem til at høre fra jer.'],
+      ['hilsen', 'Med venlig hilsen\n\nMira Kovalenko\nSøndergade 41, 2. th.\n9000 Aalborg\nTlf. 20 30 40 50'],
+    ],
+    phrases: {
+      indledning: ['Jeg skriver for at klage over …', 'Jeg vil gerne gøre opmærksom på et problem med …'],
+      hovedafsnit: ['For det første … For det andet …', 'Desuden … / Derudover …', 'Jeg har allerede … , men …', 'Derfor …'],
+      afslutning: ['Jeg forventer, at I … inden …', 'Jeg vil gerne have pengene tilbage.', 'Jeg ser frem til at høre fra jer.'],
+    },
+  },
+  opsigelse: {
+    note: 'Отказ от договора: короткое письмо. Номер клиента, с какой даты расторгаете, и просьба подтвердить письменно.',
+    parts: [
+      ['modtager', 'NordMobil A/S\nPostboks 300\n8000 Aarhus C'],
+      ['dato', 'Aalborg, 15. november 2026', 'right'],
+      ['overskrift', '**Opsigelse af mobilabonnement, kundenummer 220931**'],
+      ['indledning', 'Jeg vil hermed opsige mit mobilabonnement med telefonnummer 20 30 40 50.'],
+      ['hovedafsnit', 'Ifølge kontrakten er der en måneds opsigelse, *så* abonnementet slutter den 31. december 2026. *Da* jeg allerede har betalt for januar, beder jeg om at få beløbet tilbage.'],
+      ['afslutning', 'Jeg vil gerne have en skriftlig bekræftelse på opsigelsen. På forhånd tak.'],
+      ['hilsen', 'Med venlig hilsen\n\nMira Kovalenko\nSøndergade 41, 2. th.\n9000 Aalborg'],
+    ],
+    phrases: {
+      indledning: ['Jeg vil hermed opsige …', 'Jeg ønsker at opsige … pr. 1. januar.'],
+      hovedafsnit: ['Ifølge kontrakten …', 'Da jeg allerede har betalt for …, beder jeg om …', 'Mit kundenummer er …'],
+      afslutning: ['Jeg vil gerne have en skriftlig bekræftelse.', 'På forhånd tak.'],
+    },
+  },
+  ansoegning: {
+    note: 'Заявление о работе: кто вы, какой у вас опыт и почему вы подходите именно на это место. Отправитель — вверху слева.',
+    parts: [
+      ['afsender', 'Ahmed Saleh\nVestergade 8\n9000 Aalborg\nTlf. 30 40 50 60\nahmed.saleh@eksempel.dk'],
+      ['modtager', 'Kantinen Nordlys\nAtt.: Lene Holm\nHavnevej 3\n9000 Aalborg'],
+      ['dato', 'Aalborg, 20. november 2026', 'right'],
+      ['overskrift', '**Ansøgning om job som køkkenmedhjælper**'],
+      ['indledning', 'Jeg har med stor interesse læst jeres annonce på Jobnet, og jeg søger hermed stillingen som køkkenmedhjælper.'],
+      ['hovedafsnit', 'Jeg er 34 år og kommer fra Syrien. Jeg har boet i Danmark i fire år, og jeg går på Danskuddannelse 3.\n\nI Syrien arbejdede jeg seks år på en restaurant, *først* som opvasker og *senere* som kok. I Danmark har jeg været i praktik i køkkenet i en børnehave i tre måneder.\n\nJeg er god til at arbejde hurtigt og ordentligt, og jeg kan lide at samarbejde. *Desuden* er jeg vant til at møde tidligt.'],
+      ['afslutning', 'Jeg ser frem til at høre fra jer og fortæller gerne mere til en samtale.'],
+      ['hilsen', 'Med venlig hilsen\n\nAhmed Saleh'],
+    ],
+    phrases: {
+      indledning: ['Jeg har med stor interesse læst jeres annonce på …', 'Jeg søger hermed stillingen som …'],
+      hovedafsnit: ['Jeg er … år og kommer fra …', 'Jeg har erfaring med …', 'Jeg er god til at … / Jeg er vant til at …', 'Jeg er interesseret i jobbet, fordi …'],
+      afslutning: ['Jeg ser frem til at høre fra jer.', 'Jeg fortæller gerne mere til en samtale.'],
+    },
+  },
+};
+
+let shown = 'klage';
+let sets = [];
+
+function paintLanguages() {
+  $('#langs').innerHTML = Object.keys(STRINGS).map(code =>
+    `<button class="lang" data-lang="${code}" aria-pressed="${code === currentLang()}">${code.toUpperCase()}</button>`).join('');
+  $('#langs').querySelectorAll('.lang').forEach(b => b.onclick = () => { applyLang(b.dataset.lang); render(); });
+}
+
+// **bold** for the heading line, *connector* drawn as a connector; everything escaped first.
+const marked = text => esc(text).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\*(.+?)\*/g, '<b class="c">$1</b>');
+
+function render() {
+  document.documentElement.lang = currentLang();
+  paintLanguages();
+  $('#title').textContent = t('title');
+  $('#intro').textContent = t('intro');
+  // An object, not a string: t() reads an object as plural forms, so the names are taken as they are.
+  const names = (STRINGS[currentLang()] ?? STRINGS.ru).letters;
+  $('#tabs').innerHTML = Object.keys(LETTERS).map(k =>
+    `<button class="tab" data-letter="${k}" aria-pressed="${k === shown}">${esc(names[k])}</button>`).join('');
+  $('#tabs').querySelectorAll('.tab').forEach(b => b.onclick = () => { shown = b.dataset.letter; render(); });
+  const letter = LETTERS[shown];
+  $('#letterTitle').textContent = STRINGS.da.letters[shown];
+  $('#letterNote').textContent = letter.note;
+  $('#letter').innerHTML = letter.parts.map(([part, text, align]) =>
+    `<div class="part" data-part="${part}">${esc(PARTS[part][0])}<span lang="ru">${esc(PARTS[part][1])}</span></div>
+     <div class="text ${align ?? ''}">${marked(text)}</div>`).join('');
+  $('#phrasesTitle').textContent = t('phrases');
+  $('#phrases').innerHTML = Object.entries(letter.phrases).map(([part, list]) =>
+    `<p style="margin:.4rem 0 .1rem"><b>${esc(PARTS[part][0])}</b> <span class="muted" lang="ru">${esc(PARTS[part][1])}</span></p>
+     <ul class="plain" lang="da">${list.map(p => `<li>${esc(p)}</li>`).join('')}</ul>`).join('');
+  $('#practiceTitle').textContent = t('practice');
+  $('#practiceIntro').textContent = t('practiceIntro');
+  $('#toSkriv').textContent = t('toSkriv');
+  $('#toConnectors').textContent = t('toConnectors');
+  $('#exercises').innerHTML = sets.map(s =>
+    `<li><a class="cta" href="/grammar?s=${encodeURIComponent(s.slug)}"><b aria-hidden="true">✉️</b>
+      <span lang="da">${esc(s.title.replace(/^Breve: /, '').replace(/^./, c => c.toUpperCase()))}</span>
+      <span class="muted" style="font-weight:400">${esc(t('questions', s.questions).replace('{n}', s.questions))}</span></a></li>`).join('');
+}
+
+async function load() {
+  try {
+    // A set whose slug has the segment breve- belongs to this page.
+    sets = (await api('/grammar')).sets.filter(s => /(^|-)breve-/.test(s.slug));
+  } catch (e) {
+    sets = [];
+  }
+  render();
+}
+
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
+render();
+load();
+</script>
+</body>
+</html>
