@@ -15,12 +15,6 @@ use InvalidArgumentException;
  */
 final class WritingCheckService
 {
-    /** Fewer words than this give the reviewer nothing to say. */
-    private const FEWEST_WORDS = 10;
-
-    /** Several times the test's minimum: past this the text is not an answer to the task. */
-    private const MOST_WORDS = 600;
-
     private const MOST_CHARACTERS = 6000;
 
     /** The models the page offers, the one that spends least of the subscription first. */
@@ -66,11 +60,13 @@ final class WritingCheckService
         if ($task === null) {
             throw new InvalidArgumentException("There is no writing task '{$taskId}'.");
         }
+        // Fewer words than the task's floor give the reviewer nothing to say; past its ceiling
+        // the text is not an answer to the task.
         $words = WritingTasks::words($text);
-        if ($words < self::FEWEST_WORDS) {
-            throw new InvalidArgumentException('Write at least ' . self::FEWEST_WORDS . ' words before asking for a check.');
+        if ($words < $task['fewest']) {
+            throw new InvalidArgumentException("Write at least {$task['fewest']} words before asking for a check.");
         }
-        if ($words > self::MOST_WORDS || mb_strlen($text) > self::MOST_CHARACTERS) {
+        if ($words > $task['most'] || mb_strlen($text) > self::MOST_CHARACTERS) {
             throw new InvalidArgumentException('The text is far longer than the task asks for.');
         }
 

@@ -10,7 +10,7 @@ use UnexpectedValueException;
  * The system prompt is the same for every check; the task, the learner's text and the
  * language the explanations are written in all travel in the user message.
  */
-final class WritingPrompt
+final class WritingPrompt implements ReviewPrompt
 {
     private const LANGUAGES = ['ru' => 'Russian', 'uk' => 'Ukrainian', 'en' => 'English', 'da' => 'Danish'];
 

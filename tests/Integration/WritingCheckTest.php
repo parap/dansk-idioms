@@ -172,6 +172,22 @@ final class WritingCheckTest extends IntegrationTestCase
         self::assertSame([], $reviewer->asked);
     }
 
+    /** A connector task takes a sentence or two, far under a letter's ten-word floor. */
+    public function testAConnectorTaskTakesAShortSentence(): void
+    {
+        $reviewer = $this->reviewer();
+
+        $this->service($reviewer)->check($this->user(), 'fo-konsekvens', 'Det sneede, derfor blev vi hjemme.', 'ru', 'haiku');
+
+        self::assertSame('fo-konsekvens', $reviewer->asked[0][0]);
+    }
+
+    public function testRefusesAConnectorTextOfAWordOrTwo(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->service($this->reviewer())->check($this->user(), 'fo-konsekvens', 'Derfor ja.', 'ru', 'haiku');
+    }
+
     public function testRefusesATextFarLongerThanTheTaskAsksFor(): void
     {
         $this->expectException(InvalidArgumentException::class);

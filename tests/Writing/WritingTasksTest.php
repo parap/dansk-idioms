@@ -30,6 +30,26 @@ final class WritingTasksTest extends TestCase
         self::assertSame([], $task['questions']);
     }
 
+    /** A connector task: write sentences with the connectors of one group, the hints as a start. */
+    public function testAConnectorTaskCarriesItsGroupConnectorsAndHints(): void
+    {
+        $task = (new WritingTasks())->find('fo-konsekvens');
+
+        self::assertSame('connectors', $task['kind']);
+        self::assertSame('Konsekvens', $task['title']);
+        self::assertContains('derfor', $task['connectors']);
+        self::assertCount(3, $task['questions']);
+        self::assertSame([4, 300], [$task['fewest'], $task['most']]);
+    }
+
+    /** A letter is refused under ten words; a sentence or two with a connector is not. */
+    public function testATaskNamesTheLengthItTakes(): void
+    {
+        $email = (new WritingTasks())->find('e1');
+
+        self::assertSame([10, 600], [$email['fewest'], $email['most']]);
+    }
+
     public function testAnUnknownTaskIsNone(): void
     {
         self::assertNull((new WritingTasks())->find('x9'));

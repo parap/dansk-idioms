@@ -1292,6 +1292,48 @@ def a_connector_set_leads_back_to_its_page(b):
         b.js('document.querySelector("a.cta.back").getAttribute("href")')
 
 
+FO_REPLY = """{"feedback": {"summary": "Хорошо, одна ошибка в порядке слов.", "sentences": [
+    {"original": "Det sneede, derfor skolen holdt lukket.", "connector": "derfor", "in_group": true, "order_ok": false,
+     "meaning_ok": true, "corrected": "Det sneede, derfor holdt skolen lukket.", "explanation": "После derfor инверсия."},
+    {"original": "Huslejen steg, så vi flyttede.", "connector": "så", "in_group": true, "order_ok": true,
+     "meaning_ok": true, "corrected": "Huslejen steg, så vi flyttede.", "explanation": "Верно."}]},
+    "words": 11, "minimum": 0, "left_today": 4}"""
+
+
+@check
+def the_connector_writing_is_not_offered_to_a_guest(b):
+    b.goto('/forbinderord')
+    b.until('!!document.querySelector("#rules")', what='the connector page')
+    b.until('document.readyState === "complete"', what='the page to settle')
+    time.sleep(1)
+    assert b.js('document.querySelector("#write").hidden'), 'a guest is offered the connector writing check'
+
+
+@check
+def connector_sentences_are_checked_one_by_one(b):
+    b.goto('/forbinderord')
+    b.until('!!document.querySelector("#rules")', what='the connector page')
+    b.js("Object.keys(localStorage).filter(k => k.startsWith('fo-skriv:') || k === 'skriv:model').forEach(k => localStorage.removeItem(k))")
+    stand_in_for_the_check(b, 200, FO_REPLY)
+    # Drawn again, so the page asks the stand-in whether the check is offered.
+    b.js('document.querySelector(".lang[aria-pressed=true]").click()')
+    b.until('!document.querySelector("#write").hidden && document.querySelectorAll("#writeGroup option").length > 0',
+            what='the writing card offered')
+    b.js("(() => { const g = document.querySelector('#writeGroup'); g.value = 'fo-konsekvens'; g.dispatchEvent(new Event('change')); })()")
+    b.until('document.querySelector("#writeHelp").textContent.includes("derfor")', what="the group's connectors")
+    b.js("(() => { const t = document.querySelector('#writeText'); t.value = 'Det sneede, derfor skolen holdt lukket.\\nHuslejen steg, så vi flyttede.'; t.dispatchEvent(new Event('input')); })()")
+    b.js('document.querySelector("#writeCheck").click()')
+    b.until('!!document.querySelector("#writeReviewCard")', what='the review')
+    sent = b.js('window.checkSent')
+    assert sent['task'] == 'fo-konsekvens' and sent['model'] == 'haiku', sent
+    assert b.js('document.querySelectorAll("#writeReviewCard li").length') == 2, 'not every sentence is reviewed'
+    assert b.js('document.querySelector("#writeReviewCard ins")?.textContent ?? ""') == 'Det sneede, derfor holdt skolen lukket.', \
+        'the corrected sentence is not shown'
+    assert b.js('document.querySelectorAll("#writeReviewCard .mark.no").length') == 1, 'the word-order mistake is not marked'
+    assert '4' in b.js('document.querySelector("#writeLeft").textContent'), 'the checks left today are not updated'
+    b.js("Object.keys(localStorage).filter(k => k.startsWith('fo-skriv:')).forEach(k => localStorage.removeItem(k))")
+
+
 def open_grammar_set(b):
     only(['grammar'])
     b.goto('/grammar?s=ui-fixture-grammar')
