@@ -1400,6 +1400,60 @@ def a_writing_task_counts_words_against_its_minimum(b):
     b.js("localStorage.removeItem('skriv:e1')")
 
 
+# The check is answered by a stand-in for the server, so these checks never pay for a review.
+CHECK_REPLY = """{"feedback": {"summary": "Et godt svar.", "verdict": "borderline",
+    "task": [{"point": "Hvilket kursus skal Sune vælge?", "status": "missing", "comment": "Не ответили."}],
+    "errors": [{"original": "jeg har boet", "correction": "jeg har boet her", "explanation": "Не хватает места.", "kind": "grammar"}],
+    "strengths": ["Ясная структура."], "corrected": "Hej Sune, tak for din mail."},
+    "words": 130, "minimum": 125, "left_today": 9}"""
+
+
+def stand_in_for_the_check(b, status, body):
+    b.js(f"""(() => {{ const real = window.fetch;
+        window.fetch = (url, opts) => String(url).endsWith('/modultest/skriv/check')
+          ? Promise.resolve(new Response({json.dumps(body)}, {{status: {status}, headers: {{'Content-Type': 'application/json'}}}}))
+          : real(url, opts); }})()""")
+
+
+def open_the_email_task_with_a_draft(b):
+    b.goto('/modultest/skriv')
+    b.until('!!document.querySelector("#draft")', what='the email task')
+    b.js("localStorage.removeItem('skriv:e1'); localStorage.removeItem('skriv:e1:review')")
+    b.goto('/modultest/skriv')
+    b.until('!!document.querySelector("#check")', what='the check button')
+    b.js("""(() => { const d = document.querySelector('#draft');
+        d.value = Array(130).fill('ord').join(' '); d.dispatchEvent(new Event('input')); })()""")
+
+
+@check
+def a_checked_text_shows_its_review(b):
+    open_the_email_task_with_a_draft(b)
+    stand_in_for_the_check(b, 200, CHECK_REPLY)
+    b.js('document.querySelector("#check").click()')
+    b.until('!!document.querySelector("#reviewCard")', what='the review')
+    card = b.js('document.querySelector("#reviewCard").innerText')
+    assert 'На грани' in card, f'the verdict is not shown: {card[:200]!r}'
+    assert b.js('document.querySelector("#reviewCard del")?.textContent ?? ""') == 'jeg har boet', 'the error is not shown'
+    assert b.js('document.querySelector("#reviewCard ins")?.textContent ?? ""') == 'jeg har boet her', 'the correction is not shown'
+    assert 'Hvilket kursus skal Sune vælge?' in card and 'нет' in card, 'an unanswered question is not marked'
+    assert 'Hej Sune, tak for din mail.' in card, 'the corrected text is not shown'
+    assert '9' in b.js('document.querySelector("#reviewCard p:last-child").textContent'), 'the checks left today are not shown'
+    b.goto('/modultest/skriv')
+    b.until('!!document.querySelector("#reviewCard")', what='the review kept after a reload')
+    b.js("localStorage.removeItem('skriv:e1'); localStorage.removeItem('skriv:e1:review')")
+
+
+@check
+def a_check_that_is_switched_off_says_so(b):
+    open_the_email_task_with_a_draft(b)
+    stand_in_for_the_check(b, 503, '{"error": {"code": "unavailable", "message": "Checking is not switched on."}}')
+    b.js('document.querySelector("#check").click()')
+    b.until('document.querySelector("#checkState").textContent.includes("не подключена")', what='the switched-off notice')
+    assert not b.js('!!document.querySelector("#reviewCard")'), 'a review is drawn without one'
+    assert not b.js('document.querySelector("#check").disabled'), 'the button stays disabled'
+    b.js("localStorage.removeItem('skriv:e1')")
+
+
 @check
 def a_model_answer_appears_only_when_asked_for(b):
     b.goto('/modultest/skriv')

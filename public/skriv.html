@@ -51,6 +51,13 @@
   ul.checks label{display:flex;gap:.5rem;align-items:baseline;cursor:pointer}
   ul.phrases{margin:0;padding-left:1.2rem}
   .model{white-space:pre-wrap;border-left:3px solid var(--ok);padding:6px 0 6px 12px;margin:10px 0 0}
+  .verdict{display:inline-block;padding:3px 10px;border-radius:8px;font-weight:700}
+  .verdict.likely_pass{background:var(--okbg);color:var(--ok)} .verdict.borderline{background:var(--chip)}
+  .verdict.not_yet{background:var(--badbg);color:var(--bad)}
+  ul.review{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+  .mark{display:block;font-size:.85rem;font-weight:600}
+  .mark.answered{color:var(--ok)} .mark.missing{color:var(--bad)}
+  del{color:var(--bad)} ins{color:var(--ok);text-decoration:none;font-weight:600}
   .btn{padding:10px 16px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;
     border:1px solid var(--line);background:var(--chip);color:var(--ink)}
   .btn:hover:not(:disabled){border-color:var(--accent)}
@@ -78,12 +85,33 @@
 </div>
 
 <script type="module">
-import { $, esc, t, registerStrings, currentLang, setLang as applyLang } from '/shared.js';
+import { $, esc, t, api, registerStrings, currentLang, setLang as applyLang } from '/shared.js';
 
 const STRINGS = {
   ru: {
     title: 'Письмо и устная часть',
-    intro: 'Тренажёр для письменной и устной части Modultest DU3, модуль 4. Ситуации и вопросы свои, по образцу официальных. Текст проверяете вы сами: счётчик слов, памятка и образец ответа. Черновик сохраняется в этом браузере.',
+    intro: 'Тренажёр для письменной и устной части Modultest DU3, модуль 4. Ситуации и вопросы свои, по образцу официальных. Письмо и пост можно отправить на проверку: она покажет, на что вы не ответили, ошибки с исправлениями и исправленный текст. Черновик сохраняется в этом браузере.',
+    check: 'Проверить текст',
+    checking: 'Проверяю… обычно до минуты.',
+    checkNote: 'Текст уходит на проверку в Claude (Anthropic) и сохраняется на сайте. До {n} проверок в день.',
+    checkOff: 'Проверка пока не подключена.',
+    checkLimit: 'Проверки на сегодня закончились. Попробуйте завтра.',
+    checkShort: 'Напишите хотя бы 10 слов.',
+    checkFailed: 'Проверка не удалась. Попробуйте ещё раз через минуту.',
+    review: 'Проверка',
+    leftToday: 'Осталось проверок сегодня: {n}',
+    likely_pass: 'Скорее сдано',
+    borderline: 'На грани',
+    not_yet: 'Пока не сдано',
+    verdictNote: 'Оценка ориентировочная: официальный проходной порог не опубликован.',
+    taskDone: 'Задание',
+    errorsTitle: 'Ошибки',
+    noErrors: 'Ошибок не найдено.',
+    strengths: 'Что получилось',
+    corrected: 'Исправленный текст',
+    answered: 'есть',
+    partly: 'частично',
+    missing: 'нет',
     w1: 'Письмо · Opgave 1', w2: 'Письмо · Opgave 2', o1: 'Устно · Opgave 1', o2: 'Устно · Opgave 2',
     situation: 'Ситуация {n}', words: 'слов', minimum: 'минимум {n}',
     checkAnswered: 'Ответил на вопрос:', checkBlog: 'Есть в тексте:',
@@ -103,7 +131,28 @@ const STRINGS = {
   },
   en: {
     title: 'Writing and speaking',
-    intro: 'Practice for the writing and speaking parts of Modultest DU3, module 4. The situations and questions are our own, modelled on the official ones. You check your own text: a word counter, a checklist and a model answer. Your draft is kept in this browser.',
+    intro: 'Practice for the writing and speaking parts of Modultest DU3, module 4. The situations and questions are our own, modelled on the official ones. Send a letter or blog post for a check: it shows what you left unanswered, your errors with corrections, and a corrected text. Your draft is kept in this browser.',
+    check: 'Check my text',
+    checking: 'Checking… usually under a minute.',
+    checkNote: 'Your text is sent to Claude (Anthropic) for the check and kept on the site. Up to {n} checks a day.',
+    checkOff: 'Checking is not switched on yet.',
+    checkLimit: 'Today\'s checks are used up. Try again tomorrow.',
+    checkShort: 'Write at least 10 words.',
+    checkFailed: 'The check did not work. Try again in a minute.',
+    review: 'Check',
+    leftToday: 'Checks left today: {n}',
+    likely_pass: 'Likely to pass',
+    borderline: 'Borderline',
+    not_yet: 'Not there yet',
+    verdictNote: 'An estimate: no official pass mark is published.',
+    taskDone: 'The task',
+    errorsTitle: 'Errors',
+    noErrors: 'No errors found.',
+    strengths: 'What works',
+    corrected: 'Corrected text',
+    answered: 'done',
+    partly: 'partly',
+    missing: 'missing',
     w1: 'Writing · Opgave 1', w2: 'Writing · Opgave 2', o1: 'Speaking · Opgave 1', o2: 'Speaking · Opgave 2',
     situation: 'Situation {n}', words: 'words', minimum: 'at least {n}',
     checkAnswered: 'I answered:', checkBlog: 'My text has:',
@@ -123,7 +172,28 @@ const STRINGS = {
   },
   uk: {
     title: 'Письмо та усна частина',
-    intro: 'Тренажер для письмової та усної частини Modultest DU3, модуль 4. Ситуації та питання власні, за зразком офіційних. Текст перевіряєте ви самі: лічильник слів, пам’ятка й зразок відповіді. Чернетка зберігається в цьому браузері.',
+    intro: 'Тренажер для письмової та усної частини Modultest DU3, модуль 4. Ситуації та питання власні, за зразком офіційних. Лист і пост можна надіслати на перевірку: вона покаже, на що ви не відповіли, помилки з виправленнями та виправлений текст. Чернетка зберігається в цьому браузері.',
+    check: 'Перевірити текст',
+    checking: 'Перевіряю… зазвичай до хвилини.',
+    checkNote: 'Текст надсилається на перевірку в Claude (Anthropic) і зберігається на сайті. До {n} перевірок на день.',
+    checkOff: 'Перевірку ще не підключено.',
+    checkLimit: 'Перевірки на сьогодні закінчилися. Спробуйте завтра.',
+    checkShort: 'Напишіть щонайменше 10 слів.',
+    checkFailed: 'Перевірка не вдалася. Спробуйте ще раз за хвилину.',
+    review: 'Перевірка',
+    leftToday: 'Лишилося перевірок сьогодні: {n}',
+    likely_pass: 'Найімовірніше складено',
+    borderline: 'На межі',
+    not_yet: 'Поки не складено',
+    verdictNote: 'Оцінка орієнтовна: офіційний прохідний поріг не опубліковано.',
+    taskDone: 'Завдання',
+    errorsTitle: 'Помилки',
+    noErrors: 'Помилок не знайдено.',
+    strengths: 'Що вдалося',
+    corrected: 'Виправлений текст',
+    answered: 'є',
+    partly: 'частково',
+    missing: 'немає',
     w1: 'Письмо · Opgave 1', w2: 'Письмо · Opgave 2', o1: 'Усно · Opgave 1', o2: 'Усно · Opgave 2',
     situation: 'Ситуація {n}', words: 'слів', minimum: 'щонайменше {n}',
     checkAnswered: 'Я відповів на питання:', checkBlog: 'У тексті є:',
@@ -143,7 +213,28 @@ const STRINGS = {
   },
   da: {
     title: 'Skrivning og mundtlig',
-    intro: 'Øvelser til skrivning og mundtlig kommunikation i Modultest DU3, modul 4. Situationer og spørgsmål er vores egne, lavet efter forlægget. Du tjekker selv din tekst: ordtæller, tjekliste og et eksempel på et svar. Dit udkast gemmes i denne browser.',
+    intro: 'Øvelser til skrivning og mundtlig kommunikation i Modultest DU3, modul 4. Situationer og spørgsmål er vores egne, lavet efter forlægget. Du kan sende en e-mail eller et blogindlæg til tjek: det viser, hvad du ikke har svaret på, dine fejl med rettelser og en rettet tekst. Dit udkast gemmes i denne browser.',
+    check: 'Tjek min tekst',
+    checking: 'Tjekker… som regel under et minut.',
+    checkNote: 'Teksten sendes til Claude (Anthropic) til tjek og gemmes på siden. Op til {n} tjek om dagen.',
+    checkOff: 'Tjek er ikke slået til endnu.',
+    checkLimit: 'Dagens tjek er brugt. Prøv igen i morgen.',
+    checkShort: 'Skriv mindst 10 ord.',
+    checkFailed: 'Tjekket mislykkedes. Prøv igen om et minut.',
+    review: 'Tjek',
+    leftToday: 'Tjek tilbage i dag: {n}',
+    likely_pass: 'Sandsynligvis bestået',
+    borderline: 'På grænsen',
+    not_yet: 'Ikke bestået endnu',
+    verdictNote: 'Et skøn: der er ikke offentliggjort en grænse for bestået.',
+    taskDone: 'Opgaven',
+    errorsTitle: 'Fejl',
+    noErrors: 'Ingen fejl fundet.',
+    strengths: 'Det fungerer',
+    corrected: 'Rettet tekst',
+    answered: 'ja',
+    partly: 'delvis',
+    missing: 'nej',
     w1: 'Skrivning · Opgave 1', w2: 'Skrivning · Opgave 2', o1: 'Mundtlig · Opgave 1', o2: 'Mundtlig · Opgave 2',
     situation: 'Situation {n}', words: 'ord', minimum: 'mindst {n}',
     checkAnswered: 'Jeg har svaret på:', checkBlog: 'Min tekst har:',
@@ -224,7 +315,11 @@ function writing(task) {
       <textarea id="draft" aria-label="${esc(t(tab))}" spellcheck="true">${esc(store.get(key))}</textarea>
       <p class="row" style="margin:.5rem 0 0"><span class="count" id="count"></span>
         <span class="spacer"></span><button class="btn" id="clear" lang="${currentLang()}">${esc(t('clear'))}</button></p>
+      <p class="row" style="margin:.8rem 0 0" lang="${currentLang()}"><button class="btn primary" id="check">${esc(t('check'))}</button>
+        <span class="muted" style="font-size:.85rem">${esc(fill(t('checkNote'), {n: DAILY_CHECKS}))}</span></p>
+      <p class="muted" id="checkState" role="status" lang="${currentLang()}" style="margin:.5rem 0 0"></p>
     </div>
+    <div id="review"></div>
     <div class="card">
       <h2>${esc(email ? t('checkAnswered') : t('checkBlog'))}</h2>
       <ul class="checks">${checks.map((c, i) => `<li><label><input type="checkbox" data-check="${i}"
@@ -246,11 +341,60 @@ function writing(task) {
   paint();
   $('#clear').onclick = () => { if (confirm(t('confirmClear'))) { draft.value = ''; store.set(key, ''); paint(); } };
   view.querySelectorAll('[data-check]').forEach(c => c.onchange = () => store.set(`${key}:${c.dataset.check}`, c.checked ? '1' : ''));
+  $('#check').onclick = () => check(task, draft.value, key);
+  paintReview(store.get(`${key}:review`));
   $('#toggle').onclick = () => {
     const m = $('#model');
     m.hidden = !m.hidden;
     $('#toggle').textContent = t(m.hidden ? 'showModel' : 'hideModel');
   };
+}
+
+// The server's own allowance; the page only names it.
+const DAILY_CHECKS = 10;
+const CHECK_ERRORS = {503: 'checkOff', 429: 'checkLimit', 422: 'checkShort'};
+
+async function check(task, text, key) {
+  const button = $('#check');
+  button.disabled = true;
+  $('#checkState').textContent = t('checking');
+  try {
+    const result = await api('/modultest/skriv/check', {method: 'POST', body: {task: task.id, text, lang: currentLang()}});
+    store.set(`${key}:review`, JSON.stringify(result));
+    $('#checkState').textContent = '';
+    paintReview(JSON.stringify(result));
+    $('#review').scrollIntoView({behavior: 'smooth', block: 'start'});
+  } catch (e) {
+    if ($('#checkState')) $('#checkState').textContent = t(CHECK_ERRORS[e.status] ?? 'checkFailed');
+  } finally {
+    if ($('#check')) $('#check').disabled = false;
+  }
+}
+
+/** The last review of this task, kept in the browser beside the draft it was made of. */
+function paintReview(saved) {
+  const box = $('#review');
+  let r = null;
+  try { r = saved ? JSON.parse(saved) : null; } catch {}
+  if (!box || !r?.feedback) return;
+  const f = r.feedback;
+  box.innerHTML = `
+    <div class="card" id="reviewCard">
+      <h2>${esc(t('review'))}</h2>
+      <p style="margin:0 0 .3rem"><span class="verdict ${esc(f.verdict)}">${esc(t(f.verdict))}</span>
+        <span class="count ${r.words >= r.minimum ? 'enough' : 'short'}" style="margin-left:.6rem">${r.words} ${esc(t('words'))} · ${esc(fill(t('minimum'), {n: r.minimum}))}</span></p>
+      <p class="muted" style="margin:0 0 .6rem;font-size:.85rem">${esc(t('verdictNote'))}</p>
+      <p style="margin:0">${esc(f.summary)}</p>
+      <h3>${esc(t('taskDone'))}</h3>
+      <ul class="review">${f.task.map(p => `<li><span class="mark ${esc(p.status)}">${esc(t(p.status))}</span><b lang="da">${esc(p.point)}</b><br><span class="muted">${esc(p.comment)}</span></li>`).join('')}</ul>
+      <h3>${esc(t('errorsTitle'))}</h3>
+      ${f.errors.length ? `<ul class="review">${f.errors.map(e => `<li><span lang="da"><del>${esc(e.original)}</del> → <ins>${esc(e.correction)}</ins></span>
+        <br><span class="muted">${esc(e.explanation)}</span></li>`).join('')}</ul>` : `<p class="muted" style="margin:0">${esc(t('noErrors'))}</p>`}
+      ${f.strengths.length ? `<h3>${esc(t('strengths'))}</h3><ul>${f.strengths.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+      <h3>${esc(t('corrected'))}</h3>
+      <div class="model" lang="da">${esc(f.corrected)}</div>
+      <p class="muted" style="margin:.8rem 0 0;font-size:.85rem">${esc(fill(t('leftToday'), {n: r.left_today}))}</p>
+    </div>`;
 }
 
 // ---------- speaking ----------

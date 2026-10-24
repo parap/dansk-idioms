@@ -56,6 +56,15 @@ $config = [
         'source' => getenv('BOT_COMMUNICATOR_SOURCE') ?: 'Dansk idioms (Telegram)',
     ],
 
+    // Review of Modultest letters and blog posts by Claude. With no key the check reports
+    // itself unavailable; each review costs a few cents, hence the daily allowances.
+    'writing' => [
+        'api_key'           => getenv('ANTHROPIC_API_KEY') ?: null,
+        'model'             => 'claude-opus-5-5',
+        'per_learner_daily' => 10,
+        'site_daily'        => 150,
+    ],
+
     'quiz' => [
         'questions_per_round' => 10,
         'options_per_question' => 4,
