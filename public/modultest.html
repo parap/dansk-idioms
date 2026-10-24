@@ -59,7 +59,11 @@
   .wgap:focus{outline:2px solid var(--accent);outline-offset:1px}
   .wgap.filled{border-bottom-color:var(--ok)}
   .num{font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
-  .example{font-weight:600;border-bottom:2px solid var(--ok);padding:0 .15rem}
+  .example{font-weight:600;border-bottom:2px solid var(--ok);padding:0 .15rem;cursor:help}
+  .q > p.example-note{margin:.1rem 0 .55rem;padding:.4rem .65rem;border-left:3px solid var(--ok);border-radius:6px;
+    background:var(--okbg);font-size:.88rem;font-weight:400}
+  .opt.static,.opt.static:hover{cursor:help;border-color:var(--line)}
+  .opt.static.right,.opt.static.right:hover{border-color:var(--ok)}
   .q{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
   .q:first-of-type{border-top:none;padding-top:0;margin-top:0}
   .q > p{margin:0 0 .45rem;font-weight:600}
@@ -112,6 +116,8 @@ import { $, esc, t, api, registerStrings, currentLang, setLang as applyLang } fr
 const STRINGS = {
   ru: {
     title: 'Модульный тест DU3.4',
+    exampleNote: 'Это образец: ответ уже выбран за вас. Начинайте с пункта 1.',
+    exampleNoteGap: 'Это образец: предложение уже вставлено за вас. Начинайте с пропуска 1.',
     intro: 'Пробный тест по чтению в формате Modultest DU3, модуль 4: четыре задания подряд, 50 минут, ' +
            'как на настоящем тесте с 2026 года. Тексты и вопросы свои, составлены по образцу. ' +
            'Результат — в баллах: официальный проходной порог не опубликован.',
@@ -136,6 +142,8 @@ const STRINGS = {
   },
   en: {
     title: 'Module test DU3.4',
+    exampleNote: 'This is a worked example: the answer is already chosen for you. Start with question 1.',
+    exampleNoteGap: 'This is a worked example: the sentence is already put in for you. Start with gap 1.',
     intro: 'A practice reading test in the format of Modultest DU3, module 4: four tasks in a row, 50 minutes, ' +
            'as in the real test from 2026. The texts and questions are our own, modelled on it. ' +
            'You get points: no official pass mark is published.',
@@ -160,6 +168,8 @@ const STRINGS = {
   },
   uk: {
     title: 'Модульний тест DU3.4',
+    exampleNote: 'Це зразок: відповідь уже обрано за вас. Починайте з пункту 1.',
+    exampleNoteGap: 'Це зразок: речення вже вставлено за вас. Починайте з пропуску 1.',
     intro: 'Пробний тест із читання у форматі Modultest DU3, модуль 4: чотири завдання поспіль, 50 хвилин, ' +
            'як на справжньому тесті з 2026 року. Тексти й питання власні, складені за зразком. ' +
            'Результат — у балах: офіційний прохідний поріг не опубліковано.',
@@ -184,6 +194,8 @@ const STRINGS = {
   },
   da: {
     title: 'Modultest DU3.4',
+    exampleNote: 'Dette er et eksempel: svaret er allerede valgt for dig. Begynd med spørgsmål 1.',
+    exampleNoteGap: 'Dette er et eksempel: sætningen er allerede sat ind for dig. Begynd med hul 1.',
     intro: 'En prøvetest i læsning i samme format som Modultest DU3, modul 4: fire opgaver i træk, 50 minutter, ' +
            'som i den rigtige test fra 2026. Tekster og spørgsmål er vores egne, lavet efter forlægget. ' +
            'Du får point: der er ikke offentliggjort en grænse for bestået.',
@@ -332,19 +344,24 @@ function exampleHtml(passage, items) {
   const answer = passage.kind === 'insert'
     ? letter(bankOf(items).indexOf(passage.example.text))
     : passage.example.options[passage.example.answer];
-  return `<span class="example"><span class="num">(0)</span> ${esc(answer)}</span>`;
+  return `<span class="example" title="${esc(exampleNote(passage))}"><span class="num">(0)</span> ${esc(answer)}</span>`;
 }
+
+// A chosen answer reads as the learner's own unless the page says plainly that it is the example.
+const exampleNote = passage => t(passage.kind === 'insert' ? 'exampleNoteGap' : 'exampleNote');
 
 /** The example's own row above the questions: answered, with nothing to press. */
 function exampleQuestionHtml(passage, items) {
   const ex = passage.example;
   if (!ex) return '';
-  const head = `<p>${passage.kind === 'insert' ? esc(fill(t('gap'), {n: 0})) : '0.'} <span class="muted">(${esc(t('example'))})</span></p>`;
+  const note = esc(exampleNote(passage));
+  const head = `<p>${passage.kind === 'insert' ? esc(fill(t('gap'), {n: 0})) : '0.'} <span class="muted">(${esc(t('example'))})</span></p>
+    <p class="example-note" role="note">${note}</p>`;
   if (passage.kind === 'insert') {
-    return `<div class="q">${head}<div class="letters"><span class="opt right">${letter(bankOf(items).indexOf(ex.text))}</span></div></div>`;
+    return `<div class="q">${head}<div class="letters"><span class="opt static right" title="${note}">${letter(bankOf(items).indexOf(ex.text))}</span></div></div>`;
   }
   return `<div class="q">${head}<div class="opts" lang="da">${ex.options.map((o, i) => `
-    <div class="opt ${i === ex.answer ? 'right' : ''}"><b>${letter(i)}.</b> ${esc(o)}</div>`).join('')}</div></div>`;
+    <div class="opt static ${i === ex.answer ? 'right' : ''}" title="${note}"><b>${letter(i)}.</b> ${esc(o)}</div>`).join('')}</div></div>`;
 }
 
 /** A filled insertion gap shows the letter put in it, so the text reads as the learner has built it. */
