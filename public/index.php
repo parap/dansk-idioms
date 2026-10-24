@@ -68,6 +68,7 @@ $dispatcher = FastRoute\simpleDispatcher(static function (RouteCollector $r): vo
     // A Modultest paper the same way: its own list and start, the session routes for the rest.
     $r->addRoute('GET',  '/api/v1/modultest',          'modultest.list');
     $r->addRoute('POST', '/api/v1/modultest/sessions', 'modultest.start');
+    $r->addRoute('GET',  '/api/v1/modultest/skriv/check', 'modultest.skriv.available');
     $r->addRoute('POST', '/api/v1/modultest/skriv/check', 'modultest.skriv.check');
 
     $r->addRoute('POST', '/api/v1/reading/sessions', 'reading.start');
@@ -257,6 +258,7 @@ try {
 
         'modultest.list'  => $modultest->list(),
         'modultest.start' => $modultest->start($body),
+        'modultest.skriv.available' => (new WritingCheckController())->available(),
         'modultest.skriv.check' => (new WritingCheckController())->check($body),
 
         'reading.start'   => $reading->start($body),

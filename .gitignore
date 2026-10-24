@@ -6,6 +6,8 @@
 !/storage/exports/.gitkeep
 !/storage/logs/.gitkeep
 !/storage/indfoedsret/.gitkeep
+/storage/writing/*/*
+!/storage/writing/*/.gitkeep
 .env
 .idea/
 /.phpunit.cache/

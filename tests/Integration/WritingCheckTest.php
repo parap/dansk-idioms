@@ -11,8 +11,8 @@ use InvalidArgumentException;
 use RuntimeException;
 
 /**
- * A learner's letter or blog post sent for review: checked against the task it answers,
- * counted against a daily allowance, and kept with what the reviewer said.
+ * A letter or blog post sent for review: offered only to the site's admins, checked against
+ * the task it answers, counted against a daily allowance, and kept with what came back.
  */
 final class WritingCheckTest extends IntegrationTestCase
 {
@@ -39,16 +39,22 @@ final class WritingCheckTest extends IntegrationTestCase
         };
     }
 
-    private function service(?WritingReviewer $reviewer, int $perLearner = 3, int $site = 100): WritingCheckService
+    private function service(?WritingReviewer $reviewer, int $perUser = 3): WritingCheckService
     {
-        return new WritingCheckService($reviewer, perLearnerDaily: $perLearner, siteDaily: $site);
+        return new WritingCheckService($reviewer, perUserDaily: $perUser);
+    }
+
+    private function user(string $role = 'admin', string $email = 'alex@example.test'): int
+    {
+        Db::execute('INSERT INTO users (email, password_hash, role) VALUES (?, ?, ?)', [$email, 'x', $role]);
+        return (int) Db::pdo()->lastInsertId();
     }
 
     public function testReturnsTheReviewWithTheServersOwnWordCount(): void
     {
         $reviewer = $this->reviewer();
 
-        $result = $this->service($reviewer)->check(null, 'anon-1', 'e1', self::TEXT, 'uk');
+        $result = $this->service($reviewer)->check($this->user(), 'e1', self::TEXT, 'uk');
 
         self::assertSame(self::FEEDBACK, $result['feedback']);
         self::assertSame(18, $result['words']);
@@ -59,11 +65,11 @@ final class WritingCheckTest extends IntegrationTestCase
 
     public function testKeepsTheCheckWithWhatItCost(): void
     {
-        $this->service($this->reviewer())->check(null, 'anon-1', 'b2', self::TEXT, 'ru');
+        $user = $this->user();
+        $this->service($this->reviewer())->check($user, 'b2', self::TEXT, 'ru');
 
-        $row = Db::fetchOne('SELECT anon_key, user_id, task_id, text, word_count, model, input_tokens, output_tokens, feedback FROM writing_checks');
-        self::assertSame('anon-1', $row['anon_key']);
-        self::assertNull($row['user_id']);
+        $row = Db::fetchOne('SELECT user_id, task_id, text, word_count, model, input_tokens, output_tokens, feedback FROM writing_checks');
+        self::assertSame($user, (int) $row['user_id']);
         self::assertSame('b2', $row['task_id']);
         self::assertSame(self::TEXT, $row['text']);
         self::assertSame(18, (int) $row['word_count']);
@@ -72,12 +78,59 @@ final class WritingCheckTest extends IntegrationTestCase
         self::assertEquals(self::FEEDBACK, json_decode($row['feedback'], true));
     }
 
+    /** The review runs on the owner's own subscription, so nobody else is offered it. */
+    public function testAGuestIsNotOfferedTheCheck(): void
+    {
+        $reviewer = $this->reviewer();
+
+        try {
+            $this->service($reviewer)->check(null, 'e1', self::TEXT, 'ru');
+            self::fail('a guest was reviewed');
+        } catch (WritingCheckUnavailable) {
+        }
+        self::assertSame([], $reviewer->asked);
+        self::assertSame(['available' => false, 'left_today' => 0], $this->service($reviewer)->availability(null));
+    }
+
+    public function testASignedInLearnerWhoIsNoAdminIsNotOfferedTheCheck(): void
+    {
+        $learner  = $this->user('user', 'learner@example.test');
+        $reviewer = $this->reviewer();
+
+        try {
+            $this->service($reviewer)->check($learner, 'e1', self::TEXT, 'ru');
+            self::fail('a learner who is no admin was reviewed');
+        } catch (WritingCheckUnavailable) {
+        }
+        self::assertSame([], $reviewer->asked);
+        self::assertFalse($this->service($reviewer)->availability($learner)['available']);
+    }
+
+    public function testAnAdminIsOfferedTheCheckWithTheChecksLeftToday(): void
+    {
+        $admin   = $this->user();
+        $service = $this->service($this->reviewer(), perUser: 3);
+        $service->check($admin, 'e1', self::TEXT, 'ru');
+
+        self::assertSame(['available' => true, 'left_today' => 2], $service->availability($admin));
+    }
+
+    /** With no reviewer configured nothing can be checked, whoever asks. */
+    public function testWithoutAReviewerTheCheckIsUnavailable(): void
+    {
+        $admin = $this->user();
+
+        self::assertFalse($this->service(null)->availability($admin)['available']);
+        $this->expectException(WritingCheckUnavailable::class);
+        $this->service(null)->check($admin, 'e1', self::TEXT, 'ru');
+    }
+
     public function testRefusesATaskThePageDoesNotOffer(): void
     {
         $reviewer = $this->reviewer();
 
         try {
-            $this->service($reviewer)->check(null, 'anon-1', 'e99', self::TEXT, 'ru');
+            $this->service($reviewer)->check($this->user(), 'e99', self::TEXT, 'ru');
             self::fail('an unknown task was reviewed');
         } catch (InvalidArgumentException) {
         }
@@ -90,7 +143,7 @@ final class WritingCheckTest extends IntegrationTestCase
         $reviewer = $this->reviewer();
 
         try {
-            $this->service($reviewer)->check(null, 'anon-1', 'e1', 'Hej Sune, tak.', 'ru');
+            $this->service($reviewer)->check($this->user(), 'e1', 'Hej Sune, tak.', 'ru');
             self::fail('three words were reviewed');
         } catch (InvalidArgumentException) {
         }
@@ -100,79 +153,46 @@ final class WritingCheckTest extends IntegrationTestCase
     public function testRefusesATextFarLongerThanTheTaskAsksFor(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->service($this->reviewer())->check(null, 'anon-1', 'e1', str_repeat('ord ', 700), 'ru');
+        $this->service($this->reviewer())->check($this->user(), 'e1', str_repeat('ord ', 700), 'ru');
     }
 
-    public function testStopsALearnerAtTheDailyAllowance(): void
+    public function testStopsAtTheDailyAllowance(): void
     {
+        $admin    = $this->user();
         $reviewer = $this->reviewer();
-        $service  = $this->service($reviewer, perLearner: 2);
-        $service->check(null, 'anon-1', 'e1', self::TEXT, 'ru');
-        $service->check(null, 'anon-1', 'e1', self::TEXT, 'ru');
+        $service  = $this->service($reviewer, perUser: 2);
+        $service->check($admin, 'e1', self::TEXT, 'ru');
+        $service->check($admin, 'e1', self::TEXT, 'ru');
 
         try {
-            $service->check(null, 'anon-1', 'e1', self::TEXT, 'ru');
+            $service->check($admin, 'e1', self::TEXT, 'ru');
             self::fail('a third check went through');
         } catch (WritingLimitReached) {
         }
         self::assertCount(2, $reviewer->asked);
-        self::assertSame(1, $service->check(null, 'anon-2', 'e1', self::TEXT, 'ru')['left_today'], 'another learner was stopped too');
-    }
-
-    /** A signed-in learner is counted by account, so a fresh browser is no new allowance. */
-    public function testCountsASignedInLearnerByAccount(): void
-    {
-        $user = $this->user();
-        $service = $this->service($this->reviewer(), perLearner: 1);
-        $service->check($user, 'anon-1', 'e1', self::TEXT, 'ru');
-
-        $this->expectException(WritingLimitReached::class);
-        $service->check($user, 'anon-2', 'e1', self::TEXT, 'ru');
+        self::assertSame(1, $service->check($this->user('admin', 'other@example.test'), 'e1', self::TEXT, 'ru')['left_today'], 'another admin was stopped too');
     }
 
     public function testYesterdaysChecksDoNotCountToday(): void
     {
-        $service = $this->service($this->reviewer(), perLearner: 1);
-        $service->check(null, 'anon-1', 'e1', self::TEXT, 'ru');
+        $admin   = $this->user();
+        $service = $this->service($this->reviewer(), perUser: 1);
+        $service->check($admin, 'e1', self::TEXT, 'ru');
         Db::execute('UPDATE writing_checks SET created_at = NOW() - INTERVAL 25 HOUR');
 
-        self::assertSame(0, $service->check(null, 'anon-1', 'e1', self::TEXT, 'ru')['left_today']);
-    }
-
-    /** The whole site has a ceiling too: an allowance per browser is no limit to someone clearing cookies. */
-    public function testStopsEveryoneAtTheSitesDailyCeiling(): void
-    {
-        $service = $this->service($this->reviewer(), perLearner: 5, site: 2);
-        $service->check(null, 'anon-1', 'e1', self::TEXT, 'ru');
-        $service->check(null, 'anon-2', 'e1', self::TEXT, 'ru');
-
-        $this->expectException(WritingLimitReached::class);
-        $service->check(null, 'anon-3', 'e1', self::TEXT, 'ru');
+        self::assertSame(0, $service->check($admin, 'e1', self::TEXT, 'ru')['left_today']);
     }
 
     public function testAFailedReviewIsNotCounted(): void
     {
-        $service = $this->service($this->reviewer(new RuntimeException('overloaded')), perLearner: 1);
+        $service = $this->service($this->reviewer(new RuntimeException('timed out')), perUser: 1);
 
         try {
-            $service->check(null, 'anon-1', 'e1', self::TEXT, 'ru');
+            $service->check($this->user(), 'e1', self::TEXT, 'ru');
             self::fail('the failure was swallowed');
         } catch (RuntimeException $e) {
-            self::assertSame('overloaded', $e->getMessage());
+            self::assertSame('timed out', $e->getMessage());
         }
         self::assertSame(0, (int) Db::fetchValue('SELECT COUNT(*) FROM writing_checks'));
-    }
-
-    /** With no key configured there is no reviewer, and the page is told so rather than left waiting. */
-    public function testWithoutAReviewerTheCheckIsUnavailable(): void
-    {
-        $this->expectException(WritingCheckUnavailable::class);
-        $this->service(null)->check(null, 'anon-1', 'e1', self::TEXT, 'ru');
-    }
-
-    private function user(): int
-    {
-        Db::execute("INSERT INTO users (email, password_hash) VALUES ('skriv@example.test', 'x')");
-        return (int) Db::pdo()->lastInsertId();
     }
 }

@@ -1,0 +1,6 @@
+[Unit]
+Description=Answer the queued writing checks with Claude Code
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 %h/dansk.div/bin/writing-worker.py

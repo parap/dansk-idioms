@@ -86,6 +86,16 @@ ssh "$HOST" "set -euo pipefail
     $COMPOSE exec -T app php bin/reading-import.php content/video/*.txt | tail -2
     $COMPOSE exec -T app php bin/reading-import.php content/verbs/*.txt | tail -2
     $COMPOSE exec -T app php bin/reading-import.php content/grammar/*.txt | tail -2
+
+    # The writing check is answered on this host by Claude Code, logged in as this account;
+    # a path unit starts bin/writing-worker.py when a job is queued. Copied every time, so a
+    # changed unit never lags behind the code, and refused loudly if it does not come up.
+    mkdir -p ~/.config/systemd/user
+    cp deploy/systemd/dansk-writing.path deploy/systemd/dansk-writing.service ~/.config/systemd/user/
+    systemctl --user daemon-reload
+    systemctl --user enable --now -q dansk-writing.path
+    systemctl --user is-active -q dansk-writing.path || { echo '  the writing worker is not active'; exit 1; }
+    echo '  writing worker active'
 "
 
 # ---- the verdict, taken from outside --------------------------------------------------
@@ -109,6 +119,7 @@ check "http redirects"       "$(code "${URL/https:/http:}/")"           308
 check "reading page"         "$(code "$URL/read.html")"                 200
 check "exam page"            "$(code "$URL/proeve.html")"               200
 check "health"               "$(code "$URL/api/v1/health")"             200
+check "writing check answers" "$(code "$URL/api/v1/modultest/skriv/check")" 200
 # The body, not just the status. A bare 404 is also what a stranger's server says, and
 # a check that passes when the site is missing entirely is not checking anything.
 hidden=$(curl -s --connect-timeout 8 -m 25 "$URL/api/v1/admin/review" \

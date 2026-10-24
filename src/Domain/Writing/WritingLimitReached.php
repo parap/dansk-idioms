@@ -4,5 +4,5 @@ namespace Dansk\Domain\Writing;
 
 use RuntimeException;
 
-/** The learner, or the site as a whole, has used today's checks. */
+/** Today's checks are used up. */
 final class WritingLimitReached extends RuntimeException {}

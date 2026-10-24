@@ -56,13 +56,12 @@ $config = [
         'source' => getenv('BOT_COMMUNICATOR_SOURCE') ?: 'Dansk idioms (Telegram)',
     ],
 
-    // Review of Modultest letters and blog posts by Claude. With no key the check reports
-    // itself unavailable; each review costs a few cents, hence the daily allowances.
+    // Review of Modultest letters and blog posts by Claude Code on the host, through the
+    // directory bin/writing-worker.py reads. It runs on the owner's subscription, so only
+    // admins are offered it, and the allowance leaves the subscription's limits for other work.
     'writing' => [
-        'api_key'           => getenv('ANTHROPIC_API_KEY') ?: null,
-        'model'             => 'claude-opus-5-5',
-        'per_learner_daily' => 10,
-        'site_daily'        => 150,
+        'queue_dir'      => dirname(__DIR__) . '/storage/writing',
+        'per_user_daily' => 20,
     ],
 
     'quiz' => [
