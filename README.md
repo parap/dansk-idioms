@@ -508,7 +508,8 @@ language. Everything user-facing goes through `t('key')`, which falls back to Ru
 A value may be a map of CLDR plural categories, selected by `Intl.PluralRules`, so
 Russian and Ukrainian get their three forms (1 раунд / 2 раунда / 5 раундов).
 
-The switch offers whatever languages that page's `STRINGS` defines, so **a language added
+The switch offers whatever languages that page's `STRINGS` defines, in the order `languages()`
+in `public/shared.js` gives (English, Danish, Ukrainian, Russian), so **a language added
 to one page and forgotten on another drops the reader back into Russian halfway through
 the site**, and the fallback says nothing. An interface check walks all three pages and
 requires them to offer the same list.

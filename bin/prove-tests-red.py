@@ -931,6 +931,8 @@ FAULTS = [
   "  return `<span class=\"example\" title=\"${esc(exampleNote(passage))}\">","  return `<span class=\"example\">","ui"),
  (308,"the example in a mistakes round is not labelled","public/read.html",
   " <small class=\"exnote\">${esc(t('example'))}</small></span>`","</span>`","ui"),
+ (309,"the language switch keeps each page's own order","public/shared.js",
+  "const ORDER = ['en', 'da', 'uk', 'ru'];","const ORDER = [];","ui"),
  (296,"a task's length floor is the letter's","src/Domain/Writing/WritingCheckService.php",
   "        if ($words < $task['fewest']) {","        if ($words < 10) {","integration:testAConnectorTaskTakesAShortSentence"),
  (297,"the connector card is offered to anyone","public/forbinderord.html",
