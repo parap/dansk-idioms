@@ -48,6 +48,16 @@ final class ClaudeWritingReviewerTest extends TestCase
         );
     }
 
+    /**
+     * The SDK finds its HTTP client by discovery and composer installs it without one; the
+     * tests above bring their own transport, so only this notices every real review failing.
+     */
+    public function testTheSdkFindsAnHttpClientOfItsOwn(): void
+    {
+        self::assertInstanceOf(ClientInterface::class, \Http\Discovery\Psr18ClientDiscovery::find());
+        self::assertNotNull(\Http\Discovery\Psr17FactoryDiscovery::findRequestFactory());
+    }
+
     public function testSendsTheTaskAndTextToTheConfiguredModelForAStructuredAnswer(): void
     {
         $this->reviewer()->review((new WritingTasks())->find('e1'), 'Hej Sune, tak for din mail.', 'ru');
