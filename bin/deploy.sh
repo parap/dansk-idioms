@@ -120,6 +120,10 @@ check "reading page"         "$(code "$URL/read.html")"                 200
 check "exam page"            "$(code "$URL/proeve.html")"               200
 check "health"               "$(code "$URL/api/v1/health")"             200
 check "writing check answers" "$(code "$URL/api/v1/modultest/skriv/check")" 200
+# Code must be revalidated like the pages: a browser keeping an old shared.js beside a new
+# page that imports from it draws a blank page.
+revalidated=$(curl -sI --connect-timeout 8 -m 25 "$URL/shared.js" | grep -io 'no-cache' | head -1 || true)
+check "shared code revalidates" "${revalidated:-kept by the browser}" 'no-cache'
 # The body, not just the status. A bare 404 is also what a stranger's server says, and
 # a check that passes when the site is missing entirely is not checking anything.
 hidden=$(curl -s --connect-timeout 8 -m 25 "$URL/api/v1/admin/review" \

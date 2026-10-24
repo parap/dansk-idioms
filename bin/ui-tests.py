@@ -1763,6 +1763,17 @@ def the_quiz_direction_is_offered_only_in_russian(b):
 
 
 @check
+def shared_code_is_checked_for_a_new_version_on_every_load(b):
+    """A page always comes fresh; code it imports that a browser keeps by its own guess goes stale
+    beside it, and a page importing a name the stale copy lacks draws nothing at all."""
+    b.goto('/')
+    b.until('!!document.querySelector("#go")', what='the start page')
+    for path in ('/shared.js', '/shared.js?v=2'):
+        header = b.js(f"fetch('{path}').then(r => r.headers.get('cache-control') || '')")
+        assert 'no-cache' in header, f'{path} is served for the browser to keep: {header!r}'
+
+
+@check
 def every_page_offers_the_same_languages(b):
     """A language offered on one page and missing on the next drops the reader back into
     Russian halfway through the site, and the fallback is silent."""
