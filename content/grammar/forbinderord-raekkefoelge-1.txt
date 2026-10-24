@@ -1,0 +1,71 @@
+kind: grammar
+slug: forbinderord-raekkefoelge-1
+title: Forbinderord: rækkefølge
+
+--- questions ---
+1. Jeg vil gerne flytte. ___ er lejligheden for lille, og for det andet ligger den langt fra mit arbejde.
+> for det første … for det andet — «во-первых … во-вторых», перечисление доводов. Я хочу переехать. Во-первых, квартира слишком маленькая, а во-вторых, она далеко от моей работы.
+* For det første
+  Til sidst
+  Desuden
+  Derfor
+
+2. For det første er det sundt at cykle. For det andet er det billigt. Og ___ får man frisk luft.
+> endelig в перечислении — «и наконец», последний довод. Во-первых, ездить на велосипеде полезно. Во-вторых, это дёшево. И наконец, бываешь на свежем воздухе.
+* endelig
+  først
+  tidligere
+  dog
+
+3. Hun tager toget, dels fordi det er billigt, ___ fordi hun kan læse undervejs.
+> dels … dels — «отчасти … отчасти», два довода одинакового веса. Она ездит поездом, отчасти потому что это дёшево, отчасти потому что в дороге можно читать.
+* dels
+  både
+  også
+  først
+
+4. Vælg den rigtige sætning.
+> for det første — обстоятельство: в начале предложения глагол идёт вторым, без запятой. Во-первых, дом слишком дорогой.
+* For det første er huset for dyrt.
+  For det første huset er for dyrt.
+  For det første, huset er for dyrt.
+
+5. ___ skal vi tænke på børnenes sikkerhed. Det er det vigtigste.
+> først og fremmest — «прежде всего», самое важное. Прежде всего нам нужно думать о безопасности детей. Это главное.
+* Først og fremmest
+  Til sidst
+  Bagefter
+  Derimod
+
+6. Endelig vil jeg nævne, at prisen er god. Hvad betyder «endelig» her?
+> В перечислении endelig значит «наконец, последнее». В другом контексте оно значит «наконец-то, после ожидания» (Endelig kom bussen). И наконец, хочу отметить, что цена хорошая.
+* Som det sidste punkt vil jeg nævne, at prisen er god.
+  Efter lang ventetid vil jeg nævne, at prisen er god.
+  Desværre vil jeg nævne, at prisen er god.
+
+7. Vi købte huset, dels fordi det lå tæt på skolen, dels ___ haven var stor.
+> Обе части dels … dels устроены одинаково: dels fordi …, dels fordi …. Мы купили дом отчасти потому, что он был рядом со школой, отчасти потому, что сад был большой.
+* fordi
+  for
+  derfor
+  så
+
+8. Vælg den rigtige sætning.
+> endelig — наречие: в начале предложения глагол стоит вторым. И наконец, я лучше сплю по ночам.
+* Endelig sover jeg bedre om natten.
+  Endelig jeg sover bedre om natten.
+  Endelig, jeg sover bedre om natten.
+
+9. Der er to grunde til, at jeg vil skifte job: ___ er lønnen lav, og for det andet er arbejdstiderne skæve.
+> Пара for det første … for det andet. Есть две причины, по которым я хочу сменить работу: во-первых, низкая зарплата, а во-вторых, неудобный график.
+* for det første
+  til sidst
+  derefter
+  desuden
+
+10. Han træner, ___ for at tabe sig, dels for at få flere venner.
+> dels … dels повторяется в обеих частях. Он тренируется отчасти чтобы похудеть, отчасти чтобы завести больше друзей.
+* dels
+  både
+  enten
+  først

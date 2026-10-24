@@ -1,0 +1,71 @@
+kind: grammar
+slug: forbinderord-tilfoejelse-1
+title: Forbinderord: tilføjelse
+
+--- questions ---
+1. Jeg kan ikke lide kaffe, og jeg kan ___ lide te.
+> При отрицании «тоже» — heller ikke, а не også ikke. Я не люблю кофе, и чай тоже не люблю.
+* heller ikke
+  også
+  også ikke
+  ikke også
+
+2. Hun taler dansk og engelsk. Hun taler ___ lidt tysk.
+> også — «тоже, также» в утвердительном предложении, стоит после глагола. Она говорит по-датски и по-английски. Ещё она немного говорит по-немецки.
+* også
+  heller ikke
+  heller
+  derfor
+
+3. Lejligheden er stor og lys. ___ ligger den tæt på stationen.
+> desuden — «кроме того», добавляет ещё один плюс. Квартира большая и светлая. Кроме того, она рядом со станцией.
+* Desuden
+  Derfor
+  Alligevel
+  Tidligere
+
+4. Vælg den rigtige sætning.
+> derudover — наречие: в начале предложения глагол идёт вторым, без запятой. Кроме того, у неё двое детей.
+* Derudover har hun to børn.
+  Derudover hun har to børn.
+  Derudover, hun har to børn.
+
+5. Han har mistet sit job, og nu er han ___ blevet syg.
+> endda — усиление «даже, вдобавок»: к одной плохой новости добавляется ещё более плохая. Он потерял работу, а теперь ещё и заболел.
+* endda
+  heller ikke
+  tidligere
+  dels
+
+6. Vælg den rigtige sætning.
+> heller ikke стоит там же, где ikke: после глагола в главном предложении. Он тоже не придёт завтра.
+* Han kommer heller ikke i morgen.
+  Han heller ikke kommer i morgen.
+  Han kommer ikke heller i morgen.
+
+7. Firmaet har øget sin omsætning. ___ har det ansat 20 nye medarbejdere.
+> endvidere и ydermere — формальные «кроме того, к тому же», для статей и официальных писем. Компания увеличила оборот. Кроме того, она наняла 20 новых сотрудников.
+* Endvidere
+  Heller ikke
+  Alligevel
+  Dels
+
+8. Billetten var billig, og ___ fik vi gratis kaffe.
+> oven i købet (или слитно ovenikøbet) — «вдобавок, ещё и», добавляет приятную неожиданность. Билет был дешёвый, и вдобавок нам дали бесплатный кофе.
+* oven i købet
+  heller ikke
+  i stedet
+  derimod
+
+9. Flere danskere cykler. Samtidig falder antallet af biler i byen. Hvad betyder «samtidig»?
+> samtidig — «одновременно, в то же время», два явления происходят параллельно. Всё больше датчан ездят на велосипеде. Одновременно число машин в городе падает.
+* På samme tid.
+  Derfor.
+  Alligevel.
+
+10. Mange unge ryger ikke. ___ drikker færre unge alkohol end før.
+> ligeledes — «так же, точно так же», добавляет похожий факт. Многие молодые люди не курят. Точно так же меньше молодёжи пьёт алкоголь, чем раньше.
+* Ligeledes
+  Alligevel
+  Tidligere
+  For eksempel

@@ -58,6 +58,11 @@ final class ShellTest extends TestCase
         self::assertSame('/skriv.html', Shell::forPath('/modultest/skriv', false));
     }
 
+    public function testTheConnectorPageHasItsOwnDocument(): void
+    {
+        self::assertSame('/forbinderord.html', Shell::forPath('/forbinderord', false));
+    }
+
     public function testATrailingSlashIsTheSameAddress(): void
     {
         self::assertSame('/read.html', Shell::forPath('/read/', false));

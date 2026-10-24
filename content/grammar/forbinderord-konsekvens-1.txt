@@ -1,0 +1,71 @@
+kind: grammar
+slug: forbinderord-konsekvens-1
+title: Forbinderord: konsekvens
+
+--- questions ---
+1. Det er dyrt at parkere i centrum, ___ jeg tager cyklen.
+> så как союз главного предложения — «так что, поэтому», следствие; порядок после него обычный (jeg tager). Парковаться в центре дорого, так что я езжу на велосипеде.
+* så
+  fordi
+  for
+  selvom
+
+2. Det er dyrt at parkere i centrum. ___ tager jeg cyklen.
+> derfor — наречие «поэтому»: в начале предложения глагол идёт вторым (tager jeg). Парковаться в центре дорого. Поэтому я езжу на велосипеде.
+* Derfor
+  Fordi
+  For
+  Selvom
+
+3. Vælg den rigtige sætning.
+> После derfor инверсия: глагол перед подлежащим. Она забыла ключ и поэтому позвонила в дверь.
+* Hun havde glemt sin nøgle, derfor ringede hun på.
+  Hun havde glemt sin nøgle, derfor hun ringede på.
+  Hun havde glemt sin nøgle, derfor ringede på hun.
+
+4. Prisen steg, og ___ faldt salget.
+> dermed — «тем самым, вследствие этого», формальное. Цена выросла, и вследствие этого продажи упали.
+* dermed
+  selvom
+  fordi
+  først
+
+5. Der kom flere turister, og ___ steg priserne på hotellerne.
+> derfor — следствие: больше туристов → выше цены. Туристов стало больше, и поэтому цены в гостиницах выросли.
+* derfor
+  heller ikke
+  for eksempel
+  imidlertid
+
+6. Hun havde ikke betalt regningen. Følgelig blev strømmen lukket. Hvad betyder «følgelig»?
+> følgelig — формальное «следовательно, как следствие». Она не оплатила счёт. Как следствие, ей отключили электричество.
+* Som en følge af det.
+  Heldigvis.
+  Før det.
+
+7. Jeg kom for sent, ___ bussen var forsinket.
+> Здесь вторая часть — причина, а не следствие: нужен fordi. derfor и så ввели бы следствие. Я опоздал, потому что автобус задержался.
+* fordi
+  derfor
+  så
+  dermed
+
+8. Hun har arbejdet meget i år. ___ har hun brug for en lang ferie.
+> af den grund — «по этой причине», то же, что derfor. Она много работала в этом году. По этой причине ей нужен долгий отпуск.
+* Af den grund
+  Til gengæld
+  Bagefter
+  Alligevel
+
+9. Vælg den rigtige sætning.
+> После og наречие dermed занимает первое место второго предложения, поэтому глагол идёт перед подлежащим. Курящих становится меньше, и тем самым меньше людей заболевает.
+* Færre ryger, og dermed bliver færre syge.
+  Færre ryger, og dermed færre bliver syge.
+  Færre ryger, og dermed bliver syge færre.
+
+10. Toget var aflyst, ___ kom vi for sent til mødet.
+> derfor с инверсией (kom vi) — следствие. fordi и for ввели бы причину, а selvom — уступку. Поезд отменили, поэтому мы опоздали на встречу.
+* derfor
+  fordi
+  for
+  selvom

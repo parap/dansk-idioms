@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#c8102e">
+<title>Forbinderord</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#fff; --ink:#14171c; --muted:#676e7b; --line:#e0e4ea;
+    --accent:#c8102e; --accent-ink:#fff; --ok:#127a4a; --okbg:#e7f6ee;
+    --bad:#b3261e; --badbg:#fdecea; --chip:#eef1f5; --shadow:0 1px 2px rgba(20,23,28,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#121419;--card:#1b1e24;--ink:#e8ebf0;--muted:#98a1b0;--line:#2b3039;
+      --accent:#ff5a6e;--accent-ink:#1b1e24;--ok:#4cc38a;--okbg:#14301f;
+      --bad:#ff6b61;--badbg:#331b19;--chip:#232830;--shadow:none;}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+  .wrap{max-width:820px;margin:0 auto;padding:20px 16px 64px}
+  header{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+  .brand{font-weight:700;letter-spacing:-.02em;font-size:1.05rem;color:inherit;text-decoration:none}
+  .brand:hover span{text-decoration:underline}
+  .brand span{color:var(--accent)}
+  header h1{font-size:1.2rem;margin:0}
+  .spacer{flex:1}
+  .lang{background:none;border:none;color:var(--muted);font:inherit;font-size:.85rem;
+    padding:.2rem .35rem;cursor:pointer;border-radius:5px}
+  .lang[aria-pressed=true]{color:var(--ink);font-weight:600;background:var(--chip)}
+  .langs{display:inline-flex;gap:.1rem}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:18px;box-shadow:var(--shadow);margin-bottom:16px}
+  .card h2{font-size:1.1rem;margin:0 0 .7rem}
+  .card h3{font-size:1rem;margin:1.2rem 0 .4rem}
+  .muted{color:var(--muted)}
+  p{margin:0 0 .7rem}
+  #drills{list-style:none;margin:0;padding:0;display:grid;gap:10px;
+    grid-template-columns:repeat(auto-fill,minmax(9rem,1fr))}
+  #drills a{display:grid;justify-items:center;gap:.1rem;height:100%;padding:.75rem .5rem;border-radius:12px;
+    text-align:center;text-decoration:none;color:var(--ink);font-weight:600;
+    background:hsl(var(--h) 85% 95%);border:1px solid hsl(var(--h) 55% 82%);transition:border-color .12s}
+  #drills a:hover,#drills a:focus-visible{border-color:hsl(var(--h) 60% 45%)}
+  #drills .pic{font:2rem/1.15 "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+  #drills .title{font-size:.92rem;line-height:1.3}
+  #drills .n{display:block;color:var(--muted);font-size:.82rem;font-weight:400}
+  @media (prefers-color-scheme:dark){
+    #drills a{background:hsl(var(--h) 30% 19%);border-color:hsl(var(--h) 30% 32%)}
+    #drills a:hover,#drills a:focus-visible{border-color:hsl(var(--h) 60% 60%)}
+  }
+  .table{width:100%;border-collapse:collapse;font-size:.95rem}
+  .table th,.table td{text-align:left;vertical-align:top;padding:.5rem .45rem;border-top:1px solid var(--line)}
+  .table th{font-size:.85rem;color:var(--muted);font-weight:600;border-top:none}
+  .scroll{overflow-x:auto}
+  .ex{display:block;margin:.15rem 0 0;font-style:italic}
+  .formal{color:var(--muted);font-size:.85rem}
+  .order{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9rem;background:var(--chip);
+    padding:.05rem .35rem;border-radius:5px;white-space:nowrap}
+  b.c{color:var(--accent)}
+  ul.plain{margin:0 0 .7rem;padding-left:1.2rem}
+  a{color:var(--accent)}
+  [hidden]{display:none!important}
+  /* On a phone each row becomes a block: three columns of a few words each break mid-word */
+  @media (max-width:560px){ .table.stack thead{display:none}
+    .table.stack tr{display:block;border-top:1px solid var(--line);padding:.4rem 0}
+    .table.stack td{display:block;border:none;padding:.15rem 0}
+    .table.stack td:first-child{font-weight:600} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="/">Dansk <span>idiomer</span></a>
+    <h1 id="title"></h1>
+    <span class="spacer"></span>
+    <span id="langs" class="langs"></span>
+  </header>
+  <main id="view">
+    <div class="card"><p class="muted" id="intro" style="margin:0"></p></div>
+    <div class="card"><h2 id="drillsTitle"></h2><div id="drillsBox"></div></div>
+    <div class="card" id="rules" lang="ru">
+      <h2>Справка: связующие слова</h2>
+      <p class="muted">К тетради по forbinderord (задания 1–20) и Skriveguiden (с. 3–9 и 29). Объяснения и примеры — свои.</p>
+
+      <h3>Три вида связок и порядок слов</h3>
+      <div class="scroll"><table class="table stack">
+        <thead><tr><th>Вид</th><th>Слова</th><th>Порядок слов</th></tr></thead>
+        <tbody>
+          <tr><td>Союзы главного предложения</td><td lang="da">og, men, eller, for, så</td>
+            <td>Места в предложении не занимают, дальше обычный порядок <span class="order">S-V-A</span>: подлежащее, глагол, ikke.
+              <span class="ex" lang="da">Jeg er sulten, <b class="c">for</b> jeg har ikke spist.</span></td></tr>
+          <tr><td>Союзы придаточного</td><td lang="da">at, om, fordi, da, når, hvis, selvom, mens, før, efter at, siden, indtil, eftersom, idet, hvorimod, så (at)</td>
+            <td>В придаточном <span class="order">S-A-V</span>: ikke и другие наречия стоят перед глаголом.
+              <span class="ex" lang="da">Jeg er sulten, <b class="c">fordi</b> jeg ikke har spist.</span></td></tr>
+          <tr><td>Наречия-связки</td><td lang="da">derfor, alligevel, desuden, derefter, faktisk, heldigvis, til gengæld …</td>
+            <td>В начале предложения занимают первое место, и глагол идёт вторым, перед подлежащим: <span class="order">A-V-S</span>. Запятой после них нет.
+              <span class="ex" lang="da">Jeg har ikke spist. <b class="c">Derfor</b> er jeg sulten.</span></td></tr>
+        </tbody>
+      </table></div>
+      <p style="margin-top:.7rem">Если придаточное стоит первым, оно целиком занимает первое место, и главное предложение начинается с глагола:
+        <span class="ex" lang="da"><b class="c">Når</b> jeg kommer hjem, laver jeg mad.</span></p>
+
+      <h3>for, fordi, derfor</h3>
+      <ul class="plain">
+        <li><span lang="da"><b class="c">for</b></span> — «ведь, так как», союз главного предложения, порядок S-V-A. Звучит книжно, в речи чаще fordi.
+          <span class="ex" lang="da">Vi tager toget, for bilen er ikke klar.</span></li>
+        <li><span lang="da"><b class="c">fordi</b></span> — «потому что», вводит придаточное, порядок S-A-V.
+          <span class="ex" lang="da">Vi tager toget, fordi bilen ikke er klar.</span></li>
+        <li><span lang="da"><b class="c">derfor</b></span> — «поэтому», наречие: называет не причину, а следствие, после него инверсия.
+          <span class="ex" lang="da">Bilen er ikke klar. Derfor tager vi toget.</span></li>
+      </ul>
+
+      <h3>Три значения så</h3>
+      <ul class="plain">
+        <li>Союз главного предложения = «и поэтому, так что», порядок S-V-A.
+          <span class="ex" lang="da">Det regner, <b class="c">så</b> vi bliver hjemme.</span></li>
+        <li>Союз придаточного = «чтобы» (så at), порядок S-A-V.
+          <span class="ex" lang="da">Tal højt, <b class="c">så</b> alle kan høre dig.</span></li>
+        <li>Наречие = «потом, затем» (derefter), после него инверсия.
+          <span class="ex" lang="da">Først spiser vi, og <b class="c">så</b> går vi en tur.</span></li>
+      </ul>
+
+      <h3>Связки по смыслу</h3>
+      <p class="muted">Серым — формальные связки: для статей, жалоб и официальных писем.</p>
+      <div class="scroll"><table class="table stack">
+        <thead><tr><th>Группа</th><th>Связки</th><th>Пример</th></tr></thead>
+        <tbody id="groups"></tbody>
+      </table></div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+import { $, esc, t, api, registerStrings, currentLang, setLang as applyLang } from '/shared.js';
+
+const STRINGS = {
+  ru: {
+    title: 'Связующие слова',
+    intro: 'Связующие слова (forbinderord) — к рабочей тетради и Skriveguiden. Сначала тренажёры по группам, ниже справка: виды связок, порядок слов после них и таблица по смыслу.',
+    drills: 'Тренажёры',
+    book: 'тетрадь: {n}',
+    questions: {one: '{n} вопрос', few: '{n} вопроса', many: '{n} вопросов', other: '{n} вопроса'},
+    empty: 'Тренажёров пока нет.',
+    error: 'Не удалось загрузить тренажёры. Попробуйте обновить страницу.',
+  },
+  en: {
+    title: 'Connectors',
+    intro: 'Danish connectors (forbinderord), to go with the workbook and Skriveguiden. Drills by group first; below them the rules, in Russian like the notes in the drills: the kinds of connectors, word order after them, and a table by meaning.',
+    drills: 'Drills',
+    book: 'workbook: {n}',
+    questions: {one: '{n} question', other: '{n} questions'},
+    empty: 'No drills yet.',
+    error: 'Could not load the drills. Try reloading the page.',
+  },
+  uk: {
+    title: 'Сполучні слова',
+    intro: 'Сполучні слова (forbinderord) — до робочого зошита й Skriveguiden. Спершу тренажери за групами, нижче довідка російською, як і пояснення в тренажерах: види сполучників, порядок слів після них і таблиця за значенням.',
+    drills: 'Тренажери',
+    book: 'зошит: {n}',
+    questions: {one: '{n} питання', few: '{n} питання', many: '{n} питань', other: '{n} питання'},
+    empty: 'Тренажерів поки немає.',
+    error: 'Не вдалося завантажити тренажери. Спробуйте оновити сторінку.',
+  },
+  da: {
+    title: 'Forbinderord',
+    intro: 'Forbinderord til arbejdshæftet og Skriveguiden. Først øvelser for hver gruppe; nedenunder reglerne, på russisk som forklaringerne i øvelserne: slags forbinderord, ordstilling efter dem og en tabel efter betydning.',
+    drills: 'Øvelser',
+    book: 'hæfte: {n}',
+    questions: {one: '{n} spørgsmål', other: '{n} spørgsmål'},
+    empty: 'Der er ingen øvelser endnu.',
+    error: 'Kunne ikke hente øvelserne. Prøv at genindlæse siden.',
+  },
+};
+registerStrings(STRINGS);
+
+// The drills in the order the workbook takes them, with the exercises each goes with.
+const DRILLS = [
+  ['ordstilling', '🔀', '1–7'], ['tid', '⏱️', '9'], ['raekkefoelge', '🔢', '10'], ['tilfoejelse', '➕', '11'],
+  ['forklaring', '💡', '12'], ['konsekvens', '➡️', '13'], ['sammenligning', '⚖️', '14'], ['modsaetning', '↔️', '15'],
+  ['eksempel', '🔍', '16'], ['uddybning', '🔎', '17'], ['holdning', '💬', '18'], ['opsummering', '🧾', '19'],
+  ['betydning', '❓', '8, 20'],
+];
+
+// The meaning groups of the table: the connectors, a sentence of our own, the formal ones greyed.
+const GROUPS = [
+  ['Tid', 'время', 'først, derefter, bagefter, dernæst, så, kort efter, senere, til sidst, før, tidligere, nu, i dag', 'dernæst', 'Først handler vi ind, derefter laver vi mad.'],
+  ['Rækkefølge', 'порядок доводов', 'for det første … for det andet, endelig, dels … dels, først og fremmest', '', 'For det første er det billigt, for det andet er det sundt.'],
+  ['Tilføjelse', 'добавление', 'også, heller ikke, desuden, derudover, endda, oven i købet, tilmed, samtidig, ligeledes, endvidere, ydermere', 'endvidere, ydermere, ligeledes', 'Huset er stort. Desuden har det en have.'],
+  ['Forklaring', 'причина', 'fordi, da, eftersom, idet, for, nemlig, på grund af (pga.)', 'eftersom, idet', 'Vi bliver hjemme, fordi det regner.'],
+  ['Konsekvens', 'следствие', 'så, derfor, dermed, således, følgelig, af den grund', 'dermed, således, følgelig', 'Det regner, derfor bliver vi hjemme.'],
+  ['Sammenligning', 'сравнение', 'både … og, hverken … eller, også, heller ikke, ligesom, end, til sammenligning', 'til sammenligning', 'Både Ida og Ali taler dansk.'],
+  ['Modsætning', 'противопоставление', 'men, selvom, alligevel, dog, imidlertid, derimod, til gengæld, mens, hvorimod, omvendt, på den ene side … på den anden side, ikke desto mindre', 'imidlertid, hvorimod, ikke desto mindre', 'Det er dyrt. Til gengæld er det godt.'],
+  ['Eksempel', 'пример', 'for eksempel (fx), eksempelvis, blandt andet (bl.a.), som, især, specielt', 'eksempelvis', 'Jeg kan lide grøntsager, især gulerødder.'],
+  ['Uddybning', 'уточнение', 'det vil sige (dvs.), det betyder, med andre ord (m.a.o.), altså, faktisk', '', 'Han er 18, dvs. han må stemme.'],
+  ['Holdning', 'позиция говорящего', 'selvfølgelig, naturligvis, heldigvis, desværre, forhåbentlig, måske, muligvis, formodentlig, sandsynligvis, først og fremmest, endelig, omsider', 'formodentlig', 'Heldigvis kom ingen til skade.'],
+  ['Opsummering', 'итог', 'alt i alt, kort sagt, sammenfattende kan man sige, afslutningsvis, til sidst, til slut', 'sammenfattende kan man sige, afslutningsvis', 'Alt i alt var det en god dag.'],
+];
+
+// The workbook's drills, and only them: a set whose slug has the segment forbinderord-.
+// Its group is what follows, before the number: forbinderord-tid-1 is the time drill.
+const isConnector = slug => /(^|-)forbinderord-/.test(slug);
+const stem = slug => (slug.match(/forbinderord-(.+)-\d+$/) ?? [])[1];
+
+function paintLanguages() {
+  $('#langs').innerHTML = Object.keys(STRINGS).map(code =>
+    `<button class="lang" data-lang="${code}" aria-pressed="${code === currentLang()}">${code.toUpperCase()}</button>`).join('');
+  $('#langs').querySelectorAll('.lang').forEach(b => b.onclick = () => { applyLang(b.dataset.lang); render(); });
+}
+
+let drills = null;
+let failed = false;
+
+// On this page every drill is about connectors, so a tile names only its group: Tid, not Forbinderord: tid.
+const short = title => title.replace(/^Forbinderord(: | og )/, '').replace(/^./, c => c.toUpperCase());
+
+function drillsHtml() {
+  if (failed) return `<p class="muted" style="margin:0">${esc(t('error'))}</p>`;
+  if (drills === null) return '';
+  if (drills.length === 0) return `<p class="muted" style="margin:0">${esc(t('empty'))}</p>`;
+  const place = s => { const i = DRILLS.findIndex(d => d[0] === stem(s.slug)); return i < 0 ? DRILLS.length : i; };
+  return `<ul id="drills">${[...drills].sort((a, b) => place(a) - place(b)).map((s, i) => {
+    const d = DRILLS[place(s)];
+    return `<li><a href="/grammar?s=${encodeURIComponent(s.slug)}" style="--h:${Math.round((i * 137.508) % 360)}">
+      <span class="pic" aria-hidden="true">${d ? d[1] : '📘'}</span>
+      <span class="title" lang="da">${esc(short(s.title))}</span>
+      <span class="n">${esc(t('questions', s.questions).replace('{n}', s.questions))}</span>
+      ${d ? `<span class="n">${esc(t('book').replace('{n}', d[2]))}</span>` : ''}
+    </a></li>`;
+  }).join('')}</ul>`;
+}
+
+function render() {
+  document.documentElement.lang = currentLang();
+  $('#title').textContent = t('title');
+  $('#intro').textContent = t('intro');
+  $('#drillsTitle').textContent = t('drills');
+  $('#drillsBox').innerHTML = drillsHtml();
+  paintLanguages();
+}
+
+$('#groups').innerHTML = GROUPS.map(([name, ru, words, formal, example]) => {
+  const greyed = new Set(formal.split(', ').filter(Boolean));
+  const list = words.split(', ').map(w => greyed.has(w) ? `<span class="formal">${esc(w)}</span>` : esc(w)).join(', ');
+  return `<tr><td><b lang="da">${esc(name)}</b><br><span class="muted">${esc(ru)}</span></td>
+    <td lang="da">${list}</td><td lang="da"><i>${esc(example)}</i></td></tr>`;
+}).join('');
+
+async function load() {
+  try {
+    drills = (await api('/grammar')).sets.filter(s => isConnector(s.slug));
+  } catch (e) {
+    failed = true;
+  }
+  render();
+}
+
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
+render();
+load();
+</script>
+</body>
+</html>

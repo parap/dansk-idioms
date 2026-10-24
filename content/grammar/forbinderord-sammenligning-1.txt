@@ -1,0 +1,66 @@
+kind: grammar
+slug: forbinderord-sammenligning-1
+title: Forbinderord: sammenligning
+
+--- questions ---
+1. ___ min mor og min far taler dansk.
+> både … og — «и … и», оба. И мама, и папа говорят по-датски.
+* Både
+  Hverken
+  Enten
+  Begge
+
+2. Han taler ___ dansk eller engelsk.
+> hverken … eller — «ни … ни». Он не говорит ни по-датски, ни по-английски.
+* hverken
+  både
+  også
+  heller
+
+3. Min søster er gift, og jeg er ___ gift.
+> også — «тоже» в утвердительном предложении. Моя сестра замужем, и я тоже.
+* også
+  heller
+  både
+  ligesom
+
+4. Peter er ikke gift, og Anna er ___ ikke gift.
+> heller ikke — «тоже не». Питер не женат, и Анна тоже не замужем.
+* heller
+  også
+  hverken
+  både
+
+5. I år besøgte to millioner turister byen. ___ kom der kun én million i 2010.
+> til sammenligning — «для сравнения». В этом году город посетили два миллиона туристов. Для сравнения, в 2010 году их было всего миллион.
+* Til sammenligning
+  Derfor
+  Desuden
+  Endelig
+
+6. Hun er bedre til matematik, ___ jeg er.
+> После сравнительной степени (bedre, større) сравнивают через end. Она лучше меня в математике.
+* end
+  som
+  ligesom
+  derfor
+
+7. Han elsker fodbold, ___ sin far.
+> ligesom — «как, так же как». Он, как и его отец, обожает футбол.
+* ligesom
+  end
+  både
+  også
+
+8. Der er færre rygere i dag ___ for 20 år siden.
+> færre — сравнительная степень, поэтому end. Сегодня курильщиков меньше, чем 20 лет назад.
+* end
+  som
+  ligesom
+  til sammenligning
+
+9. Ingen af dem var gift. Hvad betyder sætningen?
+> ingen af — «ни один из». Никто из них не был в браке.
+* Ikke en eneste af dem var gift.
+  Nogle af dem var gift.
+  Alle var gift.

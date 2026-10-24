@@ -39,6 +39,12 @@ title: Datid eller førnutid
   the other word order. A form that does not exist (`købede`, `har blevet`) is a fair
   distractor; a nonsense string is not.
 
+**Connector drills** (`forbinderord-<group>-1`) go with a workbook on forbinderord and its
+Skriveguiden. A set whose slug has the segment `forbinderord-` is offered on `/forbinderord`,
+next to the rules it drills, and the grammar list shows one tile for all of them; the page's
+`DRILLS` puts them in the workbook's order and names the exercises each goes with. The book's
+own sentences are not used: its topics and task types are, with sentences of our own.
+
 ```bash
 docker-compose exec app php bin/reading-import.php --publish content/grammar/*.txt
 ```

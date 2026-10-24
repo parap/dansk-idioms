@@ -1,0 +1,94 @@
+kind: grammar
+slug: forbinderord-betydning-1
+title: Quiz: forbinderords betydning
+
+--- questions ---
+1. Han har desværre mistet sit arbejde.
+> desværre — «к сожалению»: говорящий огорчён. Он, к сожалению, потерял работу.
+* Det er en trist nyhed, at han har mistet sit arbejde.
+  Det er godt, at han har mistet sit arbejde.
+  Det er måske ikke sandt, at han har mistet sit arbejde.
+
+2. Huset var gammelt og oven i købet koldt.
+> oven i købet — «вдобавок, ещё и». Дом был старый, да ещё и холодный.
+* Huset var gammelt, og det var også koldt.
+  Huset var gammelt, men varmt.
+  Huset var gammelt, og derfor var det varmt.
+
+3. Hun læser medicin. Hun vil nemlig være læge.
+> nemlig объясняет причину предыдущего. Она изучает медицину. Дело в том, что она хочет стать врачом.
+* Hun læser medicin, fordi hun vil være læge.
+  Hun læser medicin, selvom hun ikke vil være læge.
+  Hun vil være læge, men læser noget andet.
+
+4. Formodentlig er butikken lukket nu.
+> formodentlig (formentlig) — «вероятно, по всей видимости». Вероятно, магазин сейчас закрыт.
+* Jeg tror, at butikken er lukket nu.
+  Jeg ved, at butikken er åben nu.
+  Butikken lukker aldrig.
+
+5. Vi fik omsider svar fra kommunen.
+> omsider — «наконец-то, после долгого ожидания». Мы наконец получили ответ из коммуны.
+* Vi fik svar efter lang tid.
+  Vi fik svar med det samme.
+  Vi fik aldrig svar.
+
+6. Han er doven. Hans kone er derimod meget aktiv.
+> derimod — «напротив». Он ленивый. Его жена, напротив, очень активная.
+* Hans kone er det modsatte af ham.
+  Hans kone er også doven.
+  Hans kone er doven på grund af ham.
+
+7. Vi havde inviteret 50. Der kom imidlertid kun 12.
+> imidlertid — формальное «однако», то же, что men или dog. Мы пригласили 50 человек. Однако пришли только 12.
+* Men der kom kun 12.
+  Derfor kom der kun 12.
+  Der kom flere, end vi havde inviteret.
+
+8. Hun er syg og kan følgelig ikke komme.
+> følgelig — «следовательно, поэтому». Она больна и поэтому не может прийти.
+* Hun kan ikke komme, fordi hun er syg.
+  Hun er syg, men kommer alligevel.
+  Hun kommer, når hun er rask.
+
+9. Lønnen er lav. Til gengæld er arbejdstiderne gode.
+> til gengæld — «зато»: минус уравновешивается плюсом. Зарплата низкая. Зато график хороший.
+* Lønnen er dårlig, men arbejdstiderne er en fordel.
+  Både lønnen og arbejdstiderne er dårlige.
+  Lønnen er lav, fordi arbejdstiderne er gode.
+
+10. Selvom det var koldt, badede vi i havet.
+> selvom — «хотя»: действие произошло вопреки обстоятельству. Хотя было холодно, мы купались в море.
+* Det var koldt, men vi badede alligevel.
+  Vi badede ikke, fordi det var koldt.
+  Det var varmt, så vi badede.
+
+11. Han har ligeledes fået en bøde.
+> ligeledes — «так же, тоже». Он тоже получил штраф.
+* Han har også fået en bøde.
+  Han har ikke fået en bøde.
+  Han har fået en større bøde end de andre.
+
+12. Min mand vil gerne bo på landet. Jeg vil omvendt helst bo i byen.
+> omvendt — «наоборот». Мой муж хочет жить в деревне. Я, наоборот, предпочла бы жить в городе.
+* Jeg vil det modsatte af min mand.
+  Jeg vil det samme som min mand.
+  Jeg vil bo på landet, men min mand vil ikke.
+
+13. Billetterne var udsolgt. Vi måtte altså blive hjemme.
+> altså — «значит, так что»: вывод. Билеты были распроданы. Так что нам пришлось остаться дома.
+* Derfor måtte vi blive hjemme.
+  Selvom billetterne var udsolgt, kom vi ind.
+  Vi blev hjemme, før billetterne blev udsolgt.
+
+14. Kort efter kom politiet.
+> kort efter — «вскоре после этого». Вскоре после этого приехала полиция.
+* Lidt senere kom politiet.
+  Politiet var der allerede før.
+  Politiet kom aldrig.
+
+15. Det er sandsynligvis for sent at tilmelde sig.
+> sandsynligvis — «вероятно»: говорящий почти уверен, но не на сто процентов. Записываться, вероятно, уже поздно.
+* Jeg tror, det er for sent, men jeg er ikke helt sikker.
+  Det er helt sikkert for sent.
+  Det er ikke for sent.
