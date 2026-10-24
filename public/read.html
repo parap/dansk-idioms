@@ -38,7 +38,8 @@
     .grid .passage{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto} }
   .passage h2{font-size:1.05rem;margin:0 0 .6rem}
   .passage p{margin:0 0 .9rem;white-space:pre-wrap}
-  .example{font-weight:600;border-bottom:2px solid var(--ok);padding:0 .15rem}
+  .example{font-weight:600;border-bottom:2px solid var(--ok);padding:0 .15rem;cursor:help}
+  .example .exnote{font-weight:400;font-size:.75em;color:var(--ok)}
   .gap{display:inline-block;min-width:3.2rem;padding:0 .4rem;margin:0 .1rem;
     border:1px dashed var(--accent);border-radius:6px;background:var(--chip);
     color:var(--ink);font:inherit;font-size:.95rem;cursor:pointer;vertical-align:baseline}
@@ -116,6 +117,7 @@ const STRINGS = {
   ru: {
     goOverMistakes: 'Работа над ошибками',
     history: 'Сданные работы',
+    example: 'пример', exampleNote: 'Это образец: ответ уже выбран за вас. Начинайте с пункта 1.',
     prevQuestion: 'Назад', nextQuestion: 'Дальше',
     intro: 'Тренажёр по чтению для Prøve i Dansk 3. Прочитайте текст и ответьте на вопросы — ' +
            'формат тот же, что на экзамене.',
@@ -137,6 +139,7 @@ const STRINGS = {
   en: {
     goOverMistakes: 'Go over mistakes',
     history: 'Sittings so far',
+    example: 'example', exampleNote: 'This is a worked example: the answer is already chosen for you. Start with question 1.',
     prevQuestion: 'Back', nextQuestion: 'Next',
     intro: 'Reading practice for Prøve i Dansk 3. Read the text and answer the questions — ' +
            'the format matches the exam.',
@@ -158,6 +161,7 @@ const STRINGS = {
   uk: {
     goOverMistakes: 'Робота над помилками',
     history: 'Складені роботи',
+    example: 'приклад', exampleNote: 'Це зразок: відповідь уже обрано за вас. Починайте з пункту 1.',
     prevQuestion: 'Назад', nextQuestion: 'Далі',
     intro: 'Тренажер із читання для Prøve i Dansk 3. Прочитайте текст і дайте ' +
            'відповіді на запитання — формат той самий, що й на іспиті.',
@@ -182,6 +186,7 @@ const STRINGS = {
   da: {
     goOverMistakes: 'Gennemgå fejlene',
     history: 'Tidligere prøver',
+    example: 'eksempel', exampleNote: 'Dette er et eksempel: svaret er allerede valgt for dig. Begynd med spørgsmål 1.',
     prevQuestion: 'Tilbage', nextQuestion: 'Næste',
     intro: 'Læsetræning til Prøve i Dansk 3. Læs teksten og svar på spørgsmålene — ' +
            'formatet er det samme som til prøven.',
@@ -321,7 +326,7 @@ async function start(mode) {
  */
 function passageHtml(passage) {
   return esc(passage.body).replace(/\{\{(\d+)\}\}/g, (_, n) => n === '0'
-    ? `<span class="example">(0) ${esc(exampleAnswer(passage))}</span>`
+    ? `<span class="example" title="${esc(t('exampleNote'))}">(0) ${esc(exampleAnswer(passage))} <small class="exnote">${esc(t('example'))}</small></span>`
     : `<button class="gap" data-gap="${esc(n)}" id="gap-${esc(n)}">${esc(n)}</button>`);
 }
 

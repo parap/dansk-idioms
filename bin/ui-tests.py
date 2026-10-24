@@ -1472,6 +1472,31 @@ def a_modultest_task_shows_its_example_answered_and_does_not_count_it(b):
     assert not b.js('!!document.querySelector("#qs button.opt[data-pos=\'0\']")'), 'the example can be answered'
     assert 'Se eksemplet (0)' in b.js('document.querySelector(".instr").textContent'), 'the instruction does not point at the example'
     assert '/ 3' in b.js('document.querySelector("#count").textContent'), 'the example is counted as a question'
+    # A pre-chosen answer reads as a learner's own unless the page says plainly it is the worked example.
+    note = b.js('document.querySelector("#qs .example-note")?.innerText ?? ""')
+    assert 'образец' in note and '1' in note, f'the example is not said to be one: {note!r}'
+    assert b.js('!!document.querySelector("#qs .example-note") && getComputedStyle(document.querySelector("#qs .example-note")).display !== "none"'), \
+        'the note on the example is hidden'
+    assert 'образец' in b.js('document.querySelector("#qs .opt.right")?.title ?? ""'), 'the chosen example answer has no tooltip'
+    assert 'образец' in b.js('document.querySelector(".text .example")?.title ?? ""'), 'the example in the text has no tooltip'
+
+
+@check
+def a_modultest_example_in_a_mistakes_round_says_it_is_one(b):
+    """A task missed in a Modultest comes back in the reading mistakes round, its worked example with it."""
+    open_modultest(b)
+    wrong = (correct_indexes()[0] + 1) % 3
+    b.js(f'document.querySelector(\'.opt[data-pos="1"][data-i="{wrong}"]\').click()')
+    b.until('!!document.querySelector(".opt.chosen")', what='the wrong answer kept')
+    b.js('window.confirm = () => true; document.querySelector("#hand").click()')
+    b.until('!!document.querySelector("#result")', what='the result')
+    b.goto('/read')
+    b.until('!!document.querySelector("#mistakes")', what='the mistakes round offered')
+    b.js('document.querySelector("#mistakes").click()')
+    b.until('!!document.querySelector(".passage .example")', what='the worked example in the mistakes round')
+    assert b.js('document.querySelector(".passage .example .exnote")?.textContent ?? ""') == 'пример', \
+        'the example in the text is not labelled as one'
+    assert 'образец' in b.js('document.querySelector(".passage .example").title'), 'the example in the text has no tooltip'
 
 
 @check
