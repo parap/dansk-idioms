@@ -28,9 +28,9 @@ final class WritingCheckTest extends IntegrationTestCase
         return new class(self::FEEDBACK, $fails) implements WritingReviewer {
             public array $asked = [];
             public function __construct(private array $feedback, private ?RuntimeException $fails) {}
-            public function review(array $task, string $text, string $lang): array
+            public function review(array $task, string $text, string $lang, string $model): array
             {
-                $this->asked[] = [$task['id'], $text, $lang];
+                $this->asked[] = [$task['id'], $text, $lang, $model];
                 if ($this->fails) {
                     throw $this->fails;
                 }
@@ -54,19 +54,41 @@ final class WritingCheckTest extends IntegrationTestCase
     {
         $reviewer = $this->reviewer();
 
-        $result = $this->service($reviewer)->check($this->user(), 'e1', self::TEXT, 'uk');
+        $result = $this->service($reviewer)->check($this->user(), 'e1', self::TEXT, 'uk', 'haiku');
 
         self::assertSame(self::FEEDBACK, $result['feedback']);
         self::assertSame(18, $result['words']);
         self::assertSame(125, $result['minimum']);
         self::assertSame(2, $result['left_today']);
-        self::assertSame([['e1', self::TEXT, 'uk']], $reviewer->asked);
+        self::assertSame([['e1', self::TEXT, 'uk', 'haiku']], $reviewer->asked);
+    }
+
+    /** The page offers three models, the cheapest first; the review runs on the one chosen. */
+    public function testReviewsWithTheModelChosen(): void
+    {
+        $reviewer = $this->reviewer();
+
+        $this->service($reviewer)->check($this->user(), 'e1', self::TEXT, 'ru', 'opus');
+
+        self::assertSame('opus', $reviewer->asked[0][3]);
+    }
+
+    public function testRefusesAModelThePageDoesNotOffer(): void
+    {
+        $reviewer = $this->reviewer();
+
+        try {
+            $this->service($reviewer)->check($this->user(), 'e1', self::TEXT, 'ru', 'claude-fable-5-1');
+            self::fail('an unoffered model was used');
+        } catch (InvalidArgumentException) {
+        }
+        self::assertSame([], $reviewer->asked);
     }
 
     public function testKeepsTheCheckWithWhatItCost(): void
     {
         $user = $this->user();
-        $this->service($this->reviewer())->check($user, 'b2', self::TEXT, 'ru');
+        $this->service($this->reviewer())->check($user, 'b2', self::TEXT, 'ru', 'haiku');
 
         $row = Db::fetchOne('SELECT user_id, task_id, text, word_count, model, input_tokens, output_tokens, feedback FROM writing_checks');
         self::assertSame($user, (int) $row['user_id']);
@@ -84,7 +106,7 @@ final class WritingCheckTest extends IntegrationTestCase
         $reviewer = $this->reviewer();
 
         try {
-            $this->service($reviewer)->check(null, 'e1', self::TEXT, 'ru');
+            $this->service($reviewer)->check(null, 'e1', self::TEXT, 'ru', 'haiku');
             self::fail('a guest was reviewed');
         } catch (WritingCheckUnavailable) {
         }
@@ -98,7 +120,7 @@ final class WritingCheckTest extends IntegrationTestCase
         $reviewer = $this->reviewer();
 
         try {
-            $this->service($reviewer)->check($learner, 'e1', self::TEXT, 'ru');
+            $this->service($reviewer)->check($learner, 'e1', self::TEXT, 'ru', 'haiku');
             self::fail('a learner who is no admin was reviewed');
         } catch (WritingCheckUnavailable) {
         }
@@ -110,7 +132,7 @@ final class WritingCheckTest extends IntegrationTestCase
     {
         $admin   = $this->user();
         $service = $this->service($this->reviewer(), perUser: 3);
-        $service->check($admin, 'e1', self::TEXT, 'ru');
+        $service->check($admin, 'e1', self::TEXT, 'ru', 'haiku');
 
         self::assertSame(['available' => true, 'left_today' => 2], $service->availability($admin));
     }
@@ -122,7 +144,7 @@ final class WritingCheckTest extends IntegrationTestCase
 
         self::assertFalse($this->service(null)->availability($admin)['available']);
         $this->expectException(WritingCheckUnavailable::class);
-        $this->service(null)->check($admin, 'e1', self::TEXT, 'ru');
+        $this->service(null)->check($admin, 'e1', self::TEXT, 'ru', 'haiku');
     }
 
     public function testRefusesATaskThePageDoesNotOffer(): void
@@ -130,7 +152,7 @@ final class WritingCheckTest extends IntegrationTestCase
         $reviewer = $this->reviewer();
 
         try {
-            $this->service($reviewer)->check($this->user(), 'e99', self::TEXT, 'ru');
+            $this->service($reviewer)->check($this->user(), 'e99', self::TEXT, 'ru', 'haiku');
             self::fail('an unknown task was reviewed');
         } catch (InvalidArgumentException) {
         }
@@ -143,7 +165,7 @@ final class WritingCheckTest extends IntegrationTestCase
         $reviewer = $this->reviewer();
 
         try {
-            $this->service($reviewer)->check($this->user(), 'e1', 'Hej Sune, tak.', 'ru');
+            $this->service($reviewer)->check($this->user(), 'e1', 'Hej Sune, tak.', 'ru', 'haiku');
             self::fail('three words were reviewed');
         } catch (InvalidArgumentException) {
         }
@@ -153,7 +175,7 @@ final class WritingCheckTest extends IntegrationTestCase
     public function testRefusesATextFarLongerThanTheTaskAsksFor(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->service($this->reviewer())->check($this->user(), 'e1', str_repeat('ord ', 700), 'ru');
+        $this->service($this->reviewer())->check($this->user(), 'e1', str_repeat('ord ', 700), 'ru', 'haiku');
     }
 
     public function testStopsAtTheDailyAllowance(): void
@@ -161,26 +183,26 @@ final class WritingCheckTest extends IntegrationTestCase
         $admin    = $this->user();
         $reviewer = $this->reviewer();
         $service  = $this->service($reviewer, perUser: 2);
-        $service->check($admin, 'e1', self::TEXT, 'ru');
-        $service->check($admin, 'e1', self::TEXT, 'ru');
+        $service->check($admin, 'e1', self::TEXT, 'ru', 'haiku');
+        $service->check($admin, 'e1', self::TEXT, 'ru', 'haiku');
 
         try {
-            $service->check($admin, 'e1', self::TEXT, 'ru');
+            $service->check($admin, 'e1', self::TEXT, 'ru', 'haiku');
             self::fail('a third check went through');
         } catch (WritingLimitReached) {
         }
         self::assertCount(2, $reviewer->asked);
-        self::assertSame(1, $service->check($this->user('admin', 'other@example.test'), 'e1', self::TEXT, 'ru')['left_today'], 'another admin was stopped too');
+        self::assertSame(1, $service->check($this->user('admin', 'other@example.test'), 'e1', self::TEXT, 'ru', 'haiku')['left_today'], 'another admin was stopped too');
     }
 
     public function testYesterdaysChecksDoNotCountToday(): void
     {
         $admin   = $this->user();
         $service = $this->service($this->reviewer(), perUser: 1);
-        $service->check($admin, 'e1', self::TEXT, 'ru');
+        $service->check($admin, 'e1', self::TEXT, 'ru', 'haiku');
         Db::execute('UPDATE writing_checks SET created_at = NOW() - INTERVAL 25 HOUR');
 
-        self::assertSame(0, $service->check($admin, 'e1', self::TEXT, 'ru')['left_today']);
+        self::assertSame(0, $service->check($admin, 'e1', self::TEXT, 'ru', 'haiku')['left_today']);
     }
 
     public function testAFailedReviewIsNotCounted(): void
@@ -188,7 +210,7 @@ final class WritingCheckTest extends IntegrationTestCase
         $service = $this->service($this->reviewer(new RuntimeException('timed out')), perUser: 1);
 
         try {
-            $service->check($this->user(), 'e1', self::TEXT, 'ru');
+            $service->check($this->user(), 'e1', self::TEXT, 'ru', 'haiku');
             self::fail('the failure was swallowed');
         } catch (RuntimeException $e) {
             self::assertSame('timed out', $e->getMessage());

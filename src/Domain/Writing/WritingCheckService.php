@@ -23,6 +23,9 @@ final class WritingCheckService
 
     private const MOST_CHARACTERS = 6000;
 
+    /** The models the page offers, the one that spends least of the subscription first. */
+    public const MODELS = ['haiku', 'sonnet', 'opus'];
+
     public function __construct(
         private ?WritingReviewer $reviewer,
         private int $perUserDaily,
@@ -51,10 +54,13 @@ final class WritingCheckService
     }
 
     /** @return array{feedback:array<string,mixed>,words:int,minimum:int,left_today:int} */
-    public function check(?int $userId, string $taskId, string $text, string $lang): array
+    public function check(?int $userId, string $taskId, string $text, string $lang, string $model): array
     {
         if (!$this->offeredTo($userId)) {
             throw new WritingCheckUnavailable('Checking is not offered here.');
+        }
+        if (!in_array($model, self::MODELS, true)) {
+            throw new InvalidArgumentException("There is no model '{$model}' to check with.");
         }
         $task = $this->tasks->find($taskId);
         if ($task === null) {
@@ -73,7 +79,7 @@ final class WritingCheckService
             throw new WritingLimitReached('Today\'s checks are used up.');
         }
 
-        $review = $this->reviewer->review($task, $text, $lang);
+        $review = $this->reviewer->review($task, $text, $lang, $model);
 
         Db::execute(
             'INSERT INTO writing_checks (user_id, task_id, text, word_count, feedback, model, input_tokens, output_tokens)

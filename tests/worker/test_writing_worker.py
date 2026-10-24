@@ -31,7 +31,7 @@ open({str(self.calls)!r}, 'a').write(json.dumps({{'argv': sys.argv[1:], 'stdin':
         return str(stub)
 
     def queue(self, name='a1', job=None):
-        job = job or {'system': 'Du er lærer.', 'prompt': 'Hej Sune.', 'schema': {'type': 'object'}}
+        job = job or {'system': 'Du er lærer.', 'prompt': 'Hej Sune.', 'schema': {'type': 'object'}, 'model': 'sonnet'}
         (self.dir / 'queue' / f'{name}.json').write_text(json.dumps(job))
 
     def run_worker(self, claude):
@@ -60,9 +60,17 @@ open({str(self.calls)!r}, 'a').write(json.dumps({{'argv': sys.argv[1:], 'stdin':
         self.assertEqual(argv[argv.index('--setting-sources') + 1], '')
         self.assertIn('--no-session-persistence', argv)
         self.assertEqual(argv[argv.index('--system-prompt') + 1], 'Du er lærer.')
+        self.assertEqual(argv[argv.index('--model') + 1], 'sonnet')
         self.assertEqual(json.loads(argv[argv.index('--json-schema') + 1]), {'type': 'object'})
         self.assertEqual(call['stdin'], 'Hej Sune.')
         self.assertFalse(pathlib.Path(call['cwd']).exists(), 'claude ran in a directory that outlived it')
+
+    def test_refuses_a_model_it_does_not_offer_without_running_claude(self):
+        self.queue(job={'system': 's', 'prompt': 'p', 'schema': {}, 'model': 'claude-fable-5-1'})
+        self.run_worker(self.claude('print("{}")'))
+
+        self.assertFalse(self.calls.exists(), 'claude ran on a model that is not offered')
+        self.assertFalse(self.answered()['ok'])
 
     def test_a_failed_run_is_answered_as_a_failure(self):
         self.queue()

@@ -1414,7 +1414,8 @@ def stand_in_for_the_check(b, status, body):
     b.js(f"""(() => {{ const real = window.fetch;
         const reply = (body, status) => Promise.resolve(new Response(body, {{status, headers: {{'Content-Type': 'application/json'}}}}));
         window.fetch = (url, opts) => !String(url).endsWith('/modultest/skriv/check') ? real(url, opts)
-          : (opts?.method === 'POST' ? reply({json.dumps(body)}, {status}) : reply({json.dumps(offer)}, 200)); }})()""")
+          : (opts?.method === 'POST' ? (window.checkSent = JSON.parse(opts.body), reply({json.dumps(body)}, {status}))
+             : reply({json.dumps(offer)}, 200)); }})()""")
 
 
 def open_the_email_task_with_a_draft(b, status, body):
@@ -1451,12 +1452,45 @@ def a_checked_text_shows_its_review(b):
 
 
 @check
+def the_check_is_sent_with_the_model_chosen_the_cheapest_by_default(b):
+    b.goto('/modultest/skriv')
+    b.until('!!document.querySelector("#draft")', what='the writing page')
+    b.js("localStorage.removeItem('skriv:model')")
+    open_the_email_task_with_a_draft(b, 200, CHECK_REPLY)
+    assert not b.js('document.querySelector("#modelRow").hidden'), 'the model choice is not shown with the check'
+    assert b.js('document.querySelector("#checkModel").value') == 'haiku', 'the cheapest model is not the default'
+    b.js('document.querySelector("#check").click()')
+    b.until('!!document.querySelector("#reviewCard")', what='the review')
+    assert b.js('window.checkSent.model') == 'haiku', b.js('JSON.stringify(window.checkSent)')
+    b.js("(() => { const m = document.querySelector('#checkModel'); m.value = 'opus'; m.dispatchEvent(new Event('change')); })()")
+    b.js('document.querySelector("#check").click()')
+    b.until('window.checkSent.model === "opus"', what='the review asked of opus')
+    b.goto('/modultest/skriv')
+    b.until('!!document.querySelector("#checkModel")', what='the page again')
+    assert b.js('document.querySelector("#checkModel").value') == 'opus', 'the choice of model is not kept'
+    b.js("localStorage.removeItem('skriv:model'); localStorage.removeItem('skriv:e1'); localStorage.removeItem('skriv:e1:review')")
+
+
+@check
+def no_page_repeats_an_id(b):
+    """Two elements under one id leave $('#x') reaching the first, and the other's button silently works the wrong one."""
+    for path, ready in [('/', '.cta'), ('/modultest', '#view .card'), ('/modultest/skriv', '#draft'), ('/read', '#go'),
+                        ('/grammar', 'body'), ('/proeve', 'body')]:
+        b.goto(path)
+        b.until(f'!!document.querySelector("{ready}")', what=path)
+        twice = b.js("""(() => { const ids = [...document.querySelectorAll('[id]')].map(e => e.id);
+            return [...new Set(ids.filter((id, i) => ids.indexOf(id) !== i))]; })()""")
+        assert not twice, f'{path} repeats ids: {twice}'
+
+
+@check
 def the_check_is_not_offered_to_a_guest(b):
     b.goto('/modultest/skriv')
     b.until('!!document.querySelector("#checkRow")', what='the email task')
     b.until('document.readyState === "complete"', what='the page to settle')
     time.sleep(1)
     assert b.js('document.querySelector("#checkRow").hidden'), 'a guest is offered the check'
+    assert b.js('document.querySelector("#modelRow").hidden'), 'a guest is offered a choice of model'
 
 
 @check

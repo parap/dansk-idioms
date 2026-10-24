@@ -58,6 +58,9 @@
   .mark{display:block;font-size:.85rem;font-weight:600}
   .mark.answered{color:var(--ok)} .mark.missing{color:var(--bad)}
   del{color:var(--bad)} ins{color:var(--ok);text-decoration:none;font-weight:600}
+  #modelRow label{display:grid;gap:.25rem;width:100%;max-width:26rem}
+  select{font:inherit;padding:7px 10px;border-radius:9px;border:1px solid var(--line);
+    background:var(--card);color:var(--ink);width:100%;min-width:0}
   .btn{padding:10px 16px;border-radius:10px;font:inherit;font-weight:600;cursor:pointer;
     border:1px solid var(--line);background:var(--chip);color:var(--ink)}
   .btn:hover:not(:disabled){border-color:var(--accent)}
@@ -95,6 +98,7 @@ const STRINGS = {
     checking: 'Проверяю… обычно до минуты.',
     checkNote: 'Проверка идёт через Claude на подписке владельца сайта. Осталось сегодня: {n}.',
     checkOff: 'Проверка доступна только владельцу сайта.',
+    modelLabel: 'Модель', haiku: 'Haiku — быстро, экономно', sonnet: 'Sonnet — точнее', opus: 'Opus — точнее всего, дороже',
     checkLimit: 'Проверки на сегодня закончились. Попробуйте завтра.',
     checkShort: 'Напишите хотя бы 10 слов.',
     checkFailed: 'Проверка не удалась. Попробуйте ещё раз через минуту.',
@@ -136,6 +140,7 @@ const STRINGS = {
     checking: 'Checking… usually under a minute.',
     checkNote: 'Checked by Claude on the site owner\'s subscription. Left today: {n}.',
     checkOff: 'Checking is open to the site\'s owner only.',
+    modelLabel: 'Model', haiku: 'Haiku — fast, economical', sonnet: 'Sonnet — more accurate', opus: 'Opus — most accurate, costliest',
     checkLimit: 'Today\'s checks are used up. Try again tomorrow.',
     checkShort: 'Write at least 10 words.',
     checkFailed: 'The check did not work. Try again in a minute.',
@@ -177,6 +182,7 @@ const STRINGS = {
     checking: 'Перевіряю… зазвичай до хвилини.',
     checkNote: 'Перевірка йде через Claude на підписці власника сайту. Лишилося сьогодні: {n}.',
     checkOff: 'Перевірка доступна лише власнику сайту.',
+    modelLabel: 'Модель', haiku: 'Haiku — швидко, економно', sonnet: 'Sonnet — точніше', opus: 'Opus — найточніше, дорожче',
     checkLimit: 'Перевірки на сьогодні закінчилися. Спробуйте завтра.',
     checkShort: 'Напишіть щонайменше 10 слів.',
     checkFailed: 'Перевірка не вдалася. Спробуйте ще раз за хвилину.',
@@ -218,6 +224,7 @@ const STRINGS = {
     checking: 'Tjekker… som regel under et minut.',
     checkNote: 'Tjekkes af Claude på sideejerens abonnement. Tilbage i dag: {n}.',
     checkOff: 'Tjek er kun åbent for sidens ejer.',
+    modelLabel: 'Model', haiku: 'Haiku — hurtig, sparsom', sonnet: 'Sonnet — mere præcis', opus: 'Opus — mest præcis, dyrest',
     checkLimit: 'Dagens tjek er brugt. Prøv igen i morgen.',
     checkShort: 'Skriv mindst 10 ord.',
     checkFailed: 'Tjekket mislykkedes. Prøv igen om et minut.',
@@ -317,6 +324,8 @@ function writing(task) {
         <span class="spacer"></span><button class="btn" id="clear" lang="${currentLang()}">${esc(t('clear'))}</button></p>
       <p class="row" id="checkRow" style="margin:.8rem 0 0" lang="${currentLang()}" hidden><button class="btn primary" id="check">${esc(t('check'))}</button>
         <span class="muted" style="font-size:.85rem" id="checkNote"></span></p>
+      <p class="row" id="modelRow" style="margin:.4rem 0 0" lang="${currentLang()}" hidden><label class="muted" style="font-size:.9rem">${esc(t('modelLabel'))}
+        <select id="checkModel">${CHECK_MODELS.map(m => `<option value="${m}" ${m === chosenModel() ? 'selected' : ''}>${esc(t(m))}</option>`).join('')}</select></label></p>
       <p class="muted" id="checkState" role="status" lang="${currentLang()}" style="margin:.5rem 0 0"></p>
     </div>
     <div id="review"></div>
@@ -342,6 +351,7 @@ function writing(task) {
   $('#clear').onclick = () => { if (confirm(t('confirmClear'))) { draft.value = ''; store.set(key, ''); paint(); } };
   view.querySelectorAll('[data-check]').forEach(c => c.onchange = () => store.set(`${key}:${c.dataset.check}`, c.checked ? '1' : ''));
   $('#check').onclick = () => check(task, draft.value, key);
+  $('#checkModel').onchange = () => store.set('skriv:model', $('#checkModel').value);
   offerCheck();
   paintReview(store.get(`${key}:review`));
   $('#toggle').onclick = () => {
@@ -352,13 +362,16 @@ function writing(task) {
 }
 
 const CHECK_ERRORS = {403: 'checkOff', 429: 'checkLimit', 422: 'checkShort'};
+// The server's WritingCheckService::MODELS, the one that spends least of the subscription first.
+const CHECK_MODELS = ['haiku', 'sonnet', 'opus'];
+const chosenModel = () => CHECK_MODELS.includes(store.get('skriv:model')) ? store.get('skriv:model') : CHECK_MODELS[0];
 
 /** The check runs on the owner's own subscription, so the button shows only for whom the server offers it. */
 async function offerCheck() {
   const offer = await api('/modultest/skriv/check').catch(() => null);
   if (!offer?.available || !$('#checkRow')) return;
   $('#checkNote').textContent = fill(t('checkNote'), {n: offer.left_today});
-  $('#checkRow').hidden = false;
+  $('#checkRow').hidden = $('#modelRow').hidden = false;
 }
 
 async function check(task, text, key) {
@@ -366,7 +379,7 @@ async function check(task, text, key) {
   button.disabled = true;
   $('#checkState').textContent = t('checking');
   try {
-    const result = await api('/modultest/skriv/check', {method: 'POST', body: {task: task.id, text, lang: currentLang()}});
+    const result = await api('/modultest/skriv/check', {method: 'POST', body: {task: task.id, text, lang: currentLang(), model: $('#checkModel').value}});
     store.set(`${key}:review`, JSON.stringify(result));
     $('#checkState').textContent = '';
     $('#checkNote').textContent = fill(t('checkNote'), {n: result.left_today});

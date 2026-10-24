@@ -174,7 +174,8 @@ to Claude, which says which of the task's questions it answers, lists the errors
 corrections, and returns a corrected text and an estimate of passing. The review runs on the
 owner's own Claude subscription, through Claude Code on the server, so the button shows only
 for accounts with `users.role = 'admin'`, twenty checks a day (`writing` in
-`config/config.php`). The app runs in a container and Claude Code on the host: the app puts the
+`config/config.php`). A list under the button picks the model: Haiku by default, as it spends
+least of the subscription, then Sonnet and Opus (`WritingCheckService::MODELS`). The app runs in a container and Claude Code on the host: the app puts the
 job in `storage/writing/queue/`, the user unit `deploy/systemd/dansk-writing.path` starts
 `bin/writing-worker.py`, which runs `claude -p` without tools, settings or sessions and answers
 into `storage/writing/done/`. `bin/deploy.sh` installs and enables the unit; Claude Code must be
