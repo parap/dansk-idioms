@@ -38,6 +38,10 @@ export const registerStrings = strings => {
 
 export const currentLang = () => lang;
 
+// The order every page's language switch offers them in.
+const ORDER = ['en', 'da', 'uk', 'ru'];
+export const languages = () => [...ORDER.filter(code => code in STRINGS), ...Object.keys(STRINGS).filter(code => !ORDER.includes(code))];
+
 export const t = (key, count) => {
   const value = STRINGS[lang]?.[key] ?? STRINGS.ru?.[key] ?? key;
   if (typeof value === 'string') return value;

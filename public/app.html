@@ -112,7 +112,7 @@
 </div>
 
 <script type="module">
-import { $, esc, api, t, registerStrings, currentLang, setLang as applyLang } from '/shared.js';
+import { $, esc, api, t, registerStrings, currentLang, setLang as applyLang, languages } from '/shared.js';
 // ---------------------------------------------------------------------------
 // Interface strings. Adding a language means adding one key here; nothing else
 // in the page hard-codes user-facing text. Falls back to Russian for any key a
@@ -261,7 +261,7 @@ let direction = localStorage.getItem('quiz_direction') === 'tr_to_da' ? 'tr_to_d
 
 async function refreshMe() {
   try { me = (await api('/me')).user; } catch { me = null; }
-  const langs = Object.keys(STRINGS).map(code =>
+  const langs = languages().map(code =>
     `<button class="lang" data-lang="${code}" aria-pressed="${code === currentLang()}">${code.toUpperCase()}</button>`
   ).join('');
   $('#who').innerHTML = (me

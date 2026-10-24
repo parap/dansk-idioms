@@ -1728,7 +1728,8 @@ def every_page_carries_the_way_home(b):
                     '.classList.contains("brand")'), f'{path} puts something before the mark'
 
 
-LANGUAGES = ['ru', 'en', 'uk', 'da']
+# The order the switch offers them in: English first, Russian last.
+LANGUAGES = ['en', 'da', 'uk', 'ru']
 
 
 def offered_languages(b):

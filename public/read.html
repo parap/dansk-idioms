@@ -109,7 +109,7 @@
 </div>
 
 <script type="module">
-import { $, esc, api, t, registerStrings, currentLang, setLang as applyLang } from '/shared.js';
+import { $, esc, api, t, registerStrings, currentLang, setLang as applyLang, languages } from '/shared.js';
 
 // Interface strings. Adding a language means adding one key here; nothing else in the
 // page hard-codes user-facing text.
@@ -221,7 +221,7 @@ function paintLanguages() {
   document.documentElement.lang = currentLang();
   const box = $('#langs');
   box.hidden = false;
-  box.innerHTML = Object.keys(STRINGS).map(code =>
+  box.innerHTML = languages().map(code =>
     `<button class="lang" data-lang="${code}" aria-pressed="${code === currentLang()}"
       >${code.toUpperCase()}</button>`).join('');
   box.querySelectorAll('.lang').forEach(b => b.onclick = () => {

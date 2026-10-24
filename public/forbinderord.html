@@ -159,7 +159,7 @@
 </div>
 
 <script type="module">
-import { $, esc, t, api, registerStrings, currentLang, setLang as applyLang } from '/shared.js';
+import { $, esc, t, api, registerStrings, currentLang, setLang as applyLang, languages } from '/shared.js';
 
 const STRINGS = {
   ru: {
@@ -314,7 +314,7 @@ const isConnector = slug => /(^|-)forbinderord-/.test(slug);
 const stem = slug => (slug.match(/forbinderord-(.+)-\d+$/) ?? [])[1];
 
 function paintLanguages() {
-  $('#langs').innerHTML = Object.keys(STRINGS).map(code =>
+  $('#langs').innerHTML = languages().map(code =>
     `<button class="lang" data-lang="${code}" aria-pressed="${code === currentLang()}">${code.toUpperCase()}</button>`).join('');
   $('#langs').querySelectorAll('.lang').forEach(b => b.onclick = () => { applyLang(b.dataset.lang); render(); });
 }

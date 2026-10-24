@@ -89,7 +89,7 @@
 </div>
 
 <script type="module">
-import { $, esc, t, api, registerStrings, currentLang, setLang as applyLang } from '/shared.js';
+import { $, esc, t, api, registerStrings, currentLang, setLang as applyLang, languages } from '/shared.js';
 
 const STRINGS = {
   ru: {
@@ -164,7 +164,7 @@ const marks = {};     // position -> {chosen, correct, note}
 
 function paintLanguages() {
   const box = $('#langs');
-  box.innerHTML = Object.keys(STRINGS).map(code =>
+  box.innerHTML = languages().map(code =>
     `<button class="lang" data-lang="${code}" aria-pressed="${code === currentLang()}"
       >${code.toUpperCase()}</button>`).join('');
   box.querySelectorAll('.lang').forEach(b => b.onclick = () => { applyLang(b.dataset.lang); render(); });
