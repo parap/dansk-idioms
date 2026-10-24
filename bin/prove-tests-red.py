@@ -898,7 +898,7 @@ FAULTS = [
  (287,"the job does not name its model","src/Domain/Writing/SubscriptionWritingReviewer.php",
   "            'model'  => $model,\n","","unit:testHandsTheWorkerTheSystemPromptTheRequestAndTheSchema"),
  (288,"the page sends no model","public/skriv.html",
-  "lang: currentLang(), model: $('#model').value}","lang: currentLang()}","ui"),
+  "lang: currentLang(), model: $('#checkModel').value}","lang: currentLang()}","ui"),
  (289,"the dearest model is the default","public/skriv.html",
   "store.get('skriv:model') : CHECK_MODELS[0];","store.get('skriv:model') : CHECK_MODELS[2];","ui"),
  (284,"the review's errors are not drawn","public/skriv.html",

@@ -325,7 +325,7 @@ function writing(task) {
       <p class="row" id="checkRow" style="margin:.8rem 0 0" lang="${currentLang()}" hidden><button class="btn primary" id="check">${esc(t('check'))}</button>
         <span class="muted" style="font-size:.85rem" id="checkNote"></span></p>
       <p class="row" id="modelRow" style="margin:.4rem 0 0" lang="${currentLang()}" hidden><label class="muted" style="font-size:.9rem">${esc(t('modelLabel'))}
-        <select id="model">${CHECK_MODELS.map(m => `<option value="${m}" ${m === chosenModel() ? 'selected' : ''}>${esc(t(m))}</option>`).join('')}</select></label></p>
+        <select id="checkModel">${CHECK_MODELS.map(m => `<option value="${m}" ${m === chosenModel() ? 'selected' : ''}>${esc(t(m))}</option>`).join('')}</select></label></p>
       <p class="muted" id="checkState" role="status" lang="${currentLang()}" style="margin:.5rem 0 0"></p>
     </div>
     <div id="review"></div>
@@ -351,7 +351,7 @@ function writing(task) {
   $('#clear').onclick = () => { if (confirm(t('confirmClear'))) { draft.value = ''; store.set(key, ''); paint(); } };
   view.querySelectorAll('[data-check]').forEach(c => c.onchange = () => store.set(`${key}:${c.dataset.check}`, c.checked ? '1' : ''));
   $('#check').onclick = () => check(task, draft.value, key);
-  $('#model').onchange = () => store.set('skriv:model', $('#model').value);
+  $('#checkModel').onchange = () => store.set('skriv:model', $('#checkModel').value);
   offerCheck();
   paintReview(store.get(`${key}:review`));
   $('#toggle').onclick = () => {
@@ -379,7 +379,7 @@ async function check(task, text, key) {
   button.disabled = true;
   $('#checkState').textContent = t('checking');
   try {
-    const result = await api('/modultest/skriv/check', {method: 'POST', body: {task: task.id, text, lang: currentLang(), model: $('#model').value}});
+    const result = await api('/modultest/skriv/check', {method: 'POST', body: {task: task.id, text, lang: currentLang(), model: $('#checkModel').value}});
     store.set(`${key}:review`, JSON.stringify(result));
     $('#checkState').textContent = '';
     $('#checkNote').textContent = fill(t('checkNote'), {n: result.left_today});
