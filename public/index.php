@@ -10,6 +10,7 @@ use Dansk\Controller\ReadingAdminController;
 use Dansk\Controller\ReadingController;
 use Dansk\Controller\VerbController;
 use Dansk\Controller\VideoController;
+use Dansk\Controller\WritingCheckController;
 use Dansk\Http\Response;
 use Dansk\Support\AdminReach;
 use Dansk\Support\BotApi;
@@ -67,6 +68,7 @@ $dispatcher = FastRoute\simpleDispatcher(static function (RouteCollector $r): vo
     // A Modultest paper the same way: its own list and start, the session routes for the rest.
     $r->addRoute('GET',  '/api/v1/modultest',          'modultest.list');
     $r->addRoute('POST', '/api/v1/modultest/sessions', 'modultest.start');
+    $r->addRoute('POST', '/api/v1/modultest/skriv/check', 'modultest.skriv.check');
 
     $r->addRoute('POST', '/api/v1/reading/sessions', 'reading.start');
     $r->addRoute('GET',  '/api/v1/reading/sessions', 'reading.history');
@@ -255,6 +257,7 @@ try {
 
         'modultest.list'  => $modultest->list(),
         'modultest.start' => $modultest->start($body),
+        'modultest.skriv.check' => (new WritingCheckController())->check($body),
 
         'reading.start'   => $reading->start($body),
         'reading.history' => $reading->history(),

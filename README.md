@@ -169,6 +169,15 @@ that answer again. It is the only feedback loop the quiz has.
 and a standalone window. Offline it will show the shell but cannot serve a scored
 round, by design: caching questions would mean shipping the answers to the browser.
 
+**Checking a Modultest letter or blog post.** On `/modultest/skriv` the learner can send a
+text to Claude, which says which of the task's questions it answers, lists the errors with
+corrections, and returns a corrected text and an estimate of passing. The server builds the
+request from the task in `public/skriv-tal.json`, so a page cannot ask about anything else.
+It needs `ANTHROPIC_API_KEY` in the server's `.env` (then `docker compose up -d app`); without
+it the button answers that checking is not switched on. Each review costs a few cents on
+`claude-opus-5-5`, so a learner gets ten a day and the site 150 (`writing` in
+`config/config.php`); every review is kept in `writing_checks` with its token counts.
+
 ---
 
 ## Adding new idioms
