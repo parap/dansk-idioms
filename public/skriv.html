@@ -93,6 +93,7 @@ import { $, esc, t, api, registerStrings, currentLang, setLang as applyLang } fr
 const STRINGS = {
   ru: {
     title: 'Письмо и устная часть',
+    toLetters: 'Шаблоны официальных писем',
     intro: 'Тренажёр для письменной и устной части Modultest DU3, модуль 4. Ситуации и вопросы свои, по образцу официальных. Текст проверяете вы сами: счётчик слов, памятка и образец ответа. Черновик сохраняется в этом браузере.',
     check: 'Проверить текст',
     checking: 'Проверяю… обычно до минуты.',
@@ -135,6 +136,7 @@ const STRINGS = {
   },
   en: {
     title: 'Writing and speaking',
+    toLetters: 'Formal letter templates',
     intro: 'Practice for the writing and speaking parts of Modultest DU3, module 4. The situations and questions are our own, modelled on the official ones. You check your own text: a word counter, a checklist and a model answer. Your draft is kept in this browser.',
     check: 'Check my text',
     checking: 'Checking… usually under a minute.',
@@ -177,6 +179,7 @@ const STRINGS = {
   },
   uk: {
     title: 'Письмо та усна частина',
+    toLetters: 'Шаблони офіційних листів',
     intro: 'Тренажер для письмової та усної частини Modultest DU3, модуль 4. Ситуації та питання власні, за зразком офіційних. Текст перевіряєте ви самі: лічильник слів, пам’ятка й зразок відповіді. Чернетка зберігається в цьому браузері.',
     check: 'Перевірити текст',
     checking: 'Перевіряю… зазвичай до хвилини.',
@@ -219,6 +222,7 @@ const STRINGS = {
   },
   da: {
     title: 'Skrivning og mundtlig',
+    toLetters: 'Skabeloner til formelle breve',
     intro: 'Øvelser til skrivning og mundtlig kommunikation i Modultest DU3, modul 4. Situationer og spørgsmål er vores egne, lavet efter forlægget. Du tjekker selv din tekst: ordtæller, tjekliste og et eksempel på et svar. Dit udkast gemmes i denne browser.',
     check: 'Tjek min tekst',
     checking: 'Tjekker… som regel under et minut.',
@@ -317,6 +321,7 @@ function writing(task) {
   $('#task').innerHTML = `
     <div class="card" lang="da">
       <p style="margin:0 0 .8rem">${esc(instruction)}</p>
+      ${email ? `<p style="margin:0 0 .8rem"><a href="/breve" lang="${currentLang()}">${esc(t('toLetters'))}</a></p>` : ''}
       ${email ? '' : `<h2>${esc(task.title)}</h2>`}
       <div class="letter">${esc(email ? task.mail : task.post)}</div>
       <textarea id="draft" aria-label="${esc(t(tab))}" spellcheck="true">${esc(store.get(key))}</textarea>
