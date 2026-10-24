@@ -1741,6 +1741,28 @@ def choose_language(b, code):
 
 
 @check
+def the_quiz_direction_is_offered_only_in_russian(b):
+    """The idioms are translated into Russian alone, so only the Russian interface offers a direction."""
+    try:
+        b.goto('/')
+        b.until('!!document.querySelector("#go")', what='the start page')
+        b.js("localStorage.setItem('quiz_direction', 'tr_to_da'); localStorage.setItem('ui_lang', 'en')")
+        b.goto('/')
+        b.until('!!document.querySelector("#go")', what='the start page in English')
+        assert not b.js('!!document.querySelector(".dir")'), 'the English page offers a Russian quiz direction'
+        b.js('document.querySelector("#go").click()')
+        b.until('!!document.querySelector(".term")', what='the first question')
+        assert b.js('document.querySelector(".term").getAttribute("lang")') == 'da', \
+            'a hidden direction still turned the round to Russian prompts'
+        b.js("localStorage.setItem('ui_lang', 'ru')")
+        b.goto('/')
+        b.until('!!document.querySelector("#go")', what='the start page in Russian')
+        assert b.js('document.querySelectorAll(".dir").length') == 2, 'the Russian page lost its quiz directions'
+    finally:
+        b.js("localStorage.setItem('ui_lang', 'ru'); localStorage.removeItem('quiz_direction')")
+
+
+@check
 def every_page_offers_the_same_languages(b):
     """A language offered on one page and missing on the next drops the reader back into
     Russian halfway through the site, and the fallback is silent."""

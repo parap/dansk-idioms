@@ -258,6 +258,10 @@ let me = null, sid = null, total = 0, asked = 0, shownAt = 0;
 // Which way the round runs. Recognising an idiom and producing one are different
 // skills, so the choice is the user's rather than a hidden default.
 let direction = localStorage.getItem('quiz_direction') === 'tr_to_da' ? 'tr_to_da' : 'da_to_tr';
+// The idioms are translated into Russian alone, so the direction is offered in the Russian
+// interface only; elsewhere a round asks the Danish idiom, never a choice the page does not show.
+const directions = () => currentLang() === 'ru';
+const roundDirection = () => directions() ? direction : 'da_to_tr';
 
 async function refreshMe() {
   try { me = (await api('/me')).user; } catch { me = null; }
@@ -329,11 +333,11 @@ async function home() {
         <div class="stat"><b>${s.idioms_published ?? '—'}</b><span>${esc(t('statIdioms', s.idioms_published))}</span></div>
         ${tiles(s)}
       </div>
-      <div class="dirs">
+      ${directions() ? `<div class="dirs">
         <button class="dir" data-dir="da_to_tr" aria-pressed="${direction === 'da_to_tr'}">${esc(t('dirForward'))}</button>
         <button class="dir" data-dir="tr_to_da" aria-pressed="${direction === 'tr_to_da'}">${esc(t('dirReverse'))}</button>
       </div>
-      <p class="dirhint">${direction === 'tr_to_da' ? esc(t('dirHint')) : ''}</p>
+      <p class="dirhint">${direction === 'tr_to_da' ? esc(t('dirHint')) : ''}</p>` : ''}
       <button class="primary" id="go">${esc(t('start'))}</button>
       ${me ? '' : `<button class="link" id="reg" style="width:100%">${esc(t('createAccount'))}</button>`}
     </div>`;
@@ -350,7 +354,7 @@ async function home() {
 async function start() {
   $('#go').disabled = true;
   try {
-    const r = await api('/quiz/sessions', {method:'POST', body:{length:10, direction}});
+    const r = await api('/quiz/sessions', {method:'POST', body:{length:10, direction: roundDirection()}});
     sid = r.session_id; total = r.question.total; asked = 0;
     render(r.question);
   } catch (e) {
