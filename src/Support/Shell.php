@@ -30,6 +30,7 @@ final class Shell
         '/video'  => '/video.html',
         '/verbs'  => '/verbs.html',
         '/grammar' => '/grammar.html',
+        '/forbinderord' => '/forbinderord.html',
         '/modultest' => '/modultest.html',
         '/modultest/skriv' => '/skriv.html',
     ];

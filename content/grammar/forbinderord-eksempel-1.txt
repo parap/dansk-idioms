@@ -1,0 +1,62 @@
+kind: grammar
+slug: forbinderord-eksempel-1
+title: Forbinderord: eksempel
+
+--- questions ---
+1. Jeg kan godt lide nordiske byer, ___ Oslo og Stockholm.
+> for eksempel (fx, eksempelvis) — «например». Мне нравятся северные города, например Осло и Стокгольм.
+* for eksempel
+  derfor
+  alligevel
+  dels
+
+2. Der er mange ting at lave i weekenden. Man kan ___ tage på museum.
+> for eksempel можно поставить и в середину предложения, после глагола. В выходные есть чем заняться. Можно, например, сходить в музей.
+* for eksempel
+  heller ikke
+  derfor
+  alligevel
+
+3. Hvad står forkortelsen «bl.a.» for?
+> bl.a. = blandt andet — «в том числе, среди прочего». Он читает много книг, в том числе детективы: Han læser mange bøger, bl.a. krimier.
+* blandt andet
+  blandt alle
+  bare lidt
+
+4. Jeg elsker frugt, især jordbær. Hvad betyder sætningen?
+> især (specielt) — «особенно»: из всего выделяется одно. Я обожаю фрукты, особенно клубнику.
+* Jeg elsker al frugt, men jordbær mest.
+  Jeg elsker kun jordbær.
+  Jeg elsker frugt, men ikke jordbær.
+
+5. Han har boet i flere lande, ___ Tyskland, Polen og Spanien.
+> bl.a. — «в том числе»: названы не все страны. Он жил в нескольких странах, в том числе в Германии, Польше и Испании.
+* bl.a.
+  derfor
+  alligevel
+  til sidst
+
+6. Vælg den rigtige sætning.
+> fx стоит после глагола, как обычное наречие. Она может, например, поехать на автобусе.
+* Hun kan fx tage bussen.
+  Hun fx kan tage bussen.
+  Fx hun kan tage bussen.
+
+7. Vælg den rigtige sætning.
+> eksempelvis в начале предложения занимает первое место, глагол идёт вторым. Например, поездка на автобусе стоит 24 кроны.
+* Eksempelvis koster en bustur 24 kroner.
+  Eksempelvis en bustur koster 24 kroner.
+  Eksempelvis, en bustur koster 24 kroner.
+
+8. Mange sportsgrene er populære i Danmark, ___ fodbold og håndbold.
+> som перед перечислением значит «такие как». Многие виды спорта популярны в Дании, такие как футбол и гандбол.
+* som
+  derfor
+  end
+  mens
+
+9. Hvad står forkortelsen «fx» for?
+> fx = for eksempel; пишется без точек. Например — fx.
+* for eksempel
+  for eksempler
+  faktisk

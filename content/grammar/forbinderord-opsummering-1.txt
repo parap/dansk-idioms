@@ -1,0 +1,50 @@
+kind: grammar
+slug: forbinderord-opsummering-1
+title: Forbinderord: opsummering
+
+--- questions ---
+1. Maden var god, og personalet var søde. ___ var det en dejlig aften.
+> alt i alt — «в целом, в общем»: подводит итог. Еда была вкусная, персонал милый. В целом вечер был чудесный.
+* Alt i alt
+  For eksempel
+  Derimod
+  Først
+
+2. Vælg den rigtige sætning.
+> kort sagt — «короче говоря»: в начале предложения глагол идёт вторым, без запятой. Короче говоря, это хорошая идея.
+* Kort sagt er det en god idé.
+  Kort sagt det er en god idé.
+  Kort sagt, det er en god idé.
+
+3. ___ vil jeg sige tak for et godt samarbejde.
+> afslutningsvis — «в заключение», в конце текста или письма. В заключение хочу поблагодарить за хорошее сотрудничество.
+* Afslutningsvis
+  For eksempel
+  Derimod
+  Tidligere
+
+4. Sammenfattende kan man sige, ___ cyklen er det bedste transportmiddel i byen.
+> sammenfattende kan man sige, at … — «подводя итог, можно сказать, что …»; дальше придаточное с at. Подводя итог, можно сказать, что велосипед — лучший транспорт в городе.
+* at
+  fordi
+  som
+  hvis
+
+5. Vælg den rigtige sætning.
+> alt i alt — обстоятельство: в начале предложения глагол идёт вторым. В целом у меня был хороший год.
+* Alt i alt har jeg haft et godt år.
+  Alt i alt jeg har haft et godt år.
+  Alt i alt, jeg har haft et godt år.
+
+6. Hvor i en tekst bruger man typisk «afslutningsvis»?
+> afslutningsvis, alt i alt, kort sagt подводят итог, поэтому стоят в последнем абзаце.
+* I det sidste afsnit.
+  I det første afsnit.
+  I overskriften.
+
+7. Bussen er billig, hurtig og god for miljøet. ___ er den den bedste løsning.
+> kort sagt подводит итог перечисленному. Автобус дешёвый, быстрый и хорош для окружающей среды. Короче говоря, это лучшее решение.
+* Kort sagt
+  Derimod
+  Tidligere
+  Selvom

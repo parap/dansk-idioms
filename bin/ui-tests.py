@@ -166,6 +166,15 @@ SEED_PHP = r"""
             ]],
         ],
     ]);
+    // A connector drill, which the grammar list gathers onto the connector page.
+    $repo->save([
+        'slug' => 'ui-fixture-forbinderord-1', 'kind' => 'grammar', 'title' => 'UI fixture forbinderord', 'body' => null,
+        'items' => [['position' => 1, 'prompt' => 'Jeg er træt, ___ jeg går i seng.', 'note' => 'så — следствие.', 'options' => [
+            ['label' => 'A', 'text' => 'så', 'correct' => true],
+            ['label' => 'B', 'text' => 'fordi'],
+            ['label' => 'C', 'text' => 'selvom'],
+        ]]],
+    ]);
     // A Modultest paper of two tasks: a cloze opening with its worked example, and a written gap.
     $repo->save([
         'slug' => 'ui-fixture-mt-opg1', 'paper' => 'ui-fixture-paper', 'kind' => 'cloze', 'title' => 'UI fixture mt cloze',
@@ -1251,6 +1260,38 @@ def the_grammar_list_links_every_published_set(b):
         'the fixture set is not listed with a picture'
 
 
+@check
+def the_grammar_list_gathers_the_connector_sets_onto_their_page(b):
+    only(['grammar'])
+    b.goto('/grammar')
+    b.until('!!document.querySelector("#sets")', what='the grammar set list')
+    assert b.js('!!document.querySelector("#sets a[href=\'/forbinderord\']")'), 'the list has no way to the connector page'
+    assert not b.js('!!document.querySelector("#sets a[href=\'/grammar?s=ui-fixture-forbinderord-1\']")'), \
+        'a connector set is listed among the grammar sets'
+    assert b.js('!!document.querySelector("#sets a[href=\'/grammar?s=ui-fixture-grammar\']")'), 'another set went missing'
+
+
+@check
+def the_connector_page_explains_the_rules_and_links_its_drills(b):
+    only(['grammar'])
+    b.goto('/forbinderord')
+    b.until('!!document.querySelector("#drills a")', what='the connector drills')
+    assert b.js('!!document.querySelector("#drills a[href=\'/grammar?s=ui-fixture-forbinderord-1\']")'), 'a connector set is not offered'
+    assert not b.js('!!document.querySelector("#drills a[href=\'/grammar?s=ui-fixture-grammar\']")'), 'another grammar set is offered here'
+    rules = b.js('document.querySelector("#rules").innerText')
+    for word in ('fordi', 'derfor', 'alligevel', 'S-V-A'):
+        assert word in rules, f'the rules say nothing of {word}'
+
+
+@check
+def a_connector_set_leads_back_to_its_page(b):
+    only(['grammar'])
+    b.goto('/grammar?s=ui-fixture-forbinderord-1')
+    b.until('document.querySelectorAll(".q").length === 1', what='the connector question')
+    assert b.js('document.querySelector("a.cta.back").getAttribute("href")') == '/forbinderord', \
+        b.js('document.querySelector("a.cta.back").getAttribute("href")')
+
+
 def open_grammar_set(b):
     only(['grammar'])
     b.goto('/grammar?s=ui-fixture-grammar')
@@ -1475,7 +1516,7 @@ def the_check_is_sent_with_the_model_chosen_the_cheapest_by_default(b):
 def no_page_repeats_an_id(b):
     """Two elements under one id leave $('#x') reaching the first, and the other's button silently works the wrong one."""
     for path, ready in [('/', '.cta'), ('/modultest', '#view .card'), ('/modultest/skriv', '#draft'), ('/read', '#go'),
-                        ('/grammar', 'body'), ('/proeve', 'body')]:
+                        ('/grammar', 'body'), ('/forbinderord', '#rules'), ('/proeve', 'body')]:
         b.goto(path)
         b.until(f'!!document.querySelector("{ready}")', what=path)
         twice = b.js("""(() => { const ids = [...document.querySelectorAll('[id]')].map(e => e.id);
@@ -1585,7 +1626,7 @@ def every_page_offers_the_same_languages(b):
     """A language offered on one page and missing on the next drops the reader back into
     Russian halfway through the site, and the fallback is silent."""
     try:
-        for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs', '/grammar', '/modultest', '/modultest/skriv'):
+        for path in ('/', '/read', '/proeve', '/proeve/praktisk', '/listen', '/video', '/verbs', '/grammar', '/forbinderord', '/modultest', '/modultest/skriv'):
             b.goto(path)
             b.until('!!document.querySelector(".lang")', what='the language switch on ' + path)
             assert offered_languages(b) == LANGUAGES, f'{path} offers {offered_languages(b)}'

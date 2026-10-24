@@ -1,0 +1,70 @@
+kind: grammar
+slug: forbinderord-holdning-1
+title: Forbinderord: holdning
+
+--- questions ---
+1. Jeg mistede min telefon, men ___ fandt en sød pige den.
+> heldigvis — «к счастью». Я потерял телефон, но, к счастью, его нашла одна милая девушка.
+* heldigvis
+  desværre
+  forhåbentlig
+  omvendt
+
+2. Jeg kan ___ ikke komme til din fødselsdag. Jeg er syg.
+> desværre — «к сожалению». К сожалению, я не смогу прийти на твой день рождения. Я заболел.
+* desværre
+  for eksempel
+  forhåbentlig
+  omsider
+
+3. Vejret bliver ___ godt i weekenden. Vi håber det i hvert fald.
+> forhåbentlig — «надеюсь, будем надеяться». Будем надеяться, погода в выходные будет хорошей. Во всяком случае, мы на это надеемся.
+* forhåbentlig
+  desværre
+  først og fremmest
+  omsider
+
+4. Efter tre års venten fik vi ___ en større lejlighed.
+> omsider (или endelig) — «наконец-то, после долгого ожидания». После трёх лет ожидания мы наконец получили квартиру побольше.
+* omsider
+  dels
+  desværre
+  for eksempel
+
+5. Han er sandsynligvis hjemme nu. Hvad betyder sætningen?
+> sandsynligvis — «вероятно»: говорящий почти уверен. Вероятно, он сейчас дома.
+* Jeg er ret sikker på, at han er hjemme.
+  Jeg ved, at han ikke er hjemme.
+  Jeg har ingen idé om, hvor han er.
+
+6. Hun kommer muligvis i morgen. Hvad betyder sætningen?
+> muligvis (как и måske) — «возможно»: говорящий не уверен. Возможно, она придёт завтра.
+* Jeg er ikke sikker på, at hun kommer.
+  Hun kommer helt sikkert.
+  Hun kommer ikke.
+
+7. Vælg den rigtige sætning.
+> heldigvis — наречие: в начале предложения глагол идёт вторым, без запятой. К счастью, никто не пострадал.
+* Heldigvis var der ingen, der kom til skade.
+  Heldigvis der var ingen, der kom til skade.
+  Heldigvis, der var ingen, der kom til skade.
+
+8. Det er ___ gratis at gå i folkeskolen i Danmark. Sådan er det for alle.
+> selvfølgelig (naturligvis) — «разумеется, конечно»: всем известный факт. Учиться в датской народной школе, разумеется, бесплатно. Так для всех.
+* selvfølgelig
+  forhåbentlig
+  desværre
+  muligvis
+
+9. Vælg den rigtige sætning.
+> forhåbentlig — наречие: в начале предложения глагол стоит вторым. Будем надеяться, придёт больше гостей.
+* Forhåbentlig kommer der flere gæster.
+  Forhåbentlig der kommer flere gæster.
+  Forhåbentlig, der kommer flere gæster.
+
+10. ___ skal vi passe på miljøet. Det er det allervigtigste.
+> først og fremmest — «прежде всего», самое важное. Прежде всего мы должны беречь окружающую среду. Это важнее всего.
+* Først og fremmest
+  Desværre
+  Muligvis
+  Bagefter

@@ -1,0 +1,64 @@
+kind: grammar
+slug: forbinderord-forklaring-1
+title: Forbinderord: forklaring
+
+--- questions ---
+1. Vi bliver hjemme i dag, ___ det regner.
+> fordi объясняет причину и вводит придаточное. Мы сегодня остаёмся дома, потому что идёт дождь.
+* fordi
+  derfor
+  så
+  selvom
+
+2. Undervisningen er aflyst. Læreren er ___ syg.
+> nemlig объясняет то, что сказано перед этим, и стоит после глагола: «дело в том, что». Занятие отменено. Учитель, видите ли, заболел.
+* nemlig
+  derfor
+  alligevel
+  desuden
+
+3. Kampen blev aflyst ___ sne.
+> på grund af (pga.) — «из-за» — ставится перед существительным; fordi — перед целым предложением (fordi det sneede). Матч отменили из-за снега.
+* på grund af
+  fordi
+  derfor
+  selvom
+
+4. Vælg den rigtige sætning.
+> for — союз главного предложения: после него порядок S-V-A, ikke после глагола. Мы взяли такси, ведь автобус не пришёл.
+* Vi tog en taxa, for bussen kom ikke.
+  Vi tog en taxa, for bussen ikke kom.
+  Vi tog en taxa, for kom bussen ikke.
+
+5. Jeg kunne ikke ringe, ___ min telefon var løbet tør for strøm.
+> da здесь значит «так как», то есть fordi. Я не мог позвонить, так как у меня сел телефон.
+* da
+  derfor
+  så
+  alligevel
+
+6. Vælg den rigtige sætning.
+> eftersom — союз придаточного, как fordi: подлежащее, ikke, глагол. Нам придётся подождать, так как магазин сегодня не открывается.
+* Vi må vente, eftersom butikken ikke åbner i dag.
+  Vi må vente, eftersom butikken åbner ikke i dag.
+  Vi må vente, eftersom åbner butikken ikke i dag.
+
+7. ___ der var mange syge, blev mødet udsat.
+> da в начале предложения — «так как» (причина). Придаточное стоит первым, поэтому дальше глагол главного (blev). Так как многие болели, собрание перенесли.
+* Da
+  Derfor
+  Så
+  Alligevel
+
+8. Bilen standsede, idet benzinen var sluppet op. Hvad betyder «idet» her?
+> idet — формальное «так как», то же, что fordi. Иногда оно значит «в тот момент, когда». Машина остановилась, так как кончился бензин.
+* fordi
+  selvom
+  før
+
+9. Mange tager toget ___ de høje benzinpriser.
+> Перед существительным — på grund af, а не fordi. Многие ездят поездом из-за высоких цен на бензин.
+* på grund af
+  fordi
+  derfor
+  eftersom

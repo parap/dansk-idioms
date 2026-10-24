@@ -1,0 +1,76 @@
+kind: grammar
+slug: forbinderord-ordstilling-1
+title: Forbinderord og ordstilling
+
+--- questions ---
+1. Vælg den rigtige sætning.
+> fordi вводит придаточное: подлежащее, затем ikke, затем глагол (S-A-V). Я остаюсь дома, потому что у меня нет времени.
+* Jeg bliver hjemme, fordi jeg ikke har tid.
+  Jeg bliver hjemme, fordi har jeg ikke tid.
+  Jeg bliver hjemme, fordi ikke jeg har tid.
+
+2. Vælg den rigtige sætning.
+> for — союз главного предложения (как og, men, eller, så): после него обычный порядок S-V-A, ikke стоит после глагола. Я остаюсь дома, ведь у меня нет времени.
+* Jeg bliver hjemme, for jeg har ikke tid.
+  Jeg bliver hjemme, for jeg ikke har tid.
+  Jeg bliver hjemme, for har jeg ikke tid.
+
+3. Vælg den rigtige sætning.
+> derfor — наречие. Стоя первым, оно занимает первое место предложения, и глагол идёт вторым, перед подлежащим (инверсия). Мне некогда, поэтому я остаюсь дома.
+* Jeg har ikke tid, derfor bliver jeg hjemme.
+  Jeg har ikke tid, derfor jeg bliver hjemme.
+  Jeg har ikke tid, derfor at jeg bliver hjemme.
+
+4. Jeg bliver hjemme, ___ jeg ikke har tid.
+> Порядок «jeg ikke har» — порядок придаточного (S-A-V), значит нужен союз придаточного: fordi. После for стоял бы порядок главного: for jeg har ikke tid. Я остаюсь дома, потому что у меня нет времени.
+* fordi
+  for
+  derfor
+
+5. Vælg den rigtige sætning.
+> Придаточное в начале целиком занимает первое место, поэтому дальше сразу глагол главного предложения, потом подлежащее. Когда я прихожу домой, я готовлю ужин.
+* Når jeg kommer hjem, laver jeg aftensmad.
+  Når jeg kommer hjem, jeg laver aftensmad.
+  Når kommer jeg hjem, laver jeg aftensmad.
+
+6. Vælg den rigtige sætning.
+> men — союз главного предложения и места в предложении не занимает: после него порядок S-V-A, ikke после глагола. Она приедет завтра, но надолго не останется.
+* Hun kommer i morgen, men hun bliver ikke længe.
+  Hun kommer i morgen, men hun ikke bliver længe.
+  Hun kommer i morgen, men bliver hun ikke længe.
+
+7. Vælg den rigtige sætning.
+> alligevel — наречие: в начале предложения глагол идёт вторым, подлежащее после него. Запятая после наречия в датском не ставится. Он болен. Тем не менее он идёт на работу.
+* Han er syg. Alligevel går han på arbejde.
+  Han er syg. Alligevel han går på arbejde.
+  Han er syg. Alligevel, han går på arbejde.
+
+8. Vælg den rigtige sætning.
+> selvom вводит придаточное; оно стоит первым, поэтому главное предложение начинается с глагола (cykler hun). Хотя идёт дождь, она едет на работу на велосипеде.
+* Selvom det regner, cykler hun på arbejde.
+  Selvom det regner, hun cykler på arbejde.
+  Selvom regner det, cykler hun på arbejde.
+
+9. Vælg den rigtige sætning.
+> hvis вводит придаточное: ikke стоит перед глаголом (vi ikke er). Мы пойдём в кино, если не слишком устанем.
+* Vi går i biografen, hvis vi ikke er for trætte.
+  Vi går i biografen, hvis vi er ikke for trætte.
+  Vi går i biografen, hvis er vi ikke for trætte.
+
+10. Vælg den rigtige sætning.
+> desuden — наречие: на первом месте оно забирает это место, глагол идёт вторым. Запятая после него — калька с английского, в датском её нет. Кроме того, у неё есть собака.
+* Desuden har hun en hund.
+  Desuden hun har en hund.
+  Desuden, hun har en hund.
+
+11. Vælg den rigtige sætning.
+> eftersom вводит придаточное причины, как fordi: ikke перед глаголом. Нам придётся подождать, так как врач ещё не пришёл.
+* Vi må vente, eftersom lægen ikke er kommet endnu.
+  Vi må vente, eftersom lægen er ikke kommet endnu.
+  Vi må vente, eftersom er lægen ikke kommet endnu.
+
+12. Vælg den rigtige sætning.
+> После men порядок главного предложения, но если первым после men стоит наречие (alligevel), оно занимает первое место, и глагол идёт перед подлежащим. Ему 85 лет, но он всё равно каждый день ездит на велосипеде.
+* Han er 85 år, men alligevel cykler han hver dag.
+  Han er 85 år, men alligevel han cykler hver dag.
+  Han er 85 år, men alligevel, han cykler hver dag.

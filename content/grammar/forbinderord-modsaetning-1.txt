@@ -1,0 +1,71 @@
+kind: grammar
+slug: forbinderord-modsaetning-1
+title: Forbinderord: modsætning
+
+--- questions ---
+1. Hun er træt, ___ hun vil gerne med i biografen.
+> men — «но», союз главного предложения; после него обычный порядок. Она устала, но хочет пойти в кино.
+* men
+  fordi
+  så
+  derfor
+
+2. ___ hun er træt, vil hun gerne med i biografen.
+> selvom — «хотя», вводит придаточное; когда оно стоит первым, главное начинается с глагола (vil hun). Хотя она устала, она хочет пойти в кино.
+* Selvom
+  Fordi
+  Derfor
+  Men
+
+3. Hun er træt. ___ vil hun gerne med i biografen.
+> alligevel — «тем не менее, всё равно», наречие: после него инверсия (vil hun). Она устала. Тем не менее она хочет пойти в кино.
+* Alligevel
+  Selvom
+  Fordi
+  Derfor
+
+4. Vælg den rigtige sætning.
+> til gengæld — «зато», наречие: в начале предложения глагол идёт вторым. Петь он не умеет. Зато он хорошо играет на гитаре.
+* Han kan ikke synge. Til gengæld spiller han godt guitar.
+  Han kan ikke synge. Til gengæld han spiller godt guitar.
+  Han kan ikke synge. Til gengæld, han spiller godt guitar.
+
+5. Jeg drikker kaffe, ___ min mand foretrækker te.
+> mens здесь — «тогда как, а», противопоставление двух людей. Я пью кофе, а мой муж предпочитает чай.
+* mens
+  fordi
+  så
+  dermed
+
+6. Byen har mange arbejdspladser. Landet har ___ meget få.
+> derimod — «напротив, зато», стоит после глагола. В городе много рабочих мест. В сельской местности их, напротив, очень мало.
+* derimod
+  desuden
+  også
+  derfor
+
+7. ___ er det godt at bo centralt, men på den anden side er det dyrt.
+> på den ene side … på den anden side — «с одной стороны … с другой стороны». С одной стороны, жить в центре удобно, но с другой стороны, это дорого.
+* På den ene side
+  Til sidst
+  Derfor
+  Desuden
+
+8. I Danmark er der mange cykelstier, ___ der næsten ingen er i min hjemby.
+> hvorimod — «тогда как», формальнее mens; вводит придаточное. В Дании много велодорожек, тогда как в моём родном городе их почти нет.
+* hvorimod
+  fordi
+  derfor
+  heller ikke
+
+9. Han havde kun sovet tre timer. Ikke desto mindre var han i godt humør. Hvad betyder det?
+> ikke desto mindre — «тем не менее», то же, что alligevel. Он спал всего три часа. Тем не менее у него было хорошее настроение.
+* Han var i godt humør, selvom han havde sovet lidt.
+  Han var i dårligt humør, fordi han havde sovet lidt.
+  Han havde sovet godt og var i godt humør.
+
+10. Vælg den rigtige sætning.
+> dog — «однако, всё же», стоит после глагола, как ikke. Курить в помещении запрещено. На улице, однако, курить можно.
+* Det er forbudt at ryge indenfor. Udenfor må man dog godt ryge.
+  Det er forbudt at ryge indenfor. Udenfor man må dog godt ryge.
+  Det er forbudt at ryge indenfor. Udenfor dog man må godt ryge.

@@ -1,0 +1,71 @@
+kind: grammar
+slug: forbinderord-tid-1
+title: Forbinderord: tid
+
+--- questions ---
+1. ___ spiste vi morgenmad, og bagefter gik vi en tur.
+> først открывает последовательность («сначала»), bagefter продолжает её («потом»). Сначала мы позавтракали, а потом пошли гулять.
+* Først
+  Til sidst
+  Derfor
+  Desuden
+
+2. Vi så filmen, og ___ drak vi kaffe på en café.
+> bagefter — «после этого, потом». Мы посмотрели фильм, а потом выпили кофе в кафе.
+* bagefter
+  heller ikke
+  fordi
+  for eksempel
+
+3. ___ boede de fleste danskere på landet. I dag bor de fleste i byerne.
+> tidligere — «раньше» — противопоставляется i dag. Раньше большинство датчан жили в деревне. Сегодня большинство живёт в городах.
+* Tidligere
+  Senere
+  Bagefter
+  Til sidst
+
+4. Hun startede på sprogskolen i januar. Kort ___ fik hun arbejde i en børnehave.
+> kort efter — «вскоре после этого». Она начала учиться в языковой школе в январе. Вскоре после этого она получила работу в детском саду.
+* efter
+  derfor
+  ligesom
+  altså
+
+5. Vælg den rigtige sætning.
+> derefter — наречие: в начале предложения глагол стоит вторым (støvsuger jeg). Сначала я мою посуду. После этого я пылесошу гостиную.
+* Først vasker jeg op. Derefter støvsuger jeg stuen.
+  Først vasker jeg op. Derefter jeg støvsuger stuen.
+  Først vasker jeg op. Derefter, jeg støvsuger stuen.
+
+6. Vi skal først handle ind, ___ skal vi lave mad, og til sidst spiser vi.
+> så здесь — наречие «потом, затем», следующий шаг после først; после него инверсия (skal vi). Сначала нам нужно сходить в магазин, потом приготовить еду, а в конце мы поедим.
+* så
+  fordi
+  ellers
+  tidligere
+
+7. Han arbejdede i Odense i fem år. ___ flyttede han til Aalborg.
+> senere — «позже». Он пять лет работал в Оденсе. Позже он переехал в Ольборг.
+* Senere
+  Til gengæld
+  Først
+  Heller ikke
+
+8. ___ var der kun få, der havde en mobiltelefon. Nu har næsten alle en.
+> før — «раньше, прежде» — противопоставляется nu. Раньше лишь у немногих был мобильный телефон. Теперь он есть почти у всех.
+* Før
+  Nu
+  Senere
+  Til sidst
+
+9. Vi ledte længe. Til sidst fandt vi en parkeringsplads. Hvad betyder det?
+> til sidst — «в конце концов, напоследок»: после долгих поисков. Мы долго искали. В конце концов мы нашли парковку.
+* Vi fandt en parkeringsplads, efter at vi havde ledt længe.
+  Vi fandt en parkeringsplads med det samme.
+  Vi fandt aldrig en parkeringsplads.
+
+10. Vælg den rigtige sætning.
+> i dag в начале предложения занимает первое место, глагол идёт вторым. Сегодня она работает из дома.
+* I dag arbejder hun hjemmefra.
+  I dag hun arbejder hjemmefra.
+  I dag arbejder hjemmefra hun.

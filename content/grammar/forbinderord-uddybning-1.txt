@@ -1,0 +1,56 @@
+kind: grammar
+slug: forbinderord-uddybning-1
+title: Forbinderord: uddybning
+
+--- questions ---
+1. Han er pensioneret, ___ han arbejder ikke mere.
+> dvs. (det vil sige) — «то есть», уточняет сказанное. Он на пенсии, то есть больше не работает.
+* dvs.
+  for eksempel
+  selvom
+  derimod
+
+2. Hvad står forkortelsen «dvs.» for?
+> dvs. = det vil sige — «то есть».
+* det vil sige
+  det var sådan
+  dels ... dels
+
+3. Hvad står forkortelsen «m.a.o.» for?
+> m.a.o. = med andre ord — «другими словами», повторяет мысль короче или проще.
+* med andre ord
+  mere af ordet
+  med alle os
+
+4. Jeg drikker sjældent kaffe. ___ kan jeg ikke lide smagen.
+> faktisk — «на самом деле, вообще-то»: уточнение, которого собеседник мог не ожидать. Я редко пью кофе. Вообще-то мне не нравится его вкус.
+* Faktisk
+  Alligevel
+  Derimod
+  Tidligere
+
+5. Bussen kører kun én gang i timen. Vi skal ___ skynde os.
+> altså — «значит, то есть»: вывод из сказанного. Автобус ходит раз в час. Значит, нам надо поторопиться.
+* altså
+  heller ikke
+  heller
+  dels
+
+6. Vælg den rigtige sætning.
+> faktisk — наречие: в начале предложения глагол идёт вторым, без запятой. Вообще-то я никогда не был в Париже.
+* Faktisk har jeg aldrig været i Paris.
+  Faktisk jeg har aldrig været i Paris.
+  Faktisk, jeg har aldrig været i Paris.
+
+7. Han har fuldtidsarbejde, ___ 37 timer om ugen.
+> dvs. уточняет: полный рабочий день — это 37 часов в неделю. Он работает полный день, то есть 37 часов в неделю.
+* dvs.
+  desuden
+  alligevel
+  for
+
+8. Hun er færdig med sin uddannelse. Med andre ord kan hun begynde at arbejde nu. Hvad betyder det?
+> med andre ord — «другими словами»: вторая фраза говорит то же самое иначе. Она закончила учёбу. Другими словами, теперь она может начать работать.
+* Det vil sige, at hun kan begynde at arbejde nu.
+  Selvom hun er færdig, kan hun ikke arbejde.
+  Hun skal læse videre, før hun kan arbejde.

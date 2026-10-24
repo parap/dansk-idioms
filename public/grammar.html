@@ -99,6 +99,8 @@ const STRINGS = {
     empty: 'Наборов пока нет.',
     missing: 'Такого набора нет.',
     back: 'Все наборы',
+    connectors: 'Связующие слова', connectorSets: {one: '{n} набор', few: '{n} набора', many: '{n} наборов', other: '{n} набора'},
+    backConnectors: 'Связующие слова',
     again: 'Ещё раунд',
     pool: 'в наборе {n}',
     score: 'Верно',
@@ -112,6 +114,8 @@ const STRINGS = {
     empty: 'No sets yet.',
     missing: 'There is no such set.',
     back: 'All sets',
+    connectors: 'Connectors', connectorSets: {one: '{n} set', other: '{n} sets'},
+    backConnectors: 'Connectors',
     again: 'Another round',
     pool: '{n} in the set',
     score: 'Correct',
@@ -125,6 +129,8 @@ const STRINGS = {
     empty: 'Наборів поки немає.',
     missing: 'Такого набору немає.',
     back: 'Усі набори',
+    connectors: 'Сполучні слова', connectorSets: {one: '{n} набір', few: '{n} набори', many: '{n} наборів', other: '{n} набору'},
+    backConnectors: 'Сполучні слова',
     again: 'Ще раунд',
     pool: 'у наборі {n}',
     score: 'Правильно',
@@ -138,6 +144,8 @@ const STRINGS = {
     empty: 'Der er ingen sæt endnu.',
     missing: 'Det sæt findes ikke.',
     back: 'Alle sæt',
+    connectors: 'Forbinderord', connectorSets: {one: '{n} sæt', other: '{n} sæt'},
+    backConnectors: 'Forbinderord',
     again: 'En runde til',
     pool: '{n} i sættet',
     score: 'Rigtige',
@@ -166,16 +174,27 @@ function paintLanguages() {
 const PICTURES = {'datid-foernutid': '⏳', 'ordstilling': '🔀', 'hvis-ville': '💭', 'passiv': '🧽',
   'der-som': '🔗', 'praepositioner': '📍', 'sig-hinanden': '🪞', 'faste-udtryk': '💬'};
 
+// A connector drill -- a slug with the segment forbinderord- -- is offered on /forbinderord,
+// beside the rules it drills, and the list here shows one tile for all of them.
+const isConnector = slug => /(^|-)forbinderord-/.test(slug);
+
 function picture(slug) {
   return PICTURES[slug.replace(/-\d+$/, '')] ?? '📘';
 }
 
 function listView() {
   if (sets.length === 0) return `<div class="card"><p class="muted" style="margin:0">${esc(t('empty'))}</p></div>`;
+  const own = sets.filter(f => !isConnector(f.slug));
+  const connectors = sets.filter(f => isConnector(f.slug)).length;
   return `<div class="card">
       <p class="muted" style="margin:0 0 .9rem">${esc(t('intro'))}</p>
       <ul id="sets">
-        ${sets.map((f, i) => {
+        ${connectors ? `<li><a href="/forbinderord" style="--h:200">
+            <span class="pic" aria-hidden="true">🧩</span>
+            <span class="title">${esc(t('connectors'))}</span>
+            <span class="n">${esc(t('connectorSets', connectors).replace('{n}', connectors))}</span>
+          </a></li>` : ''}
+        ${own.map((f, i) => {
           // The golden angle keeps neighbouring sets far apart on the colour wheel.
           const hue = Math.round((i * 137.508) % 360);
           return `<li><a href="/grammar?s=${encodeURIComponent(f.slug)}" style="--h:${hue}">
@@ -196,9 +215,12 @@ function promptHtml(item) {
 
 function setView() {
   const set = round.passages[0];
+  const back = isConnector(set.slug)
+    ? `<a class="cta back" href="/forbinderord"><b aria-hidden="true">←</b><span>${esc(t('backConnectors'))}</span></a>`
+    : `<a class="cta back" href="/grammar"><b aria-hidden="true">←</b><span>${esc(t('back'))}</span></a>`;
   const right = Object.values(marks).filter(m => m.chosen === m.correct).length;
   const answered = Object.keys(marks).length;
-  return `<a class="cta back" href="/grammar"><b aria-hidden="true">←</b><span>${esc(t('back'))}</span></a>
+  return `${back}
     <h2 style="margin:0 0 12px">${esc(set.title)}</h2>
     <div class="card">
       ${round.items.map(item => {
@@ -217,7 +239,7 @@ function setView() {
       ${answered === round.items.length ? `<p class="muted" style="margin:.2rem 0 0">${esc(t('done'))}</p>
         <div class="finish" id="finish">
           <a class="cta" id="again" href="/grammar?s=${encodeURIComponent(set.slug)}"><span>${esc(t('again'))}</span></a>
-          <a class="cta back" href="/grammar"><b aria-hidden="true">←</b><span>${esc(t('back'))}</span></a>
+          ${back}
         </div>` : ''}
     </div>`;
 }
