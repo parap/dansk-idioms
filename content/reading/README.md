@@ -131,6 +131,7 @@ Files named `pd2-<year><s|v>-opg<task>-…` are past Prøve i Dansk 2 reading pa
 (`s` the May-June term, `v` November-December), sat together on `/pd2` under the 90 minutes of
 both reading parts, one point per answer. Each keeps the task number of the paper, so a
 paper whose pages are missing simply lacks that task. Opgave 1 types short answers (`write`),
-Opgave 3 types the words from its box (`write`), Opgave 4 is an insertion, and Opgave 5 is an
-insertion turned round: the interview questions stand in the text and its paragraphs are the parts.
+Opgave 3 types the words from its box (`write`) and Opgave 4 is an insertion. Opgave 2 and 5 are
+insertions turned round: the missing words of an advert, or the interview questions, stand in the
+text, and the adverts or the interview's paragraphs are the parts.
 
