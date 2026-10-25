@@ -1,0 +1,43 @@
+kind: insert
+slug: pd2-2019v-opg5-yonas
+paper: pd2-2019v
+title: Interview med Yonas – vikar i et vikarbureau
+
+--- text ---
+Yonas er vikar og har stor erfaring med lagerarbejde. Han er tilmeldt et vikarbureau, som ringer
+til ham, hvis en arbejdsplads mangler en vikar til deres lager.
+
+Hvor længe har du været vikar? {{0}}
+
+Hvad skal en vikar være god til? {{1}}
+
+Hvorfor arbejder du som vikar? {{2}}
+
+Har du altid de samme arbejdsopgaver? {{3}}
+
+Tjener du nok som vikar? {{4}}
+
+Bruger du meget tid på transport? {{5}}
+
+--- parts ---
+A Jeg startede lige efter min 40 års fødselsdag, så det må snart være i tre år. Dengang havde jeg gået ledig i nogle måneder, og jeg kunne ikke finde et job. Jeg så et opslag fra et vikarbureau på Facebook og ringede til dem. De indkaldte mig til en samtale, og så begyndte jeg dagen efter.
+B Ja, for det meste. Det er lidt usikkert, fordi jeg ikke har fast arbejde, og nogle måneder er da også bedre end andre. Det skal man altid huske. Men jeg har fx råd til at have bil, og i år kan min kone og jeg også tage ud at rejse i sommerferien med vores børn, så jeg er godt tilfreds.
+C Det er lidt forskelligt. Det kan skifte fra uge til uge. Jeg kan bedst lide at arbejde om dagen, fordi det passer godt sammen med mit familieliv. Men somme tider siger jeg også ja til vikararbejde om aftenen og om natten. Det gør jeg, hvis det fx er det eneste, jeg kan få den uge.
+D Nej, ikke specielt. Men da jeg startede som vikar, var det værre. Dengang havde jeg ikke bil, så jeg var nødt til at tage bussen, hvis jeg fik et vikarjob, der lå langt væk eller ude på landet. Der kører ikke altid så mange busser, så jeg skulle somme tider stå meget tidligt op om morgenen. Det savner jeg ikke.
+E Lidt af hvert. Det siger næsten sig selv. Men det vigtigste er nok, at man er fleksibel og mødestabil, og så skal man kunne lide at møde nye mennesker. Det her er ikke et job for folk, som bedst kan lide at dagene altid ligner hinanden.
+F Nej, egentlig ikke. Somme tider kører jeg forbi vikarbureauet, hvis vi skal snakke om vagtplaner og løn og sådan noget, men jeg synes ikke, jeg har brug for mere end det. Så jeg har det faktisk helt fint med, at jeg ikke har en fast arbejdsplads.
+G Først og fremmest har jeg jo brug for at tjene penge. Men jeg kan også godt lide den frihed, jeg har i det her job. Fx er det rimelig let for mig at holde fri en dag, hvis jeg har brug for det. Og så kan jeg faktisk godt lide, at jeg får mulighed for at være på så mange forskellige arbejdspladser.
+H Ja, de skifter ikke så meget. Jeg har kørekort til truck, så jeg bliver tit bedt om at arbejde steder, hvor de har brug for én, der kan flytte varer med truck. Men ellers laver jeg alt, hvad man nu laver på et lager. Tager imod varer, scanner og pakker dem og sådan noget.
+
+--- questions ---
+0. A
+1. E
+> «det vigtigste er nok, at man er fleksibel og mødestabil».
+2. G
+> «Først og fremmest har jeg jo brug for at tjene penge. Men jeg kan også godt lide den frihed».
+3. H
+> «Ja, de skifter ikke så meget» — задачи почти всегда одни и те же.
+4. B
+> «jeg har fx råd til at have bil … så jeg er godt tilfreds».
+5. D
+> «Nej, ikke specielt. Men da jeg startede som vikar, var det værre» — автобусы раньше, теперь машина.

@@ -1,0 +1,235 @@
+kind: write
+slug: pd2-2019v-opg1-informationer
+paper: pd2-2019v
+title: Søg informationer
+
+--- text ---
+Søg informationer under Isbarer i København.
+
+Eksempel (0): På hvilken isbar kan man købe en is med basilikum? Svar: Bryggen 11
+
+På hvilken isbar kan man købe en is, som er sukkerfri? {{1}}
+
+Søg informationer under Højskoler med korte kurser (1-7 uger).
+
+På hvilken højskole kan man komme på cykelkursus? {{2}}
+
+På hvilken skole er alle værelserne egnede for handicappede? {{3}}
+
+På hvilken højskole kan man lære om nordisk kultur? {{4}}
+
+Søg informationer under Hoteller på Djursland.
+
+På hvilket hotel er der nyrenoverede værelser? {{5}}
+
+På hvilket hotel er der cykeludlejning? {{6}}
+
+Isbarer i København
+
+Nicecream. Is til mælkeallergikere og økofans – det får du hos Nicecream på hhv. Elmegade og
+Enghave Plads. Nicecream specialiserer sig i lækre, håndlavede veganske ispinde og
+is-sandwiches. Her bruges økologisk kokosmælk til basen og al frugt, chokolade og krymmel er
+økologisk.
+
+Olufs Is. Byens måske mest populære ispind har man i en årrække fået hos Olufs Is nær
+Trianglen. Her har man specialiseret sig i klassiske, italienske ispinde af både flødeis og
+sorbet. Ispindene fås i alle regnbuens farver og er alle dyppet i chokolade – flere er klædt i
+knuste nødder og krymmel. Mums.
+
+Paradis Is. Paradis Is er en populær isbar, som findes over det meste af landet. Her er
+kvaliteten i højsædet hver dag, og isen har altid en lækker cremet konsistens og fantastisk
+smag. Paradis kører med konceptet 'månedens is', så der altid er noget nyt at prøve – også for
+stamkunderne.
+
+Vildglad. Her får du hjemmelavet italiensk is produceret i Vildglads eget ismejeri –
+frisklavet hver eneste dag. Mejeriet byder bl.a. på sjove varianter som bubblegum og sukkerfri
+kiwi-æble-lime-is! Vildglad har to filialer på hhv. Amagerbrogade og i Amager Strandpark.
+
+Bryggen 11. Hos Bryggen 11, som ligger lige ved Københavns Havnebad, kan man få lækker
+hjemmelavet is. Smagsvarianterne er både traditionelle og eksperimenterende – med alt lige fra
+vaniljeis til jordbær-basilikum. Nyd isen ved vandet med udsigt til byens skyline.
+
+Istid. Hos Istid på Jægersborggade får du Skandinaviens første nitrogenis! Her er isen lavet på
+rene økologiske råvarer, og til nedfrysning bruges flydende nitrogen. Når du bestiller din is,
+er den derfor frisklavet på mindre end ét minut! Der er altid 4 forskellige smage at vælge
+imellem.
+
+Østerberg Ice Cream. Hos Østerberg Ice Cream på Rosenvængets Allé får I frisklavet is med
+smagsvarianter fra hele verden. Prøv bl.a. varianterne med jackfrugt og rød dragefrugt. Isen
+serveres i friskbagte vafler og er helt uden konserveringsmidler eller kunstige aromaer og
+farver.
+
+Social Foodies. Social Foodies på Østerbro har især én meget populær is: "Dyrehaven" – en skøn
+blanding af æble, ingefær, citron og spinat. De økologiske råvarer, som butikkens varer er
+lavet på, produceres af de afrikanske landmænd, som Social Foodies støtter.
+
+Ismageriet. Ismageriet har i mange år ligget langt ude på Amager. I maj 2017 lukkede butikken
+dog ned og åbnede i nye lokaler i Mikado House ved DR-Byen for at få mere plads – bl.a. til
+udeservering. Det er selvfølgelig den samme lækre, frisklavede is med de bedste råvarer, som
+kan nydes i den nye butik. Ismageriet har også en filial på Søborg Hovedgade.
+
+Siciliansk Is. Der er italiensk is, og så er der siciliansk is. Mange af ingredienserne kommer
+direkte fra Middelhavsøen, og resultatet er den lækreste og blødeste is, man kan forestille
+sig. Alt er lavet efter gamle sicilianske traditioner, og isbaren er især berømt for sin nødde-,
+pistacie-, pinje- og mandelis.
+
+Kilde: bornibyen.dk/koebenhavn/articles/26963-guide-byens-10-bedste-isbarer (19.01.2018, uddrag)
+
+Højskoler med korte kurser (1-7 uger)
+
+Egmont Højskolen, www.egmont.dk – 8300 Odder. Egmont Højskolen er et levende hus for alle slags
+mennesker året rundt. Vi tilbyder et sommerprogram med korte kurser inden for alt lige fra
+menneskekundskab, politik og medier til sejlads og livskvalitet. Praktiske oplysninger: Enkelt- og
+dobbeltværelser, alle handicapegnede. Vegetar- eller specialkost. Wi-fi. Åbne værksteder.
+Svømmehal. Idrætshal. Midt i skoven og tæt ved vandet.
+
+Idrætshøjskolen Bosei, www.bosei.dk – 4720 Præstø. Familiekurser uge 28 & 29 – også hold for
+teens – aktiv sommer og østens mystik! 'Bosei Geek Week uge 30 – find din indre nørd'.
+Idrætshøjskole med japansk twist! Praktiske oplysninger: Enkelt- og dobbeltværelser. Wi-fi.
+Svømmehal, idrætshal, fitnesscenter, budosale, bold- og tennisbaner. En time fra København, 2 km
+til by og vand. Ligger midt i skoven. Fortrinsvis økologiske råvarer.
+
+Grundtvigs Højskole, www.grundtvigs.dk – 3400 Hillerød. Brug en uge af din sommer på at dyrke dine
+interesser. Kurser i fotografi, litteratur, politik, maleri, kor, radio, sangskrivning, filosofi,
+graphic novels og meget mere. Hygge, lækker mad, god stemning og nye inputs. Praktiske
+oplysninger: Enkelt- og dobbeltværelser, de fleste med eget bad og toilet. Elevator. Mulighed for
+gluten-/laktosefri, vegansk og vegetarisk kost.
+
+Johan Borups Højskole, www.borups.dk – 1220 København K. Ved Frederiksholms Kanal med udsigt til
+Christiansborg ligger Johan Borups Højskole i et smukt palæ. Om sommeren tilbyder vi kurser for
+alle. Med faglighed, inspiration, højskolesang, foredrag, udflugter, dejlig mad – og måske en
+svømmetur i havnens rene vand! Praktiske oplysninger: Der er ingen senge på skolen, så du skaffer
+dig selv et sted at bo ude i byen.
+
+Gymnastikhøjskolen i Ollerup, www.ollerup.dk – 5762 Vester Skerninge. Tradition og fornyelse i
+smukke omgivelser: 'Aktive seniorer', 'Vandrekursus', 'Familiehøjskole', 'Forældre/baby-relation',
+'Rytmecamp' og de landskendte Svendborgkurser. Praktiske oplysninger: Wi-fi. Fantastiske
+faciliteter: fitness, spinning, danse- og bevægelsessale, springcenter, idrætshal, boldbaner,
+beachvolley, parkourhal, inden- og udendørs pool. Almindelig kost samt vegetar- og specialkost.
+
+Nordfyns Højskole, www.nordfyns.nu – 5400 Bogense. Vi har korte kurser det meste af året og noget
+for enhver smag. Prøv f.eks. vores kurser i patchwork, motion og fitness, outdoor, miniature eller
+oplevelser på og i vandet. Du fordyber dig i ugens emne sammen med ligesindede. Praktiske
+oplysninger: 2 km til strand. 500 m til skov. Enkelt- og dobbeltværelser. Wi-fi. Fortrinsvis
+økologisk mad med mulighed for specialkost.
+
+Nørgaards Højskole, www.nrgaard.dk – 8850 Bjerringbro. Atmosfære, livsglæde og faglighed er
+kendetegn for Nørgaards Højskole. Korte kurser året rundt med forskellige emner: golf, bridge,
+gospel, kor, kajak, vandring, wellness, maleri, jul og nytår, yoga, familiekurser m.fl. Praktiske
+oplysninger: 110 moderne værelser. Økologisk køkken, skønne fællesrum, svømmehal og fitness.
+Togforbindelse direkte til højskolen. Vi henter på stationen.
+
+Testrup Højskole, www.testrup.dk – 8320 Mårslet. Tag på højskole i din ferie: Til voksne tilbyder
+vi kurserne 'Livsfilosofi', 'Dans!' (fra 16 år) og 'Tag og Skriv!' Skal du med familien, har vi
+'Musikkursus' (fra 10 år) og 'Kunsten at more sig' (fra 7 år). Praktiske oplysninger: Testrup
+Højskole er en hyggelig traditionsrig, grundtvigsk højskole i en landsby syd for Aarhus. På
+Testrup lægger vi vægt på høj faglighed, stor hjemlighed og et økologisk køkken.
+
+Ry Højskole, www.ryhojskole.dk – 8680 Ry. Sommerkurserne byder på pilgrimsvandring, maleri,
+skriveværksted, tango, kajaksejlads, musik, korsang, svejsning, ridning, teater og meget andet. Uge
+29 er for familier. Praktiske oplysninger: Vi spiser fortrinsvis økologisk. Vi bor meget smukt, og
+parken går ned til Gudenåen. Husk badetøjet. 12 enkeltværelser og 36 dobbeltværelser og 9
+værelser er med eget toilet og bad. Toget går lige til døren.
+
+Uldum Højskole, www.uldum-hojskole.dk – 7171 Uldum. Hen over sommeren byder vi på en række
+spændende korte kurser med følgende indhold: Folkemusik, rytmisk musik, kreative værksteder
+(maleri, raku-keramik, sølvsmykker, træværksted, læderværksted, skriveværksted), familiekursus og
+to naturvandrekurser: 'Østjyske Landskaber' og 'Hærvejen'. Praktiske oplysninger: Enkelt-,
+dobbelt- eller familieværelser. Svømmehal. Wi-fi. Vegetarmad.
+
+Rødding Højskole, www.rhskole.dk – 6630 Rødding. Grundtvigsk højskole med 30 korte kurser:
+livsfilosofi, litteratur, religion, historie, kunst, sang, kreative værksteder,
+erindringsskrivning, egns- og naturvandringer, familiekurser, nordisk kultur, nytårskursus. Altid
+med foredrag, debat, udflugter, højskolesang og hyggeligt samvær. Praktiske oplysninger: Grønt,
+varieret køkken med mulighed for specialkost. Teleslynge.
+
+Vejle Idrætshøjskole, www.vih.dk – 7100 Vejle. Aktive sommerkurser for hele familien eller kun for
+dig. Idræt og bevægelse er samlingspunkt. Ugekurser med fokus på golf, kajak, fitness, outdoor,
+body & mind. Praktiske oplysninger: Omgivet af bøgeskov – 10 min. fra strand, fjord og by.
+Friluftsbad, klatrevæg, boldbaner, haller, fitness, dansesal. Trådløst internet. Enkelt- og
+dobbeltværelser. Vegetar- og specialkost muligt.
+
+Silkeborg Højskole, www.silkeborghojskole.dk – 8600 Silkeborg. Sommer i det midtjyske søhøjland.
+13 spændende kurser: maleri og kunsthistorie, Bibelen, Kierkegaard, rytmisk musik, ølbrygning og
+ølhistorie, astronomi, botanik, seniorkursus, cykelkursus, to vandrekurser, to familiekurser.
+Praktiske oplysninger: Nyistandsatte enkelt- og dobbeltværelser m. udsigt over Silkeborg Langsø.
+Egen svømmehal. Stor kunstsamling. Sund og varieret kost.
+
+Vrå Højskole, www.vraahojskole.dk – 9760 Vrå. Brug en uge af din sommer til at fordybe dig i
+kunst, fotografi, fortællingen, kroppen, eller rejs med højskolen til Island. Vi har over 30
+spændende sommerkurser, hvor du lærer nyt, møder nye mennesker og får lækker mad lavet fra bunden
+af vores dygtige kokke. Alt i smukke og historiske rammer. Praktiske oplysninger:
+Dobbelt-/enkeltværelser m. toilet/bad. Mulighed for specialkost. Wi-fi. Hunde er velkomne.
+
+Kilde: Højskolerne 2018, korte kurser 1-7 uger (2018, uddrag)
+
+Hoteller på Djursland
+
+Ebeltoft Park Hotel, Vibæk Strandvej 4, 8400 Ebeltoft. Hotellet er beliggende ved den smukke
+Ebeltoft Vig i gåafstand til byens idylliske centrum og ikke langt fra Mols Bjerge. Hotellets
+velrenommerede køkken kan anbefales til ethvert formål. Hele sommeren kan den overdækkede,
+nyetablerede gårdhave benyttes morgen, middag og aften. Der er desuden også nyetableret
+morgenmads-restaurant og selskabslokale/danserestaurant. Nyd den store traditionelle sommerbuffet i
+perioden d. 26. juni-7. august samt alle de andre gode tilbud, vi har i vores restaurant.
+
+Hotel Marina, Kystvej 32, 8500 Grenaa. Kom og nyd den skønne natur og en af Danmarks bedste og mest
+børnevenlige badestrande blot få meter fra hotellet. Hotellet tilbyder alt fra wellnessophold til
+weekendophold, hygge for 2 personer på forkælelsesophold og naturligvis overnatning for hele
+familien i familieværelser. Her er fitnessrum, aktivitetsrum med bordtennis, billard, bordfodbold
+og Nintendo Wii til fri afbenyttelse. Hele året er der mulighed for at benytte wellness-afdelingen
+med pool, spa, dampbad og sauna. Der er mulighed for at bestille massage samt leje cykler på
+hotellet. Restauranten har åbent alle dage undtagen søndage i januar, februar, november og
+december.
+
+Molskroen Strandhotel, Hovedgaden 31a, Femmøller Strand, 8400 Ebeltoft. Molskroen Strandhotel byder
+på moderne værelser i maritim, varm og afslappet stil. Hotellet ligger tæt på havet og har en stor
+udendørs terrasse. Vi tilbyder to restauranter, Brasseriet og A Hereford Beefstouw, hvor du får en
+smagsoplevelse ud over det sædvanlige. Lækre lokale råvarer i skøn atmosfære, der er afslappet og
+hyggelig, og hvor den gode enkle mad er i centrum.
+
+Hotel Ebeltoft Strand, Ndr. Strandvej 3, 8400 Ebeltoft. Med kun 30 meter til vandet og en smuk
+udsigt over Ebeltoft Vig har Ebeltoft Strand nok en af Danmarks mest unikke beliggenheder. Fra vores
+store terrasse kan du nyde udsigten samt en lækker frokost eller middag. Du kan naturligvis også
+nyde middagen i restaurantens hyggelige lokaler, ledsaget af kvalitetsvine fra nogle af verdens
+bedste vinhuse. Vi tilbyder desuden overnatning på nyrenoverede, lækre værelser eller ferieophold i
+eksklusive lejligheder med direkte adgang til vandet og nyopført badebro. Hotellet har 24 timers
+service. Et stenkast fra hotellet finder du Ebeltofts hyggelige lystbådehavn, Fregatten Jylland og
+byens charmerende gader.
+
+Hotel Grenaa Strand, Havneplads 1, 8500 Grenaa. Et gammelt badehotel med udsigt over lystbådehavnen
+og Djurslands bedste børnevenlige badestrand. Vi har ti værelser og fire ferielejligheder, alle med
+toilet og bad. Rimelige priser: enkeltværelser kr. 550, dobbeltværelser kr. 750,-, ferielejligheder
+kr. 1.100,- for fire personer. Alle priser er inkl. morgenmad. Velkommen hos Lise & Roal Vetter.
+
+Kilde: Djursland – Det vildeste Danmark (2015, uddrag)
+
+--- questions ---
+1.
+Vildglad
+> «sukkerfri kiwi-æble-lime-is».
+
+2.
+Silkeborg Højskole
+Silkeborg
+> Silkeborg Højskole: «cykelkursus» среди 13 курсов.
+
+3.
+Egmont Højskolen
+Egmont Højskole
+Egmont
+> «Enkelt- og dobbeltværelser, alle handicapegnede».
+
+4.
+Rødding Højskole
+Rødding
+> «nordisk kultur» — в списке курсов Rødding Højskole.
+
+5.
+Hotel Ebeltoft Strand
+Ebeltoft Strand
+> «overnatning på nyrenoverede, lækre værelser». У Ebeltoft Park Hotel новые сад и ресторан, а не номера.
+
+6.
+Hotel Marina
+Marina
+> «Der er mulighed for at bestille massage samt leje cykler på hotellet».

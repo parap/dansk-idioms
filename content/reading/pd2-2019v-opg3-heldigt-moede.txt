@@ -1,0 +1,61 @@
+kind: write
+slug: pd2-2019v-opg3-heldigt-moede
+paper: pd2-2019v
+title: Et heldigt møde
+
+--- text ---
+Ord: og (eksempel) · ikke · kun · uden · godt · alle · selvom · med · for · husket · skuffet ·
+men · tilfreds · glemt. Du skal kun bruge hvert ord én gang.
+
+Eksempel: Magnus fra Sorø har søgt et job som kok på en fin restaurant i København, og nu er han
+glad og spændt, for han er blevet bedt om at komme til jobsamtale.
+
+Magnus har planlagt at tage bilen til København, {{1}} da han sætter sig ind i sin bil for at
+tage afsted, vil den ikke starte. Derfor cykler han hurtigt hen til stationen for tage toget. Da
+han kommer derhen, er der ikke ret lang tid til, at toget til København kører, så Magnus skynder
+sig hen til automaten for at købe en billet. Men da han skal betale, opdager han et nyt problem:
+han har hverken {{2}} at få sin pung eller sin telefon med. Magnus ved ikke, hvad han skal gøre,
+for han vil ikke tage toget {{3}} billet. Bagved Magnus står der en ung kvinde, som kan se, at
+han ikke kan betale. Og selvom de {{4}} kender hinanden, tilbyder hun at købe en billet til ham.
+Magnus takker den fremmede kvinde mange gange. Han får hendes telefonnummer, så han kan betale
+hende pengene tilbage senere, og han når toget i sidste øjeblik. Da han sidder i toget, er han
+lettet, men også lidt nervøs, {{5}} han tænker på, hvordan samtalen vil gå. Den går heldigvis
+godt, så da Magnus tager hjem, er han ret {{6}}.
+
+Derhjemme betaler han straks den hjælpsomme kvinde med MobilePay. Men han sender hende ikke {{7}}
+pengene, men også en sms, hvor han spørger, om hun vil med ud og drikke en kop kaffe i weekenden.
+Det vil hun gerne. Og om lørdagen mødes de på en café i Sorø, og denne gang har Magnus ikke {{8}}
+sin pung, så det er selvfølgelig ham, der betaler for kaffen.
+
+--- questions ---
+1.
+men
+> Планировал ехать на машине, «но» машина не завелась — противопоставление.
+
+2.
+husket
+> hverken … husket at få … med — не взял с собой ни кошелёк, ни телефон.
+
+3.
+uden
+> Он не хочет ехать без билета.
+
+4.
+ikke
+> selvom de ikke kender hinanden — хотя они не знакомы.
+
+5.
+for
+> for = потому что: нервничает, потому что думает о собеседовании.
+
+6.
+tilfreds
+> Собеседование прошло хорошо — значит, он доволен. Skuffet значило бы обратное.
+
+7.
+kun
+> ikke kun …, men også — не только деньги, но и смс.
+
+8.
+glemt
+> В этот раз он кошелёк не забыл и сам платит за кофе.
