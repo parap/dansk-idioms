@@ -1,0 +1,65 @@
+kind: write
+slug: pd2-2020s-opg3-kollegium
+paper: pd2-2020s
+title: Ida bor på kollegium
+
+--- text ---
+Ord: derfor (eksempel) · selvom · stille · desværre · for · mindre · kedeligt · utilfreds ·
+altid · større · hyggeligt · larm · tilfreds · aldrig
+
+Eksempel: De fleste unge flytter hjemmefra, når de er 18-20 år og skal starte på en
+uddannelse. Men det kan være svært at få råd til at bo alene i en lejlighed, når man
+studerer. Mange unge vælger derfor at flytte på et kollegium, hvor det ofte er billigere at
+bo.
+
+Ida er 20 år og studerer på Aarhus Universitet, og hun har et værelse på et kollegium midt
+i Aarhus. Værelset er lidt {{1}} end det, hun havde, da hun boede hjemme hos sine
+forældre. Men det er stort nok til hende, og hun har også eget bad og toilet. Køkkenet
+deler hun med 14 andre unge. For det meste synes Ida, at det er {{2}} at bo på kollegiet.
+For der er altid nogen at snakke med, og der er også fællesspisning i køkkenet et par
+gange om ugen. Det deltager Ida næsten {{3}} i, for hun kan godt lide at spise sammen med
+de andre.
+
+Men Ida synes også, at der er nogle ulemper ved at bo på kollegiet. Fx er der en fyr, der
+{{4}} rydder op efter sig i køkkenet, når han har lavet mad. Det er Ida ret sur over,
+{{5}} det betyder, at hun somme tider er nødt til at gøre rent efter ham, før hun selv kan
+lave mad. Ida er også træt af, at der tit er {{6}} på kollegiet. Når hun skal sidde og
+læse på sit værelse, vil hun nemlig godt have fred og ro. Men ved siden af Ida bor der fx
+en pige, som elsker at høre høj musik. Det gør hun næsten hver dag, {{7}} Ida har bedt
+hende om at skrue ned.
+
+Men alt i alt er Ida {{8}} med at bo på kollegiet, fordi hun bor centralt og har en billig
+husleje, og så har hun altid nogen at være sammen med.
+
+--- questions ---
+1.
+mindre
+> «Men det er stort nok til hende» — «но» показывает контраст: комната меньше прежней.
+
+2.
+hyggeligt
+> Дальше идут плюсы: всегда есть с кем поговорить, общие ужины.
+
+3.
+altid
+> «for hun kan godt lide at spise sammen med de andre» — она участвует почти всегда.
+
+4.
+aldrig
+> Это недостаток: парень никогда не убирает за собой, и Иде приходится мыть за ним.
+
+5.
+for
+> for = потому что (союз главного предложения): она сердится, потому что ей приходится убирать.
+
+6.
+larm
+> «vil hun nemlig godt have fred og ro» — ей мешает шум.
+
+7.
+selvom
+> Соседка слушает громкую музыку почти каждый день, хотя Ида просила сделать тише.
+
+8.
+tilfreds
+> «alt i alt» подводит итог с плюсами: центр, дешёвая аренда, компания — значит, довольна.

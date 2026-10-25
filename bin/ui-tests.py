@@ -203,6 +203,12 @@ SEED_PHP = r"""
             ['position' => 2, 'options' => [['label' => 'A', 'text' => 'der', 'correct' => true], ['label' => 'B', 'text' => 'som']]],
         ],
     ]);
+    // A Prøve i Dansk 2 paper of one task, numbered as the paper numbers it.
+    $repo->save([
+        'slug' => 'ui-fixture-pd2-opg3', 'paper' => 'pd2-uifixture', 'kind' => 'write', 'title' => 'UI fixture pd2 write',
+        'body' => 'Ida synes, at det er {{1}} at bo på kollegiet.',
+        'items' => [['position' => 1, 'options' => [['label' => 'A', 'text' => 'hyggeligt', 'correct' => true]]]],
+    ]);
     echo json_encode(array_column($hidden, "id"));
 """
 
@@ -1532,6 +1538,45 @@ def a_modultest_sitting_is_listed_on_its_page_and_not_with_the_reading_rounds(b)
     b.until('document.readyState === "complete"', what='the page to settle')
     names = b.js('[...document.querySelectorAll("#history .sitting .name")].map(e => e.textContent)')
     assert not any('UI fixture mt' in n for n in names), f'a Modultest sitting is listed with the reading rounds: {names}'
+
+
+@check
+def the_start_page_offers_proeve_i_dansk_2(b):
+    b.goto('/')
+    b.until('!!document.querySelector(".cta")', what='the start page')
+    assert b.js('!!document.querySelector("a.cta[href=\'/pd2\']")'), 'no way to reach /pd2'
+
+
+@check
+def a_pd2_paper_is_sat_on_its_own_page_numbered_as_on_paper_under_ninety_minutes(b):
+    only(['cloze', 'write'])
+    b.goto('/pd2')
+    b.until('!!document.querySelector(".paper[data-paper=\'pd2-uifixture\']")', what='the PD2 fixture paper')
+    assert not b.js('!!document.querySelector(".paper[data-paper=\'ui-fixture-paper\']")'), 'a Modultest paper is offered as PD2'
+    assert not b.js('!!document.querySelector("a.cta[href=\'/modultest/skriv\']")'), 'PD2 leads to the Modultest writing page'
+    b.js('document.querySelector(".paper[data-paper=\'pd2-uifixture\']").click()')
+    b.until('!!document.querySelector("#tasks")', what='the sitting')
+    clock = b.js('document.querySelector("#clock").textContent')
+    assert '90:00' in clock or '89:5' in clock, f'the clock is not the 90 minutes of PD2 reading: {clock!r}'
+    assert b.js('document.querySelector(".task").textContent').startswith('Opgave 3'), 'the task is not numbered as on the paper'
+    assert 'fem ord' in b.js('document.querySelector(".instr").textContent'), 'the instruction is not the one of PD2 Opgave 3'
+    b.js("(() => { const g = document.querySelector('.wgap'); g.value = 'hyggeligt'; g.dispatchEvent(new Event('change')); })()")
+    b.until('/1 \\/ 1/.test(document.querySelector("#count").textContent)', what='the answer kept')
+    b.js('window.confirm = () => true; document.querySelector("#hand").click()')
+    b.until('!!document.querySelector("#result")', what='the result')
+    assert b.js('document.querySelector("#final").textContent').replace(' ', '') == '1/1'
+    b.goto('/pd2')
+    b.until('!!document.querySelector("#history .sitting")', what='the sitting in the PD2 history')
+    b.goto('/modultest')
+    b.until('!!document.querySelector(".paper[data-paper=\'ui-fixture-paper\']")', what='the Modultest fixture paper')
+    assert not b.js('!!document.querySelector(".paper[data-paper=\'pd2-uifixture\']")'), 'a PD2 paper is offered as a Modultest'
+    # The history arrives after the papers, so a listed PD2 sitting is given time to show up.
+    try:
+        b.until('[...document.querySelectorAll("#history .sitting .name")].some(e => e.textContent.includes("pd2"))', timeout=3)
+        listed = True
+    except AssertionError:
+        listed = False
+    assert not listed, 'a PD2 sitting is listed with the Modultest ones'
 
 
 @check

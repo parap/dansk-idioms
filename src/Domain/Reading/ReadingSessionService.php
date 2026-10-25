@@ -32,6 +32,9 @@ final class ReadingSessionService
     /** Modultest DU3.4 sits its four reading tasks together in 50 minutes (from 2026). */
     private const MODULTEST_SECONDS = 3000;
 
+    /** Prøve i Dansk 2 gives its two reading parts 30 and 60 minutes; a pd2- paper sits both. */
+    private const PD2_SECONDS = 5400;
+
     /** A gap answered by typing a word. Its stored options are the answers it accepts. */
     private const WRITE_KIND = 'write';
 
@@ -169,7 +172,8 @@ final class ReadingSessionService
         Db::execute(
             'INSERT INTO reading_sessions (public_id, user_id, anon_key, mode, duration_s, scale_id)
              VALUES (?,?,?,?,?,NULL)',
-            [$publicId, $userId, $anonKey, self::EXAM, self::MODULTEST_SECONDS]
+            [$publicId, $userId, $anonKey, self::EXAM,
+             str_starts_with($paper, 'pd2-') ? self::PD2_SECONDS : self::MODULTEST_SECONDS]
         );
         $sessionId = (int) Db::pdo()->lastInsertId();
 

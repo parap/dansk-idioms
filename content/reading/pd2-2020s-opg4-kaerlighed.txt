@@ -1,0 +1,66 @@
+kind: insert
+slug: pd2-2020s-opg4-kaerlighed
+paper: pd2-2020s
+title: Kærlighed på internettet
+
+--- text ---
+Tom Jessen er 37 år. Han har et godt job som tømrer og bor et dejligt sted, men han
+savner en kæreste.
+
+Tom Jessen har været single i mange år, og han bor alene i et stort hus ude på landet i
+Vestjylland. Næsten alle Toms venner har en kæreste eller er blevet gift. {{0}} Han har
+bare ikke været heldig at møde den rigtige pige endnu. Så nu har han besluttet sig for at
+prøve at finde kærligheden på internettet.
+
+Tom finder en datingside på nettet, hvor singler kan møde hinanden. Her laver han en
+profil, hvor han skriver lidt om sit hus og sin hund, som han elsker at gå tur med. {{1}}
+Derfor får han en god ven til at læse det igennem og hjælpe ham med at gøre teksten mere
+spændende. Vennen tager også et rigtig godt foto af Tom, som han kan bruge sammen med
+teksten på sin profil.
+
+Efter et par dage får Tom en mail fra en kvinde, som bor i Esbjerg. Hun synes, at Tom har
+en interessant profil. Hun sender også nogle fotos af sig selv, og Tom synes, hun ser
+godt ud. Han vil gerne lære hende at kende, og de begynder at skrive sammen. {{2}} For da
+de har mailet sammen i et par uger, holder hun op med at skrive til ham, og det bliver
+Tom meget skuffet over.
+
+En dag sidder Tom og kigger på forskellige profiler på datingsiden. Han ser et foto af en
+pige, der ser rigtig sød ud. Hun hedder Anna, og der står i hendes profil, at hun bor i
+Vestjylland og har en hund ligesom ham. {{3}} Så selvom han er lidt bange for at blive
+skuffet igen, beslutter han sig for at sende hende en mail. Anna svarer ham heldigvis med
+det samme, og én mail bliver hurtigt til flere.
+
+Tom og Anna skriver og ringer sammen flere gange, og de beslutter, at de gerne vil mødes.
+Så en lørdag mødes de og går en tur med deres hunde ved en strand tæt på, hvor Tom bor.
+{{4}} Men det varer ikke så længe, for kort tid efter snakker de sammen, som om de har
+kendt hinanden i mange år. Både Tom og Anna hygger sig, og de vil begge to meget gerne ses
+igen.
+
+Tom og Anna mødes så tit, de kan, og de bliver hurtigt meget glade for hinanden. Tom er
+sikker på, at han har fundet kvinden i sit liv. Så efter et par måneder spørger han Anna,
+om hun vil giftes med ham. {{5}} Hun er meget forelsket i Tom, men hun synes, de skal
+prøve at bo sammen, inden de beslutter, om de skal giftes. Så i stedet aftaler de, at hun
+skal flytte ind hos Tom, og at de skal bo sammen i hans store hus med deres to hunde.
+
+--- parts ---
+A Og det drømmer Tom også om.
+B Men hun vil gerne vente lidt.
+C Tom synes, det lyder interessant.
+D Og de bliver meget forelskede i hinanden.
+E Men det stopper pludselig.
+F Men Tom synes, det lyder lidt kedeligt.
+G Først er de begge to ret nervøse.
+H Hun siger straks ja.
+
+--- questions ---
+0. A
+1. F
+> Derfor får han en ven til at hjælpe: значит, текст профиля ему самому не нравится — «det lyder lidt kedeligt».
+2. E
+> «For da de har mailet sammen i et par uger, holder hun op med at skrive» объясняет, что переписка вдруг оборвалась.
+3. C
+> Анна живёт в Vestjylland и у неё тоже собака — Тому это интересно, и он, несмотря на страх, ей пишет.
+4. G
+> «Men det varer ikke så længe» — что-то длилось недолго: сначала они оба нервничали.
+5. B
+> «men hun synes, de skal prøve at bo sammen, inden de beslutter» — она не говорит сразу «да», а хочет подождать.

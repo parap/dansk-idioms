@@ -1,0 +1,238 @@
+kind: write
+slug: pd2-2020s-opg1-informationer
+paper: pd2-2020s
+title: Søg informationer
+
+--- text ---
+Søg informationer under AK aftenskole – Motionshold.
+
+Eksempel (0): På hvilket motionshold er der rabat for pensionister? Svar: Motionsgymnastik
+
+Hvilket motionshold er kun for kvinder? {{1}}
+
+Søg informationer under Boliger til salg i Køge.
+
+Hvad er adressen på den bolig, som ligger tæt på en strand? {{2}}
+
+Hvad er adressen på den bolig, som har et nyt badeværelse? {{3}}
+
+Hvad er adressen på den bolig, som ligger tæt på en station? {{4}}
+
+Hvad er adressen på den bolig, som har en kælder med fitnessrum? {{5}}
+
+Søg informationer under Bagerier i Aarhus.
+
+I hvilket bageri kan man købe boller, som er bagt i stenovn? {{6}}
+
+AK aftenskole – Motionshold
+
+Mave – baller – lår. På dette hold har vi primært fokus på mave, baller og lår, men du
+får styrket og strammet muskulaturen i hele kroppen. Vi varmer op med
+konditionstræning, herefter går vi over til forskellige typer af øvelser som squats og
+mavebøjninger samt øvelser med elastikker og bolde. Træningen er målrettet kvinder, men
+mænd er også velkomne!
+
+Sund – Rask – Glad. Dette er det helt rigtige hold for alle kvinder og mænd, der vil
+vedligeholde kroppen, forebygge skader, genoptræne en svag ryg eller øge
+kropsbevidstheden. Få hele kroppen varmet op og arbejdet igennem i et tempo, som du både
+kan følge med i og finde udfordringer i.
+
+Zumba. Alle – både kvinder og mænd – der elsker at danse og bevæge sig til musik, er
+velkomne på dette hold. Zumba er dansemotion baseret på latinamerikanske dansetrin,
+herunder salsa og samba. Trinene er lette at lære, så du er hurtigt med. Ved at danse
+zumba får du styrket konditionen, koordinationen samt kroppens forskellige muskler.
+
+Yoga og afspænding. Holdet er for alle, der ønsker at forbedre deres smidighed, styrke,
+balance og kropsbevidsthed. Gennem grundlæggende yogastillinger og dybdeafspænding lærer
+du din krops signaler bedre at kende, så der skabes en øget balance mellem krop og sind.
+Målet er at styrke kroppen, løsne spændinger, forebygge stress og skabe en indre ro.
+
+Mand og motion. På dette hold arbejder vi med at opbygge kroppens muskler med ekstra
+fokus på musklerne i ryg, mave, nakke og skuldre. Kroppen arbejdes igennem i et roligt
+tempo med små præcise bevægelser tilrettet den enkelte. Vi laver også kredsløbstræning
+og afslutter altid med udstræk. Holdet er kun for mænd.
+
+Aerobic. Aerobic er intens træning og glad motion. Vores nyeste aerobichold er et
+kvindehold, hvor du får pulsen op og brænder kalorier af, mens du har det sjovt.
+Undervisningen starter med let danseaerobic som opvarmning, inden vi går i gang med
+styrke- og balanceøvelser og sjov muskel- og konditionstræning. Timen slutter altid med
+udstrækning.
+
+Motionsgymnastik. Til motionsgymnastik får du trænet hele kroppen, så den bliver stærk og
+smidig. Vores grundige opvarmning sætter gang i kredsløbet og gennemarbejder alle muskler
+og led. Vi arbejder hele kroppen igennem til god musik, så der både kommer sved på panden
+og smil på læben. Undervisningen afsluttes med grundig udstrækning. Alle kan deltage –
+rabat for pensionister.
+
+Styrke og bevægelighed. Vi starter timen med stræk og rulninger, der giver varme i hele
+kroppen. Bagefter arbejder vi med kroppens forskellige muskelgrupper, så bevægeligheden
+øges. Du kan selv bestemme, hvor udfordrende det skal være, alt afhængig af din egen
+kondition, styrke og brug af redskaber som elastikker og håndvægte. Alle kan deltage, og
+træningen ledes af en fysioterapeut, som tilpasser øvelserne til den enkeltes niveau.
+
+Boliger til salg i Køge
+
+Klemmenstrupvej 86. Denne flotte og velholdte villa byder på fire gode værelser, to
+dejlige badeværelser, et køkken-alrum samt to stuer en suite, en hævet træterrasse og en
+fliseterrasse. Ejendommen ligger på en stor grund med en solrig have. Beliggenheden kan
+ikke blive meget bedre med alle faciliteter i nabolaget, bl.a. skole, gode
+busforbindelser og fine indkøbsmuligheder. Kontant: 3.295.000. Bolig m²: 168. Grund m²:
+1202.
+
+Hasselvej 79. Ønsker I at komme væk fra storbyens larm, er denne skønne villa i et
+fredeligt, børnevenligt kvarter noget for jer. Her kan hverdagslivet udfolde sig i
+stueplanets åbne opholdsafdeling med stor stue og dejligt køkken-alrum. Villaen rummer
+også en førstesal med tre gode værelser. Ude får I en solrig have med en stor
+flisebelagt terrasse med skøn udsigt. Kontant: 1.885.000. Bolig m²: 112. Grund m²: 995.
+
+Kildevej 59. Denne etplansvilla på fire værelser er en oplagt mulighed for
+førstegangskøbere. I kommer til at bo i et trygt og børnevenligt kvarter med
+institutioner, skoler og indkøbsmuligheder i gåafstand, og togstationen er kun 5
+minutters gang væk. Boligen indeholder et badeværelse med gulvvarme og indbyggede skabe.
+Køkkenet er lyst og ligger i forbindelse med den store vinkelstue. Udestuen har en fin
+udsigt over haven med en sydvendt terrasse. Kontant: 1.595.000. Bolig m²: 108. Grund m²:
+870.
+
+Ølbyvej 166. På en attraktiv vej i Ølby ligger denne dejlige villa. I stueplan finder I
+ud over to værelser et landligt inspireret køkken med kogehalvø. Stuen ligger i forbindelse
+med køkkenet og har masser af plads til både spisning og sofahygge. I får desuden en
+fantastisk udestue, hvor solen kan nydes hele dagen. På førstesalen er der tre gode
+værelser og et lyst badeværelse. Hertil kommer en stor og solrig grund med to terrasser.
+Kontant: 2.495.000. Bolig m²: 176. Grund m²: 933.
+
+Langesvej 63. I et af Køges bedste områder udbydes denne dejlige villa, der byder
+velkommen i en lys entré med trappe til første sal. Der er et skønt gæstebadeværelse med
+bruser og gulvvarme. Den flotte stue har udgang til en høj terrasse samt åbent til nyt
+køkken. Første sal består af to store værelser samt endnu et flot badeværelse. Der er
+desuden en god kælder med vaskerum og festlokale. Der er gåafstand til Køges hyggelige
+torv og handelsby, havnen samt Køge Ås. Kontant: 4.245.000. Bolig m²: 128. Grund m²: 798.
+
+Vordingborgvej 264. Elegant villa med masser af stil og charme i eftertragtet kvarter.
+Stueetagen byder på et charmerende køkken-alrum samt en stor vinkelstue, hvor lyset
+strømmer ind gennem de store vinduespartier. På førstesalen er der tre gode værelser, et
+dejligt badeværelse samt gæstetoilet. Fra det første værelse kan I fortsætte ud på en
+fantastisk tagterrasse, hvor aftenkaffen kan nydes, mens I betragter den smukke have.
+Kontant: 3.665.000. Bolig m²: 198. Grund m²: 1.310.
+
+Ulstrup Bygade 41. Velholdt villa med store lyse rum, nyt tag, nye vinduer og nymalede
+ydervægge. Fra entreen ledes du ned ad gangen, hvorfra du har adgang til tre gode
+værelser og pænt badeværelse. I den anden ende af huset har du bryggers, flot køkken,
+spisestue og en stor stue. En sydvendt terrasse og en dejlig græsplæne sørger for
+optimale rammer om udelivet. Kun 35 minutters kørsel til København. Kontant: 2.455.000.
+Bolig m²: 158. Grund m²: 1.045.
+
+Egevej 159. Indflytningsklar etplansvilla opført i 1971 fremstår velholdt med helt nye
+vinduer. I kan se frem til et lækkert køkken, en lys stue, fire dejlige værelser, et
+stort badeværelse med badekar samt kælder med tre disponible rum. Til haven hører et
+delvist overdækket terrassemiljø med udekøkken. I bosætter jer centralt med gåafstand
+til skole, børnehave og SFO. Der er heller ikke langt til motorvejen mod København.
+Kontant: 2.395.000. Bolig m²: 146. Grund m²: 826.
+
+Stormøllevej 85. Velkommen til denne velholdte villa i to plan med hele tre stuer en
+suite, tre soveværelser samt gæstetoilet og stort badeværelse med badekar og bruseniche.
+Dertil kommer en god kælder med fitnessrum og tre disponible rum. I kommer til at bo tæt
+på naturen med skov og åbne marker i fredelige omgivelser og tæt på byens tilbud. Der er
+godt fem minutter på cykel til skole, børnehave og idrætshal. Kontant: 3.195.000. Bolig
+m²: 244. Grund m²: 958.
+
+Smedevej 76. I skønne rolige omgivelser udbydes denne dejlige rummelige villa med flot
+have. I får bl.a. tre stuer, tre værelser foruden et helt nyt badeværelse med lyse
+klinker og muret bruseniche, et stort baderum med vaskesøjle og et gæstetoilet. Med i
+købet får I et stort udhus og en carport. Når vejret tillader det, kan I trække ud på den
+store træterrasse i husets solrige have med en legevenlig græsplæne. Kontant: 2.550.000.
+Bolig m²: 187. Grund m²: 905.
+
+Køgevej 112. Dejlig villa beliggende tæt på åbne marker og en skøn badestrand. Villaen
+indeholder stort bryggers med mange skabe og god plads til vaskemaskine m.m., køkken med
+spiseplads og stor opholdsstue, som oprindelig har været to stuer, på i alt ca. 60 m².
+Fra stuen er der adgang til værelse med egen udgang til terrasse samt et stort
+forældresoveværelse med eget badeværelse. Desuden er der en børneafdeling med to
+børneværelser samt lyst badeværelse med badekar. Kontant: 2.950.000. Bolig m²: 164.
+Grund m²: 815.
+
+Lidemarksvej 23. Villa beliggende i rolige omgivelser i landsbyen Lidemark, tæt på
+Valløskovene, og med plads til den store familie. Stueplan rummer stue og køkken i åben
+forbindelse med direkte udgang til en god udestue. Desuden er der tre værelser, to fine
+badeværelser, et bryggers og en stor entré. På førstesalen er der yderligere tre
+værelser, badeværelse og en altan samt et stort loftsrum med loft til kip og mange
+muligheder for indretning. Kontant: 2.695.000. Bolig m²: 180. Grund m²: 1.075.
+
+Bagerier i Aarhus
+
+Nr. 24. Graven 24, 8000 Aarhus C. Ægteparret Karen Husted og Christian Funder står bag
+disken i bageriet Nr. 24, der er opkaldt efter adressen på Graven i Latinerkvarteret.
+Udvalget er ikke stort, men den lille butik er hyggelig, og smagen og konsistensen af
+brødet er fantastisk. Prøv for eksempel bollerne af spelt eller ølandshvede,
+brombærsnitterne eller ægteparrets version af klassiske snegle, de såkaldte kanelting.
+Nøglen til den høje kvalitet er ifølge indehaverne, at alt brød er lavet på surdej og
+hæver i 24 timer eller mere. Udover brød og kager har butikken et lille udvalg af ost,
+marmelade og forskellige meltyper, hvis du vil gøre parret kunsten efter derhjemme.
+
+Småkagehuset. Frederiks Allé 102, 8000 Aarhus C. Hos Småkagehuset på Frederiks Allé er
+det selvfølgelig først og fremmest småkager, det handler om, og de er fortræffelige. Men
+den lille bager på Frederiksbjerg har mere end små, knasende kager at byde på. Vi nævner
+i flæng stenovnsbagte brød og boller, skærekager, scones, tærter, franske vafler,
+tunesiske kaffebrød, muffins og marengskager. For slet ikke at tale om kransekage,
+studenterbrød og kokossnitter. Vi anbefaler, at du som minimum prøver
+chokoladeskærekagen og butikkens scones med æble-kanel, ligesom gulerodskagen er værd at
+gå efter. På småkagefronten er der ingen vej uden om butikkens bland-selv-koncept med
+små minikager, som du blander nøjagtigt som bland-selv-slik på tanken. Så kan du jo
+altid løbe en tur bagefter.
+
+Briancon. Åboulevarden 53, 8000 Aarhus C. Det mørke specialbrød med navnet "fransk
+ristet", de bløde müsliboller og de afhængighedsskabende kanelsnegle er sikre hits hos
+midtbybageren Briancon, der også tidligere havde en filial på Åbyhøj Torv. Vi anbefaler
+at smage det italienske durumbrød, der både fås som baguettes og i stor
+familiestørrelse. Briancon har et stort udvalg af champagner og holder jævnligt
+arrangementer, hvor du kan få en indføring i boblernes verden og smage på de våde varer.
+
+SchweizerBageriet. M.P. Bruuns Gade 56, 8000 Aarhus C. Adressen M. P. Bruuns Gade 56
+rimer på brød og kager. Lokalerne i den hvide bygning har siden 1950'erne huset
+SchweizerBageriet, og de seneste 14 år har den læreruddannede Tine Lajer Petersen stået
+i spidsen for den lækkert indrettede butik. Den lange historie betyder dog ikke, at det
+traditionsrige bageri hænger fast i fortiden. Tine og co. finder hele tiden på nye
+produkter og har i tidernes løb vundet priser for blandt andet årets bedste brød og
+Danmarks bedste rugbrød. Et af de seneste skud på stammen er butikkens såkaldte
+schweizerdeli, hvor du kan bestille frisklavede sandwiches med alt fra håndpillede rejer
+til spansk sortfodsskinke til en hurtig frokost. Hvis du har problemer med gluten, kan
+du købe friskbagte, glutenfrie brød og boller hver onsdag i bageriet.
+
+Mor Anna. Mejlgade 5, 8000 Aarhus C. Den kombinerede bager og deli Mor Anna slog dørene
+op i Mejlgade i 2015 og har siden taget kampen op mod byens øvrige gourmetbagere.
+Arsenalet består af et velvalgt sortiment af fortrinligt brød og søde sager som tebirkes
+og hindbærsnitter, og butikken skyder også med skarpt med en stribe gode sandwiches, der
+er lige til at tage med. Prøv for eksempel varianten med sprængt oksebryst med tomat,
+røget comté-ost, forårsløg og chilimayo.
+
+Kilde: www.smagaarhus.dk/bager-aarhus (03.01.2019), uddrag
+
+--- questions ---
+1.
+Aerobic
+Aerobichold
+> «Vores nyeste aerobichold er et kvindehold». Mave – baller – lår только «målrettet kvinder»: мужчины там тоже желанны.
+
+2.
+Køgevej 112
+Køgevej
+> «tæt på åbne marker og en skøn badestrand».
+
+3.
+Smedevej 76
+Smedevej
+> «et helt nyt badeværelse med lyse klinker». У Langesvej 63 новая кухня, а не ванная.
+
+4.
+Kildevej 59
+Kildevej
+> «togstationen er kun 5 minutters gang væk».
+
+5.
+Stormøllevej 85
+Stormøllevej
+> «en god kælder med fitnessrum». У Egevej 159 тоже есть подвал, но без фитнес-зала.
+
+6.
+Småkagehuset
+Småkagehus
+> «stenovnsbagte brød og boller».

@@ -124,3 +124,13 @@ everyday texts with one question each. A `paper: du3m4-v<variant>` header groups
 published, and the reading rounds never draw a passage that has a paper. Loading the
 directory again writes a changed paper, and a changed example with its text and part, onto
 a passage already loaded.
+
+## Prøve i Dansk 2, past papers
+
+Files named `pd2-<year><s|v>-opg<task>-…` are past Prøve i Dansk 2 reading papers as printed
+(`s` the May-June term, `v` November-December), sat together on `/pd2` under the 90 minutes of
+both reading parts, one point per answer. Each keeps the task number of the paper, so a
+paper whose pages are missing simply lacks that task. Opgave 1 types short answers (`write`),
+Opgave 3 types the words from its box (`write`), Opgave 4 is an insertion, and Opgave 5 is an
+insertion turned round: the interview questions stand in the text and its paragraphs are the parts.
+

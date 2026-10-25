@@ -1,0 +1,67 @@
+kind: insert
+slug: pd2-2020s-opg5-frank
+paper: pd2-2020s
+title: Interview med Frank – lastbilchauffør
+
+--- text ---
+Frank på 58 er lastbilchauffør i et stort transportfirma. Hans job er at køre varer med
+lastbil mellem Danmark og andre lande i Europa, og han er tit hjemmefra flere dage i
+træk.
+
+Har du altid været lastbilchauffør? {{0}}
+
+Hvad er det bedste ved dit job? {{1}}
+
+Har du mange forskellige arbejdsopgaver? {{2}}
+
+Kan du godt lide at arbejde alene? {{3}}
+
+Hvad er det værste ved dit job? {{4}}
+
+Hvad siger din familie til, at du er så meget væk? {{5}}
+
+--- parts ---
+A Nej, det har jeg ikke. Jeg har arbejdet på forskellige fabrikker, og jeg har også været
+  i lære som elektriker, men det var ikke noget for mig. Da jeg var 32, tog jeg et stort
+  kørekort, og så blev jeg ansat i det her transportfirma, og her har jeg været lige
+  siden.
+B Nej, det har jeg ikke. Jeg har jo kørt i lastbil i mange år, så jeg har haft flere
+  forskellige modeller. Den bil, jeg har nu, har jeg haft, siden jeg begyndte at køre
+  ture til udlandet for firmaet, og jeg er rigtig glad for den. Den er som et hjem på
+  hjul med køleskab, kaffemaskine og tv. Og der er også en seng, hvor jeg kan sove.
+C Det er nok, at man sidder ned det meste af tiden. Mange af os spiser også en del
+  fastfood, fordi vi tit er nødt til at spise på grillbarer og tankstationer. Så man
+  kommer desværre let til at veje for meget i det her job, og det gælder også for mig.
+D Ja, det har aldrig været noget problem for mig. Faktisk er det en vigtig grund til, at
+  jeg er glad for det her job. Som person er jeg nemlig en lidt stille type, og jeg tror
+  faktisk, at det ville irritere mig, hvis jeg hele tiden skulle køre sammen med en
+  anden chauffør.
+E Nej, faktisk ikke. Jeg kører mine ture, og jeg læsser varer af og på min lastbil.
+  Somme tider vasker jeg bilen og laver nogle småreparationer på den, hvis det er
+  nødvendigt. Så det varierer ikke så meget, og dagene ligner tit hinanden. Men det har
+  jeg det helt fint med.
+F Jeg ser dem ikke så tit. Vi kører næsten altid lastbil hver for sig i vores firma, så
+  det er faktisk kun, hvis vi skal til et møde eller fx til julefrokost i firmaet, at vi
+  har kontakt med hinanden. Det synes jeg er meget hyggeligt. Men til hverdag har jeg
+  sådan set ikke noget med de andre at gøre.
+G At køre lastbil om natten! Det er der ellers ikke så mange, der kan lide, men det giver
+  mig en følelse af frihed, når jeg fx kører gennem Tyskland midt om natten med musik i
+  radioen. Så er der heller ikke så mange biler på vejene, og derfor kan man komme
+  hurtigere frem.
+H Jeg begyndte først at køre lange ture til udlandet for tre år siden. Før det kørte jeg
+  kun korte ture i Danmark. Så da mine døtre var yngre, kom jeg hjem hver dag. Nu er de
+  flyttet hjemmefra, og derfor betyder det ikke så meget for dem. Og min kone nyder det
+  faktisk, når hun har huset for sig selv.
+
+--- questions ---
+0. A
+1. G
+> «det giver mig en følelse af frihed» — лучшее в работе для Франка: ночные поездки.
+2. E
+> «Så det varierer ikke så meget, og dagene ligner tit hinanden» — задач немного, и они повторяются.
+3. D
+> «det ville irritere mig, hvis jeg hele tiden skulle køre sammen med en anden chauffør». Абзац F о коллегах, но не о том, нравится ли ему работать одному.
+4. C
+> «man kommer desværre let til at veje for meget» — худшее: сидячая работа и фастфуд.
+5. H
+> «derfor betyder det ikke så meget for dem. Og min kone nyder det faktisk» — о семье.

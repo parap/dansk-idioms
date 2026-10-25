@@ -34,6 +34,7 @@ final class Shell
         '/breve' => '/breve.html',
         '/modultest' => '/modultest.html',
         '/modultest/skriv' => '/skriv.html',
+        '/pd2' => '/modultest.html',
     ];
 
     public const ADMIN = '/admin.html';
