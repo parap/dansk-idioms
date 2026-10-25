@@ -219,7 +219,64 @@ const STRINGS = {
     missing: 'Det sæt findes ikke.',
   },
 };
-registerStrings(STRINGS);
+// The page sits two tests: the Modultest DU3.4 variants at /modultest, past Prøve i Dansk 2 papers at /pd2.
+const PD2 = location.pathname.replace(/\/+$/, '') === '/pd2';
+const ofThisTest = paper => PD2 === String(paper ?? '').startsWith('pd2-');
+
+const PD2_STRINGS = {
+  ru: {
+    title: 'Prøve i Dansk 2: чтение',
+    intro: 'Прошлые экзамены Prøve i Dansk 2, часть Læseforståelse, такими, какими они были на бумаге: тексты и задания ' +
+           'министерства. Обе части идут подряд, 90 минут. Ответы и пояснения наши: ключ министерства к этим вариантам не публиковался. ' +
+           'Если какого-то задания нет, значит, его страниц у нас нет.',
+    writeHint: 'Впишите ответ прямо в поле в тексте. Ответ сохраняется сам.',
+    noMark: 'Здесь только баллы, без оценки по датской шкале.',
+  },
+  en: {
+    title: 'Prøve i Dansk 2: reading',
+    intro: 'Past Prøve i Dansk 2 papers, the Læseforståelse part, as they were printed: the ministry\'s texts and tasks. ' +
+           'Both parts in a row, 90 minutes. The answers and notes are ours: no answer key was published for these papers. ' +
+           'A task that is missing is one whose pages we do not have.',
+    writeHint: 'Type your answer straight into the field in the text. It saves itself.',
+    noMark: 'Points only, with no grade on the Danish scale.',
+  },
+  uk: {
+    title: 'Prøve i Dansk 2: читання',
+    intro: 'Минулі іспити Prøve i Dansk 2, частина Læseforståelse, такими, якими вони були на папері: тексти й завдання ' +
+           'міністерства. Обидві частини поспіль, 90 хвилин. Відповіді й пояснення наші: ключ міністерства до цих варіантів не публікувався. ' +
+           'Якщо якогось завдання немає, отже, його сторінок у нас немає.',
+    writeHint: 'Впишіть відповідь просто в поле в тексті. Відповідь зберігається сама.',
+    noMark: 'Тут лише бали, без оцінки за датською шкалою.',
+  },
+  da: {
+    title: 'Prøve i Dansk 2: læsning',
+    intro: 'Tidligere opgavesæt til Prøve i Dansk 2, Læseforståelse, som de så ud på papir: ministeriets tekster og opgaver. ' +
+           'Begge delprøver i træk, 90 minutter. Svarene og forklaringerne er vores egne: der er ikke offentliggjort en rettenøgle til disse sæt. ' +
+           'Mangler en opgave, er det fordi, vi ikke har siderne.',
+    writeHint: 'Skriv dit svar direkte i feltet i teksten. Det gemmes af sig selv.',
+    noMark: 'Kun point, ingen karakter efter 7-trinsskalaen.',
+  },
+};
+registerStrings(PD2
+  ? Object.fromEntries(Object.entries(STRINGS).map(([lang, s]) => [lang, {...s, ...PD2_STRINGS[lang]}]))
+  : STRINGS);
+
+// A PD2 task keeps the number the paper gives it, read from its slug (pd2-2020s-opg3-...).
+const taskNo = (passage, i) => (PD2 && passage.slug.match(/-opg(\d+)(?:-|$)/)?.[1]) || i + 1;
+
+// The term a PD2 paper was set in: pd2-2020s is the summer (maj-juni) term of 2020.
+const termName = paper => {
+  const m = String(paper).match(/^pd2-(\d{4})([sv])$/);
+  return m ? `${m[2] === 's' ? 'Maj-juni' : 'November-december'} ${m[1]}` : paper;
+};
+
+// The paper's own instructions, in Danish, by task number; a typed task carries its example in the text.
+const PD2_INSTRUCTIONS = {
+  1: n => `Svar på spørgsmålene (1-${n}). Find oplysningerne i teksterne under spørgsmålene. Svar kort og præcist. Se eksemplet (0).`,
+  3: n => `Læs teksten. Skriv de ord (1-${n}), der mangler. Ordene står over teksten. Der er fem ord, du ikke skal bruge. Se eksemplet (0).`,
+  4: n => `Læs teksten. Der er seks afsnit. I hvert afsnit er der et hul, hvor der mangler en sætning. Find den sætning på listen, der passer i hvert hul (1-${n}). Der er to sætninger, du ikke skal bruge.`,
+  5: n => `Læs interviewet: Franks svar står i afsnittene på listen. Find det afsnit, der passer til hvert spørgsmål (1-${n}). Der er to afsnit, du ikke skal bruge.`,
+};
 
 // The test's own instructions, in Danish as on the paper, by task type.
 const INSTRUCTIONS = {
@@ -230,7 +287,8 @@ const INSTRUCTIONS = {
 };
 
 // The paper points at its worked example in the same words.
-const instructions = (passage, n) => INSTRUCTIONS[passage.kind](n) + (passage.example ? ' Se eksemplet (0).' : '');
+const instructions = (passage, n, i) =>
+  ((PD2 && PD2_INSTRUCTIONS[taskNo(passage, i)]) || INSTRUCTIONS[passage.kind])(n) + (passage.example ? ' Se eksemplet (0).' : '');
 
 const fill = (text, values) => Object.entries(values).reduce((s, [k, v]) => s.replaceAll(`{${k}}`, v), text);
 const view = $('#view');
@@ -252,6 +310,7 @@ function paintLanguages(on) {
 }
 
 const variantName = paper => {
+  if (PD2) return termName(paper);
   const i = papers.findIndex(p => p.paper === paper);
   return i < 0 ? paper : fill(t('variant'), {n: i + 1});
 };
@@ -261,9 +320,10 @@ async function home() {
   stopClock();
   document.documentElement.lang = currentLang();
   $('#title').textContent = t('title');
+  if (PD2) document.title = t('title');
   paintLanguages(true);
   try {
-    papers = (await api('/modultest')).papers;
+    papers = (await api('/modultest')).papers.filter(p => ofThisTest(p.paper));
   } catch (e) {
     view.innerHTML = `<div class="card"><p style="margin:0">${esc(t('error'))}</p></div>`;
     return;
@@ -273,11 +333,11 @@ async function home() {
       <p class="muted" style="margin:0">${esc(t('intro'))}</p>
       ${papers.length ? `<div class="papers" id="papers">${papers.map((p, i) => `
         <button class="paper" data-paper="${esc(p.paper)}">
-          <b>${esc(fill(t('variant'), {n: i + 1}))}</b>
+          <b>${esc(variantName(p.paper))}</b>
           <span class="muted">${esc(fill(t('paperFacts'), {tasks: p.tasks, q: p.questions, p: p.points}))}</span>
         </button>`).join('')}</div>`
         : `<p class="muted">${esc(t('empty'))}</p>`}
-      <p style="margin:14px 0 0"><a class="cta" href="/modultest/skriv"><span>${esc(t('skriv'))}</span></a></p>
+      ${PD2 ? '' : `<p style="margin:14px 0 0"><a class="cta" href="/modultest/skriv"><span>${esc(t('skriv'))}</span></a></p>`}
     </div>
     <div id="history"></div>`;
   view.querySelectorAll('.paper').forEach(b => b.onclick = () => start(b.dataset.paper));
@@ -287,7 +347,7 @@ async function home() {
 async function paintHistory() {
   let sessions = [];
   try { ({sessions} = await api('/reading/sessions')); } catch (e) { return; }
-  const mine = sessions.filter(s => s.paper);
+  const mine = sessions.filter(s => s.paper && ofThisTest(s.paper));
   if (!mine.length || !$('#history')) return;
   $('#history').innerHTML = `<div class="card"><h2>${esc(t('history'))}</h2>
     ${mine.map(s => `<div class="sitting">
@@ -409,14 +469,14 @@ function render() {
   view.innerHTML = `
     <nav class="tasks" id="tasks">${passages.map((q, i) => {
       const items = itemsOf(i);
-      return `<button class="task" data-task="${i}" aria-current="${i === shown}">${esc(fill(t('task'), {n: i + 1}))}
+      return `<button class="task" data-task="${i}" aria-current="${i === shown}">${esc(fill(t('task'), {n: taskNo(q, i)}))}
         <span class="n">${items.filter(isAnswered).length}/${items.length}</span></button>`;
     }).join('')}</nav>
     <div class="grid">
       <section class="card text" lang="da"><h2>${esc(p.title)}</h2>
-        <p class="instr muted">${esc(instructions(p, itemsOf(shown).length))}</p><div id="body"></div></section>
+        <p class="instr muted">${esc(instructions(p, itemsOf(shown).length, shown))}</p><div id="body"></div></section>
       <section class="card">
-        <h2>${esc(fill(t('task'), {n: shown + 1}))}</h2>
+        <h2>${esc(fill(t('task'), {n: taskNo(p, shown)}))}</h2>
         <div id="qs">${questionsHtml(p, shown)}</div>
         <p class="row" style="margin:18px 0 0">
           <button class="primary" id="hand">${esc(t('hand'))}</button>
@@ -514,7 +574,7 @@ function results(r) {
     <div class="card" id="result">
       <h2>${esc(t('result'))}</h2>
       <p class="score" id="final">${r.points_scored} / ${r.points_max}</p>
-      <ul class="per">${tasks.map((x, i) => `<li>${esc(fill(t('task'), {n: i + 1}))} — ${esc(x.p.title)}: <b>${x.scored} / ${x.max}</b></li>`).join('')}</ul>
+      <ul class="per">${tasks.map((x, i) => `<li>${esc(fill(t('task'), {n: taskNo(x.p, i)}))} — ${esc(x.p.title)}: <b>${x.scored} / ${x.max}</b></li>`).join('')}</ul>
       ${r.is_late ? `<p class="muted">${esc(t('late'))}</p>` : ''}
       <p class="muted" style="font-size:.9rem">${esc(t('noMark'))}</p>
       <p class="row">
@@ -523,7 +583,7 @@ function results(r) {
       </p>
     </div>
     ${tasks.map((x, i) => `<div class="card">
-      <h2>${esc(fill(t('task'), {n: i + 1}))} · ${esc(t('review'))}</h2>
+      <h2>${esc(fill(t('task'), {n: taskNo(x.p, i)}))} · ${esc(t('review'))}</h2>
       ${x.p.kind === 'insert' ? `<ul class="bank" lang="da">${bankOf(x.items).map((text, j) => `<li><b>${letter(j)}</b> ${esc(text)}</li>`).join('')}</ul>` : ''}
       ${x.items.map((item, n) => `<div class="q">${answerLine(item, x.p.kind, n + 1, bankOf(x.items))}
         ${item.note ? `<p class="note">${esc(item.note)}</p>` : ''}</div>`).join('')}

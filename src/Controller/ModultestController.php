@@ -9,7 +9,8 @@ use Dansk\Support\Auth;
 use RuntimeException;
 
 /**
- * Modultest DU3.4 reading papers: the four tasks of a variant sat together.
+ * Reading papers sat as a whole: the Modultest DU3.4 variants, and past Prøve i Dansk 2
+ * papers (pd2-…), each page listing its own.
  *
  * Only the list and the start are their own endpoints; answering, handing in and the
  * review go through the session API under /reading/sessions.

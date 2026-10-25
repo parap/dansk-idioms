@@ -141,6 +141,25 @@ final class ModultestTest extends IntegrationTestCase
         self::assertSame(2 + 4 + 2 + 2, $round['points_max']);
     }
 
+    public function testAProeveIDansk2PaperSitsUnderItsOwnNinetyMinutes(): void
+    {
+        $this->publish(str_replace('du3m4-v9', 'pd2-2020s', self::CLOZE));
+
+        $round = $this->sessions->session($this->sessions->startModultest(null, 'anon-1', 'pd2-2020s')['session_id']);
+
+        self::assertSame(5400, $round['remaining_s']);
+    }
+
+    public function testEveryAnswerOfAProeveIDansk2PaperIsWorthOnePoint(): void
+    {
+        $this->publish(str_replace('du3m4-v9', 'pd2-2020s', self::INSERT), str_replace('du3m4-v9', 'pd2-2020s', self::CLOZE));
+
+        self::assertSame(
+            [['paper' => 'pd2-2020s', 'tasks' => 2, 'questions' => 4, 'points' => 4]],
+            $this->repo->publishedModultests()
+        );
+    }
+
     public function testAPaperWithAnUnpublishedTaskIsNotOffered(): void
     {
         $this->publish(self::MC, self::WRITE, self::CLOZE);

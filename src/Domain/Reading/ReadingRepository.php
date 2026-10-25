@@ -51,7 +51,7 @@ final class ReadingRepository
             $bank      = $this->insertBank($passageId, $doc);
 
             foreach ($doc['items'] as $item) {
-                $itemId = $this->insertItem($passageId, $doc['kind'], $item);
+                $itemId = $this->insertItem($passageId, $doc, $item);
                 $this->attachAnswer($passageId, $itemId, $doc['kind'], $item, $bank);
             }
 
@@ -238,16 +238,29 @@ final class ReadingRepository
         return $bank;
     }
 
-    /** @param array<string,mixed> $item */
-    private function insertItem(int $passageId, string $kind, array $item): int
+    /**
+     * @param array<string,mixed> $doc
+     * @param array<string,mixed> $item
+     */
+    private function insertItem(int $passageId, array $doc, array $item): int
     {
         Db::execute(
             'INSERT INTO reading_items (passage_id, position, section, points, prompt, note) VALUES (?,?,?,?,?,?)',
-            [$passageId, $item['position'], $item['section'] ?? null, self::POINTS[$kind], $item['prompt'] ?? null,
+            [$passageId, $item['position'], $item['section'] ?? null, self::points($doc), $item['prompt'] ?? null,
              $item['note'] ?? null]
         );
 
         return (int) Db::pdo()->lastInsertId();
+    }
+
+    /**
+     * Prøve i Dansk 2 gives one point for every correct answer, whatever the task type.
+     *
+     * @param array<string,mixed> $doc
+     */
+    private static function points(array $doc): int
+    {
+        return str_starts_with((string) ($doc['paper'] ?? ''), 'pd2-') ? 1 : self::POINTS[$doc['kind']];
     }
 
     /**
@@ -376,7 +389,7 @@ final class ReadingRepository
         $pdo->beginTransaction();
         try {
             foreach ($new as $item) {
-                $itemId = $this->insertItem((int) $passageId, $doc['kind'], $item);
+                $itemId = $this->insertItem((int) $passageId, $doc, $item);
                 $this->attachAnswer((int) $passageId, $itemId, $doc['kind'], $item, []);
             }
             $pdo->commit();
