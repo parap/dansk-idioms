@@ -1,0 +1,63 @@
+kind: insert
+slug: pd2-2019v-opg4-sofie
+paper: pd2-2019v
+title: Sofie er alenemor
+
+--- text ---
+Sofie er 35 år, læge og alenemor til Hugo på 4 år.
+
+Sofie er 35 år. Hun bor i København, hvor hun arbejder som læge på et hospital. Hun synes, det er
+et spændende job, som giver hende mulighed for at hjælpe andre mennesker, og Sofie er rigtig glad
+for det. {{0}} Hun skal nemlig både passe sit job og sin søn, Hugo, som er fire år gammel, og som
+hun bor alene sammen med.
+
+Sofie blev skilt fra Hugos far for tre år siden. Kort tid efter blev Hugos far tilbudt et job i
+Tyskland, som han sagde ja til. Så nu bor og arbejder han i Berlin, og han kommer kun til
+København en eller to dage om måneden for at være sammen med sin søn. {{1}} For det betyder, at
+han ikke kan hjælpe hende med at passe Hugo i hverdagen, og det kunne hun godt have brug for
+somme tider.
+
+Sofie er læge på hospitalets hjerteafdeling, og som hospitalslæge har hun skiftende arbejdstider.
+For det meste arbejder hun om dagen, men hun har også aften- og nattevagter. Derfor skal Hugo
+nogle gange passes om aftenen og om natten. {{2}} Han går nemlig i en børnehave, der har åbent 24
+timer i døgnet. Så han kan godt være i børnehaven, selvom Sofie arbejder sent, og det er hun
+rigtig glad for.
+
+Når Sofie har aften- eller nattevagt på hospitalet, skal Hugo sove i børnehaven om natten. Så
+afleverer hun ham i børnehaven om eftermiddagen sammen med en taske med tøj og hans bamse. Nogle
+af de andre børn græder altid, når de skal sige farvel til deres forældre og være i børnehaven om
+natten. {{3}} I starten var han somme tider lidt ked af det, når hans mor skulle gå. Men nu er han
+vant til det, og han synes faktisk, det er hyggeligt, når han skal sove i børnehaven.
+
+Sofies skiftende arbejdstider på hospitalet betyder, at hun somme tider har fri to eller tre dage
+i træk, og de dage er Hugo ikke i børnehave. I stedet er han derhjemme sammen med hende, og det
+nyder Sofie. {{4}} For han elsker at være sammen med sin mor hele dagen. Så hygger de derhjemme,
+går på legepladsen eller tager på en tur til zoo eller et andet sted.
+
+Selvom Sofie er glad for sit job, og det fungerer fint med Hugos børnehave, kunne hun godt tænke
+sig en mere normal hverdag sammen med Hugo. Derfor har hun planer om at købe sin egen lægeklinik,
+hvor hun kun skal arbejde i dagtimerne. {{5}} Så det må vente, men Sofie håber, at hun har sparet
+penge nok sammen til at købe klinikken, når Hugo skal starte i skole om et par år.
+
+--- parts ---
+A Men hun har en travl hverdag.
+B Men det gør Hugo ikke.
+C Hun har faktisk allerede købt den.
+D Det er lidt hårdt for Sofie.
+E Det gør Hugo også.
+F Hun har bare ikke råd endnu.
+G Så savner Hugo faktisk sin børnehave.
+H Men det er ikke noget problem.
+
+--- questions ---
+0. A
+1. D
+> «For det betyder, at han ikke kan hjælpe hende» объясняет, почему ей тяжело.
+2. H
+> «Han går nemlig i en børnehave, der har åbent 24 timer» — поэтому это не проблема.
+3. B
+> Другие дети плачут, «а Hugo — нет»: дальше сказано, что теперь ему даже уютно.
+4. E
+> Sofie радуется выходным, «и Hugo тоже»: «For han elsker at være sammen med sin mor».
+5. F
+> «Så det må vente» — клинику пока купить не на что. C противоречит «det må vente».

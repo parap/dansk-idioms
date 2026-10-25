@@ -1,0 +1,48 @@
+kind: insert
+slug: pd2-2019v-opg2-annoncer
+paper: pd2-2019v
+title: Annoncer
+
+--- text ---
+I hver annonce på listen mangler der et eller flere ord ([…]). Hvilken annonce passer ordene
+til?
+
+Har du fået hund eller kat? {{0}}
+
+Vi har døgnvagt ved akut sygdom. {{1}}
+
+Varighed: 8 uger. {{2}}
+
+Træner søges. {{3}}
+
+Skal du købe ny madras? {{4}}
+
+Åbningstilbud. {{5}}
+
+14 dages gratis træning på alle vores hold. {{6}}
+
+--- parts ---
+A […] Vi har et stort udvalg af foder, legetøj og tilbehør til dit nye kæledyr. Køb online og spar penge på www.dinonlinedyrehandler.dk
+B Dyrlægerne i Centrum. Hos os er der fokus på dit kæledyrs sundhed og helbred. Klinikken tilbyder bl.a. vaccinationer, røntgenundersøgelser, operationer, tandrensning og rådgivning om kost. […] Dyrlægerne i Centrum, tlf. 86 30 09 18
+C […] Vi mangler en frivillig til vores juniorhold, der spiller fodbold i HUF Boldklub hver onsdag kl. 16.30-18. Sæsonen starter d. 6. marts og varer i 13 uger. Interesseret? Kontakt Anders Jensen fra HUF Boldklub på tlf. 41 09 82 22
+D […] Så skal du ringe til os! Vi behandler smerter i ryg og nakke hjemme hos dig selv på medbragt briks. Alle hverdage kl. 9-18. De Mobile Massører, tlf. 64 80 12 68
+E Hundetræning. Nu starter vi et nyt hold for hvalpe i alderen 2-6 måneder. Startdato: mandag d. 13. januar kl. 18.30. […] Pris: 895 kr. pr. hvalp. Tilmelding på www.gb-hundeskole.dk. Hundeskolen i Gundersborg
+F […] Vi har byens største udvalg, og vores dygtige medarbejdere hjælper dig med at finde den helt rigtige, så du kan vågne frisk og veludhvilet hver dag. Neoz, Stationsvej 14
+G Månedens tilbud. Få motion og en bedre kondi! Meld dig ind i Fitnesshuset nu. Ved indmeldelse i denne måned får du: oprettelse til 0 kr. (normalpris 189,-), […] Fitnesshuset, Dalgade 16, 7100 Vejle
+H Årets moseløb. Er du i god form? Det er nemlig snart tid for årets motionsarrangement! Moseløbet afholdes søndag den 1. marts kl. 9.00. Der er ruter på 5 og 10 km. […] Pris pr. deltager: 50 kr. Tilmeld dig nu på tlf. 38 60 52 05.
+I […] 20 % rabat på træningsdragter og fodboldstøvler til børn i hele december måned. Vi slår dørene op til vores nye butik d. 1. december. Nyby Sport i Nyby Centret
+
+--- questions ---
+0. A
+1. B
+> Døgnvagt ved akut sygdom — круглосуточная помощь при острой болезни: это ветеринарная клиника.
+2. E
+> Только курс для щенков длится несколько недель. Moseløb (H) — забег в один день.
+3. C
+> «Vi mangler en frivillig til vores juniorhold» — клубу нужен тренер.
+4. F
+> «så du kan vågne frisk og veludhvilet» — магазин матрасов Neoz.
+5. I
+> «Vi slår dørene op til vores nye butik» — открытие нового магазина, отсюда Åbningstilbud.
+6. G
+> Фитнес-клуб с «Månedens tilbud» предлагает ещё и бесплатные тренировки.

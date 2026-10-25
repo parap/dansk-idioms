@@ -273,9 +273,10 @@ const termName = paper => {
 // The paper's own instructions, in Danish, by task number; a typed task carries its example in the text.
 const PD2_INSTRUCTIONS = {
   1: n => `Svar på spørgsmålene (1-${n}). Find oplysningerne i teksterne under spørgsmålene. Svar kort og præcist. Se eksemplet (0).`,
+  2: n => `Læs annoncerne på listen. I hver annonce mangler der et eller flere ord. Find den annonce, der passer til ordene (1-${n}). Der er to annoncer, du ikke skal bruge.`,
   3: n => `Læs teksten. Skriv de ord (1-${n}), der mangler. Ordene står over teksten. Der er fem ord, du ikke skal bruge. Se eksemplet (0).`,
   4: n => `Læs teksten. Der er seks afsnit. I hvert afsnit er der et hul, hvor der mangler en sætning. Find den sætning på listen, der passer i hvert hul (1-${n}). Der er to sætninger, du ikke skal bruge.`,
-  5: n => `Læs interviewet: Franks svar står i afsnittene på listen. Find det afsnit, der passer til hvert spørgsmål (1-${n}). Der er to afsnit, du ikke skal bruge.`,
+  5: n => `Læs interviewet: svarene står i afsnittene på listen. Find det afsnit, der passer til hvert spørgsmål (1-${n}). Der er to afsnit, du ikke skal bruge.`,
 };
 
 // The test's own instructions, in Danish as on the paper, by task type.
